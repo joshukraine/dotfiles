@@ -21,7 +21,7 @@ These dotfiles are mainly intended for my personal use; I've made no attempt to 
 * Vim (via Homebrew)
 * tmux (via Homebrew)
 
-Or you can get all of the above and more by running [thoughtbot's laptop script](https://github.com/thoughtbot/laptop).
+Or you can get all of the above (minus oh-my-zsh) and more by running [thoughtbot's laptop script](https://github.com/thoughtbot/laptop).
 
 ### Setup Instructions
 
