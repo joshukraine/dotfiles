@@ -1,0 +1,13 @@
+.DS_Store
+.DS_Store?
+Thumbs.db
+*.swp
+*~
+.project
+tags
+log/
+db/*.sqlite3
+Thumbs.db
+.bundle
+.env
+tmp/

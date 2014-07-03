@@ -1,0 +1,61 @@
+# Jump to quick edits
+alias omz='vim ~/.oh-my-zsh'
+alias ez='vim ~/.zshrc'
+alias ea='vim $ZSH_CUSTOM/aliases'
+alias ec='vim $ZSH_CUSTOM'
+alias ed='vim ~/.dotfiles'
+alias vrc='vim ~/.vimrc'
+
+# Finder
+alias o='open . &'
+
+# Upgrade Oh My Zshell
+alias upz='upgrade_oh_my_zsh'
+
+# Show/Hide hidden files in Finder
+alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
+alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
+
+# List direcory contents
+alias lsa='ls -lah'
+alias l='ls -lah'
+alias ll='ls -lhF'
+alias la='ls -lAhF'
+alias lf='ls -F'
+
+# joshukraine custom
+alias src='source ~/.zshrc'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
+alias t4='tree -L 4'
+
+alias t2a='tree -La 2'
+alias t3a='tree -La 3'
+alias t4a='tree -La 4'
+
+# Idiot proofing :)
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
+alias df='df -h'
+alias du='du -h'
+alias mkdir='mkdir -p'
+
+# Rails
+alias rc='rails console'
+alias rg='rails generate'
+alias rs='rails server'
+alias rsp='rspec . --format documentation' #Run full test suite using Rspec
+alias tl='tail -f log/*.log'
+alias rdb='rake db:migrate'
+alias rtp='rake db:test:prepare'
+alias bx='bundle exec'
+
+# Postgres
+alias pgs='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+
+# Homebrew
+alias bu='brew update'
+alias bg='brew upgrade'
+alias bo='brew outdated'
+alias bd='brew doctor'
