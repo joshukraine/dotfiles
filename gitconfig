@@ -1,0 +1,27 @@
+[user]
+	name = Joshua Steele
+	email = joshukraine@gmail.com
+[alias]
+	co = checkout
+	st = status
+	ci = commit
+	br = branch
+	df = diff
+	dfs = diff --staged
+	logg = log --graph --decorate --oneline --abbrev-commit --all
+[apply]
+	whitespace = nowarn
+[color]
+	ui = auto
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[core]
+	autocrlf = false
+	safecrlf = true
+	editor = vim
+	excludesfile = /Users/joshukraine/.gitignore_global
+[credential]
+	helper = osxkeychain
+[push]
+	default = matching
