@@ -39,7 +39,17 @@ Symlink the rc files. (Yes, someday when I grow up I'll put this in a Rake task.
     ln -nfs ~/.dotfiles/vimrc ~/.vimrc
     ln -nfs ~/.dotfiles/zshrc ~/.zshrc
 
+Set up the `~/.vim/bundle` directory needed by the [Vundle](https://github.com/gmarik/Vundle.vim) plugin manager.
+
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 Restart your terminal or `source ~/.zshrc`
+
+Launch `vim` and run `:PluginInstall`
+
+### Notes
+* I use Powerline which is a cool but rather fickle status bar for `vim`. You'll need to either [install Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation) (good luck!) or comment out the relevant lines in the `.vimrc`.
+* I also use the [solarized](https://github.com/altercation/solarized) color scheme for terminal and vim.
 
 ### Some of my favorite dotfile repos
 
