@@ -17,7 +17,7 @@ SAVEHIST=20000
 export BUNDLER_EDITOR="vim"
 export EDITOR="vim"
 
-export PATH=/Users/joshukraine/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/X11/bin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/bin
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/X11/bin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/bin
 export PATH="$PATH:/usr/local/lib/node_modules"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
