@@ -33,6 +33,7 @@ Symlink the rc files. (Yes, someday when I grow up I'll put this in a Rake task.
 
     ln -nfs ~/.dotfiles/gemrc ~/.gemrc
     ln -nfs ~/.dotfiles/gitignore ~/.gitignore_global
+    ln -nfs ~/.dotfiles/gitignore ~/.gitconfig gitconfig
     ln -nfs ~/.dotfiles/gvimrc ~/.gvimrc
     ln -nfs ~/.dotfiles/tmux.conf ~/.tmux.conf
     ln -nfs ~/.dotfiles/vim ~/.vim
