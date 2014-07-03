@@ -49,8 +49,9 @@ Restart your terminal or `source ~/.zshrc`
 Launch `vim` and run `:PluginInstall`
 
 ### Notes
-* I use Powerline which is a cool but rather fickle status bar for `vim`. You'll need to either [install Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation) (good luck!) or comment out the relevant lines in the `.vimrc`.
-* I also use the [solarized](https://github.com/altercation/solarized) color scheme for terminal and vim.
+* I use Powerline which is a cool but rather fickle status bar for `vim`. You'll need to either [install Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation) or comment out the relevant lines in the `.vimrc`.
+* [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58)
+* I also use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and vim.
 
 ### Some of my favorite dotfile repos
 
