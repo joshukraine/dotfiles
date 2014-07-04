@@ -12,18 +12,25 @@ These dotfiles are mainly intended for my personal use; I've made no attempt to 
 * tmux
 * zsh (oh my zsh)
 
-### Make sure you have these first
+### Setup Instructions (OS X only)
 
-* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-* [rbenv](https://github.com/sstephenson/rbenv)
-* Ruby (via rbenv)
-* [Homebrew](http://brew.sh/)
-* Vim (via Homebrew)
-* tmux (via Homebrew)
+Install [Homebrew](http://brew.sh/).
 
-Or you can get all of the above (minus `oh-my-zsh`) and more by running [thoughtbot's laptop script](https://github.com/thoughtbot/laptop).
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-### Setup Instructions
+Install [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh).
+
+    wget --no-check-certificate http://install.ohmyz.sh -O - | sh
+    source ~/.zshrc
+    
+If you plan to use [Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation), install `python` and THEN `vim`. Order is important. (For more detailed instructions on Powerline, see [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58).)
+
+    brew install python
+    brew install vim --env-std --override-system-vim
+
+Provision your machine with [thoughtbot's laptop script](https://github.com/thoughtbot/laptop). ([see requirements](https://github.com/thoughtbot/laptop#requirements))
+
+    bash <(curl -s https://raw.githubusercontent.com/thoughtbot/laptop/master/mac)
 
 Clone this repo.
 
@@ -48,14 +55,14 @@ Set up a `~/.tmp` directory (needed by `vim`)
 
     mkdir ~/.tmp
 
-Restart your terminal or `source ~/.zshrc`
+Install and configure Powerline: [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58)
 
 Launch `vim` and run `:PluginInstall`
 
 ### Notes
-* I use Powerline which is a cool but rather fickle status bar for `vim`. You'll need to either [install Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation) or comment out the relevant lines in the `.vimrc`.
-* [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58)
-* I also use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
+* If you don't want to use Powerline, simply comment out the relevant lines in the vimrc file.
+* I use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
+* I use the [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html), which you can get optimized for Powerline here: https://github.com/Lokaltog/powerline-fonts
 
 ### Some of my favorite dotfile repos
 
