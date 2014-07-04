@@ -22,15 +22,6 @@ Install [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh).
 
     wget --no-check-certificate http://install.ohmyz.sh -O - | sh
     source ~/.zshrc
-    
-If you plan to use [Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation), install `python` and THEN `vim`. Order is important. (For more detailed instructions on Powerline, see [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58).)
-
-    brew install python
-    brew install vim --env-std --override-system-vim
-
-Provision your machine with [thoughtbot's laptop script](https://github.com/thoughtbot/laptop). ([see requirements](https://github.com/thoughtbot/laptop#requirements))
-
-    bash <(curl -s https://raw.githubusercontent.com/thoughtbot/laptop/master/mac)
 
 Clone this repo.
 
@@ -47,6 +38,15 @@ Symlink the rc files. (Yes, someday when I grow up I'll put this in a Rake task.
     ln -nfs ~/.dotfiles/vimrc ~/.vimrc
     ln -nfs ~/.dotfiles/zshrc ~/.zshrc
 
+If you plan to use [Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation), install `python` and THEN `vim`. Order is important. (For more detailed instructions on Powerline, see [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58).)
+
+    brew install python
+    brew install vim --env-std --override-system-vim
+
+Provision your machine with [thoughtbot's laptop script](https://github.com/thoughtbot/laptop). ([see requirements](https://github.com/thoughtbot/laptop#requirements))
+
+    bash <(curl -s https://raw.githubusercontent.com/thoughtbot/laptop/master/mac)
+
 Set up the `~/.vim/bundle` directory needed by the [Vundle](https://github.com/gmarik/Vundle.vim) plugin manager.
 
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -60,6 +60,8 @@ Install and configure Powerline: [How to install Powerline on OS X](https://gist
 Launch `vim` and run `:PluginInstall`
 
 ### Notes
+
+* In case you're not me, you'll want to add your own name and email to `~/.dotfiles/gitconfig`.
 * If you don't want to use Powerline, simply comment out the relevant lines in the vimrc file.
 * I use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
 * I use the [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html), which you can get optimized for Powerline here: https://github.com/Lokaltog/powerline-fonts
