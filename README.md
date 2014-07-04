@@ -18,10 +18,11 @@ Install [Homebrew](http://brew.sh/).
 
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-Install [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh).
+Install [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh). (Run `brew install wget` first if needed.)
 
     wget --no-check-certificate http://install.ohmyz.sh -O - | sh
-    source ~/.zshrc
+
+Close and reopen terminal to complete `oh-my-zsh` install.
 
 Clone this repo.
 
@@ -37,6 +38,7 @@ Symlink the rc files. (Yes, someday when I grow up I'll put this in a Rake task.
     ln -nfs ~/.dotfiles/vim ~/.vim
     ln -nfs ~/.dotfiles/vimrc ~/.vimrc
     ln -nfs ~/.dotfiles/zshrc ~/.zshrc
+    source ~/.zshrc
 
 If you plan to use [Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation), install `python` and THEN `vim`. Order is important. (For more detailed instructions on Powerline, see [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58).)
 
@@ -57,7 +59,9 @@ Set up a `~/.tmp` directory (needed by `vim`)
 
 Install and configure Powerline: [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58)
 
-Launch `vim` and run `:PluginInstall`
+Install `vim` plugins with [Vundle](https://github.com/gmarik/Vundle.vim).
+
+    vim +PluginInstall +qall
 
 ### Notes
 
