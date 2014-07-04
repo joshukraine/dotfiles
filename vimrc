@@ -73,7 +73,6 @@ augroup END
 runtime macros/matchit.vim
 
 let g:rspec_runner = "os_x_iterm"
-let g:Powerline_symbols = 'unicode'
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 
@@ -228,6 +227,7 @@ colorscheme solarized
 " Powerline
 " ========================================================================
 
+let g:Powerline_symbols = 'unicode'
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
