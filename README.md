@@ -2,15 +2,15 @@
 
 These days everyone publishes their dotfiles. For this I am grateful since I've learned quite a bit by combing through the dotfiles of others. I've tried to gather the things that I find useful while at the same time keeping my own dotfiles as simple as possible.
 
-These dotfiles are mainly intended for my personal use; I've made no attempt to ensure that they are compatible with other systems. Feel free to take what you like and customize it for your own use.
+These dotfiles are mainly intended for my personal use; I've made no attempt to ensure that they are compatible with other systems. Granted, the following instructions are a bit more involved that just dotfiles. It's more like "How to set up your whole Mac from scratch". Feel free to take what you like and customize it for your own use.
 
 ### My System
 
 * OS X (10.9)
+* zsh (oh my zsh)
 * rbenv
 * Vim
 * tmux
-* zsh (oh my zsh)
 
 ### Setup Instructions (OS X only)
 
@@ -63,12 +63,24 @@ Install `vim` plugins with [Vundle](https://github.com/gmarik/Vundle.vim).
 
     vim +PluginInstall +qall
 
+### Extras
+
+I prefer Homebrew's `git`.
+
+    brew install git
+    
+I use [`tmuxinator`](https://github.com/tmuxinator/tmuxinator) for quickly setting up `tmux` environments.
+
+    gem install tmuxinator
+    
+I use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
+
+I use the [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html), which you can get optimized for Powerline here: https://github.com/Lokaltog/powerline-fonts
+
 ### Notes
 
 * In case you're not me, you'll want to add your own name and email to `~/.dotfiles/gitconfig`.
 * If you don't want to use Powerline, simply comment out the relevant lines in the vimrc file.
-* I use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
-* I use the [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html), which you can get optimized for Powerline here: https://github.com/Lokaltog/powerline-fonts
 
 ### Some of my favorite dotfile repos
 
