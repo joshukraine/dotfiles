@@ -21,7 +21,7 @@ These dotfiles are mainly intended for my personal use; I've made no attempt to 
 * Vim (via Homebrew)
 * tmux (via Homebrew)
 
-Or you can get all of the above (minus oh-my-zsh) and more by running [thoughtbot's laptop script](https://github.com/thoughtbot/laptop).
+Or you can get all of the above (minus `oh-my-zsh`) and more by running [thoughtbot's laptop script](https://github.com/thoughtbot/laptop).
 
 ### Setup Instructions
 
@@ -43,6 +43,10 @@ Symlink the rc files. (Yes, someday when I grow up I'll put this in a Rake task.
 Set up the `~/.vim/bundle` directory needed by the [Vundle](https://github.com/gmarik/Vundle.vim) plugin manager.
 
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    
+Set up a `~/.tmp` directory (needed by `vim`)
+
+    mkdir ~/.tmp
 
 Restart your terminal or `source ~/.zshrc`
 
@@ -51,7 +55,7 @@ Launch `vim` and run `:PluginInstall`
 ### Notes
 * I use Powerline which is a cool but rather fickle status bar for `vim`. You'll need to either [install Powerline](https://powerline.readthedocs.org/en/latest/overview.html#installation) or comment out the relevant lines in the `.vimrc`.
 * [How to install Powerline on OS X](https://gist.github.com/joshukraine/2c0078b9eba270382d58)
-* I also use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and vim.
+* I also use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
 
 ### Some of my favorite dotfile repos
 
