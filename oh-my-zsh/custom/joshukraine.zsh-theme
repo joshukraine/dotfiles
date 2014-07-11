@@ -10,7 +10,7 @@ _current_ruby() {
 
 _rprompt() {
   if [ $COLUMNS -gt 80 ]; then
-    echo "ruby-$(_current_ruby)"
+    echo "%{$fg[white]%}[ruby-$(_current_ruby)]%{$reset_color%}"
   fi
 }
 
