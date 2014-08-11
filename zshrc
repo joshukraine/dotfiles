@@ -22,6 +22,9 @@ export PATH="$PATH:/usr/local/lib/node_modules"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 
+setopt auto_cd
+cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites)
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 source $(brew --prefix nvm)/nvm.sh
