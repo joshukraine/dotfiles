@@ -42,6 +42,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'bufexplorer.zip'
 Plugin 'greplace.vim'
 Plugin 'Rename'
+Plugin 'puppetlabs/puppet-syntax-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
