@@ -60,3 +60,6 @@ alias bg='brew upgrade'
 alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
+
+# Ping
+alias pi='ping -Anc 5 8.8.8.8'
