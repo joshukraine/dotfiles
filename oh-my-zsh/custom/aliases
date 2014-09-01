@@ -17,8 +17,8 @@ alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finde
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 
 # List direcory contents
-alias lsa='ls -lah'
-alias l='ls -lah'
+alias lsa='ls -lahF'
+alias l='ls -lahF'
 alias ll='ls -lhF'
 alias la='ls -lAhF'
 alias lf='ls -F'

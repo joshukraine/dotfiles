@@ -23,7 +23,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 
 setopt auto_cd
-cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/vm)
+cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/vm $HOME)
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
