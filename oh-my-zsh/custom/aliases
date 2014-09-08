@@ -25,18 +25,18 @@ alias lf='ls -F'
 
 # joshukraine custom
 alias src='source ~/.zshrc'
-alias t2='tree -L 2'
-alias t3='tree -L 3'
-alias t4='tree -L 4'
+alias t2='tree -suphFL 2'
+alias t3='tree -suphFL 3'
+alias t4='tree -suphFL 4'
 
-alias t2a='tree -La 2'
-alias t3a='tree -La 3'
-alias t4a='tree -La 4'
+alias t2a='tree -suphFLa 2'
+alias t3a='tree -suphFLa 3'
+alias t4a='tree -suphFLa 4'
 
 # Idiot proofing :)
-alias mv='mv -i'
-alias cp='cp -i'
-alias rm='rm -i'
+alias mv='mv -iv'
+alias cp='cp -iv'
+alias rm='rm -iv'
 alias df='df -h'
 alias du='du -h'
 alias mkdir='mkdir -p'
