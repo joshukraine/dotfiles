@@ -63,3 +63,6 @@ alias bc='brew cleanup'
 
 # Ping
 alias pi='ping -Anc 5 8.8.8.8'
+
+# Speedtest
+alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
