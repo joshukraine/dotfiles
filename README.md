@@ -18,9 +18,9 @@ Install [Homebrew](http://brew.sh/).
 
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-Install [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh). (Run `brew install wget` first if needed.)
+Install [`oh-my-zsh`](https://github.com/robbyrussell/oh-my-zsh).
 
-    wget --no-check-certificate http://install.ohmyz.sh -O - | sh
+    curl -L http://install.ohmyz.sh | sh
 
 Close and reopen terminal to complete `oh-my-zsh` install.
 
@@ -47,8 +47,7 @@ If you plan to use [Powerline](https://powerline.readthedocs.org/en/latest/overv
 
 Provision your machine with [thoughtbot's laptop script](https://github.com/thoughtbot/laptop). ([see requirements](https://github.com/thoughtbot/laptop#requirements))
 
-    bash <(curl -s https://raw.githubusercontent.com/thoughtbot/laptop/master/mac)
-
+    bash <(curl -s https://raw.githubusercontent.com/thoughtbot/laptop/master/mac) 2>&1 | tee ~/laptop.log
 Set up the `~/.vim/bundle` directory needed by the [Vundle](https://github.com/gmarik/Vundle.vim) plugin manager.
 
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
