@@ -17,15 +17,13 @@ SAVEHIST=20000
 export BUNDLER_EDITOR="vim"
 export EDITOR="vim"
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/X11/bin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/bin
-export PATH="$PATH:/usr/local/lib/node_modules"
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="$HOME/.bin:$PATH"
-
 setopt auto_cd
 cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/vm $HOME)
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 source $(brew --prefix nvm)/nvm.sh
 
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh --no-rehash)"
