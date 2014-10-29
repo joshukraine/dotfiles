@@ -14,7 +14,11 @@ _rprompt() {
   fi
 }
 
-PROMPT='%~%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}$ % '
+local user='%{$fg[green]%}%n@%m%{$reset_color%}:'
+local pwd='%~'
+local git='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
+
+PROMPT="${user}${pwd}${git} $ "
 RPROMPT='$(_rprompt)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
