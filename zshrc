@@ -20,10 +20,7 @@ export EDITOR="vim"
 setopt auto_cd
 cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/vm $HOME)
 
-# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 source $(brew --prefix nvm)/nvm.sh
 
-
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh --no-rehash)"
+eval "$(rbenv init -)"
