@@ -24,5 +24,5 @@ RPROMPT='$(_rprompt)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" ["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}●%{$fg[white]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}●%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
