@@ -15,7 +15,7 @@ _rprompt() {
   fi
 }
 
-local user='%{$fg[green]%}%n@%m%{$fg[white]%}:%{$reset_color%}'
+local user='%{$fg[green]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
 local git='%{$fg[white]%}$(git_prompt_info)%{$reset_color%}'
 

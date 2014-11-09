@@ -52,7 +52,8 @@ alias rtp='rake db:test:prepare'
 alias bx='bundle exec'
 
 # Postgres
-alias pgs='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias stoppost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 
 # Homebrew
 alias bu='brew update'
