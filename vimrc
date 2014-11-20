@@ -120,6 +120,10 @@ set list listchars=tab:»·,trail:· " Display extra whitespace
 set cursorline                    " highlight current line
 set clipboard=unnamed             " use OS clipboard
 
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+
 " Keep focus split large, others minimal
 set winwidth=84
 set winheight=7
