@@ -18,7 +18,7 @@ export BUNDLER_EDITOR="vim"
 export EDITOR="vim"
 
 setopt auto_cd
-cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/vm $HOME)
+cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/virtual_machines $HOME)
 
 source $(brew --prefix nvm)/nvm.sh
 
