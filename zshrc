@@ -1,5 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=7
+export CONFIGURE_OPTS="--disable-install-doc:
 
 ZSH_THEME="joshukraine"
 ZSH_CUSTOM=$HOME/.dotfiles/oh-my-zsh/custom
