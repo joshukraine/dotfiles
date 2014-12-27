@@ -36,6 +36,7 @@ Symlink the rc files. (Yes, someday when I grow up I'll put this in a Rake task.
     ln -nfs ~/.dotfiles/gvimrc ~/.gvimrc
     ln -nfs ~/.dotfiles/tmux.conf ~/.tmux.conf
     ln -nfs ~/.dotfiles/vim ~/.vim
+    ln -nfs ~/.dotfiles/railsrc ~/.railsrc
     ln -nfs ~/.dotfiles/vimrc ~/.vimrc
     ln -nfs ~/.dotfiles/zshrc ~/.zshrc
     source ~/.zshrc
