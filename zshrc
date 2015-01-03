@@ -24,10 +24,7 @@ source $ZSH/oh-my-zsh.sh
 alias vi="vim"
 
 # Jump to quick edits
-alias omz='vim ~/.oh-my-zsh'
 alias ez='vim ~/.zshrc'
-alias ea='vim $ZSH_CUSTOM/aliases'
-alias ec='vim $ZSH_CUSTOM'
 alias ed='vim ~/.dotfiles'
 alias ev='vim ~/.vimrc'
 
