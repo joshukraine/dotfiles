@@ -28,7 +28,7 @@ If you don't want to use those, you'll need to remove or comment out the relevan
 
 This iteration of my dotfiles brings a few notable changes from last time.
 
-* Powerline has been replaced by [vim-airline](https://github.com/bling/vim-airline). This avoids a lot of the headache of installing python. 
+* Powerline has been replaced by [vim-airline](https://github.com/bling/vim-airline). This avoids a lot of the headache of installing python.
 * Due to changes in the `.vimrc`, vim no longer requires any .tmp or swap directories to be created.
 * I've added a `.railsrc` file to help with common setup flags I like to use when generating new rails apps.
 * All of the custom zsh code that was once stored in its own directory has now been moved in the `.zshrc` file. This keeps things a little less fragmented and in my opinion makes it easier to understand what's going on.
@@ -69,7 +69,6 @@ This iteration of my dotfiles brings a few notable changes from last time.
     source ~/.zshrc
 
 
-    
 ### Install Vundle for Vim
 
 1) Set up the `~/.vim/bundle` directory needed by the [Vundle](https://github.com/gmarik/Vundle.vim) plugin manager.
@@ -85,11 +84,11 @@ This iteration of my dotfiles brings a few notable changes from last time.
 I prefer Homebrew's `git`.
 
     brew install git
-    
+
 I use [`tmuxinator`](https://github.com/tmuxinator/tmuxinator) for quickly setting up `tmux` environments.
 
     gem install tmuxinator
-    
+
 I use the [solarized](https://github.com/altercation/solarized) color scheme (dark) for terminal and `vim`.
 
 I use the [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html), which you can get optimized for Powerline here: https://github.com/Lokaltog/powerline-fonts. This is also helpful for vim-airline, since it uses some of Powerlines custom symbols.
