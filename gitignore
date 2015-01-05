@@ -7,7 +7,6 @@ Thumbs.db
 tags
 log/
 db/*.sqlite3
-Thumbs.db
 .bundle
 .env
 tmp/
