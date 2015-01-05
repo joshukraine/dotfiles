@@ -1,7 +1,7 @@
 " Settings {{{
+
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
-" syntax enable
 
 " Use vim, not vi api
 set nocompatible
@@ -36,8 +36,10 @@ set smartcase
 " Make sure any searches /searchPhrase doesn't need the \c escape character
 set ignorecase
 
-" A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not currently loaded in a window
-" if you try and quit Vim while there are hidden buffers, you will raise an error:
+" A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not
+" currently loaded in a window.
+" If you try and quit Vim while there are hidden buffers, you will raise an
+" error:
 " E162: No write since last change for buffer “a.txt”
 set hidden
 
@@ -51,10 +53,10 @@ set backspace=indent,eol,start
 set expandtab
 
 " Set tab size in spaces (this is for manual indenting)
-set tabstop=2
+set tabstop=4
 
 " The number of spaces inserted for a tab (used for auto indenting)
-set shiftwidth=2
+set shiftwidth=4
 
 " Turn on line numbers AND use relative number
 set number
@@ -108,25 +110,32 @@ set lazyredraw
 " highlight a matching [{()}] when cursor is placed on start/end character
 set showmatch
 
-" Set built-in file system explorer to use layout similar to the NERDTree plugin
-let g:netrw_liststyle=3
+" Display the mode you're in.
+set showmode
 
+" Complete files like a shell.
+set wildmode=list:longest
 
-" LEGACY SETTINGS
-set showmode                      " Display the mode you're in.
-set wildmode=list:longest         " Complete files like a shell.
-set scrolloff=3                   " Show 3 lines of context around the cursor.
-set title                         " Set the terminal's title
+" Show 3 lines of context around the cursor.
+set scrolloff=3
+
+" Set the terminal's title
+set title
+
 set autoindent
+
 set tags=./tags;
+
 set t_Co=256
+
 set fillchars+=vert:\ 
+
 " set backupdir=~/.tmp
 " set directory=~/.tmp              " Don't clutter my dirs up with swp and tmp files
 " set list listchars=tab:»·,trail:· " Display extra whitespace
 " set clipboard=unnamed             " use OS clipboard
 
-" Make it obvious where 80 characters is
+" Vertical line at 80 characters
 set textwidth=80
 set colorcolumn=+1
 
@@ -135,10 +144,21 @@ set winwidth=84
 set winheight=7
 set winminheight=7
 set winheight=999
+
+" Set built-in file system explorer to use layout similar to the NERDTree plugin
+let g:netrw_liststyle=3
+
+" Enable built-in matchit plugin
+runtime macros/matchit.vim
+
+let g:rspec_runner = "os_x_iterm"
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
 " }}}
 
 
 " Plugins {{{
+
 filetype off                  " required by Vundle
 
 " set the runtime path to include Vundle and initialize
@@ -184,53 +204,34 @@ Plugin 'scrooloose/nerdtree'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Airline (status line)
+" }}}
+
+
+" Airline (status line) {{{
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
 let g:airline_symbols.linenr = 'Ln'
-
 let g:airline_powerline_fonts=1
 " let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" Close vim if only nerdtree window is left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Theme
-set background=dark
-colorscheme solarized
 " }}}
 
 
-" Ruby {{{
-augroup myfiletypes
-  " Clear old autocmds in group
-  autocmd!
-  " autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
-  autocmd FileType ruby,eruby,yaml setlocal path+=lib
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
+" Colorscheme {{{
 
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
+set background=dark
+colorscheme solarized
 
-  " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
-
-augroup END
-
-" Enable built-in matchit plugin
-runtime macros/matchit.vim
-
-let g:rspec_runner = "os_x_iterm"
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 " }}}
 
 
 " Mappings {{{
+
 let mapleader = ","
 
 " General Vim
@@ -274,15 +275,18 @@ map <C-n> :NERDTreeToggle<cr>
 " Tcomment
 map <Leader>/ :TComment<cr>
 
-
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
 map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 map <Leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
+
+" Open a new tab with Ctrl+T
 map <C-t> <esc>:tabnew<cr>
 
+" Clear highlights
 map <Leader>h :nohl<cr>
+
 map <Leader>cn :cn<cr>
 map <Leader>cp :cp<cr>
 
@@ -311,18 +315,51 @@ map K <Nop>
 nmap <Leader>O O<Esc>
 nmap <cr> o<Esc>
 
+" }}}
+
+
+" Commands {{{
+
 " When loading text files, wrap them and don't split up words.
 au BufNewFile,BufRead *.txt setlocal lbr
 au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 
+" file formats
+autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd Filetype markdown setlocal wrap linebreak nolist textwidth=0 wrapmargin=0 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
+autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim setlocal shiftwidth=2 tabstop=2 expandtab
+
+" autoindent with two spaces, always expand tabs
+autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
+autocmd FileType ruby,eruby,yaml setlocal path+=lib
+
+" specify syntax highlighting for specific files
+autocmd Bufread,BufNewFile *.spv set filetype=php
+autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
+
+" Enable spellchecking for Markdown
+autocmd FileType markdown setlocal spell
+
+" Automatically wrap at 80 characters for Markdown
+autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
-" }}}
 
+" Close all folds when opening a new buffer
+autocmd BufRead * setlocal foldmethod=marker
+autocmd BufRead * normal zM
 
-" Powerline {{{
-" let g:Powerline_symbols = 'unicode'
-" python from powerline.vim import setup as powerline_setup
-" python powerline_setup()
-" python del powerline_setup
+" Close vim if only nerdtree window is left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Change colourscheme when diffing
+fun! SetDiffColors()
+  highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+  highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
+endfun
+autocmd FilterWritePre * call SetDiffColors()
+
 " }}}
