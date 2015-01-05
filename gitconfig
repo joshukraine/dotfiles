@@ -20,7 +20,7 @@
 	autocrlf = false
 	safecrlf = true
 	editor = vim
-	excludesfile = /Users/joshukraine/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [credential]
 	helper = osxkeychain
 [push]
