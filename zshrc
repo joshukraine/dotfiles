@@ -17,6 +17,7 @@ plugins=(git git-flow pow vagrant)
 source $ZSH/oh-my-zsh.sh
 # }}}
 
+
 # Aliases {{{
 
 # Vim specific
@@ -65,7 +66,6 @@ alias rc='rails console'
 alias rg='rails generate'
 alias rs='rails server'
 alias rsp='rspec . --format documentation' #Run full test suite using Rspec
-alias tl='tail -f log/*.log'
 alias rdb='rake db:migrate'
 alias rtp='rake db:test:prepare'
 alias bx='bundle exec'
@@ -137,7 +137,7 @@ function tn() {
 }
 
 # Makes attaching to an existing tmux session (with a specific name) easier
-function to() {
+function ta() {
   tmux attach -t $1
 }
 
@@ -145,6 +145,9 @@ function to() {
 function tk() {
   tmux kill-session -t $1
 }
+
+# List tmux sessions
+alias tl='tmux ls'
 
 # Create a new session named for current directory, or attach if exists.
 alias tna='tmux new-session -As $(basename "$PWD" | tr . -)'
