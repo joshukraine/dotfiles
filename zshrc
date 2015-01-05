@@ -98,12 +98,6 @@ function get_ruby_version() {
 
 
 # Prompt {{{
-_rubyprompt() {
-  if [ $COLUMNS -gt 80 ]; then
-    echo "$(get_ruby_version)"
-  fi
-}
-
 ZSH_THEME_GIT_PROMPT_PREFIX=" ["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]"
 ZSH_THEME_GIT_PROMPT_DIRTY=""
@@ -119,6 +113,12 @@ local user='%{$fg[green]%}%n@%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
 local git='%{$fg[white]%}$(git_prompt_info)$(git_prompt_status)%{$reset_color%}'
+
+_rubyprompt() {
+  if [ $COLUMNS -gt 80 ]; then
+    echo "$(get_ruby_version)"
+  fi
+}
 
 if [[ -n $SSH_CONNECTION ]]; then
   PROMPT="${ssh_user}${pwd}${git} $ "
