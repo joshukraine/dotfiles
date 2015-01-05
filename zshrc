@@ -82,11 +82,6 @@ alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
 
-# Tmux
-alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
-alias tmuxsrc="tmux source-file ~/.tmux.conf"
-alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
-
 # Finder
 alias o='open . &'
 
@@ -137,19 +132,29 @@ RPROMPT='$(_rubyprompt)'
 
 # Tmux {{{
 # Makes creating a new tmux session (with a specific name) easier
-function tmuxopen() {
-  tmux attach -t $1
-}
-
-# Makes creating a new tmux session (with a specific name) easier
-function tmuxnew() {
+function tn() {
   tmux new -s $1
 }
 
+# Makes attaching to an existing tmux session (with a specific name) easier
+function to() {
+  tmux attach -t $1
+}
+
 # Makes deleting a tmux session easier
-function tmuxkill() {
+function tk() {
   tmux kill-session -t $1
 }
+
+# Create a new session named for current directory, or attach if exists.
+alias tna='tmux new-session -As $(basename "$PWD" | tr . -)'
+
+# Source .tmux.conf
+alias tsrc="tmux source-file ~/.tmux.conf"
+
+# Kill all tmux sessions
+alias tka="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
+
 # }}}
 
 
