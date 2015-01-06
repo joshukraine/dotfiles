@@ -272,6 +272,9 @@ map <Leader>gs :Gstatus<cr>
 " Searching the file system
 map <C-n> :NERDTreeToggle<cr>
 
+" Launch BufExplorer
+map <C-b> :BufExplorerHorizontalSplit<cr>
+
 " Tcomment
 map <Leader>/ :TComment<cr>
 
