@@ -22,6 +22,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Vim specific
 alias vi="vim"
+alias ct='ctags -R -V --exclude=.git'
 
 # Jump to quick edits
 alias ez='vim ~/.zshrc'
