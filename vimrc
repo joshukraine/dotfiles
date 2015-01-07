@@ -190,6 +190,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'bufexplorer.zip'
 Plugin 'greplace.vim'
 Plugin 'Rename'
