@@ -221,6 +221,7 @@ map <Leader>w <C-w>
 map <Leader>ra :%s/
 map <Leader>p :set paste<cr>o<esc>"*]p:set nopaste<cr> " Fix indentation on paste
 map <Leader>i mmgg=G`m<cr> " For indenting code
+map <Leader>ob :Obsession<cr>
 
 " Rails
 map <Leader>vm :RVmodel<cr>
