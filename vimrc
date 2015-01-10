@@ -212,7 +212,7 @@ filetype plugin indent on    " required
 
 " Mappings {{{
 
-" let mapleader = ","
+let mapleader = " "
 
 " General Vim
 map <Leader>x :Explore
