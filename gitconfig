@@ -3,12 +3,13 @@
 	email = joshukraine@gmail.com
 [alias]
 	co = checkout
-	st = status
+	st = status --short
 	ci = commit
 	br = branch
 	df = diff
 	dfs = diff --staged
 	logg = log --graph --decorate --oneline --abbrev-commit --all
+	sta = status
 [apply]
 	whitespace = nowarn
 [color]
