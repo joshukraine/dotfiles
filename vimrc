@@ -252,6 +252,9 @@ map K <Nop> " Disable K looking stuff up
 nmap <Leader>O O<Esc> " Add new line ABOVE without leaving normal mode
 nmap <CR> o<Esc> " Add new line BELOW without leaving normal mode
 
+" Run 'git blame' on a selection of code
+vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
