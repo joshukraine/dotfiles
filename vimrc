@@ -289,9 +289,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" Launch BufExplorer
-" map <C-b> :BufExplorerHorizontalSplit<CR>
-
 " Tcomment
 map <Leader>/ :TComment<CR>
 
@@ -388,6 +385,7 @@ autocmd FilterWritePre * call SetDiffColors()
 
 
 " Airline (status line) {{{
+" https://github.com/bling/vim-airline
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
