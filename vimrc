@@ -170,59 +170,52 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Vundle itself
-Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim' " https://github.com/gmarik/Vundle.vim
 
 " Ruby-specific
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-ruby/vim-ruby' " https://github.com/vim-ruby/vim-ruby
+Plugin 'kana/vim-textobj-user' " https://github.com/kana/vim-textobj-user
+Plugin 'nelstrom/vim-textobj-rubyblock' " https://github.com/nelstrom/vim-textobj-rubyblock
+Plugin 'scrooloose/syntastic' " https://github.com/scrooloose/syntastic
 
 " Searching and Navigation
-Plugin 'scrooloose/nerdtree'
-" Plugin 'bufexplorer.zip'
-Plugin 'skwp/greplace.vim'
-" Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-" Plugin 'wincent/Command-T'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree' " https://github.com/scrooloose/nerdtree
+Plugin 'skwp/greplace.vim' " https://github.com/skwp/greplace.vim
+Plugin 'rking/ag.vim' " https://github.com/rking/ag.vim
+Plugin 'christoomey/vim-tmux-navigator' " https://github.com/christoomey/vim-tmux-navigator
+Plugin 'ctrlpvim/ctrlp.vim' " https://github.com/ctrlpvim/ctrlp.vim
 
 " Look and Feel
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized' " https://github.com/altercation/vim-colors-solarized
+Plugin 'bling/vim-airline' " https://github.com/bling/vim-airline
 
 " Tim Pope
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-fugitive' " https://github.com/tpope/vim-fugitive
+Plugin 'tpope/vim-git' " https://github.com/tpope/vim-git
+Plugin 'tpope/vim-endwise' " https://github.com/tpope/vim-endwise
+Plugin 'tpope/vim-surround' " https://github.com/tpope/vim-surround
+Plugin 'tpope/vim-rails' " https://github.com/tpope/vim-rails
+Plugin 'tpope/vim-ragtag' " https://github.com/tpope/vim-ragtag
+Plugin 'tpope/vim-obsession' " https://github.com/tpope/vim-obsession
 
 " Related to testing & tmux
-Plugin 'benmills/vimux'
-Plugin 'skalnik/vim-vroom'
-" Plugin 'thoughtbot/vim-rspec'
-" Plugin 'jgdavey/tslime.vim'
+Plugin 'benmills/vimux' " https://github.com/benmills/vimux
+Plugin 'skalnik/vim-vroom' " https://github.com/skalnik/vim-vroom
+" Plugin 'thoughtbot/vim-rspec' " https://github.com/thoughtbot/vim-rspec
+" Plugin 'jgdavey/tslime.vim' " https://github.com/jgdavey/tslime.vim
 
 " Related to vim-snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+Plugin 'MarcWeber/vim-addon-mw-utils' " https://github.com/MarcWeber/vim-addon-mw-utils
+Plugin 'tomtom/tlib_vim' " https://github.com/tomtom/tlib_vim
+Plugin 'garbas/vim-snipmate' " https://github.com/garbas/vim-snipmate
+Plugin 'honza/vim-snippets' " https://github.com/honza/vim-snippets
 
 " Other
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'ervandew/supertab'
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'Rename'
+Plugin 'kchmck/vim-coffee-script' " https://github.com/kchmck/vim-coffee-script
+Plugin 'tomtom/tcomment_vim' " https://github.com/tomtom/tcomment_vim
+Plugin 'bronson/vim-trailing-whitespace' " https://github.com/bronson/vim-trailing-whitespace
+Plugin 'ervandew/supertab' " https://github.com/ervandew/supertab
+Plugin 'danro/rename.vim' " https://github.com/danro/rename.vim
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
