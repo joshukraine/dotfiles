@@ -53,10 +53,10 @@ set backspace=indent,eol,start
 set expandtab
 
 " Set tab size in spaces (this is for manual indenting)
-set tabstop=4
+set tabstop=2
 
 " The number of spaces inserted for a tab (used for auto indenting)
-set shiftwidth=4
+set shiftwidth=2
 
 " Turn on line numbers AND use relative number
 set number
@@ -64,6 +64,7 @@ set relativenumber
 
 " Highlight tailing whitespace
 set list listchars=tab:\ \ ,trail:·
+" set list listchars=tab:»·,trail:·
 
 " Get rid of the delay when pressing O (for example)
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
@@ -132,7 +133,6 @@ set fillchars+=vert:\
 
 " set backupdir=~/.tmp
 " set directory=~/.tmp              " Don't clutter my dirs up with swp and tmp files
-" set list listchars=tab:»·,trail:· " Display extra whitespace
 " set clipboard=unnamed             " use OS clipboard
 
 " Vertical line at 80 characters
@@ -151,21 +151,48 @@ let g:netrw_liststyle=3
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
 
-let g:rspec_runner = "os_x_iterm"
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+" let g:rspec_runner = "os_x_iterm"
+" let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
+set grepprg=ag
+
+let g:grep_cmd_opts = '--line-numbers --noheading'
 
 " }}}
 
 
 " Plugins {{{
 
-filetype off                  " required by Vundle
+filetype off " required by Vundle
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Vundle itself
 Plugin 'gmarik/Vundle.vim'
+
+" Ruby-specific
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'scrooloose/syntastic'
+
+" Searching and Navigation
+Plugin 'scrooloose/nerdtree'
+" Plugin 'bufexplorer.zip'
+Plugin 'skwp/greplace.vim'
+" Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'wincent/Command-T'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" Look and Feel
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+
+" Tim Pope
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-bundler'
@@ -176,32 +203,26 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-obsession'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'wincent/Command-T'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'jgdavey/tslime.vim'
-Plugin 'ervandew/supertab'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-Plugin 'bufexplorer.zip'
-Plugin 'greplace.vim'
-Plugin 'Rename'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
+
+" Related to testing & tmux
+Plugin 'benmills/vimux'
+Plugin 'skalnik/vim-vroom'
+" Plugin 'thoughtbot/vim-rspec'
+" Plugin 'jgdavey/tslime.vim'
 
 " Related to vim-snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+
+" Other
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ervandew/supertab'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'Rename'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -210,94 +231,115 @@ filetype plugin indent on    " required
 " }}}
 
 
-" Mappings {{{
+" General Mappings {{{
 
 let mapleader = " "
 
-" General Vim
-map <Leader>x :Explore
-map <Leader>vi :tabe ~/.vimrc<cr>
-map <Leader>src :source ~/.vimrc<cr>:AirlineRefresh<cr>
-map <Leader>w <C-w>
+" Misc
+" map <Leader>x :Explore
+map <Leader>ev :tabe ~/.vimrc<CR>
+map <Leader>s :source ~/.vimrc<CR>:AirlineRefresh<CR>
 map <Leader>ra :%s/
-map <Leader>p :set paste<cr>o<esc>"*]p:set nopaste<cr> " Fix indentation on paste
-map <Leader>i mmgg=G`m<cr> " For indenting code
-map <Leader>ob :Obsession<cr>
-
-" Rails
-map <Leader>vm :RVmodel<cr>
-map <Leader>vv :RVview<cr>
-map <Leader>vc :RVcontroller<cr>
-map <Leader>vh :RVhelper
-map <Leader>sm :RSmodel
-map <Leader>sv :RSview
-map <Leader>sc :RScontroller
-map <Leader>sh :RShelper
-map <Leader>vf :RVfunctional<cr>
-
-" Rspec
-map <Leader>su :RSunittest
-map <Leader>vu :RVunittest<cr>
-map <Leader>u :Runittest<cr>
-map <Leader>rd :!bundle exec rspec % --format documentation<cr>
-map <Leader>r :call RunCurrentSpecFile()<cr>
-map <Leader>n :call RunNearestSpec()<cr>
-map <Leader>l :call RunLastSpec()<cr>
-map <Leader>a :call RunAllSpecs()<cr>
-
-" Git
-map <Leader>gca :Gcommit -am ""<LEFT>
-map <Leader>gc :Gcommit -m ""<LEFT>
-map <Leader>gs :Gstatus<cr>
-
-" Searching the file system
-map <C-n> :NERDTreeToggle<cr>
-
-" Launch BufExplorer
-map <C-b> :BufExplorerHorizontalSplit<cr>
-
-" Tcomment
-map <Leader>/ :TComment<cr>
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
+map <Leader>i mmgg=G`m<CR> " For indenting code
+map <Leader>h :nohl<CR> " Clear highlights
+imap <C-[> <C-c> " Return to normal mode faster
+map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
+inoremap jj <C-c> " jj to switch back to normal mode
+nnoremap <Leader><Leader> <c-^> " Switch between the last two files
+map Q <Nop> " Disable Ex mode
+map K <Nop> " Disable K looking stuff up
+nmap <Leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+nmap <CR> o<Esc> " Add new line BELOW without leaving normal mode
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
-map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
-map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
-map <Leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
-
-" Open a new tab with Ctrl+T
-map <C-t> <esc>:tabnew<cr>
-
-" Clear highlights
-map <Leader>h :nohl<cr>
-
-map <Leader>cn :cn<cr>
-map <Leader>cp :cp<cr>
-
-" Return to normal mode faster
-imap <C-[> <C-c>
-
-" jj to switch back to normal mode
-inoremap jj <C-c>
-
-" Switch between the last two files
-nnoremap <Leader><Leader> <c-^>
+map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
+map <Leader>sp :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+map <Leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 
 " Get off my lawn
-nnoremap <Left> :echoe "Use h"<cr>
-nnoremap <Right> :echoe "Use l"<cr>
-nnoremap <Up> :echoe "Use k"<cr>
-nnoremap <Down> :echoe "Use j"<cr>
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
 
-" Disable Ex mode
-map Q <Nop>
+" Rails - Not using these right now
+" map <Leader>vm :RVmodel<CR>
+" map <Leader>vv :RVview<CR>
+" map <Leader>vc :RVcontroller<CR>
+" map <Leader>vh :RVhelper
+" map <Leader>sm :RSmodel
+" map <Leader>sv :RSview
+" map <Leader>sc :RScontroller
+" map <Leader>sh :RShelper
+" map <Leader>vf :RVfunctional<CR>
 
-" Disable K looking stuff up
-map K <Nop>
+" Rspec - Not using these right now
+" map <Leader>su :RSunittest
+" map <Leader>vu :RVunittest<CR>
+" map <Leader>u :Runittest<CR>
+" map <Leader>rd :!bundle exec rspec % --format documentation<CR>
+" map <Leader>r :call RunCurrentSpecFile()<CR>
+" map <Leader>n :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
 
-" Add new lines without leaving normal mode
-nmap <Leader>O O<Esc>
-nmap <cr> o<Esc>
+" }}}
+
+
+" Plugin-specific Mappings and Settings {{{
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Launch BufExplorer
+" map <C-b> :BufExplorerHorizontalSplit<CR>
+
+" Tcomment
+map <Leader>/ :TComment<CR>
+
+" Obsession
+map <Leader>ob :Obsession<CR>
+
+" Vimux
+" Prompt for a command to run map
+map <Leader>vp :VimuxPromptCommand<CR>
+
+" Inspect runner pane map
+map <Leader>vi :VimuxInspectRunner<CR>
+
+" Close vim tmux runner opened by VimuxRunCommand
+map <Leader>vq :VimuxCloseRunner<CR>
+
+" vroom.vim
+map <Leader>r :call vroom#RunTestFile({'options':'--drb'})<CR>
+map <Leader>n :call vroom#RunNearestTest({'options':'--drb'})<CR>
+map <Leader>l :call vroom#RunLastTest({'options':'--drb'})<CR>
+let g:vroom_use_vimux = 1
+let g:vroom_use_colors = 1
+let g:vroom_map_keys = 0
+let g:vroom_clear_screen = 0
+
+" CtrlP
+map <leader>t <C-p>
+map <leader>y :CtrlPBuffer<CR>
+let g:ctrlp_show_hidden=1
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_max_height=30
+
+" CtrlP -> override <C-o> to provide options for how to open files
+let g:ctrlp_arg_map = 1
+
+" CtrlP -> files matched are ignored when expanding wildcards
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
+
+" CtrlP -> use Ag for searching instead of VimScript
+" (might not work with ctrlp_show_hidden and ctrlp_custom_ignore)
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" CtrlP -> directories to ignore when fuzzy finding
+let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
 
 " }}}
 
@@ -357,7 +399,6 @@ endif
 
 let g:airline_symbols.linenr = 'Ln'
 let g:airline_powerline_fonts=1
-" let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
@@ -366,7 +407,11 @@ let g:airline_right_sep=''
 
 " Colorscheme {{{
 
-set background=dark
+" Light theme
+set background=light
 colorscheme solarized
 
+" Dark theme
+" set background=dark
+" colorscheme solarized
 " }}}
