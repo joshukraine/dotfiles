@@ -69,7 +69,7 @@ alias rg='rails generate'
 alias rs='rails server'
 alias rsp='rspec . --format documentation' #Run full test suite using Rspec
 alias rdb='rake db:migrate'
-alias rtp='rake db:test:prepare'
+alias rtp='rake test:prepare'
 alias bx='bundle exec'
 
 # Postgres
@@ -176,7 +176,7 @@ HISTFILE=~/.zsh_history
 
 # cdpath {{{
 setopt auto_cd
-cdpath=($HOME/dev $HOME/dev/projects $HOME/Sites $HOME/dev/virtual_machines $HOME)
+cdpath=($HOME/code $HOME/developer $HOME/Sites $HOME)
 # }}}
 
 
