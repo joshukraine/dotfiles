@@ -63,7 +63,6 @@ set number
 set relativenumber
 
 " Highlight tailing whitespace
-" set list listchars=tab:\ \ ,trail:·
 set list listchars=tab:»·,trail:·
 
 " Get rid of the delay when pressing O (for example)
@@ -72,9 +71,6 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 
 " Always show status bar
 set laststatus=2
-
-" Set the status line to something useful
-set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
 
 " Hide the toolbar
 set guioptions-=T
@@ -96,8 +92,9 @@ set shortmess+=I
 set splitbelow
 set splitright
 
-" Highlight the current line
+" Highlight the current line and column
 set cursorline
+set cursorcolumn
 
 " Ensure Vim doesn't beep at you every time you make a mistype
 set visualbell
@@ -131,10 +128,6 @@ set t_Co=256
 
 set fillchars+=vert:\ 
 
-" set backupdir=~/.tmp
-" set directory=~/.tmp              " Don't clutter my dirs up with swp and tmp files
-" set clipboard=unnamed             " use OS clipboard
-
 " Vertical line at 80 characters
 set textwidth=80
 set colorcolumn=+1
@@ -150,9 +143,6 @@ let g:netrw_liststyle=3
 
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
-
-" let g:rspec_runner = "os_x_iterm"
-" let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 set grepprg=ag
 
@@ -288,7 +278,7 @@ nnoremap <Down> :echoe "Use j"<CR>
 " Plugin-specific Mappings and Settings {{{
 
 " NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <Leader>\ :NERDTreeToggle<CR>
 
 " Tcomment
 map <Leader>/ :TComment<CR>
@@ -307,11 +297,12 @@ map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 
 " vroom.vim
-map <Leader>r :VroomRunTestFile<CR>
-map <Leader>n :VroomRunNearestTest<CR>
+map <Leader>r :VroomRunNearestTest<CR>
+map <Leader>f :VroomRunTestFile<CR>
 map <Leader>l :VroomRunLastTest<CR>
 let g:vroom_use_vimux = 1
-let g:vroom_use_colors = 0
+let g:vroom_use_colors = 1
+let g:vroom_use_bundle_exec = 0
 let g:vroom_map_keys = 0
 let g:vroom_clear_screen = 0
 let g:VimuxHeight = "30"
