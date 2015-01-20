@@ -374,6 +374,9 @@ autocmd BufRead * normal zM
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" Open NERDTree when vim starts up
+autocmd vimenter * NERDTree
+
 " Change colourscheme when diffing
 fun! SetDiffColors()
   highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
