@@ -49,22 +49,22 @@ set nowrap
 " Allow backspace to delete end of line, indent and start of line characters
 set backspace=indent,eol,start
 
-" Convert tabs to spaces
-set expandtab
+" Convert tabs to spaces, all file types
+" set expandtab
 
 " Set tab size in spaces (this is for manual indenting)
-set tabstop=2
+set tabstop=4
 
 " The number of spaces inserted for a tab (used for auto indenting)
-set shiftwidth=2
+set shiftwidth=4
 
 " Turn on line numbers AND use relative number
 set number
 set relativenumber
 
 " Highlight tailing whitespace
-set list listchars=tab:\ \ ,trail:·
-" set list listchars=tab:»·,trail:·
+" set list listchars=tab:\ \ ,trail:·
+set list listchars=tab:»·,trail:·
 
 " Get rid of the delay when pressing O (for example)
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
@@ -319,19 +319,15 @@ let g:VimuxHeight = "30"
 " CtrlP
 map <leader>t <C-p>
 map <leader>y :CtrlPBuffer<CR>
-let g:ctrlp_show_hidden=1
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_max_height=30
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_max_height = 30
 
 " CtrlP -> override <C-o> to provide options for how to open files
 let g:ctrlp_arg_map = 1
 
 " CtrlP -> files matched are ignored when expanding wildcards
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
-
-" CtrlP -> use Ag for searching instead of VimScript
-" (might not work with ctrlp_show_hidden and ctrlp_custom_ignore)
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " CtrlP -> directories to ignore when fuzzy finding
 let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
@@ -375,7 +371,7 @@ autocmd BufRead * normal zM
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Open NERDTree when vim starts up
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 " Change colourscheme when diffing
 fun! SetDiffColors()
