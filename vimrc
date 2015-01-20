@@ -216,6 +216,7 @@ Plugin 'tomtom/tcomment_vim' " https://github.com/tomtom/tcomment_vim
 Plugin 'bronson/vim-trailing-whitespace' " https://github.com/bronson/vim-trailing-whitespace
 Plugin 'ervandew/supertab' " https://github.com/ervandew/supertab
 Plugin 'danro/rename.vim' " https://github.com/danro/rename.vim
+Plugin 'duff/vim-scratch' " https://github.com/duff/vim-scratch
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -306,13 +307,14 @@ map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 
 " vroom.vim
-map <Leader>r :call vroom#RunTestFile({'options':'--drb'})<CR>
-map <Leader>n :call vroom#RunNearestTest({'options':'--drb'})<CR>
-map <Leader>l :call vroom#RunLastTest({'options':'--drb'})<CR>
+map <Leader>r :VroomRunTestFile<CR>
+map <Leader>n :VroomRunNearestTest<CR>
+map <Leader>l :VroomRunLastTest<CR>
 let g:vroom_use_vimux = 1
-let g:vroom_use_colors = 1
+let g:vroom_use_colors = 0
 let g:vroom_map_keys = 0
 let g:vroom_clear_screen = 0
+let g:VimuxHeight = "30"
 
 " CtrlP
 map <leader>t <C-p>
