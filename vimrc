@@ -190,9 +190,9 @@ Plugin 'tpope/vim-obsession' " https://github.com/tpope/vim-obsession
 
 " Related to testing & tmux
 Plugin 'benmills/vimux' " https://github.com/benmills/vimux
-Plugin 'skalnik/vim-vroom' " https://github.com/skalnik/vim-vroom
-" Plugin 'thoughtbot/vim-rspec' " https://github.com/thoughtbot/vim-rspec
 " Plugin 'jgdavey/tslime.vim' " https://github.com/jgdavey/tslime.vim
+Plugin 'thoughtbot/vim-rspec' " https://github.com/thoughtbot/vim-rspec
+" Plugin 'skalnik/vim-vroom' " https://github.com/skalnik/vim-vroom
 
 " Related to vim-snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils' " https://github.com/MarcWeber/vim-addon-mw-utils
@@ -267,10 +267,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 " map <Leader>vu :RVunittest<CR>
 " map <Leader>u :Runittest<CR>
 " map <Leader>rd :!bundle exec rspec % --format documentation<CR>
-" map <Leader>r :call RunCurrentSpecFile()<CR>
-" map <Leader>n :call RunNearestSpec()<CR>
-" map <Leader>l :call RunLastSpec()<CR>
-" map <Leader>a :call RunAllSpecs()<CR>
 
 " }}}
 
@@ -286,6 +282,23 @@ map <Leader>/ :TComment<CR>
 " Obsession
 map <Leader>ob :Obsession<CR>
 
+" vim-rspec
+map <Leader>f :call RunCurrentSpecFile()<CR>
+map <Leader>r :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = 'call VimuxRunCommand("spring rspec {spec}")'
+
+" vroom.vim (alternative plugin to vim-rspec)
+" map <Leader>r :VroomRunNearestTest<CR>
+" map <Leader>f :VroomRunTestFile<CR>
+" map <Leader>l :VroomRunLastTest<CR>
+" let g:vroom_use_vimux = 1
+" let g:vroom_use_colors = 1
+" let g:vroom_use_bundle_exec = 0
+" let g:vroom_map_keys = 0
+" let g:vroom_clear_screen = 0
+
 " Vimux
 " Prompt for a command to run map
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -293,18 +306,16 @@ map <Leader>vp :VimuxPromptCommand<CR>
 " Inspect runner pane map
 map <Leader>vi :VimuxInspectRunner<CR>
 
-" Close vim tmux runner opened by VimuxRunCommand
+" Close vim tmux runner opened by VimuxRunCommand. If a pane is closed manually,
+" the vim-rspec commands will no longer cause a new pane to open. Calling
+" :VimuxCloseRunner() will 'reset' Vimux, after which the vim-rspec commands
+" will pop open a new pane as they did initially.
 map <Leader>vq :VimuxCloseRunner<CR>
 
-" vroom.vim
-map <Leader>r :VroomRunNearestTest<CR>
-map <Leader>f :VroomRunTestFile<CR>
-map <Leader>l :VroomRunLastTest<CR>
-let g:vroom_use_vimux = 1
-let g:vroom_use_colors = 1
-let g:vroom_use_bundle_exec = 0
-let g:vroom_map_keys = 0
-let g:vroom_clear_screen = 0
+" Zoom the tmux runner page
+map <Leader>vz :VimuxZoomRunner<CR>
+
+" Set the size of the vimux window.
 let g:VimuxHeight = "30"
 
 " CtrlP
