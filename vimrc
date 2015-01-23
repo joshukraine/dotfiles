@@ -160,57 +160,58 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Vundle itself
-Plugin 'gmarik/Vundle.vim' " https://github.com/gmarik/Vundle.vim
+Plugin 'gmarik/Vundle.vim'                " https://github.com/gmarik/Vundle.vim
 
 " Ruby-specific
-Plugin 'vim-ruby/vim-ruby' " https://github.com/vim-ruby/vim-ruby
-Plugin 'kana/vim-textobj-user' " https://github.com/kana/vim-textobj-user
-Plugin 'nelstrom/vim-textobj-rubyblock' " https://github.com/nelstrom/vim-textobj-rubyblock
-Plugin 'scrooloose/syntastic' " https://github.com/scrooloose/syntastic
+Plugin 'vim-ruby/vim-ruby'                " https://github.com/vim-ruby/vim-ruby
+Plugin 'kana/vim-textobj-user'            " https://github.com/kana/vim-textobj-user
+Plugin 'nelstrom/vim-textobj-rubyblock'   " https://github.com/nelstrom/vim-textobj-rubyblock
+Plugin 'scrooloose/syntastic'             " https://github.com/scrooloose/syntastic
 
 " Searching and Navigation
-Plugin 'scrooloose/nerdtree' " https://github.com/scrooloose/nerdtree
-Plugin 'skwp/greplace.vim' " https://github.com/skwp/greplace.vim
-Plugin 'rking/ag.vim' " https://github.com/rking/ag.vim
-Plugin 'christoomey/vim-tmux-navigator' " https://github.com/christoomey/vim-tmux-navigator
-Plugin 'ctrlpvim/ctrlp.vim' " https://github.com/ctrlpvim/ctrlp.vim
+Plugin 'scrooloose/nerdtree'              " https://github.com/scrooloose/nerdtree
+Plugin 'skwp/greplace.vim'                " https://github.com/skwp/greplace.vim
+Plugin 'rking/ag.vim'                     " https://github.com/rking/ag.vim
+Plugin 'christoomey/vim-tmux-navigator'   " https://github.com/christoomey/vim-tmux-navigator
+Plugin 'ctrlpvim/ctrlp.vim'               " https://github.com/ctrlpvim/ctrlp.vim
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " https://github.com/altercation/vim-colors-solarized
-Plugin 'bling/vim-airline' " https://github.com/bling/vim-airline
+Plugin 'bling/vim-airline'                " https://github.com/bling/vim-airline
 
 " Tim Pope
-Plugin 'tpope/vim-fugitive' " https://github.com/tpope/vim-fugitive
-Plugin 'tpope/vim-git' " https://github.com/tpope/vim-git
-Plugin 'tpope/vim-endwise' " https://github.com/tpope/vim-endwise
-Plugin 'tpope/vim-surround' " https://github.com/tpope/vim-surround
-Plugin 'tpope/vim-rails' " https://github.com/tpope/vim-rails
-Plugin 'tpope/vim-ragtag' " https://github.com/tpope/vim-ragtag
-Plugin 'tpope/vim-obsession' " https://github.com/tpope/vim-obsession
+Plugin 'tpope/vim-fugitive'               " https://github.com/tpope/vim-fugitive
+Plugin 'tpope/vim-git'                    " https://github.com/tpope/vim-git
+Plugin 'tpope/vim-endwise'                " https://github.com/tpope/vim-endwise
+Plugin 'tpope/vim-surround'               " https://github.com/tpope/vim-surround
+Plugin 'tpope/vim-rails'                  " https://github.com/tpope/vim-rails
+Plugin 'tpope/vim-ragtag'                 " https://github.com/tpope/vim-ragtag
+Plugin 'tpope/vim-obsession'              " https://github.com/tpope/vim-obsession
 
 " Related to testing & tmux
-Plugin 'benmills/vimux' " https://github.com/benmills/vimux
-" Plugin 'jgdavey/tslime.vim' " https://github.com/jgdavey/tslime.vim
-Plugin 'thoughtbot/vim-rspec' " https://github.com/thoughtbot/vim-rspec
-" Plugin 'skalnik/vim-vroom' " https://github.com/skalnik/vim-vroom
+Plugin 'benmills/vimux'                   " https://github.com/benmills/vimux
+Plugin 'jgdavey/tslime.vim'               " https://github.com/jgdavey/tslime.vim
+Plugin 'thoughtbot/vim-rspec'             " https://github.com/thoughtbot/vim-rspec
+Plugin 'skalnik/vim-vroom'                " https://github.com/skalnik/vim-vroom
 
 " Related to vim-snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils' " https://github.com/MarcWeber/vim-addon-mw-utils
-Plugin 'tomtom/tlib_vim' " https://github.com/tomtom/tlib_vim
-Plugin 'garbas/vim-snipmate' " https://github.com/garbas/vim-snipmate
-Plugin 'honza/vim-snippets' " https://github.com/honza/vim-snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'     " https://github.com/MarcWeber/vim-addon-mw-utils
+Plugin 'tomtom/tlib_vim'                  " https://github.com/tomtom/tlib_vim
+Plugin 'garbas/vim-snipmate'              " https://github.com/garbas/vim-snipmate
+Plugin 'honza/vim-snippets'               " https://github.com/honza/vim-snippets
 
 " Other
-Plugin 'kchmck/vim-coffee-script' " https://github.com/kchmck/vim-coffee-script
-Plugin 'tomtom/tcomment_vim' " https://github.com/tomtom/tcomment_vim
-Plugin 'bronson/vim-trailing-whitespace' " https://github.com/bronson/vim-trailing-whitespace
-Plugin 'ervandew/supertab' " https://github.com/ervandew/supertab
-Plugin 'danro/rename.vim' " https://github.com/danro/rename.vim
-Plugin 'duff/vim-scratch' " https://github.com/duff/vim-scratch
+Plugin 'kchmck/vim-coffee-script'         " https://github.com/kchmck/vim-coffee-script
+Plugin 'tomtom/tcomment_vim'              " https://github.com/tomtom/tcomment_vim
+Plugin 'bronson/vim-trailing-whitespace'  " https://github.com/bronson/vim-trailing-whitespace
+Plugin 'ervandew/supertab'                " https://github.com/ervandew/supertab
+Plugin 'danro/rename.vim'                 " https://github.com/danro/rename.vim
+Plugin 'duff/vim-scratch'                 " https://github.com/duff/vim-scratch
+Plugin 'godlygeek/tabular'                " https://github.com/godlygeek/tabular
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()                         " required
+filetype plugin indent on                 " required
 
 " }}}
 
