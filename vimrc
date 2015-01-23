@@ -90,7 +90,7 @@ set shortmess+=I
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
-set splitright
+" set splitright
 
 " Highlight the current line and column
 set cursorline
@@ -220,53 +220,36 @@ filetype plugin indent on    " required
 let mapleader = " "
 
 " Misc
-" map <Leader>x :Explore
-map <Leader>ev :tabe ~/.vimrc<CR>
-map <Leader>s :source ~/.vimrc<CR>:AirlineRefresh<CR>
-map <Leader>ra :%s/
-map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
-map <Leader>i mmgg=G`m<CR> " For indenting code
-map <Leader>h :nohl<CR> " Clear highlights
+" map <leader>x :Explore
+map <leader>ev :tabe ~/.vimrc<CR>
+map <leader>s :source ~/.vimrc<CR>:AirlineRefresh<CR>
+map <leader>ra :%s/
+map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
+map <leader>i mmgg=G`m<CR> " For indenting code
+map <leader>h :nohl<CR> " Clear highlights
 imap <C-[> <C-c> " Return to normal mode faster
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 inoremap jj <C-c> " jj to switch back to normal mode
-nnoremap <Leader><Leader> <c-^> " Switch between the last two files
+nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
-nmap <Leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
 nmap <CR> o<Esc> " Add new line BELOW without leaving normal mode
 
 " Run 'git blame' on a selection of code
-vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+vmap <leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
-map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-map <Leader>sp :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
-map <Leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+map <leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
+map <leader>sp :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+map <leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 
-" Get off my lawn
+" Reminders :)
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-
-" Rails - Not using these right now
-" map <Leader>vm :RVmodel<CR>
-" map <Leader>vv :RVview<CR>
-" map <Leader>vc :RVcontroller<CR>
-" map <Leader>vh :RVhelper
-" map <Leader>sm :RSmodel
-" map <Leader>sv :RSview
-" map <Leader>sc :RScontroller
-" map <Leader>sh :RShelper
-" map <Leader>vf :RVfunctional<CR>
-
-" Rspec - Not using these right now
-" map <Leader>su :RSunittest
-" map <Leader>vu :RVunittest<CR>
-" map <Leader>u :Runittest<CR>
-" map <Leader>rd :!bundle exec rspec % --format documentation<CR>
 
 " }}}
 
@@ -274,25 +257,26 @@ nnoremap <Down> :echoe "Use j"<CR>
 " Plugin-specific Mappings and Settings {{{
 
 " NERDTree
-map <Leader>\ :NERDTreeToggle<CR>
+map <leader>\ :NERDTreeToggle<CR>
 
 " Tcomment
-map <Leader>/ :TComment<CR>
+map <leader>/ :TComment<CR>
 
 " Obsession
-map <Leader>ob :Obsession<CR>
+map <leader>ob :Obsession<CR>
 
 " vim-rspec
-map <Leader>f :call RunCurrentSpecFile()<CR>
-map <Leader>r :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = 'call VimuxRunCommand("spring rspec {spec}")'
+map <leader>f :call RunCurrentSpecFile()<CR>
+map <leader>r :call RunNearestSpec()<CR>
+map <leader>l :call RunLastSpec()<CR>
+map <leader>a :call RunAllSpecs()<CR>
+" let g:rspec_command = 'call VimuxRunCommand("clear; spring rspec {spec}")'
+let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
 
 " vroom.vim (alternative plugin to vim-rspec)
-" map <Leader>r :VroomRunNearestTest<CR>
-" map <Leader>f :VroomRunTestFile<CR>
-" map <Leader>l :VroomRunLastTest<CR>
+" map <leader>r :VroomRunNearestTest<CR>
+" map <leader>f :VroomRunTestFile<CR>
+" map <leader>l :VroomRunLastTest<CR>
 " let g:vroom_use_vimux = 1
 " let g:vroom_use_colors = 1
 " let g:vroom_use_bundle_exec = 0
@@ -301,22 +285,22 @@ let g:rspec_command = 'call VimuxRunCommand("spring rspec {spec}")'
 
 " Vimux
 " Prompt for a command to run map
-map <Leader>vp :VimuxPromptCommand<CR>
+map <leader>vp :VimuxPromptCommand<CR>
 
 " Inspect runner pane map
-map <Leader>vi :VimuxInspectRunner<CR>
+map <leader>vi :VimuxInspectRunner<CR>
 
 " Close vim tmux runner opened by VimuxRunCommand. If a pane is closed manually,
 " the vim-rspec commands will no longer cause a new pane to open. Calling
 " :VimuxCloseRunner() will 'reset' Vimux, after which the vim-rspec commands
 " will pop open a new pane as they did initially.
-map <Leader>vq :VimuxCloseRunner<CR>
+map <leader>vq :VimuxCloseRunner<CR>
 
 " Zoom the tmux runner page
-map <Leader>vz :VimuxZoomRunner<CR>
+map <leader>vz :VimuxZoomRunner<CR>
 
 " Set the size of the vimux window.
-let g:VimuxHeight = "30"
+let g:VimuxHeight = "25"
 
 " CtrlP
 map <leader>t <C-p>
@@ -333,6 +317,19 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 " CtrlP -> directories to ignore when fuzzy finding
 let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
+
+" Custom rails.vim commands
+command! Rroutes :e config/routes.rb
+command! RTroutes :tabe config/routes.rb
+command! RSroutes :sp config/routes.rb
+command! RVroutes :vs config/routes.rb
+command! Rfactories :e spec/factories.rb
+command! RTfactories :tabe spec/factories.rb
+command! RSfactories :sp spec/factories.rb
+command! RVfactories :vs spec/factories.rb
+
+" vim-scratch
+map <leader>sc :Sscratch<CR>
 
 " }}}
 
