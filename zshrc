@@ -22,7 +22,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Vim specific
 alias vi="vim"
-alias ct='ctags -R -V --exclude=.git'
+alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
 
 # Jump to quick edits
 alias ez='vim ~/.zshrc'
