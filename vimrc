@@ -301,7 +301,7 @@ map <leader>vq :VimuxCloseRunner<CR>
 map <leader>vz :VimuxZoomRunner<CR>
 
 " Set the size of the vimux window.
-let g:VimuxHeight = "25"
+let g:VimuxHeight = "30"
 
 " CtrlP
 map <leader>t <C-p>
