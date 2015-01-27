@@ -337,6 +337,10 @@ map <leader>sc :Sscratch<CR>
 
 " Commands {{{
 
+" specify syntax highlighting for specific files
+autocmd Bufread,BufNewFile *.spv set filetype=php
+autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
+
 " When loading text files, wrap them and don't split up words.
 au BufNewFile,BufRead *.txt setlocal lbr
 au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
@@ -350,15 +354,8 @@ autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim setlocal shiftwidth=2 tabsto
 autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
 autocmd FileType ruby,eruby,yaml setlocal path+=lib
 
-" specify syntax highlighting for specific files
-autocmd Bufread,BufNewFile *.spv set filetype=php
-autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
-
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
-
-" Automatically wrap at 80 characters for Markdown
-autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
@@ -369,9 +366,6 @@ autocmd BufRead * normal zM
 
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Open NERDTree when vim starts up
-" autocmd vimenter * NERDTree
 
 " Change colourscheme when diffing
 fun! SetDiffColors()
@@ -403,10 +397,10 @@ let g:airline_right_sep=''
 " Colorscheme {{{
 
 " Light theme
-set background=light
-colorscheme solarized
+" set background=light
+" colorscheme solarized
 
 " Dark theme
-" set background=dark
-" colorscheme solarized
+set background=dark
+colorscheme solarized
 " }}}
