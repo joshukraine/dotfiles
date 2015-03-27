@@ -31,6 +31,12 @@ if [[ "$osname" == 'Darwin' && ! -d "$COMMANDLINE_TOOLS" ]]; then
   exit 1
 fi
 
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 ####################################
 # Install oh-my-zsh
 ####################################
@@ -45,8 +51,8 @@ curl -L http://install.ohmyz.sh | sh
 echo "$divider Step 2: Installing Laptop Script from thoughtbot..."
 if [[ "$osname" == 'Darwin' ]]; then
   echo "Yay, we're on Mac!"
-  curl --remote-name https://raw.githubusercontent.com/thoughtbot/laptop/master/mac
-  sh mac 2>&1 | tee ~/laptop.log
+  # curl --remote-name https://raw.githubusercontent.com/thoughtbot/laptop/master/mac
+  # sh mac 2>&1 | tee ~/laptop.log
 elif [[ "$osname" == 'Linux' ]]; then
   echo "OK, we're on Linux, which is not supported by Laptop. Skipping..."
 else
@@ -87,7 +93,7 @@ echo "Dotfiles setup complete! Resuming main setup script..."
 ####################################
 
 echo "$divider Step 5: Installing extra Homebrew formulae..."
-brew install tree ansible htop-osx nmap ssh-copy-id tmate xz
+brew install tree ansible htop-osx nmap ssh-copy-id xz
 
 ####################################
 # Install Cask and related software
