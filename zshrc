@@ -191,11 +191,6 @@ cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME)
 # }}}
 
 
-# Homebrew {{{
-source $(brew --prefix nvm)/nvm.sh
-# }}}
-
-
 # Rbenv {{{
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
