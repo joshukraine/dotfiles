@@ -79,7 +79,6 @@ fi
 
 cd $DOTFILES_DIR
 ./setup_dotfiles.sh
-source $HOME/.zshrc
 
 echo "Dotfiles setup complete! Resuming main setup script..."
 
