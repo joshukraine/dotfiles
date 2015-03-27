@@ -90,6 +90,11 @@ alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
 
+# rbenv
+alias rbu='cd $HOME/.rbenv/plugins/ruby-build && git pull && cd'
+alias rbv='rbenv versions'
+alias rbl='rbenv install -l'
+
 # Finder
 alias o='open . &'
 
@@ -182,7 +187,7 @@ HISTFILE=~/.zsh_history
 
 # cdpath {{{
 setopt auto_cd
-cdpath=($HOME/code $HOME/developer $HOME/Sites $HOME)
+cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME)
 # }}}
 
 
