@@ -35,8 +35,10 @@ fi
 # Install oh-my-zsh
 ####################################
 
+echo ""
 echo "$divider Step 1: Installing oh-my-zsh..."
 echo ""
+
 curl -L http://install.ohmyz.sh | sh
 
 ####################################
@@ -46,8 +48,9 @@ curl -L http://install.ohmyz.sh | sh
 echo ""
 echo "$divider Step 2: Installing Laptop Script from thoughtbot..."
 echo ""
+
 if [[ "$osname" == 'Darwin' ]]; then
-  echo "Yay, we're on Mac!"
+  echo "Yay, we're on a Mac!"
   curl --remote-name https://raw.githubusercontent.com/thoughtbot/laptop/master/mac
   sh mac 2>&1 | tee ~/laptop.log
 elif [[ "$osname" == 'Linux' ]]; then
@@ -65,6 +68,7 @@ fi
 echo ""
 echo "$divider Step 3: Setting up some basic directories..."
 echo ""
+
 mkdir -p $HOME/code
 mkdir -p $HOME/Developer
 
@@ -75,6 +79,7 @@ mkdir -p $HOME/Developer
 echo ""
 echo "$divider Step 4: Installing dotfiles..."
 echo ""
+
 cd $HOME
 
 if [ ! -d $DOTFILES_DIR ]; then
@@ -96,6 +101,7 @@ echo "Dotfiles setup complete! Resuming main setup script..."
 echo ""
 echo "$divider Step 5: Installing extra Homebrew formulae..."
 echo ""
+
 brew install tree ansible htop-osx nmap ssh-copy-id
 
 ####################################
@@ -105,34 +111,15 @@ brew install tree ansible htop-osx nmap ssh-copy-id
 echo ""
 echo "$divider Step 6: Installing Cask and related software..."
 echo ""
+
 brew install caskroom/cask/brew-cask
-brew cask install google-chrome dropbox 1password alfred iterm2
-
-####################################
-# Configure git
-####################################
-
-echo ""
-echo "$divider Step 7: Configuring git..."
-echo ""
-git config --global user.name "Joshua Steele"
-git config --global user.email joshukraine@gmail.com
-git config --global core.editor vim
-git config --global alias.co checkout
-git config --global alias.br branch
-git config --global alias.ci commit
-git config --global alias.sta status
-git config --global alias.st "status --short"
-git config --global alias.df diff
-git config --global alias.dfs "diff --staged"
-git config --global alias.logg "log --graph --decorate --oneline --abbrev-commit --all"
-git config --global core.excludesfile $HOME/.gitignore_global
+brew cask install google-chrome dropbox alfred iterm2 skype vlc virtualbox little-snitch namebench vagrant cleanmymac bartender things firefox google-drive hipchat crashplan teamviewer carbon-copy-cloner istat-menus sublime-text atom silverlight applepi-baker doxie private-internet-access
 
 ####################################
 # Set OS X preferences
 ####################################
 
-# echo "$divider Step 8: Setting OS X preferences..."
+# echo "$divider Step 7: Setting OS X preferences..."
 # TODO: Set OS X prefs here.
 
 echo ""
