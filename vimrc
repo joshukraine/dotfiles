@@ -223,7 +223,8 @@ let mapleader = " "
 " Misc
 " map <leader>x :Explore
 map <leader>ev :tabe ~/.vimrc<CR>
-map <leader>s :source ~/.vimrc<CR>:AirlineRefresh<CR>
+map <leader>q :source ~/.vimrc<CR>:AirlineRefresh<CR>
+map <leader>s :w<CR>
 map <leader>ra :%s/
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
 map <leader>i mmgg=G`m<CR> " For indenting code
@@ -235,7 +236,7 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
-nmap <CR> o<Esc> " Add new line BELOW without leaving normal mode
+nmap <CR> o<Esc>k " Add new line BELOW without leaving normal mode
 
 " Run 'git blame' on a selection of code
 vmap <leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -243,7 +244,7 @@ vmap <leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
 map <leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-map <leader>sp :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+map <leader>- :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 map <leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 
 " Reminders :)
@@ -271,8 +272,8 @@ map <leader>f :call RunCurrentSpecFile()<CR>
 map <leader>r :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-" let g:rspec_command = 'call VimuxRunCommand("clear; spring rspec {spec}")'
-let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
+let g:rspec_command = 'call VimuxRunCommand("clear; spring rspec {spec}")'
+" let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
 
 " vroom.vim (alternative plugin to vim-rspec)
 " map <leader>r :VroomRunNearestTest<CR>
@@ -308,7 +309,7 @@ map <leader>t <C-p>
 map <leader>y :CtrlPBuffer<CR>
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_height = 30
+let g:ctrlp_max_height = 15
 
 " CtrlP -> override <C-o> to provide options for how to open files
 let g:ctrlp_arg_map = 1
@@ -330,7 +331,7 @@ command! RSfactories :sp spec/factories.rb
 command! RVfactories :vs spec/factories.rb
 
 " vim-scratch
-map <leader>sc :Sscratch<CR>
+map <C-s> :Sscratch<CR>
 
 " }}}
 
@@ -348,7 +349,7 @@ au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 " file formats
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype markdown setlocal wrap linebreak nolist textwidth=0 wrapmargin=0 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
-autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss setlocal shiftwidth=2 tabstop=2 expandtab
 
 " autoindent with two spaces, always expand tabs
 autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
