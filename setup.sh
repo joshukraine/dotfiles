@@ -113,7 +113,7 @@ echo "$divider Step 6: Installing Cask and related software..."
 echo ""
 
 brew install caskroom/cask/brew-cask
-brew cask install google-chrome dropbox alfred iterm2 skype vlc virtualbox little-snitch namebench vagrant cleanmymac bartender things firefox google-drive hipchat crashplan teamviewer carbon-copy-cloner istat-menus sublime-text atom silverlight applepi-baker doxie private-internet-access
+brew cask install google-chrome dropbox alfred iterm2 skype vlc virtualbox little-snitch namebench vagrant cleanmymac bartender things firefox google-drive hipchat crashplan teamviewer carbon-copy-cloner istat-menus sublime-text atom silverlight applepi-baker doxie private-internet-access hazel
 
 ####################################
 # Set OS X preferences
