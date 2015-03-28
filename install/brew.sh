@@ -14,7 +14,6 @@ apps=(
     dockutil
     ffmpeg
     gnu-sed --default-names
-    grep --default-names
     htop-osx
     imagemagick
     nmap
