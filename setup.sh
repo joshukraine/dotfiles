@@ -119,7 +119,7 @@ cd $HOME/src/fonts
 ####################################
 
 echo ""
-echo "$divider Step 5: Installing extra Homebrew formulae..."
+echo "$divider Step 6: Installing extra Homebrew formulae..."
 echo ""
 
 source "$DOTFILES_DIR/install/brew.sh"
@@ -129,7 +129,7 @@ source "$DOTFILES_DIR/install/brew.sh"
 ####################################
 
 echo ""
-echo "$divider Step 6: Installing Cask and related software..."
+echo "$divider Step 7: Installing Cask and related software..."
 echo ""
 
 source "$DOTFILES_DIR/install/brew-cask.sh"
@@ -140,7 +140,7 @@ source "$DOTFILES_DIR/install/brew-cask.sh"
 
 if [[ "$osname" == 'Darwin' ]]; then
   echo ""
-  echo "$divider Step 7: Setting OS X preferences..."
+  echo "$divider Step 8: Setting OS X preferences..."
   echo ""
   source "$DOTFILES_DIR/osx/defaults.sh"
   source "$DOTFILES_DIR/osx/dock.sh"
