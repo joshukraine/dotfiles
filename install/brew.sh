@@ -12,10 +12,8 @@ apps=(
     bash-completion
     coreutils
     dockutil
-    ffmpeg
     gnu-sed --default-names
     htop-osx
-    imagemagick
     nmap
     python
     ssh-copy-id
