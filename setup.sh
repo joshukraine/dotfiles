@@ -118,7 +118,7 @@ echo ""
 echo "$divider Step 5: Installing extra Homebrew formulae..."
 echo ""
 
-source "$DOTFILES_DIR/brew/brew.sh"
+source "$DOTFILES_DIR/install/brew.sh"
 
 ####################################
 # Install Cask and related software
@@ -128,7 +128,7 @@ echo ""
 echo "$divider Step 6: Installing Cask and related software..."
 echo ""
 
-source "$DOTFILES_DIR/brew/brew-cask.sh"
+source "$DOTFILES_DIR/install/brew-cask.sh"
 
 ####################################
 # Set OS X preferences

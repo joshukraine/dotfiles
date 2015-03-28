@@ -24,20 +24,22 @@ Or, if you prefer to use Git (which comes on all new Macs by default), do this:
 	git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 	source ~/dotfiles/setup.sh
 
+WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
+
 ### What does it do?
 
 When you invoke `setup.sh`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
-* Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 * Run thoughtbot's [Laptop script](https://github.com/thoughtbot/laptop).
-* Set up some basic directories in $HOME
-* Symlink dotfiles to $HOME
-* Install several fixed-width fonts
-* Install various packages via [Homebrew](http://brew.sh/)
-* Install OS X software via [Cask](http://caskroom.io/)
-* Set a variety of OS X defaults
-* Customize the OS X dock
+* Set up some basic directories in `$HOME`.
+* Symlink dotfiles to `$HOME`.
+* Install several fixed-width fonts.
+* Install various packages via [Homebrew](http://brew.sh/).
+* Install OS X software via [Cask](http://caskroom.io/).
+* Set a variety of OS X defaults.
+* Customize the OS X dock.
 
 ### Post-install Tasks
 
@@ -59,20 +61,20 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 
 ### Some of my favorite dotfile repos
 
-* [Pro Vim](https://github.com/Integralist/ProVim)
-* [Trevor Brown](https://github.com/Stratus3D/dotfiles)
-* [Lars Kappert](https://github.com/webpro/dotfiles)
-* [Ryan Bates](https://github.com/ryanb/dotfiles)
-* [thoughtbot](https://github.com/thoughtbot/dotfiles)
-* [Ben Orenstein](https://github.com/r00k/dotfiles)
-* [Joshua Clayton](https://github.com/joshuaclayton/dotfiles)
-* [Drew Neil](https://github.com/nelstrom/dotfiles)
-* [Chris Toomey](https://github.com/christoomey/dotfiles)
-* [Kevin Suttle](https://github.com/kevinSuttle/OSXDefaults)
-* [Carlos Becker](https://github.com/caarlos0/dotfiles)
-* [Zach Holman](https://github.com/holman/dotfiles/)
-* [Mathias Bynens](https://github.com/mathiasbynens/dotfiles/)
-* [Paul Irish](https://github.com/paulirish/dotfiles)
+* Pro Vim (https://github.com/Integralist/ProVim)
+* Trevor Brown (https://github.com/Stratus3D/dotfiles)
+* Lars Kappert (https://github.com/webpro/dotfiles)
+* Ryan Bates (https://github.com/ryanb/dotfiles)
+* thoughtbot (https://github.com/thoughtbot/dotfiles)
+* Ben Orenstein (https://github.com/r00k/dotfiles)
+* Joshua Clayton (https://github.com/joshuaclayton/dotfiles)
+* Drew Neil (https://github.com/nelstrom/dotfiles)
+* Chris Toomey (https://github.com/christoomey/dotfiles)
+* Kevin Suttle (https://github.com/kevinSuttle/OSXDefaults)
+* Carlos Becker (https://github.com/caarlos0/dotfiles)
+* Zach Holman (https://github.com/holman/dotfiles/)
+* Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
+* Paul Irish (https://github.com/paulirish/dotfiles)
 
 ### Helpful web resources on dotfiles, et al.
 
