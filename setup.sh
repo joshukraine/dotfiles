@@ -106,6 +106,10 @@ echo ""
 echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
 echo ""
 
+if [ -d "$HOME/src/fonts" ]; then
+  mv $HOME/src/fonts $HOME/src/fonts_backup
+fi
+
 git clone https://github.com/powerline/fonts.git $HOME/src/fonts
 cd $HOME/src/fonts
 ./install.sh
