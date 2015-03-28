@@ -1,6 +1,7 @@
 #!/bin/sh
 
 apps=(
+    1password
     alfred
     applepi-baker
     atom
