@@ -4,6 +4,7 @@ export EDITOR="vim"
 export BUNDLER_EDITOR="vim"
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export TERM="screen-256color"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # }}}
 
 
@@ -12,7 +13,7 @@ export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=7
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git git-flow pow vagrant)
+plugins=(git pow vagrant)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
@@ -26,7 +27,7 @@ alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list
 
 # Jump to quick edits
 alias ez='vim ~/.zshrc'
-alias ed='vim ~/.dotfiles'
+alias ed='vim ~/dotfiles'
 alias ev='vim ~/.vimrc'
 
 # General UNIX
