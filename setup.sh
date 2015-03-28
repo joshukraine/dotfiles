@@ -1,10 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ####################################
 # setup.sh
 #
-# This script is intended to set up a new Mac computer with my dotfiles and
-# other development preferences.
+# This script is intended to set up
+# a new Mac computer with my
+# dotfiles and other development
+# preferences.
 ####################################
 
 set -e # Terminate script if anything exits with a non-zero value
@@ -89,10 +91,11 @@ else
   git pull origin master
 fi
 
-cd $DOTFILES_DIR
-./setup_dotfiles.sh
+source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 
+echo ""
 echo "Dotfiles setup complete! Resuming main setup script..."
+echo ""
 
 ####################################
 # Install Cask and related software
@@ -102,7 +105,7 @@ echo ""
 echo "$divider Step 5: Installing extra Homebrew formulae..."
 echo ""
 
-brew install tree ansible htop-osx nmap ssh-copy-id
+source "$DOTFILES_DIR/brew/brew.sh"
 
 ####################################
 # Install Cask and related software
@@ -112,15 +115,19 @@ echo ""
 echo "$divider Step 6: Installing Cask and related software..."
 echo ""
 
-brew install caskroom/cask/brew-cask
-brew cask install google-chrome dropbox alfred iterm2 skype vlc virtualbox little-snitch namebench vagrant cleanmymac bartender things firefox google-drive hipchat crashplan teamviewer carbon-copy-cloner istat-menus sublime-text atom silverlight applepi-baker doxie private-internet-access hazel
+source "$DOTFILES_DIR/brew/brew-cask.sh"
 
 ####################################
 # Set OS X preferences
 ####################################
 
-# echo "$divider Step 7: Setting OS X preferences..."
-# TODO: Set OS X prefs here.
+if [[ "$osname" == 'Darwin' ]]; then
+  echo ""
+  echo "$divider Step 7: Setting OS X preferences..."
+  echo ""
+  source "$DOTFILES_DIR/osx/defaults.sh"
+  source "$DOTFILES_DIR/osx/dock.sh"
+fi
 
 echo ""
 echo "Setup complete! Please restart your terminal."
