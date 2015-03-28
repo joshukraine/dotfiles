@@ -45,16 +45,16 @@ After running `setup.sh` there are still a few things that need to be done.
 
 * Restart your machine in order for some changes to take effect.
 * Install software from Mac App Store.
-* Set up iTerm profile (see details below).
+* Set up iTerm 2 profile (see details below).
 
 ### Setting up iTerm 2
 
-Thanks to a great blog post by [Trevor Brown](http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/), I learned that you can quickly set up iTerm 2 by exporting your profile. Here are the steps.
+Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/) by Trevor Brown, I learned that you can quickly set up iTerm 2 by exporting your profile. Here are the steps.
 
 1. Open iTerm 2.
 2. Select iTerm 2 > Preferences.
 3. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
-4. Press "Browse" and point it to ~/dotfiles/iterm2/com.googlecode.iterm2.plist.
+4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 
 
 ### Some of my favorite dotfile repos
