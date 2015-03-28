@@ -73,6 +73,7 @@ echo ""
 
 mkdir -p $HOME/code
 mkdir -p $HOME/Developer
+mkdir -p $HOME/src
 
 ####################################
 # Setup dotfiles
@@ -96,6 +97,18 @@ source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 echo ""
 echo "Dotfiles setup complete! Resuming main setup script..."
 echo ""
+
+####################################
+# Install Powerline-patched fonts
+####################################
+
+echo ""
+echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
+echo ""
+
+git clone https://github.com/powerline/fonts.git $HOME/src/fonts
+cd $HOME/src/fonts
+./install.sh
 
 ####################################
 # Install Cask and related software
