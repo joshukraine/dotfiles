@@ -132,6 +132,7 @@ echo ""
 echo "$divider Step 7: Installing Cask and related software..."
 echo ""
 
+brew install caskroom/cask/brew-cask
 source "$DOTFILES_DIR/install/brew-cask.sh"
 
 ####################################
