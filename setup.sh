@@ -117,6 +117,7 @@ fi
 git clone https://github.com/powerline/fonts.git $HOME/src/fonts
 cd $HOME/src/fonts
 ./install.sh
+cd $HOME
 rm -rf $HOME/src/fonts
 
 ####################################
