@@ -36,6 +36,8 @@ When you invoke `setup.sh`, this is what it does in a nutshell:
 * Set up some basic directories in `$HOME`.
 * Symlink dotfiles to `$HOME`.
 * Install several fixed-width fonts.
+* Configure git.
+* Install Vundle and plugins for vim.
 * Install various packages via [Homebrew](http://brew.sh/).
 * Install OS X software via [Cask](http://caskroom.io/).
 * Set a variety of OS X defaults.
