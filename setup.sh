@@ -117,13 +117,34 @@ fi
 git clone https://github.com/powerline/fonts.git $HOME/src/fonts
 cd $HOME/src/fonts
 ./install.sh
+rm -rf $HOME/src/fonts
 
 ####################################
-# Install Cask and related software
+# Configure git
 ####################################
 
 echo ""
-echo "$divider Step 6: Installing extra Homebrew formulae..."
+echo "$divider Step 6: Configuring git..."
+echo ""
+
+source "$DOTFILES_DIR/install/git-setup.sh"
+
+####################################
+# Install Vundle and vim plugins
+####################################
+
+echo ""
+echo "$divider Step 7: Installing Vundle and vim plugins..."
+echo ""
+
+source "$DOTFILES_DIR/install/vundle.sh"
+
+####################################
+# Install extra Homebrew packages
+####################################
+
+echo ""
+echo "$divider Step 8: Installing extra Homebrew formulae..."
 echo ""
 
 source "$DOTFILES_DIR/install/brew.sh"
@@ -133,7 +154,7 @@ source "$DOTFILES_DIR/install/brew.sh"
 ####################################
 
 echo ""
-echo "$divider Step 7: Installing Cask and related software..."
+echo "$divider Step 9: Installing Cask and related software..."
 echo ""
 
 brew install caskroom/cask/brew-cask
@@ -145,7 +166,7 @@ source "$DOTFILES_DIR/install/brew-cask.sh"
 
 if [[ "$osname" == 'Darwin' ]]; then
   echo ""
-  echo "$divider Step 8: Setting OS X preferences..."
+  echo "$divider Step 10: Setting OS X preferences..."
   echo ""
   source "$DOTFILES_DIR/osx/defaults.sh"
   source "$DOTFILES_DIR/osx/dock.sh"
