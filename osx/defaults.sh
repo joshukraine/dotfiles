@@ -17,6 +17,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX                                                               #
 ###############################################################################
 
+echo ""
+echo "**** Setting General UI/UX defaults ****"
+echo ""
+
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "Joshua's MacBook Pro"
 sudo scutil --set HostName "joshuas-mbp"
@@ -54,12 +58,21 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
+echo ""
+echo "**** Setting SSD-specific tweaks ****"
+echo ""
+
 # Disable the sudden motion sensor as it’s not useful for SSDs
 sudo pmset -a sms 0
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
+
+echo ""
+echo "**** Setting Trackpad, mouse, keyboard, Bluetooth accessories, and input defaults ****"
+echo ""
+
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -102,6 +115,11 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
+
+
+echo ""
+echo "**** Setting Finder defaults ***"
+echo ""
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 defaults write com.apple.finder QuitMenuItem -bool true
@@ -160,6 +178,10 @@ chflags nohidden ~/Library
 # Dock                                                                        #
 ###############################################################################
 
+echo ""
+echo "**** Setting dock defaults ****"
+echo ""
+
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 
@@ -179,6 +201,11 @@ defaults write com.apple.dock showhidden -bool true
 # Dashboard & Spaces                                                          #
 ###############################################################################
 
+echo ""
+echo "**** Setting Dashboard and Spaces defaults ****"
+echo ""
+
+
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
 
@@ -195,6 +222,11 @@ defaults write com.apple.dock mru-spaces -bool false
 # Hot corners                                                                 #
 ###############################################################################
 
+echo ""
+echo "**** Setting hot corners defaults (currently no changes) ****"
+echo ""
+
+
 # Hot corners
 # Possible values:
 #  0: no-op
@@ -209,20 +241,24 @@ defaults write com.apple.dock mru-spaces -bool false
 # 12: Notification Center
 
 # Top left screen corner → Mission Control
-defaults write com.apple.dock wvous-tl-corner -int 2
+defaults write com.apple.dock wvous-tl-corner -int 0
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # Top right screen corner → Desktop
-defaults write com.apple.dock wvous-tr-corner -int 4
+defaults write com.apple.dock wvous-tr-corner -int 0
 defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # Bottom left screen corner → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
+defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
 ###############################################################################
 # Safari & WebKit                                                             #
 ###############################################################################
+
+echo ""
+echo "**** Setting Safari and WebKit defaults ****"
+echo ""
 
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
@@ -274,6 +310,10 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Mail                                                                        #
 ###############################################################################
 
+echo ""
+echo "**** Setting Mail defaults ****"
+echo ""
+
 # Disable send and reply animations in Mail.app
 defaults write com.apple.mail DisableReplyAnimations -bool true
 defaults write com.apple.mail DisableSendAnimations -bool true
@@ -302,6 +342,10 @@ defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 # Time Machine                                                                #
 ###############################################################################
 
+echo ""
+echo "**** Setting Time Machin defaults ****"
+echo ""
+
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
@@ -311,6 +355,10 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 ###############################################################################
 # Terminal.app                                                                #
 ###############################################################################
+
+echo ""
+echo "**** Setting Terminal defaults ****"
+echo ""
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
@@ -322,6 +370,10 @@ defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
+
+echo ""
+echo "**** Setting Google Chrome defaults ****"
+echo ""
 
 # Allow installing user scripts via GitHub Gist or Userscripts.org
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
@@ -343,6 +395,10 @@ defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
+echo ""
+echo "**** Time to kill affected apps..."
+echo ""
+
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Mail" "Messages" "Safari" \
 	"SystemUIServer" "Terminal" "iCal" "iTunes"; do
@@ -350,7 +406,7 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 done
 
 echo ""
-echo "OS X prefs set successfully. Some changes may require a restart to take effect."
+echo "Bam! OS X prefs set successfully. Some changes may require a restart to take effect."
 echo ""
 
 
