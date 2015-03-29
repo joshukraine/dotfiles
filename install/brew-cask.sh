@@ -20,9 +20,7 @@ apps=(
     istat-menus
     iterm2
     little-snitch
-    macpilot
     namebench
-    opera
     private-internet-access
     silverlight
     skype
