@@ -48,7 +48,7 @@ curl -L http://install.ohmyz.sh | sh
 ####################################
 
 echo ""
-echo "$divider Step 2: Installing Laptop Script from thoughtbot..."
+echo "$divider Step 2: Invoking Laptop script from thoughtbot..."
 echo ""
 
 if [[ "$osname" == 'Darwin' ]]; then
@@ -68,11 +68,15 @@ fi
 ####################################
 
 echo ""
-echo "$divider Step 3: Setting up some basic directories..."
+echo "$divider Step 3: Creating a few basic directories..."
 echo ""
 
 mkdir -p $HOME/code
 mkdir -p $HOME/Developer
+mkdir -p $HOME/Developer/training
+mkdir -p $HOME/Developer/vms
+mkdir -p $HOME/Developer/cheatsheets
+mkdir -p $HOME/Developer/other_code
 mkdir -p $HOME/src
 
 ####################################
