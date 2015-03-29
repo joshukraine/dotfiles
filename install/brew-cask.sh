@@ -10,7 +10,6 @@ apps=(
     carbon-copy-cloner
     cleanmymac
     crashplan
-    dash
     doxie
     dropbox
     firefox
