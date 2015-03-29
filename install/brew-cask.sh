@@ -9,15 +9,12 @@ apps=(
     bartender
     carbon-copy-cloner
     cleanmymac
-    cornerstone
     crashplan
     dash
     doxie
     dropbox
     firefox
-    firefox
     google-chrome
-    google-drive
     google-drive
     hazel
     hipchat
