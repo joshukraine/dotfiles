@@ -31,4 +31,4 @@ apps=(
     vlc
 )
 
-brew cask install ${apps[@]} --appdir=/Applications
+brew cask install ${apps[@]}
