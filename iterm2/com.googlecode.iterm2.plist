@@ -19,7 +19,7 @@
 	<key>CheckTestRelease</key>
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
-	<true/>
+	<false/>
 	<key>CommandSelection</key>
 	<true/>
 	<key>Control</key>
@@ -300,7 +300,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 1</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/code</string>
+	<string>~/dotfiles</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -332,11 +332,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>540 91 554 94 0 0 1920 1057 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>968 454 924 485 0 0 1920 1057 </string>
+	<string>806 513 924 485 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>768 710 384 129 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>24 210 1402 847 0 0 1920 1057 </string>
+	<string>0 327 730 473 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>983 172 730 473 0 0 1920 1057 </string>
 	<key>New Bookmarks</key>
@@ -1115,7 +1115,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/joshukraine/code</string>
+	<string>/Users/joshukraine/dotfiles</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1131,7 +1131,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-03-27T04:17:47Z</date>
+	<date>2015-03-29T14:15:38Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
