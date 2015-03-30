@@ -12,6 +12,13 @@
 set -e # Terminate script if anything exits with a non-zero value
 set -u # Prevent unset variables
 
+fancy_echo() { # Thank you, thoughtbot. :)
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
 ####################################
 # Set some variables
 ####################################
@@ -26,20 +33,28 @@ DOTFILES_DIR=$HOME/dotfiles
 # tools if OS X
 ####################################
 
-if [[ "$osname" == 'Darwin' && ! -d "$COMMANDLINE_TOOLS" ]]; then
-  echo "Apple's command line developer tools must be installed before running this script."
-  echo "To install them, just run 'gcc' from the terminal and then follow the prompts."
-  echo "Once the command line tools have been installed, you can try running this script again."
+if [ "$osname" == 'Darwin' && ! -d "$COMMANDLINE_TOOLS" ]; then
+  fancy_echo "Apple's command line developer tools must be installed before running this script. To install them, just run 'gcc' from the terminal and then follow the prompts. Once the command line tools have been installed, you can try running this script again."
   exit 1
 fi
+
+
+
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+
 
 ####################################
 # Install oh-my-zsh
 ####################################
 
-echo ""
-echo "$divider Step 1: Installing oh-my-zsh..."
-echo ""
+fancy_echo "$divider Step 1: Installing oh-my-zsh..."
 
 curl -L http://install.ohmyz.sh | sh
 
@@ -47,32 +62,23 @@ curl -L http://install.ohmyz.sh | sh
 # Provision with Laptop if OS X
 ####################################
 
-echo ""
-echo "$divider Step 2: Invoking Laptop script from thoughtbot..."
-echo ""
+fancy_echo "$divider Step 2: Invoking Laptop script from thoughtbot..."
 
-if [[ "$osname" == 'Darwin' ]]; then
-  echo "Yay, we're on a Mac!"
+if [ "$osname" == 'Darwin' ]; then
+  fancy_echo "Yay, we're on a Mac!"
   curl --remote-name https://raw.githubusercontent.com/thoughtbot/laptop/master/mac
   sh mac 2>&1 | tee ~/laptop.log
-elif [[ "$osname" == 'Linux' ]]; then
-  echo "OK, we're on Linux, which is not supported by Laptop. Skipping..."
-else
-  echo "What the heck? You're not on Mac OR Linux?"
-  echo "..."
-  echo "Nathan is that you? You're so cheap. Get a Mac, dude. :P"
+elif [ "$osname" == 'Linux' ]; then
+  fancy_echo "OK, we're on Linux, which is not supported by Laptop. Skipping..."
 fi
 
 ####################################
 # Setup basic directories
 ####################################
 
-echo ""
-echo "$divider Step 3: Creating a few basic directories..."
-echo ""
+fancy_echo "$divider Step 3: Creating a few basic directories..."
 
 mkdir -p $HOME/code
-mkdir -p $HOME/Developer
 mkdir -p $HOME/Developer/training
 mkdir -p $HOME/Developer/vms
 mkdir -p $HOME/Developer/cheatsheets
@@ -83,9 +89,7 @@ mkdir -p $HOME/src
 # Setup dotfiles
 ####################################
 
-echo ""
-echo "$divider Step 4: Installing dotfiles..."
-echo ""
+fancy_echo "$divider Step 4: Installing dotfiles..."
 
 cd $HOME
 
@@ -98,17 +102,13 @@ fi
 
 source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 
-echo ""
-echo "Dotfiles setup complete! Resuming main setup script..."
-echo ""
+fancy_echo "Dotfiles setup complete! Resuming main setup script..."
 
 ####################################
 # Install Powerline-patched fonts
 ####################################
 
-echo ""
-echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
-echo ""
+fancy_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
 
 if [ -d "$HOME/src/fonts" ]; then
   mv $HOME/src/fonts $HOME/src/fonts_backup
@@ -124,9 +124,7 @@ rm -rf $HOME/src/fonts
 # Configure git
 ####################################
 
-echo ""
-echo "$divider Step 6: Configuring git..."
-echo ""
+fancy_echo "$divider Step 6: Configuring git..."
 
 source "$DOTFILES_DIR/install/git-setup.sh"
 
@@ -134,9 +132,7 @@ source "$DOTFILES_DIR/install/git-setup.sh"
 # Install Vundle and vim plugins
 ####################################
 
-echo ""
-echo "$divider Step 7: Installing Vundle and vim plugins..."
-echo ""
+fancy_echo "$divider Step 7: Installing Vundle and vim plugins..."
 
 source "$DOTFILES_DIR/install/vundle.sh"
 
@@ -144,9 +140,7 @@ source "$DOTFILES_DIR/install/vundle.sh"
 # Install extra Homebrew packages
 ####################################
 
-echo ""
-echo "$divider Step 8: Installing extra Homebrew formulae..."
-echo ""
+fancy_echo "$divider Step 8: Installing extra Homebrew formulae..."
 
 source "$DOTFILES_DIR/install/brew.sh"
 
@@ -154,9 +148,7 @@ source "$DOTFILES_DIR/install/brew.sh"
 # Install Cask and related software
 ####################################
 
-echo ""
-echo "$divider Step 9: Installing Cask and related software..."
-echo ""
+fancy_echo "$divider Step 9: Installing Cask and related software..."
 
 brew install caskroom/cask/brew-cask
 source "$DOTFILES_DIR/install/brew-cask.sh"
@@ -165,13 +157,10 @@ source "$DOTFILES_DIR/install/brew-cask.sh"
 # Set OS X preferences
 ####################################
 
-if [[ "$osname" == 'Darwin' ]]; then
-  echo ""
-  echo "$divider Step 10: Setting OS X preferences..."
-  echo ""
+if [ "$osname" == 'Darwin' ]; then
+  fancy_echo "$divider Step 10: Setting OS X preferences..."
   source "$DOTFILES_DIR/osx/defaults.sh"
   source "$DOTFILES_DIR/osx/dock.sh"
 fi
 
-echo ""
-echo "Setup complete! Please restart your terminal."
+fancy_echo "Setup complete! Please restart your terminal."
