@@ -1,15 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-####################################
+################################################################################
 # git-setup.sh
 #
-# This script sets up some basic git
-# configuration.
-####################################
-
-echo ""
-echo "Configuring git..."
-echo ""
+# This script sets up some basic git configuration.
+################################################################################
 
 git config --global user.name "Joshua Steele"
 git config --global user.email joshukraine@gmail.com
@@ -22,4 +17,3 @@ git config --global alias.st "status --short"
 git config --global alias.df diff
 git config --global alias.dfs "diff --staged"
 git config --global alias.logg "log --graph --decorate --oneline --abbrev-commit --all"
-git config --global core.excludesfile $HOME/.gitignore_global
