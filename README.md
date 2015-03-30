@@ -12,11 +12,18 @@ Install Apple's command line tools:
 
 	xcode-select --install
 
+Reboot, check for additional updates from Mac App Store, then reboot again if necessary.
+
 ### Installation
 
-To install with curl, run this:
+To install with a one-liner, run this:
+
+	curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh && sh setup.sh 2>&1 | tee ~/setup.log
+
+Want to read through the script first?
 
 	curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh
+	less setup.sh
 	sh setup.sh 2>&1 | tee ~/setup.log
 
 Or, if you prefer to use Git (which comes on all new Macs by default), do this:
@@ -32,11 +39,11 @@ When you invoke `setup.sh`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
-* Run thoughtbot's [Laptop script](https://github.com/thoughtbot/laptop).
+* Run thoughtbot's [Laptop script](https://github.com/thoughtbot/laptop). This is a provisioning script which installs lots of goodies like Homebrew, rbenv, postgres, etc.
 * Set up some basic directories in `$HOME`.
 * Symlink dotfiles to `$HOME`.
 * Install several fixed-width fonts.
-* Configure git.
+* Configure git. (Substitute your own details here.)
 * Install Vundle and plugins for vim.
 * Install various packages via [Homebrew](http://brew.sh/).
 * Install OS X software via [Cask](http://caskroom.io/).
@@ -59,7 +66,7 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 2. Select iTerm 2 > Preferences.
 3. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
-
+5. Restart iTerm 2.
 
 ### Some of my favorite dotfile repos
 
