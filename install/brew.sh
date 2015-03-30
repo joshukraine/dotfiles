@@ -12,6 +12,7 @@ apps=(
     bash-completion
     coreutils
     dockutil
+    figlet
     gnu-sed --default-names
     htop-osx
     nmap
