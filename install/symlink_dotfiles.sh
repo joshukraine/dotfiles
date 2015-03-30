@@ -1,56 +1,47 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-####################################
+################################################################################
 # symlink_dotfiles.sh
 #
-# This script backs up any old
-# dotfiles on the system, and
-# symlinks the new ones to their
-# proper place in the home folder.
-####################################
+# This script backs up any old dotfiles on the system, and symlinks the new ones
+# to their proper place in the home folder.
+################################################################################
 
 set -e # Terminate script if anything exits with a non-zero value
 set -u # Prevent unset variables
 
-####################################
+fancy_echo() { # Thank you, thoughtbot. :)
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
+################################################################################
 # Set some variables
-####################################
+################################################################################
 
 DOTFILES=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 files="gemrc gitignore gitconfig tmux.conf railsrc vimrc zshrc"
 
-####################################
+################################################################################
 # Back up old dotfiles if needed
-####################################
-
-echo ""
-echo "Starting dotfiles setup script..."
-echo ""
+################################################################################
 
 if [[ -d $DOTFILES ]]; then
-  echo ""
-  echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
-  echo ""
+  fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf $OLD_DOTFILES_BACKUP
   cp -R $DOTFILES $OLD_DOTFILES_BACKUP
 fi
 
-####################################
+################################################################################
 # Symklink new dotfiles to $HOME
-####################################
+################################################################################
 
-echo ""
-echo "Creating symlinks..."
-echo ""
-
+fancy_echo "Creating symlinks..."
 for file in $files; do
-  echo ""
-  echo "-> Linking $DOTFILES/$file to $HOME/.$file..."
-  echo ""
+  fancy_echo "-> Linking $DOTFILES/$file to $HOME/.$file..."
   ln -nfs "$DOTFILES/$file" "$HOME/.$file"
 done
 
-echo ""
-echo "Symlinks complete!"
-echo ""
