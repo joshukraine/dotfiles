@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-################################################
-# Adapted from https://mths.be/osx.            #
-# Also referenced:                             #
-# - https://github.com/webpro/dotfiles         #
-# - https://github.com/kevinSuttle/OSXDefaults #
-################################################
+################################################################################
+# Adapted from https://mths.be/osx.
+# Also referenced:
+# - https://github.com/webpro/dotfiles
+# - https://github.com/kevinSuttle/OSXDefaults
+################################################################################
 
 # Ask for the administrator password upfront
 sudo -v
@@ -13,13 +13,18 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+fancy_echo() { # Thank you, thoughtbot. :)
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
 
-echo ""
-echo "**** Setting General UI/UX defaults ****"
-echo ""
+fancy_echo "**** Setting General UI/UX defaults ****"
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "Joshua's MacBook Pro"
@@ -58,9 +63,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-echo ""
-echo "**** Setting SSD-specific tweaks ****"
-echo ""
+fancy_echo "**** Setting SSD-specific tweaks ****"
 
 # Disable the sudden motion sensor as it’s not useful for SSDs
 sudo pmset -a sms 0
@@ -69,10 +72,7 @@ sudo pmset -a sms 0
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-echo ""
-echo "**** Setting Trackpad, mouse, keyboard, Bluetooth accessories, and input defaults ****"
-echo ""
-
+fancy_echo "**** Setting Trackpad, mouse, keyboard, Bluetooth accessories, and input defaults ****"
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -116,10 +116,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 # Finder                                                                      #
 ###############################################################################
 
-
-echo ""
-echo "**** Setting Finder defaults ***"
-echo ""
+fancy_echo "**** Setting Finder defaults ***"
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 defaults write com.apple.finder QuitMenuItem -bool true
@@ -178,9 +175,7 @@ chflags nohidden ~/Library
 # Dock                                                                        #
 ###############################################################################
 
-echo ""
-echo "**** Setting dock defaults ****"
-echo ""
+fancy_echo "**** Setting dock defaults ****"
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
@@ -201,10 +196,7 @@ defaults write com.apple.dock showhidden -bool true
 # Dashboard & Spaces                                                          #
 ###############################################################################
 
-echo ""
-echo "**** Setting Dashboard and Spaces defaults ****"
-echo ""
-
+fancy_echo "**** Setting Dashboard and Spaces defaults ****"
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
@@ -222,12 +214,8 @@ defaults write com.apple.dock mru-spaces -bool false
 # Hot corners                                                                 #
 ###############################################################################
 
-echo ""
-echo "**** Setting hot corners defaults (currently no changes) ****"
-echo ""
+fancy_echo "**** Setting hot corners defaults (currently no changes) ****"
 
-
-# Hot corners
 # Possible values:
 #  0: no-op
 #  2: Mission Control
@@ -256,9 +244,7 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 # Safari & WebKit                                                             #
 ###############################################################################
 
-echo ""
-echo "**** Setting Safari and WebKit defaults ****"
-echo ""
+fancy_echo "**** Setting Safari and WebKit defaults ****"
 
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
@@ -310,9 +296,7 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Mail                                                                        #
 ###############################################################################
 
-echo ""
-echo "**** Setting Mail defaults ****"
-echo ""
+fancy_echo "**** Setting Mail defaults ****"
 
 # Disable send and reply animations in Mail.app
 defaults write com.apple.mail DisableReplyAnimations -bool true
@@ -342,9 +326,7 @@ defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 # Time Machine                                                                #
 ###############################################################################
 
-echo ""
-echo "**** Setting Time Machin defaults ****"
-echo ""
+fancy_echo "**** Setting Time Machin defaults ****"
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -356,9 +338,7 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 # Terminal.app                                                                #
 ###############################################################################
 
-echo ""
-echo "**** Setting Terminal defaults ****"
-echo ""
+fancy_echo "**** Setting Terminal defaults ****"
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
@@ -371,9 +351,7 @@ defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
 
-echo ""
-echo "**** Setting Google Chrome defaults ****"
-echo ""
+fancy_echo "**** Setting Google Chrome defaults ****"
 
 # Allow installing user scripts via GitHub Gist or Userscripts.org
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
@@ -395,18 +373,11 @@ defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
-echo ""
-echo "**** Time to kill affected apps..."
-echo ""
+fancy_echo "**** Time to kill affected apps..."
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Mail" "Messages" "Safari" \
 	"SystemUIServer" "iCal" "iTunes"; do
 	killall "${app}" > /dev/null 2>&1
 done
-
-echo ""
-echo "Bam! OS X prefs set successfully. Some changes may require a restart to take effect."
-echo ""
-
 
