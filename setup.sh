@@ -31,7 +31,7 @@ DOTFILES_DIR=$HOME/dotfiles
 # Check for presence of command line tools if OS X
 ################################################################################
 
-if [ "$osname" == 'Darwin' && ! -d "$COMMANDLINE_TOOLS" ]; then
+if [[ "$osname" == 'Darwin' && ! -d "$COMMANDLINE_TOOLS" ]]; then
   fancy_echo "Apple's command line developer tools must be installed before running this script. To install them, just run 'gcc' from the terminal and then follow the prompts. Once the command line tools have been installed, you can try running this script again."
   exit 1
 fi
