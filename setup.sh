@@ -147,10 +147,4 @@ if [ "$osname" == 'Darwin' ]; then
   fancy_echo "OS X prefs set successfully. Some changes may require a restart to take effect."
 fi
 
-fancy_echo "Setup script complete! Please restart your terminal."
-
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-	"Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" "iCal" \
-  "iTunes" "Terminal"; do
-	killall "${app}" > /dev/null 2>&1
-done
+fancy_echo "Setup script complete! Please restart your computer."
