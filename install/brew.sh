@@ -1,11 +1,6 @@
 #!/bin/sh
 
-# Update Homebrew, formulae, and packages
-
 brew update
-brew upgrade
-
-# Install GNU packages (and override OSX version)
 
 apps=(
     ansible
