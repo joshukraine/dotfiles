@@ -24,7 +24,7 @@ fancy_echo() { # Thank you, thoughtbot. :)
 # General UI/UX                                                               #
 ###############################################################################
 
-fancy_echo "**** Setting General UI/UX defaults ****"
+fancy_echo "- Setting General UI/UX defaults..."
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "Joshua's MacBook Pro"
@@ -66,7 +66,7 @@ defaults write com.apple.loginwindow GuestEnabled -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-fancy_echo "**** Setting SSD-specific tweaks ****"
+fancy_echo "- Setting SSD-specific tweaks..."
 
 # Disable the sudden motion sensor as it’s not useful for SSDs
 sudo pmset -a sms 0
@@ -75,7 +75,7 @@ sudo pmset -a sms 0
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-fancy_echo "**** Setting Trackpad, mouse, keyboard, Bluetooth accessories, and input defaults ****"
+fancy_echo "- Setting Trackpad, mouse, keyboard, Bluetooth accessories, and input defaults..."
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -119,7 +119,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 # Finder                                                                      #
 ###############################################################################
 
-fancy_echo "**** Setting Finder defaults ***"
+fancy_echo "- Setting Finder defaults..."
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 defaults write com.apple.finder QuitMenuItem -bool true
@@ -178,7 +178,7 @@ chflags nohidden ~/Library
 # Dock                                                                        #
 ###############################################################################
 
-fancy_echo "**** Setting dock defaults ****"
+fancy_echo "- Setting dock defaults..."
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
@@ -199,7 +199,7 @@ defaults write com.apple.dock showhidden -bool true
 # Dashboard & Spaces                                                          #
 ###############################################################################
 
-fancy_echo "**** Setting Dashboard and Spaces defaults ****"
+fancy_echo "- Setting Dashboard and Spaces defaults..."
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
@@ -217,7 +217,7 @@ defaults write com.apple.dock mru-spaces -bool false
 # Hot corners                                                                 #
 ###############################################################################
 
-fancy_echo "**** Setting hot corners defaults (currently no changes) ****"
+fancy_echo "- Setting hot corners defaults (currently no changes)..."
 
 # Possible values:
 #  0: no-op
@@ -247,7 +247,7 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 # Safari & WebKit                                                             #
 ###############################################################################
 
-fancy_echo "**** Setting Safari and WebKit defaults ****"
+fancy_echo "- Setting Safari and WebKit defaults..."
 
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
@@ -299,7 +299,7 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Mail                                                                        #
 ###############################################################################
 
-fancy_echo "**** Setting Mail defaults ****"
+fancy_echo "- Setting Mail defaults..."
 
 # Disable send and reply animations in Mail.app
 defaults write com.apple.mail DisableReplyAnimations -bool true
@@ -329,7 +329,7 @@ defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 # Time Machine                                                                #
 ###############################################################################
 
-fancy_echo "**** Setting Time Machine defaults ****"
+fancy_echo "- Setting Time Machine defaults..."
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -341,7 +341,7 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 # Terminal.app                                                                #
 ###############################################################################
 
-fancy_echo "**** Setting Terminal defaults ****"
+fancy_echo "- Setting Terminal defaults..."
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
@@ -354,7 +354,7 @@ defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
 
-fancy_echo "**** Setting Google Chrome defaults ****"
+fancy_echo "- Setting Google Chrome defaults..."
 
 # Allow installing user scripts via GitHub Gist or Userscripts.org
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
