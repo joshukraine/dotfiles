@@ -329,7 +329,7 @@ defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 # Time Machine                                                                #
 ###############################################################################
 
-fancy_echo "**** Setting Time Machin defaults ****"
+fancy_echo "**** Setting Time Machine defaults ****"
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
