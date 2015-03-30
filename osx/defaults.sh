@@ -60,7 +60,7 @@ defaults write com.apple.helpviewer DevMode -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable guest login
-defaults write com.apple.loginwindow GuestEnabled -bool false
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
