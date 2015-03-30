@@ -185,7 +185,7 @@ fancy_echo "Done!"
 ################################################################################
 
 fancy_echo "$divider Step 9: Installing Cask and related software..."
-brew_install_or_upgrade caskroom/cask/brew-cask
+brew_install_or_upgrade 'brew-cask'
 source "$DOTFILES_DIR/install/brew-cask.sh"
 fancy_echo "Done!"
 
