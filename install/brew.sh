@@ -22,4 +22,4 @@ apps=(
     wget
 )
 
-brew install ${apps[@]}
+brew_install_or_upgrade ${apps[@]}
