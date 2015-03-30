@@ -144,7 +144,13 @@ if [ "$osname" == 'Darwin' ]; then
   fancy_echo "$divider Step 10: Setting OS X preferences..."
   source "$DOTFILES_DIR/osx/defaults.sh"
   source "$DOTFILES_DIR/osx/dock.sh"
-  fancy_echo "Bam! OS X prefs set successfully. Some changes may require a restart to take effect."
+  fancy_echo "OS X prefs set successfully. Some changes may require a restart to take effect."
 fi
 
-fancy_echo "Setup complete! Please restart your terminal."
+fancy_echo "Setup script complete! Please restart your terminal."
+
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+	"Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" "iCal" \
+  "iTunes" "Terminal"; do
+	killall "${app}" > /dev/null 2>&1
+done

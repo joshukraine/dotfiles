@@ -371,16 +371,3 @@ defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls
 # Use the system-native print preview dialog
 defaults write com.google.Chrome DisablePrintPreview -bool true
 defaults write com.google.Chrome.canary DisablePrintPreview -bool true
-
-###############################################################################
-# Kill affected applications                                                  #
-###############################################################################
-
-fancy_echo "**** Time to kill affected apps..."
-
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-	"Dock" "Finder" "Mail" "Messages" "Safari" \
-	"SystemUIServer" "iCal" "iTunes"; do
-	killall "${app}" > /dev/null 2>&1
-done
-
