@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ################################################################################
-# setup.sh
+# setup-mac.sh
 #
 # This script is intended to set up a new Mac computer with my dotfiles and
 # other development preferences.
