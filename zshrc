@@ -4,7 +4,6 @@ export EDITOR="vim"
 export BUNDLER_EDITOR="vim"
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export TERM="screen-256color"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # }}}
 
 
