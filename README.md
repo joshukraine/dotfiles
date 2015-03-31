@@ -1,6 +1,8 @@
 # My Dotfiles
 
-These are the dotfiles I use on my primary machine running Mac OS X, currently 10.10 Yosemite. While there are a few things that are specific to OS X, most of it should be pretty standard for any UNIX-based system.
+These are the dotfiles and general preferences I use on my primary machine running Mac OS X, currently 10.10 Yosemite. The `setup-mac.sh` script is very specific to OS X.
+
+**Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux).**
 
 ### Prerequisites
 
