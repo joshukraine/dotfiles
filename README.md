@@ -18,18 +18,23 @@ Reboot, check for additional updates from Mac App Store, then reboot again if ne
 
 To install with a one-liner, run this:
 
-	curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh && sh setup.sh 2>&1 | tee ~/setup.log
+```sh
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh && sh setup.sh 2>&1 | tee ~/setup.log
+```
 
 Want to read through the script first?
-
-	curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh
-	less setup.sh
-	sh setup.sh 2>&1 | tee ~/setup.log
+```sh
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh
+less setup.sh
+sh setup.sh 2>&1 | tee ~/setup.log
+```
 
 Or, if you prefer to use Git (which comes on all new Macs by default), do this:
 
-	git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-	source ~/dotfiles/setup.sh
+```sh
+git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
+source ~/dotfiles/setup.sh
+```
 
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
 
@@ -39,11 +44,10 @@ When you invoke `setup.sh`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
-* Run thoughtbot's [Laptop script](https://github.com/thoughtbot/laptop). This is a provisioning script which installs lots of goodies like Homebrew, rbenv, postgres, etc.
+* Run my fork of thoughtbot's [Laptop script](https://github.com/joshukraine/laptop). This is a provisioning script which installs lots of goodies like Homebrew, rbenv, postgres, etc.
 * Set up some basic directories in `$HOME`.
 * Symlink dotfiles to `$HOME`.
 * Install several fixed-width fonts.
-* Configure git. (Substitute your own details here.)
 * Install Vundle and plugins for vim.
 * Install various packages via [Homebrew](http://brew.sh/).
 * Install OS X software via [Cask](http://caskroom.io/).
