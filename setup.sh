@@ -171,37 +171,28 @@ rm -rf $HOME/src/fonts
 fancy_echo "Done!"
 
 ################################################################################
-# 6. Configure git
+# 6. Install Vundle and vim plugins
 ################################################################################
 
-fancy_echo "$divider Step 6: Configuring git..."
-
-source "$DOTFILES_DIR/install/git-setup.sh"
-fancy_echo "Done!"
-
-################################################################################
-# 7. Install Vundle and vim plugins
-################################################################################
-
-fancy_echo "$divider Step 7: Installing Vundle and vim plugins..."
+fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
 
 source "$DOTFILES_DIR/install/vundle.sh"
 fancy_echo "Done!"
 
 ################################################################################
-# 8. Install extra Homebrew packages
+# 7. Install extra Homebrew packages
 ################################################################################
 
-fancy_echo "$divider Step 8: Installing extra Homebrew formulae..."
+fancy_echo "$divider Step 7: Installing extra Homebrew formulae..."
 
 source "$DOTFILES_DIR/install/brew.sh"
 fancy_echo "Done!"
 
 ################################################################################
-# 9. Install Cask and related software
+# 8. Install Cask and related software
 ################################################################################
 
-fancy_echo "$divider Step 9: Installing Cask and related software..."
+fancy_echo "$divider Step 8: Installing Cask and related software..."
 
 brew_tap 'caskroom/cask'
 brew_install_or_upgrade 'brew-cask'
@@ -209,10 +200,10 @@ source "$DOTFILES_DIR/install/brew-cask.sh"
 fancy_echo "Done!"
 
 ################################################################################
-# 10. Set OS X preferences
+# 9. Set OS X preferences
 ################################################################################
 
-fancy_echo "$divider Step 10: Setting OS X preferences..."
+fancy_echo "$divider Step 9: Setting OS X preferences..."
 
 source "$DOTFILES_DIR/osx/defaults.sh"
 source "$DOTFILES_DIR/osx/dock.sh"
