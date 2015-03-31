@@ -22,7 +22,7 @@ files="gemrc gitignore gitconfig tmux.conf railsrc vimrc zshrc"
 # Back up old dotfiles if needed
 ################################################################################
 
-if [[ -d $DOTFILES ]]; then
+if [ -d $DOTFILES ]; then
   fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf $OLD_DOTFILES_BACKUP
   cp -R $DOTFILES $OLD_DOTFILES_BACKUP
