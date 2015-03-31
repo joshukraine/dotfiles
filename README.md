@@ -19,28 +19,28 @@ Reboot, check for additional updates from Mac App Store, then reboot again if ne
 To install with a one-liner, run this:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh && sh setup.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
 ```
 
 Want to read through the script first?
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup.sh
-less setup.sh
-sh setup.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh
+less setup-mac.sh
+sh setup-mac.sh 2>&1 | tee ~/setup.log
 ```
 
 Or, if you prefer to use Git (which comes on all new Macs by default), do this:
 
 ```sh
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-source ~/dotfiles/setup.sh
+source ~/dotfiles/setup-mac.sh
 ```
 
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
 
 ### What does it do?
 
-When you invoke `setup.sh`, this is what it does in a nutshell:
+When you invoke `setup-mac.sh`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
@@ -56,7 +56,7 @@ When you invoke `setup.sh`, this is what it does in a nutshell:
 
 ### Post-install Tasks
 
-After running `setup.sh` there are still a few things that need to be done.
+After running `setup-mac.sh` there are still a few things that need to be done.
 
 * Restart your machine in order for some changes to take effect.
 * Install software from Mac App Store.

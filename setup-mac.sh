@@ -85,12 +85,12 @@ DOTFILES_DIR=$HOME/dotfiles
 
 if [ "$osname" == 'Linux' ]; then
   fancy_echo "Oops, looks like you're on a Linux machine. Please run the command
-  below to download and execute the Linux setup script."
+below to download and execute the Linux setup script."
   fancy_echo "curl --remote-name ..."
   exit 1
 elif [ "$osname" != 'Darwin' ]; then
   fancy_echo "Oops, it looks like you're using a non-UNIX system. This script
-  only supports Mac and Linux. Exiting..."
+only supports Mac and Linux. Exiting..."
   exit 1
 fi
 
@@ -100,9 +100,9 @@ fi
 
 if [ ! -d "$COMMANDLINE_TOOLS" ]; then
   fancy_echo "Apple's command line developer tools must be installed before
-  running this script. To install them, just run 'gcc' from the terminal and
-  then follow the prompts. Once the command line tools have been installed,
-  you can try running this script again."
+running this script. To install them, just run 'gcc' from the terminal and
+then follow the prompts. Once the command line tools have been installed,
+you can try running this script again."
   exit 1
 fi
 
