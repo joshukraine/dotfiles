@@ -12,6 +12,7 @@ apps=(
     crashplan
     doxie
     dropbox
+    fantastical
     firefox
     google-chrome
     google-drive
