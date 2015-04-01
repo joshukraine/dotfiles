@@ -12,7 +12,10 @@ Install Apple's command line tools:
 
 	xcode-select --install
 
-Reboot, check for additional updates from Mac App Store, then reboot again if necessary.
+Reboot, check for additional updates, then reinstall, reboot if needed.
+
+	sudo softwareupdate -l
+	sudo softwareupdate -i -a
 
 ### Installation
 
