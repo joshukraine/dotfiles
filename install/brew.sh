@@ -4,7 +4,6 @@ brew update
 
 brew_install_or_upgrade 'ansible'
 brew_install_or_upgrade 'bash-completion'
-brew_install_or_upgrade 'coreutils'
 brew_install_or_upgrade 'dockutil'
 brew_install_or_upgrade 'figlet'
 brew_install_or_upgrade 'htop-osx'

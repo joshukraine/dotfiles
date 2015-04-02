@@ -5,7 +5,6 @@ apps=(
     alfred
     applepi-baker
     atom
-    atom
     bartender
     carbon-copy-cloner
     cleanmymac
@@ -22,7 +21,6 @@ apps=(
     iterm2
     little-snitch
     namebench
-    private-internet-access
     silverlight
     skype
     teamviewer
