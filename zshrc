@@ -187,7 +187,7 @@ HISTFILE=~/.zsh_history
 
 # cdpath {{{
 setopt auto_cd
-cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME)
+cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME)
 # }}}
 
 
