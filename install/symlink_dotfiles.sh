@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ################################################################################
 # symlink_dotfiles.sh
@@ -9,6 +9,13 @@
 
 set -e # Terminate script if anything exits with a non-zero value
 set -u # Prevent unset variables
+
+fancy_echo() {
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
 
 ################################################################################
 # Set some variables
