@@ -23,7 +23,7 @@ fancy_echo() {
 
 DOTFILES=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
-files="gemrc gitignore gitconfig tmux.conf railsrc vimrc zshrc"
+files="gemrc gitignore_global gitconfig tmux.conf railsrc vimrc zshrc"
 
 ################################################################################
 # Back up old dotfiles if needed
