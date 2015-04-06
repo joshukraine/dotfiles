@@ -143,16 +143,8 @@ mkdir -p $HOME/src
 
 fancy_echo "$divider Step 4: Installing dotfiles..."
 
-cd $HOME
-if [ ! -d $DOTFILES_DIR ]; then
-  git clone https://github.com/joshukraine/dotfiles.git $DOTFILES_DIR
-else
-  cd $DOTFILES_DIR
-  git pull origin master
-fi
-fancy_echo "Starting dotfiles setup script (install/symlink_dotfiles.sh)..."
 source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
-fancy_echo "Dotfiles setup complete! Resuming main setup script..."
+fancy_echo "Dotfiles setup complete!"
 
 ################################################################################
 # 5. Install Powerline-patched fonts
