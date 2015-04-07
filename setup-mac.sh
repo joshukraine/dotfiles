@@ -116,7 +116,8 @@ fancy_echo "$divider Step 1: Installing oh-my-zsh..."
 if [ -d "$HOME/.oh-my-zsh" ]; then
   rm -rf $HOME/.oh-my-zsh
 fi
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 ################################################################################
 # 2. Provision with my fork of Laptop
