@@ -195,6 +195,9 @@ defaults write com.apple.dock showhidden -bool true
 # No bouncing icons
 # defaults write com.apple.dock no-bouncing -bool true
 
+# Set the icon size of Dock items to 72 pixels
+defaults write com.apple.dock tilesize -int 72
+
 ###############################################################################
 # Dashboard & Spaces                                                          #
 ###############################################################################
