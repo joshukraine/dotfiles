@@ -78,6 +78,7 @@ osname=$(uname)
 divider="====> "
 COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 DOTFILES_DIR=$HOME/dotfiles
+OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 ################################################################################
 # Make sure we're on a Mac before continuing
@@ -112,7 +113,10 @@ fi
 
 fancy_echo "$divider Step 1: Installing oh-my-zsh..."
 
-curl -L http://install.ohmyz.sh | sh
+if [ -d "$HOME/.oh-my-zsh" ]; then
+  rm -rf $HOME/.oh-my-zsh
+fi
+curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 ################################################################################
 # 2. Provision with my fork of Laptop
@@ -143,7 +147,18 @@ mkdir -p $HOME/src
 
 fancy_echo "$divider Step 4: Installing dotfiles..."
 
+if [[ -d $DOTFILES_DIR ]]; then
+  fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
+  rm -rf $OLD_DOTFILES_BACKUP
+  cp -R $DOTFILES_DIR $OLD_DOTFILES_BACKUP
+  rm -rf $DOTFILES_DIR
+fi
+
+fancy_echo "Cloning joshukraine/dotfiles repo to ${DOTFILES_DIR} ..."
+
+git clone https://github.com/joshukraine/dotfiles.git $DOTFILES_DIR
 source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
+
 fancy_echo "Dotfiles setup complete!"
 
 ################################################################################
