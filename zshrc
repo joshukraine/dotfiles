@@ -98,6 +98,12 @@ alias rbl='rbenv install -l'
 # Finder
 alias o='open . &'
 
+# Check for OS X updates
+alias upc='softwareupdate -l'
+
+# Download and install OS X updates
+alias upd='softwareupdate -i -a'
+
 # Speedtest
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 # }}}
