@@ -34,13 +34,6 @@ less setup-mac.sh
 sh setup-mac.sh 2>&1 | tee ~/setup.log
 ```
 
-Or, if you prefer to use Git (which comes on all new Macs by default), do this:
-
-```sh
-git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-source ~/dotfiles/setup-mac.sh
-```
-
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
 
 ### What does it do?
