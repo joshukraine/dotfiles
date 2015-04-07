@@ -20,7 +20,9 @@ apps=(
     istat-menus
     iterm2
     little-snitch
+    mactracker
     namebench
+    screenflick
     silverlight
     skype
     teamviewer
@@ -30,4 +32,4 @@ apps=(
     vlc
 )
 
-brew cask install ${apps[@]}
+brew cask install ${apps[@]} --appdir=/Applications
