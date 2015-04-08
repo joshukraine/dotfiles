@@ -196,6 +196,11 @@ setopt auto_cd
 cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME)
 # }}}
 
+# functions {{{
+randpw() {
+  openssl rand -base64 4 | md5 | head -c8 ; echo
+}
+# }}}
 
 # Rbenv {{{
 export PATH="$HOME/.rbenv/bin:$PATH"
