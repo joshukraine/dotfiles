@@ -15,7 +15,7 @@ set -u # Prevent unset variables
 ################################################################################
 
 DOTFILES=$HOME/dotfiles
-files="gemrc gitignore_global gitconfig tmux.conf railsrc vimrc zshrc"
+files="gemrc gitignore_global gitconfig hushlogin tmux.conf railsrc vimrc zshrc"
 
 fancy_echo() {
   local fmt="$1"; shift
