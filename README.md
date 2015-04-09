@@ -70,6 +70,37 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 5. Restart iTerm 2.
 
+### How to personalize these dotfiles for your own use.
+
+No one else's dotfiles will ever be a perfect match for you. That said, if your needs are close enough to mine, you might benefit from using the same shell scripts and overall structure, and just swapping out the particulars with your own. Here's my recommended approach to doing that:
+
+1) [Fork this repo](https://github.com/joshukraine/dotfiles#fork-destination-box) and clone your new fork to your local machine.
+
+2) Review [`setup-mac.sh`](https://github.com/joshukraine/dotfiles/blob/master/setup-mac.sh) and determine which sections you want to use.
+
+* Section 1: Use oh-my-zsh? Prefer to use bash instead?
+* Section 2: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
+* Section 3: Update the `git clone...` URL to point to your fork.
+* Section 4: Install fixed-width fonts?
+* Section 5: Use Vundle? If you prefer a different plugin manager, you can add the code for that in a file called `install/<my-plugin-manager>.sh` and then update the `source` path in this section.
+* Section 6: Check the list of [Homebrew](http://brew.sh/) packages in `install/brew.sh`. Add or remove packages to suite your needs.
+* Section 7: Check the list of [Cask](http://caskroom.io/) apps in `install/brew-cask.sh`. Add or remove apps to suite your needs.
+* Section 8: Review general OS X settings in `osx/defaults.sh` and adjust as needed. `osx/dock.sh` ensures that the dock contains only the apps you select. Adjust as desired. (NOTE: `dock.sh` depends on the `dockutil` package installed by Homebrew in `brew.sh`.)
+
+3) Customize the dotfiles themselves with your own prefs. Add or remove dotfiles as desired. Since the files will later be symlinked into place, there is no need to add the leading dot to the filenames. (e.g. use `vimrc`, not `.vimrc`)
+
+4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 17)...
+
+	files="gemrc gitignore_global gitconfig tmux.conf railsrc vimrc zshrc"
+
+...and make sure all your files (and *only* those files) are listed.
+
+5) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
+
+	bash <(wget -qO- https://raw.githubusercontent.com/<your-github-username>/dotfiles/linux/setup-linux.sh) 2>&1 | tee ~/setup-linux.log
+
+6) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
+
 ### Some of my favorite dotfile repos
 
 * Pro Vim (https://github.com/Integralist/ProVim)
