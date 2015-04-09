@@ -129,24 +129,10 @@ curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/master/m
 sh mac 2>&1 | tee ~/laptop.log
 
 ################################################################################
-# 3. Setup basic directories
+# 3. Setup dotfiles
 ################################################################################
 
-fancy_echo "$divider Step 3: Creating a few basic directories..."
-
-mkdir -p $HOME/code
-mkdir -p $HOME/Developer/training
-mkdir -p $HOME/Developer/vms
-mkdir -p $HOME/Developer/cheatsheets
-mkdir -p $HOME/Developer/other_code
-mkdir -p $HOME/Developer/fav_repos
-mkdir -p $HOME/src
-
-################################################################################
-# 4. Setup dotfiles
-################################################################################
-
-fancy_echo "$divider Step 4: Installing dotfiles..."
+fancy_echo "$divider Step 3: Installing dotfiles..."
 
 if [[ -d $DOTFILES_DIR ]]; then
   fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
@@ -163,10 +149,10 @@ source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 fancy_echo "Dotfiles setup complete!"
 
 ################################################################################
-# 5. Install Powerline-patched fonts
+# 4. Install Powerline-patched fonts
 ################################################################################
 
-fancy_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
+fancy_echo "$divider Step 4: Installing fixed-width fonts patched for use with Powerline symbols..."
 
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
@@ -179,28 +165,28 @@ rm -rf $HOME/src/fonts
 fancy_echo "Done!"
 
 ################################################################################
-# 6. Install Vundle and vim plugins
+# 5. Install Vundle and vim plugins
 ################################################################################
 
-fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
+fancy_echo "$divider Step 5: Installing Vundle and vim plugins..."
 
 source "$DOTFILES_DIR/install/vundle.sh"
 fancy_echo "Done!"
 
 ################################################################################
-# 7. Install extra Homebrew packages
+# 6. Install extra Homebrew packages
 ################################################################################
 
-fancy_echo "$divider Step 7: Installing extra Homebrew formulae..."
+fancy_echo "$divider Step 6: Installing extra Homebrew formulae..."
 
 source "$DOTFILES_DIR/install/brew.sh"
 fancy_echo "Done!"
 
 ################################################################################
-# 8. Install Cask and related software
+# 7. Install Cask and related software
 ################################################################################
 
-fancy_echo "$divider Step 8: Installing Cask and related software..."
+fancy_echo "$divider Step 7: Installing Cask and related software..."
 
 brew_tap 'caskroom/cask'
 brew_install_or_upgrade 'brew-cask'
@@ -208,10 +194,10 @@ source "$DOTFILES_DIR/install/brew-cask.sh"
 fancy_echo "Done!"
 
 ################################################################################
-# 9. Set OS X preferences
+# 8. Set OS X preferences
 ################################################################################
 
-fancy_echo "$divider Step 9: Setting OS X preferences..."
+fancy_echo "$divider Step 8: Setting OS X preferences..."
 
 source "$DOTFILES_DIR/osx/defaults.sh"
 source "$DOTFILES_DIR/osx/dock.sh"
