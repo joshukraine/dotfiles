@@ -52,6 +52,7 @@ alias l='ls -lahF'
 alias ll='ls -lhF'
 alias la='ls -lAhF'
 alias lf='ls -F'
+alias lh='ls -d .*'
 
 # Tree
 alias t2='tree -FL 2'
@@ -193,14 +194,16 @@ HISTFILE=~/.zsh_history
 
 # cdpath {{{
 setopt auto_cd
-cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME)
+cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME/Dropbox $HOME)
 # }}}
+
 
 # functions {{{
 randpw() {
   openssl rand -base64 4 | md5 | head -c8 ; echo
 }
 # }}}
+
 
 # Rbenv {{{
 export PATH="$HOME/.rbenv/bin:$PATH"
