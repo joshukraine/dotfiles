@@ -74,11 +74,11 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 
 No one else's dotfiles will ever be a perfect match for you. That said, if your needs are close enough to mine, you might benefit from using the same shell scripts and overall structure, and just swapping out the particulars with your own. Here's my recommended approach to doing that:
 
-1) [Fork this repo](https://github.com/joshukraine/dotfiles#fork-destination-box) and clone your new fork to your local machine.
+1) Fork this repo and clone your new fork to your local machine.
 
 2) Review [`setup-mac.sh`](https://github.com/joshukraine/dotfiles/blob/master/setup-mac.sh) and determine which sections you want to use.
 
-* Section 1: Use oh-my-zsh? Prefer to use bash instead?
+* Section 1: Use `oh-my-zsh`? Prefer to use bash instead?
 * Section 2: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
 * Section 3: Update the `git clone...` URL to point to your fork.
 * Section 4: Install fixed-width fonts?
@@ -91,7 +91,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 17)...
 
-	files="gemrc gitignore_global gitconfig tmux.conf railsrc vimrc zshrc"
+	files="gemrc gitignore_global gitconfig hushlogin tmux.conf railsrc vimrc zshrc"
 
 ...and make sure all your files (and *only* those files) are listed.
 
