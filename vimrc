@@ -236,6 +236,7 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+nnoremap <CR> o<Esc> " Add new line BELOW without leaving normal mode
 
 " Run 'git blame' on a selection of code
 vmap <leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
