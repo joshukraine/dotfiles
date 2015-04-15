@@ -26,7 +26,7 @@
 	helper = osxkeychain
 [push]
 	default = matching
-[pull]
-	rebase = true
 [merge]
 	ff = false
+[pull]
+	rebase = preserve
