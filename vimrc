@@ -229,6 +229,7 @@ map <leader>ra :%s/
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
+map <leader>w :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 imap <C-[> <C-c> " Return to normal mode faster
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 inoremap jj <C-c> " jj to switch back to normal mode
@@ -272,8 +273,8 @@ map <leader>f :call RunCurrentSpecFile()<CR>
 map <leader>r :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = 'call VimuxRunCommand("clear; spring rspec {spec}")'
-" let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
+" let g:rspec_command = 'call VimuxRunCommand("clear; spring rspec {spec}")'
+let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
 
 " vroom.vim (alternative plugin to vim-rspec)
 " map <leader>r :VroomRunNearestTest<CR>
