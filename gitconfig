@@ -8,7 +8,7 @@
 	br = branch
 	df = diff
 	dfs = diff --staged
-	logg = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(by %an, %ar)%Creset'
+	logg = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(%an, %ar)%Creset'
 	sta = status
 [apply]
 	whitespace = nowarn
