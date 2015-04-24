@@ -160,54 +160,62 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Vundle itself
-Plugin 'gmarik/Vundle.vim'                " https://github.com/gmarik/Vundle.vim
+Plugin 'gmarik/Vundle.vim'                " Vundle, the plug-in manager for Vim                   | https://github.com/gmarik/Vundle.vim
+
+" General Vim
+Plugin 'gcmt/wildfire'                    " Smart selection of the closest text object            | https://github.com/gcmt/wildfire.vim
+Plugin 'godlygeek/tabular'                " Vim script for text filtering and alignment           | https://github.com/godlygeek/tabular
+Plugin 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
+Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
+Plugin 'vim-scripts/BufOnly'              " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 
 " Ruby-specific
-Plugin 'vim-ruby/vim-ruby'                " https://github.com/vim-ruby/vim-ruby
-Plugin 'kana/vim-textobj-user'            " https://github.com/kana/vim-textobj-user
-Plugin 'nelstrom/vim-textobj-rubyblock'   " https://github.com/nelstrom/vim-textobj-rubyblock
-Plugin 'scrooloose/syntastic'             " https://github.com/scrooloose/syntastic
+Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
+Plugin 'kana/vim-textobj-user'            " Create your own text objects                          | https://github.com/kana/vim-textobj-user
+Plugin 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting ruby blocks        | https://github.com/nelstrom/vim-textobj-rubyblock
+Plugin 'scrooloose/syntastic'             " Syntax checking hacks for vim                         | https://github.com/scrooloose/syntastic
 
 " Searching and Navigation
-Plugin 'scrooloose/nerdtree'              " https://github.com/scrooloose/nerdtree
-Plugin 'skwp/greplace.vim'                " https://github.com/skwp/greplace.vim
-Plugin 'rking/ag.vim'                     " https://github.com/rking/ag.vim
-Plugin 'christoomey/vim-tmux-navigator'   " https://github.com/christoomey/vim-tmux-navigator
-Plugin 'ctrlpvim/ctrlp.vim'               " https://github.com/ctrlpvim/ctrlp.vim
+Plugin 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
+Plugin 'skwp/greplace.vim'                " Global search and replace for vi                      | https://github.com/skwp/greplace.vim
+Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
+Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
+Plugin 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
+Plugin 'MattesGroeger/vim-bookmarks'      " Vim bookmark plugin                                   | https://github.com/MattesGroeger/vim-bookmarks
 
 " Look and Feel
-Plugin 'altercation/vim-colors-solarized' " https://github.com/altercation/vim-colors-solarized
-Plugin 'bling/vim-airline'                " https://github.com/bling/vim-airline
+Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
+Plugin 'bling/vim-airline'                " Status/tabline for vim                                | https://github.com/bling/vim-airline
 
 " Tim Pope
-Plugin 'tpope/vim-fugitive'               " https://github.com/tpope/vim-fugitive
-Plugin 'tpope/vim-git'                    " https://github.com/tpope/vim-git
-Plugin 'tpope/vim-endwise'                " https://github.com/tpope/vim-endwise
-Plugin 'tpope/vim-surround'               " https://github.com/tpope/vim-surround
-Plugin 'tpope/vim-rails'                  " https://github.com/tpope/vim-rails
-Plugin 'tpope/vim-ragtag'                 " https://github.com/tpope/vim-ragtag
-Plugin 'tpope/vim-obsession'              " https://github.com/tpope/vim-obsession
+Plugin 'tpope/vim-fugitive'               " Git wrapper for vim                                   | https://github.com/tpope/vim-fugitive
+Plugin 'tpope/vim-git'                    " Vim Git runtime files                                 | https://github.com/tpope/vim-git
+Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
+Plugin 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
+Plugin 'tpope/vim-rails'                  " Ruby on Rails power tools                             | https://github.com/tpope/vim-rails
+Plugin 'tpope/vim-ragtag'                 " HTML/XML mappings                                     | https://github.com/tpope/vim-ragtag
+Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
 
 " Related to testing & tmux
-Plugin 'benmills/vimux'                   " https://github.com/benmills/vimux
-Plugin 'jgdavey/tslime.vim'               " https://github.com/jgdavey/tslime.vim
-Plugin 'thoughtbot/vim-rspec'             " https://github.com/thoughtbot/vim-rspec
-Plugin 'skalnik/vim-vroom'                " https://github.com/skalnik/vim-vroom
+Plugin 'benmills/vimux'                   " Vim plugin to interact with tmux                      | https://github.com/benmills/vimux
+Plugin 'jgdavey/tslime.vim'               " Send command from vim to a running tmux session       | https://github.com/jgdavey/tslime.vim
+Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
+Plugin 'skalnik/vim-vroom'                " A vim plugin for running your Ruby tests              | https://github.com/skalnik/vim-vroom
 
 " Related to vim-snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'     " https://github.com/MarcWeber/vim-addon-mw-utils
-Plugin 'tomtom/tlib_vim'                  " https://github.com/tomtom/tlib_vim
-Plugin 'garbas/vim-snipmate'              " https://github.com/garbas/vim-snipmate
-Plugin 'honza/vim-snippets'               " https://github.com/honza/vim-snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'     " [vim-snipmate dependency]                             | https://github.com/MarcWeber/vim-addon-mw-utils
+Plugin 'tomtom/tlib_vim'                  " [vim-snipmate dependency]                             | https://github.com/tomtom/tlib_vim
+Plugin 'garbas/vim-snipmate'              " Textmate-style snippet behavior for vim               | https://github.com/garbas/vim-snipmate
+Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
 
 " Other
-Plugin 'kchmck/vim-coffee-script'         " https://github.com/kchmck/vim-coffee-script
-Plugin 'tomtom/tcomment_vim'              " https://github.com/tomtom/tcomment_vim
-Plugin 'bronson/vim-trailing-whitespace'  " https://github.com/bronson/vim-trailing-whitespace
-Plugin 'ervandew/supertab'                " https://github.com/ervandew/supertab
-Plugin 'danro/rename.vim'                 " https://github.com/danro/rename.vim
-Plugin 'duff/vim-scratch'                 " https://github.com/duff/vim-scratch
-Plugin 'godlygeek/tabular'                " https://github.com/godlygeek/tabular
+Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim                          | https://github.com/kchmck/vim-coffee-script
+Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in red                 | https://github.com/bronson/vim-trailing-whitespace
+Plugin 'duff/vim-scratch'                 " Create a temporary scratch buffer                     | https://github.com/duff/vim-scratch
+Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
+Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
+Plugin 'vim-scripts/Gist'                 " Post gists from vim                                   | https://github.com/vim-scripts/Gist.vim
+Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required
