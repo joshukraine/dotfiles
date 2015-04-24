@@ -230,15 +230,16 @@ filetype plugin indent on                 " required
 let mapleader = " "
 
 " Misc
-" map <leader>x :Explore
 map <leader>ev :tabe ~/.vimrc<CR>
-map <leader>q :source ~/.vimrc<CR>:AirlineRefresh<CR>
-map <leader>s :w<CR>
+map <leader>r :source ~/.vimrc<CR>:AirlineRefresh<CR>
+map <leader>q :q<CR>
+map <leader>w :w<CR>
+map <leader>x :x<CR>
 map <leader>ra :%s/
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
-map <leader>w :%s/\s\+$//e<CR> " Manually clear trailing whitespace
+map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 imap <C-[> <C-c> " Return to normal mode faster
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 inoremap jj <C-c> " jj to switch back to normal mode
@@ -246,10 +247,9 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
-nnoremap <CR> o<Esc> " Add new line BELOW without leaving normal mode
 
 " Run 'git blame' on a selection of code
-vmap <leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -274,19 +274,21 @@ map <leader>\ :NERDTreeToggle<CR>
 " Tcomment
 map <leader>/ :TComment<CR>
 
+" Bufexplorer - unmapping defaults because they cause delay for <leader>b
+map <leader>b :ToggleBufExplorer<CR>
+
 " Obsession
 map <leader>ob :Obsession<CR>
 
 " vim-rspec
 map <leader>f :call RunCurrentSpecFile()<CR>
-map <leader>r :call RunNearestSpec()<CR>
+map <leader>n :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-" let g:rspec_command = 'call VimuxRunCommand("clear; spring rspec {spec}")'
-let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
+let g:rspec_command = 'call VimuxRunCommand("clear; bin/rspec {spec}")'
 
 " vroom.vim (alternative plugin to vim-rspec)
-" map <leader>r :VroomRunNearestTest<CR>
+" map <leader>n :VroomRunNearestTest<CR>
 " map <leader>f :VroomRunTestFile<CR>
 " map <leader>l :VroomRunLastTest<CR>
 " let g:vroom_use_vimux = 1
@@ -343,6 +345,12 @@ command! RVfactories :vs spec/factories.rb
 " vim-scratch
 map <C-s> :Sscratch<CR>
 
+" Gist settings
+let g:github_user = $GITHUB_USER
+let g:github_token = $GITHUB_TOKEN
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+
 " }}}
 
 
@@ -359,7 +367,7 @@ au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 " file formats
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype sh,markdown setlocal wrap linebreak nolist textwidth=0 wrapmargin=0 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
-autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss,gitconfig setlocal shiftwidth=2 tabstop=2 expandtab
 
 " autoindent with two spaces, always expand tabs
 autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
@@ -386,6 +394,15 @@ fun! SetDiffColors()
   highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 autocmd FilterWritePre * call SetDiffColors()
+
+" Unmap GitGutter leaders that I don't use. This avoids delays for other leaders.
+autocmd VimEnter * nunmap <leader>hp
+autocmd VimEnter * nunmap <leader>hr
+autocmd VimEnter * nunmap <leader>hs
+
+" Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
+autocmd VimEnter * nunmap <leader>bs
+autocmd VimEnter * nunmap <leader>bv
 
 " }}}
 
