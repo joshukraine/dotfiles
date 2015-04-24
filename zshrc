@@ -227,3 +227,8 @@ function fs() {
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 # }}}
+
+
+# Include local settings {{{
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+# }}}
