@@ -163,11 +163,12 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'                " Vundle, the plug-in manager for Vim                   | https://github.com/gmarik/Vundle.vim
 
 " General Vim
-Plugin 'gcmt/wildfire'                    " Smart selection of the closest text object            | https://github.com/gcmt/wildfire.vim
+Plugin 'gcmt/wildfire.vim'                " Smart selection of the closest text object            | https://github.com/gcmt/wildfire.vim
 Plugin 'godlygeek/tabular'                " Vim script for text filtering and alignment           | https://github.com/godlygeek/tabular
 Plugin 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
-Plugin 'vim-scripts/BufOnly'              " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
+Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
+Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 
 " Ruby-specific
 Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -214,7 +215,7 @@ Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in re
 Plugin 'duff/vim-scratch'                 " Create a temporary scratch buffer                     | https://github.com/duff/vim-scratch
 Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
-Plugin 'vim-scripts/Gist'                 " Post gists from vim                                   | https://github.com/vim-scripts/Gist.vim
+Plugin 'vim-scripts/Gist.vim'             " Post gists from vim                                   | https://github.com/vim-scripts/Gist.vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 
 " All of your Plugins must be added before the following line
