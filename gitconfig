@@ -1,32 +1,29 @@
-[user]
-	name = Joshua Steele
-	email = joshukraine@gmail.com
+[include]
+  path = ~/.gitconfig.local
 [alias]
-	co = checkout
-	st = status --short
-	ci = commit
-	br = branch
-	df = diff
-	dfs = diff --staged
-	logg = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(%an, %ar)%Creset'
-	sta = status
+  co = checkout
+  st = status --short
+  ci = commit
+  br = branch
+  df = diff
+  dfs = diff --staged
+  logg = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(%an, %ar)%Creset'
+  sta = status
 [apply]
-	whitespace = nowarn
+  whitespace = nowarn
 [color]
-	ui = auto
+  ui = auto
 [branch "master"]
-	remote = origin
-	merge = refs/heads/master
+  remote = origin
+  merge = refs/heads/master
 [core]
-	autocrlf = false
-	safecrlf = true
-	editor = vim
-	excludesfile = ~/.gitignore_global
-[credential]
-	helper = osxkeychain
+  autocrlf = false
+  safecrlf = true
+  editor = vim
+  excludesfile = ~/.gitignore_global
 [push]
-	default = matching
+  default = matching
 [merge]
-	ff = false
+  ff = false
 [pull]
-	rebase = preserve
+  rebase = preserve
