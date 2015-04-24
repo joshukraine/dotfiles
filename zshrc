@@ -151,6 +151,8 @@ else
   PROMPT="${user}${pwd}${git} %% "
 fi
 
+setopt transient_rprompt # only show the rprompt on the current prompt
+
 RPROMPT='$(_rubyprompt)'
 # }}}
 
