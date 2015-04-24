@@ -124,15 +124,15 @@ function get_ruby_version() {
 
 # Prompt {{{
 ZSH_THEME_GIT_PROMPT_PREFIX=" ["
-ZSH_THEME_GIT_PROMPT_SUFFIX="]"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY=""
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}*"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#"
+ZSH_THEME_GIT_PROMPT_CLEAN="]"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+%{$fg[white]%}]"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}*%{$fg[white]%}]"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}]"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>%{$fg[white]%}]"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═%{$fg[white]%}]"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}]"
 
 local user='%{$fg[green]%}%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
