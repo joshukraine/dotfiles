@@ -59,6 +59,7 @@ After running `setup-mac.sh` there are still a few things that need to be done.
 * Restart your machine in order for some changes to take effect.
 * Install software from Mac App Store.
 * Set up iTerm 2 profile (see details below).
+* Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
 
 ### Setting up iTerm 2
 
@@ -95,11 +96,13 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 ...and make sure all your files (and *only* those files) are listed.
 
-5) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
+5) Create `~/.gitconfig.local` and `~/.zshrc.local` and add in your personal information. These files are sourced in `~/.gitconfig` and `~/.zshrc` respectively.
+
+6) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
 
 	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
 
-6) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
+7) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
 ### Some of my favorite dotfile repos
 
