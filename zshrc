@@ -123,21 +123,32 @@ function get_ruby_version() {
 
 
 # Prompt {{{
-ZSH_THEME_GIT_PROMPT_PREFIX=" ["
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
+
+# Get the name of the branch we are on
+# Adapted from git_prompt_info(), .oh-my-zsh/lib/git.zsh
+function my_git_branch() {
+  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    echo "${ref#refs/heads/}$(parse_git_dirty)"
+  fi
+}
+
+ZSH_THEME_GIT_PROMPT_PREFIX="["
+ZSH_THEME_GIT_PROMPT_SUFFIX="]"
 ZSH_THEME_GIT_PROMPT_DIRTY=""
-ZSH_THEME_GIT_PROMPT_CLEAN="]"
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+%{$fg[white]%}]"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}*%{$fg[white]%}]"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}]"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>%{$fg[white]%}]"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═%{$fg[white]%}]"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}]"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}*%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}"
 
 local user='%{$fg[green]%}%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
-local git='%{$fg[white]%}$(git_prompt_info)$(git_prompt_status)%{$reset_color%}'
+local git='%{$fg[white]%}[$(my_git_branch)$(git_prompt_status)]%{$reset_color%}'
 
 _rubyprompt() {
   if [ $COLUMNS -gt 80 ]; then
@@ -146,9 +157,9 @@ _rubyprompt() {
 }
 
 if [[ -n $SSH_CONNECTION ]]; then
-  PROMPT="${ssh_user}${pwd}${git} %% "
+  PROMPT="${ssh_user}${pwd} ${git} %% "
 else
-  PROMPT="${user}${pwd}${git} %% "
+  PROMPT="${user}${pwd} ${git} %% "
 fi
 
 setopt transient_rprompt # only show the rprompt on the current prompt
