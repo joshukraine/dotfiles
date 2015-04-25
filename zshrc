@@ -130,7 +130,7 @@ function my_git_branch() {
   if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    echo "${ref#refs/heads/}$(parse_git_dirty)"
+    echo " $ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
 
@@ -148,7 +148,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}"
 local user='%{$fg[green]%}%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
-local git='%{$fg[white]%}[$(my_git_branch)$(git_prompt_status)]%{$reset_color%}'
+local git='%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
 
 _rubyprompt() {
   if [ $COLUMNS -gt 80 ]; then
@@ -157,9 +157,9 @@ _rubyprompt() {
 }
 
 if [[ -n $SSH_CONNECTION ]]; then
-  PROMPT="${ssh_user}${pwd} ${git} %% "
+  PROMPT="${ssh_user}${pwd}${git} %% "
 else
-  PROMPT="${user}${pwd} ${git} %% "
+  PROMPT="${user}${pwd}${git} %% "
 fi
 
 setopt transient_rprompt # only show the rprompt on the current prompt
