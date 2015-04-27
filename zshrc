@@ -87,7 +87,7 @@ alias statpost='ps aux | ag postgres'
 
 # Homebrew
 alias bu='brew update'
-alias bg='brew upgrade'
+alias bg='brew upgrade --all'
 alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
