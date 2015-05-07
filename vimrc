@@ -169,7 +169,6 @@ Plugin 'ervandew/supertab'                " Use <Tab> for all your insert comple
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
-Plugin '0x0dea/vim-molasses'              " Punish yourself for inefficiently using Vim.          | https://github.com/0x0dea/vim-molasses
 
 " Ruby-specific
 Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -247,6 +246,9 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+
+" Delete all lines beginning with '#' regardless of leading space.
+map <leader>d :g/^\s*#.*/d
 
 " Run 'git blame' on a selection of code
 vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -351,9 +353,6 @@ let g:github_token = $GITHUB_TOKEN
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
-" vim-molasses settings
-let g:molasses_wait = '800'
-
 " }}}
 
 
@@ -427,11 +426,8 @@ let g:airline_right_sep=''
 
 " Colorscheme {{{
 
-" Light theme
-" set background=light
-" colorscheme solarized
-
-" Dark theme
-set background=dark
+" set background=light " light theme
+set background=dark " dark theme
 colorscheme solarized
+
 " }}}
