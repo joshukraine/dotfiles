@@ -248,7 +248,7 @@ map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
 
 " Delete all lines beginning with '#' regardless of leading space.
-map <leader>d :g/^\s*#.*/d
+map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 
 " Run 'git blame' on a selection of code
 vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
