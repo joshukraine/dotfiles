@@ -298,23 +298,46 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/dotfiles/iterm2</string>
+	<string>~/Desktop</string>
+	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSTableView Columns KeyBingingTable</key>
+	<array>
+		<data>
+		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
+		hAErATCG
+		</data>
+		<string>198</string>
+		<data>
+		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
+		hAErATGG
+		</data>
+		<string>302</string>
+	</array>
+	<key>NSTableView Hidden Columns KeyBingingTable</key>
+	<array/>
+	<key>NSTableView Sort Ordering KeyBingingTable</key>
+	<array/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1142 101 709 335 0 0 1920 1057 </string>
+	<string>791 227 961 317 0 0 1920 1057 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>804 275 924 485 0 0 1920 1057 </string>
+	<string>2474 418 924 485 1920 0 1920 1057 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>399 571 384 129 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 74 1914 983 0 0 1920 1057 </string>
+	<string>1920 534 730 523 1920 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2155 167 730 523 1920 0 1280 777 </string>
+	<string>149 288 1090 713 0 0 1280 1001 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>254 116 730 523 0 0 1280 1024 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>0 71 1280 930 0 0 1280 1001 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -535,7 +558,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -1040,9 +1063,13 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/joshukraine</string>
+			<string>/Users/joshukraine/code</string>
 		</dict>
 	</array>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>453206919.47209299</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>453730646.76768398</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1107,7 +1134,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-04-12T10:13:52Z</date>
+	<date>2015-05-20T08:57:09Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1155,6 +1182,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.0.0.20141103</string>
+	<string>2.1.1</string>
 </dict>
 </plist>
