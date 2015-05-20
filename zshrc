@@ -95,7 +95,7 @@ alias bc='brew cleanup'
 # rbenv
 alias rbu='cd $HOME/.rbenv/plugins/ruby-build && git pull && cd'
 alias rbv='rbenv versions'
-alias rbl='rbenv install -l'
+alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
 
 # Finder
 alias o='open . &'
