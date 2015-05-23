@@ -1,5 +1,5 @@
 # Exports {{{
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=$HOME/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export EDITOR="vim"
 export BUNDLER_EDITOR="vim"
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
