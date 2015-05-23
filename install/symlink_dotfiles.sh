@@ -41,3 +41,6 @@ for file in $files; do
   fancy_echo "-> Linking $DOTFILES_DIR/$file to $HOME/.$file..."
   ln -nfs "$DOTFILES_DIR/$file" "$HOME/.$file"
 done
+
+fancy_echo "-> Linking $DOTFILES_DIR/bin/tat to $HOME/.bin/tat..."
+ln -nfs "$DOTFILES_DIR/bin/tat" "$HOME/.bin/tat"
