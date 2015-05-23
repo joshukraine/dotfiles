@@ -195,6 +195,9 @@ Plugin 'tpope/vim-surround'               " Quoting/parenthesizing made simple  
 Plugin 'tpope/vim-rails'                  " Ruby on Rails power tools                             | https://github.com/tpope/vim-rails
 Plugin 'tpope/vim-ragtag'                 " HTML/XML mappings                                     | https://github.com/tpope/vim-ragtag
 Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
+Plugin 'tpope/vim-rake'                   " Extended funtionality for rails.vim                   | https://github.com/tpope/vim-rake
+Plugin 'tpope/vim-bundler'                " Vim goodies for Bundler, rails.vim, rake.vim          | https://github.com/tpope/vim-bundler
+
 
 " Related to testing & tmux
 Plugin 'benmills/vimux'                   " Vim plugin to interact with tmux                      | https://github.com/benmills/vimux
@@ -253,11 +256,9 @@ map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 " Run 'git blame' on a selection of code
 vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-" Edit another file in the same directory as the current file
-" uses expression to extract path from current file's path
-map <leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-map <leader>- :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
-map <leader>vn :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
 
 " Reminders :)
 nnoremap <Left> :echoe "Use h"<CR>
@@ -405,6 +406,9 @@ autocmd VimEnter * nunmap <leader>hs
 " Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
 autocmd VimEnter * nunmap <leader>bs
 autocmd VimEnter * nunmap <leader>bv
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
 
 " }}}
 
