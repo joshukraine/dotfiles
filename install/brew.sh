@@ -2,8 +2,11 @@
 
 brew update
 
+brew_tap 'Goles/battery'
+
 brew_install_or_upgrade 'ansible'
 brew_install_or_upgrade 'bash-completion'
+brew_install_or_upgrade 'battery'
 brew_install_or_upgrade 'dockutil'
 brew_install_or_upgrade 'figlet'
 brew_install_or_upgrade 'htop-osx'
