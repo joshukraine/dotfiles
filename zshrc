@@ -25,6 +25,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Vim specific
 alias vi="vim"
+alias vir="vim -R"
 alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
 
 # Jump to quick edits
@@ -95,7 +96,6 @@ alias bd='brew doctor'
 alias bc='brew cleanup'
 
 # rbenv
-alias rbu='cd $HOME/.rbenv/plugins/ruby-build && git pull && cd'
 alias rbv='rbenv versions'
 alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
 
@@ -107,9 +107,6 @@ alias upc='softwareupdate -l'
 
 # Download and install OS X updates
 alias upd='softwareupdate -i -a'
-
-# Speedtest
-alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 # }}}
 
 
