@@ -92,7 +92,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 17)...
 
-	files="gemrc gitignore_global gitconfig hushlogin tmux.conf railsrc vimrc zshrc"
+	files="gemrc gitignore_global gitconfig hushlogin tmux.conf vimrc zshrc"
 
 ...and make sure all your files (and *only* those files) are listed.
 
