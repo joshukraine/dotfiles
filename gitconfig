@@ -13,6 +13,7 @@
   whitespace = nowarn
 [color]
   ui = auto
+  ignorecase = false
 [branch "master"]
   remote = origin
   merge = refs/heads/master
