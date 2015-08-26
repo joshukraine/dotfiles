@@ -19,6 +19,9 @@ Reboot, check for additional updates, then reinstall, reboot if needed.
 	sudo softwareupdate -l
 	sudo softwareupdate -i -a
 
+Add [`.gitconfig.local`](https://github.com/joshukraine/dotfiles/blob/master/gitconfig.local.example) to your home directory. (Without this, Homebrew installs will fail since Git won't know who you are.)
+
+
 ### Installation
 
 To install with a one-liner, run this:
