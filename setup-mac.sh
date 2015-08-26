@@ -111,7 +111,7 @@ fi
 # 1. Provision with my fork of Laptop
 ################################################################################
 
-fancy_echo "$divider Step 2: Invoking my fork of thoughtbot's Laptop script..."
+fancy_echo "$divider Step 1: Invoking my fork of thoughtbot's Laptop script..."
 
 curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/master/mac
 sh mac 2>&1 | tee ~/laptop.log
@@ -120,7 +120,7 @@ sh mac 2>&1 | tee ~/laptop.log
 # 2. Install oh-my-zsh
 ################################################################################
 
-fancy_echo "$divider Step 1: Installing oh-my-zsh..."
+fancy_echo "$divider Step 2: Installing oh-my-zsh..."
 
 if [ -d "$HOME/.oh-my-zsh" ]; then
   rm -rf $HOME/.oh-my-zsh
