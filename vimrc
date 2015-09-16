@@ -209,7 +209,8 @@ Plugin 'skalnik/vim-vroom'                " A vim plugin for running your Ruby t
 Plugin 'MarcWeber/vim-addon-mw-utils'     " [vim-snipmate dependency]                             | https://github.com/MarcWeber/vim-addon-mw-utils
 Plugin 'tomtom/tlib_vim'                  " [vim-snipmate dependency]                             | https://github.com/tomtom/tlib_vim
 Plugin 'garbas/vim-snipmate'              " Textmate-style snippet behavior for vim               | https://github.com/garbas/vim-snipmate
-Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
+" Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
+Plugin 'joshukraine/vim-snippets'         " My customized vim-snippets                            | https://github.com/joshukraine/vim-snippets
 
 " Other
 Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim                          | https://github.com/kchmck/vim-coffee-script
@@ -382,9 +383,12 @@ autocmd FileType markdown setlocal spell
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
 
-" Close all folds when opening a new buffer
+" Fold settings
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
+autocmd BufRead *.rb setlocal foldmethod=syntax
+autocmd BufRead *.rb normal zR
+set foldnestmax=3
 
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
