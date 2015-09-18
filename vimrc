@@ -30,11 +30,11 @@ set incsearch
 " Highlight search matches
 set hlsearch
 
-" Ignore case in search
-set smartcase
-
-" Make sure any searches /searchPhrase doesn't need the \c escape character
+" Ignore case in search if term(s) are lowercase
 set ignorecase
+
+" Search with case sensitivity if term(s) are upper or mixed case
+set smartcase
 
 " A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not
 " currently loaded in a window.
@@ -257,9 +257,13 @@ map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 " Run 'git blame' on a selection of code
 vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-" zoom a vim pane, <C-w>= to re-balance
+" zoom a vim pane like in tmux
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+" zoom back out
 nnoremap <leader>= :wincmd =<cr>
+
+" Force vim to use 'very magic' mode for regex searches
+nnoremap / /\v
 
 " Reminders :)
 nnoremap <Left> :echoe "Use h"<CR>
@@ -438,5 +442,8 @@ let g:airline_right_sep=''
 " set background=light " light theme
 set background=dark " dark theme
 colorscheme solarized
+
+highlight clear IncSearch
+highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 
 " }}}
