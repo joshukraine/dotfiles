@@ -133,7 +133,7 @@ set textwidth=80
 set colorcolumn=+1
 
 " Keep focus split large, others minimal
-set winwidth=84
+set winwidth=90
 set winheight=7
 set winminheight=7
 set winheight=999
