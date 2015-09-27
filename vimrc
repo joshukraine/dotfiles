@@ -363,7 +363,7 @@ let g:gist_open_browser_after_post = 1
 
 " Key mappings for dragvisuals.vim
 
-runtime bundle/dragvisuals/plugin/dragvisuals.vim
+runtime bundle/dragvisuals/plugins/dragvisuals.vim
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
