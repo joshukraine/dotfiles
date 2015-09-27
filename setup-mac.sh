@@ -80,6 +80,9 @@ COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 DOTFILES_DIR=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
+# Change this value for testing installs of feature branches.
+DOTFILES_BRANCH="master"
+
 ################################################################################
 # Make sure we're on a Mac before continuing
 ################################################################################
@@ -144,7 +147,7 @@ fi
 fancy_echo "Cloning joshukraine/dotfiles repo to ${DOTFILES_DIR} ..."
 
 cd $HOME
-git clone https://github.com/joshukraine/dotfiles.git $DOTFILES_DIR
+git clone https://github.com/joshukraine/dotfiles.git -b $DOTFILES_BRANCH $DOTFILES_DIR
 source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 
 fancy_echo "Dotfiles setup complete!"
