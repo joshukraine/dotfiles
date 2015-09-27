@@ -44,3 +44,8 @@ done
 
 fancy_echo "-> Linking $DOTFILES_DIR/bin/tat to $HOME/.bin/tat..."
 ln -nfs "$DOTFILES_DIR/bin/tat" "$HOME/.bin/tat"
+
+fancy_echo "-> Installing xkbswitch utility..."
+git clone https://github.com/joshukraine/xkbswitch-macosx
+cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin
+rm -rf xkbswitch-macosx
