@@ -45,6 +45,7 @@ When you invoke `setup-mac.sh`, this is what it does in a nutshell:
 * Run my fork of thoughtbot's [Laptop script](https://github.com/joshukraine/laptop). This is a provisioning script which installs lots of goodies like Homebrew, rbenv, postgres, etc.
 * Set up some basic directories in `$HOME`.
 * Symlink dotfiles to `$HOME`.
+* Install [xkbswitch](https://github.com/joshukraine/xkbswitch-macosx) for displaying current language input source in tmux status bar.
 * Install Ukrainian spell-check dictionaries.
 * Install several fixed-width fonts.
 * Install Vundle and plugins for vim.
@@ -61,6 +62,7 @@ After running `setup-mac.sh` there are still a few things that need to be done.
 * Install software from Mac App Store.
 * Set up iTerm 2 profile (see details below).
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
+* Set up desired OS X keyboard shortcuts (see list below)
 
 ### Setting up iTerm 2
 
@@ -71,6 +73,18 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 3. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 5. Restart iTerm 2.
+
+### My OS X Keyboard Shortcuts
+
+These are the settings I currently use for custom OS X keyboard shortcuts:
+
+* Alfred: `⌘Space`
+* Spotlight search: `⌘⇧Space`
+* Switch input source: `⌃⇧Space`
+* Fantastical: `⌥⌘Space`
+* Things: `⌃Space`
+* iTerm hotkey window: `⌥Space`
+
 
 ### How to personalize these dotfiles for your own use.
 
