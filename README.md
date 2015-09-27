@@ -100,19 +100,19 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 2) Review [`setup-mac.sh`](https://github.com/joshukraine/dotfiles/blob/master/setup-mac.sh) and determine which sections you want to use.
 
-* Section 1: Use `oh-my-zsh`? Prefer to use bash instead?
-* Section 2: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
-* Section 3: Update the `git clone...` URL to point to your fork.
+* Section 1: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
+* Section 2: Use `oh-my-zsh`? Prefer to use bash instead?
+* Section 3: The dotfiles. Update the `git clone...` URL to point to your fork.
 * Section 4: Install Ukrainian dictionaries?
 * Section 5: Install fixed-width fonts?
 * Section 6: Use Vundle? If you prefer a different plugin manager, you can add the code for that in a file called `install/<my-plugin-manager>.sh` and then update the `source` path in this section.
-* Section 7: Check the list of [Homebrew](http://brew.sh/) packages in `install/brew.sh`. Add or remove packages to suite your needs.
+* Section 7: Check the list of [Homebrew](http://brew.sh/) formulae in `install/brew.sh`. Add or remove packages to suite your needs.
 * Section 8: Check the list of [Cask](http://caskroom.io/) apps in `install/brew-cask.sh`. Add or remove apps to suite your needs.
 * Section 9: Review general OS X settings in `osx/defaults.sh` and adjust as needed. `osx/dock.sh` ensures that the dock contains only the apps you select. Adjust as desired. (NOTE: `dock.sh` depends on the `dockutil` package installed by Homebrew in `brew.sh`.)
 
 3) Customize the dotfiles themselves with your own prefs. Add or remove dotfiles as desired. Since the files will later be symlinked into place, there is no need to add the leading dot to the filenames. (e.g. use `vimrc`, not `.vimrc`)
 
-4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 17)...
+4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 18)...
 
 	files="gemrc gitignore_global gitconfig hushlogin tmux.conf vimrc zshrc"
 
