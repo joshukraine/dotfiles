@@ -6,7 +6,9 @@
 # This script installs Ukrainian dictionary files which support system-wide
 # spell checking for OS X.
 #
-# Reference: http://apple.stackexchange.com/a/11842/75491
+# Reference:
+# * http://apple.stackexchange.com/a/11842/75491
+# * http://extensions.services.openoffice.org/en/project/ukrainian-dictionary
 ################################################################################
 
 set -e # Terminate script if anything exits with a non-zero value
