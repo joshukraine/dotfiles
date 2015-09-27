@@ -4,6 +4,7 @@ These are the dotfiles and general preferences I use on my primary machine runni
 
 **Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux).**
 
+
 ### Prerequisites
 
 Make sure your software is up to date:
@@ -18,6 +19,7 @@ Reboot, check for additional updates, then reinstall, reboot if needed.
 
 	sudo softwareupdate -l
 	sudo softwareupdate -i -a
+
 
 ### Installation
 
@@ -35,6 +37,7 @@ sh setup-mac.sh 2>&1 | tee ~/setup.log
 ```
 
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
+
 
 ### What does it do?
 
@@ -54,6 +57,7 @@ When you invoke `setup-mac.sh`, this is what it does in a nutshell:
 * Set a variety of OS X defaults.
 * Customize the OS X dock.
 
+
 ### Post-install Tasks
 
 After running `setup-mac.sh` there are still a few things that need to be done.
@@ -63,6 +67,7 @@ After running `setup-mac.sh` there are still a few things that need to be done.
 * Set up iTerm 2 profile (see details below).
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
 * Set up desired OS X keyboard shortcuts (see list below)
+
 
 ### Setting up iTerm 2
 
@@ -74,16 +79,17 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 5. Restart iTerm 2.
 
-### My OS X Keyboard Shortcuts
 
-These are the settings I currently use for custom OS X keyboard shortcuts:
+### OS X Keyboard Shortcuts
 
-* Alfred: `⌘Space`
-* Spotlight search: `⌘⇧Space`
-* Switch input source: `⌃⇧Space`
-* Fantastical: `⌥⌘Space`
-* Things: `⌃Space`
-* iTerm hotkey window: `⌥Space`
+These are my (current) primary OS X keyboard shortcuts:
+
+* Alfred: &#8984;Space
+* Spotlight search: &#8984;&#8679;Space
+* Switch input source: &#8963;&#8679;Space
+* Fantastical: &#8997;&#8984;Space
+* Things: &#8963;Space
+* iTerm hotkey window: &#8997;Space
 
 
 ### How to personalize these dotfiles for your own use.
@@ -120,6 +126,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 7) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
+
 ### Some of my favorite dotfile repos
 
 * Pro Vim (https://github.com/Integralist/ProVim)
@@ -136,6 +143,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 * Zach Holman (https://github.com/holman/dotfiles/)
 * Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
 * Paul Irish (https://github.com/paulirish/dotfiles)
+
 
 ### Helpful web resources on dotfiles, et al.
 
