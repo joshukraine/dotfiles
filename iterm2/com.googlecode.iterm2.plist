@@ -331,7 +331,7 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>399 571 384 129 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 556 1920 501 0 0 1920 1057 </string>
+	<string>0 276 1280 501 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>891 313 730 523 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1770,7 +1770,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.12346293032169342</real>
+			<real>0.066339217126369476</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -1796,7 +1796,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453206919.47209299</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>464954413.85081601</real>
+	<real>465040814.870372</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
