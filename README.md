@@ -1,6 +1,9 @@
 # My Dotfiles
 
-These are the dotfiles and general preferences I use on my primary machine running Mac OS X, currently 10.10 Yosemite. The `setupmac` script is very specific to OS X.
+These are the dotfiles and general preferences I use on my primary machine running OS X. The `setupmac` script is very specific to the Mac platform. It has been successfully tested on the following versions of OS X:
+
+* Yosemite (10.10)
+* El Capitan (10.11)
 
 **Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux).**
 
@@ -114,7 +117,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 18)...
 
-	files="gemrc gitignore_global gitconfig hushlogin tmux.conf vimrc zshrc"
+	files="gemrc gitconfig gitignore_global hushlogin tmux.conf vimrc zshrc"
 
 ...and make sure all your files (and *only* those files) are listed.
 
