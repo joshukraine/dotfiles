@@ -71,7 +71,10 @@ defaults write com.apple.helpviewer DevMode -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable guest login -- NOTE: This doesn't actually work due to Parental Controls bug.
-# sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
+
+# Activate audible chime when power cable is plugged in.
+defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
 
 
 ###############################################################################
@@ -145,7 +148,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Show icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
