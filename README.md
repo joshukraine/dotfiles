@@ -1,6 +1,6 @@
 # My Dotfiles
 
-These are the dotfiles and general preferences I use on my primary machine running Mac OS X, currently 10.10 Yosemite. The `setup-mac.sh` script is very specific to OS X.
+These are the dotfiles and general preferences I use on my primary machine running Mac OS X, currently 10.10 Yosemite. The `setupmac` script is very specific to OS X.
 
 **Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux).**
 
@@ -26,14 +26,14 @@ Reboot, check for additional updates, then reinstall, reboot if needed.
 To install with a one-liner, run this:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setupmac && sh setupmac 2>&1 | tee ~/setup.log
 ```
 
 Want to read through the script first?
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh
-less setup-mac.sh
-sh setup-mac.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setupmac
+less setupmac
+sh setupmac 2>&1 | tee ~/setup.log
 ```
 
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
@@ -41,7 +41,7 @@ WARNING: This script will ask for your admin password multiple times. You'll nee
 
 ### What does it do?
 
-When you invoke `setup-mac.sh`, this is what it does in a nutshell:
+When you invoke `setupmac`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
@@ -60,7 +60,7 @@ When you invoke `setup-mac.sh`, this is what it does in a nutshell:
 
 ### Post-install Tasks
 
-After running `setup-mac.sh` there are still a few things that need to be done.
+After running `setupmac` there are still a few things that need to be done.
 
 * Restart your machine in order for some changes to take effect.
 * Install software from Mac App Store.
@@ -98,7 +98,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 1) Fork this repo and clone your new fork to your local machine.
 
-2) Review [`setup-mac.sh`](https://github.com/joshukraine/dotfiles/blob/master/setup-mac.sh) and determine which sections you want to use.
+2) Review [`setupmac`](https://github.com/joshukraine/dotfiles/blob/master/setupmac) and determine which sections you want to use.
 
 * Section 1: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
 * Section 2: Use `oh-my-zsh`? Prefer to use bash instead?
@@ -122,7 +122,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 6) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
 
-	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
+	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/setupmac && sh setupmac 2>&1 | tee ~/setup.log
 
 7) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
