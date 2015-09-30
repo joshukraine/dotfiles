@@ -21,16 +21,27 @@ fancy_echo() { # Thank you, thoughtbot. :)
 }
 
 ###############################################################################
+# Set custom variables                                                        #
+###############################################################################
+
+COMPUTER_NAME="Joshua's MacBook Pro"
+HOST_NAME="joshuas-mbp"
+LOCAL_HOST_NAME="joshuas-mbp"
+NET_BIOS_NAME="joshuas-mbp"
+TIME_ZONE="Europe/Kiev"
+
+
+###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
 
 fancy_echo "- Setting General UI/UX defaults..."
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "Joshua's MacBook Pro"
-sudo scutil --set HostName "joshuas-mbp"
-sudo scutil --set LocalHostName "joshuas-mbp"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "joshuas-mbp"
+sudo scutil --set ComputerName $COMPUTER_NAME
+sudo scutil --set HostName $HOST_NAME
+sudo scutil --set LocalHostName $LOCAL_HOST_NAME
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $NET_BIOS_NAME
 
 # Show scrollbars only when scrolling
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
@@ -62,6 +73,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # Disable guest login -- NOTE: This doesn't actually work due to Parental Controls bug.
 # sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
 
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
@@ -70,6 +82,7 @@ fancy_echo "- Setting SSD-specific tweaks..."
 
 # Disable the sudden motion sensor as it’s not useful for SSDs
 sudo pmset -a sms 0
+
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -109,11 +122,12 @@ defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
 defaults write NSGlobalDomain AppleMetricUnits -bool false
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
-systemsetup -settimezone "Europe/Kiev" > /dev/null
+systemsetup -settimezone $TIME_ZONE > /dev/null
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
+
 
 ###############################################################################
 # Finder                                                                      #
@@ -174,6 +188,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+
 ###############################################################################
 # Dock                                                                        #
 ###############################################################################
@@ -198,6 +213,7 @@ defaults write com.apple.dock showhidden -bool true
 # Set the icon size of Dock items to 72 pixels
 defaults write com.apple.dock tilesize -int 72
 
+
 ###############################################################################
 # Dashboard & Spaces                                                          #
 ###############################################################################
@@ -215,6 +231,7 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
+
 
 ###############################################################################
 # Hot corners                                                                 #
@@ -245,6 +262,7 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom left screen corner → Start screen saver
 defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-bl-modifier -int 0
+
 
 ###############################################################################
 # Safari & WebKit                                                             #
@@ -298,6 +316,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
@@ -328,6 +347,7 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 # Mark all messages as read when opening a conversation
 defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 
+
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################
@@ -339,6 +359,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable local Time Machine backups
 hash tmutil &> /dev/null && sudo tmutil disablelocal
+
 
 ###############################################################################
 # Terminal.app                                                                #
@@ -352,6 +373,7 @@ defaults write com.apple.terminal StringEncodings -array 4
 # Use "Pro" theme (black background color)
 defaults write com.apple.terminal "Default Window Settings" -string "Pro"
 defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
+
 
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
