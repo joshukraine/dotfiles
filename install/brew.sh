@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # In addition to the formulae installed in this script, my fork of thoughtbot's
 # Laptop script first installs the following:
