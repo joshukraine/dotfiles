@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 dockutil --no-restart --remove all
 dockutil --no-restart --add "/Applications/Launchpad.app"

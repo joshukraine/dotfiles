@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ################################################################################
-# install_uk_dictionary.sh
+# install_uk_dictionary
 #
 # This script installs Ukrainian dictionary files which support system-wide
 # spell checking for OS X.

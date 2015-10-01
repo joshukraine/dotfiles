@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ################################################################################
-# symlink_dotfiles.sh
+# symlink_dotfiles
 #
 # This script backs up any old dotfiles on the system, and symlinks the new ones
 # to their proper place in the home folder.

@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ################################################################################
-# setup-mac.sh
+# setupmac
 #
 # This script is intended to set up a new Mac computer with my dotfiles and
 # other development preferences.
 ################################################################################
+
 
 ################################################################################
 # First, some helpful functions borrowed from Laptop. Thank you, thoughtbot. :)
@@ -67,6 +68,7 @@ brew_launchctl_restart() {
   launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
 }
 
+
 ################################################################################
 # Next, a little more setup...
 ################################################################################
@@ -80,8 +82,12 @@ COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 DOTFILES_DIR=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
+# Change this if you are using your own fork
+DOTFILES_REPO_URL="https://github.com/joshukraine/dotfiles.git"
+
 # Change this value for testing installs of feature branches.
 DOTFILES_BRANCH="master"
+
 
 ################################################################################
 # Make sure we're on a Mac before continuing
@@ -98,6 +104,7 @@ only supports Mac and Linux. Exiting..."
   exit 1
 fi
 
+
 ################################################################################
 # Check for presence of command line tools if OS X
 ################################################################################
@@ -110,6 +117,7 @@ you can try running this script again."
   exit 1
 fi
 
+
 ################################################################################
 # 1. Provision with my fork of Laptop
 ################################################################################
@@ -118,6 +126,7 @@ fancy_echo "$divider Step 1: Invoking my fork of thoughtbot's Laptop script..."
 
 curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/master/mac
 sh mac 2>&1 | tee ~/laptop.log
+
 
 ################################################################################
 # 2. Install oh-my-zsh
@@ -130,6 +139,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
 fi
 
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
 
 ################################################################################
 # 3. Setup dotfiles
@@ -144,13 +154,14 @@ if [[ -d $DOTFILES_DIR ]]; then
   rm -rf $DOTFILES_DIR
 fi
 
-fancy_echo "Cloning joshukraine/dotfiles repo to ${DOTFILES_DIR} ..."
+fancy_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 
 cd $HOME
-git clone https://github.com/joshukraine/dotfiles.git -b $DOTFILES_BRANCH $DOTFILES_DIR
-source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
+git clone $DOTFILES_REPO_URL -b $DOTFILES_BRANCH $DOTFILES_DIR
+source "$DOTFILES_DIR/install/symlink_dotfiles"
 
 fancy_echo "Dotfiles setup complete!"
+
 
 ################################################################################
 # 4. Install Ukrainian spell-check dictionaries
@@ -158,9 +169,10 @@ fancy_echo "Dotfiles setup complete!"
 
 fancy_echo "$divider Step 4: Installing Ukrainian spell-check dictionaries..."
 
-source "$DOTFILES_DIR/install/install_uk_dictionary.sh"
+source "$DOTFILES_DIR/install/install_uk_dictionary"
 
 fancy_echo "Dictionaries installed!"
+
 
 ################################################################################
 # 5. Install Powerline-patched fonts
@@ -178,14 +190,16 @@ cd $HOME
 rm -rf $HOME/src/fonts
 fancy_echo "Done!"
 
+
 ################################################################################
 # 6. Install Vundle and vim plugins
 ################################################################################
 
 fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
 
-source "$DOTFILES_DIR/install/vundle.sh"
+source "$DOTFILES_DIR/install/vundle"
 fancy_echo "Done!"
+
 
 ################################################################################
 # 7. Install extra Homebrew packages
@@ -193,8 +207,9 @@ fancy_echo "Done!"
 
 fancy_echo "$divider Step 7: Installing extra Homebrew formulae..."
 
-source "$DOTFILES_DIR/install/brew.sh"
+source "$DOTFILES_DIR/install/brew"
 fancy_echo "Done!"
+
 
 ################################################################################
 # 8. Install Cask and related software
@@ -204,8 +219,9 @@ fancy_echo "$divider Step 8: Installing Cask and related software..."
 
 brew_tap 'caskroom/cask'
 brew_install_or_upgrade 'brew-cask'
-source "$DOTFILES_DIR/install/brew-cask.sh"
+source "$DOTFILES_DIR/install/brew-cask"
 fancy_echo "Done!"
+
 
 ################################################################################
 # 9. Set OS X preferences
@@ -213,8 +229,8 @@ fancy_echo "Done!"
 
 fancy_echo "$divider Step 9: Setting OS X preferences..."
 
-source "$DOTFILES_DIR/osx/defaults.sh"
-source "$DOTFILES_DIR/osx/dock.sh"
+source "$DOTFILES_DIR/osx/defaults"
+source "$DOTFILES_DIR/osx/dock"
 fancy_echo "OS X prefs set successfully. Some changes may require a restart to take effect."
 
 echo ""

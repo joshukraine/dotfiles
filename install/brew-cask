@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 apps=(
     1password
@@ -23,7 +23,6 @@ apps=(
     mactracker
     namebench
     screenflick
-    silverlight
     skype
     teamviewer
     things

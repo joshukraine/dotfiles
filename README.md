@@ -1,6 +1,9 @@
 # My Dotfiles
 
-These are the dotfiles and general preferences I use on my primary machine running Mac OS X, currently 10.10 Yosemite. The `setup-mac.sh` script is very specific to OS X.
+These are the dotfiles and general preferences I use on my primary machine running OS X. The `setupmac` script is very specific to the Mac platform. It has been successfully tested on the following versions of OS X:
+
+* Yosemite (10.10)
+* El Capitan (10.11)
 
 **Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux).**
 
@@ -26,14 +29,14 @@ Reboot, check for additional updates, then reinstall, reboot if needed.
 To install with a one-liner, run this:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setupmac && sh setupmac 2>&1 | tee ~/setup.log
 ```
 
 Want to read through the script first?
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh
-less setup-mac.sh
-sh setup-mac.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setupmac
+less setupmac
+sh setupmac 2>&1 | tee ~/setup.log
 ```
 
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
@@ -41,7 +44,7 @@ WARNING: This script will ask for your admin password multiple times. You'll nee
 
 ### What does it do?
 
-When you invoke `setup-mac.sh`, this is what it does in a nutshell:
+When you invoke `setupmac`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
@@ -60,7 +63,7 @@ When you invoke `setup-mac.sh`, this is what it does in a nutshell:
 
 ### Post-install Tasks
 
-After running `setup-mac.sh` there are still a few things that need to be done.
+After running `setupmac` there are still a few things that need to be done.
 
 * Restart your machine in order for some changes to take effect.
 * Install software from Mac App Store.
@@ -98,7 +101,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 1) Fork this repo and clone your new fork to your local machine.
 
-2) Review [`setup-mac.sh`](https://github.com/joshukraine/dotfiles/blob/master/setup-mac.sh) and determine which sections you want to use.
+2) Review [`setupmac`](https://github.com/joshukraine/dotfiles/blob/master/setupmac) and determine which sections you want to use.
 
 * Section 1: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
 * Section 2: Use `oh-my-zsh`? Prefer to use bash instead?
@@ -106,15 +109,15 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 * Section 4: Install Ukrainian dictionaries?
 * Section 5: Install fixed-width fonts?
 * Section 6: Use Vundle? If you prefer a different plugin manager, you can add the code for that in a file called `install/<my-plugin-manager>.sh` and then update the `source` path in this section.
-* Section 7: Check the list of [Homebrew](http://brew.sh/) formulae in `install/brew.sh`. Add or remove packages to suite your needs.
-* Section 8: Check the list of [Cask](http://caskroom.io/) apps in `install/brew-cask.sh`. Add or remove apps to suite your needs.
-* Section 9: Review general OS X settings in `osx/defaults.sh` and adjust as needed. `osx/dock.sh` ensures that the dock contains only the apps you select. Adjust as desired. (NOTE: `dock.sh` depends on the `dockutil` package installed by Homebrew in `brew.sh`.)
+* Section 7: Check the list of [Homebrew](http://brew.sh/) formulae in `install/brew`. Add or remove packages to suite your needs.
+* Section 8: Check the list of [Cask](http://caskroom.io/) apps in `install/brew-cask`. Add or remove apps to suite your needs.
+* Section 9: Review general OS X settings in `osx/defaults` and adjust as needed. `osx/dock` ensures that the dock contains only the apps you select. Adjust as desired. (NOTE: `dock` depends on the `dockutil` package installed by Homebrew in `brew`.)
 
 3) Customize the dotfiles themselves with your own prefs. Add or remove dotfiles as desired. Since the files will later be symlinked into place, there is no need to add the leading dot to the filenames. (e.g. use `vimrc`, not `.vimrc`)
 
-4) Update `symlink_dotfiles.sh` to match your dotfiles. Find the following line of code (around line 18)...
+4) Update `symlink_dotfiles` to match your dotfiles. Find the following line of code (around line 18)...
 
-	files="gemrc gitignore_global gitconfig hushlogin tmux.conf vimrc zshrc"
+	files="gemrc gitconfig gitignore_global hushlogin tmux.conf vimrc zshrc"
 
 ...and make sure all your files (and *only* those files) are listed.
 
@@ -122,7 +125,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 6) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
 
-	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
+	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/setupmac && sh setupmac 2>&1 | tee ~/setup.log
 
 7) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
