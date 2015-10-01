@@ -7,9 +7,6 @@ apps=(
     atom
     bartender
     carbon-copy-cloner
-    cleanmymac
-    crashplan
-    doxie
     dropbox
     fantastical
     firefox
@@ -24,7 +21,6 @@ apps=(
     namebench
     screenflick
     skype
-    teamviewer
     things
     vagrant
     virtualbox
@@ -32,3 +28,9 @@ apps=(
 )
 
 brew cask install ${apps[@]} --appdir=/Applications
+
+# Currently not installing...
+# cleanmymac
+# crashplan
+# doxie
+# teamviewer
