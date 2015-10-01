@@ -7,6 +7,7 @@
 # other development preferences.
 ################################################################################
 
+
 ################################################################################
 # First, some helpful functions borrowed from Laptop. Thank you, thoughtbot. :)
 ################################################################################
@@ -67,6 +68,7 @@ brew_launchctl_restart() {
   launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
 }
 
+
 ################################################################################
 # Next, a little more setup...
 ################################################################################
@@ -102,6 +104,7 @@ only supports Mac and Linux. Exiting..."
   exit 1
 fi
 
+
 ################################################################################
 # Check for presence of command line tools if OS X
 ################################################################################
@@ -114,6 +117,7 @@ you can try running this script again."
   exit 1
 fi
 
+
 ################################################################################
 # 1. Provision with my fork of Laptop
 ################################################################################
@@ -122,6 +126,7 @@ fancy_echo "$divider Step 1: Invoking my fork of thoughtbot's Laptop script..."
 
 curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/master/mac
 sh mac 2>&1 | tee ~/laptop.log
+
 
 ################################################################################
 # 2. Install oh-my-zsh
@@ -134,6 +139,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
 fi
 
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
 
 ################################################################################
 # 3. Setup dotfiles
@@ -156,6 +162,7 @@ source "$DOTFILES_DIR/install/symlink_dotfiles"
 
 fancy_echo "Dotfiles setup complete!"
 
+
 ################################################################################
 # 4. Install Ukrainian spell-check dictionaries
 ################################################################################
@@ -165,6 +172,7 @@ fancy_echo "$divider Step 4: Installing Ukrainian spell-check dictionaries..."
 source "$DOTFILES_DIR/install/install_uk_dictionary"
 
 fancy_echo "Dictionaries installed!"
+
 
 ################################################################################
 # 5. Install Powerline-patched fonts
@@ -182,6 +190,7 @@ cd $HOME
 rm -rf $HOME/src/fonts
 fancy_echo "Done!"
 
+
 ################################################################################
 # 6. Install Vundle and vim plugins
 ################################################################################
@@ -191,6 +200,7 @@ fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
 source "$DOTFILES_DIR/install/vundle"
 fancy_echo "Done!"
 
+
 ################################################################################
 # 7. Install extra Homebrew packages
 ################################################################################
@@ -199,6 +209,7 @@ fancy_echo "$divider Step 7: Installing extra Homebrew formulae..."
 
 source "$DOTFILES_DIR/install/brew"
 fancy_echo "Done!"
+
 
 ################################################################################
 # 8. Install Cask and related software
@@ -210,6 +221,7 @@ brew_tap 'caskroom/cask'
 brew_install_or_upgrade 'brew-cask'
 source "$DOTFILES_DIR/install/brew-cask"
 fancy_echo "Done!"
+
 
 ################################################################################
 # 9. Set OS X preferences
