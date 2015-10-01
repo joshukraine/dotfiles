@@ -152,7 +152,7 @@ fancy_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 
 cd $HOME
 git clone $DOTFILES_REPO_URL -b $DOTFILES_BRANCH $DOTFILES_DIR
-source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
+source "$DOTFILES_DIR/install/symlink_dotfiles"
 
 fancy_echo "Dotfiles setup complete!"
 
@@ -162,7 +162,7 @@ fancy_echo "Dotfiles setup complete!"
 
 fancy_echo "$divider Step 4: Installing Ukrainian spell-check dictionaries..."
 
-source "$DOTFILES_DIR/install/install_uk_dictionary.sh"
+source "$DOTFILES_DIR/install/install_uk_dictionary"
 
 fancy_echo "Dictionaries installed!"
 
@@ -188,7 +188,7 @@ fancy_echo "Done!"
 
 fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
 
-source "$DOTFILES_DIR/install/vundle.sh"
+source "$DOTFILES_DIR/install/vundle"
 fancy_echo "Done!"
 
 ################################################################################
@@ -197,7 +197,7 @@ fancy_echo "Done!"
 
 fancy_echo "$divider Step 7: Installing extra Homebrew formulae..."
 
-source "$DOTFILES_DIR/install/brew.sh"
+source "$DOTFILES_DIR/install/brew"
 fancy_echo "Done!"
 
 ################################################################################
@@ -208,7 +208,7 @@ fancy_echo "$divider Step 8: Installing Cask and related software..."
 
 brew_tap 'caskroom/cask'
 brew_install_or_upgrade 'brew-cask'
-source "$DOTFILES_DIR/install/brew-cask.sh"
+source "$DOTFILES_DIR/install/brew-cask"
 fancy_echo "Done!"
 
 ################################################################################
@@ -217,8 +217,8 @@ fancy_echo "Done!"
 
 fancy_echo "$divider Step 9: Setting OS X preferences..."
 
-source "$DOTFILES_DIR/osx/defaults.sh"
-source "$DOTFILES_DIR/osx/dock.sh"
+source "$DOTFILES_DIR/osx/defaults"
+source "$DOTFILES_DIR/osx/dock"
 fancy_echo "OS X prefs set successfully. Some changes may require a restart to take effect."
 
 echo ""
