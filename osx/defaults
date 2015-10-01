@@ -71,7 +71,7 @@ defaults write com.apple.helpviewer DevMode -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable guest login -- NOTE: This doesn't actually work due to Parental Controls bug.
-sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
+# sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
 
 # Activate audible chime when power cable is plugged in.
 defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
