@@ -36,7 +36,6 @@ alias ev='vim ~/.vimrc'
 # General UNIX
 alias mv='mv -iv'
 alias cp='cp -iv'
-alias rm='rm -iv'
 alias df='df -h'
 alias du='du -h'
 alias mkdir='mkdir -pv'
