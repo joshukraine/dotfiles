@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ################################################################################
-# setupmac
+# bootstrap
 #
 # This script is intended to set up a new Mac computer with my dotfiles and
 # other development preferences.
