@@ -28,9 +28,3 @@ apps=(
 )
 
 brew cask install ${apps[@]} --appdir=/Applications
-
-# Currently not installing...
-# cleanmymac
-# crashplan
-# doxie
-# teamviewer
