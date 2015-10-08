@@ -1,11 +1,11 @@
-# My Dotfiles
+# My Dotfiles for OS X
 
-These are the dotfiles and general preferences I use on my primary machine running OS X. The `setupmac` script is very specific to the Mac platform. It has been successfully tested on the following versions of OS X:
+These are the dotfiles and general preferences I use on my primary machine running OS X. The `bootstrap` script is very specific to the Mac platform. It has been successfully tested on the following versions of OS X:
 
 * Yosemite (10.10)
 * El Capitan (10.11)
 
-**Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux).**
+**Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux-desktop).**
 
 
 ### Prerequisites
@@ -29,14 +29,14 @@ Reboot, check for additional updates, then reinstall, reboot if needed.
 To install with a one-liner, run this:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setupmac && sh setupmac 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/bootstrap && sh bootstrap 2>&1 | tee ~/setup.log
 ```
 
 Want to read through the script first?
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setupmac
-less setupmac
-sh setupmac 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/bootstrap
+less bootstrap
+sh bootstrap 2>&1 | tee ~/setup.log
 ```
 
 WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
@@ -44,7 +44,7 @@ WARNING: This script will ask for your admin password multiple times. You'll nee
 
 ### What does it do?
 
-When you invoke `setupmac`, this is what it does in a nutshell:
+When you invoke `bootstrap`, this is what it does in a nutshell:
 
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
@@ -63,7 +63,7 @@ When you invoke `setupmac`, this is what it does in a nutshell:
 
 ### Post-install Tasks
 
-After running `setupmac` there are still a few things that need to be done.
+After running `bootstrap` there are still a few things that need to be done.
 
 * Restart your machine in order for some changes to take effect.
 * Install software from Mac App Store.
@@ -101,7 +101,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 1) Fork this repo and clone your new fork to your local machine.
 
-2) Review [`setupmac`](https://github.com/joshukraine/dotfiles/blob/master/setupmac) and determine which sections you want to use.
+2) Review [`bootstrap`](https://github.com/joshukraine/dotfiles/blob/master/bootstrap) and determine which sections you want to use.
 
 * Section 1: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
 * Section 2: Use `oh-my-zsh`? Prefer to use bash instead?
@@ -115,7 +115,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 3) Customize the dotfiles themselves with your own prefs. Add or remove dotfiles as desired. Since the files will later be symlinked into place, there is no need to add the leading dot to the filenames. (e.g. use `vimrc`, not `.vimrc`)
 
-4) Update `symlink_dotfiles` to match your dotfiles. Find the following line of code (around line 18)...
+4) Update the `files` list in the `bootstrap` script to match your dotfiles. Find the following line of code (around line 81)...
 
 	files="gemrc gitconfig gitignore_global hushlogin tmux.conf vimrc zshrc"
 
@@ -125,7 +125,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 6) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
 
-	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/setupmac && sh setupmac 2>&1 | tee ~/setup.log
+	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/bootstrap && sh bootstrap 2>&1 | tee ~/setup.log
 
 7) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
