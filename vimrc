@@ -182,7 +182,6 @@ Plugin 'skwp/greplace.vim'                " Global search and replace for vi    
 Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plugin 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
-Plugin 'joshukraine/yankmatches'          " Damian Conway's yankmatches plugin for vim            | https://github.com/joshukraine/yankmatches
 Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 
 " Look and Feel
