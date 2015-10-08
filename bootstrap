@@ -78,9 +78,11 @@ set -u # Prevent unset variables
 
 osname=$(uname)
 divider="====> "
+files="gemrc gitconfig gitignore_global hushlogin tmux.conf vimrc zshrc"
 COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 DOTFILES_DIR=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
+DICTIONARY_DIR=$HOME/Library/Spelling
 
 # Change this if you are using your own fork
 DOTFILES_REPO_URL="https://github.com/joshukraine/dotfiles.git"
@@ -146,7 +148,6 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 ################################################################################
 
 fancy_echo "$divider Step 3: Installing dotfiles..."
-
 if [[ -d $DOTFILES_DIR ]]; then
   fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf $OLD_DOTFILES_BACKUP
@@ -155,21 +156,41 @@ if [[ -d $DOTFILES_DIR ]]; then
 fi
 
 fancy_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
-
 cd $HOME
 git clone $DOTFILES_REPO_URL -b $DOTFILES_BRANCH $DOTFILES_DIR
-source "$DOTFILES_DIR/install/symlink_dotfiles"
+
+fancy_echo "Creating symlinks..."
+for file in $files; do
+  if [ -f $HOME/.$file ]; then
+    fancy_echo ".$file already present. Backing up..."
+    cp $HOME/.$file "$HOME/.${file}_backup"
+    rm -f $HOME/.$file
+  fi
+  fancy_echo "-> Linking $DOTFILES_DIR/$file to $HOME/.$file..."
+  ln -nfs "$DOTFILES_DIR/$file" "$HOME/.$file"
+done
+
+fancy_echo "-> Linking $DOTFILES_DIR/bin/tat to $HOME/bin/tat..."
+ln -nfs "$DOTFILES_DIR/bin/tat" "$HOME/bin/tat"
+
+fancy_echo "-> Installing xkbswitch utility..."
+git clone https://github.com/joshukraine/xkbswitch-macosx
+cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin
+rm -rf xkbswitch-macosx
 
 fancy_echo "Dotfiles setup complete!"
 
 
 ################################################################################
 # 4. Install Ukrainian spell-check dictionaries
+#
+# Reference:
+# * http://apple.stackexchange.com/a/11842/75491
+# * http://extensions.services.openoffice.org/en/project/ukrainian-dictionary
 ################################################################################
 
 fancy_echo "$divider Step 4: Installing Ukrainian spell-check dictionaries..."
-
-source "$DOTFILES_DIR/install/install_uk_dictionary"
+cp $DOTFILES_DIR/lib/{hyph_uk_UA.dic,uk_UA.aff,uk_UA.dic} $DICTIONARY_DIR
 
 fancy_echo "Dictionaries installed!"
 
@@ -179,7 +200,6 @@ fancy_echo "Dictionaries installed!"
 ################################################################################
 
 fancy_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
-
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
 fi
@@ -196,8 +216,14 @@ fancy_echo "Done!"
 ################################################################################
 
 fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
+if [ -d $HOME/.vim/bundle ]; then
+  rm -rf $HOME/.vim/bundle
+fi
+git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+cp -R $DOTFILES_DIR/vim/colors $HOME/.vim # So vim won't complain about solarized not being found.
+vim +PluginInstall +qall
+rm -rf $HOME/.vim/colors
 
-source "$DOTFILES_DIR/install/vundle"
 fancy_echo "Done!"
 
 
