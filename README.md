@@ -49,7 +49,7 @@ When you invoke `bootstrap`, this is what it does in a nutshell:
 * Check for command line tools to be installed. The script will exit if they aren't found.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 * Run my fork of thoughtbot's [Laptop script](https://github.com/joshukraine/laptop). This is a provisioning script which installs lots of goodies like Homebrew, rbenv, postgres, etc.
-* Set up some basic directories in `$HOME`.
+* ~~Set up some basic directories in `$HOME`.~~
 * Symlink dotfiles to `$HOME`.
 * Install [xkbswitch](https://github.com/joshukraine/xkbswitch-macosx) for displaying current language input source in tmux status bar.
 * Install Ukrainian spell-check dictionaries.
@@ -59,6 +59,8 @@ When you invoke `bootstrap`, this is what it does in a nutshell:
 * Install OS X software via [Cask](http://caskroom.io/).
 * Set a variety of OS X defaults.
 * Customize the OS X dock.
+
+NOTE: Previously, I used the `bootstrap` script to set up many of the standard directories I use in my work. But since I now have [Dropbox Pro](https://db.tt/6kiw9mn9), all those directories are downloaded automatically after Dropbox is installed. Once they've synced, I symlink them into place in `$HOME`.
 
 
 ### Post-install Tasks
