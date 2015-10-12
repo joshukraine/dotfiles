@@ -5,7 +5,8 @@ These are the dotfiles and general preferences I use on my primary machine runni
 * Yosemite (10.10)
 * El Capitan (10.11)
 
-**Running Linux? Check out my [linux branch](https://github.com/joshukraine/dotfiles/tree/linux-desktop).**
+&#9657; **Running desktop Linux? Check out the [linux-desktop branch](https://github.com/joshukraine/dotfiles/tree/linux-desktop)**
+&#9657; **Need just the basics for a headless Linux server? Check out the [linux-server branch](https://github.com/joshukraine/dotfiles/tree/linux-server)**
 
 
 ### Prerequisites
