@@ -160,4 +160,3 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 * http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
 * http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
 * https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
-* http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
