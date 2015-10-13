@@ -6,6 +6,7 @@ These are the dotfiles and general preferences I use on my primary machine runni
 * El Capitan (10.11)
 
 &#9657; **Running desktop Linux? Check out the [linux-desktop branch](https://github.com/joshukraine/dotfiles/tree/linux-desktop)**
+
 &#9657; **Need just the basics for a headless Linux server? Check out the [linux-server branch](https://github.com/joshukraine/dotfiles/tree/linux-server)**
 
 
