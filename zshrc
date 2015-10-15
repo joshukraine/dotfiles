@@ -15,7 +15,7 @@ export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=7
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git pow vagrant)
+plugins=(git pow vagrant brew rails)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
