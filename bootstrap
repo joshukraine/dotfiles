@@ -78,7 +78,7 @@ set -u # Prevent unset variables
 
 osname=$(uname)
 divider="====> "
-files="gemrc gitconfig gitignore_global hushlogin tmux.conf vimrc zshrc"
+files="gemrc gitconfig gitignore_global hushlogin pryrc tmux.conf vimrc zshrc"
 COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 DOTFILES_DIR=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
