@@ -36,6 +36,7 @@ alias ev='vim ~/.vimrc'
 # General UNIX
 alias mv='mv -iv'
 alias cp='cp -iv'
+alias srm='srm -iv'
 alias df='df -h'
 alias du='du -h'
 alias mkdir='mkdir -pv'
@@ -226,7 +227,7 @@ cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME/Dropbox $HOME)
 
 # functions {{{
 randpw() {
-  openssl rand -base64 4 | md5 | head -c8 ; echo
+  openssl rand -base64 4 | md5 | head -c$1 ; echo
 }
 
 # Determine size of a file or total size of a directory
