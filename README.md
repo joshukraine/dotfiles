@@ -1,79 +1,43 @@
 # My Dotfiles for OS X
 
-These are the dotfiles and general preferences I use on my primary machine running OS X. The `bootstrap` script is very specific to the Mac platform. It has been successfully tested on the following versions of OS X:
+These are the dotfiles I use on my MacBook Pro running OS X El Capitan. They are geared primarily for Ruby on Rails development using zsh, vim, and tmux. Also included is my iTerm 2 profile.
 
-* Yosemite (10.10)
-* El Capitan (10.11)
+### Mac Bootstrap Script
 
-&#9657; **Running desktop Linux? Check out the [linux-desktop branch](https://github.com/joshukraine/dotfiles/tree/linux-desktop)**
+This repo previously contained my entire provisioning solution for a new machine running a fresh install of OS X. I've now extracted the provisioning functionality into its own repository. Check it out:
 
-&#9657; **Need just the basics for a headless Linux server? Check out the [linux-server branch](https://github.com/joshukraine/dotfiles/tree/linux-server)**
+&#9657; **Provision a new Mac with [Mac Bootstrap](#).**
+
+NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
 
 ### Prerequisites
 
-Make sure your software is up to date:
+The dotfiles assume you are running OS X (10.10 or higher) with the following software preinstalled:
 
-	sudo softwareupdate -i -a
+* [Git](https://git-scm.com/)
+* [Vim](http://www.vim.org/)
+* [Tmux](http://tmux.sourceforge.net/)
+* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* [Ruby](https://www.ruby-lang.org/en/)
+* [rbenv](https://github.com/sstephenson/rbenv)
 
-Install Apple's command line tools:
-
-	xcode-select --install
-
-Reboot, check for additional updates, then reinstall, reboot if needed.
-
-	sudo softwareupdate -l
-	sudo softwareupdate -i -a
-
+All of the above and more are included in [Mac Bootstrap]().
 
 ### Installation
 
-To install with a one-liner, run this:
-
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/bootstrap && sh bootstrap 2>&1 | tee ~/setup.log
+git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
+source ~/dotfiles/install.sh
 ```
-
-Want to read through the script first?
-```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/bootstrap
-less bootstrap
-sh bootstrap 2>&1 | tee ~/setup.log
-```
-
-WARNING: This script will ask for your admin password multiple times. You'll need to babysit it for a while. :)
-
-
-### What does it do?
-
-When you invoke `bootstrap`, this is what it does in a nutshell:
-
-* Check for command line tools to be installed. The script will exit if they aren't found.
-* Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
-* Run my fork of thoughtbot's [Laptop script](https://github.com/joshukraine/laptop). This is a provisioning script which installs lots of goodies like Homebrew, rbenv, postgres, etc.
-* ~~Set up some basic directories in `$HOME`.~~
-* Symlink dotfiles to `$HOME`.
-* Install [xkbswitch](https://github.com/joshukraine/xkbswitch-macosx) for displaying current language input source in tmux status bar.
-* Install Ukrainian spell-check dictionaries.
-* Install several fixed-width fonts.
-* Install Vundle and plugins for vim.
-* Install various packages via [Homebrew](http://brew.sh/).
-* Install OS X software via [Cask](http://caskroom.io/).
-* Set a variety of OS X defaults.
-* Customize the OS X dock.
-
-NOTE: Previously, I used the `bootstrap` script to set up many of the standard directories I use in my work. But since I now have [Dropbox Pro](https://db.tt/6kiw9mn9), all those directories are downloaded automatically after Dropbox is installed. Once they've synced, I symlink them into place in `$HOME`.
 
 
 ### Post-install Tasks
 
-After running `bootstrap` there are still a few things that need to be done.
+After running `install.sh` there are still a couple of things that need to be done.
 
-* Restart your machine in order for some changes to take effect.
-* Install software from Mac App Store.
 * Set up iTerm 2 profile (see details below).
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
-* Set up desired OS X keyboard shortcuts (see list below)
 
 
 ### Setting up iTerm 2
@@ -85,53 +49,6 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 3. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 5. Restart iTerm 2.
-
-
-### OS X Keyboard Shortcuts
-
-These are my (current) primary OS X keyboard shortcuts:
-
-* Alfred: &#8984;Space
-* Spotlight search: &#8984;&#8679;Space
-* Switch input source: &#8963;&#8679;Space
-* Fantastical: &#8997;&#8984;Space
-* Things: &#8963;Space
-* iTerm hotkey window: &#8997;Space
-
-
-### How to personalize these dotfiles for your own use.
-
-No one else's dotfiles will ever be a perfect match for you. That said, if your needs are close enough to mine, you might benefit from using the same shell scripts and overall structure, and just swapping out the particulars with your own. Here's my recommended approach to doing that:
-
-1) Fork this repo and clone your new fork to your local machine.
-
-2) Review [`bootstrap`](https://github.com/joshukraine/dotfiles/blob/master/bootstrap) and determine which sections you want to use.
-
-* Section 1: Laptop is awesome, but [check what it does](https://github.com/joshukraine/laptop) before installing.
-* Section 2: Use `oh-my-zsh`? Prefer to use bash instead?
-* Section 3: The dotfiles. Update the `git clone...` URL to point to your fork.
-* Section 4: Install Ukrainian dictionaries?
-* Section 5: Install fixed-width fonts?
-* Section 6: Use Vundle? If you prefer a different plugin manager, you can add the code for that in a file called `install/<my-plugin-manager>.sh` and then update the `source` path in this section.
-* Section 7: Check the list of [Homebrew](http://brew.sh/) formulae in `install/brew`. Add or remove packages to suite your needs.
-* Section 8: Check the list of [Cask](http://caskroom.io/) apps in `install/brew-cask`. Add or remove apps to suite your needs.
-* Section 9: Review general OS X settings in `osx/defaults` and adjust as needed. `osx/dock` ensures that the dock contains only the apps you select. Adjust as desired. (NOTE: `dock` depends on the `dockutil` package installed by Homebrew in `brew`.)
-
-3) Customize the dotfiles themselves with your own prefs. Add or remove dotfiles as desired. Since the files will later be symlinked into place, there is no need to add the leading dot to the filenames. (e.g. use `vimrc`, not `.vimrc`)
-
-4) Update the `files` list in the `bootstrap` script to match your dotfiles. Find the following line of code (around line 81)...
-
-	files="gemrc gitconfig gitignore_global hushlogin tmux.conf vimrc zshrc"
-
-...and make sure all your files (and *only* those files) are listed.
-
-5) Create `~/.gitconfig.local` and `~/.zshrc.local` and add in your personal information. These files are sourced in `~/.gitconfig` and `~/.zshrc` respectively.
-
-6) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
-
-	curl --remote-name https://raw.githubusercontent.com/<your-github-username>/dotfiles/master/bootstrap && sh bootstrap 2>&1 | tee ~/setup.log
-
-7) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
 
 ### Some of my favorite dotfile repos
