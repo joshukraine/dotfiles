@@ -194,23 +194,19 @@ Plugin 'tpope/vim-git'                    " Vim Git runtime files               
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
 Plugin 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
 Plugin 'tpope/vim-rails'                  " Ruby on Rails power tools                             | https://github.com/tpope/vim-rails
-Plugin 'tpope/vim-ragtag'                 " HTML/XML mappings                                     | https://github.com/tpope/vim-ragtag
 Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
 Plugin 'tpope/vim-rake'                   " Extended funtionality for rails.vim                   | https://github.com/tpope/vim-rake
 Plugin 'tpope/vim-bundler'                " Vim goodies for Bundler, rails.vim, rake.vim          | https://github.com/tpope/vim-bundler
 
 
 " Related to testing & tmux
-Plugin 'benmills/vimux'                   " Vim plugin to interact with tmux                      | https://github.com/benmills/vimux
-Plugin 'jgdavey/tslime.vim'               " Send command from vim to a running tmux session       | https://github.com/jgdavey/tslime.vim
 Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
-Plugin 'skalnik/vim-vroom'                " A vim plugin for running your Ruby tests              | https://github.com/skalnik/vim-vroom
+Plugin 'christoomey/vim-tmux-runner'      " Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
 " Related to vim-snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'     " [vim-snipmate dependency]                             | https://github.com/MarcWeber/vim-addon-mw-utils
 Plugin 'tomtom/tlib_vim'                  " [vim-snipmate dependency]                             | https://github.com/tomtom/tlib_vim
 Plugin 'garbas/vim-snipmate'              " Textmate-style snippet behavior for vim               | https://github.com/garbas/vim-snipmate
-" Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
 Plugin 'joshukraine/vim-snippets'         " My customized vim-snippets                            | https://github.com/joshukraine/vim-snippets
 
 " Other
@@ -294,36 +290,25 @@ map <leader>f :call RunCurrentSpecFile()<CR>
 map <leader>n :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = 'call VimuxRunCommand("clear; bin/rspec {spec}")'
+let g:rspec_command = 'VtrSendCommandToRunner! clear; bin/rspec {spec}'
 
-" vroom.vim (alternative plugin to vim-rspec)
-" map <leader>n :VroomRunNearestTest<CR>
-" map <leader>f :VroomRunTestFile<CR>
-" map <leader>l :VroomRunLastTest<CR>
-" let g:vroom_use_vimux = 1
-" let g:vroom_use_colors = 1
-" let g:vroom_use_bundle_exec = 0
-" let g:vroom_map_keys = 0
-" let g:vroom_clear_screen = 0
-
-" Vimux
-" Prompt for a command to run map
-map <leader>vp :VimuxPromptCommand<CR>
-
-" Inspect runner pane map
-map <leader>vi :VimuxInspectRunner<CR>
-
-" Close vim tmux runner opened by VimuxRunCommand. If a pane is closed manually,
-" the vim-rspec commands will no longer cause a new pane to open. Calling
-" :VimuxCloseRunner() will 'reset' Vimux, after which the vim-rspec commands
-" will pop open a new pane as they did initially.
-map <leader>vq :VimuxCloseRunner<CR>
-
-" Zoom the tmux runner page
-map <leader>vz :VimuxZoomRunner<CR>
-
-" Set the size of the vimux window.
-let g:VimuxHeight = "30"
+" vim-tmux-runner
+let g:VtrPercentage = 20
+nnoremap <leader>cr :VtrClearRunner<cr>
+nnoremap <leader>dr :VtrDetachRunner<cr>
+nnoremap <leader>fc :VtrFlushCommand<cr>
+nnoremap <leader>fr :VtrFocusRunner<cr>
+nnoremap <leader>kr :VtrKillRunner<cr>
+nnoremap <leader>or :VtrOpenRunner<cr>
+nnoremap <leader>pry :VtrOpenRunner {'orientation': 'h', 'percentage': 50, 'cmd': 'pry'}<cr>
+nnoremap <leader>ror :VtrReorientRunner<cr>
+nnoremap <leader>sc :VtrSendCommandToRunner<cr>
+nnoremap <leader>sd :VtrSendCtrlD<cr>
+nnoremap <leader>sf :VtrSendFile<cr>
+nnoremap <leader>sl :VtrSendLinesToRunner<cr>
+vnoremap <leader>sl :VtrSendLinesToRunner<cr>
+nnoremap <leader>sp :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': 'clear'}<cr>
+nnoremap <leader>va :VtrAttachToPane<cr>
 
 " CtrlP
 map <leader>t <C-p>
@@ -351,9 +336,6 @@ command! RTfactories :tabe spec/factories.rb
 command! RSfactories :sp spec/factories.rb
 command! RVfactories :vs spec/factories.rb
 
-" vim-scratch
-map <C-s> :Sscratch<CR>
-
 " Gist settings
 let g:github_user = $GITHUB_USER
 let g:github_token = $GITHUB_TOKEN
@@ -361,7 +343,6 @@ let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
 " Key mappings for dragvisuals.vim
-
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
