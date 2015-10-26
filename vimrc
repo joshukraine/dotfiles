@@ -294,21 +294,12 @@ let g:rspec_command = 'VtrSendCommandToRunner! clear; bin/rspec {spec}'
 
 " vim-tmux-runner
 let g:VtrPercentage = 20
-nnoremap <leader>cr :VtrClearRunner<cr>
-nnoremap <leader>dr :VtrDetachRunner<cr>
-nnoremap <leader>fc :VtrFlushCommand<cr>
-nnoremap <leader>fr :VtrFocusRunner<cr>
-nnoremap <leader>kr :VtrKillRunner<cr>
-nnoremap <leader>or :VtrOpenRunner<cr>
-nnoremap <leader>pry :VtrOpenRunner {'orientation': 'h', 'percentage': 50, 'cmd': 'pry'}<cr>
-nnoremap <leader>ror :VtrReorientRunner<cr>
-nnoremap <leader>sc :VtrSendCommandToRunner<cr>
+let g:VtrUseVtrMaps = 1
 nnoremap <leader>sd :VtrSendCtrlD<cr>
-nnoremap <leader>sf :VtrSendFile<cr>
-nnoremap <leader>sl :VtrSendLinesToRunner<cr>
-vnoremap <leader>sl :VtrSendLinesToRunner<cr>
-nnoremap <leader>sp :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': 'clear'}<cr>
-nnoremap <leader>va :VtrAttachToPane<cr>
+nmap <leader>fs :VtrFlushCommand<cr>:VtrSendCommandToRunner<cr>
+nmap <leader>osp :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': '' }<cr>
+nmap <leader>orc :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'rc'}<cr>
+nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'pry'}<cr>
 
 " CtrlP
 map <leader>t <C-p>
