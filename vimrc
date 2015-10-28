@@ -227,7 +227,7 @@ filetype plugin indent on                 " required
 
 " General Mappings {{{
 
-let mapleader = " "
+let mapleader = "\<Space>"
 
 " Misc
 map <leader>ev :tabe ~/.vimrc<CR>
@@ -240,9 +240,11 @@ map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on past
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
-imap <C-[> <C-c> " Return to normal mode faster
+imap <C-[> <C-c>:w<CR> " Return to normal mode faster + write file
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 inoremap jj <C-c> " jj to switch back to normal mode
+imap jk <esc> " Switch back to normal mode
+imap kj <esc> " Switch back to normal mode
 nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
