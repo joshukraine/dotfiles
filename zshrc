@@ -82,6 +82,7 @@ alias rsp='rspec . --format documentation' #Run full test suite using Rspec
 alias rdb='rake db:migrate'
 alias rtp='rake test:prepare'
 alias bx='bundle exec'
+alias sst='spring status'
 
 # Postgres
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
