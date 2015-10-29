@@ -169,6 +169,7 @@ Plugin 'ervandew/supertab'                " Use <Tab> for all your insert comple
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
+Plugin 'Konfekt/FastFold'                 " Speed up Vim by updating folds only when needed.      | https://github.com/Konfekt/FastFold
 
 " Ruby-specific
 Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
