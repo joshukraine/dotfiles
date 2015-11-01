@@ -169,7 +169,6 @@ Plugin 'ervandew/supertab'                " Use <Tab> for all your insert comple
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
-Plugin 'Konfekt/FastFold'                 " Speed up Vim by updating folds only when needed.      | https://github.com/Konfekt/FastFold
 
 " Ruby-specific
 Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -278,6 +277,7 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 " NERDTree
 map <leader>\ :NERDTreeToggle<CR>
+:let g:NERDTreeWinSize=25
 
 " Tcomment
 map <leader>/ :TComment<CR>
@@ -378,9 +378,9 @@ au BufWritePre *.rb :%s/\s\+$//e
 " Fold settings
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
-autocmd BufRead *.rb setlocal foldmethod=syntax
-autocmd BufRead *.rb normal zR
-set foldnestmax=3
+" autocmd BufRead *.rb setlocal foldmethod=syntax
+" autocmd BufRead *.rb normal zR
+" set foldnestmax=3
 
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
