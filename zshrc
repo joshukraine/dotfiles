@@ -74,13 +74,7 @@ alias upz='upgrade_oh_my_zsh'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 
-# Rails
-alias rc='rails console'
-alias rg='rails generate'
-alias rs='rails server'
-alias rsp='rspec . --format documentation' #Run full test suite using Rspec
-alias rdb='rake db:migrate'
-alias rtp='rake test:prepare'
+# Rails (more are defined in the oh-my-zsh rails plugin)
 alias bx='bundle exec'
 alias sst='spring status'
 
@@ -88,6 +82,7 @@ alias sst='spring status'
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 alias statpost='ps aux | ag postgres'
+alias psq='psql -d postgres'
 
 # Homebrew
 alias bu='brew update'
