@@ -90,7 +90,7 @@ set shortmess+=I
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
-" set splitright
+set splitright
 
 " Highlight the current line and column
 set cursorline
@@ -126,7 +126,7 @@ set tags=./tags;
 
 set t_Co=256
 
-set fillchars+=vert:\ 
+set fillchars+=vert:\|
 
 " Vertical line at 80 characters
 set textwidth=80
@@ -215,7 +215,7 @@ Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in re
 Plugin 'duff/vim-scratch'                 " Create a temporary scratch buffer                     | https://github.com/duff/vim-scratch
 Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
-Plugin 'vim-scripts/Gist.vim'             " Post gists from vim                                   | https://github.com/vim-scripts/Gist.vim
+Plugin 'mattn/gist-vim'                   " Post gists from vim                                   | https://github.com/mattn/gist-vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 
 " All of your Plugins must be added before the following line
@@ -243,8 +243,6 @@ map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 imap <C-[> <C-c>:w<CR> " Return to normal mode faster + write file
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 inoremap jj <C-c> " jj to switch back to normal mode
-imap jk <esc> " Switch back to normal mode
-imap kj <esc> " Switch back to normal mode
 nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
@@ -264,20 +262,19 @@ nnoremap <leader>= :wincmd =<cr>
 " Force vim to use 'very magic' mode for regex searches
 nnoremap / /\v
 
-" Reminders :)
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 " }}}
 
 
 " Plugin-specific Mappings and Settings {{{
 
 " NERDTree
+nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
-:let g:NERDTreeWinSize=25
+let g:NERDTreeWinSize=25
+let NERDTreeShowHidden=1
+
+" Toggle GitGutter
+nnoremap <F4> :GitGutterToggle<CR>
 
 " Tcomment
 map <leader>/ :TComment<CR>
@@ -334,7 +331,10 @@ command! RVfactories :vs spec/factories.rb
 let g:github_user = $GITHUB_USER
 let g:github_token = $GITHUB_TOKEN
 let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
+let g:gist_open_browser_after_post = 0
+let g:gist_post_private = 1
+let g:gist_show_privates = 1
+let g:gist_clip_command = 'pbcopy'
 
 " Key mappings for dragvisuals.vim
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
@@ -347,6 +347,7 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
+
 " }}}
 
 
@@ -433,5 +434,12 @@ colorscheme solarized
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
+highlight VertSplit ctermbg=NONE guibg=NONE
+" }}}
 
+
+" Include local settings {{{
+if filereadable(glob("$HOME/.vimrc.local"))
+  source $HOME/.vimrc.local
+endif
 " }}}
