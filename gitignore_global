@@ -15,3 +15,4 @@ Session.vim
 .powenv
 .zshrc.local
 .gitconfig.local
+.vimrc.local
