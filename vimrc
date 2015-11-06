@@ -217,6 +217,8 @@ Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'    
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
 Plugin 'mattn/gist-vim'                   " Post gists from vim                                   | https://github.com/mattn/gist-vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
+Plugin 'xolox/vim-notes'
+Plugin 'xolox/vim-misc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required
@@ -247,6 +249,7 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+map <C-n> :vs note:<CR>
 
 " Delete all lines beginning with '#' regardless of leading space.
 map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
@@ -348,6 +351,9 @@ vmap  <expr>  D        DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
+" Notes.vim
+let g:notes_directories = ['~/Dropbox/Notes']
+let g:notes_suffix = '.md'
 " }}}
 
 
