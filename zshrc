@@ -103,6 +103,9 @@ alias upc='softwareupdate -l'
 
 # Download and install OS X updates
 alias upd='softwareupdate -i -a'
+
+# Misc
+alias color='colortest -w -s'
 # }}}
 
 
