@@ -1,6 +1,6 @@
-if defined?(PryByebug)
-  Pry.commands.alias_command 'c', 'continue'
-  Pry.commands.alias_command 's', 'step'
-  Pry.commands.alias_command 'n', 'next'
-  Pry.commands.alias_command 'f', 'finish'
+if defined?(PryDebugger) or defined?(PryByebug)
+  Pry.commands.alias_command 'cc', 'continue'
+  Pry.commands.alias_command 'ss', 'step'
+  Pry.commands.alias_command 'nn', 'next'
+  Pry.commands.alias_command 'ff', 'finish'
 end
