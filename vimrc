@@ -189,15 +189,13 @@ Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim te
 Plugin 'bling/vim-airline'                " Status/tabline for vim                                | https://github.com/bling/vim-airline
 
 " Tim Pope
-Plugin 'tpope/vim-fugitive'               " Git wrapper for vim                                   | https://github.com/tpope/vim-fugitive
-Plugin 'tpope/vim-git'                    " Vim Git runtime files                                 | https://github.com/tpope/vim-git
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
 Plugin 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
 Plugin 'tpope/vim-rails'                  " Ruby on Rails power tools                             | https://github.com/tpope/vim-rails
 Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
 Plugin 'tpope/vim-rake'                   " Extended funtionality for rails.vim                   | https://github.com/tpope/vim-rake
 Plugin 'tpope/vim-bundler'                " Vim goodies for Bundler, rails.vim, rake.vim          | https://github.com/tpope/vim-bundler
-
+Plugin 'tpope/vim-ragtag'                 " HTML/XML tag mappings                                 | https://github.com/tpope/vim-ragtag
 
 " Related to testing & tmux
 Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec

@@ -7,6 +7,7 @@ export TERM="screen-256color"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export SOURCE_ANNOTATION_DIRECTORIES="spec"
 # }}}
 
 
