@@ -240,10 +240,10 @@ map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on past
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
-imap <C-[> <C-c>:w<CR> " Return to normal mode faster + write file
-map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
+imap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
 inoremap jj <C-c> " jj to switch back to normal mode
 nnoremap <leader><leader> <c-^> " Switch between the last two files
+map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
@@ -317,6 +317,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 " CtrlP -> directories to ignore when fuzzy finding
 let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
+let g:ctrlp_custom_ignore = '\vbuild$'
 
 " Custom rails.vim commands
 command! Rroutes :e config/routes.rb
@@ -368,7 +369,7 @@ au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 " file formats
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype sh,markdown setlocal wrap linebreak nolist textwidth=0 wrapmargin=0 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
-autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss,gitconfig setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss,javascript,gitconfig setlocal shiftwidth=2 tabstop=2 expandtab
 
 " autoindent with two spaces, always expand tabs
 autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
