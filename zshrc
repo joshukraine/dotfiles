@@ -79,6 +79,11 @@ alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Find
 alias bx='bundle exec'
 alias sst='spring status'
 
+# Middleman
+alias ms='bundle exec middleman server'
+alias mc='bundle exec middleman console'
+alias mb='bundle exec middleman build --clean'
+
 # Postgres
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
