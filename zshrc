@@ -153,11 +153,13 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[reset_color]%}"
 
 local user='%{$fg[green]%}%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
-local git='%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
+local git='$(git_prompt_short_sha)%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
 
 _rubyprompt() {
   if [ $COLUMNS -gt 80 ]; then
