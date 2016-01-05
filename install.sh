@@ -18,7 +18,7 @@ fancy_echo() {
 set -e # Terminate script if anything exits with a non-zero value
 set -u # Prevent unset variables
 
-files="gemrc gitconfig gitignore_global hushlogin pryrc tmux.conf vimrc zshrc"
+files="gemrc gitconfig gitignore_global hushlogin npmrc pryrc tmux.conf vimrc zshrc"
 DOTFILES_DIR=$HOME/dotfiles
 
 fancy_echo "Installing dotfiles..."
