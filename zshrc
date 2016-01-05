@@ -264,3 +264,7 @@ eval "$(rbenv init -)"
 # Include local settings {{{
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 # }}}
+
+# Travis CI {{{
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+# }}}
