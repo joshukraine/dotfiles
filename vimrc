@@ -316,8 +316,7 @@ let g:ctrlp_arg_map = 1
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 " CtrlP -> directories to ignore when fuzzy finding
-let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
-let g:ctrlp_custom_ignore = '\vbuild$'
+let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 
 " Custom rails.vim commands
 command! Rroutes :e config/routes.rb
