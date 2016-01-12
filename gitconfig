@@ -9,6 +9,9 @@
   dfs = diff --staged
   logg = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(%an, %ar)%Creset'
   sta = status
+  car = commit --amend --no-edit
+  unstage = reset
+  uncommit = reset --soft HEAD^
 [apply]
   whitespace = nowarn
 [color]
