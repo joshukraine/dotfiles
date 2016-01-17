@@ -15,7 +15,7 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export ZSH=$HOME/.oh-my-zsh
 DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE=true
-COMPLETION_WAITING_DOTS=true
+COMPLETION_WAITING_DOTS="true"
 
 plugins=(git brew rails)
 
@@ -264,6 +264,7 @@ eval "$(rbenv init -)"
 # Include local settings {{{
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 # }}}
+
 
 # Travis CI {{{
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
