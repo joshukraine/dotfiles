@@ -170,9 +170,9 @@ _rubyprompt() {
 }
 
 if [[ -n $SSH_CONNECTION ]]; then
-  PROMPT="${ssh_user}${pwd}${git} %% "
+  PROMPT="${ssh_user}${pwd}${git} %(?..%{$fg[red]%})%B%%%b "
 else
-  PROMPT="${pwd}${git} %% "
+  PROMPT="${pwd}${git} %(?..%{$fg[red]%})%B%%%b "
 fi
 
 setopt transient_rprompt # only show the rprompt on the current prompt
