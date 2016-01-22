@@ -61,13 +61,15 @@ alias lf='ls -F'
 alias lh='ls -d .*'
 
 # Tree
-alias t2='tree -FL 2'
-alias t3='tree -FL 3'
-alias t4='tree -FL 4'
+alias t1='tree -CFL 1'
+alias t2='tree -CFL 2'
+alias t3='tree -CFL 3'
+alias t4='tree -CFL 4'
 
-alias t2a='tree -FLa 2'
-alias t3a='tree -FLa 3'
-alias t4a='tree -FLa 4'
+alias t1a='tree -CFLa 1'
+alias t2a='tree -CFLa 2'
+alias t3a='tree -CFLa 3'
+alias t4a='tree -CFLa 4'
 
 # Upgrade Oh My Zshell
 alias upz='upgrade_oh_my_zsh'
