@@ -10,7 +10,6 @@ export PATH=$PATH:$GOPATH/bin
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 # }}}
 
-
 # oh-my-zsh {{{
 export ZSH=$HOME/.oh-my-zsh
 DISABLE_UPDATE_PROMPT=true
@@ -21,7 +20,6 @@ plugins=(git brew rails)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
-
 
 # Aliases {{{
 
@@ -117,7 +115,6 @@ alias upd='softwareupdate -i -a'
 alias color='colortest -w -s'
 # }}}
 
-
 # Ruby {{{
 function get_ruby_version() {
   if command -v ruby >/dev/null; then
@@ -127,7 +124,6 @@ function get_ruby_version() {
   fi
 }
 # }}}
-
 
 # Prompt {{{
 
@@ -182,7 +178,6 @@ setopt transient_rprompt # only show the rprompt on the current prompt
 RPROMPT='$(_rubyprompt)'
 # }}}
 
-
 # Tmux {{{
 # Makes creating a new tmux session (with a specific name) easier
 function tn() {
@@ -223,19 +218,16 @@ ensure_tmux_is_running() {
 ensure_tmux_is_running
 # }}}
 
-
 # History {{{
 HISTSIZE=20000
 SAVEHIST=20000
 HISTFILE=~/.zsh_history
 # }}}
 
-
 # cdpath {{{
 setopt auto_cd
 cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME/Dropbox $HOME)
 # }}}
-
 
 # functions {{{
 randpw() {
@@ -261,17 +253,14 @@ function conflicted { vim +Conflicted }
 
 # }}}
 
-
 # Rbenv {{{
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 # }}}
 
-
 # Include local settings {{{
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 # }}}
-
 
 # Travis CI {{{
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
