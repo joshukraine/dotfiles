@@ -196,6 +196,7 @@ Plugin 'tpope/vim-obsession'              " Continuously updated session files  
 Plugin 'tpope/vim-rake'                   " Extended funtionality for rails.vim                   | https://github.com/tpope/vim-rake
 Plugin 'tpope/vim-bundler'                " Vim goodies for Bundler, rails.vim, rake.vim          | https://github.com/tpope/vim-bundler
 Plugin 'tpope/vim-ragtag'                 " HTML/XML tag mappings                                 | https://github.com/tpope/vim-ragtag
+Plugin 'tpope/vim-fugitive'               " Tim Pope's Git wrapper                                | https://github.com/tpope/vim-fugitive
 
 " Related to testing & tmux
 Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
@@ -208,6 +209,7 @@ Plugin 'garbas/vim-snipmate'              " Textmate-style snippet behavior for 
 Plugin 'joshukraine/vim-snippets'         " My customized vim-snippets                            | https://github.com/joshukraine/vim-snippets
 
 " Other
+Plugin 'christoomey/vim-conflicted'       " Easy git merge conflict resolution in Vim             | https://github.com/christoomey/vim-conflicted
 Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim                          | https://github.com/kchmck/vim-coffee-script
 Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in red                 | https://github.com/bronson/vim-trailing-whitespace
 Plugin 'duff/vim-scratch'                 " Create a temporary scratch buffer                     | https://github.com/duff/vim-scratch
