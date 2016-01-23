@@ -1,33 +1,52 @@
-[include]
-  path = ~/.gitconfig.local
 [alias]
-  co = checkout
-  st = status --short
-  ci = commit
-  br = branch
-  df = diff
-  dfs = diff --staged
-  logg = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(%an, %ar)%Creset'
-  sta = status
+  a = add
+  aa = add --all
+  ap = add --patch
+  b = branch
+  ba = branch --all
+  ca = commit --amend
   car = commit --amend --no-edit
+  co = checkout
+  ci = commit -v
+  dc = diff --word-diff --cached --color-words
+  df = diff --word-diff --color-words
+  dfs = diff --staged
+  lg = log --stat --color
+  mup = !git checkout master && git pull && git checkout -
+  sl = log --graph --pretty=format:'%C(yellow)%h%Creset - %C(white)%d%Creset %s %Cblue(%an, %ar)%Creset'
+  sla = log --oneline --decorate --all --graph
+  st = status --short --branch
+  sta = status
   unstage = reset
   uncommit = reset --soft HEAD^
 [apply]
   whitespace = nowarn
-[color]
-  ui = auto
-  ignorecase = false
 [branch "master"]
   remote = origin
   merge = refs/heads/master
+[color]
+  ui = auto
+  ignorecase = false
+[commit]
+  template = ~/.gitmessage
 [core]
   autocrlf = false
   safecrlf = true
   editor = vim
   excludesfile = ~/.gitignore_global
-[push]
-  default = matching
+[fetch]
+  prune = true
+[gitsh]
+  defaultCommand = status --short --branch
+[gitsh "color"]
+  default = blue
+  untracked = yellow
+  modified = red
+[include]
+  path = ~/.gitconfig.local
 [merge]
-  ff = false
+  ff = only
 [pull]
   rebase = preserve
+[push]
+  default = upstream
