@@ -390,7 +390,7 @@ autocmd BufRead * normal zM
 " set foldnestmax=3
 
 " Close vim if only nerdtree window is left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Change colourscheme when diffing
 fun! SetDiffColors()
