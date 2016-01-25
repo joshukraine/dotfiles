@@ -251,6 +251,8 @@ function fs() {
 
 function conflicted { vim +Conflicted }
 
+function vundle_update { vim +PluginUpdate +qall }
+
 # }}}
 
 # Rbenv {{{
