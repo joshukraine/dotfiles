@@ -45,6 +45,7 @@
 [include]
   path = ~/.gitconfig.local
 [merge]
+  conflictstyle = diff3
   ff = only
 [pull]
   rebase = preserve
