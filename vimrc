@@ -186,7 +186,8 @@ Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin f
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
-Plugin 'bling/vim-airline'                " Status/tabline for vim                                | https://github.com/bling/vim-airline
+Plugin 'vim-airline/vim-airline'          " Status/tabline for vim                                | https://github.com/vim-airline/vim-airline
+Plugin 'vim-airline/vim-airline-themes'   " A collection of themes for vim-airline                | https://github.com/vim-airline/vim-airline-themes
 
 " Tim Pope
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
