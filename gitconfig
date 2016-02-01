@@ -30,7 +30,7 @@
 [commit]
   template = ~/.gitmessage
 [core]
-  autocrlf = false
+  autocrlf = input
   safecrlf = true
   editor = vim
   excludesfile = ~/.gitignore_global
