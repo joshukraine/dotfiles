@@ -197,6 +197,7 @@ Plugin 'tpope/vim-rake'                   " Extended funtionality for rails.vim 
 Plugin 'tpope/vim-bundler'                " Vim goodies for Bundler, rails.vim, rake.vim          | https://github.com/tpope/vim-bundler
 Plugin 'tpope/vim-ragtag'                 " HTML/XML tag mappings                                 | https://github.com/tpope/vim-ragtag
 Plugin 'tpope/vim-fugitive'               " Tim Pope's Git wrapper                                | https://github.com/tpope/vim-fugitive
+Plugin 'tpope/vim-haml'                   " Vim runtime files for Haml, Sass, and SCSS            | https://github.com/tpope/vim-haml
 
 " Related to testing & tmux
 Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
