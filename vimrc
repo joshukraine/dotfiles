@@ -329,6 +329,9 @@ command! RTfactories :tabe spec/factories.rb
 command! RSfactories :sp spec/factories.rb
 command! RVfactories :vs spec/factories.rb
 
+" Syntastic
+let g:syntastic_scss_checkers = ['scss_lint']
+
 " Gist settings
 let g:github_user = $GITHUB_USER
 let g:github_token = $GITHUB_TOKEN
