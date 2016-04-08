@@ -331,6 +331,8 @@ command! RVfactories :vs spec/factories.rb
 
 " Syntastic
 let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_haml_checkers = ['haml_lint']
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Gist settings
 let g:github_user = $GITHUB_USER
