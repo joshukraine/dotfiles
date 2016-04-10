@@ -83,6 +83,7 @@ alias sst='spring status'
 
 # Middleman
 alias ms='bundle exec middleman server'
+alias msg='bundle exec middleman server -e gulp'
 alias mc='bundle exec middleman console'
 alias mb='bundle exec middleman build --clean'
 
