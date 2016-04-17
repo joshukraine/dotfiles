@@ -248,7 +248,6 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
-nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
 map <C-n> :vs note:<CR>
 
 " Delete all lines beginning with '#' regardless of leading space.
