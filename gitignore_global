@@ -16,3 +16,4 @@ Session.vim
 .zshrc.local
 .gitconfig.local
 .vimrc.local
+node_modules/
