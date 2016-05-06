@@ -269,3 +269,8 @@ eval "$(rbenv init -)"
 # Travis CI {{{
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 # }}}
+
+# NVM {{{
+export NVM_DIR="/Users/joshukraine/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# }}}
