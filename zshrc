@@ -28,6 +28,7 @@ alias vi='vim'
 alias vir='vim -R'
 alias vv='vim --version | less'
 alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
+alias vi0='vim -u NONE'
 
 # Jump to quick edits
 alias ez='vim ~/.zshrc'
