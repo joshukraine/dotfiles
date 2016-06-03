@@ -4,6 +4,7 @@
   ap = add --patch
   b = branch
   ba = branch --all
+  recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
   ca = commit --amend
   car = commit --amend --no-edit
   co = checkout
