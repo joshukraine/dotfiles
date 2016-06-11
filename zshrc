@@ -83,10 +83,10 @@ alias bx='bundle exec'
 alias sst='spring status'
 
 # Middleman
-alias ms='bundle exec middleman server'
+alias mss='bundle exec middleman server'
 alias msg='bundle exec middleman server -e gulp'
-alias mc='bundle exec middleman console'
-alias mb='bundle exec middleman build --clean'
+alias mcc='bundle exec middleman console'
+alias mbb='bundle exec middleman build --clean'
 
 # Postgres
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
