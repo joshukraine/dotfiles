@@ -130,13 +130,20 @@ function get_ruby_version() {
 
 # Prompt {{{
 
+# Echo commits ahead only if remote exists.
+function my_remote_status() {
+  if [[ -n "$(command git show-ref origin/$(git_current_branch) 2> /dev/null)" ]]; then
+    echo "$(git_commits_ahead)"
+  fi
+}
+
 # Get the name of the branch we are on
 # Adapted from git_prompt_info(), .oh-my-zsh/lib/git.zsh
 function my_git_branch() {
   if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    echo " $(git_commits_ahead)$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    echo " $(my_remote_status)$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
 
