@@ -132,7 +132,7 @@ function get_ruby_version() {
 
 # Echo commits ahead only if remote exists.
 function my_remote_status() {
-  if [ -z ${ZSH_THEME_GIT_PROMPT_REMOTE_EXISTS+x} ]; then
+  if [[ -n "$(command git show-ref origin/$(git_current_branch) 2> /dev/null)" ]]; then
     echo "$(git_commits_ahead)"
   fi
 }
