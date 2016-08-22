@@ -1,9 +1,11 @@
-# My Dotfiles for macOS
+My Dotfiles for macOS
+=====================
 
 These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby on Rails development using zsh, vim, and tmux. Also included is my iTerm profile.
 
 
-### Mac Bootstrap Script
+Mac Bootstrap Script
+--------------------
 
 This repo previously contained my entire provisioning solution for a new machine running a fresh install of macOS. I've now extracted the provisioning functionality into its own repository. Check it out:
 
@@ -12,7 +14,8 @@ This repo previously contained my entire provisioning solution for a new machine
 NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
 
-### Prerequisites
+Prerequisites
+-------------
 
 The dotfiles assume you are running macOS (10.10 or higher) with the following software preinstalled:
 
@@ -26,7 +29,8 @@ The dotfiles assume you are running macOS (10.10 or higher) with the following s
 All of the above and more are included in [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).
 
 
-### Installation
+Installation
+------------
 
 ```sh
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
@@ -34,7 +38,8 @@ source ~/dotfiles/install.sh
 ```
 
 
-### Post-install Tasks
+Post-install Tasks
+------------------
 
 After running `install.sh` there are still a couple of things that need to be done.
 
@@ -42,18 +47,20 @@ After running `install.sh` there are still a couple of things that need to be do
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
 
 
-### Setting up iTerm
+Setting up iTerm
+----------------
 
 Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/) by Trevor Brown, I learned that you can quickly set up iTerm by exporting your profile. Here are the steps.
 
 1. Open iTerm.
-2. Select iTerm > Preferences.
+2. Select iTerm2 > Preferences.
 3. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 5. Restart iTerm.
 
 
-### Some of my favorite dotfile repos
+Some of my favorite dotfile repos
+---------------------------------
 
 * Pro Vim (https://github.com/Integralist/ProVim)
 * Trevor Brown (https://github.com/Stratus3D/dotfiles)
@@ -71,7 +78,8 @@ Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-p
 * Paul Irish (https://github.com/paulirish/dotfiles)
 
 
-### Helpful web resources on dotfiles, et al.
+Helpful web resources on dotfiles, et al.
+-----------------------------------------
 
 * http://dotfiles.github.io/
 * https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
