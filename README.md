@@ -1,6 +1,6 @@
 # My Dotfiles for macOS
 
-These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby on Rails development using zsh, vim, and tmux. Also included is my iTerm 2 profile.
+These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby on Rails development using zsh, vim, and tmux. Also included is my iTerm profile.
 
 
 ### Mac Bootstrap Script
@@ -38,19 +38,19 @@ source ~/dotfiles/install.sh
 
 After running `install.sh` there are still a couple of things that need to be done.
 
-* Set up iTerm 2 profile (see details below).
+* Set up iTerm profile (see details below).
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
 
 
-### Setting up iTerm 2
+### Setting up iTerm
 
-Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/) by Trevor Brown, I learned that you can quickly set up iTerm 2 by exporting your profile. Here are the steps.
+Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/) by Trevor Brown, I learned that you can quickly set up iTerm by exporting your profile. Here are the steps.
 
-1. Open iTerm 2.
-2. Select iTerm 2 > Preferences.
+1. Open iTerm.
+2. Select iTerm > Preferences.
 3. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
 4. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
-5. Restart iTerm 2.
+5. Restart iTerm.
 
 
 ### Some of my favorite dotfile repos
