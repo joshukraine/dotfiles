@@ -1,11 +1,11 @@
-# My Dotfiles for OS X
+# My Dotfiles for macOS
 
-These are the dotfiles I use on my MacBook Pro running OS X El Capitan. They are geared primarily for Ruby on Rails development using zsh, vim, and tmux. Also included is my iTerm 2 profile.
+These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby on Rails development using zsh, vim, and tmux. Also included is my iTerm 2 profile.
 
 
 ### Mac Bootstrap Script
 
-This repo previously contained my entire provisioning solution for a new machine running a fresh install of OS X. I've now extracted the provisioning functionality into its own repository. Check it out:
+This repo previously contained my entire provisioning solution for a new machine running a fresh install of macOS. I've now extracted the provisioning functionality into its own repository. Check it out:
 
 &#9657; **Provision a new Mac with [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).**
 
@@ -14,7 +14,7 @@ NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
 ### Prerequisites
 
-The dotfiles assume you are running OS X (10.10 or higher) with the following software preinstalled:
+The dotfiles assume you are running macOS (10.10 or higher) with the following software preinstalled:
 
 * [Git](https://git-scm.com/)
 * [Vim](http://www.vim.org/)
@@ -24,6 +24,7 @@ The dotfiles assume you are running OS X (10.10 or higher) with the following so
 * [rbenv](https://github.com/sstephenson/rbenv)
 
 All of the above and more are included in [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).
+
 
 ### Installation
 
