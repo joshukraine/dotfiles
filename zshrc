@@ -16,7 +16,7 @@ DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE=true
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git brew rails)
+plugins=(git brew rails osx)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
