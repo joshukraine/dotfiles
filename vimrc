@@ -215,6 +215,7 @@ Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'    
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
 Plugin 'mattn/gist-vim'                   " Post gists from vim                                   | https://github.com/mattn/gist-vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
+Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required
