@@ -226,6 +226,8 @@ ensure_tmux_is_running() {
 }
 
 ensure_tmux_is_running
+
+source ~/bin/tmuxinator.zsh
 # }}}
 
 # History {{{
