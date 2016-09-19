@@ -1,0 +1,65 @@
+# Ruby version in prompt
+function get_ruby_version() {
+  if command -v ruby >/dev/null; then
+    ruby -v | awk '{print $1 " " $2}'
+  else
+    echo "Ruby not installed"
+  fi
+}
+
+# Echo commits ahead only if remote exists.
+function my_remote_status() {
+  if [[ -n "$(command git show-ref origin/$(git_current_branch) 2> /dev/null)" ]]; then
+    echo "$(git_commits_ahead)"
+  fi
+}
+
+# Get the name of the branch we are on
+# Adapted from git_prompt_info(), .oh-my-zsh/lib/git.zsh
+function my_git_branch() {
+  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    echo " $(my_remote_status)$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+}
+
+ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{$fg[magenta]%}↑"
+ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX="%{$fg[white]%} "
+
+ZSH_THEME_GIT_PROMPT_PREFIX="["
+ZSH_THEME_GIT_PROMPT_SUFFIX="]"
+ZSH_THEME_GIT_PROMPT_DIRTY=""
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_AHEAD=""
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}*%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[reset_color]%}"
+
+local user='%{$fg[green]%}%m:%{$reset_color%}'
+local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
+local pwd='%{$fg[blue]%}%~%{$reset_color%}'
+local git='$(git_prompt_short_sha)%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
+
+_rubyprompt() {
+  if [ $COLUMNS -gt 80 ]; then
+    echo "$(get_ruby_version)"
+  fi
+}
+
+if [[ -n $SSH_CONNECTION ]]; then
+  PROMPT="${ssh_user}${pwd}${git}
+%(?..%{$fg[red]%})%B%%%b "
+else
+  PROMPT="${pwd}${git}
+%(?.%{$fg[green]%}.%{$fg[red]%})%B%%%b "
+fi
+
+setopt transient_rprompt # only show the rprompt on the current prompt
+
+RPROMPT='$(_rubyprompt)'
