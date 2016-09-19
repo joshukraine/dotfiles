@@ -11,14 +11,7 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 # }}}
 
 # oh-my-zsh {{{
-export ZSH=$HOME/.oh-my-zsh
-DISABLE_UPDATE_PROMPT=true
-DISABLE_AUTO_UPDATE=true
-COMPLETION_WAITING_DOTS="true"
-
-plugins=(git brew rails osx)
-
-source $ZSH/oh-my-zsh.sh
+source $HOME/dotfiles/zsh/oh-my-zsh
 # }}}
 
 # Aliases {{{
