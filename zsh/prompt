@@ -1,3 +1,12 @@
+# Ruby version in prompt
+function get_ruby_version() {
+  if command -v ruby >/dev/null; then
+    ruby -v | awk '{print $1 " " $2}'
+  else
+    echo "Ruby not installed"
+  fi
+}
+
 # Echo commits ahead only if remote exists.
 function my_remote_status() {
   if [[ -n "$(command git show-ref origin/$(git_current_branch) 2> /dev/null)" ]]; then

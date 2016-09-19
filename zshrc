@@ -25,16 +25,6 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases
 # }}}
 
-# Ruby {{{
-function get_ruby_version() {
-  if command -v ruby >/dev/null; then
-    ruby -v | awk '{print $1 " " $2}'
-  else
-    echo "Ruby not installed"
-  fi
-}
-# }}}
-
 # Prompt {{{
 source $HOME/dotfiles/zsh/prompt
 # }}}
