@@ -269,6 +269,8 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=25
 let NERDTreeShowHidden=1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Toggle GitGutter
 nnoremap <F4> :GitGutterToggle<CR>
