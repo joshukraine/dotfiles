@@ -361,6 +361,8 @@ let g:DVB_TrimWS = 1
 
 " specify syntax highlighting for specific files
 autocmd Bufread,BufNewFile *.spv set filetype=php
+autocmd Bufread,BufNewFile *Brewfile set filetype=ruby
+autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh set filetype=zsh
 autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
 
 " When loading text files, wrap them and don't split up words.
