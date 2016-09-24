@@ -1,7 +1,7 @@
 My Dotfiles for macOS
 =====================
 
-These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby on Rails development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
+These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
 
 
 Mac Bootstrap Script
@@ -9,7 +9,7 @@ Mac Bootstrap Script
 
 This repo previously contained my entire provisioning solution for a new machine running a fresh install of macOS. I've now extracted the provisioning functionality into its own repository. Check it out:
 
-&#9657; **Provision a new Mac with [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).**
+&#9657; **Provision a new Mac with [Mac Bootstrap](http://jsua.co/macos).**
 
 NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
@@ -19,14 +19,15 @@ Prerequisites
 
 The dotfiles assume you are running macOS (10.11) with the following software preinstalled:
 
-* [Git](https://git-scm.com/)
-* [Vim](http://www.vim.org/)
-* [Tmux](http://tmux.github.io/)
 * [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
+* [Homebrew](http://brew.sh)
+* [Vim](http://www.vim.org/)
+* [Git](https://git-scm.com/)
+* [Tmux](http://tmux.github.io/)
 * [Ruby](https://www.ruby-lang.org/en/)
 * [rbenv](https://github.com/sstephenson/rbenv)
 
-All of the above and more are included in [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).
+All of the above and more are included in [Mac Bootstrap](http://jsua.co/macos).
 
 
 Installation
@@ -45,6 +46,7 @@ After running `install.sh` there are still a couple of things that need to be do
 
 * Set up iTerm2 profile (see details below).
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
+* Complete [Brew Bundle](https://github.com/Homebrew/homebrew-bundle) with `brew bundle install --global`
 
 
 Setting up iTerm2

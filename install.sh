@@ -18,7 +18,7 @@ dotfiles_echo() {
 set -e # Terminate script if anything exits with a non-zero value
 set -u # Prevent unset variables
 
-files="gemrc gitconfig gitignore_global gitmessage hushlogin npmrc pryrc tmux.conf vimrc zshrc"
+files="Brewfile gemrc gitconfig gitignore_global gitmessage hushlogin npmrc pryrc tmux.conf vimrc zshrc"
 DOTFILES_DIR=$HOME/dotfiles
 
 dotfiles_echo "Installing dotfiles..."
@@ -34,3 +34,4 @@ for file in $files; do
 done
 
 dotfiles_echo "Dotfiles installation complete!"
+dotfiles_echo "Complete Brew Bundle installation with `brew bundle install --global`"
