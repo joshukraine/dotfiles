@@ -34,4 +34,4 @@ for file in $files; do
 done
 
 dotfiles_echo "Dotfiles installation complete!"
-dotfiles_echo "Complete Brew Bundle installation with `brew bundle install --global`"
+dotfiles_echo "Complete Brew Bundle installation with 'brew bundle install --global'"
