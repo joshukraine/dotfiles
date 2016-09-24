@@ -1,6 +1,8 @@
 My Dotfiles for macOS
 =====================
 
+![dotfiles screenshot](https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot.jpg)
+
 These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
 
 
