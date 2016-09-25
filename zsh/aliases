@@ -80,6 +80,13 @@ alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
 
+# Mac App Store (https://github.com/argon/mas)
+alias masi='mas install'
+alias masl='mas list'
+alias maso='mas outdated'
+alias mass='mas search'
+alias masu='mas upgrade'
+
 # rbenv
 alias rbv='rbenv versions'
 alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
