@@ -213,7 +213,6 @@ Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim        
 Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in red                 | https://github.com/bronson/vim-trailing-whitespace
 Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
-Plugin 'mattn/gist-vim'                   " Post gists from vim                                   | https://github.com/mattn/gist-vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
 
@@ -244,7 +243,6 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
-map <C-n> :vs note:<CR>
 
 " Delete all lines beginning with '#' regardless of leading space.
 map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
@@ -331,15 +329,6 @@ let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_haml_checkers = ['haml_lint']
 let g:syntastic_javascript_checkers = ['eslint']
 
-" Gist settings
-let g:github_user = $GITHUB_USER
-let g:github_token = $GITHUB_TOKEN
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 0
-let g:gist_post_private = 1
-let g:gist_show_privates = 1
-let g:gist_clip_command = 'pbcopy'
-
 " Key mappings for dragvisuals.vim
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
 
@@ -352,9 +341,6 @@ vmap  <expr>  D        DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
-" Notes.vim
-" let g:notes_directories = ['~/Dropbox/Notes']
-" let g:notes_suffix = '.md'
 " }}}
 
 " Commands {{{
