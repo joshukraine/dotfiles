@@ -13,7 +13,5 @@ tmp/
 config/local_env.yml
 Session.vim
 .powenv
-.zshrc.local
-.gitconfig.local
-.vimrc.local
 node_modules/
+*.local
