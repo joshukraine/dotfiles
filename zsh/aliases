@@ -87,10 +87,10 @@ alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
 # Finder
 alias o='open . &'
 
-# Check for OS X updates
+# Check for macOS updates
 alias upc='softwareupdate -l'
 
-# Download and install OS X updates
+# Download and install macOS updates
 alias upd='softwareupdate -i -a'
 
 # Misc
