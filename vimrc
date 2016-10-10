@@ -328,6 +328,10 @@ command! RVfactories :vs spec/factories.rb
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_haml_checkers = ['haml_lint']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
 
 " Key mappings for dragvisuals.vim
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
