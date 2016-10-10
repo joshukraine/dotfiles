@@ -80,6 +80,15 @@ alias msg='bundle exec middleman server -e gulp'
 alias mcc='bundle exec middleman console'
 alias mbb='bundle exec middleman build --clean'
 
+# npm (borrowed from Oh-My-Zsh npm plugin)
+alias npmG='npm install --global'
+alias npmS='npm install --save'
+alias npmD='npm install --save-dev'
+alias npmO='npm outdated'
+alias npmV='npm -v'
+alias npmL='npm list --depth=0'
+alias npmLg='npm list --depth=0 -g'
+
 # Postgres
 alias statpost='ps aux | ag postgres'
 alias psq='pgcli -d postgres'
