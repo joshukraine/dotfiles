@@ -6,13 +6,13 @@ alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list
 alias vi0='vim -u NONE'
 
 # Jump to quick edits
-alias ea='vim ~/dotfiles/zsh/aliases'
-alias ed='vim ~/dotfiles'
-alias ef='vim ~/dotfiles/zsh/functions'
-alias ep='vim ~/dotfiles/zsh/prompt'
-alias et='vim ~/.tmux.conf'
-alias ev='vim ~/.vimrc'
-alias ez='vim ~/.zshrc'
+alias ea='$EDITOR ~/dotfiles/zsh/aliases'
+alias ed='$EDITOR ~/dotfiles'
+alias ef='$EDITOR ~/dotfiles/zsh/functions'
+alias ep='$EDITOR ~/dotfiles/zsh/prompt'
+alias et='$EDITOR ~/.tmux.conf'
+alias ev='$EDITOR ~/.vimrc'
+alias ez='$EDITOR ~/.zshrc'
 
 # General UNIX
 alias mv='mv -iv'
