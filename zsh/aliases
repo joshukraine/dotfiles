@@ -20,10 +20,14 @@ alias cp='cp -iv'
 alias srm='srm -iv'
 alias df='df -h'
 alias du='du -h'
+alias dud='du -d 1 -h'
+alias duf='du -sh *'
 alias mkdir='mkdir -pv'
 alias src='source ~/.zshrc'
 alias pi='ping -Anc 5 8.8.8.8'
 alias path='echo -e ${PATH//:/\\n}'
+
+# Moving around
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -32,12 +36,21 @@ alias .2='cd ../../'
 alias .3='cd ../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
-alias lsa='ls -lahF'
-alias l='ls -lahF'
-alias ll='ls -lhF'
-alias la='ls -lAhF'
-alias lf='ls -F'
-alias lh='ls -d .*'
+
+# Listing files and directories
+alias l='ls -lFh'     #size,show type,human readable
+alias la='ls -lAFh'   #long list,show almost all,show type,human readable
+alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
+alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
+alias ll='ls -l'      #long list
+alias ldot='ls -ld .*'
+alias lS='ls -1FSsh'
+alias lart='ls -1Fcart'
+alias lrt='ls -1Fcrt'
+
+# Finding stuff!
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
 
 # Tree
 alias t1='tree -CFL 1'
