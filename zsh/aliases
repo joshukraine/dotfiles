@@ -75,10 +75,10 @@ alias bx='bundle exec'
 alias sst='spring status'
 
 # Middleman
-alias mss='bundle exec middleman server'
-alias msg='bundle exec middleman server -e gulp'
-alias mcc='bundle exec middleman console'
-alias mbb='bundle exec middleman build --clean'
+alias mm='bundle exec middleman'
+alias mms='bundle exec middleman server'
+alias mmc='bundle exec middleman console -e console'
+alias mmb='bundle exec middleman build --clean'
 
 # npm (borrowed from Oh-My-Zsh npm plugin)
 alias npmG='npm install --global'
