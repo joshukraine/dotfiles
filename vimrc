@@ -255,9 +255,6 @@ nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 " zoom back out
 nnoremap <leader>= :wincmd =<cr>
 
-" Force vim to use 'very magic' mode for regex searches
-nnoremap / /\v
-
 " }}}
 
 " Plugin-specific Mappings and Settings {{{
