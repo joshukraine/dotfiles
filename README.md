@@ -1,9 +1,9 @@
 My Dotfiles for macOS
 =====================
 
-![dotfiles screenshot](https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot2.jpg)
+![dotfiles screenshot](https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot.png)
 
-These are the dotfiles I use on my MacBook Pro, currently running macOS Sierra (10.12). They are geared primarily towards Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
+These are the dotfiles I use on my MacBook Pro, currently running [macOS Sierra (10.12)](http://www.apple.com/macos/sierra/). They are geared primarily towards Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
 
 
 Mac Bootstrap Script
