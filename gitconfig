@@ -5,14 +5,18 @@
 
   b = branch
   ba = branch --all
+  br = branch --remote
 
   ca = commit --amend
-  co = checkout
   ci = commit -v
+  co = checkout
+  com = checkout master
 
   dc = diff --word-diff --cached --color-words
   df = diff --word-diff --color-words
   dfs = diff --staged
+
+  f = fetch
 
   lg = log --stat --color
   lgg = log --graph --color
@@ -34,9 +38,12 @@
   st = status
 
   recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  rv = remote -v
 
   unstage = reset
   uncommit = reset --soft HEAD^
+
+  wch = whatchanged -p --abbrev-commit --pretty=medium
 
 [apply]
   whitespace = nowarn
