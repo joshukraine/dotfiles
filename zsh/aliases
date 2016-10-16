@@ -105,6 +105,10 @@ alias bsl='brew services list'
 alias bsr='brew services restart'
 alias bs0='brew services stop'
 alias bs1='brew services start'
+alias brews='brew list -1'
+alias bubo='brew update && brew outdated'
+alias bubc='brew upgrade && brew cleanup'
+alias bubu='bubo && bubc'
 
 # Mac App Store (https://github.com/argon/mas)
 alias masi='mas install'
