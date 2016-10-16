@@ -20,3 +20,13 @@ function fs() {
 function conflicted { vim +Conflicted }
 
 function vundle_update { vim +PluginUpdate +qall }
+
+# No arguments: `git status`
+# With arguments: acts like `git`
+g() {
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status
+  fi
+}
