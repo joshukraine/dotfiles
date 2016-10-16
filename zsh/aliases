@@ -63,6 +63,47 @@ alias t2a='tree -CFLa 2'
 alias t3a='tree -CFLa 3'
 alias t4a='tree -CFLa 4'
 
+# Git (Mostly equivalent to ~/.gitconfig aliases)
+alias ga='git add'
+alias gaa='git add --all'
+alias gap='git add --patch'
+
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbr='git branch --remote'
+
+alias gca='git commit --amend'
+alias gci='git commit -v'
+alias gco='git checkout'
+alias gcm='git checkout master'
+
+alias gdc='git diff --word-diff --cached --color-words'
+alias gdf='git diff --word-diff --color-words'
+alias gdfs='git diff --staged'
+
+alias gf='git fetch'
+
+alias glg='git log --stat --color'
+alias glgg='git log --graph --color'
+alias glga='git log --graph --decorate --all'
+alias glgm='git log --graph --max-count=10'
+alias glgp='git log --stat --color --patch'
+alias glo='git log --oneline --decorate --color'
+alias glor='git log --oneline --decorate --color --graph'
+alias glol='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias gloa='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --all'
+
+alias gmup='!git checkout master && git pull && git checkout -'
+
+alias gpl='git pull'
+alias gpum='git push -u origin master'
+alias gps='git push'
+
+alias gsta='git status --short --branch'
+alias gst='git status'
+
+alias grv='git remote -v'
+
 # Upgrade Oh My Zshell
 alias upz='upgrade_oh_my_zsh'
 
