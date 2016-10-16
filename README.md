@@ -1,9 +1,9 @@
 My Dotfiles for macOS
 =====================
 
-![dotfiles screenshot](https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot.jpg)
+![dotfiles screenshot](https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot2.jpg)
 
-These are the dotfiles I use on my MacBook Pro, currently running El Capitan. They are geared primarily for Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
+These are the dotfiles I use on my MacBook Pro, currently running macOS Sierra (10.12). They are geared primarily towards Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
 
 
 Mac Bootstrap Script
@@ -19,7 +19,7 @@ NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 Prerequisites
 -------------
 
-The dotfiles assume you are running macOS (10.11) with the following software preinstalled:
+The dotfiles assume you are running macOS with the following software preinstalled:
 
 * [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
 * [Homebrew](http://brew.sh)
