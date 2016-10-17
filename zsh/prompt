@@ -44,11 +44,11 @@ ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[yellow]%}⚑"
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 
-local datetime='[%{$fg[yellow]%}%D{%Y-%m-%d %H:%M:%S}%{$reset_color%}]'
+local timestamp='[%{$fg[yellow]%}%*%{$reset_color%}]'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
 local git='$(my_git_prompt)$(git_prompt_short_sha)'
 
-PROMPT="${datetime} ${pwd} ${git}
+PROMPT="${timestamp} ${pwd} ${git}
 %(?..%{$fg[red]%})%B$%b "
 
 setopt transient_rprompt # only show the rprompt on the current prompt
