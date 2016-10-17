@@ -1,46 +1,47 @@
 [alias]
-  a = add
+  a  = add
   aa = add --all
   ap = add --patch
 
-  b = branch
+  b  = branch
   ba = branch --all
   br = branch --remote
 
-  ca = commit --amend
-  ci = commit -v
-  co = checkout
+  ca  = commit --amend
+  ci  = commit -v
+  co  = checkout
   com = checkout master
 
-  dc = diff --word-diff --cached --color-words
-  df = diff --word-diff --color-words
+  dc  = diff --word-diff --cached --color-words
+  df  = diff --word-diff --color-words
   dfs = diff --staged
 
   f = fetch
 
-  lg = log --stat --color
+  l   = log --oneline --decorate --color --graph
+  la  = log --oneline --decorate --color --graph --all
+  lo  = log --oneline --decorate --color
+  lg  = log --stat --color
   lgg = log --graph --color
   lga = log --graph --decorate --all
   lgm = log --graph --max-count=10
   lgp = log --stat --color --patch
-  lo = log --oneline --decorate --color
-  lor = log --oneline --decorate --color --graph
   lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   loa = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
 
   mup = !git checkout master && git pull && git checkout -
 
-  pl = pull
+  pl  = pull
+  ps  = push
   pum = push -u origin master
-  ps = push
 
   sta = status --short --branch
-  st = status
+  st  = status
 
-  recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-  rv = remote -v
+  recent = for-each-ref --sort = committerdate refs/heads/ --format = '%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  rv     = remote -v
 
-  unstage = reset
+  unstage  = reset
   uncommit = reset --soft HEAD^
 
   wch = whatchanged -p --abbrev-commit --pretty=medium
@@ -61,6 +62,9 @@
   editor = vim
   excludesfile = ~/.gitignore_global
 
+[color "status"]
+  untracked = cyan
+
 [fetch]
   prune = true
 
@@ -69,7 +73,7 @@
 
 [gitsh "color"]
   default = blue
-  untracked = yellow
+  untracked = cyan
   modified = red
 
 [include]
@@ -77,13 +81,13 @@
 
 [merge]
   conflictstyle = diff3
-  ff = only
+  ff = false
 
 [pull]
   rebase = preserve
 
 [push]
-  default = upstream
+  default = simple
 
 [url "https://github.com/"]
   insteadOf = git@github.com:
