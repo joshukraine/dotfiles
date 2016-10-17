@@ -11,7 +11,7 @@ export PATH=$PATH:$GOPATH/bin
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 
 setopt auto_cd
-cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
+cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
 
 HISTSIZE=20000
 SAVEHIST=20000
