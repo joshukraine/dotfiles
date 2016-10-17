@@ -83,21 +83,22 @@ alias gdfs='git diff --staged'
 
 alias gf='git fetch'
 
+alias gl='git log --oneline --decorate --color --graph'
+alias gla='git log --oneline --decorate --color --graph --all'
+alias glo='git log --oneline --decorate --color'
 alias glg='git log --stat --color'
 alias glgg='git log --graph --color'
 alias glga='git log --graph --decorate --all'
 alias glgm='git log --graph --max-count=10'
 alias glgp='git log --stat --color --patch'
-alias glo='git log --oneline --decorate --color'
-alias glor='git log --oneline --decorate --color --graph'
 alias glol='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gloa='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --all'
 
 alias gmup='!git checkout master && git pull && git checkout -'
 
 alias gpl='git pull'
-alias gpum='git push -u origin master'
 alias gps='git push'
+alias gpum='git push -u origin master'
 
 alias gsta='git status --short --branch'
 alias gst='git status'
