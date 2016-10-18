@@ -76,6 +76,7 @@ alias gca='git commit --amend'
 alias gci='git commit -v'
 alias gco='git checkout'
 alias gcm='git checkout master'
+alias gcl='git clone'
 
 alias gdc='git diff --word-diff --cached --color-words'
 alias gdf='git diff --word-diff --color-words'

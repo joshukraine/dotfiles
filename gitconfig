@@ -9,6 +9,7 @@
 
   ca  = commit --amend
   ci  = commit -v
+  cl  = clone
   co  = checkout
   com = checkout master
 
