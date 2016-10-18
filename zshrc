@@ -23,6 +23,7 @@ source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/prompt
 source $HOME/dotfiles/zsh/tmux
 source $HOME/dotfiles/zsh/functions
+source $HOME/dotfiles/zsh/z.sh
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
