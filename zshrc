@@ -16,6 +16,7 @@ cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOM
 HISTSIZE=1000000
 SAVEHIST=1000000
 HISTFILE=~/.zsh_history
+HIST_STAMPS="yyyy-mm-dd"
 
 source $HOME/dotfiles/zsh/oh-my-zsh
 source $HOME/dotfiles/zsh/aliases
