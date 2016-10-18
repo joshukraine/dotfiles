@@ -13,8 +13,8 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 setopt auto_cd
 cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
 
-HISTSIZE=20000
-SAVEHIST=20000
+HISTSIZE=1000000
+SAVEHIST=1000000
 HISTFILE=~/.zsh_history
 
 source $HOME/dotfiles/zsh/oh-my-zsh
