@@ -101,7 +101,7 @@ alias gpl='git pull'
 alias gps='git push'
 alias gpum='git push -u origin master'
 
-alias gsta='git status --short --branch'
+alias gs='git status --short --branch'
 alias gst='git status'
 
 alias grv='git remote -v'
