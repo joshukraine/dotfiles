@@ -101,10 +101,12 @@ alias gpl='git pull'
 alias gps='git push'
 alias gpum='git push -u origin master'
 
+alias grv='git remote -v'
+
 alias gs='git status --short --branch'
 alias gst='git status'
 
-alias grv='git remote -v'
+alias gtl='git tag --list | sort -r'
 
 # Upgrade Oh My Zshell
 alias upz='upgrade_oh_my_zsh'
