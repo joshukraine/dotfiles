@@ -13,7 +13,9 @@ _rubyprompt() {
 }
 
 function my_remote_status() {
-  echo "$(git_commits_ahead)$(git_commits_behind)"
+  if [[ -n "$(command git show-ref origin/$(git_current_branch) 2> /dev/null)"  ]]; then
+    echo "$(git_commits_ahead)$(git_commits_behind)"
+  fi
 }
 
 # Adapted from git_prompt_info(): oh-my-zsh/lib/git.zsh
