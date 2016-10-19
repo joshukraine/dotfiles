@@ -36,11 +36,13 @@
   ps  = push
   pum = push -u origin master
 
+  recent = for-each-ref --sort = committerdate refs/heads/ --format = '%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  rv     = remote -v
+
   s = status --short --branch
   st  = status
 
-  recent = for-each-ref --sort = committerdate refs/heads/ --format = '%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-  rv     = remote -v
+  tl = tag --list
 
   unstage  = reset
   uncommit = reset --soft HEAD^
