@@ -25,6 +25,10 @@ alias tsrc="tmux source-file ~/.tmux.conf"
 # Kill all tmux sessions
 alias tka="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
 
+# Useful for setting up tmuxinator envs
+# http://stackoverflow.com/a/9976282/183537
+alias tlw='tmux list-windows'
+
 # Always in tmux :)
 _not_inside_tmux() { [[ -z "$TMUX" ]] }
 
