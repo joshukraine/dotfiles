@@ -25,12 +25,6 @@ source $HOME/dotfiles/zsh/tmux
 source $HOME/dotfiles/zsh/functions
 source $HOME/dotfiles/zsh/z.sh
 
-# hub - https://github.com/github/hub#aliasing
-# Insecure directories error? http://stackoverflow.com/a/13785716
-eval "$(hub alias -s)"
-fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
-autoload -U compinit && compinit
-
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
