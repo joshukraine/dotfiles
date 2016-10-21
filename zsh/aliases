@@ -47,6 +47,7 @@ alias ldot='ls -ld .*'
 alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
+alias ld='ls -ld' # Useful for showing permissions of a single directory
 
 # Finding stuff!
 alias fd='find . -type d -name'
