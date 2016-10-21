@@ -93,7 +93,6 @@ cask "ngrok"
 cask "opera"
 cask "postico"
 cask "private-internet-access"
-cask "razer-synapse"
 cask "screenflick"
 cask "sketch"
 cask "skype"
@@ -116,7 +115,6 @@ mas "Marked 2", id: 890031187
 mas "Tweetbot", id: 557168941
 mas "Pages", id: 409201541
 mas "Byword", id: 420212497
-mas "Dash", id: 449589707
 mas "OmniFocus", id: 867299399
 mas "Pixelmator", id: 407963104
 mas "Numbers", id: 409203825
