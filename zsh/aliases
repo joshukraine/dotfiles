@@ -183,3 +183,4 @@ alias upd='softwareupdate -i -a'
 
 # Misc
 alias color='colortest -w -s'
+alias hangout='open https://hangouts.google.com/hangouts/_'
