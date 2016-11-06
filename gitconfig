@@ -32,9 +32,10 @@
 
   mup = !git checkout master && git pull && git checkout -
 
-  pl  = pull
-  ps  = push
-  pum = push -u origin master
+  pl     = pull
+  ps     = push
+  pum    = push -u origin master
+  please = push --force-with-lease
 
   recent = for-each-ref --sort = committerdate refs/heads/ --format = '%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
   rv     = remote -v
