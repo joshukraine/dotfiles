@@ -118,9 +118,12 @@ alias upz='upgrade_oh_my_zsh'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 
-# Rails (more are defined in the oh-my-zsh rails plugin)
+# Rails
 alias bx='bundle exec'
 alias sst='spring status'
+
+# Pow/Powder
+alias pw='powder'
 
 # Middleman
 alias mm='bundle exec middleman'
