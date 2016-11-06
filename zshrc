@@ -9,6 +9,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
+export DISABLE_AUTO_TITLE=true
 
 setopt auto_cd
 cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
