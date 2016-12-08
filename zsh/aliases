@@ -172,6 +172,10 @@ alias masu='mas upgrade'
 alias rbv='rbenv versions'
 alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
 
+# Ansible
+alias ans='ansible'
+alias ap='ansible-playbook'
+
 # Finder
 alias o='open . &'
 
