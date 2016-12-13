@@ -1,7 +1,6 @@
 # https://github.com/Homebrew/homebrew-bundle
 
 tap "caskroom/cask"
-tap "goles/battery"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/dupes"
@@ -28,7 +27,6 @@ brew "gettext"
 brew "gist"
 brew "git"
 brew "glib"
-brew "goles/battery/battery"
 brew "homebrew/dupes/rsync"
 brew "htop"
 brew "hub"
