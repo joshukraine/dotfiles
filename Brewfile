@@ -84,7 +84,6 @@ cask "firefox"
 cask "google-chrome"
 cask "google-drive"
 cask "hazel"
-cask "hipchat"
 cask "istat-menus"
 cask "iterm2"
 cask "little-snitch"
@@ -115,6 +114,7 @@ mas "Pages", id: 409201541
 mas "Pimp Your Screen", id: 755444885
 mas "Pixelmator", id: 407963104
 mas "Scrivener", id: 418889511
+mas "Slack", id: 803453959
 mas "Tweetbot", id: 557168941
 mas "WiFi Explorer", id: 494803304
 mas "e-Sword X", id: 968437868
