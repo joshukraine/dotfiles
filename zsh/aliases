@@ -54,15 +54,16 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
 # Tree
-alias t1='tree -CFL 1'
-alias t2='tree -CFL 2'
-alias t3='tree -CFL 3'
-alias t4='tree -CFL 4'
+alias tree='tree -CF'
+alias t1='tree -L 1'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
+alias t4='tree -L 4'
 
-alias t1a='tree -CFLa 1'
-alias t2a='tree -CFLa 2'
-alias t3a='tree -CFLa 3'
-alias t4a='tree -CFLa 4'
+alias t1a='tree -La 1'
+alias t2a='tree -La 2'
+alias t3a='tree -La 3'
+alias t4a='tree -La 4'
 
 # Git (Mostly equivalent to ~/.gitconfig aliases)
 alias ga='git add'
