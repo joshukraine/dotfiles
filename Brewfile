@@ -97,8 +97,8 @@ cask "sketch"
 cask "skype"
 cask "the-unarchiver"
 cask "vagrant"
-cask "virtualbox"
 cask "vlc"
+cask "vmware-fusion"
 
 # mas-cli
 # https://github.com/argon/mas
