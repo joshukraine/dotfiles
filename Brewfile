@@ -40,7 +40,6 @@ brew "libtiff"
 brew "libtool"
 brew "libyaml"
 brew "mas"
-brew "namebench"
 brew "openssl"
 brew "pcre"
 brew "perl"
@@ -87,7 +86,6 @@ cask "hazel"
 cask "istat-menus"
 cask "iterm2"
 cask "little-snitch"
-cask "namebench"
 cask "ngrok"
 cask "opera"
 cask "postico"
@@ -103,7 +101,6 @@ cask "vmware-fusion"
 # mas-cli
 # https://github.com/argon/mas
 mas "1Password", id: 443987910
-mas "Byword", id: 420212497
 mas "Evernote", id: 406056744
 mas "Gemini 2", id: 1090488118
 mas "Magnet", id: 441258766
