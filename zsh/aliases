@@ -123,9 +123,6 @@ alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Find
 alias bx='bundle exec'
 alias sst='spring status'
 
-# Pow/Powder
-alias pw='powder'
-
 # Middleman
 alias mm='bundle exec middleman'
 alias mms='bundle exec middleman server'
