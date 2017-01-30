@@ -46,6 +46,7 @@ brew "perl"
 brew "pgcli"
 brew "pkg-config"
 brew "postgresql", service_restart: true
+brew "puma-dev"
 brew "python"
 brew "rbenv"
 brew "readline"
