@@ -53,6 +53,7 @@ brew "readline"
 brew "reattach-to-user-namespace"
 brew "redis", service_restart: true
 brew "ruby-build"
+brew "shellcheck"
 brew "spark"
 brew "speedtest_cli"
 brew "sqlite"
