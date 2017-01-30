@@ -1,9 +1,11 @@
+# http://ruby-doc.org/stdlib-2.4.0/libdoc/rubygems/rdoc/Gem/ConfigFile.html
+
 ---
-:verbose: true
 gem: --no-ri --no-rdoc
-:update_sources: true
 :sources:
-- http://gems.rubyforge.org
-:backtrace: false
+- https://rubygems.org
+:verbose: true
+:update_sources: true
+:backtrace: true
 :bulk_threshold: 1000
 :benchmark: false
