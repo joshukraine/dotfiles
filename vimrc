@@ -172,7 +172,7 @@ Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers   
 Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
 Plugin 'kana/vim-textobj-user'            " Create your own text objects                          | https://github.com/kana/vim-textobj-user
 Plugin 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting ruby blocks        | https://github.com/nelstrom/vim-textobj-rubyblock
-Plugin 'scrooloose/syntastic'             " Syntax checking hacks for vim                         | https://github.com/scrooloose/syntastic
+Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
 
 " Searching and Navigation
 Plugin 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
