@@ -7,6 +7,7 @@ tap "homebrew/dupes"
 tap "homebrew/services"
 tap "homebrew/versions"
 tap "thoughtbot/formulae"
+tap "puma/puma"
 
 # Homebrew
 # https://github.com/Homebrew/brew/
