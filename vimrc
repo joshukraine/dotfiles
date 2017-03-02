@@ -86,7 +86,7 @@ set autoread
 set clipboard+=unnamed
 
 " Don't show intro
-set shortmess+=I
+" set shortmess+=I
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
@@ -214,6 +214,7 @@ Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in re
 Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
+Plugin 'slim-template/vim-slim'           " Slim syntax highlighting                              | https://github.com/slim-template/vim-slim
 Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
 
 " All of your Plugins must be added before the following line
