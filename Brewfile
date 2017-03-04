@@ -1,6 +1,7 @@
 # https://github.com/Homebrew/homebrew-bundle
 
 tap "caskroom/cask"
+tap "caskroom/versions"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/dupes"
@@ -81,7 +82,7 @@ cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "crashplan"
 cask "daisydisk"
-cask "dash"
+cask "dash3"
 cask "dropbox"
 cask "fantastical"
 cask "firefox"
