@@ -252,7 +252,7 @@
 	<key>DimOnlyText</key>
 	<false/>
 	<key>DisableFullscreenTransparency</key>
-	<true/>
+	<false/>
 	<key>EnableRendezvous</key>
 	<false/>
 	<key>FocusFollowsMouse</key>
@@ -266,18 +266,24 @@
 	<key>HideActivityIndicator</key>
 	<false/>
 	<key>HideMenuBarInFullscreen</key>
-	<true/>
+	<false/>
 	<key>HideScrollbar</key>
 	<false/>
 	<key>HideTab</key>
 	<false/>
+	<key>HideTabCloseButton</key>
+	<false/>
+	<key>HideTabNumber</key>
+	<false/>
 	<key>HighlightTabLabels</key>
 	<true/>
 	<key>HotKeyBookmark</key>
-	<string>51194D10-71D0-426D-A08A-08237ECB8E16</string>
+	<string>912B9877-27CF-4131-92C1-2A581E58E1F1</string>
 	<key>HotKeyTogglesWindow</key>
 	<true/>
 	<key>Hotkey</key>
+	<true/>
+	<key>HotkeyAutoHides</key>
 	<true/>
 	<key>HotkeyChar</key>
 	<integer>32</integer>
@@ -285,6 +291,8 @@
 	<integer>49</integer>
 	<key>HotkeyModifiers</key>
 	<integer>524288</integer>
+	<key>HotkeyWindowFloatsAboveOtherWindows</key>
+	<false/>
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>JobName</key>
@@ -297,6 +305,10 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSColorPanelMode</key>
+	<string>7</string>
+	<key>NSColorPickerPreferredRGBEntryMode</key>
+	<integer>2</integer>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -316,7 +328,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdCAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdCGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -337,18 +349,18 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>685 618 228 297 0 0 2560 1440 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>195 327 552 101 0 0 1920 1080 </string>
+	<string>1465 121 698 354 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>650 520 620 392 0 0 1920 1057 </string>
+	<string>970 786 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2747 171 796 473 1920 0 1920 1080 </string>
+	<string>1472 395 918 512 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 554 1920 526 0 0 1920 1080 </string>
+	<string>0 88 910 1330 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>767 177 1090 788 0 0 1920 1057 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2167 112 820 548 1920 0 1920 1057 </string>
+	<string>2749 258 1510 1048 2560 0 2560 1418 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -517,18 +529,29 @@
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
-			<key>Background Image Location</key>
-			<string></string>
+			<key>Badge Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.5</real>
+				<key>Blue Component</key>
+				<real>0.0</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.0</real>
+				<key>Red Component</key>
+				<real>1</real>
+			</dict>
 			<key>Blend</key>
-			<real>0.30000001192092896</real>
+			<real>0.2426469970972111</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
 			<true/>
 			<key>Blur</key>
-			<false/>
+			<true/>
 			<key>Blur Radius</key>
-			<real>2</real>
+			<real>19.615594951923079</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -543,9 +566,11 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>90</integer>
+			<integer>150</integer>
 			<key>Command</key>
 			<string></string>
+			<key>Cursor Boost</key>
+			<real>0.0</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -554,6 +579,19 @@
 				<real>0.50962930917739868</real>
 				<key>Red Component</key>
 				<real>0.44058024883270264</real>
+			</dict>
+			<key>Cursor Guide Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.25</real>
+				<key>Blue Component</key>
+				<real>1</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.91000000000000003</real>
+				<key>Red Component</key>
+				<real>0.65000000000000002</real>
 			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
@@ -594,7 +632,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.1000000238418579</real>
+			<real>0.97617660516715898</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -910,6 +948,19 @@
 					<string>[1;5F</string>
 				</dict>
 			</dict>
+			<key>Link Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.67800000000000005</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.27000000000000002</real>
+				<key>Red Component</key>
+				<real>0.023</real>
+			</dict>
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
@@ -917,13 +968,15 @@
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
-			<string>Default</string>
+			<string>Solarized Dark</string>
 			<key>Non Ascii Font</key>
 			<string>SauceCodePowerline-Light 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline 16</string>
+			<string>FiraCode-Regular 16</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -931,9 +984,9 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>25</integer>
+			<integer>50</integer>
 			<key>Screen</key>
-			<integer>-1</integer>
+			<integer>1</integer>
 			<key>Scrollback Lines</key>
 			<integer>50000</integer>
 			<key>Scrollback With Status Bar</key>
@@ -1068,6 +1121,8 @@
 					<string>\btelnet:([a-z0-9A-Z_]+@)?([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\b</string>
 				</dict>
 			</array>
+			<key>Space</key>
+			<integer>-1</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -1083,15 +1138,17 @@
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
-			<false/>
+			<true/>
 			<key>Use Bright Bold</key>
 			<false/>
 			<key>Use Canonical Parser</key>
 			<false/>
+			<key>Use Cursor Guide</key>
+			<false/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.058158278465271</real>
+			<real>1</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1267,8 +1324,21 @@
 			<false/>
 			<key>Background Image Location</key>
 			<string></string>
+			<key>Badge Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.5</real>
+				<key>Blue Component</key>
+				<real>0.0</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.0</real>
+				<key>Red Component</key>
+				<real>1</real>
+			</dict>
 			<key>Blend</key>
-			<real>0.5</real>
+			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -1276,7 +1346,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>3.0418014526367188</real>
+			<real>30</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1286,6 +1356,8 @@
 				<key>Red Component</key>
 				<real>0.50599193572998047</real>
 			</dict>
+			<key>Bound Hosts</key>
+			<array/>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -1303,6 +1375,19 @@
 				<key>Red Component</key>
 				<real>0.44058024883270264</real>
 			</dict>
+			<key>Cursor Guide Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.25</real>
+				<key>Blue Component</key>
+				<real>1</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.91000000000000003</real>
+				<key>Red Component</key>
+				<real>0.65000000000000002</real>
+			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1317,7 +1402,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -1338,11 +1423,11 @@
 				<real>0.44058024883270264</real>
 			</dict>
 			<key>Guid</key>
-			<string>51194D10-71D0-426D-A08A-08237ECB8E16</string>
+			<string>912B9877-27CF-4131-92C1-2A581E58E1F1</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.1000000238418579</real>
+			<real>0.97617660516715898</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1658,6 +1743,19 @@
 					<string>[1;5F</string>
 				</dict>
 			</dict>
+			<key>Link Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.67800000000000005</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.27000000000000002</real>
+				<key>Red Component</key>
+				<real>0.023</real>
+			</dict>
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
@@ -1671,9 +1769,11 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline 16</string>
+			<string>FiraCode-Regular 16</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
+			<key>Prevent Opening in a Tab</key>
+			<false/>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -1681,7 +1781,7 @@
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
-			<integer>-1</integer>
+			<integer>0</integer>
 			<key>Scrollback Lines</key>
 			<integer>50000</integer>
 			<key>Scrollback With Status Bar</key>
@@ -1827,13 +1927,13 @@
 			<key>Thin Strokes</key>
 			<integer>2</integer>
 			<key>Transparency</key>
-			<real>0.095525145530700684</real>
+			<real>0.14613766642011836</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
-			<false/>
+			<true/>
 			<key>Use Bright Bold</key>
 			<false/>
 			<key>Use Canonical Parser</key>
@@ -1841,27 +1941,23 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.0621833801269531</real>
+			<real>1</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>2</integer>
+			<integer>6</integer>
 			<key>Working Directory</key>
-			<string>/Users/joshukraine/code</string>
+			<string>/Users/joshukraine/Desktop</string>
 		</dict>
 	</array>
-	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
-	<true/>
-	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
-	<integer>1</integer>
-	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
+	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>E5831967-AAE2-47AD-9862-8C5686DD85AD</string>
+	<string>50FDFC79-020E-4E78-9FE3-7F34C9076ACC</string>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>497039282.74905598</real>
+	<real>506710255.95253497</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -1926,11 +2022,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=97</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=21</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-12-23T11:41:17Z</date>
+	<date>2017-03-26T11:00:48Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1938,6 +2034,8 @@
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
+	<true/>
+	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
 	<true/>
@@ -1949,6 +2047,8 @@
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
+	<key>TabStyle</key>
+	<integer>1</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
@@ -1980,6 +2080,12 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.13</string>
+	<string>3.0.15</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
+	<key>kCPKUseSystemColorPicker</key>
+	<false/>
 </dict>
 </plist>
