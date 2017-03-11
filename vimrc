@@ -263,7 +263,7 @@ nnoremap <leader>= :wincmd =<cr>
 " NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=25
+let g:NERDTreeWinSize=28
 let NERDTreeShowHidden=1
 
 " Toggle GitGutter
