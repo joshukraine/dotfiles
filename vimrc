@@ -245,6 +245,9 @@ map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 
+" Expand active file directory
+cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
 " Delete all lines beginning with '#' regardless of leading space.
 map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 
