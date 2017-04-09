@@ -52,6 +52,7 @@ brew "postgresql", service_restart: true
 brew "puma-dev"
 brew "python"
 brew "rbenv"
+brew "rbenv-default-gems"
 brew "readline"
 brew "reattach-to-user-namespace"
 brew "redis", service_restart: true

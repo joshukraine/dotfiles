@@ -31,5 +31,9 @@ for file in $files; do
   ln -nfs "$DOTFILES_DIR/$file" "$HOME/.$file"
 done
 
+if [ -d "$HOME"/.rbenv ]; then
+  ln -nfs "$DOTFILES_DIR"/default-gems "$HOME"/.rbenv/default-gems
+fi
+
 dotfiles_echo "Dotfiles installation complete!"
 dotfiles_echo "Complete Brew Bundle installation with 'brew bundle install -v --global'"
