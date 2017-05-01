@@ -7,8 +7,8 @@ tap "homebrew/core"
 tap "homebrew/dupes"
 tap "homebrew/services"
 tap "homebrew/versions"
-tap "thoughtbot/formulae"
 tap "puma/puma"
+tap "thoughtbot/formulae"
 
 # Homebrew
 # https://github.com/Homebrew/brew/
@@ -30,7 +30,6 @@ brew "gettext"
 brew "gist"
 brew "git"
 brew "glib"
-brew "homebrew/dupes/rsync"
 brew "htop"
 brew "hub"
 brew "imagemagick"
@@ -48,14 +47,16 @@ brew "pcre"
 brew "perl"
 brew "pgcli"
 brew "pkg-config"
-brew "postgresql", service_restart: true
-brew "puma-dev"
+brew "postgresql", restart_service: true
+brew "puma/puma/puma-dev"
 brew "python"
 brew "rbenv"
 brew "rbenv-default-gems"
 brew "readline"
 brew "reattach-to-user-namespace"
-brew "redis", service_restart: true
+brew "redis", restart_service: true
+brew "rsync"
+brew "ruby"
 brew "ruby-build"
 brew "shellcheck"
 brew "spark"
@@ -87,12 +88,14 @@ cask "dash3"
 cask "dropbox"
 cask "fantastical"
 cask "firefox"
+cask "geekbench"
 cask "google-chrome"
 cask "google-drive"
 cask "hazel"
 cask "istat-menus"
 cask "iterm2"
 cask "little-snitch"
+cask "micro-snitch"
 cask "ngrok"
 cask "opera"
 cask "postico"
@@ -114,6 +117,7 @@ mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
 mas "OmniFocus", id: 867299399
+mas "OmniGraffle", id: 711830901
 mas "Pages", id: 409201541
 mas "Pimp Your Screen", id: 755444885
 mas "Pixelmator", id: 407963104
@@ -121,6 +125,7 @@ mas "Scrivener", id: 418889511
 mas "Slack", id: 803453959
 mas "Tweetbot", id: 557168941
 mas "WiFi Explorer", id: 494803304
+mas "Xcode", id: 497799835
 mas "e-Sword X", id: 968437868
 mas "iNet Network Scanner", id: 403304796
 mas "iStat Mini", id: 927292435
