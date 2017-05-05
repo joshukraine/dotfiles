@@ -113,3 +113,6 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
+
+" Write files as sudo
+cmap w!! w !sudo tee >/dev/null %
