@@ -1,6 +1,5 @@
 export ZSH=$HOME/.oh-my-zsh
-DISABLE_UPDATE_PROMPT=true
-DISABLE_AUTO_UPDATE=true
+export UPDATE_ZSH_DAYS=7
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(rails github history osx)

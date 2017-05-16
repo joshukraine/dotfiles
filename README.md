@@ -1,9 +1,9 @@
 My Dotfiles for macOS
 =====================
 
-![dotfiles screenshot](https://s3.amazonaws.com/images.jsua.co/dotfiles-demo.png)
+![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Macs, currently running [macOS Sierra (10.12)](http://www.apple.com/macos/sierra/). They are geared primarily towards Ruby-based web development using Zsh (via [Oh-My-Zsh](http://ohmyz.sh/)), Vim, and Tmux. Also included is my [iTerm2](https://www.iterm2.com/) profile.
+These are the dotfiles I use on my Macs, currently running [macOS Sierra (10.12)][sierra]. They are geared primarily towards Ruby-based web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), Vim, and Tmux. Also included is my [iTerm2][iterm2] profile.
 
 
 Mac Bootstrap Script
@@ -11,7 +11,7 @@ Mac Bootstrap Script
 
 This repo previously contained my entire provisioning solution for a new machine running a fresh install of macOS. I've now extracted the provisioning functionality into its own repository. Check it out:
 
-&#9657; **Provision a new Mac with [Mac Bootstrap](http://jsua.co/macos).**
+&#9657; **Provision a new Mac with [Mac Bootstrap][mac-bootstrap].**
 
 NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
@@ -21,15 +21,15 @@ Prerequisites
 
 The dotfiles assume you are running macOS with the following software preinstalled:
 
-* [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
-* [Homebrew](http://brew.sh)
-* [Vim](http://www.vim.org/)
-* [Git](https://git-scm.com/)
-* [Tmux](http://tmux.github.io/)
-* [Ruby](https://www.ruby-lang.org/en/)
-* [rbenv](https://github.com/sstephenson/rbenv)
+* [Oh-My-Zsh][oh-my-zsh]
+* [Homebrew][homebrew]
+* [Vim][vim]
+* [Git][git]
+* [Tmux][tmux]
+* [Ruby][ruby]
+* [rbenv][rbenv]
 
-All of the above and more are included in [Mac Bootstrap](http://jsua.co/macos).
+All of the above and more are included in [Mac Bootstrap][mac-bootstrap]
 
 
 Installation
@@ -48,13 +48,13 @@ After running `install.sh` there are still a couple of things that need to be do
 
 * Set up iTerm2 profile (see details below).
 * Add personal data to `~/.gitconfig.local` and `~/.zshrc.local`.
-* Complete [Brew Bundle](https://github.com/Homebrew/homebrew-bundle) with `brew bundle install --global`
+* Complete [Brew Bundle][brew-bundle] with `brew bundle install --global`
 
 
 Setting up iTerm2
 ----------------
 
-Thanks to a [great blog post](http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/) by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
+Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
 
 1. Open iTerm2.
 2. Select iTerm2 > Preferences.
@@ -93,7 +93,24 @@ Helpful web resources on dotfiles, et al.
 * http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
 * https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
 
+
 License
 -------
 
-Copyright (c) 2016 Joshua Steele. [MIT License](https://github.com/joshukraine/dotfiles/blob/master/LICENSE)
+Copyright (c) 2016 Joshua Steele. [MIT License][license]
+
+
+[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-demo.png
+[mac-bootstrap]: http://jsua.co/macos
+[sierra]: http://www.apple.com/macos/sierra/
+[iterm2]: https://www.iterm2.com/
+[oh-my-zsh]: https://github.com/robbyrussell/oh-my-zsh
+[homebrew]: http://brew.sh
+[vim]: http://www.vim.org/
+[git]: https://git-scm.com/
+[tmux]: http://tmux.github.io/
+[ruby]: https://www.ruby-lang.org/en
+[rbenv]: https://github.com/sstephenson/rbenv
+[brew-bundle]: https://github.com/Homebrew/homebrew-bundle
+[blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
+[license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
