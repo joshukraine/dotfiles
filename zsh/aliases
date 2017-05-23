@@ -13,6 +13,7 @@ alias ep='$EDITOR ~/dotfiles/zsh/prompt'
 alias et='$EDITOR ~/.tmux.conf'
 alias ev='$EDITOR ~/.vimrc'
 alias ez='$EDITOR ~/.zshrc'
+alias ezl='$EDITOR ~/.zshrc.local'
 
 # General UNIX
 alias mv='mv -iv'
