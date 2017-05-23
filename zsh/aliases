@@ -129,6 +129,7 @@ alias mm='bundle exec middleman'
 alias mms='bundle exec middleman server'
 alias mmc='bundle exec middleman console -e console'
 alias mmb='bundle exec middleman build --clean'
+alias mma='bundle exec middleman article'
 
 # npm (borrowed from Oh-My-Zsh npm plugin)
 alias npmG='npm install --global'
