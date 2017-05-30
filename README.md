@@ -97,7 +97,7 @@ Helpful web resources on dotfiles, et al.
 License
 -------
 
-Copyright (c) 2016 Joshua Steele. [MIT License][license]
+Copyright &copy; 2017 Joshua Steele. [MIT License][license]
 
 
 [screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-demo.png
