@@ -307,6 +307,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -342,15 +344,26 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>3220 217 445 440 2560 0 2560 1440 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2829 122 796 473 2560 0 2560 1417 </string>
+	<string>3738 207 918 452 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2745 54 1510 1050 2560 0 2560 1417 </string>
+	<string>2882 204 1510 1050 2560 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>ASCII Ligatures</key>
+			<false/>
 			<key>Allow Title Reporting</key>
 			<false/>
 			<key>Ambiguous Double Width</key>
@@ -1107,7 +1120,7 @@
 				</dict>
 			</array>
 			<key>Space</key>
-			<integer>-1</integer>
+			<integer>0</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -1955,10 +1968,14 @@
 			<string>/Users/joshukraine/Desktop</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveUsedCopyMode</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>6342C337-94B4-4ED1-8BCF-3122FC8F988A</string>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>518512499.72623402</real>
 	<key>OnlyWhenMoreTabs</key>
@@ -2029,7 +2046,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-07T07:15:50Z</date>
+	<date>2017-08-03T10:08:04Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2083,7 +2100,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.beta.4</string>
+	<string>3.1.beta.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
