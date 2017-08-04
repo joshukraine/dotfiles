@@ -63,6 +63,7 @@ Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 Plugin 'slim-template/vim-slim'           " Slim syntax highlighting                              | https://github.com/slim-template/vim-slim
 Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
+Plugin 'lifepillar/vim-cheat40'           " A Vim cheat sheet that makes sense, inside Vim!       | https://github.com/lifepillar/vim-cheat40
 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required
