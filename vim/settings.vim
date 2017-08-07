@@ -44,6 +44,9 @@ set hidden
 " Turn word wrap off
 set nowrap
 
+" Conceal Markdown characters
+set conceallevel=2
+
 " Allow backspace to delete end of line, indent and start of line characters
 set backspace=indent,eol,start
 
