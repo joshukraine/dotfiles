@@ -103,7 +103,7 @@ let g:syntastic_warning_symbol = '∆∆'
 let g:syntastic_style_warning_symbol = '≈≈'
 
 " Vim Markdown
-let g:vim_markdown_folding_level = 2
+let g:vim_markdown_folding_disabled = 1
 
 " Key mappings for dragvisuals.vim
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
