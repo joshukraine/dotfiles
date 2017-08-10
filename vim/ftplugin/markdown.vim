@@ -18,5 +18,5 @@ autocmd BufWinLeave *.md call clearmatches()
 command! -nargs=* Wrap set wrap linebreak nolist
 
 " en and em dashes
-inoremap <buffer> --<space> –<space>
-inoremap <buffer> ---<space> —<space>
+inoremap <buffer> --<space> –
+inoremap <buffer> ---<space> —
