@@ -32,7 +32,6 @@ Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin f
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
 Plugin 'vim-airline/vim-airline'          " Status/tabline for vim                                | https://github.com/vim-airline/vim-airline
 Plugin 'vim-airline/vim-airline-themes'   " A collection of themes for vim-airline                | https://github.com/vim-airline/vim-airline-themes
-Plugin 'plasticboy/vim-markdown'          " Syntax highlighting and more for markdown             | https://github.com/plasticboy/vim-markdown
 
 " Tim Pope
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
