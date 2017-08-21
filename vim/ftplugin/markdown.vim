@@ -1,4 +1,5 @@
-setlocal spell
+setlocal spell spelllang=en_us
+set complete+=kspell
 
 highlight htmlItalic cterm=italic
 highlight htmlBold cterm=bold
