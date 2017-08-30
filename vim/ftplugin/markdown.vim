@@ -18,6 +18,10 @@ autocmd InsertLeave *.md call MatchTechWordsToAvoid()
 autocmd BufWinLeave *.md call clearmatches()
 command! -nargs=* Wrap set wrap linebreak nolist
 
-" en and em dashes
+" en and em dashes (https://www.w3schools.com/charsets/ref_utf_punctuation.asp)
 inoremap <buffer> --<space> –
 inoremap <buffer> ---<space> —
+
+" arrows (https://www.w3schools.com/charsets/ref_utf_arrows.asp)
+inoremap <buffer> --><space> →
+inoremap <buffer> <--<space> ←
