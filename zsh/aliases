@@ -144,6 +144,8 @@ alias npmLg='npm list --depth=0 -g'
 
 # Postgres
 alias statpost='ps aux | ag postgres'
+alias startpost='brew services start postgresql'
+alias stoppost='brew services stop postgresql'
 alias psq='pgcli -d postgres'
 
 # Homebrew
