@@ -124,6 +124,7 @@ alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Find
 # Rails
 alias bx='bundle exec'
 alias sst='spring status'
+alias fos='foreman start'
 
 # Middleman
 alias mm='bundle exec middleman'
