@@ -125,6 +125,14 @@ alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Find
 alias bx='bundle exec'
 alias sst='spring status'
 alias fos='foreman start'
+alias rsr='bin/rails restart'
+alias RED='RAILS_ENV=development'
+alias REP='RAILS_ENV=production'
+alias RET='RAILS_ENV=test'
+alias rc='rails console'
+alias rdb='rails dbconsole'
+alias rgm='rails generate migration'
+alias rs='rails server'
 
 # Middleman
 alias mm='bundle exec middleman'
