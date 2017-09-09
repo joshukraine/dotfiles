@@ -15,7 +15,7 @@ dotfiles_echo() {
 
 set -e # Terminate script if anything exits with a non-zero value
 
-files="Brewfile gemrc gitconfig gitignore_global gitmessage hushlogin npmrc pryrc tmux.conf vimrc zshrc"
+files="asdfrc Brewfile gemrc gitconfig gitignore_global gitmessage hushlogin npmrc pryrc tmux.conf vimrc zshrc"
 DOTFILES_DIR=$HOME/dotfiles
 VIM_DIR=$DOTFILES_DIR/vim
 
@@ -35,10 +35,6 @@ if [ -d "$HOME"/.vim/ftplugin ]; then
   rm -rf "$HOME"/.vim/ftplugin
 fi
 ln -nfs "$VIM_DIR"/ftplugin "$HOME"/.vim/ftplugin
-
-if [ -d "$HOME"/.rbenv ]; then
-  ln -nfs "$DOTFILES_DIR"/default-gems "$HOME"/.rbenv/default-gems
-fi
 
 dotfiles_echo "Dotfiles installation complete!"
 dotfiles_echo "Complete Brew Bundle installation with 'brew bundle install -v --global'"

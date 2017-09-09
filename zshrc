@@ -11,6 +11,7 @@ export PATH=$PATH:$GOPATH/bin
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
+export RUBY_CONFIGURE_OPTIONS='--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
 
 setopt auto_cd
 cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
@@ -20,23 +21,19 @@ SAVEHIST=1000000
 HISTFILE=~/.zsh_history
 HIST_STAMPS="yyyy-mm-dd"
 
-source $HOME/dotfiles/zsh/oh-my-zsh
-source $HOME/dotfiles/zsh/aliases
-source $HOME/dotfiles/zsh/prompt
-source $HOME/dotfiles/zsh/tmux
-source $HOME/dotfiles/zsh/functions
-source $HOME/dotfiles/zsh/z.sh
+. $HOME/dotfiles/zsh/oh-my-zsh
+. $HOME/dotfiles/zsh/aliases
+. $HOME/dotfiles/zsh/prompt
+. $HOME/dotfiles/zsh/tmux
+. $HOME/dotfiles/zsh/functions
+. $HOME/dotfiles/zsh/z.sh
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
 # Travis CI
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Include local settings
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

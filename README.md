@@ -27,7 +27,7 @@ The dotfiles assume you are running macOS with the following software preinstall
 * [Git][git]
 * [Tmux][tmux]
 * [Ruby][ruby]
-* [rbenv][rbenv]
+* [asdf][asdf]
 
 All of the above and more are included in [Mac Bootstrap][mac-bootstrap]
 
@@ -110,7 +110,7 @@ Copyright &copy; 2017 Joshua Steele. [MIT License][license]
 [git]: https://git-scm.com/
 [tmux]: http://tmux.github.io/
 [ruby]: https://www.ruby-lang.org/en
-[rbenv]: https://github.com/sstephenson/rbenv
+[asdf]: https://github.com/asdf-vm/asdf
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE

@@ -1,1 +1,4 @@
 bundler
+gem-ctags
+pry
+tmuxinator
