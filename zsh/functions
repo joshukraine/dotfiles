@@ -30,3 +30,37 @@ g() {
     git status
   fi
 }
+
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
+function _rails_command () {
+  if [ -e "bin/rails" ]; then
+    bin/rails $@
+  elif [ -e "script/rails" ]; then
+    ruby script/rails $@
+  elif [ -e "script/server" ]; then
+    ruby script/$@
+  else
+    command rails $@
+  fi
+}
+
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
+function _rake_command () {
+  if [ -e "bin/rake" ]; then
+    bin/rake $@
+  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+    bundle exec rake $@
+  else
+    command rake $@
+  fi
+}
+
+function _rspec_command () {
+  if [ -e "bin/rspec" ]; then
+    bin/rspec $@
+  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+    bundle exec rspec $@
+  else
+    command rspec $@
+  fi
+}

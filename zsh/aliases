@@ -122,17 +122,20 @@ alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finde
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 
 # Rails
+alias -g RED='RAILS_ENV=development'
+alias -g REP='RAILS_ENV=production'
+alias -g RET='RAILS_ENV=test'
 alias bx='bundle exec'
-alias sst='spring status'
 alias fos='foreman start'
-alias rsr='bin/rails restart'
-alias RED='RAILS_ENV=development'
-alias REP='RAILS_ENV=production'
-alias RET='RAILS_ENV=test'
+alias rails='_rails_command'
+alias rake='_rake_command'
 alias rc='rails console'
 alias rdb='rails dbconsole'
 alias rgm='rails generate migration'
 alias rs='rails server'
+alias rspec='_rspec_command'
+alias rsr='rails restart'
+alias sst='spring status'
 
 # Middleman
 alias mm='bundle exec middleman'
