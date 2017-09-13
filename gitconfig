@@ -19,16 +19,9 @@
 
   f = fetch
 
-  l   = log --oneline --decorate --color --graph
-  la  = log --oneline --decorate --color --graph --all
-  lo  = log --oneline --decorate --color
-  lg  = log --stat --color
-  lgg = log --graph --color
-  lga = log --graph --decorate --all
-  lgm = log --graph --max-count=10
-  lgp = log --stat --color --patch
-  lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  loa = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+  l  = log --graph --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %C(blue)%aN%Creset %s %C(green)%cd'
+  ls = log --stat --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %C(blue)%aN%Creset %s %C(green)%cd'
+  lg = log
 
   mup = !git checkout master && git pull && git checkout -
 
