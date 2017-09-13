@@ -91,3 +91,6 @@
 
 [url "https://"]
   insteadOf = git://
+
+[mailmap]
+  file = ~/.mailmap
