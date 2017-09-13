@@ -19,9 +19,9 @@
 
   f = fetch
 
-  l  = log --graph --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %C(blue)%aN%Creset %s %C(green)%cd'
-  ls = log --stat --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %C(blue)%aN%Creset %s %C(green)%cd'
-  lg = log
+  l  = log --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %s%n %C(blue)%aN (%cd)%n'
+  lg = log --graph --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %s%n %C(blue)%aN (%cd)%n'
+  ls = log --stat --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %s%n %C(blue)%aN (%cd)%n'
 
   mup = !git checkout master && git pull && git checkout -
 
