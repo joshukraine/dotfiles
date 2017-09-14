@@ -7,7 +7,7 @@ map <leader>q :q<CR>
 map <leader>w :w<CR>
 map <leader>x :x<CR>
 map <leader>ra :%s/
-map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on paste
+map <leader>p :set paste<CR>""p:set nopaste<CR> " Fix indentation on paste
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
