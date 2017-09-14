@@ -67,6 +67,9 @@
   safecrlf     = warn
   pager = diff-so-fancy | less
 
+[diff]
+  tool = vimdiff3
+
 [fetch]
   prune = true
 
