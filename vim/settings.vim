@@ -70,9 +70,6 @@ set list listchars=tab:»·,trail:·
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
 set timeout timeoutlen=1000 ttimeoutlen=100
 
-" Always show status bar
-set laststatus=2
-
 " Hide the toolbar
 set guioptions-=T
 

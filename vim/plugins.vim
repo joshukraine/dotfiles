@@ -30,8 +30,6 @@ Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin f
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
-Plugin 'vim-airline/vim-airline'          " Status/tabline for vim                                | https://github.com/vim-airline/vim-airline
-Plugin 'vim-airline/vim-airline-themes'   " A collection of themes for vim-airline                | https://github.com/vim-airline/vim-airline-themes
 
 " Tim Pope
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
@@ -76,8 +74,9 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
-" Toggle GitGutter
+" GitGutter
 nnoremap <F4> :GitGutterToggle<CR>
+let g:gitgutter_realtime=1
 
 " Tcomment
 map <leader>/ :TComment<CR>

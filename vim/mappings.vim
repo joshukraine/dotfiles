@@ -2,7 +2,7 @@ let mapleader = "\<Space>"
 
 " Misc
 map <leader>ev :tabe ~/.vimrc<CR>
-map <leader>r :source ~/.vimrc<CR>:AirlineRefresh<CR>
+map <leader>r :source ~/.vimrc<CR>
 map <leader>q :q<CR>
 map <leader>w :w<CR>
 map <leader>x :x<CR>
