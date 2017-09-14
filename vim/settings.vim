@@ -139,6 +139,9 @@ set winheight=7
 set winminheight=7
 set winheight=999
 
+" Start diff mode with vertical splits
+set diffopt=vertical
+
 " Set built-in file system explorer to use layout similar to the NERDTree plugin
 let g:netrw_liststyle=3
 
