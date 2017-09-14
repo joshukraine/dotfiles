@@ -68,3 +68,86 @@ Plugin 'lifepillar/vim-cheat40'           " A Vim cheat sheet that makes sense, 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required
 filetype plugin indent on                 " required
+
+" Plugin-specifc Mappings & Settings
+
+" NERDTree
+nmap <silent> <F3> :NERDTreeToggle<CR>
+map <leader>\ :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+
+" Toggle GitGutter
+nnoremap <F4> :GitGutterToggle<CR>
+
+" Tcomment
+map <leader>/ :TComment<CR>
+
+" Bufexplorer - unmapping defaults because they cause delay for <leader>b
+map <leader>b :ToggleBufExplorer<CR>
+
+" Obsession
+map <leader>ob :Obsession<CR>
+
+" vim-rspec
+map <leader>f :call RunCurrentSpecFile()<CR>
+map <leader>n :call RunNearestSpec()<CR>
+map <leader>l :call RunLastSpec()<CR>
+map <leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = 'VtrSendCommandToRunner! clear; bin/rspec {spec}'
+
+" vim-tmux-runner
+let g:VtrPercentage = 20
+let g:VtrUseVtrMaps = 1
+nnoremap <leader>sd :VtrSendCtrlD<cr>
+nmap <leader>fs :VtrFlushCommand<cr>:VtrSendCommandToRunner<cr>
+nmap <leader>osp :VtrOpenRunner {'orientation': 'h', 'percentage': 20, 'cmd': '' }<cr>
+nmap <leader>orc :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'rc'}<cr>
+nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'pry'}<cr>
+
+" CtrlP
+map <leader>t <C-p>
+map <leader>y :CtrlPBuffer<CR>
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_max_height = 15
+
+" CtrlP -> override <C-o> to provide options for how to open files
+let g:ctrlp_arg_map = 1
+
+" CtrlP -> files matched are ignored when expanding wildcards
+set wildignore+=*/.git/*,*.tmp/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*/tmp
+
+" CtrlP -> directories to ignore when fuzzy finding
+let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
+
+" Custom rails.vim commands
+command! Rroutes :e config/routes.rb
+command! RTroutes :tabe config/routes.rb
+command! RSroutes :sp config/routes.rb
+command! RVroutes :vs config/routes.rb
+command! Rfactories :e spec/factories.rb
+command! RTfactories :tabe spec/factories.rb
+command! RSfactories :sp spec/factories.rb
+command! RVfactories :vs spec/factories.rb
+
+" Syntastic
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_haml_checkers = ['haml_lint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_sh_checkers = ['shellcheck']
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
+
+" Key mappings for dragvisuals.vim
+runtime bundle/dragvisuals/plugins/dragvisuals.vim
+
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
