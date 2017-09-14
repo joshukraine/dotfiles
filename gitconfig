@@ -1,66 +1,59 @@
+# https://git-scm.com/docs/git-config
+
 [alias]
-  a  = add
+  a = add
   aa = add --all
   ap = add --patch
-
-  b  = branch
+  b = branch
   ba = branch --all
   br = branch --remote
-
-  ca  = commit --amend
-  ci  = commit -v
-  cl  = clone
-  co  = checkout
+  ca = commit --amend
+  ci = commit -v
+  cl = clone
+  co = checkout
   com = checkout master
-
-  dc  = diff --word-diff --cached --color-words
-  df  = diff --word-diff --color-words
-  dfs = diff --staged
-
+  dc = diff --word-diff --cached --color-words
+  df = diff --word-diff --color-words
   f = fetch
-
-  l  = log --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %s%n %C(blue)%aN (%cd)%n'
-  lg = log --graph --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %s%n %C(blue)%aN (%cd)%n'
-  ls = log --stat --date=format:'%b %d, %Y' --pretty=format:'%C(yellow)%h%Creset %s%n %C(blue)%aN (%cd)%n'
-
-  mup = !git checkout master && git pull && git checkout -
-
-  pl     = pull
-  ps     = push
-  pum    = push -u origin master
-  please = push --force-with-lease
-
-  recent = for-each-ref --sort = committerdate refs/heads/ --format = '%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-  rv     = remote -v
-
-  s = status --short --branch
-  st  = status
-
+  l = log --date=format:'%b %d, %Y' --pretty=format:'%C(yellow bold)%h%Creset %s%n %C(blue)%aN (%cd)%n'
+  lg = log --graph --stat --pretty=format:'%C(yellow bold)%h%Creset %s%n %C(blue)%aN (%cd)%n'
+  pl = pull
+  ps = push
+  psf = push --force-with-lease
+  pum = push -u origin master
+  recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  rv = remote -v
+  s = status
   tl = tag --list
-
-  unstage  = reset
   uncommit = reset --soft HEAD^
-
+  unstage = reset
   wch = whatchanged -p --abbrev-commit --pretty=medium
 
 [apply]
   whitespace = nowarn
 
-[color]
-  ui = auto
-  ignorecase = false
+[color "branch"]
+  current = white bold
+  local   = yellow
+  remote  = cyan
+
+[color "diff"]
+  frag = white bold
+  meta = yellow bold
+  new  = green
+  old  = red
+
+[color "status"]
+  untracked = cyan
 
 [commit]
   template = ~/.gitmessage
 
 [core]
-  autocrlf = input
-  safecrlf = true
-  editor = vim
+  autocrlf     = input
   excludesfile = ~/.gitignore_global
-
-[color "status"]
-  untracked = cyan
+  ignorecase   = false
+  safecrlf     = warn
 
 [fetch]
   prune = true
@@ -69,21 +62,29 @@
   defaultCommand = status --short --branch
 
 [gitsh "color"]
-  default = blue
+  default   = blue
+  modified  = red
   untracked = cyan
-  modified = red
 
 [include]
   path = ~/.gitconfig.local
 
+[mailmap]
+  # Display commit author names based on global mailmap file.
+  file = ~/.mailmap
+
 [merge]
   conflictstyle = diff3
+
+  # Always create local merge commits when merging.
   ff = false
 
 [pull]
+  # Don't flatten locally created merge commits when rebasing.
   rebase = preserve
 
 [push]
+  # Refuse to push if upstream branch name is different from local.
   default = simple
 
 [url "https://github.com/"]
@@ -91,6 +92,3 @@
 
 [url "https://"]
   insteadOf = git://
-
-[mailmap]
-  file = ~/.mailmap
