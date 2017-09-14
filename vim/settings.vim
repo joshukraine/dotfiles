@@ -137,7 +137,7 @@ set colorcolumn=+1
 set winwidth=90
 set winheight=7
 set winminheight=7
-set winheight=999
+set winheight=35
 
 " Start diff mode with vertical splits
 set diffopt=vertical
