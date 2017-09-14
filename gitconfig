@@ -27,10 +27,13 @@
   tl = tag --list
   uncommit = reset --soft HEAD^
   unstage = reset
-  wch = whatchanged -p --abbrev-commit --pretty=medium
+  wch = whatchanged -p --abbrev-commit --pretty=medium -10
 
 [apply]
   whitespace = nowarn
+
+[color]
+  ui = true
 
 [color "branch"]
   current = white bold
@@ -38,10 +41,18 @@
   remote  = cyan
 
 [color "diff"]
-  frag = white bold
-  meta = yellow bold
-  new  = green
-  old  = red
+  frag = magenta bold
+  meta = white
+  new = green bold
+  old = red bold
+  commit = yellow bold
+  whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [color "status"]
   untracked = cyan
@@ -54,6 +65,7 @@
   excludesfile = ~/.gitignore_global
   ignorecase   = false
   safecrlf     = warn
+  pager = diff-so-fancy | less
 
 [fetch]
   prune = true
