@@ -33,7 +33,7 @@ HIST_STAMPS="yyyy-mm-dd"
 . $HOME/.asdf/completions/asdf.bash
 
 # Travis CI
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && . ~/.travis/travis.sh
 
 # Include local settings
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+[[ -f ~/.zshrc.local ]] && . ~/.zshrc.local

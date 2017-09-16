@@ -37,7 +37,7 @@ Installation
 
 ```sh
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-source ~/dotfiles/install.sh
+. ~/dotfiles/install.sh
 ```
 
 

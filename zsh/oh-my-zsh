@@ -4,4 +4,4 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(github history osx)
 
-source $ZSH/oh-my-zsh.sh
+. $ZSH/oh-my-zsh.sh
