@@ -2,6 +2,8 @@
 set background=dark " dark theme
 colorscheme solarized
 
+let g:solarized_diffmode="high"
+
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE

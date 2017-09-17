@@ -30,15 +30,6 @@ autocmd BufRead * normal zM
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Change colourscheme when diffing
-fun! SetDiffColors()
-  highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
-  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
-  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
-  highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
-endfun
-autocmd FilterWritePre * call SetDiffColors()
-
 " Unmap GitGutter leaders that I don't use. This avoids delays for other leaders.
 autocmd VimEnter * nunmap <leader>hp
 autocmd VimEnter * nunmap <leader>hr
