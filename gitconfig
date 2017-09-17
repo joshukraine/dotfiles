@@ -41,7 +41,7 @@
   remote  = cyan
 
 [color "diff"]
-  frag = magenta bold
+  frag = cyan bold
   meta = white
   new = green bold
   old = red bold
