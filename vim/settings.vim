@@ -133,8 +133,8 @@ set colorcolumn=+1
 " Keep focus split large, others minimal
 set winwidth=90
 set winheight=5
+set winheight=40
 set winminheight=5
-set winheight=999
 
 " Start diff mode with vertical splits
 set diffopt=vertical
