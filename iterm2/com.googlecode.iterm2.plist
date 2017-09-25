@@ -307,10 +307,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
-	<key>NSFontPanelAttributes</key>
-	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop</string>
+	<string>~/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -344,19 +342,14 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
-	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
-	<dict>
-		<key>TB Is Shown</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>3220 217 445 440 2560 0 2560 1440 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>3304 1138 400 129 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>3530 786 620 392 2560 0 2560 1440 </string>
+	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3417 390 770 429 2560 0 2560 1440 </string>
+	<string>3135 96 918 485 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3031 183 1660 1150 2560 0 2560 1417 </string>
+	<string>2882 204 1660 1150 2560 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1133,6 +1126,8 @@
 			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
+			<key>Unicode Version</key>
+			<integer>8</integer>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -1968,16 +1963,14 @@
 			<string>/Users/joshukraine/Desktop</string>
 		</dict>
 	</array>
-	<key>NoSyncHaveUsedCopyMode</key>
-	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>6342C337-94B4-4ED1-8BCF-3122FC8F988A</string>
+	<string>69D8270D-6000-4D6E-81FB-9B75C7BECE36</string>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>518512499.72623402</real>
+	<real>527265980.10987997</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -2042,11 +2035,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=95</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=38</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-07T08:07:43Z</date>
+	<date>2017-09-24T07:20:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2100,7 +2093,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.beta.9</string>
+	<string>3.1.2.beta.2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
