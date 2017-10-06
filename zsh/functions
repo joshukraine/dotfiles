@@ -60,3 +60,23 @@ function _rspec_command () {
     command rspec $@
   fi
 }
+
+function _spring_command () {
+  if [ -e "bin/spring" ]; then
+    bin/spring $@
+  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+    bundle exec spring $@
+  else
+    command spring $@
+  fi
+}
+
+function _guard_command () {
+  if [ -e "bin/guard" ]; then
+    bin/guard $@
+  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+    bundle exec guard $@
+  else
+    command guard $@
+  fi
+}
