@@ -4,3 +4,8 @@ if defined?(PryDebugger) or defined?(PryByebug)
   Pry.commands.alias_command 'nn', 'next'
   Pry.commands.alias_command 'ff', 'finish'
 end
+
+if defined?(AwesomePrint)
+  require "awesome_print"
+  AwesomePrint.pry!
+end
