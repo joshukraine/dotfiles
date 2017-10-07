@@ -70,13 +70,3 @@ function _spring_command () {
     command spring $@
   fi
 }
-
-function _guard_command () {
-  if [ -e "bin/guard" ]; then
-    bin/guard $@
-  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-    bundle exec guard $@
-  else
-    command guard $@
-  fi
-}
