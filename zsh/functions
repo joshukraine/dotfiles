@@ -70,3 +70,9 @@ function _spring_command () {
     command spring $@
   fi
 }
+
+function n_test_runs() {
+  for (( n=0; n<$1; n++ ));
+  do { time bundle exec rspec ./spec; } 2>> time.txt;
+  done
+}
