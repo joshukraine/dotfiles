@@ -32,6 +32,23 @@ HIST_STAMPS="yyyy-mm-dd"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+# Use vi mode
+bindkey -v
+
+# Vi mode settings
+# Better searching in command mode
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+
+# Beginning search with arrow keys
+bindkey -M viins "^[OA" up-line-or-beginning-search
+bindkey -M viins "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "^[OA" up-line-or-beginning-search
+bindkey -M vicmd "^[OB" down-line-or-beginning-search
+
+# Easier, more vim-like editor opening
+bindkey -M vicmd v edit-command-line
+
 # Travis CI
 [ -f ~/.travis/travis.sh ] && . ~/.travis/travis.sh
 
