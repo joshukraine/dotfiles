@@ -111,6 +111,7 @@ alias rspec='_rspec_command'
 alias rsr='rails restart'
 alias rtp='rails db:test:prepare'
 alias spring='_spring_command'
+alias mina='_mina_command'
 alias sst='spring status'
 
 # Middleman

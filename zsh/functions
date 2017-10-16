@@ -71,6 +71,16 @@ function _spring_command () {
   fi
 }
 
+function _mina_command () {
+  if [ -e "bin/mina" ]; then
+    bin/mina $@
+  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+    bundle exec mina $@
+  else
+    command mina $@
+  fi
+}
+
 function n_test_runs() {
   for (( n=0; n<$1; n++ ));
   do { time bundle exec rspec ./spec; } 2>> time.txt;
