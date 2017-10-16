@@ -145,7 +145,8 @@ alias masu='mas upgrade'
 
 # Ansible
 alias ans='ansible'
-alias ap='ansible-playbook'
+alias anp='ansible-playbook'
+alias anv='ansible-vault --ask-vault-pass'
 
 # Homebrew
 alias bc='brew cleanup'
