@@ -29,6 +29,10 @@ alias tka="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux
 # http://stackoverflow.com/a/9976282/183537
 alias tlw='tmux list-windows'
 
+# Grab the current tmux layout and copy to pasteboard.
+# https://leanpub.com/the-tao-of-tmux/read#window-layouts
+alias twcp='tmux lsw -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f2 | pbcopy'
+
 # Always in tmux :)
 _not_inside_tmux() { [[ -z "$TMUX" ]] }
 
