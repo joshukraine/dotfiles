@@ -350,17 +350,19 @@
 	<string>3304 1138 400 129 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3530 786 620 392 2560 0 2560 1440 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>2829 126 606 469 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3070 310 796 473 2560 0 2560 1440 </string>
+	<string>3070 298 918 485 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2882 204 1675 1150 2560 0 2560 1417 </string>
+	<string>2878 204 1675 1150 2560 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
-			<true/>
+			<false/>
 			<key>Allow Title Reporting</key>
 			<false/>
 			<key>Ambiguous Double Width</key>
@@ -2846,7 +2848,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-10-12T10:52:41Z</date>
+	<date>2017-10-20T17:25:37Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
