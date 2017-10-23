@@ -37,6 +37,3 @@ set statusline+=\ %P
 set statusline+=\ %l:%c
 set statusline+=\ 
 set statusline+=%m%h%r
-
-" Vim Conflicted
-set statusline+=%{ConflictedVersion()}
