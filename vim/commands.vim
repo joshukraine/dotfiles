@@ -17,8 +17,8 @@ autocmd FileType sh,cucumber,ruby,yaml,html,xml,zsh,vim,css,scss,javascript,coff
 autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
 autocmd FileType ruby,eruby,yaml setlocal path+=lib
 
-" Remove trailing whitespace on save for ruby files.
-au BufWritePre *.rb :%s/\s\+$//e
+" Remove trailing whitespace on save for specified file types.
+au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee :%s/\s\+$//e
 
 " Fold settings
 autocmd BufRead * setlocal foldmethod=marker
