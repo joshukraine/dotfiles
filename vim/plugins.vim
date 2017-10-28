@@ -7,18 +7,20 @@ call vundle#begin()
 " Vundle itself
 Plugin 'VundleVim/Vundle.vim'             " Vundle, the plug-in manager for Vim                   | https://github.com/VundleVim/Vundle.vim.git
 
-" General Vim
+" General
 Plugin 'godlygeek/tabular'                " Vim script for text filtering and alignment           | https://github.com/godlygeek/tabular
 Plugin 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
+Plugin 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
+Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
+Plugin 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 
 " Ruby-specific
 Plugin 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
 Plugin 'kana/vim-textobj-user'            " Create your own text objects                          | https://github.com/kana/vim-textobj-user
 Plugin 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting ruby blocks        | https://github.com/nelstrom/vim-textobj-rubyblock
-Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
 
 " Searching and Navigation
 Plugin 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
@@ -27,6 +29,7 @@ Plugin 'skwp/greplace.vim'                " Global search and replace for vi    
 Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
+Plugin 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -136,3 +139,6 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
