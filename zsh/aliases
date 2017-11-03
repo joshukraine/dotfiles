@@ -173,6 +173,7 @@ alias upz='upgrade_oh_my_zsh'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 alias o='open . &'
+alias dsstore_bye_bye='find . -name "*.DS_Store" -type f -delete'
 
 # Check for macOS updates
 alias upc='softwareupdate -l'
