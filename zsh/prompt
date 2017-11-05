@@ -28,6 +28,18 @@ function my_git_prompt() {
   fi
 }
 
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-keymap-select
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%} "
+}
+
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}["
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[white]%}]%{$reset_color%}"
 
@@ -60,4 +72,4 @@ PROMPT="${timestamp} ${pwd} ${git}
 
 setopt transient_rprompt # only show the rprompt on the current prompt
 
-RPROMPT='$(_rubyprompt)'
+RPROMPT='$(vi_mode_prompt_info) $(_rubyprompt)'

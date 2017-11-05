@@ -41,13 +41,16 @@ bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
 
 # Beginning search with arrow keys
-bindkey -M viins "^[OA" up-line-or-beginning-search
-bindkey -M viins "^[OB" down-line-or-beginning-search
-bindkey -M vicmd "^[OA" up-line-or-beginning-search
-bindkey -M vicmd "^[OB" down-line-or-beginning-search
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
 
 # Easier, more vim-like editor opening
 bindkey -M vicmd v edit-command-line
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
 
 # Travis CI
 [ -f ~/.travis/travis.sh ] && . ~/.travis/travis.sh
