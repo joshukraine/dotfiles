@@ -113,7 +113,7 @@ alias rsr='rails restart'
 alias rtp='rails db:test:prepare'
 alias spring='_spring_command'
 alias sst='spring status'
-alias psp='DISABLE_SPRING=0 bin/rake parallel:spec'
+alias psp='spring stop && DISABLE_SPRING=0 bin/rake parallel:spec'
 
 # Middleman
 alias mm='bundle exec middleman'
