@@ -51,7 +51,7 @@ set conceallevel=2
 set backspace=indent,eol,start
 
 " Convert tabs to spaces, all file types
-" set expandtab
+set expandtab
 
 " Set tab size in spaces (this is for manual indenting)
 set tabstop=2
