@@ -7,8 +7,8 @@ tap "homebrew/core"
 tap "homebrew/dupes"
 tap "homebrew/services"
 tap "homebrew/versions"
-tap "puma/puma"
 tap "thoughtbot/formulae"
+tap "universal-ctags/universal-ctags"
 
 # Homebrew
 # https://github.com/Homebrew/brew/
@@ -57,12 +57,11 @@ brew "pkg-config"
 brew "postgresql", restart_service: true
 brew "puma/puma/puma-dev"
 brew "python"
-brew "qt@5.5"
+brew "qt@5.5" if MacOS::Xcode.installed?
 brew "readline"
 brew "reattach-to-user-namespace"
 brew "redis", restart_service: true
 brew "rsync"
-brew "ruby"
 brew "shellcheck"
 brew "spark"
 brew "speedtest-cli"
@@ -82,12 +81,10 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
 cask "alfred"
-cask "applepi-baker"
 cask "atom"
 cask "bartender"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
-cask "crashplan"
 cask "daisydisk"
 cask "dash3"
 cask "dropbox"
