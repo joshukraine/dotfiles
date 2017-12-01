@@ -58,7 +58,6 @@ brew "python"
 brew "qt@5.5" if MacOS::Xcode.installed?
 brew "readline"
 brew "reattach-to-user-namespace"
-brew "redis", restart_service: true
 brew "rsync"
 brew "shellcheck"
 brew "spark"
