@@ -48,6 +48,7 @@ done
 dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
 ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
 
+dotfiles_echo "-> Linking $VIM_DIR/ftplugin to $HOME/.vim/ftplugin..."
 if [ -d "$HOME"/.vim/ftplugin ]; then
   rm -rf "$HOME"/.vim/ftplugin
 fi
