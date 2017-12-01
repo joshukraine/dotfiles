@@ -51,6 +51,9 @@ ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
 if [ -d "$HOME"/.vim/ftplugin ]; then
   rm -rf "$HOME"/.vim/ftplugin
 fi
+if [ ! -d "$HOME"/.vim/ ]; then
+  mkdir "$HOME"/.vim
+fi
 ln -nfs "$VIM_DIR"/ftplugin "$HOME"/.vim/ftplugin
 
 dotfiles_echo "Dotfiles installation complete!"
