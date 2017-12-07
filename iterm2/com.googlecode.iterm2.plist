@@ -309,6 +309,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -345,17 +347,13 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>2049 110 445 103 0 0 2560 1440 </string>
-	<key>NSWindow Frame SUStatusFrame</key>
-	<string>1943 1009 400 129 0 0 2560 1440 </string>
+	<string>2049 110 445 541 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>3530 786 620 392 2560 0 2560 1440 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>2829 126 606 469 2560 0 2560 1440 </string>
+	<string>970 790 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3070 378 918 485 2560 0 2560 1440 </string>
+	<string>2829 101 918 512 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2878 204 1675 1150 2560 0 2560 1417 </string>
+	<string>2882 204 1675 1150 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -967,7 +965,7 @@
 			<key>Name</key>
 			<string>Solarized Dark</string>
 			<key>Non Ascii Font</key>
-			<string>SauceCodePowerline-Light 14</string>
+			<string>Menlo-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -2579,7 +2577,7 @@
 			<key>Name</key>
 			<string>MacBook Pro</string>
 			<key>Non Ascii Font</key>
-			<string>SauceCodePowerline-Light 14</string>
+			<string>Menlo-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -2768,16 +2766,12 @@
 			<string>/Users/joshukraine/code</string>
 		</dict>
 	</array>
-	<key>NoSyncHaveUsedCopyMode</key>
-	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>69D8270D-6000-4D6E-81FB-9B75C7BECE36</string>
-	<key>NoSyncPermissionToShowTip</key>
-	<false/>
+	<string>AF27859D-0224-4035-946A-2348BAB2DA54</string>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>527265980.10987997</real>
+	<real>534277525.30897099</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -2844,11 +2838,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=38</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=73</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-06T19:42:54Z</date>
+	<date>2017-12-06T18:25:47Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
