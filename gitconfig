@@ -66,6 +66,7 @@
   ignorecase   = false
   safecrlf     = warn
   pager = diff-so-fancy | less
+  abbrev = 7
 
 [diff]
   tool = vimdiff3
