@@ -3,6 +3,7 @@ autocmd Bufread,BufNewFile *.spv set filetype=php
 autocmd Bufread,BufNewFile *Brewfile set filetype=ruby
 autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh set filetype=zsh
 autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
+autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
 
 " When loading text files, wrap them and don't split up words.
 au BufNewFile,BufRead *.txt setlocal lbr
