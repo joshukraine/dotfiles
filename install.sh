@@ -10,7 +10,7 @@ dotfiles_echo() {
   local fmt="$1"; shift
 
   # shellcheck disable=SC2059
-  printf "\n[DOTFILES] $fmt\n" "$@"
+  printf "\\n[DOTFILES] $fmt\\n" "$@"
 }
 
 set -e # Terminate script if anything exits with a non-zero value
