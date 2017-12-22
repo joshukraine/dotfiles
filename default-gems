@@ -1,4 +1,6 @@
 bundler
-gem-ctags
+haml_lint
 pry
+rubocop
+scss_lint
 tmuxinator
