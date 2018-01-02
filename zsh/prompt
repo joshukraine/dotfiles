@@ -58,7 +58,7 @@ ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[yellow]%}⚑"
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 
-local timestamp='[%{$fg[yellow]%}%*%{$reset_color%}]'
+local timestamp='%{$reset_color%}[%{$fg[yellow]%}%*%{$reset_color%}]'
 local git='$(my_git_prompt)$(git_prompt_short_sha)'
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -68,7 +68,7 @@ else
 fi
 
 PROMPT="${timestamp} ${pwd} ${git}
-%(?..%{$fg[red]%})%B$%b "
+%(?..%{$fg[red]%})%B$%b%{$reset_color%} "
 
 setopt transient_rprompt # only show the rprompt on the current prompt
 
