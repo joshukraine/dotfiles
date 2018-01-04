@@ -14,7 +14,7 @@ NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
 ## Prerequisites
 
-The dotfiles assume you are running macOS with the following software preinstalled:
+The dotfiles assume you are running macOS with the following software pre-installed:
 
 * [Oh-My-Zsh][oh-my-zsh]
 * [Homebrew][homebrew]
@@ -93,7 +93,7 @@ Getting set up after a fresh install is simple.
 
 Copyright &copy; 2017 Joshua Steele. [MIT License][license]
 
-[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot.png
+[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot-2018-01-04.png
 [mac-bootstrap]: http://jsua.co/macos
 [high-sierra]: https://www.apple.com/macos/high-sierra/
 [iterm2]: https://www.iterm2.com/
