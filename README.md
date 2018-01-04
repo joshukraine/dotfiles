@@ -53,8 +53,6 @@ Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can
 
 ## Setting up Terminal.app
 
-These days I've switched over to using Terminal.app instead of iTerm2. In my mind, there is no question that iTerm2 has a far richer set of features and is overall easier to use and configure. That being said, it has gotten really slow. Slow enough, in fact, that it was affecting my work. For now, I'm using Terminal.app. There are a few rough edges, but the in-console experience is blazing fast and in the end, that's what matters most to me.
-
 Getting set up after a fresh install is simple.
 
 1. Open Terminal.app.
