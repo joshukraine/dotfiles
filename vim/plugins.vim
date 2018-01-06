@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'             " Vundle, the plug-in manager for Vim 
 " Plugin 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 " Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
-" Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
+Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 " Plugin 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
 " Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
 " Plugin 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
@@ -71,7 +71,7 @@ let NERDTreeShowHidden=1
 map <leader>/ :TComment<CR>
 
 " Bufexplorer - unmapping defaults because they cause delay for <leader>b
-" map <leader>b :ToggleBufExplorer<CR>
+map <leader>b :ToggleBufExplorer<CR>
 
 " Obsession
 " map <leader>ob :Obsession<CR>
