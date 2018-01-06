@@ -32,9 +32,9 @@ autocmd BufRead * normal zM
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Unmap GitGutter leaders that I don't use. This avoids delays for other leaders.
-autocmd VimEnter * nunmap <leader>hp
-autocmd VimEnter * nunmap <leader>hr
-autocmd VimEnter * nunmap <leader>hs
+" autocmd VimEnter * nunmap <leader>hp
+" autocmd VimEnter * nunmap <leader>hr
+" autocmd VimEnter * nunmap <leader>hs
 
 " Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
 autocmd VimEnter * nunmap <leader>bs
