@@ -275,7 +275,7 @@ Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim te
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
 Plugin 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
 " Plugin 'tpope/vim-rails'                  " Ruby on Rails power tools                             | https://github.com/tpope/vim-rails
-" Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
+Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
 " Plugin 'tpope/vim-fugitive'               " Tim Pope's Git wrapper                                | https://github.com/tpope/vim-fugitive
 " Plugin 'tpope/vim-repeat'                 " Enable repeating supported plugin maps with '.'       | https://github.com/tpope/vim-repeat
 
@@ -311,7 +311,7 @@ map <leader>/ :TComment<CR>
 map <leader>b :ToggleBufExplorer<CR>
 
 " Obsession
-" map <leader>ob :Obsession<CR>
+map <leader>ob :Obsession<CR>
 
 " vim-rspec
 map <leader>f :call RunCurrentSpecFile()<CR>
