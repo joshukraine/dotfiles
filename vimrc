@@ -301,7 +301,7 @@ map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " GitGutter
-" nnoremap <F4> :GitGutterToggle<CR>
+nnoremap <F4> :GitGutterToggle<CR>
 " let g:gitgutter_eager = 1
 
 " Tcomment
