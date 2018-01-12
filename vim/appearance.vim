@@ -1,8 +1,8 @@
 " set background=light " light theme
 set background=dark " dark theme
-let g:solarized_diffmode="high"
 colorscheme solarized
-
+let g:solarized_diffmode="high"
+let g:solarized_termtrans = 1 " Use terminal background
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
