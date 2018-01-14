@@ -251,7 +251,7 @@ Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vi
 " Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 " Plugin 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
-" Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
+Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
 " Plugin 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 
 " Ruby-specific
@@ -266,7 +266,7 @@ Plugin 'scrooloose/nerdtree'              " A tree explorer plugin for vim      
 " Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 " Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
-" Plugin 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
+Plugin 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -356,14 +356,14 @@ let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 " command! RVfactories :vs spec/factories.rb
 
 " Syntastic
-" let g:syntastic_scss_checkers = ['scss_lint']
-" let g:syntastic_haml_checkers = ['haml_lint']
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_sh_checkers = ['shellcheck']
-" let g:syntastic_error_symbol = '✗✗'
-" let g:syntastic_style_error_symbol = '✠✠'
-" let g:syntastic_warning_symbol = '∆∆'
-" let g:syntastic_style_warning_symbol = '≈≈'
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_haml_checkers = ['haml_lint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_sh_checkers = ['shellcheck']
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
 
 " Key mappings for dragvisuals.vim
 " runtime bundle/dragvisuals/plugins/dragvisuals.vim
