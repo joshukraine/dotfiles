@@ -246,7 +246,7 @@ Plugin 'VundleVim/Vundle.vim'             " Vundle, the plug-in manager for Vim 
 
 " General
 " Plugin 'godlygeek/tabular'                " Vim script for text filtering and alignment           | https://github.com/godlygeek/tabular
-" Plugin 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
+Plugin 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
 Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 " Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
@@ -265,7 +265,7 @@ Plugin 'scrooloose/nerdtree'              " A tree explorer plugin for vim      
 " Plugin 'skwp/greplace.vim'                " Global search and replace for vi                      | https://github.com/skwp/greplace.vim
 " Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
-" Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
+Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plugin 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 
 " Look and Feel
@@ -284,7 +284,7 @@ Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim            
 Plugin 'christoomey/vim-tmux-runner'      " Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
 " Other
-" Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim                          | https://github.com/kchmck/vim-coffee-script
+Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim                          | https://github.com/kchmck/vim-coffee-script
 Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 " Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
@@ -366,16 +366,16 @@ let g:syntastic_warning_symbol = '∆∆'
 let g:syntastic_style_warning_symbol = '≈≈'
 
 " Key mappings for dragvisuals.vim
-" runtime bundle/dragvisuals/plugins/dragvisuals.vim
-"
-" vmap  <expr>  <LEFT>   DVB_Drag('left')
-" vmap  <expr>  <RIGHT>  DVB_Drag('right')
-" vmap  <expr>  <DOWN>   DVB_Drag('down')
-" vmap  <expr>  <UP>     DVB_Drag('up')
-" vmap  <expr>  D        DVB_Duplicate()
+runtime bundle/dragvisuals/plugins/dragvisuals.vim
+
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
-" let g:DVB_TrimWS = 1
+let g:DVB_TrimWS = 1
 
 " Tagbar
 " nmap <F8> :TagbarToggle<CR>
