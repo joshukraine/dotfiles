@@ -435,7 +435,8 @@ set statusline+=\
 set statusline+=%m%h%r
 " }}}
 
-" Include local settings
+" Local {{{
 if filereadable(glob("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
+" }}}
