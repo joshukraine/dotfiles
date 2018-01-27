@@ -225,7 +225,7 @@ map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
 inoremap jj <C-c> " jj to switch back to normal mode
-nnoremap <leader>6 <c-^> " Switch between the last two files
+nnoremap <leader>4 <c-^> " Switch between the last two files
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
