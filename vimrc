@@ -393,8 +393,6 @@ let g:DVB_TrimWS = 1
 " }}}
 
 " Appearance {{{
-" set background=light " light theme
-set background=dark " dark theme
 colorscheme solarized
 let g:solarized_diffmode="high"
 let g:solarized_termtrans = 1 " Use terminal background
