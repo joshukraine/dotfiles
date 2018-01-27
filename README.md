@@ -62,6 +62,12 @@ Getting set up after a fresh install is simple.
 1. Select `~/dotfiles/terminal/<desired-profile>.terminal` and click Open.
 1. Click the Default button to keep using this profile in new Terminal windows.
 
+## A Note about Vim performance and Ruby files
+
+I recently discovered a resolution to some significant performance issues I had been experiencing running Vim on macOS. These issues were particularly painful when editing Ruby files. I've documented what I learned here:
+
+&#9657; [What I've learned about slow performance in Vim](vim-performance.md)
+
 ## Some of my favorite dotfile repos
 
 * Pro Vim (https://github.com/Integralist/ProVim)
