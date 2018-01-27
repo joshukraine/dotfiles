@@ -2,6 +2,10 @@
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
 
+" Force vim to use older regex engine.
+" https://stackoverflow.com/a/16920294/655204
+set re=1
+
 " Use vim, not vi api
 set nocompatible
 
