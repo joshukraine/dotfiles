@@ -154,45 +154,56 @@ let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=
 
 " Commands {{{
 " specify syntax highlighting for specific files
-autocmd Bufread,BufNewFile *.spv set filetype=php
-autocmd Bufread,BufNewFile *Brewfile set filetype=ruby
-autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh set filetype=zsh
-autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
-autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
-
-" file formats
-" autocmd Filetype gitcommit setlocal spell textwidth=72
-" autocmd Filetype sh,markdown setlocal wrap linebreak nolist textwidth=0 wrapmargin=0 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
-" autocmd FileType sh,cucumber,ruby,yaml,html,xml,zsh,vim,css,scss,javascript,coffee,json,gitconfig setlocal shiftwidth=2 tabstop=2 expandtab
-
-" autoindent with two spaces, always expand tabs
-autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
-autocmd FileType ruby,eruby,yaml setlocal path+=lib
+augroup file_types
+  autocmd!
+  autocmd Bufread,BufNewFile *.spv set filetype=php
+  autocmd Bufread,BufNewFile *Brewfile set filetype=ruby
+  autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh set filetype=zsh
+  autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
+  autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
+augroup END
 
 " Remove trailing whitespace on save for specified file types.
-au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee :%s/\s\+$//e
+augroup clear_whitespace
+  autocmd!
+  au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee :%s/\s\+$//e
+augroup END
 
 " Fold settings
-autocmd BufRead * setlocal foldmethod=marker
-autocmd BufRead * normal zM
-" autocmd BufRead *.rb setlocal foldmethod=syntax
-" autocmd BufRead *.rb normal zR
-" set foldnestmax=3
+augroup fold_settings
+  autocmd!
+  autocmd BufRead * setlocal foldmethod=marker
+  autocmd BufRead * normal zM
+  " autocmd FileType ruby setlocal foldmethod=manual
+  " autocmd BufRead *.rb setlocal foldmethod=syntax
+  " autocmd BufRead *.rb normal zR
+  " set foldnestmax=3
+augroup END
 
 " Close vim if only nerdtree window is left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup nerdtree_settings
+  autocmd!
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
-" Unmap GitGutter leaders that I don't use. This avoids delays for other leaders.
-autocmd VimEnter * nunmap <leader>hp
-autocmd VimEnter * nunmap <leader>hr
-autocmd VimEnter * nunmap <leader>hs
+" Unmap various plugin-related commands I don't use.
+augroup unmappings
+  autocmd!
+  " Unmap GitGutter leaders that I don't use. This avoids delays for other leaders.
+  autocmd VimEnter * nunmap <leader>hp
+  autocmd VimEnter * nunmap <leader>hr
+  autocmd VimEnter * nunmap <leader>hs
 
-" Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
-autocmd VimEnter * nunmap <leader>bs
-autocmd VimEnter * nunmap <leader>bv
+  " Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
+  autocmd VimEnter * nunmap <leader>bs
+  autocmd VimEnter * nunmap <leader>bv
+augroup END
 
 " automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
+augroup window_resize
+  autocmd!
+  autocmd VimResized * :wincmd =
+augroup END
 " }}}
 
 " Mappings {{{
