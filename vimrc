@@ -345,7 +345,7 @@ map <leader>t <C-p>
 map <leader>y :CtrlPBuffer<CR>
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_height = 25
+let g:ctrlp_max_height = 15
 
 " CtrlP -> override <C-o> to provide options for how to open files
 let g:ctrlp_arg_map = 1
