@@ -104,6 +104,9 @@ set wildmenu
 " redraw only when we need to (i.e. don't redraw when executing a macro)
 set lazyredraw
 
+" Indicates a fast terminal connection
+set ttyfast
+
 " highlight a matching [{()}] when cursor is placed on start/end character
 set showmatch
 
