@@ -28,8 +28,9 @@ files=(
 "hushlogin"
 "npmrc"
 "pryrc"
-"tool-versions"
+"svgo.yml"
 "tmux.conf"
+"tool-versions"
 "vimrc"
 "zshrc"
 )
