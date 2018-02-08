@@ -30,11 +30,7 @@ brew "git"
 brew "git-quick-stats"
 brew "gmp" # Vim dependency
 brew "gpg" # asdf-nodejs dependency
-
-# brew "htop" # htop not working on High Sierra right now.
-# https://github.com/Homebrew/homebrew-core/pull/22479
-# https://github.com/hishamhm/htop/issues/682
-
+brew "htop"
 brew "hub"
 brew "imagemagick"
 brew "libtool" # asdf dependency
