@@ -188,3 +188,4 @@ alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list
 alias color='colortest -w -s'
 alias hangout='open https://hangouts.google.com/hangouts/_'
 alias htop='sudo htop'
+alias copy='tr -d "\n" | pbcopy'
