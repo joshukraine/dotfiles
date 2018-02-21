@@ -270,7 +270,7 @@ Plugin 'tomtom/tcomment_vim'              " An extensible & universal comment vi
 Plugin 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plugin 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 Plugin 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
-Plugin 'vim-syntastic/syntastic'          " Syntax checking hacks for vim                         | https://github.com/vim-syntastic/syntastic
+Plugin 'w0rp/ale'                         " Asynchronous Lint Engine                              | https://github.com/w0rp/ale
 Plugin 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 
 " Ruby-specific
@@ -374,15 +374,10 @@ let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 " command! RSfactories :sp spec/factories.rb
 " command! RVfactories :vs spec/factories.rb
 
-" Syntastic
-let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_haml_checkers = ['haml_lint']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_sh_checkers = ['shellcheck']
-let g:syntastic_error_symbol = '✗✗'
-let g:syntastic_style_error_symbol = '✠✠'
-let g:syntastic_warning_symbol = '∆∆'
-let g:syntastic_style_warning_symbol = '≈≈'
+" ALE | https://github.com/w0rp/ale#1-supported-languages-and-tools
+let g:ale_completion_enabled = 1
+let g:ale_sign_error = '⌦'
+let g:ale_sign_warning = '∙∙'
 
 " Key mappings for dragvisuals.vim
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
