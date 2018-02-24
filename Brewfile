@@ -37,6 +37,7 @@ brew "libtool" # asdf dependency
 brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
 brew "mas"
+brew "neovim"
 brew "pandoc"
 brew "perl"
 brew "pgcli"
