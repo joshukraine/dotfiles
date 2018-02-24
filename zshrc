@@ -1,7 +1,7 @@
 # ~/.zshrc
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
-export EDITOR="vim"
+export EDITOR="nvim"
 export BUNDLER_EDITOR=$EDITOR
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -11,6 +11,7 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
 export RUBY_CONFIGURE_OPTIONS='--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
+export XDG_CONFIG_HOME=$HOME/.config
 
 setopt auto_cd
 cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
