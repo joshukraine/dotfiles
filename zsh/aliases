@@ -44,6 +44,7 @@ alias ef='$EDITOR ~/dotfiles/zsh/functions'
 alias ep='$EDITOR ~/dotfiles/zsh/prompt'
 alias et='$EDITOR ~/.tmux.conf'
 alias ev='$EDITOR ~/.vimrc'
+alias evl='$EDITOR ~/.vimrc.local'
 alias ez='$EDITOR ~/.zshrc'
 alias ezl='$EDITOR ~/.zshrc.local'
 
@@ -58,8 +59,9 @@ alias t4='tree -L 4'
 alias t4a='tree -La 4'
 alias tree='tree -CF'
 
-# Vim
-alias vi='vim'
+# Vim/Neovim
+alias vi='nvim'
+alias nv='nvim'
 alias vir='vim -R'
 alias vv='vim --version | less'
 alias vi0='vim -u NONE'
