@@ -322,9 +322,6 @@ let NERDTreeShowHidden=1
 " GitGutter
 nnoremap <F4> :GitGutterToggle<CR>
 let g:gitgutter_map_keys = 0
-if has('nvim')
-  let g:gitgutter_eager = 1
-endif
 
 " Tcomment
 map <leader>/ :TComment<CR>
