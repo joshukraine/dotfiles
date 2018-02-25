@@ -130,8 +130,6 @@ set autoindent
 
 set tags=./tags;
 
-set t_Co=256
-
 set fillchars+=vert:\|
 
 " Vertical line at 80 characters
@@ -157,6 +155,14 @@ runtime macros/matchit.vim
 set grepprg=ag
 
 let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=tmp'
+
+if has('nvim')
+  set updatetime=100
+
+  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+        \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
+        \,sm:block-blinkwait0-blinkoff150-blinkon175
+endif
 " }}}
 
 " Commands {{{
@@ -196,11 +202,6 @@ augroup END
 " Unmap various plugin-related commands I don't use.
 augroup unmappings
   autocmd!
-  " Unmap GitGutter leaders that I don't use. This avoids delays for other leaders.
-  autocmd VimEnter * nunmap <leader>hp
-  autocmd VimEnter * nunmap <leader>hr
-  autocmd VimEnter * nunmap <leader>hs
-
   " Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
   autocmd VimEnter * nunmap <leader>bs
   autocmd VimEnter * nunmap <leader>bv
@@ -323,7 +324,10 @@ let NERDTreeShowHidden=1
 
 " GitGutter
 nnoremap <F4> :GitGutterToggle<CR>
-" let g:gitgutter_eager = 1
+let g:gitgutter_map_keys = 0
+if has('nvim')
+  let g:gitgutter_eager = 1
+endif
 
 " Tcomment
 map <leader>/ :TComment<CR>
@@ -394,10 +398,11 @@ vmap  <expr>  D        DVB_Duplicate()
 let g:DVB_TrimWS = 1
 
 " Tagbar
-" nmap <F8> :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 " }}}
 
 " Appearance {{{
+set background=dark
 colorscheme solarized
 let g:solarized_diffmode="high"
 let g:solarized_termtrans = 1 " Use terminal background
