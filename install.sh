@@ -28,6 +28,7 @@ files=(
 "hushlogin"
 "npmrc"
 "pryrc"
+"rubocop.yml"
 "svgo.yml"
 "tmux.conf"
 "tool-versions"

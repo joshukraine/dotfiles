@@ -1,0 +1,6 @@
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
