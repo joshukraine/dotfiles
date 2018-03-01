@@ -89,7 +89,7 @@ set autoread
 set clipboard+=unnamed
 
 " Don't show intro
-" set shortmess+=I
+set shortmess+=I
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
