@@ -215,10 +215,13 @@ augroup END
 " }}}
 
 " Mappings {{{
+
 let mapleader = "\<Space>"
 
 " Misc
 map <leader>ev :tabe ~/.vimrc<CR>
+map <leader>ew :windo edit!<CR>
+map <leader>eb :bufdo edit!<CR>
 map <leader>r :source ~/.vimrc<CR>
 map <leader>q :q<CR>
 map <leader>w :w<CR>
