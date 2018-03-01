@@ -1,6 +1,4 @@
 " Settings {{{
-" Switch syntax highlighting on, when the terminal has colors
-syntax on
 
 " Force vim to use older regex engine.
 " https://stackoverflow.com/a/16920294/655204
@@ -18,17 +16,8 @@ set nowritebackup
 " No swap file
 set noswapfile
 
-" Command history
-set history=500
-
-" Always show cursor
-set ruler
-
 " Show incomplete commands
 set showcmd
-
-" Incremental searching (search as you type)
-set incsearch
 
 " Highlight search matches
 set hlsearch
@@ -52,9 +41,6 @@ set nowrap
 " Conceal Markdown characters
 set conceallevel=2
 
-" Allow backspace to delete end of line, indent and start of line characters
-set backspace=indent,eol,start
-
 " Convert tabs to spaces, all file types
 set expandtab
 
@@ -68,21 +54,14 @@ set shiftwidth=2
 set number
 set relativenumber
 
-" Highlight tailing whitespace
+" Highlight tabs and trailing whitespace
 set list listchars=tab:»·,trail:·
-
-" Get rid of the delay when pressing O (for example)
-" http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
-set timeout timeoutlen=1000 ttimeoutlen=100
 
 " Hide the toolbar
 set guioptions-=T
 
 " UTF encoding
 set encoding=utf-8
-
-" Autoload files that have changed outside of vim
-set autoread
 
 " Use system clipboard
 " http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
@@ -102,9 +81,6 @@ set cursorcolumn
 " Ensure Vim doesn't beep at you every time you make a mistype
 set visualbell
 
-" Visual autocomplete for command menu (e.g. :e ~/path/to/file)
-set wildmenu
-
 " redraw only when we need to (i.e. don't redraw when executing a macro)
 set lazyredraw
 
@@ -120,13 +96,8 @@ set showmode
 " Complete files like a shell.
 set wildmode=list:longest
 
-" Show 3 lines of context around the cursor.
-set scrolloff=3
-
 " Set the terminal's title
 set title
-
-set autoindent
 
 set tags=./tags;
 
@@ -166,6 +137,7 @@ endif
 " }}}
 
 " Commands {{{
+
 " specify syntax highlighting for specific files
 augroup file_types
   autocmd!
@@ -258,6 +230,7 @@ cmap w!! w !sudo tee >/dev/null %
 " }}}
 
 " Plugins {{{
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -407,6 +380,7 @@ nmap <F8> :TagbarToggle<CR>
 " }}}
 
 " Appearance {{{
+
 set background=dark
 colorscheme solarized
 let g:solarized_diffmode="high"
@@ -424,9 +398,6 @@ function! StatuslineGit()
   let l:branchname = GitBranch()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
-
-" Always show statusline
-set laststatus=2
 
 " Statusline appearance
 set statusline=
@@ -448,6 +419,7 @@ set statusline+=%m%h%r
 " }}}
 
 " Local {{{
+
 if filereadable(glob("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
