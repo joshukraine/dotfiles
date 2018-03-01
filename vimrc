@@ -323,8 +323,15 @@ map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " GitGutter
-nnoremap <F4> :GitGutterToggle<CR>
-let g:gitgutter_map_keys = 0
+nnoremap <F6> :GitGutterToggle<CR>
+nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_terminal_reports_focus=0
+
+" GitGutter default mapping reference
+" https://github.com/airblade/vim-gitgutter#getting-started
+" <leader>hp - Preview hunk
+" <leader>hs - Stage hunk
+" <leader>hu - Undo hunk
 
 " Tcomment
 map <leader>/ :TComment<CR>
