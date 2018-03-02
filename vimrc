@@ -96,6 +96,9 @@ set showmode
 " Complete files like a shell.
 set wildmode=list:longest
 
+" Show 3 lines of context around the cursor.
+set scrolloff=3
+
 " Set the terminal's title
 set title
 
