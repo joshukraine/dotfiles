@@ -131,6 +131,8 @@ set grepprg=ag
 let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=tmp'
 
 if has('nvim')
+  set inccommand=nosplit
+
   set updatetime=100
 
   set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
