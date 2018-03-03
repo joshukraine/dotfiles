@@ -436,6 +436,8 @@ set statusline+=\[%{&fileformat}\]
 set statusline+=\ %P
 set statusline+=\ %l:%c
 set statusline+=\ 
+set statusline+=%{ObsessionStatus('●','❙❙','■')}
+set statusline+=\ 
 set statusline+=%m%h%r
 " }}}
 
