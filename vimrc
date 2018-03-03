@@ -110,13 +110,6 @@ set fillchars+=vert:\|
 set textwidth=80
 set colorcolumn=+1
 
-" Keep focus split large, others minimal
-" Currently setting these in ~/.vimrc.local for machine-specific values.
-" set winwidth=90
-" set winheight=5
-" set winheight=40
-" set winminheight=5
-
 " Start diff mode with vertical splits
 set diffopt=vertical
 
@@ -139,6 +132,23 @@ if has('nvim')
         \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
         \,sm:block-blinkwait0-blinkoff150-blinkon175
 endif
+
+" Keep focus split wide, others narrow.
+set winwidth=90
+set winminwidth=5
+
+" Keep focus split at max height, others minimal.
+function! SetWindowHeight()
+  set winheight=5
+  set winminheight=5
+  set winheight=999
+endfunction
+
+" Reset window height to avoid session errors.
+function! ResetWindowHeight()
+  set winminheight=0
+  set winheight=1
+endfunction
 " }}}
 
 " Commands {{{
@@ -189,6 +199,13 @@ augroup window_resize
   autocmd!
   autocmd VimResized * :wincmd =
 augroup END
+
+" Reset window sizes to avoid errors on session load.
+augroup set_window_height
+  autocmd!
+  autocmd VimLeavePre * :call ResetWindowHeight()
+  autocmd VimEnter * :call SetWindowHeight()
+augroup END
 " }}}
 
 " Mappings {{{
@@ -207,7 +224,7 @@ map <leader>ra :%s/
 map <leader>p :set paste<CR>""p:set nopaste<CR> " Fix indentation on paste
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
-map <leader>0 :set winheight=100<CR>
+map <leader>0 :call SetWindowHeight()<CR>
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
 inoremap jj <C-c> " jj to switch back to normal mode
