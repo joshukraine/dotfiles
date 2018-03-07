@@ -283,7 +283,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting rub
 Plug 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
 Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
 Plug 'skwp/greplace.vim'                " Global search and replace for vi                      | https://github.com/skwp/greplace.vim
-Plug 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
+Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI script 'ack'     | https://github.com/mileszs/ack.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
@@ -311,6 +311,11 @@ Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands fr
 call plug#end()
 
 " Plugin-specifc Mappings & Settings
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
