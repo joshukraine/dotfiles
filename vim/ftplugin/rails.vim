@@ -1,0 +1,1 @@
+:UltiSnipsAddFiletypes rails.ruby
