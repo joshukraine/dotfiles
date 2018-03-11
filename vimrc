@@ -321,8 +321,10 @@ call plug#end()
 " Plugin-specifc Mappings & Settings
 
 " nvim-completion-manager
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+if has('nvim')
+  inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+  inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+endif
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'horizontal'
