@@ -263,7 +263,6 @@ call plug#begin('~/.vim/plugged')
 
 " General
 Plug 'godlygeek/tabular'                " Vim script for text filtering and alignment           | https://github.com/godlygeek/tabular
-Plug 'ervandew/supertab'                " Use <Tab> for all your insert completion needs        | https://github.com/ervandew/supertab
 Plug 'tomtom/tcomment_vim'              " An extensible & universal comment vim-plugin          | https://github.com/tomtom/tcomment_vim
 Plug 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plug 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
@@ -273,6 +272,15 @@ Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for    
 Plug 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
 Plug 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
+
+" Code Completion
+if has('nvim')
+  Plug 'roxma/nvim-completion-manager'  " Async Completion Framework for Neovim                 | https://github.com/roxma/nvim-completion-manager
+  Plug 'roxma/ncm-rct-complete'         " Required for Ruby completion                          | https://github.com/roxma/ncm-rct-complete
+  Plug 'roxma/nvim-cm-tern',
+    \ {'do': 'npm install'}             " Javascript completion for nvim-completion-manager.    | https://github.com/roxma/nvim-cm-tern
+endif
+Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -311,6 +319,14 @@ Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands fr
 call plug#end()
 
 " Plugin-specifc Mappings & Settings
+
+" nvim-completion-manager
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" UltiSnips
+let g:UltiSnipsEditSplit = 'horizontal'
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " Far.vim
 let g:far#source = 'agnvim'
