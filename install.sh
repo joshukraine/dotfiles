@@ -71,6 +71,9 @@ ln -nfs "$DOTFILES_DIR"/vim/colors "$VIM_DIR"/colors
 dotfiles_echo "-> Linking $DOTFILES_DIR/vim/spell to $VIM_DIR/spell..."
 ln -nfs "$DOTFILES_DIR"/vim/spell "$VIM_DIR"/spell
 
+dotfiles_echo "-> Linking $DOTFILES_DIR/vim/UltiSnips to $VIM_DIR/UltiSnips..."
+ln -nfs "$DOTFILES_DIR"/vim/UltiSnips "$VIM_DIR"/UltiSnips
+
 dotfiles_echo "-> Linking $DOTFILES_DIR/init.vim to $NVIM_DIR/init.vim..."
 ln -nfs "$DOTFILES_DIR"/init.vim "$NVIM_DIR"/init.vim
 
