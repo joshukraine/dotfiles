@@ -281,6 +281,7 @@ if has('nvim')
     \ {'do': 'npm install'}             " Javascript completion for nvim-completion-manager.    | https://github.com/roxma/nvim-cm-tern
 endif
 Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
+Plug 'othree/csscomplete.vim'           " CSS Omni Complete Function for CSS3                   | https://github.com/othree/csscomplete.vim
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -326,6 +327,12 @@ endif
 " UltiSnips
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+
+" CSS Omni Complete Function for CSS3
+augroup csscomplete
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+augroup END
 
 " Far.vim
 let g:far#source = 'agnvim'
