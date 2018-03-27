@@ -350,6 +350,9 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
+" Vim DevIcons
+source $HOME/dotfiles/vim/devicons.vim
+
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
 nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
