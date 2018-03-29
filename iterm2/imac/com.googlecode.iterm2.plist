@@ -347,11 +347,11 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>3787 110 1267 407 2560 0 2560 1440 </string>
+	<string>3456 62 1267 139 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1009 768 620 392 0 0 2560 1417 </string>
+	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3813 429 918 401 2560 0 2560 1440 </string>
+	<string>3813 387 918 492 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>2882 204 1660 1150 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
@@ -965,9 +965,11 @@
 			<key>Name</key>
 			<string>Solarized Dark</string>
 			<key>Non Ascii Font</key>
-			<string>Menlo-Regular 18</string>
+			<string>FuraCodeNerdFontC-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>FiraCode-Regular 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
@@ -1145,7 +1147,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -2074,7 +2076,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-24T08:21:50Z</date>
+	<date>2018-03-26T11:29:21Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2130,7 +2132,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.6beta3</string>
+	<string>3.1.6beta4</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

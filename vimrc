@@ -297,10 +297,6 @@ Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 
-" Colors and Syntax Highlighting
-Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
-Plug 'sheerun/vim-polyglot'             " A solid language pack for Vim.                        | https://github.com/sheerun/vim-polyglot
-
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
 Plug 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
@@ -313,6 +309,12 @@ Plug 'tpope/vim-sensible'               " Defaults everyone can agree on        
 " Testing & Tmux
 Plug 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
 Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
+
+" Colors and Syntax Highlighting
+Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
+Plug 'sheerun/vim-polyglot'             " A solid language pack for Vim.                        | https://github.com/sheerun/vim-polyglot
+Plug 'ryanoasis/vim-devicons'           " Adds file type glyphs/icons to popular Vim plugins    | https://github.com/ryanoasis/vim-devicons
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Extra syntax and highlight for nerdtree files  | https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
 
 call plug#end()
 
@@ -347,6 +349,9 @@ endif
 nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+
+" Vim DevIcons
+source $HOME/dotfiles/vim/devicons.vim
 
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
