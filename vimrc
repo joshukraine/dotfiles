@@ -469,7 +469,7 @@ set statusline+=\ %l:%c
 set statusline+=\ 
 set statusline+=%{ObsessionStatus('●','❙❙','■')}
 set statusline+=\ 
-set statusline+=%m%h%r
+set statusline+=%h%r
 " }}}
 
 " Local {{{
