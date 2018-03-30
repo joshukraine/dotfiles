@@ -299,7 +299,8 @@ Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                 
 
 " Colors and Syntax Highlighting
 Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
-Plug 'sheerun/vim-polyglot'             " A solid language pack for Vim.                        | https://github.com/sheerun/vim-polyglot
+Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
+Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
