@@ -30,6 +30,7 @@ brew "git"
 brew "git-quick-stats"
 brew "gmp" # Vim dependency
 brew "gpg" # asdf-nodejs dependency
+brew "hivemind"
 brew "htop"
 brew "hub"
 brew "imagemagick"
@@ -41,9 +42,9 @@ brew "neovim", args: ["HEAD"]
 brew "pandoc"
 brew "perl"
 brew "pgcli"
-brew "postgresql", service_restart: :changed
+brew "phantomjs"
+brew "postgresql", restart_service: true
 brew "python"
-brew "qt@5.5" if MacOS::Xcode.installed?
 brew "readline"
 brew "reattach-to-user-namespace"
 brew "rsync"
@@ -54,14 +55,11 @@ brew "the_silver_searcher"
 brew "thoughtbot/formulae/gitsh"
 brew "tmux"
 brew "tree"
-brew "universal-ctags", args: ["HEAD"]
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "unixodbc" # asdf dependency
-
-# brew "vim" # Compiling myself right now.
-# https://gist.github.com/joshukraine/b9085aeb3dd762cf1d1e1c356974032f
-
 brew "wget"
 brew "xz"
+brew "yarn", args: ["without-node"]
 brew "zsh"
 
 # homebrew-cask
@@ -70,6 +68,7 @@ cask "alfred"
 cask "atom"
 cask "bartender"
 cask "carbon-copy-cloner"
+cask "caskroom/versions/vmware-fusion8"
 cask "cleanmymac"
 cask "daisydisk"
 cask "dash"
@@ -93,4 +92,3 @@ cask "the-unarchiver"
 cask "tunnelbear"
 cask "vagrant"
 cask "vlc"
-cask "vmware-fusion8"
