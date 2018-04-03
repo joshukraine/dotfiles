@@ -377,11 +377,11 @@ map <leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = 'VtrSendCommandToRunner! clear; bin/rspec {spec}'
 
 " vim-tmux-runner
-let g:VtrPercentage = 20
+let g:VtrPercentage = 25
 let g:VtrUseVtrMaps = 1
 nnoremap <leader>sd :VtrSendCtrlD<cr>
 nmap <leader>fs :VtrFlushCommand<cr>:VtrSendCommandToRunner<cr>
-nmap <leader>osp :VtrOpenRunner {'orientation': 'h', 'percentage': 20, 'cmd': '' }<cr>
+nmap <leader>osp :VtrOpenRunner {'orientation': 'h', 'percentage': 25, 'cmd': '' }<cr>
 nmap <leader>orc :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'rc'}<cr>
 nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'pry'}<cr>
 
