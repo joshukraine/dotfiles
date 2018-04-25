@@ -6,9 +6,18 @@ function get_ruby_version() {
   fi
 }
 
-_rubyprompt() {
+function get_node_version() {
+  if command -v node >/dev/null; then
+    echo "node $(node -v)"
+  else
+    echo "Node not installed"
+  fi
+}
+
+
+_version_prompt() {
   if [ $COLUMNS -gt 80 ]; then
-    echo "$(get_ruby_version)"
+    echo "$(get_node_version) | $(get_ruby_version)"
   fi
 }
 
@@ -72,4 +81,4 @@ PROMPT="${timestamp} ${pwd} ${git}
 
 setopt transient_rprompt # only show the rprompt on the current prompt
 
-RPROMPT='$(vi_mode_prompt_info) $(_rubyprompt)'
+RPROMPT='$(vi_mode_prompt_info) $(_version_prompt)'
