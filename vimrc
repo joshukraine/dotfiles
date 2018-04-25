@@ -139,8 +139,8 @@ set winminwidth=5
 
 " Keep focus split at max height, others minimal.
 function! SetWindowHeight()
-  set winheight=5
-  set winminheight=5
+  set winheight=7
+  set winminheight=7
   set winheight=999
 endfunction
 
