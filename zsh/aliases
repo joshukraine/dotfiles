@@ -124,15 +124,6 @@ alias mmc='bundle exec middleman console -e console'
 alias mmb='bundle exec middleman build --clean'
 alias mma='bundle exec middleman article'
 
-# npm (borrowed from Oh-My-Zsh npm plugin)
-alias npmD='npm install --save-dev'
-alias npmG='npm install --global'
-alias npmL='npm list --depth=0'
-alias npmLg='npm list --depth=0 -g'
-alias npmO='npm outdated'
-alias npmS='npm install --save'
-alias npmV='npm -v'
-
 # Postgres
 alias psq='pgcli -d postgres'
 alias startpost='brew services start postgresql'
