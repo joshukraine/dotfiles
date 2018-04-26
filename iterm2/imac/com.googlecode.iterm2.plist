@@ -310,7 +310,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSFontPanelAttributes</key>
-	<string>1, 0</string>
+	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dotfiles/iterm2/imac</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -347,13 +347,13 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>3787 110 1267 407 2560 0 2560 1440 </string>
+	<string>3787 373 1267 276 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1009 768 620 392 0 0 2560 1417 </string>
+	<string>3530 786 620 392 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3813 429 918 401 2560 0 2560 1440 </string>
+	<string>3714 604 918 401 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2882 204 1660 1150 2560 0 2560 1440 </string>
+	<string>2882 0 1660 1417 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1147,7 +1147,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>1.2805793486445785</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -2074,7 +2074,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-24T08:21:50Z</date>
+	<date>2018-04-25T11:33:47Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2130,7 +2130,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.6beta3</string>
+	<string>3.1.6beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
