@@ -45,6 +45,7 @@ brew "pgcli"
 brew "phantomjs"
 brew "postgresql", restart_service: true
 brew "python"
+brew "python3"
 brew "readline"
 brew "reattach-to-user-namespace"
 brew "rsync"
