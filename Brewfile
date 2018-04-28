@@ -30,7 +30,6 @@ brew "git"
 brew "git-quick-stats"
 brew "gmp" # Vim dependency
 brew "gpg" # asdf-nodejs dependency
-brew "hivemind"
 brew "htop"
 brew "hub"
 brew "imagemagick"
@@ -39,6 +38,7 @@ brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
 brew "mas"
 brew "neovim", args: ["HEAD"]
+brew "overmind"
 brew "pandoc"
 brew "perl"
 brew "pgcli"
