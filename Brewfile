@@ -15,6 +15,7 @@ tap "universal-ctags/universal-ctags"
 brew "openssl"
 brew "openssl@1.1" # wget dependency
 
+brew "ansible"
 brew "autoconf" # asdf dependency
 brew "automake" # asdf dependency
 brew "awscli"
