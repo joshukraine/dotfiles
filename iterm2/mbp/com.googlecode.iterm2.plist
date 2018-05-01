@@ -347,11 +347,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>869 168 486 229 0 0 1440 900 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>330 307 620 392 0 0 1280 777 </string>
+	<string>410 381 620 392 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>459 96 796 473 0 0 1440 900 </string>
+	<string>469 470 918 401 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 167 1310 710 0 0 1440 877 </string>
+	<string>0 80 1360 797 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1145,7 +1145,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>0.95864904932228912</real>
+			<real>1.2000000000000002</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1967,6 +1967,8 @@
 			<string>/Users/joshukraine/Desktop</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveUsedCopyMode</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
@@ -2049,7 +2051,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-06T08:19:10Z</date>
+	<date>2018-05-01T07:52:37Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2105,7 +2107,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5.beta.2</string>
+	<string>3.1.6beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
