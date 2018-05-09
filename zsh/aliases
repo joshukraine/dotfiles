@@ -7,7 +7,7 @@ alias duf='du -sh *'
 alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 alias path='echo -e ${PATH//:/\\n}'
-alias pi='ping -Anc 5 8.8.8.8'
+alias pi='ping -Anc 5 1.1.1.1'
 alias src='. ~/.zshrc'
 alias srm='srm -iv'
 
