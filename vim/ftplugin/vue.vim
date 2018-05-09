@@ -1,0 +1,1 @@
+:UltiSnipsAddFiletypes vue.html.javascript
