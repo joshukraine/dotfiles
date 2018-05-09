@@ -302,6 +302,11 @@ Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                 
 Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
+Plug 'pangloss/vim-javascript',
+      \ { 'for': ['javascript', 'vue']
+      \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
+Plug 'digitaltoad/vim-pug'              " Vim Pug (formerly Jade) syntax highlighting           | https://github.com/digitaltoad/vim-pug
+Plug 'posva/vim-vue', { 'for': 'vue' }  " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
