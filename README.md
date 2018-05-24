@@ -2,7 +2,7 @@
 
 ![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Macs, currently running [macOS High Sierra (10.13)][high-sierra]. They are geared primarily towards Ruby-centric web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Vim][vim]/[Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
+These are the dotfiles I use on my Macs, currently running [macOS High Sierra (10.13)][high-sierra]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [Node.js][nodejs] web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Vim][vim]/[Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
 ## Mac Bootstrap Script
 
@@ -22,6 +22,7 @@ The dotfiles assume you are running macOS with the following software pre-instal
 * [Git][git]
 * [Tmux][tmux]
 * [Ruby][ruby]
+* [Node.js][nodejs]
 * [asdf][asdf]
 
 All of the above and more are included in [Mac Bootstrap][mac-bootstrap]
@@ -107,7 +108,7 @@ I'm currently trying out Neovim, and so far things are working nicely. For now I
 
 ## License
 
-Copyright &copy; 2017 Joshua Steele. [MIT License][license]
+Copyright &copy; 2018 Joshua Steele. [MIT License][license]
 
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
@@ -120,9 +121,11 @@ Copyright &copy; 2017 Joshua Steele. [MIT License][license]
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
 [neovim]: https://neovim.io/
+[nodejs]: https://nodejs.org/
 [oh-my-zsh]: https://github.com/robbyrussell/oh-my-zsh
+[rails]: https://rubyonrails.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-screenshot-2018-01-04.png
+[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-05-24-2018.png
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [vim]: http://www.vim.org/
