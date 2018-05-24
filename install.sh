@@ -22,6 +22,7 @@ NVIM_DIR=$HOME/.config/nvim
 files=(
 "asdfrc"
 "default-gems"
+"default-npm-packages"
 "gemrc"
 "gitconfig"
 "gitignore_global"
