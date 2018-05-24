@@ -3,5 +3,4 @@ haml_lint
 neovim
 pry
 rubocop
-scss_lint
 tmuxinator
