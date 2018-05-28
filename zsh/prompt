@@ -73,7 +73,7 @@ local git='$(my_git_prompt)$(git_prompt_short_sha)'
 if [[ -n $SSH_CONNECTION ]]; then
   local pwd='%{$fg[magenta]%}%n@%m %{$fg[blue]%}%~%{$reset_color%}'
 else
-  local pwd='%{$fg[blue]%}%~%{$reset_color%}'
+  local pwd='%{$fg[blue]%}$(shrink_path -f)%{$reset_color%}'
 fi
 
 PROMPT="${timestamp} ${pwd} ${git}
