@@ -79,6 +79,4 @@ fi
 PROMPT="${timestamp} ${pwd} ${git}
 %(?..%{$fg[red]%})%B$%b%{$reset_color%} "
 
-setopt transient_rprompt # only show the rprompt on the current prompt
-
 RPROMPT='$(vi_mode_prompt_info) $(_version_prompt)'

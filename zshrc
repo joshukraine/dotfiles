@@ -13,20 +13,20 @@ export _Z_OWNER=$USER
 export RUBY_CONFIGURE_OPTIONS='--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
 export XDG_CONFIG_HOME=$HOME/.config
 
-setopt auto_cd
+. $HOME/dotfiles/zsh/oh-my-zsh
+. $HOME/dotfiles/zsh/opts
+. $HOME/dotfiles/zsh/aliases
+. $HOME/dotfiles/zsh/prompt
+. $HOME/dotfiles/zsh/tmux
+. $HOME/dotfiles/zsh/functions
+. $HOME/dotfiles/zsh/z.sh
+
 cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
 
 HISTSIZE=1000000
 SAVEHIST=1000000
 HISTFILE=~/.zsh_history
 HIST_STAMPS="yyyy-mm-dd"
-
-. $HOME/dotfiles/zsh/oh-my-zsh
-. $HOME/dotfiles/zsh/aliases
-. $HOME/dotfiles/zsh/prompt
-. $HOME/dotfiles/zsh/tmux
-. $HOME/dotfiles/zsh/functions
-. $HOME/dotfiles/zsh/z.sh
 
 # asdf
 . $HOME/.asdf/asdf.sh
