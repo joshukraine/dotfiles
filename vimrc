@@ -430,6 +430,11 @@ let g:ale_linters = {
 \   'javascript': ['standard'],
 \}
 
+let g:ale_pattern_options = {
+\   '.*\.json$': {'ale_enabled': 0},
+\   'tailwind\.js$': {'ale_enabled': 0},
+\}
+
 " Key mappings for dragvisuals.vim
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
 
