@@ -308,6 +308,7 @@ Plug 'pangloss/vim-javascript',
       \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
 Plug 'digitaltoad/vim-pug'              " Vim Pug (formerly Jade) syntax highlighting           | https://github.com/digitaltoad/vim-pug
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
+Plug 'chrisbra/Colorizer'               " A plugin to color colornames and codes                | https://github.com/chrisbra/Colorizer
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
@@ -449,6 +450,9 @@ let g:DVB_TrimWS = 1
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" Colorizer
+let g:colorizer_auto_filetype='css,html,javascript,vue'
 " }}}
 
 " Appearance {{{
