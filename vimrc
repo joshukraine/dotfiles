@@ -307,7 +307,7 @@ Plug 'pangloss/vim-javascript',
       \ { 'for': ['javascript', 'vue']
       \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
 Plug 'digitaltoad/vim-pug'              " Vim Pug (formerly Jade) syntax highlighting           | https://github.com/digitaltoad/vim-pug
-Plug 'posva/vim-vue', { 'for': 'vue' }  " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
+Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
