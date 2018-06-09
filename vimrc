@@ -136,6 +136,10 @@ if has('nvim')
         \,sm:block-blinkwait0-blinkoff150-blinkon175
 endif
 
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 " Keep focus split wide, others narrow.
 set winwidth=90
 set winminwidth=5
