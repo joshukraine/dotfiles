@@ -150,12 +150,17 @@ endsnippet
 ############
 
 snippet vsfc "Vue single file component"
-<template lang="$1">
-	$2
+<template lang="pug">
 </template>
 
 <script>
 export default {
+	name: '$1',
+	data () {
+		return {
+			$2
+		}
+	}
 }
 </script>
 
