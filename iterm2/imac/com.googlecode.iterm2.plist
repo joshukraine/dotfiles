@@ -653,7 +653,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop/material.vim-master/iterm2</string>
+	<string>~/Desktop/mbadolato-iTerm2-Color-Schemes-7d01cd1/schemes</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{910, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -692,9 +692,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3148 891 928 394 2560 0 2560 1440 </string>
+	<string>2855 758 928 394 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2882 0 1660 1417 2560 0 2560 1440 </string>
+	<string>2794 0 1660 1417 2560 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2323,13 +2323,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.47843128442764282</real>
+				<real>0.25882352941176473</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.43137252330780029</real>
+				<real>0.22745098039215686</real>
 				<key>Red Component</key>
-				<real>0.32941177487373352</real>
+				<real>0.17254901960784313</real>
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
@@ -3310,7 +3310,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-06-08T14:06:08Z</date>
+	<date>2018-06-10T14:06:51Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -3368,7 +3368,7 @@
 	<key>iTerm Version</key>
 	<string>3.2.0beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
 	<false/>
 	<key>kCPKUseSystemColorPicker</key>
