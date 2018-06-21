@@ -2,6 +2,12 @@ export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=7
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(github history osx shrink-path)
+plugins=(
+history
+npm
+osx
+shrink-path
+yarn
+)
 
 . $ZSH/oh-my-zsh.sh
