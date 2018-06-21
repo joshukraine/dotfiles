@@ -428,8 +428,11 @@ let g:ale_sign_error = '⌦'
 let g:ale_sign_warning = '∙∙'
 
 let g:ale_linters = {
-\   'javascript': ['standard'],
+  \ 'javascript': ['standard'],
+  \ 'vue': ['eslint', 'stylelint'],
 \}
+
+let g:ale_linter_aliases = {'vue': ['javascript', 'css']}
 
 let g:ale_pattern_options = {
 \   '.*\.json$': {'ale_enabled': 0},
