@@ -1,1 +1,1 @@
-:UltiSnipsAddFiletypes vue.html.javascript
+:UltiSnipsAddFiletypes vue.html.javascript.css
