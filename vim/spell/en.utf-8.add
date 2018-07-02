@@ -70,3 +70,7 @@ Webpacker
 precompiles
 JavaScript
 postgresql
+debounce
+lodash
+navbar
+css
