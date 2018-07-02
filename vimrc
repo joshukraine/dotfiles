@@ -279,11 +279,14 @@ Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!      
 
 " Code Completion
 if has('nvim')
-  Plug 'roxma/nvim-completion-manager'  " Async Completion Framework for Neovim                 | https://github.com/roxma/nvim-completion-manager
-  Plug 'roxma/ncm-rct-complete'         " Required for Ruby completion                          | https://github.com/roxma/ncm-rct-complete
-  Plug 'roxma/nvim-cm-tern',
-    \ {'do': 'npm install'}             " Javascript completion for nvim-completion-manager.    | https://github.com/roxma/nvim-cm-tern
+  Plug 'Shougo/deoplete.nvim',
+  \ { 'do': ':UpdateRemotePlugins' }    " Asynchronous completion framework for neovim/Vim8     | https://github.com/Shougo/deoplete.nvim
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
+let g:deoplete#enable_at_startup = 1
 Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
 Plug 'othree/csscomplete.vim'           " CSS Omni Complete Function for CSS3                   | https://github.com/othree/csscomplete.vim
 
@@ -329,12 +332,6 @@ Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands fr
 call plug#end()
 
 " Plugin-specifc Mappings & Settings
-
-" nvim-completion-manager
-if has('nvim')
-  inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-  inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-endif
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'horizontal'
