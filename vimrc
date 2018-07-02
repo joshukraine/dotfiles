@@ -38,6 +38,9 @@ set hidden
 " Turn word wrap off
 set nowrap
 
+" Don't break long lines in insert mode.
+set formatoptions=l
+
 " Conceal Markdown characters
 set conceallevel=2
 
