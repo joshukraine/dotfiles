@@ -174,7 +174,7 @@ augroup END
 " Remove trailing whitespace on save for specified file types.
 augroup clear_whitespace
   autocmd!
-  au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee :%s/\s\+$//e
+  au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee,*.vue :%s/\s\+$//e
 augroup END
 
 " Fold settings
