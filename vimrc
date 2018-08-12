@@ -442,8 +442,7 @@ let g:ale_linters = {
 let g:ale_linter_aliases = {'vue': ['javascript', 'css']}
 
 let g:ale_pattern_options = {
-\   '.*\.json$': {'ale_enabled': 0},
-\   'tailwind\.js$': {'ale_enabled': 0},
+\   '.*\.json$': {'ale_enabled': 0}
 \}
 
 " Key mappings for dragvisuals.vim
