@@ -125,7 +125,7 @@ Copyright &copy; 2018 Joshua Steele. [MIT License][license]
 [oh-my-zsh]: https://github.com/robbyrussell/oh-my-zsh
 [rails]: https://rubyonrails.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-05-24-2018.png
+[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-09-16-2018.png
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [vim]: http://www.vim.org/
