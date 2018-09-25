@@ -136,6 +136,10 @@ if has('nvim')
         \,sm:block-blinkwait0-blinkoff150-blinkon175
 endif
 
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 " Keep focus split wide, others narrow.
 set winwidth=90
 set winminwidth=5
@@ -170,7 +174,7 @@ augroup END
 " Remove trailing whitespace on save for specified file types.
 augroup clear_whitespace
   autocmd!
-  au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee :%s/\s\+$//e
+  au BufWritePre *.rb,*.yml,*.erb,*.haml,*.css,*.scss,*.js,*.coffee,*.vue :%s/\s\+$//e
 augroup END
 
 " Fold settings
@@ -286,7 +290,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
 Plug 'othree/csscomplete.vim'           " CSS Omni Complete Function for CSS3                   | https://github.com/othree/csscomplete.vim
 
@@ -306,7 +309,8 @@ Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 
 " Colors and Syntax Highlighting
-Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
+" Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
+Plug 'kaicataldo/material.vim'          " Vim/Neovim Material color scheme                      | https://github.com/kaicataldo/material.vim
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
@@ -332,6 +336,9 @@ Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands fr
 call plug#end()
 
 " Plugin-specifc Mappings & Settings
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'horizontal'
@@ -435,8 +442,7 @@ let g:ale_linters = {
 let g:ale_linter_aliases = {'vue': ['javascript', 'css']}
 
 let g:ale_pattern_options = {
-\   '.*\.json$': {'ale_enabled': 0},
-\   'tailwind\.js$': {'ale_enabled': 0},
+\   '.*\.json$': {'ale_enabled': 0}
 \}
 
 " Key mappings for dragvisuals.vim
@@ -461,9 +467,7 @@ let g:colorizer_auto_filetype='css,html,javascript,vue'
 " Appearance {{{
 
 set background=dark
-colorscheme solarized
-let g:solarized_diffmode="high"
-let g:solarized_termtrans = 1 " Use terminal background
+colorscheme material
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
@@ -482,12 +486,12 @@ endfunction
 set statusline=
 set statusline+=%#PmenuSel#
 set statusline+=%{StatuslineGit()}
-set statusline+=%#LineNr#
+set statusline+=%#CursorLine#
 set statusline+=%<
 set statusline+=\ %f
 set statusline+=%m
 set statusline+=%=
-set statusline+=%#CursorColumn#
+set statusline+=%#StatusLine#
 set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]

@@ -66,9 +66,6 @@ fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/vim/ftplugin to $VIM_DIR/ftplugin..."
 ln -nfs "$DOTFILES_DIR"/vim/ftplugin "$VIM_DIR"/ftplugin
 
-dotfiles_echo "-> Linking $DOTFILES_DIR/vim/colors to $VIM_DIR/colors..."
-ln -nfs "$DOTFILES_DIR"/vim/colors "$VIM_DIR"/colors
-
 dotfiles_echo "-> Linking $DOTFILES_DIR/vim/spell to $VIM_DIR/spell..."
 ln -nfs "$DOTFILES_DIR"/vim/spell "$VIM_DIR"/spell
 

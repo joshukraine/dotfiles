@@ -12,6 +12,7 @@ export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
 export RUBY_CONFIGURE_OPTIONS='--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
 export XDG_CONFIG_HOME=$HOME/.config
+export TERM=xterm-256color
 
 . $HOME/dotfiles/zsh/oh-my-zsh
 . $HOME/dotfiles/zsh/opts
