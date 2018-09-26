@@ -36,8 +36,7 @@ brew "imagemagick"
 brew "libtool" # asdf dependency
 brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
-brew "mas"
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "overmind"
 brew "pandoc"
 brew "perl"
@@ -66,7 +65,6 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
 cask "alfred"
-cask "atom"
 cask "bartender"
 cask "carbon-copy-cloner"
 cask "caskroom/versions/vmware-fusion8"
@@ -89,5 +87,4 @@ cask "postman"
 cask "screenflick"
 cask "skype"
 cask "the-unarchiver"
-cask "tunnelbear"
 cask "vagrant"
