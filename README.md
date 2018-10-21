@@ -2,7 +2,7 @@
 
 ![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Macs, currently running [macOS High Sierra (10.13)][high-sierra]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [Node.js][nodejs] web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Vim][vim]/[Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
+These are the dotfiles I use on my Macs, currently running [macOS Mojave (10.14)][mojave]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [Node.js][nodejs] web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Vim][vim]/[Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
 ## Mac Bootstrap Script
 
@@ -115,11 +115,11 @@ Copyright &copy; 2018 Joshua Steele. [MIT License][license]
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [git]: https://git-scm.com/
-[high-sierra]: https://www.apple.com/macos/high-sierra/
 [homebrew]: http://brew.sh
 [iterm2]: https://www.iterm2.com/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
+[mojave]: https://www.apple.com/macos/mojave/
 [neovim]: https://neovim.io/
 [nodejs]: https://nodejs.org/
 [oh-my-zsh]: https://github.com/robbyrussell/oh-my-zsh
