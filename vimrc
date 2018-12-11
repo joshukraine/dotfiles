@@ -446,7 +446,7 @@ let g:ale_pattern_options = {
 \}
 
 " Key mappings for dragvisuals.vim
-runtime bundle/dragvisuals/plugins/dragvisuals.vim
+runtime plugged/dragvisuals/plugins/dragvisuals.vim
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
