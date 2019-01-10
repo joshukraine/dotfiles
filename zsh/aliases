@@ -160,6 +160,10 @@ alias bubc='brew upgrade && brew cleanup'
 alias bubo='brew update && brew outdated'
 alias bubu='bubo && bubc'
 
+# asdf
+alias aua='asdf update && asdf plugin-update --all'
+alias ala='asdf list-all'
+
 # oh-my-zsh
 alias upz='upgrade_oh_my_zsh'
 
