@@ -514,3 +514,5 @@ if filereadable(glob("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
 " }}}
+
+" vim: fdm=marker fen
