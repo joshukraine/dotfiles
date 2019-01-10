@@ -156,6 +156,14 @@ function! ResetWindowHeight()
   set winminheight=0
   set winheight=1
 endfunction
+
+" Requires 'jq' (brew install jq)
+function! s:PrettyJSON()
+  %!jq .
+  set filetype=json
+  normal zR
+endfunction
+command! PrettyJSON :call <sid>PrettyJSON()
 " }}}
 
 " Commands {{{
