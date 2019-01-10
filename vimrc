@@ -188,12 +188,8 @@ augroup END
 " Fold settings
 augroup fold_settings
   autocmd!
-  autocmd BufRead * setlocal foldmethod=marker
-  autocmd BufRead * normal zM
-  " autocmd FileType ruby setlocal foldmethod=manual
-  " autocmd BufRead *.rb setlocal foldmethod=syntax
-  " autocmd BufRead *.rb normal zR
-  " set foldnestmax=3
+  autocmd FileType json setlocal foldmethod=syntax
+  autocmd FileType json normal zR
 augroup END
 
 " Close vim if only nerdtree window is left
@@ -327,6 +323,7 @@ Plug 'pangloss/vim-javascript',
 Plug 'digitaltoad/vim-pug'              " Vim Pug (formerly Jade) syntax highlighting           | https://github.com/digitaltoad/vim-pug
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 Plug 'chrisbra/Colorizer'               " A plugin to color colornames and codes                | https://github.com/chrisbra/Colorizer
+Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
