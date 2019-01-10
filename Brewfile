@@ -32,7 +32,9 @@ brew "git-quick-stats"
 brew "gmp" # Vim dependency
 brew "gpg" # asdf-nodejs dependency
 brew "htop"
+brew "httpie"
 brew "imagemagick"
+brew "jq"
 brew "libtool" # asdf dependency
 brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
