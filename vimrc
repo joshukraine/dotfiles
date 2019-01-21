@@ -172,7 +172,7 @@ command! PrettyJSON :call <sid>PrettyJSON()
 augroup file_types
   autocmd!
   autocmd Bufread,BufNewFile *.spv set filetype=php
-  autocmd Bufread,BufNewFile *Brewfile set filetype=ruby
+  autocmd Bufread,BufNewFile *Brewfile,pryrc set filetype=ruby
   autocmd Bufread,BufNewFile *stylelintrc,*browserslistrc,*babelrc set filetype=json
   autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh,opts set filetype=zsh
   autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
