@@ -284,6 +284,7 @@ Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for    
 Plug 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
 Plug 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
+Plug 'diepm/vim-rest-console'           " A REST console for Vim.                               | https://github.com/diepm/vim-rest-console
 
 " Code Completion
 if has('nvim')
@@ -467,7 +468,14 @@ nmap <F8> :TagbarToggle<CR>
 
 " Colorizer
 let g:colorizer_auto_filetype='css,html,javascript,vue'
-" }}}
+
+" Vim REST Console (VRC)
+let g:vrc_curl_opts = {
+  \ '-L': '',
+  \ '-i': '',
+\}
+
+"}}}
 
 " Appearance {{{
 
