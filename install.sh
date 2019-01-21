@@ -27,6 +27,7 @@ files=(
 "gitconfig"
 "gitignore_global"
 "gitmessage"
+"gitsh_completions"
 "hushlogin"
 "npmrc"
 "pryrc"
