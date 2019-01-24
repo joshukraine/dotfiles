@@ -10,7 +10,7 @@ export PATH=$PATH:$GOPATH/bin
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
-export RUBY_CONFIGURE_OPTIONS='--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
+export RUBY_CONFIGURE_OPTS="--with-opt-dir=`brew --prefix openssl`:`brew --prefix readline`:`brew --prefix libyaml`:`brew --prefix gdbm`"
 export XDG_CONFIG_HOME=$HOME/.config
 
 . $HOME/dotfiles/zsh/oh-my-zsh
