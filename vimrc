@@ -350,6 +350,11 @@ let g:deoplete#enable_at_startup = 1
 " UltiSnips
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+let g:ultisnips_javascript = {
+     \ 'keyword-spacing': 'always',
+     \ 'semi': 'never',
+     \ 'space-before-function-paren': 'always',
+     \ }
 
 " CSS Omni Complete Function for CSS3
 augroup csscomplete
