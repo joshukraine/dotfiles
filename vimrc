@@ -295,6 +295,7 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+" For snippet reference, see honza/vim-snippets at https://github.com/honza/vim-snippets
 Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
 Plug 'othree/csscomplete.vim'           " CSS Omni Complete Function for CSS3                   | https://github.com/othree/csscomplete.vim
 
