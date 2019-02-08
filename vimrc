@@ -411,9 +411,25 @@ let g:VtrPercentage = 25
 let g:VtrUseVtrMaps = 1
 nnoremap <leader>sd :VtrSendCtrlD<cr>
 nmap <leader>fs :VtrFlushCommand<cr>:VtrSendCommandToRunner<cr>
+nmap <leader>v3 :VtrAttachToPane 3<cr>
+nmap <leader>v4 :VtrAttachToPane 4<cr>
 nmap <leader>osp :VtrOpenRunner {'orientation': 'h', 'percentage': 25, 'cmd': '' }<cr>
 nmap <leader>orc :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'rc'}<cr>
 nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'pry'}<cr>
+
+" vim-tmux-runner default mappings
+" nnoremap <leader>va :VtrAttachToPane<cr>
+" nnoremap <leader>ror :VtrReorientRunner<cr>
+" nnoremap <leader>sc :VtrSendCommandToRunner<cr>
+" nnoremap <leader>sl :VtrSendLinesToRunner<cr>
+" vnoremap <leader>sl :VtrSendLinesToRunner<cr>
+" nnoremap <leader>or :VtrOpenRunner<cr>
+" nnoremap <leader>kr :VtrKillRunner<cr>
+" nnoremap <leader>fr :VtrFocusRunner<cr>
+" nnoremap <leader>dr :VtrDetachRunner<cr>
+" nnoremap <leader>cr :VtrClearRunner<cr>
+" nnoremap <leader>fc :VtrFlushCommand<cr>
+" nnoremap <leader>sf :VtrSendFile<cr>
 
 " CtrlP
 map <leader>t <C-p>
