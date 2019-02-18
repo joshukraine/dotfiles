@@ -136,9 +136,10 @@ if has('nvim')
         \,sm:block-blinkwait0-blinkoff150-blinkon175
 endif
 
-if (has("termguicolors"))
-  set termguicolors
-endif
+" Need this when using material colorscheme
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
 
 " Keep focus split wide, others narrow.
 set winwidth=90
@@ -315,8 +316,8 @@ Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 
 " Colors and Syntax Highlighting
-" Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
-Plug 'kaicataldo/material.vim'          " Vim/Neovim Material color scheme                      | https://github.com/kaicataldo/material.vim
+Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
+" Plug 'kaicataldo/material.vim'          " Vim/Neovim Material color scheme                      | https://github.com/kaicataldo/material.vim
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
@@ -510,7 +511,10 @@ let g:vrc_curl_opts = {
 " Appearance {{{
 
 set background=dark
-colorscheme material
+colorscheme solarized
+let g:solarized_diffmode="high"
+let g:solarized_termtrans = 1 " Use terminal background
+" colorscheme material
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
