@@ -688,9 +688,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3530 786 620 392 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2923 291 918 512 2560 0 2560 1440 </string>
+	<string>2923 354 918 423 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2879 -55 1525 1417 2560 0 2560 1440 </string>
+	<string>2728 -19 1675 1417 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1306,7 +1306,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>FiraCode-Regular 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
