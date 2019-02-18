@@ -108,7 +108,7 @@ I'm currently trying out Neovim, and so far things are working nicely. For now I
 
 ## License
 
-Copyright &copy; 2018 Joshua Steele. [MIT License][license]
+Copyright &copy; 2019 Joshua Steele. [MIT License][license]
 
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
