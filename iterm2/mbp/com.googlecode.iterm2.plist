@@ -589,7 +589,7 @@
 		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
-	<string>7C79CB2E-47DC-4B57-A1AA-C9B7FB4D1BE5</string>
+	<string>69FA0EA6-2CDC-4B2F-AE7E-4BA04C65C07B</string>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
@@ -695,9 +695,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 496 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3189 467 918 423 2560 0 2560 1440 </string>
+	<string>629 593 916 423 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3624 -161 1210 1324 2560 0 2560 1440 </string>
+	<string>0 80 1210 947 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 80 1225 947 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -2210,7 +2210,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>FiraCode-Regular 14</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -3290,7 +3290,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-12-02T19:30:40Z</date>
+	<date>2019-02-08T17:18:18Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -3348,7 +3348,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.6beta4</string>
+	<string>3.2.7beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
