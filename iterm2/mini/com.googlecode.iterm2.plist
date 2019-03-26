@@ -350,11 +350,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>694 498 620 392 0 0 1920 1057 </string>
+	<string>666 321 620 392 0 0 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 122 796 473 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>287 0 1225 1057 0 0 1920 1057 </string>
+	<string>287 0 1210 1057 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>88 0 1832 1057 0 0 1920 1080 </string>
 	<key>New Bookmarks</key>
@@ -1984,7 +1984,11 @@
 	<key>NoSyncInstallationId</key>
 	<string>CC851560-A1AE-4491-8241-021AE3BDB850</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>3</integer>
+	<integer>7</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>575374693.11798501</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -2630,7 +2634,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-03-26T10:16:50Z</date>
+	<date>2019-03-26T18:12:52Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2638,7 +2642,7 @@
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -2695,5 +2699,7 @@
 	<false/>
 	<key>kCPKUseSystemColorPicker</key>
 	<false/>
+	<key>moveToApplicationsFolderAlertSuppress</key>
+	<true/>
 </dict>
 </plist>
