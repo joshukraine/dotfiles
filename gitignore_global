@@ -149,6 +149,9 @@ dist
 /test/version_tmp/
 /tmp/
 
+# Ignore master key for decrypting credentials (Rails 5.2+)
+/config/master.key
+
 # Used by dotenv library to load environment variables.
 # .env
 
