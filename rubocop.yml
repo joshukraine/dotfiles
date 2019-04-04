@@ -1,3 +1,15 @@
+AllCops:
+  DisplayCopNames: true
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+  SupportedStyles:
+    - normal
+    - rails
+
+Metrics/LineLength:
+  Max: 80
+
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
   Enabled: true
