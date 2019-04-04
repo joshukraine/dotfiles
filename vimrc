@@ -405,7 +405,7 @@ map <leader>f :call RunCurrentSpecFile()<CR>
 map <leader>n :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = 'VtrSendCommandToRunner! clear; bin/rspec {spec}'
+let g:rspec_command = 'VtrSendCommandToRunner! clear; rspec {spec}'
 
 " vim-tmux-runner
 let g:VtrPercentage = 25
