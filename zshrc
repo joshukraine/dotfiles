@@ -12,6 +12,7 @@ export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
 export RUBY_CONFIGURE_OPTS="--with-opt-dir=`brew --prefix openssl`:`brew --prefix readline`:`brew --prefix libyaml`:`brew --prefix gdbm`"
 export XDG_CONFIG_HOME=$HOME/.config
+export TERM="screen-256color"
 
 . $HOME/dotfiles/zsh/oh-my-zsh
 . $HOME/dotfiles/zsh/opts
