@@ -53,6 +53,8 @@ Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can
 1. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
 1. Restart iTerm2.
 
+Additionally iTerm2 provides a great collection of color schemes to give your terminal that personal touch. I've included in dotfiles so you only need to head over to iTerm2 > Preferences > Profiles > Colors and select "Import" from the Color Presets control. Color scheme files are found in  `~/dotfiles/iTerm2/iTerm2-Color-Schemes/schemes/` and can be viewed [online](https://github.com/mbadolato/iTerm2-Color-Schemes).
+
 ## Setting up Terminal.app
 
 Getting set up after a fresh install is simple.
