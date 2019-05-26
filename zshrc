@@ -1,4 +1,5 @@
 # ~/.zshrc
+. $HOME/dotfiles/zsh/profiler.start
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
 export EDITOR="nvim"
@@ -58,3 +59,5 @@ export KEYTIMEOUT=1
 
 # Include local settings
 [[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
+
+. $HOME/dotfiles/zsh/profiler.stop
