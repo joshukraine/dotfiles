@@ -81,9 +81,7 @@ I'm currently trying out Neovim, and so far things are working nicely. For now I
 
 ## Identifying Sources of Slow Startup Times
 
-The .zshrc script can be profiled by touching the file `~/.zshrc.profiler` and starting a new login shell. To see the top 20 
-lines that are taking the most time use the `zshrc_profiler_view`. `zshrc_profiler` parameters are number of lines to show (20)
-and path to profiler log file ($TMPDIR/zshrc_profiler.${PID}log).
+The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and starting a new login shell. To see the top 20 lines that are taking the most time use the `zshrc_profiler_view`. `zshrc_profiler` parameters are number of lines to show (20) and path to profiler log file (`$TMPDIR/zshrc_profiler.${PID}log`).
 
 ## Some of my favorite dotfile repos
 
