@@ -5,7 +5,6 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
 history
 npm
-osx
 shrink-path
 yarn
 )
