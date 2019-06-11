@@ -15,9 +15,10 @@ dotfiles_echo() {
 
 set -e # Terminate script if anything exits with a non-zero value
 
+CONFIG_DIR=$HOME/.config
 DOTFILES_DIR=$HOME/dotfiles
 VIM_DIR=$HOME/.vim
-NVIM_DIR=$HOME/.config/nvim
+NVIM_DIR=$CONFIG_DIR/nvim
 
 files=(
 "asdfrc"
@@ -75,6 +76,9 @@ ln -nfs "$DOTFILES_DIR"/vim/UltiSnips "$VIM_DIR"/UltiSnips
 
 dotfiles_echo "-> Linking $DOTFILES_DIR/init.vim to $NVIM_DIR/init.vim..."
 ln -nfs "$DOTFILES_DIR"/init.vim "$NVIM_DIR"/init.vim
+
+dotfiles_echo "-> Linking $DOTFILES_DIR/ranger to $CONFIG_DIR/ranger..."
+ln -nfs "$DOTFILES_DIR"/ranger "$CONFIG_DIR"/ranger
 
 dotfiles_echo "Dotfiles installation complete!"
 
