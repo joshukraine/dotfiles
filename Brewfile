@@ -1,10 +1,12 @@
 # https://github.com/Homebrew/homebrew-bundle
 
-tap "caskroom/cask"
-tap "caskroom/versions"
 tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "jonof/kenutils"
+tap "puma/puma"
 tap "thoughtbot/formulae"
 tap "universal-ctags/universal-ctags"
 
@@ -15,6 +17,7 @@ tap "universal-ctags/universal-ctags"
 brew "openssl"
 brew "openssl@1.1" # wget dependency
 
+brew "advancecomp"
 brew "ansible"
 brew "autoconf" # asdf dependency
 brew "automake" # asdf dependency
@@ -27,26 +30,43 @@ brew "coreutils"
 brew "diff-so-fancy"
 brew "dockutil"
 brew "dos2unix"
+brew "gifsicle"
 brew "git"
 brew "git-quick-stats"
 brew "gmp" # Vim dependency
-brew "gpg" # asdf-nodejs dependency
+brew "gnupg" # asdf-nodejs dependency
+brew "highlight"
 brew "htop"
 brew "httpie"
 brew "imagemagick"
+brew "jhead"
+brew "jonof/kenutils/pngout"
+brew "jpeg"
+brew "jpegoptim"
 brew "jq"
+brew "libtermkey"
 brew "libtool" # asdf dependency
 brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
-brew "neovim"
+brew "media-info"
+brew "memcached"
+brew "mono"
+brew "multitail"
+brew "neovim", args: ["HEAD"]
+brew "optipng"
 brew "overmind"
 brew "pandoc"
 brew "perl"
 brew "pgcli"
+brew "pngcrush"
+brew "pngquant"
 brew "postgresql", restart_service: true
+brew "puma/puma/puma-dev"
 brew "python"
 brew "python3"
+brew "ranger", link: false
 brew "readline"
+brew "rlwrap"
 brew "rsync"
 brew "shellcheck"
 brew "sqlite"
@@ -54,12 +74,14 @@ brew "ssh-copy-id"
 brew "the_silver_searcher"
 brew "thoughtbot/formulae/gitsh"
 brew "tmux"
+brew "trash"
 brew "tree"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "unixodbc" # asdf dependency
+brew "w3m"
 brew "wget"
 brew "xz"
-brew "yarn", args: ["without-node"]
+brew "yarn"
 brew "zsh"
 
 # homebrew-cask
@@ -67,7 +89,6 @@ brew "zsh"
 cask "alfred"
 cask "bartender"
 cask "carbon-copy-cloner"
-cask "caskroom/versions/vmware-fusion8"
 cask "cleanmymac"
 cask "daisydisk"
 cask "dash"
@@ -82,9 +103,12 @@ cask "little-snitch"
 cask "micro-snitch"
 cask "ngrok"
 cask "opera"
+cask "pdftotext"
 cask "postico"
 cask "postman"
 cask "screenflick"
 cask "skype"
+cask "tableplus"
 cask "the-unarchiver"
 cask "vagrant"
+cask "viber"

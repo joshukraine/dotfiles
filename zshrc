@@ -22,6 +22,7 @@ export TERM="screen-256color"
 . $HOME/dotfiles/zsh/tmux
 . $HOME/dotfiles/zsh/functions
 . $HOME/dotfiles/zsh/z.sh
+. $HOME/dotfiles/zsh/ranger.sh
 
 cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
 
