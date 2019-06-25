@@ -98,7 +98,7 @@
 
 [pull]
   # Don't flatten locally created merge commits when rebasing.
-  rebase = preserve
+  rebase = merges
 
 [push]
   # Refuse to push if upstream branch name is different from local.
