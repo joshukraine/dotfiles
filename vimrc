@@ -315,6 +315,8 @@ Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI s
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
+Plug 'francoiscabrol/ranger.vim'        " Ranger integration in vim and neovim                  | https://github.com/francoiscabrol/ranger.vim
+Plug 'rbgrouleff/bclose.vim'            " Dependency of ranger.vim                              | https://github.com/rbgrouleff/bclose.vim
 
 " Colors and Syntax Highlighting
 Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -507,7 +509,11 @@ let g:vrc_curl_opts = {
   \ '-i': '',
 \}
 
-"}}}
+" Ranger.vim
+let g:ranger_map_keys = 0
+map <leader>k :Ranger<CR>
+
+" }}}
 
 " Appearance {{{
 
