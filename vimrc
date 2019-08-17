@@ -120,7 +120,7 @@ set diffopt=vertical
 " set cmdheight=2
 
 " always show signcolumns
-set signcolumn=yes
+set signcolumn=auto
 
 " Set built-in file system explorer to use layout similar to the NERDTree plugin
 let g:netrw_liststyle=3
@@ -289,7 +289,6 @@ Plug 'majutsushi/tagbar'                " A class outline viewer for vim        
 Plug 'w0rp/ale'                         " Asynchronous Lint Engine                              | https://github.com/w0rp/ale
 Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 Plug 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
-Plug 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
 Plug 'diepm/vim-rest-console'           " A REST console for Vim.                               | https://github.com/diepm/vim-rest-console
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
@@ -390,17 +389,6 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
                   \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
                   \ '\.rar$']
-
-" GitGutter
-nnoremap <F6> :GitGutterToggle<CR>
-nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
-let g:gitgutter_terminal_reports_focus=0
-
-" GitGutter default mapping reference
-" https://github.com/airblade/vim-gitgutter#getting-started
-" <leader>hp - Preview hunk
-" <leader>hs - Stage hunk
-" <leader>hu - Undo hunk
 
 " Tcomment
 map <leader>/ :TComment<CR>
@@ -625,6 +613,21 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" coc-git
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" Stage current chunk
+nmap <leader>hs :CocCommand git.chunkStage<CR>
+" Undo current chunk
+nmap <leader>hu :CocCommand git.chunkUndo<CR>
+" Fold unchanged lines of current buffer
+nmap <leader>fu :CocCommand git.foldUnchanged<CR>
+
 " }}}
 
 " Appearance {{{
@@ -638,21 +641,13 @@ let g:solarized_termtrans = 1 " Use terminal background
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+highlight SignColumn ctermfg=10 ctermbg=0 guifg=Yellow
 
 " Statusline appearance
 set statusline=
+set statusline^=\ %{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
 set statusline+=%#CursorLine#
 set statusline+=%<
 set statusline+=\ %f
