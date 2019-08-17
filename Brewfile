@@ -86,7 +86,7 @@ brew "zsh"
 
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
-cask "alfred"
+cask "alfred3"
 cask "bartender"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
