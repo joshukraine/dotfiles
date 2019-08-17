@@ -1,1 +1,1 @@
-:UltiSnipsAddFiletypes scss.css
+" :UltiSnipsAddFiletypes scss.css
