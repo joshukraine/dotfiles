@@ -116,9 +116,6 @@ set colorcolumn=+1
 " Start diff mode with vertical splits
 set diffopt=vertical
 
-" Better display for messages
-" set cmdheight=2
-
 " always show signcolumns
 set signcolumn=auto
 
@@ -180,7 +177,7 @@ augroup file_types
   autocmd!
   autocmd Bufread,BufNewFile *.spv set filetype=php
   autocmd Bufread,BufNewFile *Brewfile,pryrc set filetype=ruby
-  autocmd Bufread,BufNewFile *stylelintrc,*browserslistrc,*babelrc set filetype=json
+  autocmd Bufread,BufNewFile *prettierrc,*stylelintrc,*browserslistrc,*babelrc set filetype=json
   autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh,opts set filetype=zsh
   autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
   autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
@@ -323,7 +320,6 @@ Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)  
 Plug 'pangloss/vim-javascript',
       \ { 'for': ['javascript', 'vue']
       \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
-Plug 'digitaltoad/vim-pug'              " Vim Pug (formerly Jade) syntax highlighting           | https://github.com/digitaltoad/vim-pug
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 Plug 'chrisbra/Colorizer'               " A plugin to color colornames and codes                | https://github.com/chrisbra/Colorizer
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
