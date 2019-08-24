@@ -294,20 +294,9 @@ Plug 'diepm/vim-rest-console'           " A REST console for Vim.               
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
 
 " Code Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mattn/emmet-vim'
-
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim',
-"   \ { 'do': ':UpdateRemotePlugins' }    " Asynchronous completion framework for neovim/Vim8     | https://github.com/Shougo/deoplete.nvim
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" For snippet reference, see honza/vim-snippets at https://github.com/honza/vim-snippets
-" Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
-" Plug 'othree/csscomplete.vim'           " CSS Omni Complete Function for CSS3                   | https://github.com/othree/csscomplete.vim
+Plug 'neoclide/coc.nvim',
+      \ {'branch': 'release'}           " Intellisense engine for vim8 & neovim                 | https://github.com/neoclide/coc.nvim
+Plug 'mattn/emmet-vim'                  " emmet for vim                                         | https://github.com/mattn/emmet-vim
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -355,24 +344,6 @@ Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands fr
 call plug#end()
 
 " Plugin-specifc Mappings & Settings
-
-" deoplete
-" let g:deoplete#enable_at_startup = 1
-
-" UltiSnips
-" let g:UltiSnipsEditSplit = 'horizontal'
-" let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-" let g:ultisnips_javascript = {
-"      \ 'keyword-spacing': 'always',
-"      \ 'semi': 'never',
-"      \ 'space-before-function-paren': 'always',
-"      \ }
-
-" CSS Omni Complete Function for CSS3
-" augroup csscomplete
-"   autocmd!
-"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-" augroup END
 
 " Far.vim
 let g:far#source = 'agnvim'
