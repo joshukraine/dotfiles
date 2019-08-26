@@ -295,6 +295,7 @@ Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selec
 Plug 'neoclide/coc.nvim',
       \ {'branch': 'release'}           " Intellisense engine for vim8 & neovim                 | https://github.com/neoclide/coc.nvim
 Plug 'mattn/emmet-vim'                  " emmet for vim                                         | https://github.com/mattn/emmet-vim
+Plug 'honza/vim-snippets'               " Snippets files for various programming languages      | https://github.com/honza/vim-snippets
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
