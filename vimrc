@@ -202,14 +202,6 @@ augroup nerdtree_settings
   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
-" Unmap various plugin-related commands I don't use.
-augroup unmappings
-  autocmd!
-  " Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
-  autocmd VimEnter * nunmap <leader>bs
-  autocmd VimEnter * nunmap <leader>bv
-augroup END
-
 " automatically rebalance windows on vim resize
 augroup window_resize
   autocmd!
@@ -364,8 +356,9 @@ let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
 " Tcomment
 map <leader>/ :TComment<CR>
 
-" Bufexplorer - unmapping defaults because they cause delay for <leader>b
-map <leader>b :ToggleBufExplorer<CR>
+" Bufexplorer
+let g:bufExplorerDisableDefaultKeyMapping=1
+nnoremap <silent> <F4> :BufExplorer<CR>
 
 " Obsession
 map <leader>ob :Obsession<CR>
