@@ -469,6 +469,9 @@ let g:DVB_TrimWS = 1
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" emmet-vim
+let g:user_emmet_leader_key=','
+
 " Colorizer
 let g:colorizer_auto_filetype='css,html,javascript,vue'
 
