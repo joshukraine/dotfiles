@@ -298,12 +298,12 @@ Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting rub
 Plug 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
 Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
-Plug 'skwp/greplace.vim'                " Global search and replace for VI                      | https://github.com/skwp/greplace.vim
-Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI script 'ack'     | https://github.com/mileszs/ack.vim
+" Plug 'skwp/greplace.vim'                " Global search and replace for VI                      | https://github.com/skwp/greplace.vim
+" Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI script 'ack'     | https://github.com/mileszs/ack.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
-Plug 'francoiscabrol/ranger.vim'        " Ranger integration in vim and neovim                  | https://github.com/francoiscabrol/ranger.vim
+" Plug 'francoiscabrol/ranger.vim'        " Ranger integration in vim and neovim                  | https://github.com/francoiscabrol/ranger.vim
 Plug 'rbgrouleff/bclose.vim'            " Dependency of ranger.vim                              | https://github.com/rbgrouleff/bclose.vim
 
 " Colors and Syntax Highlighting
@@ -341,9 +341,9 @@ let g:far#source = 'agnvim'
 let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
 
 " ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+" if executable('ag')
+"   let g:ackprg = 'ag --vimgrep'
+" endif
 
 " NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
@@ -475,8 +475,8 @@ let g:vrc_curl_opts = {
 \}
 
 " Ranger.vim
-let g:ranger_map_keys = 0
-map <leader>k :Ranger<CR>
+" let g:ranger_map_keys = 0
+" map <leader>k :Ranger<CR>
 
 " Coc
 " Use tab for trigger completion with characters ahead and navigate.
