@@ -430,15 +430,15 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 
 let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'css': ['prettier'],
-      \ 'vue': ['stylelint', 'prettier', 'eslint'],
+      \ 'javascript': ['prettier'],
+      \ 'css': ['prettier', 'stylelint'],
+      \ 'vue': ['prettier', 'stylelint'],
       \}
 
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
-      \ 'css': ['prettier'],
-      \ 'vue': ['stylelint', 'prettier', 'eslint'],
+      \ 'css': ['stylelint'],
+      \ 'vue': ['eslint', 'stylelint'],
       \}
 
 let g:ale_linter_aliases = {'vue': ['javascript', 'css']}
