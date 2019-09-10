@@ -2,10 +2,7 @@ AllCops:
   DisplayCopNames: true
 
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
-  SupportedStyles:
-    - normal
-    - rails
+  EnforcedStyle: indented_internal_methods
 
 Metrics/LineLength:
   Max: 80
