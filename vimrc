@@ -116,6 +116,9 @@ set colorcolumn=+1
 " Start diff mode with vertical splits
 set diffopt=vertical
 
+" always show signcolumns
+set signcolumn=auto
+
 " Set built-in file system explorer to use layout similar to the NERDTree plugin
 let g:netrw_liststyle=3
 
@@ -174,7 +177,7 @@ augroup file_types
   autocmd!
   autocmd Bufread,BufNewFile *.spv set filetype=php
   autocmd Bufread,BufNewFile *Brewfile,pryrc set filetype=ruby
-  autocmd Bufread,BufNewFile *stylelintrc,*browserslistrc,*babelrc set filetype=json
+  autocmd Bufread,BufNewFile *prettierrc,*stylelintrc,*browserslistrc,*babelrc set filetype=json
   autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh,opts set filetype=zsh
   autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
   autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
@@ -197,14 +200,6 @@ augroup END
 augroup nerdtree_settings
   autocmd!
   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
-
-" Unmap various plugin-related commands I don't use.
-augroup unmappings
-  autocmd!
-  " Unmap Bufexplorer leaders that I don't use. This avoids delays for other leaders.
-  autocmd VimEnter * nunmap <leader>bs
-  autocmd VimEnter * nunmap <leader>bv
 augroup END
 
 " automatically rebalance windows on vim resize
@@ -283,23 +278,16 @@ Plug 'majutsushi/tagbar'                " A class outline viewer for vim        
 Plug 'w0rp/ale'                         " Asynchronous Lint Engine                              | https://github.com/w0rp/ale
 Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 Plug 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
-Plug 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
 Plug 'diepm/vim-rest-console'           " A REST console for Vim.                               | https://github.com/diepm/vim-rest-console
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
+Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 
 " Code Completion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim',
-  \ { 'do': ':UpdateRemotePlugins' }    " Asynchronous completion framework for neovim/Vim8     | https://github.com/Shougo/deoplete.nvim
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-" For snippet reference, see honza/vim-snippets at https://github.com/honza/vim-snippets
-Plug 'SirVer/ultisnips'                 " The ultimate snippet solution for Vim                 | https://github.com/sirver/UltiSnips
-Plug 'othree/csscomplete.vim'           " CSS Omni Complete Function for CSS3                   | https://github.com/othree/csscomplete.vim
+Plug 'neoclide/coc.nvim',
+      \ {'branch': 'release'}           " Intellisense engine for vim8 & neovim                 | https://github.com/neoclide/coc.nvim
+Plug 'mattn/emmet-vim'                  " emmet for vim                                         | https://github.com/mattn/emmet-vim
+Plug 'honza/vim-snippets'               " Snippets files for various programming languages      | https://github.com/honza/vim-snippets
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -310,12 +298,12 @@ Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting rub
 Plug 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
 Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
-Plug 'skwp/greplace.vim'                " Global search and replace for VI                      | https://github.com/skwp/greplace.vim
-Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI script 'ack'     | https://github.com/mileszs/ack.vim
+" Plug 'skwp/greplace.vim'                " Global search and replace for VI                      | https://github.com/skwp/greplace.vim
+" Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI script 'ack'     | https://github.com/mileszs/ack.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
-Plug 'francoiscabrol/ranger.vim'        " Ranger integration in vim and neovim                  | https://github.com/francoiscabrol/ranger.vim
+" Plug 'francoiscabrol/ranger.vim'        " Ranger integration in vim and neovim                  | https://github.com/francoiscabrol/ranger.vim
 Plug 'rbgrouleff/bclose.vim'            " Dependency of ranger.vim                              | https://github.com/rbgrouleff/bclose.vim
 
 " Colors and Syntax Highlighting
@@ -326,10 +314,10 @@ Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)  
 Plug 'pangloss/vim-javascript',
       \ { 'for': ['javascript', 'vue']
       \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
-Plug 'digitaltoad/vim-pug'              " Vim Pug (formerly Jade) syntax highlighting           | https://github.com/digitaltoad/vim-pug
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 Plug 'chrisbra/Colorizer'               " A plugin to color colornames and codes                | https://github.com/chrisbra/Colorizer
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
+Plug 'digitaltoad/vim-pug'              " Vim syntax highlighting for Pug templates             | https://github.com/digitaltoad/vim-pug
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
@@ -348,32 +336,14 @@ call plug#end()
 
 " Plugin-specifc Mappings & Settings
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-
-" UltiSnips
-let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-let g:ultisnips_javascript = {
-     \ 'keyword-spacing': 'always',
-     \ 'semi': 'never',
-     \ 'space-before-function-paren': 'always',
-     \ }
-
-" CSS Omni Complete Function for CSS3
-augroup csscomplete
-  autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-augroup END
-
 " Far.vim
 let g:far#source = 'agnvim'
 let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
 
 " ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+" if executable('ag')
+"   let g:ackprg = 'ag --vimgrep'
+" endif
 
 " NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
@@ -383,22 +353,12 @@ let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
                   \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
                   \ '\.rar$']
 
-" GitGutter
-nnoremap <F6> :GitGutterToggle<CR>
-nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
-let g:gitgutter_terminal_reports_focus=0
-
-" GitGutter default mapping reference
-" https://github.com/airblade/vim-gitgutter#getting-started
-" <leader>hp - Preview hunk
-" <leader>hs - Stage hunk
-" <leader>hu - Undo hunk
-
 " Tcomment
 map <leader>/ :TComment<CR>
 
-" Bufexplorer - unmapping defaults because they cause delay for <leader>b
-map <leader>b :ToggleBufExplorer<CR>
+" Bufexplorer
+let g:bufExplorerDisableDefaultKeyMapping=1
+nnoremap <silent> <F4> :BufExplorer<CR>
 
 " Obsession
 map <leader>ob :Obsession<CR>
@@ -466,16 +426,18 @@ let g:ale_completion_enabled = 1
 let g:ale_sign_error = '⌦'
 let g:ale_sign_warning = '∙∙'
 
-let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'vue': ['eslint', 'stylelint'],
-      \}
-
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 
+let g:ale_fixers = {
+      \ 'javascript': ['prettier'],
+      \ 'css': ['prettier', 'stylelint'],
+      \ 'vue': ['prettier', 'stylelint'],
+      \}
+
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
+      \ 'css': ['stylelint'],
       \ 'vue': ['eslint', 'stylelint'],
       \}
 
@@ -500,6 +462,9 @@ let g:DVB_TrimWS = 1
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" emmet-vim
+let g:user_emmet_leader_key='<C-e>'
+
 " Colorizer
 let g:colorizer_auto_filetype='css,html,javascript,vue'
 
@@ -510,8 +475,118 @@ let g:vrc_curl_opts = {
 \}
 
 " Ranger.vim
-let g:ranger_map_keys = 0
-map <leader>k :Ranger<CR>
+" let g:ranger_map_keys = 0
+" map <leader>k :Ranger<CR>
+
+" Coc
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" coc-git
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" Stage current chunk
+nmap <leader>hs :CocCommand git.chunkStage<CR>
+" Undo current chunk
+nmap <leader>hu :CocCommand git.chunkUndo<CR>
+" Fold unchanged lines of current buffer
+nmap <leader>fu :CocCommand git.foldUnchanged<CR>
 
 " }}}
 
@@ -526,20 +601,13 @@ let g:solarized_termtrans = 1 " Use terminal background
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+highlight SignColumn ctermfg=10 ctermbg=0 guifg=Yellow
 
 " Statusline appearance
 set statusline=
+set statusline^=\ %{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
 set statusline+=%#CursorLine#
 set statusline+=%<
 set statusline+=\ %f
