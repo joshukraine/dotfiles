@@ -275,7 +275,7 @@ Plug 'tomtom/tcomment_vim'              " An extensible & universal comment vim-
 Plug 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plug 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 Plug 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
-Plug 'w0rp/ale'                         " Asynchronous Lint Engine                              | https://github.com/w0rp/ale
+Plug 'dense-analysis/ale'               " Asynchronous Lint Engine                              | https://github.com/dense-analysis/ale
 Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 Plug 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
@@ -421,8 +421,7 @@ let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 " command! RSfactories :sp spec/factories.rb
 " command! RVfactories :vs spec/factories.rb
 
-" ALE | https://github.com/w0rp/ale#1-supported-languages-and-tools
-let g:ale_completion_enabled = 1
+" ALE | https://github.com/dense-analysis/ale#1-supported-languages-and-tools
 let g:ale_sign_error = '⌦'
 let g:ale_sign_warning = '∙∙'
 
