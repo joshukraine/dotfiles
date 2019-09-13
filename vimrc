@@ -424,27 +424,7 @@ let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 " ALE | https://github.com/dense-analysis/ale#1-supported-languages-and-tools
 let g:ale_sign_error = '⌦'
 let g:ale_sign_warning = '∙∙'
-
-let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
-
-let g:ale_fixers = {
-      \ 'javascript': ['prettier'],
-      \ 'css': ['prettier', 'stylelint'],
-      \ 'vue': ['prettier', 'stylelint'],
-      \}
-
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'css': ['stylelint'],
-      \ 'vue': ['eslint', 'stylelint'],
-      \}
-
-let g:ale_linter_aliases = {'vue': ['javascript', 'css']}
-
-let g:ale_pattern_options = {
-\   '.*\.json$': {'ale_enabled': 0}
-\}
 
 " Key mappings for dragvisuals.vim
 runtime plugged/dragvisuals/plugins/dragvisuals.vim
