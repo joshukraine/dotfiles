@@ -502,6 +502,9 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Comment highlighting for jsonc
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
