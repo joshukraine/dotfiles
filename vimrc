@@ -298,12 +298,9 @@ Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting rub
 Plug 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
 Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
-" Plug 'skwp/greplace.vim'                " Global search and replace for VI                      | https://github.com/skwp/greplace.vim
-" Plug 'mileszs/ack.vim'                  " Vim plugin for the Perl module / CLI script 'ack'     | https://github.com/mileszs/ack.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
-" Plug 'francoiscabrol/ranger.vim'        " Ranger integration in vim and neovim                  | https://github.com/francoiscabrol/ranger.vim
 Plug 'rbgrouleff/bclose.vim'            " Dependency of ranger.vim                              | https://github.com/rbgrouleff/bclose.vim
 
 " Colors and Syntax Highlighting
@@ -339,11 +336,6 @@ call plug#end()
 " Far.vim
 let g:far#source = 'agnvim'
 let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
-
-" ack.vim
-" if executable('ag')
-"   let g:ackprg = 'ag --vimgrep'
-" endif
 
 " NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
@@ -457,10 +449,6 @@ let g:vrc_curl_opts = {
   \ '-i': '',
 \}
 
-" Ranger.vim
-" let g:ranger_map_keys = 0
-" map <leader>k :Ranger<CR>
-
 " Coc
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -477,10 +465,6 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
