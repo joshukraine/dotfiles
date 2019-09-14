@@ -426,6 +426,9 @@ let g:ale_sign_error = '⌦'
 let g:ale_sign_warning = '∙∙'
 let g:ale_fix_on_save = 1
 
+nmap <silent> [a <Plug>(ale_previous_wrap)
+nmap <silent> ]a <Plug>(ale_next_wrap)
+
 " Key mappings for dragvisuals.vim
 runtime plugged/dragvisuals/plugins/dragvisuals.vim
 
