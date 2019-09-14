@@ -71,11 +71,11 @@ ln -nfs "$DOTFILES_DIR"/vim/ftplugin "$VIM_DIR"/ftplugin
 dotfiles_echo "-> Linking $DOTFILES_DIR/vim/spell to $VIM_DIR/spell..."
 ln -nfs "$DOTFILES_DIR"/vim/spell "$VIM_DIR"/spell
 
-dotfiles_echo "-> Linking $DOTFILES_DIR/vim/UltiSnips to $VIM_DIR/UltiSnips..."
-ln -nfs "$DOTFILES_DIR"/vim/UltiSnips "$VIM_DIR"/UltiSnips
-
 dotfiles_echo "-> Linking $DOTFILES_DIR/init.vim to $NVIM_DIR/init.vim..."
 ln -nfs "$DOTFILES_DIR"/init.vim "$NVIM_DIR"/init.vim
+
+dotfiles_echo "-> Linking $DOTFILES_DIR/coc-settings.json to $NVIM_DIR/coc-settings.json..."
+ln -nfs "$DOTFILES_DIR"/coc-settings.json "$NVIM_DIR"/coc-settings.json
 
 dotfiles_echo "-> Linking $DOTFILES_DIR/ranger to $CONFIG_DIR/ranger..."
 ln -nfs "$DOTFILES_DIR"/ranger "$CONFIG_DIR"/ranger
