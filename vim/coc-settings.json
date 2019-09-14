@@ -1,4 +1,0 @@
-{
-  // Ignore Tailwind @apply
-  "vetur.validation.style": false
-}
