@@ -1,7 +1,6 @@
 gulp-cli
 neovim
 pug
-standard
 stylelint
 svgo
-vue-cli
+@vue/cli
