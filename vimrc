@@ -329,7 +329,6 @@ Plug 'tpope/vim-repeat'                 " Enable repeating supported plugin maps
 Plug 'tpope/vim-sensible'               " Defaults everyone can agree on                        | https://github.com/tpope/vim-sensible
 
 " Testing & Tmux
-" Plug 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
 Plug 'janko/vim-test'                   " Run your tests at the speed of thought                | https://github.com/janko/vim-test
 Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
@@ -363,13 +362,6 @@ nnoremap <silent> <F4> :BufExplorer<CR>
 
 " Obsession
 map <leader>ob :Obsession<CR>
-
-" vim-rspec
-" map <leader>f :call RunCurrentSpecFile()<CR>
-" map <leader>n :call RunNearestSpec()<CR>
-" map <leader>l :call RunLastSpec()<CR>
-" map <leader>a :call RunAllSpecs()<CR>
-" let g:rspec_command = 'VtrSendCommandToRunner! clear; rspec {spec}'
 
 " vim-test
 nmap <silent> t<C-n> :TestNearest<CR>
