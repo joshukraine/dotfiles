@@ -76,7 +76,8 @@ else
   local pwd='%{$fg[blue]%}$(shrink_path -f)%{$reset_color%}'
 fi
 
-PROMPT="${timestamp} ${pwd} ${git}
+# PROMPT="${timestamp} ${pwd} ${git}
+PROMPT="${pwd} ${git}
 %(?..%{$fg[red]%})%B$%b%{$reset_color%} "
 
 # RPROMPT='$(vi_mode_prompt_info) $(_version_prompt)'
