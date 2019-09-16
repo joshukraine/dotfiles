@@ -4,7 +4,7 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
 history
-shrink-path
+# shrink-path
 yarn
 )
 
