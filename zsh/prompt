@@ -79,7 +79,7 @@ fi
 
 # PROMPT="${timestamp} ${pwd} ${git}
 PROMPT="${pwd} ${git}
-%(?..%{$fg[red]%})%B$%b%{$reset_color%} "
+%(?..%{$fg[red]%})$%{$reset_color%} "
 
 # RPROMPT='$(vi_mode_prompt_info) $(_version_prompt)'
 RPROMPT='$(vi_mode_prompt_info)'
