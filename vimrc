@@ -343,7 +343,7 @@ map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
                   \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
-                  \ '\.rar$']
+                  \ 'node_modules$', '\.rar$']
 
 " Tcomment
 map <leader>/ :TComment<CR>
