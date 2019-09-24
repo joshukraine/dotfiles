@@ -1,6 +1,7 @@
+@vue/cli
 gulp-cli
 neovim
 pug
 stylelint
 svgo
-@vue/cli
+vue-language-server
