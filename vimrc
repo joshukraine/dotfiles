@@ -282,6 +282,7 @@ Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!      
 Plug 'diepm/vim-rest-console'           " A REST console for Vim.                               | https://github.com/diepm/vim-rest-console
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
+Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
@@ -344,6 +345,19 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
                   \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
                   \ 'node_modules$', '\.rar$']
+" GitGutter
+nnoremap <F6> :GitGutterToggle<CR>
+nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_terminal_reports_focus=0
+
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap [g <Plug>(GitGutterPrevHunk)
+
+" GitGutter default mapping reference
+" https://github.com/airblade/vim-gitgutter#getting-started
+" <leader>hp - Preview hunk
+" <leader>hs - Stage hunk
+" <leader>hu - Undo hunk
 
 " Tcomment
 map <leader>/ :TComment<CR>
@@ -543,21 +557,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" coc-git
-" navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
-" show commit contains current position
-nmap gc <Plug>(coc-git-commit)
-" Stage current chunk
-nmap <leader>hs :CocCommand git.chunkStage<CR>
-" Undo current chunk
-nmap <leader>hu :CocCommand git.chunkUndo<CR>
-" Fold unchanged lines of current buffer
-nmap <leader>fu :CocCommand git.foldUnchanged<CR>
-
 " }}}
 
 " Appearance {{{
@@ -571,11 +570,19 @@ let g:solarized_termtrans = 1 " Use terminal background
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE
-highlight SignColumn ctermfg=10 ctermbg=0 guifg=Yellow
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
 
 " Statusline appearance
 set statusline=
-set statusline^=\ %{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+set statusline+=%{StatuslineGit()}
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%#PmenuSel#
 set statusline+=%#CursorLine#
