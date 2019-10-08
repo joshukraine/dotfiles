@@ -41,9 +41,6 @@ set nowrap
 " Don't break long lines in insert mode.
 set formatoptions=l
 
-" Conceal Markdown characters
-set conceallevel=2
-
 " Convert tabs to spaces, all file types
 set expandtab
 
