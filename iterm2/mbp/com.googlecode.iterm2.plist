@@ -704,9 +704,9 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>155 855 400 129 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 496 620 392 0 0 1680 1027 </string>
+	<string>530 493 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 80 1210 947 0 0 1680 1027 </string>
+	<string>0 0 1000 1050 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 80 1680 947 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -1368,7 +1368,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 14</string>
+			<string>CascadiaCode-Regular 15</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -2270,7 +2270,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>CascadiaCode-Regular 18</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -3348,24 +3348,40 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.0beta11</string>
+		<string>3.3.3beta1</string>
 		<string>3.3.0beta10</string>
-		<string>3.3.0beta13</string>
-		<string>3.3.0beta16</string>
+		<string>3.3.5beta2</string>
+		<string>3.3.0beta11</string>
 		<string>3.3.0beta12</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.5beta1</string>
+		<string>3.3.0beta16</string>
+		<string>3.3.3beta2</string>
+		<string>3.3.5beta3</string>
+		<string>3.3.4beta1</string>
 		<string>3.3.2beta2</string>
+	</array>
+	<key>NoSyncBFPFavorites</key>
+	<array>
+		<string>Fira Code</string>
+		<string>Cascadia Code</string>
+	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>Cascadia Code</string>
+		<string>Fira Code</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{79, 796}</string>
+		<string>{533, 717}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>AE6FA487-E161-4CAE-A2F2-7CE439D1A67B</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>40</integer>
+	<integer>51</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3887,6 +3903,22 @@
 		<array>
 			<dict>
 				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
 				<string>tmuxWindowTitle</string>
@@ -4148,7 +4180,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-21T09:08:09Z</date>
+	<date>2019-10-13T02:55:42Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4214,7 +4246,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.2beta2</string>
+	<string>3.3.5beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

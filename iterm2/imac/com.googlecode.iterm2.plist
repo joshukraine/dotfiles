@@ -702,13 +702,13 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>78 83 224 275 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>3640 983 400 129 2560 0 2560 1440 </string>
+	<string>3721 918 400 129 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>3604 798 928 394 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2560 0 2560 1417 2560 0 2560 1417 </string>
+	<string>0 0 1180 1440 0 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1026,7 +1026,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>0.97999999999999998</real>
+			<real>1.1000000000000001</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1368,7 +1368,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 16</string>
+			<string>CascadiaCode-Regular 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1912,7 +1912,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>0.97617660516715898</real>
+			<real>1.1000000000000001</real>
 			<key>HotKey Characters</key>
 			<string> </string>
 			<key>HotKey Characters Ignoring Modifiers</key>
@@ -2268,11 +2268,11 @@
 			<key>Name</key>
 			<string>Hotkey Window</string>
 			<key>Non Ascii Font</key>
-			<string>SauceCodePowerline-Light 14</string>
+			<string>Menlo-Regular 11</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Regular 18</string>
+			<string>CascadiaCode-Regular 18</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -2444,7 +2444,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>1.28</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -3350,23 +3350,40 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.0beta14</string>
-		<string>3.3.0beta11</string>
-		<string>3.3.0beta16</string>
-		<string>3.3.1beta1</string>
-		<string>3.3.0beta13</string>
-		<string>3.3.2beta2</string>
+		<string>3.3.3beta1</string>
 		<string>3.3.0beta10</string>
-		<string>3.3.0beta15</string>
+		<string>3.3.5beta2</string>
+		<string>3.3.0beta11</string>
 		<string>3.3.2beta1</string>
 		<string>3.3.0beta12</string>
+		<string>3.3.7beta1</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.0beta14</string>
+		<string>3.3.1beta1</string>
+		<string>3.3.0beta15</string>
+		<string>3.3.3beta2</string>
+		<string>3.3.0beta16</string>
+		<string>3.3.5beta1</string>
+		<string>3.3.5beta3</string>
+		<string>3.3.2beta2</string>
+		<string>3.3.4beta1</string>
+	</array>
+	<key>NoSyncBFPFavorites</key>
+	<array>
+		<string>Fira Code</string>
+		<string>Cascadia Code</string>
+	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>Cascadia Code</string>
+		<string>Fira Code</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{2865, 679}</string>
+		<string>{3442, 700}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -3375,7 +3392,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>3314C653-8399-4C62-B896-6A72133DE721</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>109</integer>
+	<integer>154</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3905,6 +3922,22 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
 				<string>tmuxWindowTitle</string>
@@ -4176,7 +4209,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-16T10:59:24Z</date>
+	<date>2019-10-11T05:13:55Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4242,7 +4275,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.2beta2</string>
+	<string>3.3.7beta1</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
