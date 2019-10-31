@@ -1,6 +1,6 @@
 {
   // Settings for coc-vetur
-  "vetur.validation.template": true,
-  "vetur.validation.script": true,
+  "vetur.validation.template": false,
+  "vetur.validation.script": false,
   "vetur.validation.style": false
 }
