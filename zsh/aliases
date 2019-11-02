@@ -22,16 +22,9 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 
 # Listing files and directories
-alias l='ls -lFh'     #size,show type,human readable
-alias lS='ls -1FSsh'
-alias la='ls -lAFh'   #long list,show almost all,show type,human readable
-alias lart='ls -1Fcart'
-alias ld='ls -ld' # Useful for showing permissions of a single directory
-alias ldot='ls -ld .*'
-alias ll='ls -l'      #long list
-alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
-alias lrt='ls -1Fcrt'
-alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
+alias ls='exa'
+alias l='exa -lhF'
+alias la='exa -lahF'
 
 # Finding stuff!
 alias fd='find . -type d -name'
@@ -184,15 +177,16 @@ alias upc='softwareupdate -l'
 alias upd='softwareupdate -i -a'
 
 # Misc
-alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
-alias color='colortest -w -s'
-alias hangout='open https://hangouts.google.com/hangouts/_'
-alias htop='sudo htop'
-alias copy='tr -d "\n" | pbcopy'
+alias cat='bat'
 alias ch='cht.sh'
 alias chs='cht.sh --shell'
+alias color='colortest -w -s'
+alias copy='tr -d "\n" | pbcopy'
+alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
+alias hangout='open https://hangouts.google.com/hangouts/_'
+alias htop='sudo htop'
+alias no='get_node_version'
 alias ra='ranger'
 alias ru='ruby -v'
-alias no='get_node_version'
 alias yg='yarn generate'
 alias ygs='yarn generate && cd dist && http-server -p 8080'
