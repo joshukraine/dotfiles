@@ -123,7 +123,7 @@ alias mma='bundle exec middleman article'
 # Postgres
 alias psq='pgcli -d postgres'
 alias startpost='brew services start postgresql'
-alias statpost='ps aux | ag postgres'
+alias statpost='ps aux | rg postgres'
 alias stoppost='brew services stop postgresql'
 
 # Mac App Store (https://github.com/argon/mas)
