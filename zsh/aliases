@@ -158,6 +158,7 @@ alias bubu='bubo && bubc'
 # asdf
 alias aua='asdf update && asdf plugin-update --all'
 alias ala='asdf list-all'
+alias rlv="asdf list-all ruby | rg '^\d'"
 
 # oh-my-zsh
 alias upz='upgrade_oh_my_zsh'
