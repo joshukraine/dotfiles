@@ -513,7 +513,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
 
 augroup mygroup
   autocmd!
