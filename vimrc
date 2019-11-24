@@ -482,7 +482,6 @@ let g:coc_global_extensions = [
   \ 'coc-solargraph',
   \ 'coc-tailwindcss',
   \ 'coc-tsserver',
-  \ 'coc-tsserver',
   \ 'coc-vetur',
   \ 'coc-yaml',
   \ ]
