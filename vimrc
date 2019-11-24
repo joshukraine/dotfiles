@@ -146,17 +146,11 @@ set winwidth=90
 set winminwidth=5
 
 " Keep focus split at max height, others minimal.
-function! SetWindowHeight()
-  set winheight=7
-  set winminheight=7
-  set winheight=999
-endfunction
-
-" Reset window height to avoid session errors.
-function! ResetWindowHeight()
-  set winminheight=0
-  set winheight=1
-endfunction
+set winheight=7
+set winminheight=7
+" The line below maximzes the window height on enter. Unfortunately it also
+" maximizes the height of some floating windows. Disabling for now.
+" autocmd WinEnter * wincmd _
 
 " Requires 'jq' (brew install jq)
 function! s:PrettyJSON()
@@ -205,14 +199,6 @@ augroup window_resize
   autocmd VimResized * :wincmd =
 augroup END
 
-" Reset window sizes to avoid errors on session load.
-augroup set_window_height
-  autocmd!
-  autocmd VimLeavePre * :call ResetWindowHeight()
-  autocmd VimEnter * :call SetWindowHeight()
-augroup END
-" }}}
-
 " Mappings {{{
 
 let mapleader = "\<Space>"
@@ -229,7 +215,6 @@ map <leader>ra :%s/
 map <leader>p :set paste<CR>""p:set nopaste<CR> " Fix indentation on paste
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
-map <leader>0 :call SetWindowHeight()<CR>
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
 inoremap jj <C-c> " jj to switch back to normal mode
@@ -249,8 +234,12 @@ vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("
 
 " zoom a vim pane like in tmux
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+
 " zoom back out
 nnoremap <leader>= :wincmd =<cr>
+
+" Maximize the height of the current window.
+nnoremap <leader>0 :wincmd _<cr>
 
 " Write files as sudo
 cmap w!! w !sudo tee >/dev/null %
