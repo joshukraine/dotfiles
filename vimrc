@@ -336,6 +336,7 @@ let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
 nnoremap <F6> :GitGutterToggle<CR>
 nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
 let g:gitgutter_terminal_reports_focus=0
+let g:gitgutter_preview_win_floating = 0
 
 nmap ]g <Plug>(GitGutterNextHunk)
 nmap [g <Plug>(GitGutterPrevHunk)
@@ -345,6 +346,9 @@ nmap [g <Plug>(GitGutterPrevHunk)
 " <leader>hp - Preview hunk
 " <leader>hs - Stage hunk
 " <leader>hu - Undo hunk
+
+" GitMessenger
+nmap <Leader>m <Plug>(git-messenger)
 
 " Tcomment
 map <leader>/ :TComment<CR>
