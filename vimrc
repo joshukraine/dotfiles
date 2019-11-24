@@ -451,6 +451,24 @@ let g:vrc_curl_opts = {
 \}
 
 " Coc
+" https://github.com/neoclide/coc.nvim
+
+" Global extension names to install when they aren't installed
+let g:coc_global_extensions = [
+  \ 'coc-emmet',
+  \ 'coc-highlight',
+  \ 'coc-json',
+  \ 'coc-marketplace',
+  \ 'coc-pairs',
+  \ 'coc-snippets',
+  \ 'coc-solargraph',
+  \ 'coc-tailwindcss',
+  \ 'coc-tsserver',
+  \ 'coc-tsserver',
+  \ 'coc-vetur',
+  \ 'coc-yaml',
+  \ ]
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
