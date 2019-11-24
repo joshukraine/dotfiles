@@ -67,8 +67,8 @@ set encoding=utf-8
 " http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
 set clipboard+=unnamed
 
-" Don't show intro
-set shortmess+=I
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
