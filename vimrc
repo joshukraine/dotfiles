@@ -336,13 +336,13 @@ let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "*",
     \ "Staged"    : "+",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
+    \ "Untracked" : "•",
+    \ "Renamed"   : ">",
+    \ "Unmerged"  : "ǁ",
+    \ "Deleted"   : "-",
     \ "Dirty"     : "✗",
     \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
+    \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
     \ }
 
