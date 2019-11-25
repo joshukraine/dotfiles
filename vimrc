@@ -198,6 +198,7 @@ augroup window_resize
   autocmd!
   autocmd VimResized * :wincmd =
 augroup END
+" }}}
 
 " Mappings {{{
 
