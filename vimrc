@@ -342,6 +342,9 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+" Vim DevIcons
+source $HOME/dotfiles/vim/devicons.vim
+
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
 nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
