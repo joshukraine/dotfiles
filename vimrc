@@ -589,10 +589,11 @@ endfunction
 
 " Statusline appearance
 set statusline=
-" set statusline+=%{StatuslineGit()}
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline+=%<
 set statusline+=%#PmenuSel#
+set statusline+=%{StatuslineGit()}
+set statusline^=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%<
+set statusline+=\ %#StatusLine#
 set statusline+=\ %f
 set statusline+=%m
 set statusline+=\ %#CursorLine#
