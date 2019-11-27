@@ -43,6 +43,10 @@ let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.js\.erb$']   = s:js
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.html\.erb$'] = s:haml
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gulpfile.js']    = s:gulp
 
+" The following autocmd lines provide coloring for the icons themselves without
+" coloring the file names.
+" https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#how-did-you-get-color-matching-on-just-the-glyphicon-in-nerdtree
+
 autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=166 guifg=#ffa500
 autocmd filetype nerdtree highlight haml_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight git_icon ctermbg=none ctermfg=166 guifg=#ffa500
@@ -74,3 +78,44 @@ autocmd filetype nerdtree syn match vim_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match gulpfile_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match sh_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match license_icon ## containedin=NERDTreeFile
+
+" The following code provides an alternative solution to coloring icons. It
+" colors not only the icons but also the entire filename. It should be used as a
+" replace for — not in conjunction with — the above autocmd approach.
+" https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#how-did-you-get-color-matching-based-on-file-type-in-nerdtree
+
+" NERDTrees File highlighting
+" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+"   exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"   exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+" endfunction
+
+" Primary extensions
+" call NERDTreeHighlightFile('css', '32', 'none', '#0087d7', '#151515')
+" call NERDTreeHighlightFile('haml', '160', 'none', '#d70000', '#151515')
+" call NERDTreeHighlightFile('html', '166', 'none', '#d75f00', '#151515')
+" call NERDTreeHighlightFile('js', '178', 'none', '#d7af00', '#151515')
+" call NERDTreeHighlightFile('json', '178', 'none', '#d7af00', '#151515')
+" call NERDTreeHighlightFile('md', '31', 'none', '#0087af', '#151515')
+" call NERDTreeHighlightFile('rb', '160', 'none', '#d70000', '#151515')
+" call NERDTreeHighlightFile('erb', '160', 'none', '#d70000', '#151515')
+" call NERDTreeHighlightFile('scss', '205', 'none', '#ff5faf', '#151515')
+" call NERDTreeHighlightFile('sh', '97', 'none', '#875faf', '#151515')
+" call NERDTreeHighlightFile('vim', '28', 'none', '#008700', '#151515')
+" call NERDTreeHighlightFile('vue', '29', 'none', '#00875f', '#151515')
+" call NERDTreeHighlightFile('yml', '195', 'none', '#d7ffff', '#151515')
+" call NERDTreeHighlightFile('adoc', '197', 'none', '#ff005f', '#151515')
+" call NERDTreeHighlightFile('LICENSE', '195', 'none', '#d7ffff', '#151515')
+" call NERDTreeHighlightFile('conf', '195', 'none', '#d7ffff', '#151515')
+
+" Special files (may need to come after primaries)
+" call NERDTreeHighlightFile('gulpfile.js', '124', 'none', '#af0000', '#151515')
+" call NERDTreeHighlightFile('vimrc', '28', 'none', '#008700', '#151515')
+" call NERDTreeHighlightFile('Gemfile', '160', 'none', '#d70000', '#151515')
+" call NERDTreeHighlightFile('Gemfile.lock', '160', 'none', '#d70000', '#151515')
+" call NERDTreeHighlightFile('Rakefile', '160', 'none', '#d70000', '#151515')
+" call NERDTreeHighlightFile('Procfile', '97', 'none', '#875faf', '#151515')
+" call NERDTreeHighlightFile('.gitignore', '166', 'none', '#d75f00', '#151515')
+" call NERDTreeHighlightFile('gitconfig', '166', 'none', '#d75f00', '#151515')
+" call NERDTreeHighlightFile('gitignore_global', '166', 'none', '#d75f00', '#151515')
+" call NERDTreeHighlightFile('gitmessage', '166', 'none', '#d75f00', '#151515')
