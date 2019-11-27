@@ -129,7 +129,7 @@ let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=
 if has('nvim')
   set inccommand=nosplit
 
-  set updatetime=100
+  set updatetime=300
 
   set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
         \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
