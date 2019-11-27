@@ -76,7 +76,7 @@ set splitright
 
 " Highlight the current line and column
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 
 " Ensure Vim doesn't beep at you every time you make a mistype
 set visualbell
