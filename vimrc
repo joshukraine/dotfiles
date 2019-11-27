@@ -471,7 +471,6 @@ let g:vrc_curl_opts = {
 let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-html',
-  \ 'coc-highlight',
   \ 'coc-json',
   \ 'coc-marketplace',
   \ 'coc-pairs',
