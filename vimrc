@@ -1,5 +1,4 @@
 " Settings {{{
-
 " Force vim to use older regex engine.
 " https://stackoverflow.com/a/16920294/655204
 set re=1
@@ -162,7 +161,6 @@ command! PrettyJSON :call <sid>PrettyJSON()
 " }}}
 
 " Commands {{{
-
 " specify syntax highlighting for specific files
 augroup file_types
   autocmd!
@@ -201,7 +199,6 @@ augroup END
 " }}}
 
 " Mappings {{{
-
 let mapleader = "\<Space>"
 
 " Misc
@@ -241,7 +238,6 @@ cmap w!! w !sudo tee >/dev/null %
 " }}}
 
 " Plugins {{{
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -282,7 +278,6 @@ Plug 'brooth/far.vim'                   " Find And Replace Vim plugin           
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
-Plug 'rbgrouleff/bclose.vim'            " Dependency of ranger.vim                              | https://github.com/rbgrouleff/bclose.vim
 Plug 'ryanoasis/vim-devicons'           " Adds file type icons to Vim                           | https://github.com/ryanoasis/vim-devicons
 
 " Colors and Syntax Highlighting
@@ -335,7 +330,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Renamed"   : ">",
     \ "Unmerged"  : "ǁ",
     \ "Deleted"   : "-",
-    \ "Dirty"     : "✗",
+    \ "Dirty"     : "*",
     \ "Clean"     : "✔︎",
     \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
@@ -570,11 +565,9 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
 " }}}
 
 " Appearance {{{
-
 set background=dark
 colorscheme solarized
 let g:solarized_diffmode="high"
@@ -616,7 +609,6 @@ set statusline+=%r
 " }}}
 
 " Local {{{
-
 if filereadable(glob("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
