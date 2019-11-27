@@ -131,9 +131,9 @@ if has('nvim')
 
   set updatetime=300
 
-  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-        \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
-        \,sm:block-blinkwait0-blinkoff150-blinkon175
+  " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  "       \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
+  "       \,sm:block-blinkwait0-blinkoff150-blinkon175
 endif
 
 " Need this when using material colorscheme
