@@ -601,7 +601,7 @@ endfunction
 
 " Statusline appearance
 set statusline=
-set statusline+=%{StatuslineGit()}
+" set statusline+=%{StatuslineGit()}
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%#PmenuSel#
 set statusline+=%#CursorLine#
