@@ -602,22 +602,21 @@ endfunction
 set statusline=
 " set statusline+=%{StatuslineGit()}
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline+=%#PmenuSel#
-set statusline+=%#CursorLine#
 set statusline+=%<
+set statusline+=%#PmenuSel#
 set statusline+=\ %f
 set statusline+=%m
+set statusline+=\ %#CursorLine#
 set statusline+=%=
-set statusline+=%#StatusLine#
 set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
+set statusline+=\ %#StatusLine#
 set statusline+=\ %P
 set statusline+=\ %l:%c
-set statusline+=\ 
-set statusline+=%{ObsessionStatus('●','❙❙','■')}
-set statusline+=\ 
-set statusline+=%h%r
+set statusline+=\ %{ObsessionStatus('●','','■')}
+set statusline+=\ %h
+set statusline+=%r
 " }}}
 
 " Local {{{
