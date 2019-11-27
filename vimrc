@@ -267,7 +267,6 @@ Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in
 " Code Completion
 Plug 'neoclide/coc.nvim',
       \ {'branch': 'release'}           " Intellisense engine for vim8 & neovim                 | https://github.com/neoclide/coc.nvim
-Plug 'mattn/emmet-vim'                  " emmet for vim                                         | https://github.com/mattn/emmet-vim
 Plug 'honza/vim-snippets'               " Snippets files for various programming languages      | https://github.com/honza/vim-snippets
 
 " Ruby-specific
@@ -452,9 +451,6 @@ let g:DVB_TrimWS = 1
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" emmet-vim
-let g:user_emmet_leader_key='<C-e>'
-
 " Colorizer
 let g:colorizer_auto_filetype='css,html,javascript,vue'
 
@@ -470,7 +466,7 @@ let g:vrc_curl_opts = {
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
   \ 'coc-css',
-  \ 'coc-emmet',
+  \ 'coc-html',
   \ 'coc-highlight',
   \ 'coc-json',
   \ 'coc-marketplace',
