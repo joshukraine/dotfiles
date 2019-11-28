@@ -125,15 +125,13 @@ set grepprg=ag
 
 let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=tmp'
 
-if has('nvim')
-  set inccommand=nosplit
+set inccommand=nosplit
 
-  set updatetime=300
+set updatetime=300
 
-  " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-  "       \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
-  "       \,sm:block-blinkwait0-blinkoff150-blinkon175
-endif
+" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+"       \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
+"       \,sm:block-blinkwait0-blinkoff150-blinkon175
 
 " Need this when using material colorscheme
 " if (has("termguicolors"))
@@ -202,7 +200,7 @@ augroup END
 let mapleader = "\<Space>"
 
 " Misc
-map <leader>r :source ~/.vimrc<CR>
+map <leader>r :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
 map <leader>q :q<CR>
 map <leader>w :w<CR>
 map <leader>x :x<CR>
@@ -238,13 +236,15 @@ cmap w!! w !sudo tee >/dev/null %
 " }}}
 
 " Plugins {{{
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $HOME/.vimrc
+let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
+if !filereadable(autoload_plug_path)
+  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
+      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+  autocmd VimEnter * PlugInstall --sync | exe 'source' stdpath('config') . '/init.vim'
 endif
+unlet autoload_plug_path
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 
 " General
 Plug 'godlygeek/tabular'                " Vim script for text filtering and alignment           | https://github.com/godlygeek/tabular
@@ -337,7 +337,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 " Vim DevIcons
-source $HOME/dotfiles/vim/devicons.vim
+exe 'source' stdpath('config') . '/extras/devicons.vim'
 
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
