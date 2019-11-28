@@ -18,9 +18,6 @@ set noswapfile
 " Show incomplete commands
 set showcmd
 
-" Highlight search matches
-set hlsearch
-
 " Ignore case in search if term(s) are lowercase
 set ignorecase
 
@@ -83,9 +80,6 @@ set visualbell
 " redraw only when we need to (i.e. don't redraw when executing a macro)
 set lazyredraw
 
-" Indicates a fast terminal connection
-set ttyfast
-
 " highlight a matching [{()}] when cursor is placed on start/end character
 set showmatch
 
@@ -102,8 +96,6 @@ set scrolloff=3
 set title
 
 set tags=./tags;
-
-set fillchars+=vert:\|
 
 " Vertical line at 80 characters
 set textwidth=80
