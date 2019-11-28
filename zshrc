@@ -12,7 +12,9 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
 export RUBY_CONFIGURE_OPTS="--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm"
-export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 export TERM="screen-256color"
 
 . $HOME/dotfiles/zsh/oh-my-zsh
