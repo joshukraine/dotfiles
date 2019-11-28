@@ -2,7 +2,7 @@
 
 ![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Macs, currently running [macOS Mojave (10.14)][mojave]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [Node.js][nodejs] web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Vim][vim]/[Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
+These are the dotfiles I use on my Macs, currently running [macOS Mojave (10.14)][mojave]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [Node.js][nodejs] web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
 ## Mac Bootstrap Script
 
@@ -18,7 +18,7 @@ The dotfiles assume you are running macOS with the following software pre-instal
 
 * [Oh-My-Zsh][oh-my-zsh]
 * [Homebrew][homebrew]
-* [Vim][vim] and [Neovim][neovim]
+* [Neovim][neovim]
 * [Git][git]
 * [Tmux][tmux]
 * [Ruby][ruby]
@@ -71,6 +71,10 @@ I recently discovered a resolution to some significant performance issues I had 
 &#9657; [What I've learned about slow performance in Vim](vim-performance.md)
 
 ## Vim vs. Neovim
+
+UPDATE: After "trying" Neovim for nearly two years, I'm ready to make the switch permanent. Instead of linking to my `.vimrc` as described below, I've now moved all my configs over to `~/.config/nvim/init.vim`.
+
+---
 
 I'm currently trying out Neovim, and so far things are working nicely. For now I have things set up so I can run either Vim or Neovim interchangeably. This is accomplished by telling Neovim's config file (`~/.config/nvim/init.vim`) to source the standard Vim config file (`~/.vimrc`).
 

@@ -15,10 +15,8 @@ dotfiles_echo() {
 
 set -e # Terminate script if anything exits with a non-zero value
 
-CONFIG_DIR=$HOME/.config
+CONFIG_DIR=$XDG_CONFIG_HOME
 DOTFILES_DIR=$HOME/dotfiles
-VIM_DIR=$HOME/.vim
-NVIM_DIR=$CONFIG_DIR/nvim
 
 files=(
 "asdfrc"
@@ -36,7 +34,6 @@ files=(
 "svgo.yml"
 "tmux.conf"
 "tool-versions"
-"vimrc"
 "zshrc"
 )
 
@@ -55,27 +52,10 @@ done
 dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
 ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
 
-dotfiles_echo "Setting up Vim and Neovim..."
+dotfiles_echo "Setting up Neovim..."
 
-if [ ! -d "$VIM_DIR" ]; then
-  mkdir -p "$VIM_DIR"
-fi
-
-if [ ! -d "$NVIM_DIR" ]; then
-  mkdir -p "$NVIM_DIR"
-fi
-
-dotfiles_echo "-> Linking $DOTFILES_DIR/vim/ftplugin to $VIM_DIR/ftplugin..."
-ln -nfs "$DOTFILES_DIR"/vim/ftplugin "$VIM_DIR"/ftplugin
-
-dotfiles_echo "-> Linking $DOTFILES_DIR/vim/spell to $VIM_DIR/spell..."
-ln -nfs "$DOTFILES_DIR"/vim/spell "$VIM_DIR"/spell
-
-dotfiles_echo "-> Linking $DOTFILES_DIR/init.vim to $NVIM_DIR/init.vim..."
-ln -nfs "$DOTFILES_DIR"/init.vim "$NVIM_DIR"/init.vim
-
-dotfiles_echo "-> Linking $DOTFILES_DIR/coc-settings.json to $NVIM_DIR/coc-settings.json..."
-ln -nfs "$DOTFILES_DIR"/coc-settings.json "$NVIM_DIR"/coc-settings.json
+dotfiles_echo "-> Linking $DOTFILES_DIR/nvim to $CONFIG_DIR/nvim..."
+ln -nfs "$DOTFILES_DIR"/nvim "$CONFIG_DIR"/nvim
 
 dotfiles_echo "-> Linking $DOTFILES_DIR/ranger to $CONFIG_DIR/ranger..."
 ln -nfs "$DOTFILES_DIR"/ranger "$CONFIG_DIR"/ranger
@@ -84,5 +64,5 @@ dotfiles_echo "Dotfiles installation complete!"
 
 dotfiles_echo "Post-install recommendations:"
 dotfiles_echo "- Complete Brew Bundle installation with 'brew bundle install'"
-dotfiles_echo "- The first time you launch Vim or Neovim, plugins will be installed automatically."
+dotfiles_echo "- The first time you launch Neovim, plugins will be installed automatically."
 dotfiles_echo "- After launching Neovim, run :checkhealth and resolve any errors/warnings."

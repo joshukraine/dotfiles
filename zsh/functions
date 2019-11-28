@@ -17,8 +17,6 @@ function fs() {
   fi;
 }
 
-function conflicted { vim +Conflicted }
-
 # No arguments: `git status`
 # With arguments: acts like `git`
 g() {

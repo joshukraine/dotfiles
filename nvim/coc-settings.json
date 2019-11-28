@@ -1,0 +1,9 @@
+{
+  // Using ALE/eslint for this.
+  "javascript.validate.enable": false,
+
+  // Settings for coc-vetur
+  "vetur.validation.template": false,
+  "vetur.validation.script": false,
+  "vetur.validation.style": false
+}
