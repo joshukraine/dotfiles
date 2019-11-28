@@ -36,7 +36,7 @@ alias ed='$EDITOR ~/dotfiles'
 alias ef='$EDITOR ~/dotfiles/zsh/functions'
 alias ep='$EDITOR ~/dotfiles/zsh/prompt'
 alias et='$EDITOR ~/.tmux.conf'
-alias ev='$EDITOR ~/.vimrc'
+alias ev='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
 alias evl='$EDITOR ~/.vimrc.local'
 alias ez='$EDITOR ~/.zshrc'
 alias ezl='$EDITOR ~/.zshrc.local'
@@ -52,12 +52,12 @@ alias t4='tree -L 4'
 alias t4a='tree -La 4'
 alias tree='tree -CF'
 
-# Vim/Neovim
+# Neovim
 alias vi='nvim'
-alias nv='nvim'
-alias vir='vim -R'
-alias vv='vim --version | less'
-alias vi0='vim -u NONE'
+alias vim='nvim'
+alias vir='nvim -R'
+alias vv='nvim --version | less'
+alias vi0='nvim -u NONE'
 
 # Git
 alias ga='git add'
