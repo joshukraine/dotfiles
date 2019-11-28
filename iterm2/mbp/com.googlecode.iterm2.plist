@@ -702,11 +702,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1169 113 445 103 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>155 855 400 129 0 0 1680 1027 </string>
+	<string>640 690 400 129 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 493 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1000 1050 0 0 1680 1050 </string>
+	<string>0 80 1360 947 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 80 1680 947 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -931,7 +931,7 @@
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
-			<true/>
+			<false/>
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
@@ -1368,7 +1368,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>CascadiaCode-Regular 15</string>
+			<string>FuraCodeNerdFontComplete-Retina 15</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1629,7 +1629,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.28</real>
+			<real>1.3200000000000001</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -3352,14 +3352,19 @@
 		<string>3.3.0beta10</string>
 		<string>3.3.5beta2</string>
 		<string>3.3.0beta11</string>
+		<string>3.3.7beta1</string>
 		<string>3.3.0beta12</string>
+		<string>3.3.7beta3</string>
 		<string>3.3.0beta13</string>
 		<string>3.3.5beta1</string>
 		<string>3.3.0beta16</string>
 		<string>3.3.3beta2</string>
 		<string>3.3.5beta3</string>
+		<string>3.3.7beta2</string>
 		<string>3.3.4beta1</string>
 		<string>3.3.2beta2</string>
+		<string>3.3.7beta4</string>
+		<string>3.3.8beta1</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
@@ -3368,8 +3373,7 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Cascadia Code</string>
-		<string>Fira Code</string>
+		<string>FuraCode Nerd Font</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
@@ -3381,7 +3385,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>AE6FA487-E161-4CAE-A2F2-7CE439D1A67B</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>51</integer>
+	<integer>68</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4180,11 +4184,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-10-13T02:55:42Z</date>
+	<date>2019-11-27T04:43:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
-	<true/>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -4246,7 +4250,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.5beta3</string>
+	<string>3.3.8beta1</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

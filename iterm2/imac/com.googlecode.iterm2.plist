@@ -702,13 +702,13 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>78 83 224 275 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>3721 918 400 129 2560 0 2560 1440 </string>
+	<string>3640 966 400 129 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>3530 768 620 392 2560 0 2560 1417 </string>
+	<string>3530 786 620 392 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>3604 798 928 394 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1180 1440 0 0 2560 1440 </string>
+	<string>2810 75 1510 1342 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -931,7 +931,7 @@
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
-			<true/>
+			<false/>
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
@@ -1026,7 +1026,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.1000000000000001</real>
+			<real>1</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1368,7 +1368,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>CascadiaCode-Regular 16</string>
+			<string>FuraCodeNerdFontComplete-Regular 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -3351,22 +3351,26 @@
 	<key>NoSyncAllAppVersions</key>
 	<array>
 		<string>3.3.3beta1</string>
-		<string>3.3.0beta10</string>
 		<string>3.3.5beta2</string>
-		<string>3.3.0beta11</string>
 		<string>3.3.2beta1</string>
-		<string>3.3.0beta12</string>
 		<string>3.3.7beta1</string>
-		<string>3.3.0beta13</string>
-		<string>3.3.0beta14</string>
+		<string>3.3.7beta3</string>
 		<string>3.3.1beta1</string>
-		<string>3.3.0beta15</string>
 		<string>3.3.3beta2</string>
-		<string>3.3.0beta16</string>
 		<string>3.3.5beta1</string>
+		<string>3.3.0beta16</string>
+		<string>3.3.0beta15</string>
+		<string>3.3.0beta14</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.0beta12</string>
+		<string>3.3.0beta11</string>
+		<string>3.3.0beta10</string>
 		<string>3.3.5beta3</string>
+		<string>3.3.7beta2</string>
 		<string>3.3.2beta2</string>
 		<string>3.3.4beta1</string>
+		<string>3.3.7beta4</string>
+		<string>3.3.8beta1</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
@@ -3375,6 +3379,8 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
+		<string>FuraCode Nerd Font Mono</string>
+		<string>FuraCode Nerd Font</string>
 		<string>Cascadia Code</string>
 		<string>Fira Code</string>
 	</array>
@@ -3383,7 +3389,7 @@
 		<key>screenFrame</key>
 		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{3442, 700}</string>
+		<string>{3088, 1084}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -3392,7 +3398,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>3314C653-8399-4C62-B896-6A72133DE721</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>154</integer>
+	<integer>214</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4209,7 +4215,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-10-11T05:13:55Z</date>
+	<date>2019-11-26T07:12:40Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4275,7 +4281,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.7beta1</string>
+	<string>3.3.8beta1</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

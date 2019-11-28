@@ -1,5 +1,4 @@
 " Settings {{{
-
 " Force vim to use older regex engine.
 " https://stackoverflow.com/a/16920294/655204
 set re=1
@@ -129,11 +128,11 @@ let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=
 if has('nvim')
   set inccommand=nosplit
 
-  set updatetime=100
+  set updatetime=300
 
-  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-        \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
-        \,sm:block-blinkwait0-blinkoff150-blinkon175
+  " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  "       \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
+  "       \,sm:block-blinkwait0-blinkoff150-blinkon175
 endif
 
 " Need this when using material colorscheme
@@ -146,8 +145,8 @@ set winwidth=90
 set winminwidth=5
 
 " Keep focus split at max height, others minimal.
-set winheight=7
-set winminheight=7
+set winheight=5
+set winminheight=5
 " The line below maximzes the window height on enter. Unfortunately it also
 " maximizes the height of some floating windows. Disabling for now.
 " autocmd WinEnter * wincmd _
@@ -162,7 +161,6 @@ command! PrettyJSON :call <sid>PrettyJSON()
 " }}}
 
 " Commands {{{
-
 " specify syntax highlighting for specific files
 augroup file_types
   autocmd!
@@ -201,7 +199,6 @@ augroup END
 " }}}
 
 " Mappings {{{
-
 let mapleader = "\<Space>"
 
 " Misc
@@ -241,7 +238,6 @@ cmap w!! w !sudo tee >/dev/null %
 " }}}
 
 " Plugins {{{
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -282,7 +278,7 @@ Plug 'brooth/far.vim'                   " Find And Replace Vim plugin           
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
-Plug 'rbgrouleff/bclose.vim'            " Dependency of ranger.vim                              | https://github.com/rbgrouleff/bclose.vim
+Plug 'ryanoasis/vim-devicons'           " Adds file type icons to Vim                           | https://github.com/ryanoasis/vim-devicons
 
 " Colors and Syntax Highlighting
 Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -293,7 +289,6 @@ Plug 'pangloss/vim-javascript',
       \ { 'for': ['javascript', 'vue']
       \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
-Plug 'chrisbra/Colorizer'               " A plugin to color colornames and codes                | https://github.com/chrisbra/Colorizer
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
 Plug 'digitaltoad/vim-pug'              " Vim syntax highlighting for Pug templates             | https://github.com/digitaltoad/vim-pug
 Plug 'habamax/vim-asciidoctor'          " Asciidoctor plugin for Vim                            | https://github.com/habamax/vim-asciidoctor
@@ -335,11 +330,14 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Renamed"   : ">",
     \ "Unmerged"  : "ǁ",
     \ "Deleted"   : "-",
-    \ "Dirty"     : "✗",
+    \ "Dirty"     : "*",
     \ "Clean"     : "✔︎",
     \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
     \ }
+
+" Vim DevIcons
+source $HOME/dotfiles/vim/devicons.vim
 
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
@@ -451,9 +449,6 @@ let g:DVB_TrimWS = 1
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" Colorizer
-let g:colorizer_auto_filetype='css,html,javascript,vue'
-
 " Vim REST Console (VRC)
 let g:vrc_curl_opts = {
   \ '-L': '',
@@ -467,7 +462,6 @@ let g:vrc_curl_opts = {
 let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-html',
-  \ 'coc-highlight',
   \ 'coc-json',
   \ 'coc-marketplace',
   \ 'coc-pairs',
@@ -571,11 +565,9 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
 " }}}
 
 " Appearance {{{
-
 set background=dark
 colorscheme solarized
 let g:solarized_diffmode="high"
@@ -597,28 +589,27 @@ endfunction
 
 " Statusline appearance
 set statusline=
-set statusline+=%{StatuslineGit()}
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%#PmenuSel#
-set statusline+=%#CursorLine#
+set statusline+=%{StatuslineGit()}
+set statusline^=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%<
+set statusline+=\ %#StatusLine#
 set statusline+=\ %f
 set statusline+=%m
+set statusline+=\ %#CursorLine#
 set statusline+=%=
-set statusline+=%#StatusLine#
 set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
+set statusline+=\ %#StatusLine#
 set statusline+=\ %P
 set statusline+=\ %l:%c
-set statusline+=\ 
-set statusline+=%{ObsessionStatus('●','❙❙','■')}
-set statusline+=\ 
-set statusline+=%h%r
+set statusline+=\ %{ObsessionStatus('●','','■')}
+set statusline+=\ %h
+set statusline+=%r
 " }}}
 
 " Local {{{
-
 if filereadable(glob("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
