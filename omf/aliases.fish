@@ -79,7 +79,7 @@ alias gpum 'git push -u origin master'
 alias grv 'git remote -v'
 alias gs 'git status'
 alias gtl 'git tag --list | sort -r'
-# alias gwip 'git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+alias gwip 'git add -A; git rm (git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 
 # Rails
 alias RED='RAILS_ENV=development'
