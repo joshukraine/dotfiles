@@ -20,6 +20,7 @@ set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg TERM "screen-256color"
 
 . $OMF_CONFIG/aliases.fish
+. $OMF_CONFIG/tmux.fish
 
 fish_vi_key_bindings
 
