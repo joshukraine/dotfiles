@@ -562,6 +562,10 @@ let g:solarized_termtrans = 1 " Use terminal background
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE
+highlight CocErrorSign ctermfg=160 ctermbg=0
+highlight CocWarningSign ctermfg=178 ctermbg=0
+highlight CocInfoSign ctermfg=33 ctermbg=0
+highlight CocHintSign ctermfg=226 ctermbg=0
 
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
