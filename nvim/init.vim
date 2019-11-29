@@ -135,8 +135,8 @@ set winwidth=90
 set winminwidth=5
 
 " Keep focus split at max height, others minimal.
-set winheight=5
-set winminheight=5
+set winheight=1
+set winminheight=1
 " The line below maximzes the window height on enter. Unfortunately it also
 " maximizes the height of some floating windows. Disabling for now.
 " autocmd WinEnter * wincmd _
