@@ -1,9 +1,18 @@
 {
-  // Using ALE/eslint for this.
-  "javascript.validate.enable": false,
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": "ﯦ",
 
-  // Settings for coc-vetur
-  "vetur.validation.template": false,
-  "vetur.validation.script": false,
-  "vetur.validation.style": false
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": [
+    "javascript",
+    "vue"
+  ],
+
+  "vetur.validation.style": false,
+
+  "css.validate": false,
+
+  "stylelintplus.autoFixOnSave": true,
 }
