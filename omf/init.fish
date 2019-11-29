@@ -22,3 +22,6 @@ set -xg TERM "screen-256color"
 . $OMF_CONFIG/aliases.fish
 
 fish_vi_key_bindings
+
+# asdf
+. $HOME/.asdf/asdf.fish
