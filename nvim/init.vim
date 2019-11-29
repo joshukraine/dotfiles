@@ -244,7 +244,6 @@ Plug 'tomtom/tcomment_vim'              " An extensible & universal comment vim-
 Plug 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plug 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 Plug 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
-Plug 'dense-analysis/ale'               " Asynchronous Lint Engine                              | https://github.com/dense-analysis/ale
 Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
 Plug 'diepm/vim-rest-console'           " A REST console for Vim.                               | https://github.com/diepm/vim-rest-console
@@ -417,14 +416,6 @@ let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 " command! RTfactories :tabe spec/factories.rb
 " command! RSfactories :sp spec/factories.rb
 " command! RVfactories :vs spec/factories.rb
-
-" ALE | https://github.com/dense-analysis/ale#1-supported-languages-and-tools
-let g:ale_sign_error = '⌦'
-let g:ale_sign_warning = '∙∙'
-let g:ale_fix_on_save = 1
-
-nmap <silent> [a <Plug>(ale_previous_wrap)
-nmap <silent> ]a <Plug>(ale_next_wrap)
 
 " Key mappings for dragvisuals.vim
 runtime plugged/dragvisuals/plugins/dragvisuals.vim
