@@ -11,6 +11,7 @@ endif
 " https://www.nerdfonts.com/cheat-sheet
 let s:css3  = ''
 let s:git   = ''
+let s:gulp  = ''
 let s:haml  = ''
 let s:html5 = ''
 let s:js    = ''
@@ -18,16 +19,17 @@ let s:md    = ''
 let s:ruby  = ''
 let s:sass  = ''
 let s:vim   = ''
-let s:gulp   = ''
+let s:vue   = '﵂'
 
 " Filetypes
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']  = s:css3
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = s:html5
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['haml'] = s:haml
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = s:vim
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']  = s:md
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = s:html5
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js']  = s:js
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']  = s:md
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = s:vim
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue']  = s:vue
 
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitignore.*']    = s:git
@@ -62,6 +64,7 @@ autocmd filetype nerdtree highlight vim_icon ctermbg=none ctermfg=28 guifg=#0087
 autocmd filetype nerdtree highlight gulpfile_icon ctermbg=none ctermfg=124 guifg=#af0000
 autocmd filetype nerdtree highlight sh_icon ctermbg=none ctermfg=97 guifg=#875faf
 autocmd filetype nerdtree highlight license_icon ctermbg=none ctermfg=195 guifg=#d7ffff
+autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=#d7af00
 
 autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFile,html
 autocmd filetype nerdtree syn match haml_icon ## containedin=NERDTreeFile
@@ -78,6 +81,7 @@ autocmd filetype nerdtree syn match vim_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match gulpfile_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match sh_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match license_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match favicon_icon ## containedin=NERDTreeFile
 
 " The following code provides an alternative solution to coloring icons. It
 " colors not only the icons but also the entire filename. It should be used as a
