@@ -580,7 +580,7 @@ endfunction
 set statusline=
 set statusline+=%#PmenuSel#
 set statusline+=%{StatuslineGit()}
-set statusline^=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%<
 set statusline+=\ %#StatusLine#
 set statusline+=\ %f
