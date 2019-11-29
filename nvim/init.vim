@@ -135,8 +135,8 @@ set winwidth=90
 set winminwidth=5
 
 " Keep focus split at max height, others minimal.
-set winheight=5
-set winminheight=5
+set winheight=1
+set winminheight=1
 " The line below maximzes the window height on enter. Unfortunately it also
 " maximizes the height of some floating windows. Disabling for now.
 " autocmd WinEnter * wincmd _
@@ -244,7 +244,6 @@ Plug 'tomtom/tcomment_vim'              " An extensible & universal comment vim-
 Plug 'vim-scripts/BufOnly.vim'          " Delete all the buffers except current/named buffer    | https://github.com/vim-scripts/BufOnly.vim
 Plug 'jlanzarotta/bufexplorer'          " Open/close/navigate vim's buffers                     | https://github.com/jlanzarotta/bufexplorer
 Plug 'majutsushi/tagbar'                " A class outline viewer for vim                        | https://github.com/majutsushi/tagbar
-Plug 'dense-analysis/ale'               " Asynchronous Lint Engine                              | https://github.com/dense-analysis/ale
 Plug 'ntpeters/vim-better-whitespace'   " Better whitespace highlighting for                    | https://github.com/ntpeters/vim-better-whitespace
 Plug 'machakann/vim-highlightedyank'    " Make the yanked region apparent!                      | https://github.com/machakann/vim-highlightedyank
 Plug 'diepm/vim-rest-console'           " A REST console for Vim.                               | https://github.com/diepm/vim-rest-console
@@ -418,14 +417,6 @@ let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 " command! RSfactories :sp spec/factories.rb
 " command! RVfactories :vs spec/factories.rb
 
-" ALE | https://github.com/dense-analysis/ale#1-supported-languages-and-tools
-let g:ale_sign_error = '⌦'
-let g:ale_sign_warning = '∙∙'
-let g:ale_fix_on_save = 1
-
-nmap <silent> [a <Plug>(ale_previous_wrap)
-nmap <silent> ]a <Plug>(ale_next_wrap)
-
 " Key mappings for dragvisuals.vim
 runtime plugged/dragvisuals/plugins/dragvisuals.vim
 
@@ -453,12 +444,14 @@ let g:vrc_curl_opts = {
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
   \ 'coc-css',
+  \ 'coc-eslint',
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-marketplace',
   \ 'coc-pairs',
   \ 'coc-snippets',
   \ 'coc-solargraph',
+  \ 'coc-stylelintplus',
   \ 'coc-tailwindcss',
   \ 'coc-tsserver',
   \ 'coc-vetur',
@@ -569,6 +562,10 @@ let g:solarized_termtrans = 1 " Use terminal background
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE
+highlight CocErrorSign ctermfg=160 ctermbg=0
+highlight CocWarningSign ctermfg=178 ctermbg=0
+highlight CocInfoSign ctermfg=33 ctermbg=0
+highlight CocHintSign ctermfg=226 ctermbg=0
 
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
@@ -583,7 +580,7 @@ endfunction
 set statusline=
 set statusline+=%#PmenuSel#
 set statusline+=%{StatuslineGit()}
-set statusline^=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%<
 set statusline+=\ %#StatusLine#
 set statusline+=\ %f
