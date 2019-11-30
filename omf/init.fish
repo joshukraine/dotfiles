@@ -30,6 +30,9 @@ fish_vi_key_bindings
 # asdf
 . $HOME/.asdf/asdf.fish
 
+# https://github.com/starship/starship#fish
+starship init fish | source
+
 if test -e ~/.fish.local
   . ~/.fish.local
 end
