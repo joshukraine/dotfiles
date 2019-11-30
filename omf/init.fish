@@ -27,3 +27,7 @@ fish_vi_key_bindings
 
 # asdf
 . $HOME/.asdf/asdf.fish
+
+if test -e ~/.fish.local
+  . ~/.fish.local
+end
