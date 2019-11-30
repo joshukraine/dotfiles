@@ -1,0 +1,5 @@
+set -xg GITHUB_USER 'your_username'
+set -xg GITHUB_TOKEN 'my123nuclear456launch789code'
+set -xg MY_SPECIAL_PATH "$HOME/foo/bar"
+
+# vim: set filetype=fish:
