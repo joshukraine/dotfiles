@@ -1,11 +1,13 @@
-# PATH - https://fishshell.com/docs/current/tutorial.html#tut_path
-set -g fish_user_paths '/sbin' $fish_user_paths
-set -g fish_user_paths '/usr/sbin' $fish_user_paths
-set -g fish_user_paths '/bin' $fish_user_paths
-set -g fish_user_paths '/usr/bin' $fish_user_paths
-set -g fish_user_paths '/usr/local/sbin' $fish_user_paths
-set -g fish_user_paths '/usr/local/bin' $fish_user_paths
-set -g fish_user_paths "$HOME/bin" $fish_user_paths
+# PATH
+set -xg PATH \
+  "$HOME/bin" \
+  '/usr/local/bin' \
+  '/usr/local/sbin' \
+  '/usr/bin' \
+  '/bin' \
+  '/usr/sbin' \
+  '/sbin' \
+  $PATH
 
 # Environment variables - https://fishshell.com/docs/current/commands.html#set
 set -xg EDITOR 'nvim'
