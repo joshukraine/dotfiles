@@ -10,28 +10,33 @@ endif
 " Custom Icons
 " https://www.nerdfonts.com/cheat-sheet
 let s:css3  = ''
+let s:fish  = ''
 let s:git   = ''
 let s:gulp  = ''
-let s:haml  = ''
+let s:haml  = ''
 let s:html5 = ''
 let s:js    = ''
 let s:md    = ''
-let s:ruby  = ''
+let s:ruby  = ''
 let s:sass  = ''
+let s:svg   = ''
 let s:vim   = ''
 let s:vue   = '﵂'
 
 " Filetypes
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols         = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']  = s:css3
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['haml'] = s:haml
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = s:html5
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js']  = s:js
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']  = s:md
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js']   = s:js
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']   = s:md
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = s:vim
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue']  = s:vue
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['svg']  = s:svg
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['fish'] = s:fish
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rb']   = s:ruby
 
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols                   = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitignore.*']    = s:git
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitconfig.*']    = s:git
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitmodules']     = s:git
@@ -53,7 +58,7 @@ autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=166 guifg=#ff
 autocmd filetype nerdtree highlight haml_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight git_icon ctermbg=none ctermfg=166 guifg=#ffa500
 autocmd filetype nerdtree highlight ruby_icon ctermbg=none ctermfg=160 guifg=#d70000
-autocmd filetype nerdtree highlight css_icon ctermbg=none ctermfg=32 guifg=#ffa500
+autocmd filetype nerdtree highlight css_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight yml_icon ctermbg=none ctermfg=195 guifg=#d7ffff
 autocmd filetype nerdtree highlight md_icon ctermbg=none ctermfg=31 guifg=#0087af
 autocmd filetype nerdtree highlight js_icon ctermbg=none ctermfg=178 guifg=#d7af00
@@ -63,13 +68,16 @@ autocmd filetype nerdtree highlight scss_icon ctermbg=none ctermfg=205 guifg=#ff
 autocmd filetype nerdtree highlight vim_icon ctermbg=none ctermfg=28 guifg=#008700
 autocmd filetype nerdtree highlight gulpfile_icon ctermbg=none ctermfg=124 guifg=#af0000
 autocmd filetype nerdtree highlight sh_icon ctermbg=none ctermfg=97 guifg=#875faf
+autocmd filetype nerdtree highlight procfile_icon ctermbg=none ctermfg=97 guifg=#875faf
+autocmd filetype nerdtree highlight fish_icon ctermbg=none ctermfg=97 guifg=#875faf
 autocmd filetype nerdtree highlight license_icon ctermbg=none ctermfg=195 guifg=#d7ffff
 autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=#d7af00
+autocmd filetype nerdtree highlight svg_icon ctermbg=none ctermfg=205 guifg=#ff5faf
 
 autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFile,html
-autocmd filetype nerdtree syn match haml_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match haml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match git_icon ## containedin=NERDTreeFile
-autocmd filetype nerdtree syn match ruby_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match ruby_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match css_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match yml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match md_icon ## containedin=NERDTreeFile
@@ -80,8 +88,11 @@ autocmd filetype nerdtree syn match scss_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match vim_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match gulpfile_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match sh_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match procfile_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match fish_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match license_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match favicon_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match svg_icon ## containedin=NERDTreeFile
 
 " The following code provides an alternative solution to coloring icons. It
 " colors not only the icons but also the entire filename. It should be used as a
