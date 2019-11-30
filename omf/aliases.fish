@@ -29,12 +29,12 @@ alias fd 'find . -type d -name'
 alias ff 'find . -type f -name'
 
 # Jump to quick edits
-alias ea '$EDITOR ~/dotfiles/omf/aliases.fish'
-alias ed '$EDITOR ~/dotfiles'
-alias et '$EDITOR ~/.tmux.conf'
-alias ev '$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
-alias evl '$EDITOR ~/.vimrc.local'
-alias ezl '$EDITOR ~/.zshrc.local'
+alias ea "$EDITOR ~/dotfiles/omf/aliases.fish"
+alias ed "$EDITOR ~/dotfiles"
+alias et "$EDITOR ~/.tmux.conf"
+alias ev "$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
+alias evl "$EDITOR ~/.vimrc.local"
+alias efl "$EDITOR ~/.fish.local"
 
 # Tree
 alias t1 'tree -L 1'
