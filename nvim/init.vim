@@ -1,4 +1,7 @@
 " Settings {{{
+" https://github.com/christoomey/vim-tmux-navigator/issues/72
+set shell=/bin/bash\ -i
+
 " Force vim to use older regex engine.
 " https://stackoverflow.com/a/16920294/655204
 set re=1
