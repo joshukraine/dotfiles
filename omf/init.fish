@@ -23,7 +23,6 @@ set -xg TERM 'screen-256color'
 
 . $OMF_CONFIG/abbreviations.fish
 . $OMF_CONFIG/aliases.fish
-. $OMF_CONFIG/functions.fish
 . $OMF_CONFIG/tmux.fish
 
 fish_vi_key_bindings
