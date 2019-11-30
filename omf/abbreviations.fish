@@ -4,18 +4,15 @@ abbr -a -g du 'du -h'
 abbr -a -g dud 'du -d 1 -h'
 abbr -a -g duf 'du -sh *'
 abbr -a -g mv 'mv -iv'
+abbr -a -g mkdir 'mkdir -pv'
 abbr -a -g cp 'cp -iv'
-abbr -a -g cl clear
+abbr -a -g c clear
 
 # Moving around
 abbr -a -g .. 'cd ..'
 abbr -a -g ... 'cd ../../'
 abbr -a -g .... 'cd ../../../'
 abbr -a -g ..... 'cd ../../../../'
-abbr -a -g .2 'cd ../../'
-abbr -a -g .3 'cd ../../../'
-abbr -a -g .4 'cd ../../../../'
-abbr -a -g .5 'cd ../../../../..'
 abbr -a -g - 'cd -'
 
 # Tree
@@ -58,6 +55,16 @@ abbr -a -g ra 'ranger'
 abbr -a -g ch 'cht.sh'
 abbr -a -g chs 'cht.sh --shell'
 abbr -a -g color 'colortest -w -s'
+
+# Tmux
+abbr -a -g tl 'tmux ls'
+abbr -a -g tlw 'tmux list-windows'
+
+# asdf
+abbr -a -g ala 'asdf list-all'
+
+# https://fishshell.com/docs/current/commands.html#fish_update_completions
+abbr -a -g ucl 'fish_update_completions'
 
 # Neovim
 abbr -a -g vi 'nvim'
