@@ -15,13 +15,11 @@ alias evl "$EDITOR ~/.vimrc.local"
 alias efl "$EDITOR ~/.fish.local"
 
 # Git
-alias gbrm 'git branch --merged master | grep -v "^\*\|  master" | xargs -n 1 git branch -d'
 alias gdf 'git diff --word-diff --color-words'
 alias gds 'git diff --word-diff --cached --color-words'
 alias gl 'git log --date=format:"%b %d, %Y" --pretty=format:"%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n %C(blue)%aN (%cd)%n"'
 alias glg 'git log --graph --stat --pretty=format:"%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n %C(blue)%aN (%cd)%n"'
 alias gtl 'git tag --list | sort -r'
-alias gwip 'git add -A; git rm (git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 
 # Rails
 alias RED='RAILS_ENV=development'
@@ -63,18 +61,6 @@ alias startpost 'brew services start postgresql'
 alias statpost 'ps aux | rg postgres'
 alias stoppost 'brew services stop postgresql'
 
-# Homebrew
-alias bubc 'brew upgrade; and brew cleanup'
-alias bubo 'brew update; and brew outdated'
-
-# asdf
-alias aua 'asdf update; and asdf plugin-update --all'
-alias ala 'asdf list-all'
-alias rlv "asdf list-all ruby | rg '^\d'"
-
-# https://fishshell.com/docs/current/commands.html#fish_update_completions
-alias ucl 'fish_update_completions'
-
 # Finder
 alias saf 'defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf 'defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
@@ -91,7 +77,4 @@ alias upd 'softwareupdate -i -a'
 
 # Misc
 alias cat 'bat'
-alias copy 'tr -d "\n" | pbcopy'
-alias ct 'ctags -R --languages=ruby --exclude=.git --exclude=log . (bundle list --paths)'
 alias htop 'sudo htop'
-alias ygs 'yarn generate; and cd dist; and http-server -p 8080'
