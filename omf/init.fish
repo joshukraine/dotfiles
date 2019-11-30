@@ -21,6 +21,7 @@ set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg TERM 'screen-256color'
 
+. $OMF_CONFIG/abbreviations.fish
 . $OMF_CONFIG/aliases.fish
 . $OMF_CONFIG/functions.fish
 . $OMF_CONFIG/tmux.fish

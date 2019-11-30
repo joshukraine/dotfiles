@@ -1,32 +1,10 @@
 # General UNIX
-alias cp 'cp -iv'
-alias df 'df -h'
-alias du 'du -h'
-alias dud 'du -d 1 -h'
-alias duf 'du -sh *'
 alias mkdir 'mkdir -pv'
-alias mv 'mv -iv'
 alias pi 'ping -Anc 5 1.1.1.1'
 alias src 'exec fish'
-
-# Moving around
-alias .. 'cd ..'
-alias ... 'cd ../../'
-alias .... 'cd ../../../'
-alias ..... 'cd ../../../../'
-alias .2 'cd ../../'
-alias .3 'cd ../../../'
-alias .4 'cd ../../../../'
-alias .5 'cd ../../../../..'
-
-# Listing files and directories
 alias ls 'exa'
 alias l 'exa -lhF'
 alias la 'exa -lahF'
-
-# Finding stuff!
-alias fd 'find . -type d -name'
-alias ff 'find . -type f -name'
 
 # Jump to quick edits
 alias ea "$EDITOR ~/dotfiles/omf/aliases.fish"
@@ -36,48 +14,12 @@ alias ev "$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
 alias evl "$EDITOR ~/.vimrc.local"
 alias efl "$EDITOR ~/.fish.local"
 
-# Tree
-alias t1 'tree -L 1'
-alias t1a 'tree -La 1'
-alias t2 'tree -L 2'
-alias t2a 'tree -La 2'
-alias t3 'tree -L 3'
-alias t3a 'tree -La 3'
-alias t4 'tree -L 4'
-alias t4a 'tree -La 4'
-alias tree 'tree -CF'
-
-# Neovim
-alias vi 'nvim'
-alias vim 'nvim'
-alias vir 'nvim -R'
-alias vv 'nvim --version | less'
-alias vi0 'nvim -u NONE'
-
 # Git
-alias ga 'git add'
-alias gaa 'git add --all'
-alias gap 'git add --patch'
-alias gb 'git branch'
-alias gba 'git branch --all'
-alias gbr 'git branch --remote'
 alias gbrm 'git branch --merged master | grep -v "^\*\|  master" | xargs -n 1 git branch -d'
-alias gca 'git commit --amend'
-alias gci 'git commit -v'
-alias gcl 'git clone'
-alias gco 'git checkout'
-alias gcom 'git checkout master'
 alias gdf 'git diff --word-diff --color-words'
 alias gds 'git diff --word-diff --cached --color-words'
-alias gf 'git fetch'
 alias gl 'git log --date=format:"%b %d, %Y" --pretty=format:"%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n %C(blue)%aN (%cd)%n"'
 alias glg 'git log --graph --stat --pretty=format:"%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n %C(blue)%aN (%cd)%n"'
-alias gpl 'git pull'
-alias gps 'git push'
-alias gpsf 'git push --force-with-lease'
-alias gpum 'git push -u origin master'
-alias grv 'git remote -v'
-alias gs 'git status'
 alias gtl 'git tag --list | sort -r'
 alias gwip 'git add -A; git rm (git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 
@@ -121,35 +63,17 @@ alias startpost 'brew services start postgresql'
 alias statpost 'ps aux | rg postgres'
 alias stoppost 'brew services stop postgresql'
 
-# Ansible
-alias ans 'ansible'
-alias anp 'ansible-playbook'
-alias anv 'ansible-vault --ask-vault-pass'
-
 # Homebrew
-alias bc 'brew cleanup'
-alias bd 'brew doctor'
-alias bg 'brew upgrade --all'
-alias bo 'brew outdated'
-alias brews 'brew list -1'
-alias bs0 'brew services stop'
-alias bs1 'brew services start'
-alias bs 'brew services'
-alias bsc 'brew services cleanup'
-alias bsl 'brew services list'
-alias bsr 'brew services restart'
-alias bu 'brew update'
-alias bubc 'brew upgrade && brew cleanup'
-alias bubo 'brew update && brew outdated'
-alias bubu 'bubo && bubc'
+alias bubc 'brew upgrade; and brew cleanup'
+alias bubo 'brew update; and brew outdated'
 
 # asdf
-alias aua 'asdf update && asdf plugin-update --all'
+alias aua 'asdf update; and asdf plugin-update --all'
 alias ala 'asdf list-all'
 alias rlv "asdf list-all ruby | rg '^\d'"
 
-# oh-my-zsh
-alias upz 'upgrade_oh_my_zsh'
+# https://fishshell.com/docs/current/commands.html#fish_update_completions
+alias ucl 'fish_update_completions'
 
 # Finder
 alias saf 'defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
@@ -167,14 +91,7 @@ alias upd 'softwareupdate -i -a'
 
 # Misc
 alias cat 'bat'
-alias ch 'cht.sh'
-alias chs 'cht.sh --shell'
-alias color 'colortest -w -s'
 alias copy 'tr -d "\n" | pbcopy'
 alias ct 'ctags -R --languages=ruby --exclude=.git --exclude=log . (bundle list --paths)'
 alias htop 'sudo htop'
-alias ra 'ranger'
-alias ru 'ruby -v'
-alias yg 'yarn generate'
-alias ygs 'yarn generate && cd dist && http-server -p 8080'
-alias yba 'yarn build --analyze'
+alias ygs 'yarn generate; and cd dist; and http-server -p 8080'
