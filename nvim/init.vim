@@ -6,9 +6,6 @@ set shell=/bin/bash\ -i
 " https://stackoverflow.com/a/16920294/655204
 set re=1
 
-" Use vim, not vi api
-set nocompatible
-
 " No backup files
 set nobackup
 
@@ -324,7 +321,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unmerged"  : "ǁ",
     \ "Deleted"   : "-",
     \ "Dirty"     : "*",
-    \ "Clean"     : "✔︎",
+    \ "Clean"     : "",
     \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
     \ }
