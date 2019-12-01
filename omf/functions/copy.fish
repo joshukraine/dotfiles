@@ -1,3 +1,3 @@
 function copy
-  tr -d "\n" | pbcopy
+  echo $argv | tr -d "\n" | pbcopy
 end
