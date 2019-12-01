@@ -1,13 +1,5 @@
 # PATH
-set -xg PATH \
-  "$HOME/bin" \
-  '/usr/local/bin' \
-  '/usr/local/sbin' \
-  '/usr/bin' \
-  '/bin' \
-  '/usr/sbin' \
-  '/sbin' \
-  $PATH
+set PATH $HOME/bin $PATH
 
 # Environment variables - https://fishshell.com/docs/current/commands.html#set
 set -xg EDITOR 'nvim'
