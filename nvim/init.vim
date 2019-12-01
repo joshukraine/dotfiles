@@ -318,14 +318,14 @@ let NERDTreeMinimalUI = 1
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "*",
     \ "Staged"    : "+",
-    \ "Untracked" : "•",
-    \ "Renamed"   : ">",
+    \ "Untracked" : "?",
+    \ "Renamed"   : "»",
     \ "Unmerged"  : "ǁ",
-    \ "Deleted"   : "-",
+    \ "Deleted"   : "✘",
     \ "Dirty"     : "*",
     \ "Clean"     : "",
     \ "Ignored"   : "☒",
-    \ "Unknown"   : "?"
+    \ "Unknown"   : "??"
     \ }
 
 " Vim DevIcons
