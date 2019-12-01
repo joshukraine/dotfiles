@@ -22,7 +22,6 @@ set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg TERM 'screen-256color'
 
 . $OMF_CONFIG/abbreviations.fish
-. $OMF_CONFIG/aliases.fish
 
 fish_vi_key_bindings
 
