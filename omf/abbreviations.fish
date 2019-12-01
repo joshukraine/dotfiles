@@ -92,6 +92,22 @@ abbr -a -g ans 'ansible'
 abbr -a -g anp 'ansible-playbook'
 abbr -a -g anv 'ansible-vault --ask-vault-pass'
 
+# Rails
+abbr -a -g RED 'RAILS_ENV=development'
+abbr -a -g REP 'RAILS_ENV=production'
+abbr -a -g RET 'RAILS_ENV=test'
+abbr -a -g bx 'bundle exec'
+abbr -a -g om 'overmind start'
+abbr -a -g psp 'bundle exec rake parallel:spec'
+abbr -a -g rc 'rails console'
+abbr -a -g rcop 'rubocop'
+abbr -a -g rdb 'rails dbconsole'
+abbr -a -g rdm 'rails db:migrate'
+abbr -a -g rgm 'rails generate migration'
+abbr -a -g rs 'rails server'
+abbr -a -g rsp 'rspec .'
+abbr -a -g rtp 'rails db:test:prepare'
+
 # Yarn
 abbr -a -g yg 'yarn generate'
 abbr -a -g yba 'yarn build --analyze'
