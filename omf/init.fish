@@ -1,5 +1,7 @@
 # PATH
-set PATH $HOME/bin $PATH
+set PATH '/usr/local/sbin' $PATH
+set PATH '/usr/local/bin' $PATH
+set PATH "$HOME/bin" $PATH
 
 # Environment variables - https://fishshell.com/docs/current/commands.html#set
 set -xg EDITOR 'nvim'
@@ -17,11 +19,11 @@ set -xg TERM 'screen-256color'
 
 fish_vi_key_bindings
 
-# asdf
-. $HOME/.asdf/asdf.fish
-
 # https://github.com/starship/starship#fish
 starship init fish | source
+
+# asdf
+. $HOME/.asdf/asdf.fish
 
 if test -e ~/.fish.local
   . ~/.fish.local
