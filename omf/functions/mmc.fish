@@ -1,3 +1,3 @@
 function mmc
-  bundle exec middleman console -e console
+    bundle exec middleman console -e console
 end

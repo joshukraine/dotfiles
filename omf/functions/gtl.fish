@@ -1,3 +1,3 @@
 function gtl
-  git tag --list | sort -r
+    git tag --list | sort -r
 end

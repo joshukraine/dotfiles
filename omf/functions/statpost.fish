@@ -1,3 +1,3 @@
 function statpost
-  ps aux | rg postgres
+    ps aux | rg postgres
 end

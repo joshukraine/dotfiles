@@ -1,3 +1,3 @@
 function src
-  exec fish
+    exec fish
 end

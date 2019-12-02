@@ -1,3 +1,3 @@
 function path
-  echo $PATH | tr " " "\n" | nl
+    echo $PATH | tr " " "\n" | nl
 end

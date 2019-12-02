@@ -1,3 +1,3 @@
 function gdf
-  git diff --word-diff --color-words
+    git diff --word-diff --color-words
 end

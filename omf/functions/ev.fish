@@ -1,3 +1,3 @@
 function ev
-  $EDITOR $XDG_CONFIG_HOME/nvim/init.vim
+    $EDITOR $XDG_CONFIG_HOME/nvim/init.vim
 end

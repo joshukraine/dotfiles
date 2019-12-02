@@ -1,3 +1,3 @@
 function et
-  $EDITOR ~/.tmux.conf
+    $EDITOR ~/.tmux.conf
 end

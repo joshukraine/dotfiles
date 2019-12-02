@@ -1,3 +1,3 @@
 function startpost
-  brew services start postgresql
+    brew services start postgresql
 end

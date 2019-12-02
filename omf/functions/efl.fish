@@ -1,3 +1,3 @@
 function efl
-  $EDITOR ~/.fish.local
+    $EDITOR ~/.fish.local
 end

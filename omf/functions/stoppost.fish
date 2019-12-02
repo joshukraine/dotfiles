@@ -1,3 +1,3 @@
 function stoppost
-  brew services stop postgresql
+    brew services stop postgresql
 end

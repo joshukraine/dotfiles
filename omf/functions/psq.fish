@@ -1,3 +1,3 @@
 function psq
-  pgcli -d postgres
+    pgcli -d postgres
 end

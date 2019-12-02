@@ -1,3 +1,3 @@
 function mm
-  bundle exec middleman
+    bundle exec middleman
 end

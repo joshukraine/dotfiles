@@ -1,3 +1,3 @@
 function mms
-  bundle exec middleman server
+    bundle exec middleman server
 end

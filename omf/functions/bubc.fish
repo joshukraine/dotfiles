@@ -1,3 +1,4 @@
 function bubc
-  brew upgrade; and brew cleanup
+    brew upgrade
+    and brew cleanup
 end

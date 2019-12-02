@@ -1,3 +1,3 @@
 function htop
-  sudo htop
+    sudo htop
 end

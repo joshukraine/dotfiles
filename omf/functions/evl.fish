@@ -1,3 +1,3 @@
 function evl
-  $EDITOR ~/.vimrc.local
+    $EDITOR ~/.vimrc.local
 end
