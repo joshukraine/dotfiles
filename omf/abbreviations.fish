@@ -66,13 +66,6 @@ abbr -a -g ala 'asdf list-all'
 # https://fishshell.com/docs/current/commands.html#fish_update_completions
 abbr -a -g ucl 'fish_update_completions'
 
-# Neovim
-abbr -a -g vi 'nvim'
-abbr -a -g vim 'nvim'
-abbr -a -g vir 'nvim -R'
-abbr -a -g vv 'nvim --version | less'
-abbr -a -g vi0 'nvim -u NONE'
-
 # Homebrew
 abbr -a -g bc 'brew cleanup'
 abbr -a -g bd 'brew doctor'
