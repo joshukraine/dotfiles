@@ -2,7 +2,7 @@
 
 ![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Macs, currently running [macOS Mojave (10.14)][mojave]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [Node.js][nodejs] web development using Zsh (via [Oh-My-Zsh][oh-my-zsh]), [Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
+These are the dotfiles I use on my Macs, currently running [macOS Mojave (10.14)][mojave]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [JavaScript][javascript] web development using [Fish][fish] (with [Oh-My-Fish][oh-my-fish]), [Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
 ## Mac Bootstrap Script
 
@@ -16,30 +16,56 @@ NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 
 The dotfiles assume you are running macOS with the following software pre-installed:
 
-* [Oh-My-Zsh][oh-my-zsh]
-* [Homebrew][homebrew]
-* [Neovim][neovim]
 * [Git][git]
-* [Tmux][tmux]
+* [Homebrew][homebrew]
 * [Ruby][ruby]
 * [Node.js][nodejs]
+* [Fish][fish] or [Zsh][zsh]
+* [Oh My Fish][oh-my-fish] or [Oh-My-Zsh][oh-my-zsh]
+* [Neovim][neovim]
+* [Tmux][tmux]
 * [asdf][asdf]
+* [Starship][starship]
 
 All of the above and more are included in [Mac Bootstrap][mac-bootstrap]
 
 ## Installation
 
+The install script will try to detect your default shell using `$SHELL` and provide the appropriate setup. Supported options are Fish and Zsh.
+
+1. Setup your shell. (See Fish/Zsh instructions below.)
+
+1. Install the dotfiles.
+
 ```sh
-git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-. ~/dotfiles/install.sh
+$ git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
+$ sh ~/dotfiles/install.sh
 ```
+
+## Fish or Zsh?
+
+I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script below will set your config for whichever shell (Fish or Zsh) is currently set as your default. If you're not sure, run `echo $SHELL` in your terminal.
+
+### Zsh Setup
+
+1. Install zsh: `$ brew install zsh`
+1. Set it as your default shell: `$ chsh -s $(which zsh)`
+1. Install [Oh My Zsh][oh-my-zsh].
+1. Restart your computer.
+
+### Fish Setup
+
+1. Install Fish: `$ brew install fish`
+1. Add Fish to `/etc/shells`: `$ echo /usr/local/bin/fish | sudo tee -a /etc/shells`
+1. Set it as your default shell: `$ chsh -s /usr/local/bin/fish`
+1. Install [Oh My Fish][oh-my-fish]
 
 ## Post-install Tasks
 
 After running `install.sh` there are still a couple of things that need to be done.
 
 * Set up iTerm2 or Terminal.app profile (see details below).
-* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, and `~/.zshrc.local`.
+* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
 * Complete [Brew Bundle][brew-bundle] with `brew bundle install`
 * After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
 
@@ -122,18 +148,23 @@ Copyright &copy; 2019 Joshua Steele. [MIT License][license]
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
+[fish]: http://fishshell.com/
 [git]: https://git-scm.com/
 [homebrew]: http://brew.sh
 [iterm2]: https://www.iterm2.com/
+[javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
 [mojave]: https://www.apple.com/macos/mojave/
 [neovim]: https://neovim.io/
 [nodejs]: https://nodejs.org/
-[oh-my-zsh]: https://github.com/robbyrussell/oh-my-zsh
+[oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
+[oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [rails]: https://rubyonrails.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-02-18-2019.png
+[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/c_scale,f_auto,q_auto:best,w_1500/v1575408538/screenshots/dotfiles-dec-2019_bbfbfr.png
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [vim]: http://www.vim.org/
+[zsh]: https://www.zsh.org/
+[starship]: https://starship.rs/

@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 ################################################################################
 # install
 #
-# This script symlinks the dotfiles into place in the home directory.
+# This script symlinks dotfiles into place in the home and config directories
 ################################################################################
 
 dotfiles_echo() {
@@ -15,10 +15,9 @@ dotfiles_echo() {
 
 set -e # Terminate script if anything exits with a non-zero value
 
-CONFIG_DIR=$XDG_CONFIG_HOME
 DOTFILES_DIR=$HOME/dotfiles
 
-files=(
+home_items=(
 "asdfrc"
 "default-gems"
 "default-npm-packages"
@@ -34,31 +33,80 @@ files=(
 "svgo.yml"
 "tmux.conf"
 "tool-versions"
-"zshrc"
 )
+
+config_items=(
+"nvim"
+"omf"
+"ranger"
+"starship.toml"
+)
+
+if [ -z "$XDG_CONFIG_HOME" ]; then
+  if [ ! -d "$HOME/.config" ]; then
+    mkdir "$HOME/.config"
+  fi
+  CONFIG_DIR=$HOME/.config
+else
+  CONFIG_DIR=$XDG_CONFIG_HOME
+fi
+
+dotfiles_echo "Setting up your shell configs..."
+
+if [ "$(basename "$SHELL")" = "fish" ]; then
+  if [ -d "$CONFIG_DIR"/omf ]; then
+  dotfiles_echo "Fish shell detected"
+    cp -r "$CONFIG_DIR"/omf "$CONFIG_DIR"/omf_backup
+    rm -rf "$CONFIG_DIR"/omf
+  fi
+  dotfiles_echo "-> Linking $DOTFILES_DIR/omf to $CONFIG_DIR/omf..."
+  ln -nfs "$DOTFILES_DIR"/omf "$CONFIG_DIR"/omf
+
+elif [ "$(basename "$SHELL")" = "zsh" ]; then
+  dotfiles_echo "Zsh detected"
+  if [ -f "$HOME"/.zshrc ]; then
+    dotfiles_echo ".zshrc already present. Backing up..."
+    cp "$HOME"/.zshrc "$HOME"/.zshrc_backup
+    rm -f "$HOME"/.zshrc
+  fi
+  dotfiles_echo "-> Linking $DOTFILES_DIR/zshrc to $HOME/.zshrc..."
+  ln -nfs "$DOTFILES_DIR"/zshrc "$HOME"/.zshrc
+
+else
+  dotfiles_echo "Sorry, it looks like your default shell is set to $SHELL,
+  which is not supported. Please install Zsh or Fish and try again."
+  exit 1
+fi
 
 dotfiles_echo "Installing dotfiles..."
 
-for file in "${files[@]}"; do
-  if [ -f "$HOME"/."$file" ]; then
-    dotfiles_echo ".$file already present. Backing up..."
-    cp "$HOME"/."$file" "$HOME"/."${file}"_backup
-    rm -f "$HOME"/."$file"
+for item in "${home_items[@]}"; do
+  if [ -f "$HOME"/."$item" ]; then
+    dotfiles_echo ".$item already present. Backing up..."
+    cp "$HOME"/."$item" "$HOME"/."${item}"_backup
+    rm -f "$HOME"/."$item"
   fi
-  dotfiles_echo "-> Linking $DOTFILES_DIR/$file to $HOME/.$file..."
-  ln -nfs "$DOTFILES_DIR"/"$file" "$HOME"/."$file"
+  dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $HOME/.$item..."
+  ln -nfs "$DOTFILES_DIR"/"$item" "$HOME"/."$item"
 done
 
+if [ -f "$HOME"/Brewfile ]; then
+  dotfiles_echo "Brewfile already present. Backing up..."
+  cp "$HOME"/Brewfile "$HOME"/Brewfile_backup
+  rm -f "$HOME"/Brewfile
+fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
 ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
 
-dotfiles_echo "Setting up Neovim..."
-
-dotfiles_echo "-> Linking $DOTFILES_DIR/nvim to $CONFIG_DIR/nvim..."
-ln -nfs "$DOTFILES_DIR"/nvim "$CONFIG_DIR"/nvim
-
-dotfiles_echo "-> Linking $DOTFILES_DIR/ranger to $CONFIG_DIR/ranger..."
-ln -nfs "$DOTFILES_DIR"/ranger "$CONFIG_DIR"/ranger
+for item in "${config_items[@]}"; do
+  if [ -f "$CONFIG_DIR"/"$item" ]; then
+    dotfiles_echo "$item already present. Backing up..."
+    cp "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}"_backup
+    rm -rf "$CONFIG_DIR"/"$item"
+  fi
+  dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/.$item..."
+  ln -nfs "$DOTFILES_DIR"/"$item" "$CONFIG_DIR"/"$item"
+done
 
 dotfiles_echo "Dotfiles installation complete!"
 

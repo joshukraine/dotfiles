@@ -1,10 +1,10 @@
 " Settings {{{
+" https://github.com/christoomey/vim-tmux-navigator/issues/72
+set shell=/bin/bash\ -i
+
 " Force vim to use older regex engine.
 " https://stackoverflow.com/a/16920294/655204
 set re=1
-
-" Use vim, not vi api
-set nocompatible
 
 " No backup files
 set nobackup
@@ -282,6 +282,8 @@ Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
 Plug 'digitaltoad/vim-pug'              " Vim syntax highlighting for Pug templates             | https://github.com/digitaltoad/vim-pug
 Plug 'habamax/vim-asciidoctor'          " Asciidoctor plugin for Vim                            | https://github.com/habamax/vim-asciidoctor
+Plug 'dag/vim-fish'                     " Vim support for editing fish scripts                  | https://github.com/dag/vim-fish
+Plug 'cespare/vim-toml'                 " Vim syntax for TOML                                   | https://github.com/cespare/vim-toml
 
 " Tim Pope
 Plug 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
@@ -316,14 +318,14 @@ let NERDTreeMinimalUI = 1
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "*",
     \ "Staged"    : "+",
-    \ "Untracked" : "•",
-    \ "Renamed"   : ">",
+    \ "Untracked" : "?",
+    \ "Renamed"   : "»",
     \ "Unmerged"  : "ǁ",
-    \ "Deleted"   : "-",
+    \ "Deleted"   : "✘",
     \ "Dirty"     : "*",
-    \ "Clean"     : "✔︎",
+    \ "Clean"     : "",
     \ "Ignored"   : "☒",
-    \ "Unknown"   : "?"
+    \ "Unknown"   : "??"
     \ }
 
 " Vim DevIcons
