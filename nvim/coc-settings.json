@@ -14,5 +14,11 @@
 
   "css.validate": false,
 
-  "stylelintplus.autoFixOnSave": true
+  "stylelintplus.autoFixOnSave": true,
+
+  "solargraph.diagnostics": true,
+  "solargraph.rename": true,
+  "solargraph.completion": true,
+  "solargraph.formatting": true,
+  "solargraph.hover": true
 }
