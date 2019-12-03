@@ -43,6 +43,7 @@ abbr -a -g gpl 'git pull'
 abbr -a -g gps 'git push'
 abbr -a -g gpsf 'git push --force-with-lease'
 abbr -a -g gpum 'git push -u origin master'
+abbr -a -g gpuo 'git push -u origin'
 abbr -a -g grv 'git remote -v'
 abbr -a -g gs 'git status'
 
