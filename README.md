@@ -162,7 +162,7 @@ Copyright &copy; 2019 Joshua Steele. [MIT License][license]
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [rails]: https://rubyonrails.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://s3.amazonaws.com/images.jsua.co/dotfiles-02-18-2019.png
+[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/c_scale,f_auto,q_auto:best,w_1500/v1575408538/screenshots/dotfiles-dec-2019_bbfbfr.png
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [vim]: http://www.vim.org/
