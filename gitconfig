@@ -65,12 +65,15 @@
   excludesfile = ~/.gitignore_global
   ignorecase   = false
   safecrlf     = warn
-  pager = diff-so-fancy | less
   abbrev = 7
 
 [diff]
   tool = vimdiff3
   submodule = log
+
+[pager]
+  diff = diff-so-fancy | less --tabs=4 -RFXS
+  log = less -+X
 
 [fetch]
   prune = true
