@@ -31,7 +31,7 @@ untracked.style = "cyan"
 
 [git_commit]
 disabled = false
-style = "green"
+style = "bold black"
 prefix = ""
 suffix = " "
 
