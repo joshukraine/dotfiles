@@ -110,7 +110,7 @@ let g:netrw_liststyle=3
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
 
-set grepprg=ag
+set grepprg=rg
 
 let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=tmp'
 
