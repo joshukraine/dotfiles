@@ -29,5 +29,11 @@ staged.value = "+"
 stashed.style = "yellow"
 untracked.style = "cyan"
 
+[git_commit]
+disabled = false
+style = "green"
+prefix = ""
+suffix = " "
+
 [ruby]
 symbol = " "
