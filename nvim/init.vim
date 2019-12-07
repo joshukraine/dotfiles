@@ -53,9 +53,6 @@ set relativenumber
 " Highlight tabs and trailing whitespace
 set list listchars=tab:»·,trail:·,nbsp:+
 
-" Hide the toolbar
-set guioptions-=T
-
 " UTF encoding
 set encoding=utf-8
 
