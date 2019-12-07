@@ -1,9 +1,7 @@
-# No arguments: `git status`
-# With arguments: acts like `git`
 function g
     if count $argv >/dev/null
         git $argv
     else
-        git status
+        clear && git status --short --branch && echo
     end
 end
