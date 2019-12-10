@@ -8,7 +8,7 @@
   ba = branch --all
   br = branch --remote
   ca = commit --amend
-  ci = commit -v
+  cm = commit -v
   cl = clone
   co = checkout
   com = checkout master
