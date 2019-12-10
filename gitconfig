@@ -12,8 +12,8 @@
   cl = clone
   co = checkout
   com = checkout master
-  df = diff --word-diff --color-words
-  ds = diff --word-diff --cached --color-words
+  df = diff
+  dc = diff --cached
   f = fetch
   l = log --date=format:'%b %d, %Y' --pretty=format:'%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n %C(blue)%aN (%cd)%n'
   lg = log --graph --stat --pretty=format:'%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n %C(blue)%aN (%cd)%n'
