@@ -249,6 +249,7 @@ Plug 'diepm/vim-rest-console'           " A REST console for Vim.               
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
+Plug 'webdevel/tabulous'                " Vim plugin for setting the tabline                    | https://github.com/webdevel/tabulous
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
@@ -432,6 +433,11 @@ let g:DVB_TrimWS = 1
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" Tabulous
+let tabulousLabelModifiedStr = '[+] '
+let tabulousCloseStr = ''
+let tabulousLabelNameOptions = ':t'
+
 " Vim REST Console (VRC)
 let g:vrc_curl_opts = {
   \ '-L': '',
@@ -562,10 +568,15 @@ let g:solarized_termtrans = 1 " Use terminal background
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 highlight VertSplit ctermbg=NONE guibg=NONE
+
 highlight CocErrorSign ctermfg=160 ctermbg=0
 highlight CocWarningSign ctermfg=178 ctermbg=0
 highlight CocInfoSign ctermfg=33 ctermbg=0
 highlight CocHintSign ctermfg=226 ctermbg=0
+
+highlight TabLine     ctermfg=11 ctermbg=0 cterm=reverse
+highlight TabLineFill ctermfg=11 ctermbg=0 cterm=reverse
+highlight TabLineSel  ctermfg=15 ctermbg=4 cterm=NONE
 
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
