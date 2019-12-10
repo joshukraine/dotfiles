@@ -25,8 +25,8 @@
   rv = remote -v
   s = status
   tl = tag --list
-  uncommit = reset --soft HEAD^
-  unstage = reset
+  re = reset
+  rsh = reset --soft HEAD^
   wch = whatchanged -p --abbrev-commit --pretty=medium -10
 
 [apply]

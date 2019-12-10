@@ -47,6 +47,8 @@ abbr -a -g gpsf 'git push --force-with-lease'
 abbr -a -g gpub 'git publish'
 abbr -a -g gpum 'git push -u origin master'
 abbr -a -g gpuo 'git push -u origin'
+abbr -a -g gre 'git reset'
+abbr -a -g grsh 'git reset --soft HEAD^'
 abbr -a -g grv 'git remote -v'
 abbr -a -g gs 'git status'
 
