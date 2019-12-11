@@ -18,9 +18,10 @@
 
   "stylelintplus.autoFixOnSave": true,
 
-  "solargraph.diagnostics": true,
-  "solargraph.rename": true,
+  "solargraph.autoformat": true,
   "solargraph.completion": true,
+  "solargraph.diagnostics": true,
   "solargraph.formatting": true,
-  "solargraph.hover": true
+  "solargraph.hover": true,
+  "solargraph.rename": true,
 }
