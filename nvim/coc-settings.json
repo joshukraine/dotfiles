@@ -23,5 +23,5 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "solargraph.hover": true,
-  "solargraph.rename": true,
+  "solargraph.rename": true
 }
