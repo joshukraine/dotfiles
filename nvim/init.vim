@@ -200,6 +200,8 @@ map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
 inoremap jj <C-c> " jj to switch back to normal mode
 nnoremap <leader>4 <c-^> " Switch between the last two files
+nnoremap <leader>5 :bnext<CR>
+nnoremap <leader>6 :bprev<CR>
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 
 " Expand active file directory
@@ -390,7 +392,7 @@ nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'p
 " nnoremap <leader>sf :VtrSendFile<cr>
 
 " CtrlP
-map <leader>t <C-p>
+map <leader>t :CtrlP<CR>
 map <leader>y :CtrlPBuffer<CR>
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 0
