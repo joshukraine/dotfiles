@@ -65,7 +65,8 @@
   excludesfile = ~/.gitignore_global
   ignorecase   = false
   safecrlf     = warn
-  abbrev = 7
+  abbrev       = 7
+  editor       = nvim
 
 [diff]
   tool = vimdiff3
