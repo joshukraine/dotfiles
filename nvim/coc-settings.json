@@ -23,5 +23,7 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "solargraph.hover": true,
-  "solargraph.rename": true
+  "solargraph.rename": true,
+
+  "coc.preferences.formatOnSaveFiletypes": ["ruby"]
 }
