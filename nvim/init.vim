@@ -250,6 +250,7 @@ Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the c
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
 Plug 'webdevel/tabulous'                " Vim plugin for setting the tabline                    | https://github.com/webdevel/tabulous
+Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quotes in pair     | https://github.com/jiangmiao/auto-pairs
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
@@ -454,7 +455,6 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-marketplace',
-  \ 'coc-pairs',
   \ 'coc-snippets',
   \ 'coc-solargraph',
   \ 'coc-stylelintplus',
@@ -471,11 +471,6 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-if (exists("coc#on_enter"))
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-endif
 
 function! s:check_back_space() abort
   let col = col('.') - 1
