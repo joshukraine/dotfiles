@@ -704,11 +704,11 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>3640 966 400 129 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>3530 786 620 392 2560 0 2560 1440 </string>
+	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>3604 798 928 394 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2810 75 1510 1342 2560 0 2560 1440 </string>
+	<string>2883 54 1510 1342 2560 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -952,7 +952,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>150</integer>
+			<integer>140</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Boost</key>
@@ -1382,7 +1382,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>50</integer>
+			<integer>35</integer>
 			<key>Screen</key>
 			<integer>1</integer>
 			<key>Scrollback Lines</key>
@@ -3374,6 +3374,7 @@
 		<string>3.3.7beta4</string>
 		<string>3.3.8beta1</string>
 		<string>3.3.8beta2</string>
+		<string>3.3.8beta3</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
@@ -3392,7 +3393,7 @@
 		<key>screenFrame</key>
 		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{3145, 1160}</string>
+		<string>{3195, 1265}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -3401,7 +3402,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>3314C653-8399-4C62-B896-6A72133DE721</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>250</integer>
+	<integer>258</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4218,7 +4219,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-17T05:54:56Z</date>
+	<date>2019-12-23T07:29:49Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4284,7 +4285,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.8beta2</string>
+	<string>3.3.8beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
