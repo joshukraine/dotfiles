@@ -699,14 +699,22 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 163 224 275 0 0 1680 1027 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>440 454 799 448 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>640 690 400 129 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 496 620 392 0 0 1680 1050 </string>
+	<string>530 493 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 80 1360 947 0 0 1680 1027 </string>
+	<string>201 194 1090 762 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>233 0 1360 1050 0 0 1680 1050 </string>
+	<string>264 201 1270 762 0 0 1680 1027 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>233 505 1090 522 0 0 1680 1027 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>233 263 1090 642 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -950,7 +958,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>150</integer>
+			<integer>140</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Boost</key>
@@ -1378,7 +1386,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>50</integer>
+			<integer>30</integer>
 			<key>Screen</key>
 			<integer>1</integer>
 			<key>Scrollback Lines</key>
@@ -3349,6 +3357,8 @@
 	<key>NoSyncAllAppVersions</key>
 	<array>
 		<string>3.3.8beta1</string>
+		<string>3.3.8beta3</string>
+		<string>3.3.8beta2</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
@@ -3360,12 +3370,12 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{518, 843}</string>
+		<string>{452, 847}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>1A82FD0A-AF32-46BA-B0C2-E52FAB98377A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>5</integer>
+	<integer>8</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>598340262.46807802</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -4168,8 +4178,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-17T05:37:44Z</date>
+	<date>2019-12-23T09:21:34Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
@@ -4232,7 +4244,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.8beta1</string>
+	<string>3.3.8beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
