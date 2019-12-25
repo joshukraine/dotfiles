@@ -16,6 +16,7 @@ let s:gulp  = ''
 let s:haml  = ''
 let s:html5 = ''
 let s:js    = ''
+let s:ts    = 'ﯤ'
 let s:md    = ''
 let s:ruby  = ''
 let s:sass  = ''
@@ -29,6 +30,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']  = s:css3
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['haml'] = s:haml
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = s:html5
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js']   = s:js
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['ts']   = s:ts
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']   = s:md
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = s:vim
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue']  = s:vue
@@ -62,6 +64,7 @@ autocmd filetype nerdtree highlight css_icon ctermbg=none ctermfg=39 guifg=#00af
 autocmd filetype nerdtree highlight yml_icon ctermbg=none ctermfg=195 guifg=#d7ffff
 autocmd filetype nerdtree highlight md_icon ctermbg=none ctermfg=31 guifg=#0087af
 autocmd filetype nerdtree highlight js_icon ctermbg=none ctermfg=178 guifg=#d7af00
+autocmd filetype nerdtree highlight ts_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight json_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight vue_icon ctermbg=none ctermfg=29 guifg=#00875f
 autocmd filetype nerdtree highlight scss_icon ctermbg=none ctermfg=205 guifg=#ff5faf
@@ -82,6 +85,7 @@ autocmd filetype nerdtree syn match css_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match yml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match md_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match js_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match ts_icon #ﯤ# containedin=NERDTreeFile
 autocmd filetype nerdtree syn match json_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match vue_icon #﵂# containedin=NERDTreeFile
 autocmd filetype nerdtree syn match scss_icon ## containedin=NERDTreeFile

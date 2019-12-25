@@ -4,4 +4,5 @@ neovim
 pug
 stylelint
 svgo
+typescript
 vue-language-server
