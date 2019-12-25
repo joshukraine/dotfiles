@@ -37,3 +37,6 @@ suffix = " "
 
 [ruby]
 symbol = " "
+
+[nodejs]
+symbol = " "
