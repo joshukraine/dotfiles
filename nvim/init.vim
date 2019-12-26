@@ -255,7 +255,7 @@ Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quo
 " Code Completion
 Plug 'neoclide/coc.nvim',
       \ {'branch': 'release'}           " Intellisense engine for vim8 & neovim                 | https://github.com/neoclide/coc.nvim
-Plug 'honza/vim-snippets'               " Snippets files for various programming languages      | https://github.com/honza/vim-snippets
+" Plug 'honza/vim-snippets'               " Snippets files for various programming languages      | https://github.com/honza/vim-snippets
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
