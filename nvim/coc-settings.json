@@ -25,5 +25,9 @@
   "solargraph.hover": true,
   "solargraph.rename": true,
 
-  "coc.preferences.formatOnSaveFiletypes": ["ruby"]
+  "coc.preferences.formatOnSaveFiletypes": ["ruby"],
+
+  "snippets.extends": {
+    "vue": ["javascript", "typescript", "html", "css"]
+  }
 }
