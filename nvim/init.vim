@@ -319,6 +319,8 @@ let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
                   \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
                   \ 'node_modules$', '\.rar$']
 let NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "*",
