@@ -109,7 +109,7 @@ abbr -a -g rtp 'rails db:test:prepare'
 # Yarn
 abbr -a -g y 'yarn'
 abbr -a -g ya 'yarn add'
-abbr -a -g yad 'yarn add --dev'
+abbr -a -g yad 'yarn add -D'
 abbr -a -g yap 'yarn add --peer'
 abbr -a -g yb 'yarn build'
 abbr -a -g yba 'yarn build --analyze'
