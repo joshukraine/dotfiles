@@ -3,6 +3,7 @@ set fish_greeting ''
 # PATH
 set PATH '/usr/local/sbin' $PATH
 set PATH '/usr/local/bin' $PATH
+set PATH "$HOME/.cargo/bin" $PATH
 set PATH "$HOME/bin" $PATH
 
 # Environment variables - https://fishshell.com/docs/current/commands.html#set
