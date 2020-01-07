@@ -5,10 +5,7 @@
   "diagnostic.hintSign": "ﯦ",
 
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": [
-    "javascript",
-    "vue"
-  ],
+  "eslint.filetypes": ["vue"],
 
   "javascript.suggestionActions.enabled": false,
 
