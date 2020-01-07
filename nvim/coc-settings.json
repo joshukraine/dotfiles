@@ -7,8 +7,6 @@
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["vue"],
 
-  "javascript.suggestionActions.enabled": false,
-
   "vetur.validation.style": false,
 
   "css.validate": false,
