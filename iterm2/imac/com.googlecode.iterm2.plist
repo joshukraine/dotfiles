@@ -12,6 +12,8 @@
 	<false/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
+	<key>ApplePressAndHoldEnabled</key>
+	<false/>
 	<key>AppleScrollAnimationEnabled</key>
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
@@ -702,13 +704,13 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>78 83 224 275 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>3640 966 400 129 2560 0 2560 1417 </string>
+	<string>785 696 400 129 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>3530 768 620 392 2560 0 2560 1417 </string>
+	<string>3530 786 620 392 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>3604 798 928 394 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2883 54 1510 1342 2560 0 2560 1417 </string>
+	<string>2818 204 1410 952 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3375,6 +3377,8 @@
 		<string>3.3.8beta1</string>
 		<string>3.3.8beta2</string>
 		<string>3.3.8beta3</string>
+		<string>3.3.8beta4</string>
+		<string>3.3.8beta5</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
@@ -3393,7 +3397,7 @@
 		<key>screenFrame</key>
 		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{3195, 1265}</string>
+		<string>{3150, 784}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -3402,7 +3406,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>3314C653-8399-4C62-B896-6A72133DE721</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>258</integer>
+	<integer>319</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4219,7 +4223,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-23T07:29:49Z</date>
+	<date>2020-01-23T15:20:48Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4285,7 +4289,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.8beta3</string>
+	<string>3.3.8beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
