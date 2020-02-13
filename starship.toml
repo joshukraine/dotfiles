@@ -19,15 +19,19 @@ behind.style = "cyan"
 behind.value = ""
 conflicted.style = "yellow"
 deleted.style = "black"
-diverged.style = "purple"
-diverged.value = ""
+diverged.value = ""
 modified.style = "red"
 modified.value = "*"
+modified_count.enabled = true
+modified_count.style = "red"
 renamed.style = "purple"
 staged.style = "green"
 staged.value = "+"
 stashed.style = "yellow"
+stashed_count.enabled = true
+stashed_count.style = "yellow"
 untracked.style = "cyan"
+show_sync_count = true
 
 [git_commit]
 disabled = false
