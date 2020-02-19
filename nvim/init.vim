@@ -267,7 +267,9 @@ Plug 'kana/vim-textobj-user'            " Create your own text objects          
 Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting ruby blocks        | https://github.com/nelstrom/vim-textobj-rubyblock
 
 " Searching and Navigation
-Plug 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
+Plug 'Shougo/denite.nvim',
+      \ { 'do': ':UpdateRemotePlugins'
+      \ }                               " Asynchronous unite all interfaces for Neovim/Vim8     | https://github.com/Shougo/denite.nvim
 Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim                        | https://github.com/scrooloose/nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status               | https://github.com/Xuyuanp/nerdtree-git-plugin
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
@@ -399,22 +401,6 @@ nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'p
 " nnoremap <leader>cr :VtrClearRunner<cr>
 " nnoremap <leader>fc :VtrFlushCommand<cr>
 " nnoremap <leader>sf :VtrSendFile<cr>
-
-" CtrlP
-map <leader>t :CtrlP<CR>
-map <leader>y :CtrlPBuffer<CR>
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_height = 15
-
-" CtrlP -> override <C-o> to provide options for how to open files
-let g:ctrlp_arg_map = 1
-
-" CtrlP -> files matched are ignored when expanding wildcards
-set wildignore+=*/.git/*,*.tmp/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*/tmp,*/dist,*/.nuxt
-
-" CtrlP -> directories to ignore when fuzzy finding
-let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 
 " Custom rails.vim commands
 " command! Rroutes :e config/routes.rb
