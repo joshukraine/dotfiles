@@ -602,6 +602,10 @@ let g:lightline.active = {
       \  'right': [['percent', 'lineinfo', 'obsession'], ['fileformat', 'fileencoding', 'filetype', 'filesize'], ['tags']]
       \ }
 let g:lightline.inactive = g:lightline.active
+let g:lightline.tabline = {
+      \  'left': [['tabs']],
+      \  'right': []
+      \ }
 
 colorscheme solarized
 let g:solarized_diffmode="high"
