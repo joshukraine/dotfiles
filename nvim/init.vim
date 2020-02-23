@@ -403,21 +403,9 @@ nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'p
 " nnoremap <leader>fc :VtrFlushCommand<cr>
 " nnoremap <leader>sf :VtrSendFile<cr>
 
-" CtrlP
-map <leader>t :CtrlP<CR>
-map <leader>y :CtrlPBuffer<CR>
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_height = 15
-
-" CtrlP -> override <C-o> to provide options for how to open files
-let g:ctrlp_arg_map = 1
-
-" CtrlP -> files matched are ignored when expanding wildcards
-set wildignore+=*/.git/*,*.tmp/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*/tmp,*/dist,*/.nuxt
-
-" CtrlP -> directories to ignore when fuzzy finding
-let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
+" FZF
+map <leader>t :Files<CR>
+map <leader>b :Buffers<CR>
 
 " Custom rails.vim commands
 " command! Rroutes :e config/routes.rb
