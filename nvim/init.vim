@@ -83,7 +83,8 @@ set lazyredraw
 set showmatch
 
 " Display the mode you're in.
-set showmode
+" set showmode
+set noshowmode " Or not...
 
 " Complete files like a shell.
 set wildmode=list:longest
@@ -274,6 +275,7 @@ Plug 'brooth/far.vim'                   " Find And Replace Vim plugin           
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
 Plug 'ryanoasis/vim-devicons'           " Adds file type icons to Vim                           | https://github.com/ryanoasis/vim-devicons
+Plug 'itchyny/lightline.vim'            " Light/configurable statusline/tabline plugin for Vim  | https://github.com/itchyny/lightline.vim
 
 " Colors and Syntax Highlighting
 Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -567,6 +569,44 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Appearance {{{
 set background=dark
+
+function! LightlineObsession()
+  return '%{ObsessionStatus("⚡️ ", "🚫 ")}'
+endfunction
+
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+let g:lightline = {
+      \   'colorscheme': 'solarized',
+      \   'component': { 'lineinfo': '⭡ %3l:%-2v', 'close': "\uf00d", },
+      \   'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \   'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+      \ }
+let g:lightline.component_function = {
+      \  'readonly': 'LightlineReadonly',
+      \  'gitbranch': 'FugitiveHead',
+      \  'bufferinfo': 'lightline#buffer#bufferinfo'
+      \}
+let g:lightline.component_expand = {
+      \  'buffers': 'lightline#bufferline#buffers',
+      \  'obsession': 'LightlineObsession',
+      \ }
+let g:lightline.component_type = {
+      \  'paste': 'warning',
+      \  'buffers': 'tabsel',
+      \ }
+let g:lightline.active = {
+      \  'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
+      \  'right': [['percent', 'lineinfo', 'obsession'], ['fileformat', 'fileencoding', 'filetype', 'filesize'], ['tags']]
+      \ }
+let g:lightline.inactive = g:lightline.active
+let g:lightline.tabline = {
+      \  'left': [['tabs']],
+      \  'right': []
+      \ }
+
 colorscheme solarized
 let g:solarized_diffmode="high"
 let g:solarized_termtrans = 1 " Use terminal background
@@ -580,40 +620,6 @@ highlight CocErrorSign ctermfg=160 ctermbg=0
 highlight CocWarningSign ctermfg=178 ctermbg=0
 highlight CocInfoSign ctermfg=33 ctermbg=0
 highlight CocHintSign ctermfg=226 ctermbg=0
-
-highlight TabLine     ctermfg=11 ctermbg=0 cterm=reverse
-highlight TabLineFill ctermfg=11 ctermbg=0 cterm=reverse
-highlight TabLineSel  ctermfg=15 ctermbg=4 cterm=NONE
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
-" Statusline appearance
-set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
-set statusline+=%#PmenuSel#%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline+=%<
-set statusline+=\ %#StatusLine#
-set statusline+=\ %f
-set statusline+=%m
-set statusline+=\ %#CursorLine#
-set statusline+=%=
-set statusline+=\ %y
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=\ %#StatusLine#
-set statusline+=\ %P
-set statusline+=\ %l:%c
-set statusline+=\ %{ObsessionStatus('●','','■')}
-set statusline+=\ %h
-set statusline+=%r
 " }}}
 
 " Local {{{
