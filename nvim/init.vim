@@ -83,7 +83,8 @@ set lazyredraw
 set showmatch
 
 " Display the mode you're in.
-set showmode
+" set showmode
+set noshowmode " Or not...
 
 " Complete files like a shell.
 set wildmode=list:longest
