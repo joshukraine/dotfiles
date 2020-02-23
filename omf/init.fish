@@ -17,6 +17,7 @@ set -xg XDG_CONFIG_HOME "$HOME/.config"
 set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg TERM 'screen-256color'
+set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden'
 
 . $OMF_CONFIG/abbreviations.fish
 
