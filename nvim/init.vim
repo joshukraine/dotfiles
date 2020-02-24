@@ -404,8 +404,9 @@ nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'p
 " nnoremap <leader>sf :VtrSendFile<cr>
 
 " FZF
-map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
+map <leader>t :Files<CR>
+map <leader>y :Rg<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
