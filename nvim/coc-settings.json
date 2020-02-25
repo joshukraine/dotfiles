@@ -4,6 +4,10 @@
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "ﯦ",
 
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
