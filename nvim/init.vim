@@ -569,6 +569,10 @@ function! LightlineObsession()
   return '%{ObsessionStatus("⚡️ ", "🚫 ")}'
 endfunction
 
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
 function! LightlineReadonly()
   return &readonly ? '' : ''
 endfunction
@@ -582,7 +586,9 @@ let g:lightline = {
 let g:lightline.component_function = {
       \  'readonly': 'LightlineReadonly',
       \  'gitbranch': 'FugitiveHead',
-      \  'bufferinfo': 'lightline#buffer#bufferinfo'
+      \  'bufferinfo': 'lightline#buffer#bufferinfo',
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
       \}
 let g:lightline.component_expand = {
       \  'buffers': 'lightline#bufferline#buffers',
@@ -593,7 +599,7 @@ let g:lightline.component_type = {
       \  'buffers': 'tabsel',
       \ }
 let g:lightline.active = {
-      \  'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
+      \  'left': [['mode', 'paste'], ['gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified']],
       \  'right': [['percent', 'lineinfo', 'obsession'], ['fileformat', 'fileencoding', 'filetype', 'filesize'], ['tags']]
       \ }
 let g:lightline.inactive = g:lightline.active
