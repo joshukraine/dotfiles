@@ -5,7 +5,14 @@
   "diagnostic.hintSign": "ﯦ",
 
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["vue"],
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact",
+    "vue"
+  ],
 
   "vetur.validation.style": false,
 
@@ -20,7 +27,15 @@
   "solargraph.hover": true,
   "solargraph.rename": true,
 
-  "coc.preferences.formatOnSaveFiletypes": ["ruby"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "json",
+    "ruby",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact"
+  ],
 
   "snippets.extends": {
     "vue": ["javascript", "typescript", "html", "css"]
