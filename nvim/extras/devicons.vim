@@ -24,6 +24,8 @@ let s:sass  = ''
 let s:svg   = ''
 let s:vim   = ''
 let s:vue   = '﵂'
+let s:jsx   = ''
+let s:tsx   = ''
 
 " Filetypes
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols         = {} " needed
@@ -39,6 +41,8 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue']  = s:vue
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['svg']  = s:svg
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['fish'] = s:fish
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rb']   = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx']   = s:jsx
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx']   = s:tsx
 
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols                   = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitignore.*']    = s:git
@@ -78,6 +82,7 @@ autocmd filetype nerdtree highlight fish_icon ctermbg=none ctermfg=97 guifg=#875
 autocmd filetype nerdtree highlight license_icon ctermbg=none ctermfg=195 guifg=#d7ffff
 autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight svg_icon ctermbg=none ctermfg=205 guifg=#ff5faf
+autocmd filetype nerdtree highlight jsx_icon ctermbg=none ctermfg=45 guifg=#00d7ff
 
 autocmd filetype nerdtree highlight git_add_icon ctermbg=none ctermfg=2 guifg=#859900
 autocmd filetype nerdtree highlight git_mod_icon ctermbg=none ctermfg=124 guifg=#af0000
@@ -103,6 +108,7 @@ autocmd filetype nerdtree syn match fish_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match license_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match favicon_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match svg_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match jsx_icon ## containedin=NERDTreeFile
 
 autocmd filetype nerdtree syn match git_add_icon #✚# containedin=NERDTreeFile
 autocmd filetype nerdtree syn match git_mod_icon #✹# containedin=NERDTreeFile
