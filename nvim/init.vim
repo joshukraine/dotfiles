@@ -454,6 +454,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-marketplace',
+  \ 'coc-prettier',
   \ 'coc-snippets',
   \ 'coc-solargraph',
   \ 'coc-stylelintplus',
@@ -537,6 +538,9 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Using CocList
 " Show all diagnostics
