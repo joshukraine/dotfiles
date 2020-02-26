@@ -565,8 +565,26 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Appearance {{{
 set background=dark
 
+function! LightlineRelativepath()
+  let relativepath = expand('%:f') !=# '' ? expand('%:f') : '[No Name]'
+  let modified = &modified ? ' +' : ''
+  return relativepath . modified
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 95 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 95 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 95 ? &fileencoding : ''
+endfunction
+
 function! LightlineObsession()
-  return '%{ObsessionStatus("⚡️ ", "🚫 ")}'
+  return '%{ObsessionStatus("●", "", "■")}'
 endfunction
 
 function! CocCurrentFunction()
@@ -578,35 +596,37 @@ function! LightlineReadonly()
 endfunction
 
 let g:lightline = {
-      \   'colorscheme': 'solarized',
-      \   'component': { 'lineinfo': '⭡ %3l:%-2v', 'close': "\uf00d", },
-      \   'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \   'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
-      \ }
+    \   'colorscheme': 'solarized',
+    \   'component': { 'lineinfo': '⭡ %3l:%-2v' },
+    \ }
+
 let g:lightline.component_function = {
-      \  'readonly': 'LightlineReadonly',
-      \  'gitbranch': 'FugitiveHead',
-      \  'bufferinfo': 'lightline#buffer#bufferinfo',
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \}
+    \  'relativepath': 'LightlineRelativepath',
+    \  'fileformat': 'LightlineFileformat',
+    \  'fileencoding': 'LightlineFileencoding',
+    \  'readonly': 'LightlineReadonly',
+    \  'cocstatus': 'coc#status',
+    \  'currentfunction': 'CocCurrentFunction'
+    \ }
+
 let g:lightline.component_expand = {
-      \  'buffers': 'lightline#bufferline#buffers',
-      \  'obsession': 'LightlineObsession',
-      \ }
-let g:lightline.component_type = {
-      \  'paste': 'warning',
-      \  'buffers': 'tabsel',
-      \ }
+    \  'obsession': 'LightlineObsession',
+    \ }
+
 let g:lightline.active = {
-      \  'left': [['mode', 'paste'], ['gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified']],
-      \  'right': [['percent', 'lineinfo', 'obsession'], ['fileformat', 'fileencoding', 'filetype', 'filesize'], ['tags']]
-      \ }
-let g:lightline.inactive = g:lightline.active
+    \  'left': [ ['mode', 'paste'], ['relativepath', 'cocstatus', 'currentfunction', 'readonly'] ],
+    \  'right': [ ['lineinfo'], ['percent'], ['filetype', 'fileencoding', 'fileformat', 'obsession'] ]
+    \ }
+
+let g:lightline.inactive = {
+    \ 'left': [ [ 'relativepath'] ],
+    \ 'right': [ [ 'lineinfo' ] ],
+    \ }
+
 let g:lightline.tabline = {
-      \  'left': [['tabs']],
-      \  'right': []
-      \ }
+    \  'left': [ ['tabs'] ],
+    \  'right': []
+    \ }
 
 colorscheme solarized
 let g:solarized_diffmode="high"
