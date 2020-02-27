@@ -253,7 +253,6 @@ Plug 'diepm/vim-rest-console'           " A REST console for Vim.               
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
-Plug 'webdevel/tabulous'                " Vim plugin for setting the tabline                    | https://github.com/webdevel/tabulous
 Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quotes in pair     | https://github.com/jiangmiao/auto-pairs
 
 " Code Completion
@@ -437,11 +436,6 @@ let g:DVB_TrimWS = 1
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
-
-" Tabulous
-let tabulousLabelModifiedStr = '[+] '
-let tabulousCloseStr = ''
-let tabulousLabelNameOptions = ':t'
 
 " Vim REST Console (VRC)
 let g:vrc_curl_opts = {
