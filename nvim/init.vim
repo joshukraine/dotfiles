@@ -253,7 +253,6 @@ Plug 'diepm/vim-rest-console'           " A REST console for Vim.               
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
-Plug 'webdevel/tabulous'                " Vim plugin for setting the tabline                    | https://github.com/webdevel/tabulous
 Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quotes in pair     | https://github.com/jiangmiao/auto-pairs
 
 " Code Completion
@@ -438,11 +437,6 @@ let g:DVB_TrimWS = 1
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" Tabulous
-let tabulousLabelModifiedStr = '[+] '
-let tabulousCloseStr = ''
-let tabulousLabelNameOptions = ':t'
-
 " Vim REST Console (VRC)
 let g:vrc_curl_opts = {
   \ '-L': '',
@@ -565,48 +559,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Appearance {{{
 set background=dark
 
-function! LightlineObsession()
-  return '%{ObsessionStatus("⚡️ ", "🚫 ")}'
-endfunction
-
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
-
-function! LightlineReadonly()
-  return &readonly ? '' : ''
-endfunction
-
-let g:lightline = {
-      \   'colorscheme': 'solarized',
-      \   'component': { 'lineinfo': '⭡ %3l:%-2v', 'close': "\uf00d", },
-      \   'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \   'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
-      \ }
-let g:lightline.component_function = {
-      \  'readonly': 'LightlineReadonly',
-      \  'gitbranch': 'FugitiveHead',
-      \  'bufferinfo': 'lightline#buffer#bufferinfo',
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \}
-let g:lightline.component_expand = {
-      \  'buffers': 'lightline#bufferline#buffers',
-      \  'obsession': 'LightlineObsession',
-      \ }
-let g:lightline.component_type = {
-      \  'paste': 'warning',
-      \  'buffers': 'tabsel',
-      \ }
-let g:lightline.active = {
-      \  'left': [['mode', 'paste'], ['gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified']],
-      \  'right': [['percent', 'lineinfo', 'obsession'], ['fileformat', 'fileencoding', 'filetype', 'filesize'], ['tags']]
-      \ }
-let g:lightline.inactive = g:lightline.active
-let g:lightline.tabline = {
-      \  'left': [['tabs']],
-      \  'right': []
-      \ }
+exe 'source' stdpath('config') . '/lightline.vim'
 
 colorscheme solarized
 let g:solarized_diffmode="high"
