@@ -8,6 +8,10 @@
     "javascript": "javascriptreact"
   },
 
+  "emmet.excludeLanguages": [
+    "haml"
+  ],
+
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
