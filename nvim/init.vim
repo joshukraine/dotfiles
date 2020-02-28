@@ -256,10 +256,10 @@ Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quo
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
-      \ {'branch': 'release'}             " Intellisense engine for vim8 & neovim            | https://github.com/neoclide/coc.nvim
+      \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 " Plug 'honza/vim-snippets'                 " Snippets files for various programming languages | https://github.com/honza/vim-snippets
-Plug 'sdras/vue-vscode-snippets'          " Vue VSCode Snippets                              | https://github.com/sdras/vue-vscode-snippets
-Plug 'burkeholland/simple-react-snippets' " React VSCode Snippets                            | https://github.com/burkeholland/simple-react-snippets
+Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
+Plug 'dsznajder/vscode-es7-javascript-react-snippets' " Extension for Javascript/React snippets | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
