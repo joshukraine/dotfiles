@@ -260,6 +260,7 @@ Plug 'neoclide/coc.nvim',
 " Plug 'honza/vim-snippets'                 " Snippets files for various programming languages | https://github.com/honza/vim-snippets
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
 Plug 'dsznajder/vscode-es7-javascript-react-snippets' " Extension for Javascript/React snippets | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
+Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -435,6 +436,8 @@ vmap  <expr>  D        DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
+let g:user_emmet_leader_key=','
+
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
@@ -450,7 +453,6 @@ let g:vrc_curl_opts = {
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
   \ 'coc-css',
-  \ 'coc-emmet',
   \ 'coc-eslint',
   \ 'coc-html',
   \ 'coc-json',
