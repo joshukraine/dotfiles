@@ -14,7 +14,11 @@
     "vue"
   ],
 
-  "vetur.validation.style": false,
+  "prettier.disableLanguages": ["vue"],
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "all",
 
   "css.validate": false,
 
@@ -39,5 +43,7 @@
 
   "snippets.extends": {
     "vue": ["javascript", "typescript", "html", "css"]
-  }
+  },
+
+  "vetur.validation.style": false
 }
