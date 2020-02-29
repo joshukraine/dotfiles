@@ -22,8 +22,6 @@
 
   "css.validate": false,
 
-  "stylelintplus.autoFixOnSave": true,
-
   "solargraph.autoformat": true,
   "solargraph.completion": true,
   "solargraph.diagnostics": true,
@@ -32,6 +30,7 @@
   "solargraph.rename": true,
 
   "coc.preferences.formatOnSaveFiletypes": [
+    "css",
     "javascript",
     "javascriptreact",
     "json",
