@@ -571,7 +571,7 @@ set background=dark
 
 exe 'source' stdpath('config') . '/lightline.vim'
 
-colorscheme solarized
+colorscheme solarized " https://github.com/altercation/vim-colors-solarized#the-values
 let g:solarized_diffmode="high"
 let g:solarized_termtrans = 1 " Use terminal background
 " colorscheme material
