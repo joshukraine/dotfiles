@@ -453,6 +453,7 @@ let g:vrc_curl_opts = {
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
   \ 'coc-css',
+  \ 'coc-emmet',
   \ 'coc-eslint',
   \ 'coc-html',
   \ 'coc-json',
