@@ -79,6 +79,10 @@ autocmd filetype nerdtree highlight license_icon ctermbg=none ctermfg=195 guifg=
 autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight svg_icon ctermbg=none ctermfg=205 guifg=#ff5faf
 
+autocmd filetype nerdtree highlight git_add_icon ctermbg=none ctermfg=2 guifg=#859900
+autocmd filetype nerdtree highlight git_mod_icon ctermbg=none ctermfg=124 guifg=#af0000
+autocmd filetype nerdtree highlight git_untracked_icon ctermbg=none ctermfg=37 guifg=#00afaf
+
 autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFile,html
 autocmd filetype nerdtree syn match haml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match git_icon ## containedin=NERDTreeFile
@@ -99,6 +103,10 @@ autocmd filetype nerdtree syn match fish_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match license_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match favicon_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match svg_icon ## containedin=NERDTreeFile
+
+autocmd filetype nerdtree syn match git_add_icon #✚# containedin=NERDTreeFile
+autocmd filetype nerdtree syn match git_mod_icon #✹# containedin=NERDTreeFile
+autocmd filetype nerdtree syn match git_untracked_icon ## containedin=NERDTreeFile
 
 " The following code provides an alternative solution to coloring icons. It
 " colors not only the icons but also the entire filename. It should be used as a
