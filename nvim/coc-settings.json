@@ -39,6 +39,7 @@
 
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "html",
     "javascript",
     "javascriptreact",
     "json",
