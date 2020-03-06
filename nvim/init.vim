@@ -198,7 +198,6 @@ map <leader>q :q<CR>
 map <leader>w :w<CR>
 map <leader>x :x<CR>
 map <leader>ra :%s/
-map <leader>p :set paste<CR>""p:set nopaste<CR> " Fix indentation on paste
 map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
@@ -257,9 +256,10 @@ Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quo
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
-      \ {'branch': 'release'}           " Intellisense engine for vim8 & neovim                 | https://github.com/neoclide/coc.nvim
-" Plug 'honza/vim-snippets'               " Snippets files for various programming languages      | https://github.com/honza/vim-snippets
-Plug 'sdras/vue-vscode-snippets'        " Vue VSCode Snippets                                   | https://github.com/sdras/vue-vscode-snippets
+      \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
+Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
+Plug 'dsznajder/vscode-es7-javascript-react-snippets' " Extension for Javascript/React snippets | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
+Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
@@ -285,6 +285,7 @@ Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)  
 Plug 'pangloss/vim-javascript',
       \ { 'for': ['javascript', 'vue']
       \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
+Plug 'maxmellon/vim-jsx-pretty'         " JSX and TSX syntax pretty highlighting for vim.       | https://github.com/MaxMEllon/vim-jsx-pretty
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
 Plug 'digitaltoad/vim-pug'              " Vim syntax highlighting for Pug templates             | https://github.com/digitaltoad/vim-pug
@@ -434,6 +435,8 @@ vmap  <expr>  D        DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
+let g:user_emmet_leader_key=','
+
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
@@ -449,10 +452,12 @@ let g:vrc_curl_opts = {
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
   \ 'coc-css',
+  \ 'coc-emmet',
   \ 'coc-eslint',
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-marketplace',
+  \ 'coc-prettier',
   \ 'coc-snippets',
   \ 'coc-solargraph',
   \ 'coc-stylelintplus',
@@ -537,6 +542,11 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
+" Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+map <leader>p :Prettier<CR>
+
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -553,7 +563,7 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
 " Appearance {{{
@@ -561,7 +571,7 @@ set background=dark
 
 exe 'source' stdpath('config') . '/lightline.vim'
 
-colorscheme solarized
+colorscheme solarized " https://github.com/altercation/vim-colors-solarized#the-values
 let g:solarized_diffmode="high"
 let g:solarized_termtrans = 1 " Use terminal background
 " colorscheme material

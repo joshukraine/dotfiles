@@ -5,13 +5,30 @@
   "diagnostic.hintSign": "ﯦ",
 
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["vue"],
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact",
+    "vue"
+  ],
 
-  "vetur.validation.style": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+
+  "emmet.excludeLanguages": [
+    "haml"
+  ],
+
+  "prettier.disableLanguages": ["vue"],
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "all",
 
   "css.validate": false,
-
-  "stylelintplus.autoFixOnSave": true,
 
   "solargraph.autoformat": true,
   "solargraph.completion": true,
@@ -20,9 +37,21 @@
   "solargraph.hover": true,
   "solargraph.rename": true,
 
-  "coc.preferences.formatOnSaveFiletypes": ["ruby"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "ruby",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact"
+  ],
 
   "snippets.extends": {
     "vue": ["javascript", "typescript", "html", "css"]
-  }
+  },
+
+  "vetur.validation.style": false
 }
