@@ -55,6 +55,10 @@ abbr -a -g gs 'git status'
 abbr -a -g fd 'find . -type d -name'
 abbr -a -g ff 'find . -type f -name'
 
+# macOS Finder
+abbr -a -g defr 'defaults read'
+abbr -a -g defw 'defaults write'
+
 # Misc
 abbr -a -g ra 'ranger'
 abbr -a -g ch 'cht.sh'
