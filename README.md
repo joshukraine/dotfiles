@@ -2,11 +2,11 @@
 
 ![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Macs, currently running [macOS Mojave (10.14)][mojave]. They are geared primarily towards [Ruby][ruby]/[Rails][rails] and [JavaScript][javascript] web development using [Fish][fish] (with [Oh-My-Fish][oh-my-fish]), [Neovim][neovim], and [Tmux][tmux]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
+These are the dotfiles I use on my Mac computers, currently running [macOS Catalina (10.15)][catalina]. They are geared primarily towards web development with [Rails][rails], [React][react], and [Vue][vue]. I use a terminal-based development environment built on [Fish][fish], [Tmux][tmux], and [Neovim][neovim]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
 ## Mac Bootstrap Script
 
-This repo previously contained my entire provisioning solution for a new machine running a fresh install of macOS. I've now extracted the provisioning functionality into its own repository. Check it out:
+Need to provision a new Mac from scratch? My Mac Bootstrap script installs and configures the software, dotfiles, and general preferences I use for web development.
 
 &#9657; **Provision a new Mac with [Mac Bootstrap][mac-bootstrap].**
 
@@ -147,6 +147,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
+[catalina]: https://www.apple.com/macos/catalina/
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
@@ -155,16 +156,17 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
-[mojave]: https://www.apple.com/macos/mojave/
 [neovim]: https://neovim.io/
 [nodejs]: https://nodejs.org/
 [oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [rails]: https://rubyonrails.org/
+[react]: https://reactjs.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/c_scale,f_auto,q_auto:best,w_1500/v1575408538/screenshots/dotfiles-dec-2019_bbfbfr.png
+[starship]: https://starship.rs/
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [vim]: http://www.vim.org/
+[vue]: https://vuejs.org/
 [zsh]: https://www.zsh.org/
-[starship]: https://starship.rs/
