@@ -34,7 +34,7 @@ untracked.style = "cyan"
 show_sync_count = true
 
 [git_commit]
-disabled = false
+only_detached = false
 style = "bold black"
 prefix = ""
 suffix = " "
