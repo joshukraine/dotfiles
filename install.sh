@@ -33,6 +33,7 @@ home_files=(
 "svgo.yml"
 "tmux.conf"
 "tool-versions"
+"zshrc"
 )
 
 config_dirs=(
