@@ -78,7 +78,7 @@ abbr -a -g ucl 'fish_update_completions'
 # Homebrew
 abbr -a -g bc 'brew cleanup'
 abbr -a -g bd 'brew doctor'
-abbr -a -g bg 'brew upgrade --all'
+abbr -a -g bg 'brew upgrade'
 abbr -a -g bo 'brew outdated'
 abbr -a -g brews 'brew list -1'
 abbr -a -g bs 'brew services'
