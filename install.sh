@@ -111,9 +111,11 @@ done
 dotfiles_echo "-> Linking $DOTFILES_DIR/starship.toml to $CONFIG_DIR/starship.toml..."
 ln -nfs "$DOTFILES_DIR"/starship.toml "$CONFIG_DIR"/starship.toml
 
+dotfiles_echo "-> Installing vim-plug plugins..."
+nvim --headless +PlugInstall +qall
+
 dotfiles_echo "Dotfiles installation complete!"
 
 dotfiles_echo "Post-install recommendations:"
 dotfiles_echo "- Complete Brew Bundle installation with 'brew bundle install'"
-dotfiles_echo "- The first time you launch Neovim, plugins will be installed automatically."
 dotfiles_echo "- After launching Neovim, run :checkhealth and resolve any errors/warnings."
