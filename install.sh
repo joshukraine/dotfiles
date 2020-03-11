@@ -95,12 +95,12 @@ dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
 ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
 
 for item in "${config_dirs[@]}"; do
-  if [ -d "$CONFIG_DIR"/"$item" ]; then
-    dotfiles_echo "$item already present. Backing up..."
-    mv "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}"_backup
+  if [ ! -d "$CONFIG_DIR"/"$item" ]; then
+    dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/$item..."
+    ln -nfs "$DOTFILES_DIR"/"$item" "$CONFIG_DIR"/"$item"
+  else
+    dotfiles_echo "$item already present. Skipping..."
   fi
-  dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/$item..."
-  ln -nfs "$DOTFILES_DIR"/"$item" "$CONFIG_DIR"/"$item"
 done
 
 dotfiles_echo "-> Linking $DOTFILES_DIR/starship.toml to $CONFIG_DIR/starship.toml..."
