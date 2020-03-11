@@ -56,10 +56,11 @@ dotfiles_echo "Setting up your shell configs..."
 if [ "$(basename "$SHELL")" = "fish" ]; then
   dotfiles_echo "Fish shell detected"
   if [ -d "$CONFIG_DIR"/omf ]; then
-    mv "$CONFIG_DIR"/omf "$CONFIG_DIR"/omf_backup
+    dotfiles_echo "$CONFIG_DIR/omf already present. Skipping..."
+  else
+    dotfiles_echo "-> Linking $DOTFILES_DIR/omf to $CONFIG_DIR/omf..."
+    ln -nfs "$DOTFILES_DIR"/omf "$CONFIG_DIR"/omf
   fi
-  dotfiles_echo "-> Linking $DOTFILES_DIR/omf to $CONFIG_DIR/omf..."
-  ln -nfs "$DOTFILES_DIR"/omf "$CONFIG_DIR"/omf
 
 elif [ "$(basename "$SHELL")" = "zsh" ]; then
   dotfiles_echo "Zsh detected"
