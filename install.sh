@@ -51,9 +51,15 @@ else
   CONFIG_DIR=$XDG_CONFIG_HOME
 fi
 
+if [ -z "$DEFAULT_SHELL" ]; then
+  SHELL_PREF=$DEFAULT_SHELL
+else
+  SHELL_PREF=$(basename "$SHELL")
+fi
+
 dotfiles_echo "Setting up your shell configs..."
 
-if [ "$(basename "$SHELL")" = "fish" ]; then
+if [ "$SHELL_PREF" == "fish" ]; then
   dotfiles_echo "Fish shell detected"
   if [ -d "$CONFIG_DIR"/omf ]; then
     dotfiles_echo "$CONFIG_DIR/omf already present. Skipping..."
@@ -62,7 +68,7 @@ if [ "$(basename "$SHELL")" = "fish" ]; then
     ln -nfs "$DOTFILES_DIR"/omf "$CONFIG_DIR"/omf
   fi
 
-elif [ "$(basename "$SHELL")" = "zsh" ]; then
+elif [ "$SHELL_PREF" == "zsh" ]; then
   dotfiles_echo "Zsh detected"
   if [ -f "$HOME"/.zshrc ]; then
     dotfiles_echo ".zshrc already present. Backing up..."
