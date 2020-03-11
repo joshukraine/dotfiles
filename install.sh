@@ -54,8 +54,8 @@ fi
 dotfiles_echo "Setting up your shell configs..."
 
 if [ "$(basename "$SHELL")" = "fish" ]; then
-  if [ -d "$CONFIG_DIR"/omf ]; then
   dotfiles_echo "Fish shell detected"
+  if [ -d "$CONFIG_DIR"/omf ]; then
     cp -r "$CONFIG_DIR"/omf "$CONFIG_DIR"/omf_backup
     rm -rf "$CONFIG_DIR"/omf
   fi
