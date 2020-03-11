@@ -56,8 +56,7 @@ dotfiles_echo "Setting up your shell configs..."
 if [ "$(basename "$SHELL")" = "fish" ]; then
   dotfiles_echo "Fish shell detected"
   if [ -d "$CONFIG_DIR"/omf ]; then
-    cp -r "$CONFIG_DIR"/omf "$CONFIG_DIR"/omf_backup
-    rm -rf "$CONFIG_DIR"/omf
+    mv "$CONFIG_DIR"/omf "$CONFIG_DIR"/omf_backup
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/omf to $CONFIG_DIR/omf..."
   ln -nfs "$DOTFILES_DIR"/omf "$CONFIG_DIR"/omf
@@ -66,8 +65,7 @@ elif [ "$(basename "$SHELL")" = "zsh" ]; then
   dotfiles_echo "Zsh detected"
   if [ -f "$HOME"/.zshrc ]; then
     dotfiles_echo ".zshrc already present. Backing up..."
-    cp "$HOME"/.zshrc "$HOME"/.zshrc_backup
-    rm -f "$HOME"/.zshrc
+    mv "$HOME"/.zshrc "$HOME"/.zshrc_backup
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/zshrc to $HOME/.zshrc..."
   ln -nfs "$DOTFILES_DIR"/zshrc "$HOME"/.zshrc
@@ -83,8 +81,7 @@ dotfiles_echo "Installing dotfiles..."
 for item in "${home_files[@]}"; do
   if [ -f "$HOME"/."$item" ]; then
     dotfiles_echo ".$item already present. Backing up..."
-    cp "$HOME"/."$item" "$HOME"/."${item}"_backup
-    rm -f "$HOME"/."$item"
+    mv "$HOME"/."$item" "$HOME"/."${item}"_backup
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $HOME/.$item..."
   ln -nfs "$DOTFILES_DIR"/"$item" "$HOME"/."$item"
@@ -92,8 +89,7 @@ done
 
 if [ -f "$HOME"/Brewfile ]; then
   dotfiles_echo "Brewfile already present. Backing up..."
-  cp "$HOME"/Brewfile "$HOME"/Brewfile_backup
-  rm -f "$HOME"/Brewfile
+  mv "$HOME"/Brewfile "$HOME"/Brewfile_backup
 fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
 ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
@@ -101,8 +97,7 @@ ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
 for item in "${config_dirs[@]}"; do
   if [ -d "$CONFIG_DIR"/"$item" ]; then
     dotfiles_echo "$item already present. Backing up..."
-    cp -r "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}"_backup
-    rm -rf "$CONFIG_DIR"/"$item"
+    mv "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}"_backup
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/$item..."
   ln -nfs "$DOTFILES_DIR"/"$item" "$CONFIG_DIR"/"$item"
