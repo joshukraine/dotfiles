@@ -17,6 +17,15 @@ set -e # Terminate script if anything exits with a non-zero value
 
 DOTFILES_DIR=$HOME/dotfiles
 
+if [ -z "$XDG_CONFIG_HOME" ]; then
+  if [ ! -d "$HOME/.config" ]; then
+    mkdir "$HOME/.config"
+  fi
+  CONFIG_DIR=$HOME/.config
+else
+  CONFIG_DIR=$XDG_CONFIG_HOME
+fi
+
 home_files=(
 "asdfrc"
 "default-gems"
