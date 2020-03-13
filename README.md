@@ -44,7 +44,7 @@ $ sh ~/dotfiles/install.sh
 
 ## Fish or Zsh?
 
-I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script below will set your config for whichever shell (Fish or Zsh) is currently set as your default. If you're not sure, run `echo $SHELL` in your terminal.
+I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script will link configs for both Fish and Zsh shells. After completing the installation, switch to the shell you want to use.
 
 ### Zsh Setup
 
