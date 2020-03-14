@@ -1,6 +1,5 @@
 # General UNIX
 abbr -a -g c clear
-abbr -a -g cp 'cp -iv'
 abbr -a -g df 'df -h'
 abbr -a -g du 'du -h'
 abbr -a -g dud 'du -d 1 -h'
