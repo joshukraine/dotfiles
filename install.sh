@@ -61,7 +61,7 @@ for item in "${home_files[@]}"; do
       rm -v "$HOME"/."$item"
     else
       dotfiles_echo "Backing up..."
-      mv -v "$HOME"/."$item" "$HOME"/."${item}_backup"
+      mv -v "$HOME"/."$item" "$HOME"/."${item}.bak"
     fi
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $HOME/.$item..."
@@ -75,7 +75,7 @@ if [ -e "$HOME"/Brewfile ]; then
     rm -v "$HOME"/Brewfile
   else
     dotfiles_echo "Backing up..."
-    mv -v "$HOME"/Brewfile "$HOME"/Brewfile_backup
+    mv -v "$HOME"/Brewfile "$HOME"/Brewfile.bak
   fi
 fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
@@ -89,7 +89,7 @@ for item in "${config_dirs[@]}"; do
       rm -v "$CONFIG_DIR"/"$item"
     else
       dotfiles_echo "Backing up..."
-      mv -v "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}_backup"
+      mv -v "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}_bak"
     fi
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/$item..."
@@ -103,7 +103,7 @@ if [ -e "$CONFIG_DIR"/starship.toml ]; then
     rm -v "$CONFIG_DIR"/starship.toml
   else
     dotfiles_echo "Backing up..."
-    mv -v "$CONFIG_DIR"/starship.toml "$CONFIG_DIR"/starship_backup.toml
+    mv -v "$CONFIG_DIR"/starship.toml "$CONFIG_DIR"/starship.toml.bak
   fi
 fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/starship.toml to $CONFIG_DIR/starship.toml..."
