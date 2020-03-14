@@ -13,6 +13,17 @@ dotfiles_echo() {
   printf "\\n[DOTFILES] $fmt\\n" "$@"
 }
 
+dotfiles_backup() {
+  if ! command -v gcp >/dev/null || ! command -v gdate >/dev/null; then
+    dotfiles_echo "GNU cp and date commands are required. Please install via Homebrew coreutils: brew install coreutils"
+    exit 1
+  elif [ -d "$1" ]; then
+    mv -v "$1" "${1}_bak_$(gdate +"%Y%m%d%3N")"
+  else
+    gcp -f --backup=numbered "$1" "$1"
+  fi
+}
+
 set -e # Terminate script if anything exits with a non-zero value
 
 DOTFILES_DIR=$HOME/dotfiles
@@ -61,7 +72,7 @@ for item in "${home_files[@]}"; do
       rm -v "$HOME"/."$item"
     else
       dotfiles_echo "Backing up..."
-      mv -v "$HOME"/."$item" "$HOME"/."${item}.bak"
+      dotfiles_backup "${HOME}/.${item}"
     fi
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $HOME/.$item..."
@@ -75,7 +86,7 @@ if [ -e "$HOME"/Brewfile ]; then
     rm -v "$HOME"/Brewfile
   else
     dotfiles_echo "Backing up..."
-    mv -v "$HOME"/Brewfile "$HOME"/Brewfile.bak
+    dotfiles_backup "${HOME}/Brewfile"
   fi
 fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
@@ -89,7 +100,7 @@ for item in "${config_dirs[@]}"; do
       rm -v "$CONFIG_DIR"/"$item"
     else
       dotfiles_echo "Backing up..."
-      mv -v "$CONFIG_DIR"/"$item" "$CONFIG_DIR"/"${item}_bak"
+      dotfiles_backup "${CONFIG_DIR}/${item}"
     fi
   fi
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/$item..."
@@ -103,7 +114,7 @@ if [ -e "$CONFIG_DIR"/starship.toml ]; then
     rm -v "$CONFIG_DIR"/starship.toml
   else
     dotfiles_echo "Backing up..."
-    mv -v "$CONFIG_DIR"/starship.toml "$CONFIG_DIR"/starship.toml.bak
+    dotfiles_backup "${CONFIG_DIR}/starship.toml"
   fi
 fi
 dotfiles_echo "-> Linking $DOTFILES_DIR/starship.toml to $CONFIG_DIR/starship.toml..."
