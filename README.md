@@ -17,7 +17,7 @@ NOTE: Mac Bootstrap automatically clones and installs this dotfiles repo.
 The dotfiles assume you are running macOS with the following software pre-installed:
 
 * [Git][git]
-* [Homebrew][homebrew]
+* [Homebrew][homebrew] (including [coreutils][coreutils])
 * [Ruby][ruby]
 * [Node.js][nodejs]
 * [Fish][fish] or [Zsh][zsh]
@@ -149,6 +149,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
 [catalina]: https://www.apple.com/macos/catalina/
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
+[coreutils]: https://formulae.brew.sh/formula/coreutils
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
 [homebrew]: http://brew.sh
