@@ -60,11 +60,34 @@ I have used Zsh for years and really liked it. Recently I've switched to Fish, a
 1. Set it as your default shell: `$ chsh -s /usr/local/bin/fish`
 1. Install [Oh My Fish][oh-my-fish]
 
+## Machine-specific Configs
+
+I regularly use two Mac computers: a desktop and laptop. Most of my configs are identical between the two, but there are some some differences. I also occasionally install my dotfiles on other machines (family computer, wife's computer, your computer if I can get to it... 😈) 
+
+For this reason, I've introduced a `machines/` folder where I keep configs that are specific to a given computer. Machine-specific configs should be stored in sub-folders of `machines/` and named for the `hostname` of that machine. The overall structure looks like this:
+
+```
+machines/
+├── joshuas-imac
+│   ├── Brewfile -> ../../Brewfile
+│   ├── Brewfile.lock.json
+│   ├── com.googlecode.iterm2.plist
+│   └── [...]
+└── joshuas-mbp15
+    ├── Brewfile -> ../../Brewfile
+    ├── Brewfile.lock.json
+    ├── com.googlecode.iterm2.plist
+    └── [...]
+```
+
+My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `omf/functions/bb.fish`)
+
 ## Post-install Tasks
 
 After running `install.sh` there are still a couple of things that need to be done.
 
 * Set up iTerm2 or Terminal.app profile (see details below).
+* Add machine-specific configs as needed. (see Machine-specific Configs above)
 * Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
 * Complete [Brew Bundle][brew-bundle] with `brew bundle install`
 * After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
@@ -76,7 +99,7 @@ Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can
 1. Open iTerm2.
 1. Select iTerm2 > Preferences.
 1. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
-1. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
+1. Press "Browse" and point it to `~/dotfiles/machines/<hostname>/com.googlecode.iterm2.plist`.
 1. Restart iTerm2.
 
 ## Setting up Terminal.app
@@ -87,7 +110,7 @@ Getting set up after a fresh install is simple.
 1. Select Terminal > Preferences. (But really you'll just press &#8984;, right? So much faster.)
 1. Select the Profiles tab.
 1. Click the gear icon and select Import...
-1. Select `~/dotfiles/terminal/<desired-profile>.terminal` and click Open.
+1. Select `~/dotfiles/machines/<hostname>/solarized-dark.terminal` and click Open.
 1. Click the Default button to keep using this profile in new Terminal windows.
 
 ## A Note about Vim performance and Ruby files
