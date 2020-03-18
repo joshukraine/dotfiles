@@ -5,10 +5,10 @@
         "revision": "491180c6f8bbd2b1496ab25aee4889b7c3de8caf"
       },
       "homebrew/cask": {
-        "revision": "02270662f1d5101087187d550b334a1bc0f8d435"
+        "revision": "41c9cf805257ebe5faa9d8acc3b67cfd0ba1caf9"
       },
       "homebrew/cask-versions": {
-        "revision": "dcf2d688d9c4b947448ffdef8fdafbedcee57be2"
+        "revision": "bcf924296a8adc1938f080124c34cafaf139f311"
       },
       "homebrew/cask-drivers": {
         "revision": "ec134ae83bdc87ab9b332b49ecfab710b5cda089"
@@ -17,7 +17,7 @@
         "revision": "9cceb85a7a963ed393d70bedf008f50e543eef8d"
       },
       "homebrew/core": {
-        "revision": "8106c346994cbf4e205e9b1086520f364be46ac7"
+        "revision": "d7e7114767e205075e9d0faaac21868bce5e3b1f"
       },
       "homebrew/services": {
         "revision": "984f3a2528961b01a5481af6d79dfd6a7c903995"
@@ -1689,7 +1689,7 @@
         }
       },
       "postico": {
-        "version": "1.5.10",
+        "version": "1.5.12",
         "options": {
           "full_name": "postico"
         }
@@ -1773,7 +1773,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.10-75-gf527f03",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "8106c346994cbf4e205e9b1086520f364be46ac7",
+        "Homebrew/homebrew-core": "d7e7114767e205075e9d0faaac21868bce5e3b1f",
         "CLT": "11.3.1.0.1.1576735732",
         "Xcode": "11.3",
         "macOS": "10.15.3"
