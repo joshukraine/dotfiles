@@ -75,6 +75,7 @@ abbr -a -g ala 'asdf list-all'
 abbr -a -g ucl 'fish_update_completions'
 
 # Homebrew
+abbr -a -g bb 'brew bundle'
 abbr -a -g bc 'brew cleanup'
 abbr -a -g bd 'brew doctor'
 abbr -a -g bg 'brew upgrade'
