@@ -26,6 +26,8 @@ let s:vim   = ''
 let s:vue   = '﵂'
 let s:jsx   = ''
 let s:tsx   = ''
+let s:npm   = ''
+let s:info   = ''
 
 " Filetypes
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols         = {} " needed
@@ -44,19 +46,26 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rb']   = s:ruby
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx']   = s:jsx
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx']   = s:tsx
 
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols                   = {} " needed
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitignore.*']    = s:git
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitconfig.*']    = s:git
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitmodules']     = s:git
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitmessage']     = s:git
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Gemfile.*']      = s:ruby
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Rakefile']       = s:ruby
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Guardfile']      = s:ruby
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['vimrc$']         = s:vim
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.scss\.erb$'] = s:sass
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.js\.erb$']   = s:js
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.html\.erb$'] = s:haml
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gulpfile.js']    = s:gulp
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols                         = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitignore.*']          = s:git
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitconfig.*']          = s:git
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitmodules']           = s:git
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gitmessage']           = s:git
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Gemfile.*']            = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gemrc$']               = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['pryrc$']               = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Rakefile']             = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Brewfile']             = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Guardfile']            = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['vimrc$']               = s:vim
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['npmrc$']               = s:npm
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['default-npm-packages'] = s:npm
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['default-gems']         = s:ruby
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.scss\.erb$']       = s:sass
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.js\.erb$']         = s:js
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.html\.erb$']       = s:haml
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['gulpfile.js']          = s:gulp
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['README*']              = s:info
 
 " The following autocmd lines provide coloring for the icons themselves without
 " coloring the file names.
@@ -66,9 +75,11 @@ autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=166 guifg=#ff
 autocmd filetype nerdtree highlight haml_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight git_icon ctermbg=none ctermfg=166 guifg=#ffa500
 autocmd filetype nerdtree highlight ruby_icon ctermbg=none ctermfg=160 guifg=#d70000
+autocmd filetype nerdtree highlight npm_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight css_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight yml_icon ctermbg=none ctermfg=195 guifg=#d7ffff
 autocmd filetype nerdtree highlight md_icon ctermbg=none ctermfg=31 guifg=#0087af
+autocmd filetype nerdtree highlight info_icon ctermbg=none ctermfg=31 guifg=#0087af
 autocmd filetype nerdtree highlight js_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight ts_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight json_icon ctermbg=none ctermfg=2 guifg=#859900
@@ -92,9 +103,11 @@ autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFile,htm
 autocmd filetype nerdtree syn match haml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match git_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match ruby_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match npm_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match css_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match yml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match md_icon ## containedin=NERDTreeFile
+autocmd filetype nerdtree syn match info_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match js_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match ts_icon #ﯤ# containedin=NERDTreeFile
 autocmd filetype nerdtree syn match json_icon ## containedin=NERDTreeFile
