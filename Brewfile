@@ -91,6 +91,7 @@ brew "zsh"
 
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
+cask "1password"
 cask "alfred"
 cask "bartender"
 cask "brave-browser"
