@@ -816,6 +816,27 @@
           }
         }
       },
+      "mas": {
+        "version": "1.6.3",
+        "bottle": {
+          "cellar": ":any",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.catalina.bottle.tar.gz",
+              "sha256": "2069b8c1c1a64c2fb91cc1c25ab9c9890c61f2182224b9e0605a35a151bb85bd"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.mojave.bottle.tar.gz",
+              "sha256": "3dd5a50b551a37c164c31375cc8498ba870e29e50086bd5c4c294bc26708a6d2"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.high_sierra.bottle.tar.gz",
+              "sha256": "a0d1e45203448c08420c3eab2d40ef957fd22c8e40fbeb067bc7bffe4f08dfe2"
+            }
+          }
+        }
+      },
       "media-info": {
         "version": "19.09",
         "bottle": {
@@ -1529,27 +1550,6 @@
             }
           }
         }
-      },
-      "mas": {
-        "version": "1.6.3",
-        "bottle": {
-          "cellar": ":any",
-          "prefix": "/usr/local",
-          "files": {
-            "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.catalina.bottle.tar.gz",
-              "sha256": "2069b8c1c1a64c2fb91cc1c25ab9c9890c61f2182224b9e0605a35a151bb85bd"
-            },
-            "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.mojave.bottle.tar.gz",
-              "sha256": "3dd5a50b551a37c164c31375cc8498ba870e29e50086bd5c4c294bc26708a6d2"
-            },
-            "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.high_sierra.bottle.tar.gz",
-              "sha256": "a0d1e45203448c08420c3eab2d40ef957fd22c8e40fbeb067bc7bffe4f08dfe2"
-            }
-          }
-        }
       }
     },
     "cask": {
@@ -1685,6 +1685,18 @@
           "full_name": "microsoft-edge"
         }
       },
+      "microsoft-excel": {
+        "version": "16.35.20030802",
+        "options": {
+          "full_name": "microsoft-excel"
+        }
+      },
+      "microsoft-word": {
+        "version": "16.35.20030802",
+        "options": {
+          "full_name": "microsoft-word"
+        }
+      },
       "ngrok": {
         "version": "latest",
         "options": {
@@ -1780,21 +1792,17 @@
         "options": {
           "full_name": "whatsapp"
         }
-      },
-      "microsoft-word": {
-        "version": "16.35.20030802",
-        "options": {
-          "full_name": "microsoft-word"
-        }
-      },
-      "microsoft-excel": {
-        "version": "16.35.20030802",
-        "options": {
-          "full_name": "microsoft-excel"
-        }
       }
     },
     "mas": {
+      "Deliveries": {
+        "id": "924726344",
+        "version": "3.2.2"
+      },
+      "Evernote": {
+        "id": "406056744",
+        "version": "7.14"
+      },
       "Keynote": {
         "id": "409183694",
         "version": "9.2.1"
@@ -1831,19 +1839,11 @@
         "id": "1191449274",
         "version": "2.6.1"
       },
-      "e-Sword": null,
-      "Deliveries": {
-        "id": "924726344",
-        "version": "3.2.2"
-      },
-      "Evernote": {
-        "id": "406056744",
-        "version": "7.14"
-      },
       "WiFi Explorer": {
         "id": "494803304",
         "version": "2.6"
       },
+      "e-Sword": null,
       "iNet Network Scanner": {
         "id": "403304796",
         "version": "2.7"
