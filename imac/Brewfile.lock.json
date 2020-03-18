@@ -1718,12 +1718,6 @@
           "full_name": "slack"
         }
       },
-      "spark": {
-        "version": "latest",
-        "options": {
-          "full_name": "spark"
-        }
-      },
       "steam": {
         "version": "latest",
         "options": {
