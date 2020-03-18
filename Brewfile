@@ -67,7 +67,7 @@ brew "pgcli"
 brew "postgresql", restart_service: true
 brew "puma/puma/puma-dev"
 brew "python"
-brew "ranger", link: false
+brew "ranger"
 brew "readline"
 brew "ripgrep"
 brew "rlwrap"
