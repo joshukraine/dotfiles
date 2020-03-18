@@ -5,7 +5,7 @@
         "revision": "491180c6f8bbd2b1496ab25aee4889b7c3de8caf"
       },
       "homebrew/cask": {
-        "revision": "15975647a8db466bec5aefeae012bbd8e8777308"
+        "revision": "382dea8b613c05acc5e550ab5287c22b99e9ce84"
       },
       "homebrew/cask-versions": {
         "revision": "bcf924296a8adc1938f080124c34cafaf139f311"
@@ -1760,6 +1760,45 @@
           "full_name": "whatsapp"
         }
       }
+    },
+    "mas": {
+      "Keynote": {
+        "id": "409183694",
+        "version": "9.2.1"
+      },
+      "Magnet": {
+        "id": "441258766",
+        "version": "2.4.5"
+      },
+      "Marked 2": {
+        "id": "890031187",
+        "version": "2.5.39"
+      },
+      "Numbers": {
+        "id": "409203825",
+        "version": "6.2.1"
+      },
+      "OmniGraffle": {
+        "id": "1142578753",
+        "version": "7.13.1"
+      },
+      "Pages": {
+        "id": "409201541",
+        "version": "8.2.1"
+      },
+      "Pixelmator Pro": {
+        "id": "1289583905",
+        "version": "1.5.5"
+      },
+      "Spark": {
+        "id": "1176895641",
+        "version": "2.5.6"
+      },
+      "ToothFairy": {
+        "id": "1191449274",
+        "version": "2.6.1"
+      },
+      "e-Sword": null
     }
   },
   "system": {
