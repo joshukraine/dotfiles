@@ -1819,7 +1819,23 @@
         "id": "1191449274",
         "version": "2.6.1"
       },
-      "e-Sword": null
+      "e-Sword": null,
+      "Deliveries": {
+        "id": "924726344",
+        "version": "3.2.2"
+      },
+      "Evernote": {
+        "id": "406056744",
+        "version": "7.14"
+      },
+      "WiFi Explorer": {
+        "id": "494803304",
+        "version": "2.6"
+      },
+      "iNet Network Scanner": {
+        "id": "403304796",
+        "version": "2.7"
+      }
     }
   },
   "system": {
