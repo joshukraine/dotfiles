@@ -67,6 +67,7 @@ abbr -a -g color 'colortest -w -s'
 # Tmux
 abbr -a -g tl 'tmux ls'
 abbr -a -g tlw 'tmux list-windows'
+abbr -a -g mux 'tmuxinator'
 
 # asdf
 abbr -a -g ala 'asdf list-all'
