@@ -5,7 +5,7 @@
         "revision": "491180c6f8bbd2b1496ab25aee4889b7c3de8caf"
       },
       "homebrew/cask": {
-        "revision": "15975647a8db466bec5aefeae012bbd8e8777308"
+        "revision": "b6ac3795c1df9f97242481c0817b1165e3e6306a"
       },
       "homebrew/cask-versions": {
         "revision": "bcf924296a8adc1938f080124c34cafaf139f311"
@@ -30,7 +30,10 @@
       }
     },
     "brew": {
-      "openssl": null,
+      "openssl": {
+        "version": "1.0.2t",
+        "bottle": null
+      },
       "openssl@1.1": {
         "version": "1.1.1d",
         "bottle": {
@@ -930,21 +933,21 @@
         }
       },
       "neovim": {
-        "version": "HEAD-5a5c2f0",
+        "version": "HEAD-5f92093",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-5a5c2f0.catalina.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-5f92093.catalina.bottle.tar.gz",
               "sha256": "389ab254794ea04df8a106bf281c227c4fdee27c609d52951f32b9a0239031d6"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-5a5c2f0.mojave.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-5f92093.mojave.bottle.tar.gz",
               "sha256": "fb6cc38c45be4650a4a750a314cec27f6f7643dc7c22a1f5abae347e1b39b388"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-5a5c2f0.high_sierra.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-5f92093.high_sierra.bottle.tar.gz",
               "sha256": "b2f7450e005f4eb22bfaf650fe7741fa8629393a947b4dd48c9f91e7fc258113"
             }
           }
@@ -1539,13 +1542,13 @@
         }
       },
       "alfred": {
-        "version": "4.0.8_1135",
+        "version": "4.0.6_1124",
         "options": {
           "full_name": "alfred"
         }
       },
       "bartender": {
-        "version": "3.1.07",
+        "version": "3.0.47",
         "options": {
           "full_name": "bartender"
         }
@@ -1557,7 +1560,7 @@
         }
       },
       "carbon-copy-cloner": {
-        "version": "5.1.15.5925",
+        "version": "5.1.6.5566",
         "options": {
           "full_name": "carbon-copy-cloner"
         }
@@ -1575,13 +1578,13 @@
         }
       },
       "daisydisk": {
-        "version": "4.10",
+        "version": "4.6.5.1",
         "options": {
           "full_name": "daisydisk"
         }
       },
       "dash": {
-        "version": "5.1.3",
+        "version": "4.5.3",
         "options": {
           "full_name": "dash"
         }
@@ -1599,13 +1602,13 @@
         }
       },
       "fantastical": {
-        "version": "3.0.8",
+        "version": "2.5.5",
         "options": {
           "full_name": "fantastical"
         }
       },
       "firefox": {
-        "version": "74.0",
+        "version": "62.0.3",
         "options": {
           "full_name": "firefox"
         }
@@ -1629,31 +1632,31 @@
         }
       },
       "hazel": {
-        "version": "4.4.4",
+        "version": "4.3.2",
         "options": {
           "full_name": "hazel"
         }
       },
       "istat-menus": {
-        "version": "6.40",
+        "version": "6.20",
         "options": {
           "full_name": "istat-menus"
         }
       },
       "iterm2-beta": {
-        "version": "3.3.10beta2",
+        "version": "3.3.8beta1",
         "options": {
           "full_name": "iterm2-beta"
         }
       },
       "little-snitch": {
-        "version": "4.4.3",
+        "version": "4.2.4",
         "options": {
           "full_name": "little-snitch"
         }
       },
       "micro-snitch": {
-        "version": "1.3.1",
+        "version": "1.3",
         "options": {
           "full_name": "micro-snitch"
         }
@@ -1671,7 +1674,7 @@
         }
       },
       "opera": {
-        "version": "67.0.3575.79",
+        "version": "56.0.3051.52",
         "options": {
           "full_name": "opera"
         }
@@ -1689,7 +1692,7 @@
         }
       },
       "postman": {
-        "version": "7.20.1",
+        "version": "6.4.4",
         "options": {
           "full_name": "postman"
         }
@@ -1707,7 +1710,7 @@
         }
       },
       "skype": {
-        "version": "8.57.0.116",
+        "version": "8.32.0.44",
         "options": {
           "full_name": "skype"
         }
@@ -1725,7 +1728,7 @@
         }
       },
       "tableplus": {
-        "version": "3.1.2,296",
+        "version": "2.12,282",
         "options": {
           "full_name": "tableplus"
         }
@@ -1759,19 +1762,13 @@
         "options": {
           "full_name": "whatsapp"
         }
-      },
-      "spark": {
-        "version": "latest",
-        "options": {
-          "full_name": "spark"
-        }
       }
     }
   },
   "system": {
     "macos": {
       "catalina": {
-        "HOMEBREW_VERSION": "2.2.10",
+        "HOMEBREW_VERSION": "2.2.10-75-gf527f03",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "d7e7114767e205075e9d0faaac21868bce5e3b1f",
         "CLT": "11.3.1.0.1.1576735732",
