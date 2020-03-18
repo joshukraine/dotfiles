@@ -187,7 +187,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [rails]: https://rubyonrails.org/
 [react]: https://reactjs.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/c_scale,f_auto,q_auto:best,w_1500/v1575408538/screenshots/dotfiles-dec-2019_bbfbfr.png
+[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1584547844/screenshots/dotfiles-mar-2020_a5p5do.png
 [starship]: https://starship.rs/
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
