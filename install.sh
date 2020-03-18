@@ -79,19 +79,6 @@ for item in "${home_files[@]}"; do
   ln -nfs "$DOTFILES_DIR"/"$item" "$HOME"/."$item"
 done
 
-if [ -e "$HOME"/Brewfile ]; then
-  dotfiles_echo "Brewfile exists."
-  if [ -L "$HOME"/Brewfile ]; then
-    dotfiles_echo "Symbolic link detected. Removing..."
-    rm -v "$HOME"/Brewfile
-  else
-    dotfiles_echo "Backing up..."
-    dotfiles_backup "${HOME}/Brewfile"
-  fi
-fi
-dotfiles_echo "-> Linking $DOTFILES_DIR/Brewfile to $HOME/Brewfile..."
-ln -nfs "$DOTFILES_DIR"/Brewfile "$HOME"/Brewfile
-
 for item in "${config_dirs[@]}"; do
   if [ -d "$CONFIG_DIR"/"$item" ]; then
     dotfiles_echo "Directory ${item} exists."
