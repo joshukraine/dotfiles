@@ -53,6 +53,7 @@ brew "libtermkey"
 brew "libtool" # asdf dependency
 brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
+brew "mas"
 brew "media-info"
 brew "memcached"
 brew "mono"
@@ -129,3 +130,16 @@ cask "toggl"
 cask "viber"
 cask "vmware-fusion"
 cask "whatsapp"
+
+# rubocop:disable Style/NumericLiterals
+mas "Keynote", id: 409183694
+mas "Magnet", id: 441258766
+mas "Marked 2", id: 890031187
+mas "Numbers", id: 409203825
+mas "OmniGraffle", id: 1142578753
+mas "Pages", id: 409201541
+mas "Pixelmator Pro", id: 1289583905
+mas "Spark", id: 1176895641
+mas "ToothFairy", id: 1191449274
+mas "e-Sword", id: 968437868
+# rubocop:enable Style/NumericLiterals

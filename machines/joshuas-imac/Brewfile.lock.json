@@ -1529,6 +1529,27 @@
             }
           }
         }
+      },
+      "mas": {
+        "version": "1.6.3",
+        "bottle": {
+          "cellar": ":any",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.catalina.bottle.tar.gz",
+              "sha256": "2069b8c1c1a64c2fb91cc1c25ab9c9890c61f2182224b9e0605a35a151bb85bd"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.mojave.bottle.tar.gz",
+              "sha256": "3dd5a50b551a37c164c31375cc8498ba870e29e50086bd5c4c294bc26708a6d2"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/mas-1.6.3.high_sierra.bottle.tar.gz",
+              "sha256": "a0d1e45203448c08420c3eab2d40ef957fd22c8e40fbeb067bc7bffe4f08dfe2"
+            }
+          }
+        }
       }
     },
     "cask": {
@@ -1760,6 +1781,45 @@
           "full_name": "whatsapp"
         }
       }
+    },
+    "mas": {
+      "Keynote": {
+        "id": "409183694",
+        "version": "9.2.1"
+      },
+      "Magnet": {
+        "id": "441258766",
+        "version": "2.4.5"
+      },
+      "Marked 2": {
+        "id": "890031187",
+        "version": "2.5.39"
+      },
+      "Numbers": {
+        "id": "409203825",
+        "version": "6.2.1"
+      },
+      "OmniGraffle": {
+        "id": "1142578753",
+        "version": "7.13.1"
+      },
+      "Pages": {
+        "id": "409201541",
+        "version": "8.2.1"
+      },
+      "Pixelmator Pro": {
+        "id": "1289583905",
+        "version": "1.5.5"
+      },
+      "Spark": {
+        "id": "1176895641",
+        "version": "2.5.6"
+      },
+      "ToothFairy": {
+        "id": "1191449274",
+        "version": "2.6.1"
+      },
+      "e-Sword": null
     }
   },
   "system": {
