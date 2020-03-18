@@ -13,18 +13,19 @@ export RUBY_CONFIGURE_OPTS="--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export DOTFILES="$HOME/dotfiles"
 export TERM="screen-256color"
 
-. $HOME/dotfiles/zsh/oh-my-zsh
-. $HOME/dotfiles/zsh/opts
-. $HOME/dotfiles/zsh/aliases
-. $HOME/dotfiles/zsh/prompt
-. $HOME/dotfiles/zsh/tmux
-. $HOME/dotfiles/zsh/functions
-. $HOME/dotfiles/zsh/z.sh
-. $HOME/dotfiles/zsh/ranger.sh
+. $DOTFILES/zsh/oh-my-zsh
+. $DOTFILES/zsh/opts
+. $DOTFILES/zsh/aliases
+. $DOTFILES/zsh/prompt
+. $DOTFILES/zsh/tmux
+. $DOTFILES/zsh/functions
+. $DOTFILES/zsh/z.sh
+. $DOTFILES/zsh/ranger.sh
 
-cdpath=($HOME/code $HOME/dotfiles $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
+cdpath=($HOME/code $DOTFILES $HOME/Developer $HOME/Sites $HOME/Dropbox $HOME)
 
 HISTSIZE=1000000
 SAVEHIST=1000000

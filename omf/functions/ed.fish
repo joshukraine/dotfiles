@@ -1,3 +1,3 @@
 function ed
-    $EDITOR ~/dotfiles
+    $EDITOR $DOTFILES
 end

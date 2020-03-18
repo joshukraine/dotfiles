@@ -16,6 +16,7 @@ set -xg RUBY_CONFIGURE_OPTS '--with-opt-dir=/usr/local/opt/openssl:/usr/local/op
 set -xg XDG_CONFIG_HOME "$HOME/.config"
 set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
+set -xg DOTFILES "$HOME/dotfiles"
 set -xg TERM 'screen-256color'
 set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden'
 
