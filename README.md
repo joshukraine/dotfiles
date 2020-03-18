@@ -86,11 +86,12 @@ My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above 
 
 After running `install.sh` there are still a couple of things that need to be done.
 
-* Set up iTerm2 or Terminal.app profile (see details below).
 * Add machine-specific configs as needed. (see Machine-specific Configs above)
-* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
+* Set up iTerm2 or Terminal.app profile (see details below).
 * Complete [Brew Bundle][brew-bundle] with `brew bundle install`
+* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
 * After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
+* If using Fish, customize your setup by running the `fish_config` command.
 
 ## Setting up iTerm2
 
