@@ -1780,6 +1780,18 @@
         "options": {
           "full_name": "whatsapp"
         }
+      },
+      "microsoft-word": {
+        "version": "16.35.20030802",
+        "options": {
+          "full_name": "microsoft-word"
+        }
+      },
+      "microsoft-excel": {
+        "version": "16.35.20030802",
+        "options": {
+          "full_name": "microsoft-excel"
+        }
       }
     },
     "mas": {
