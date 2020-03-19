@@ -116,7 +116,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['node_modules$'] = s:nod
 " coloring the file names.
 " https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#how-did-you-get-color-matching-on-just-the-glyphicon-in-nerdtree
 
-autocmd filetype nerdtree highlight config_icon ctermbg=none ctermfg=136 guifg=#af8700
+autocmd filetype nerdtree highlight config_icon ctermbg=none ctermfg=250 guifg=#bcbcbc
 autocmd filetype nerdtree highlight css_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight fish_icon ctermbg=none ctermfg=97 guifg=#875faf
@@ -128,8 +128,8 @@ autocmd filetype nerdtree highlight info_icon ctermbg=none ctermfg=31 guifg=#008
 autocmd filetype nerdtree highlight js_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight json_icon ctermbg=none ctermfg=2 guifg=#859900
 autocmd filetype nerdtree highlight jsx_icon ctermbg=none ctermfg=45 guifg=#00d7ff
-autocmd filetype nerdtree highlight license_icon ctermbg=none ctermfg=195 guifg=#d7ffff
-autocmd filetype nerdtree highlight lock_icon ctermbg=none ctermfg=195 guifg=#d7ffff
+autocmd filetype nerdtree highlight license_icon ctermbg=none ctermfg=253 guifg=#dadada
+autocmd filetype nerdtree highlight lock_icon ctermbg=none ctermfg=253 guifg=#dadada
 autocmd filetype nerdtree highlight md_icon ctermbg=none ctermfg=31 guifg=#0087af
 autocmd filetype nerdtree highlight npm_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight procfile_icon ctermbg=none ctermfg=97 guifg=#875faf
@@ -138,11 +138,11 @@ autocmd filetype nerdtree highlight ruby_icon ctermbg=none ctermfg=160 guifg=#d7
 autocmd filetype nerdtree highlight scss_icon ctermbg=none ctermfg=205 guifg=#ff5faf
 autocmd filetype nerdtree highlight sh_icon ctermbg=none ctermfg=97 guifg=#875faf
 autocmd filetype nerdtree highlight svg_icon ctermbg=none ctermfg=205 guifg=#ff5faf
-autocmd filetype nerdtree highlight tags_icon ctermbg=none ctermfg=195 guifg=#d7ffff
+autocmd filetype nerdtree highlight tags_icon ctermbg=none ctermfg=253 guifg=#dadada
 autocmd filetype nerdtree highlight ts_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight vim_icon ctermbg=none ctermfg=28 guifg=#008700
 autocmd filetype nerdtree highlight vue_icon ctermbg=none ctermfg=29 guifg=#00875f
-autocmd filetype nerdtree highlight xml_icon ctermbg=none ctermfg=136 guifg=#af8700
+autocmd filetype nerdtree highlight xml_icon ctermbg=none ctermfg=253 guifg=#dadada
 
 autocmd filetype nerdtree highlight git_add_icon ctermbg=none ctermfg=2 guifg=#859900
 autocmd filetype nerdtree highlight git_mod_icon ctermbg=none ctermfg=124 guifg=#af0000
