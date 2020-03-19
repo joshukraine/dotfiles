@@ -94,6 +94,7 @@ brew "zsh"
 # https://github.com/caskroom/homebrew-cask
 cask "1password"
 cask "alfred"
+cask "balenaetcher"
 cask "bartender"
 cask "brave-browser"
 cask "carbon-copy-cloner"
