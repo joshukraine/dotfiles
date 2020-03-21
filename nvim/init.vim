@@ -258,7 +258,8 @@ Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quo
 Plug 'neoclide/coc.nvim',
       \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
-Plug 'dsznajder/vscode-es7-javascript-react-snippets' " Extension for Javascript/React snippets | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
+Plug 'joshukraine/vscode-es7-javascript-react-snippets',
+            \ {'branch': 'coc-nvim-patch'}            " React VSCode snippets                   | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
 Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
 
 " Ruby-specific
