@@ -122,8 +122,8 @@ set inccommand=nosplit
 set updatetime=300
 
 " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-"       \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
-"       \,sm:block-blinkwait0-blinkoff150-blinkon175
+"             \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
+"             \,sm:block-blinkwait0-blinkoff150-blinkon175
 
 " Need this when using material colorscheme
 " if (has("termguicolors"))
@@ -233,7 +233,7 @@ cmap w!! w !sudo tee >/dev/null %
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 if !filereadable(autoload_plug_path)
   silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
-      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+              \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
   autocmd VimEnter * PlugInstall --sync | exe 'source' stdpath('config') . '/init.vim'
 endif
 unlet autoload_plug_path
@@ -256,7 +256,7 @@ Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quo
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
-      \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
+            \ {'branch': 'release'}                   " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
 Plug 'joshukraine/vscode-es7-javascript-react-snippets',
             \ {'branch': 'coc-nvim-patch'}            " React VSCode snippets                   | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
@@ -284,8 +284,8 @@ Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
-      \ { 'for': ['javascript', 'vue']
-      \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
+            \ { 'for': ['javascript', 'vue']
+            \}                          " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
 Plug 'maxmellon/vim-jsx-pretty'         " JSX and TSX syntax pretty highlighting for vim.       | https://github.com/MaxMEllon/vim-jsx-pretty
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
@@ -321,24 +321,24 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
-                  \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
-                  \ '\.rar$']
+            \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
+            \ '\.rar$']
 let NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✹",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : ""
-    \ }
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "═",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✹",
+            \ "Clean"     : "✔︎",
+            \ 'Ignored'   : '☒',
+            \ "Unknown"   : ""
+            \ }
 
 " Vim DevIcons
 exe 'source' stdpath('config') . '/extras/devicons.vim'
@@ -410,9 +410,9 @@ map <leader>t :Files<CR>
 map <leader>y :Rg<CR>
 
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview(), <bang>0)
 
 " Custom rails.vim commands
 " command! Rroutes :e config/routes.rb
@@ -443,37 +443,37 @@ nmap <F8> :TagbarToggle<CR>
 
 " Vim REST Console (VRC)
 let g:vrc_curl_opts = {
-  \ '-L': '',
-  \ '-i': '',
-\}
+            \ '-L': '',
+            \ '-i': '',
+            \ }
 
 " Coc
 " https://github.com/neoclide/coc.nvim
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
-  \ 'coc-css',
-  \ 'coc-emmet',
-  \ 'coc-eslint',
-  \ 'coc-html',
-  \ 'coc-json',
-  \ 'coc-marketplace',
-  \ 'coc-prettier',
-  \ 'coc-snippets',
-  \ 'coc-solargraph',
-  \ 'coc-stylelintplus',
-  \ 'coc-tailwindcss',
-  \ 'coc-tsserver',
-  \ 'coc-vetur',
-  \ 'coc-yaml',
-  \ ]
+            \ 'coc-css',
+            \ 'coc-emmet',
+            \ 'coc-eslint',
+            \ 'coc-html',
+            \ 'coc-json',
+            \ 'coc-marketplace',
+            \ 'coc-prettier',
+            \ 'coc-snippets',
+            \ 'coc-solargraph',
+            \ 'coc-stylelintplus',
+            \ 'coc-tailwindcss',
+            \ 'coc-tsserver',
+            \ 'coc-vetur',
+            \ 'coc-yaml',
+            \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
