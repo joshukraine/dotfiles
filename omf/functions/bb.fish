@@ -1,5 +1,5 @@
 function bb
-    set machine (hostname)
+    set machine (scutil --get LocalHostName)
 
     if [ -d $DOTFILES/machines/$machine ]
         set brewfile_path $DOTFILES/machines/$machine/Brewfile
