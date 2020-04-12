@@ -49,6 +49,7 @@ abbr -a -g gpum 'git push -u origin master'
 abbr -a -g gpuo 'git push -u origin'
 abbr -a -g gre 'git reset'
 abbr -a -g grv 'git remote -v'
+abbr -a -g gtl 'git tag --list'
 abbr -a -g gs 'git status'
 
 # Finding stuff!
