@@ -95,6 +95,7 @@ abbr -a -g bu 'brew update'
 abbr -a -g ans 'ansible'
 abbr -a -g anp 'ansible-playbook'
 abbr -a -g anv 'ansible-vault --ask-vault-pass'
+abbr -a -g ang 'ansible-galaxy'
 
 # Rails
 abbr -a -g RED 'RAILS_ENV=development'
