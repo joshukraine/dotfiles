@@ -657,7 +657,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/dotfiles/iterm2/mbp</string>
+	<string>~/dotfiles/machines/joshuas-mbp15</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -704,13 +704,13 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>0 163 224 275 0 0 1680 1027 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>440 451 799 448 0 0 1680 1050 </string>
+	<string>440 454 799 448 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>640 693 400 129 0 0 1680 1027 </string>
+	<string>640 693 400 129 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 496 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>192 212 1270 762 0 0 1680 1050 </string>
+	<string>192 130 1270 822 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>264 201 1270 746 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1036,7 +1036,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>0.97999999999999998</real>
+			<real>1</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1378,7 +1378,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 15</string>
+			<string>CaskaydiaCoveNerdFontComplete- 15</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -3358,6 +3358,7 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
+		<string>3.3.10beta3</string>
 		<string>3.3.9beta1</string>
 		<string>3.3.8beta5</string>
 		<string>3.3.8beta4</string>
@@ -3373,6 +3374,7 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
+		<string>CaskaydiaCove Nerd Font</string>
 		<string>FiraCode Nerd Font</string>
 		<string>Fira Code</string>
 		<string>FuraCode Nerd Font</string>
@@ -3382,14 +3384,14 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{273, 735}</string>
+		<string>{524, 743}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>1A82FD0A-AF32-46BA-B0C2-E52FAB98377A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>32</integer>
+	<integer>50</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>598340262.46807802</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -4180,7 +4182,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/joshukraine/dotfiles/iterm2/mbp</string>
+	<string>/Users/joshukraine/dotfiles/machines/joshuas-mbp15</string>
 	<key>PreserveWindowSizeWhenTabBarVisibilityChanges</key>
 	<false/>
 	<key>PromptOnQuit</key>
@@ -4200,11 +4202,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-03-08T06:26:59Z</date>
+	<date>2020-04-14T18:53:25Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>2711344229</integer>
+	<integer>3155997021</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -4268,7 +4270,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.10beta2</string>
+	<string>3.3.10beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
