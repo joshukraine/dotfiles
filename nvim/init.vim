@@ -585,6 +585,8 @@ highlight CocErrorSign ctermfg=160 ctermbg=0
 highlight CocWarningSign ctermfg=178 ctermbg=0
 highlight CocInfoSign ctermfg=33 ctermbg=0
 highlight CocHintSign ctermfg=226 ctermbg=0
+
+highlight Comment cterm=italic gui=italic
 " }}}
 
 " Local {{{
