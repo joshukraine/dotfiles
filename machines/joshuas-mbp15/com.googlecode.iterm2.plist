@@ -710,7 +710,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 496 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>61 160 1270 822 0 0 1680 1050 </string>
+	<string>61 152 1410 762 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>264 201 1270 746 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1374,11 +1374,11 @@
 			<key>Name</key>
 			<string>Solarized Dark</string>
 			<key>Non Ascii Font</key>
-			<string>Menlo-Regular 18</string>
+			<string>FiraCodeNerdFontComplete-Regular 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 15</string>
+			<string>MonoLisa-Regular 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1637,9 +1637,9 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.3200000000000001</real>
+			<real>1.3400000000000001</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1663,12 +1663,14 @@
 	<key>NoSyncBFPFavorites</key>
 	<array>
 		<string>FiraCode Nerd Font</string>
+		<string>MonoLisa</string>
+		<string>CaskaydiaCove Nerd Font</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Menlo</string>
-		<string>MonoLisa</string>
 		<string>CaskaydiaCove Nerd Font</string>
+		<string>MonoLisa</string>
+		<string>Andale Mono</string>
 		<string>FiraCode Nerd Font</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
@@ -1676,14 +1678,14 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{551, 945}</string>
+		<string>{594, 735}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>1A82FD0A-AF32-46BA-B0C2-E52FAB98377A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>55</integer>
+	<integer>61</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>598340262.46807802</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
