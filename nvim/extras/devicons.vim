@@ -120,7 +120,7 @@ autocmd filetype nerdtree highlight config_icon ctermbg=none ctermfg=250 guifg=#
 autocmd filetype nerdtree highlight css_icon ctermbg=none ctermfg=39 guifg=#00afff
 autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=#d7af00
 autocmd filetype nerdtree highlight fish_icon ctermbg=none ctermfg=97 guifg=#875faf
-autocmd filetype nerdtree highlight git_icon ctermbg=none ctermfg=166 guifg=#ffa500
+autocmd filetype nerdtree highlight git_icon ctermbg=none ctermfg=166 guifg=#d75f00
 autocmd filetype nerdtree highlight gulpfile_icon ctermbg=none ctermfg=124 guifg=#af0000
 autocmd filetype nerdtree highlight haml_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=166 guifg=#ffa500

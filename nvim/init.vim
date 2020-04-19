@@ -571,13 +571,12 @@ let g:neosolarized_italic = 1
 silent! colorscheme NeoSolarized " https://github.com/altercation/vim-colors-solarized#the-values
 
 highlight clear IncSearch
-highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
-highlight VertSplit ctermbg=NONE guibg=NONE
+highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=White
 
-highlight CocErrorSign ctermfg=160 ctermbg=0
-highlight CocWarningSign ctermfg=178 ctermbg=0
-highlight CocInfoSign ctermfg=33 ctermbg=0
-highlight CocHintSign ctermfg=226 ctermbg=0
+highlight CocErrorSign ctermfg=160 ctermbg=0 guifg=#d70000 guibg=NONE
+highlight CocWarningSign ctermfg=178 ctermbg=0 guifg=#d7af00 guibg=NONE
+highlight CocInfoSign ctermfg=33 ctermbg=0 guifg=#0087ff guibg=NONE
+highlight CocHintSign ctermfg=226 ctermbg=0 guifg=#ffff00 guibg=NONE
 
 highlight Comment cterm=italic gui=italic
 " }}}
