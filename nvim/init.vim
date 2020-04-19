@@ -121,15 +121,6 @@ set inccommand=nosplit
 
 set updatetime=300
 
-" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-"             \,a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor
-"             \,sm:block-blinkwait0-blinkoff150-blinkon175
-
-" Need this when using material colorscheme
-" if (has("termguicolors"))
-"   set termguicolors
-" endif
-
 " Keep focus split wide, others narrow.
 set winwidth=90
 set winminwidth=5
@@ -279,8 +270,7 @@ Plug 'ryanoasis/vim-devicons'           " Adds file type icons to Vim           
 Plug 'itchyny/lightline.vim'            " Light/configurable statusline/tabline plugin for Vim  | https://github.com/itchyny/lightline.vim
 
 " Colors and Syntax Highlighting
-Plug 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
-" Plug 'kaicataldo/material.vim'          " Vim/Neovim Material color scheme                      | https://github.com/kaicataldo/material.vim
+Plug 'icymind/NeoSolarized'             " Solarized colorscheme with better truecolor support   | https://github.com/icymind/NeoSolarized
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
@@ -569,13 +559,15 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
 " Appearance {{{
 set background=dark
+set termguicolors
 
 exe 'source' stdpath('config') . '/lightline.vim'
 
-silent! colorscheme solarized " https://github.com/altercation/vim-colors-solarized#the-values
-let g:solarized_diffmode="high"
-let g:solarized_termtrans = 1 " Use terminal background
-" colorscheme material
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 1
+
+silent! colorscheme NeoSolarized " https://github.com/altercation/vim-colors-solarized#the-values
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
