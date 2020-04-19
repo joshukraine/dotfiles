@@ -123,6 +123,10 @@ ln -nfs "$DOTFILES_DIR"/starship.toml "$CONFIG_DIR"/starship.toml
 dotfiles_echo "-> Installing vim-plug plugins..."
 nvim --headless +PlugInstall +qall
 
+dotfiles_echo "-> Installing custom terminfo entries..."
+tic -x "$DOTFILES_DIR"/terminfo/tmux-256color.terminfo
+tic -x "$DOTFILES_DIR"/terminfo/xterm-256color-italic.terminfo
+
 dotfiles_echo "Dotfiles installation complete!"
 
 dotfiles_echo "Post-install recommendations:"
