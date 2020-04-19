@@ -95,15 +95,11 @@ brew "zsh"
 cask "1password"
 cask "alfred"
 cask "arq"
-cask "balenaetcher"
 cask "bartender"
-cask "brave-browser"
 cask "carbon-copy-cloner"
 cask "clover-configurator"
 cask "daisydisk"
-cask "dash"
 cask "dropbox"
-cask "expressvpn"
 cask "fantastical"
 cask "font-caskaydiacove-nerd-font"
 cask "font-firacode-nerd-font"
@@ -114,11 +110,7 @@ cask "little-snitch"
 cask "micro-snitch"
 cask "microsoft-excel"
 cask "microsoft-word"
-cask "pdftotext"
-cask "pgadmin4"
 cask "postico"
-cask "postman"
-cask "screenflick"
 cask "skype"
 cask "slack"
 cask "steam"
@@ -129,13 +121,10 @@ cask "vmware-fusion"
 cask "whatsapp"
 
 # rubocop:disable Style/NumericLiterals
-mas "Deliveries", id: 924726344
 mas "Evernote", id: 406056744
-mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
-mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Spark", id: 1176895641
