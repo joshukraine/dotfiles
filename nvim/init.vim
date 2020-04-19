@@ -338,6 +338,7 @@ nnoremap <F6> :GitGutterToggle<CR>
 nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
 let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_preview_win_floating = 0
+let g:gitgutter_override_sign_column_highlight = 0
 
 nmap ]g <Plug>(GitGutterNextHunk)
 nmap [g <Plug>(GitGutterPrevHunk)
