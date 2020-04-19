@@ -708,7 +708,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2882 204 1410 952 2560 0 2560 1440 </string>
+	<string>2810 204 1550 987 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1028,7 +1028,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.05</real>
+			<real>1</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1370,7 +1370,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>CaskaydiaCoveNerdFontComplete- 17</string>
+			<string>FiraCodeNerdFontComplete-Regular 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -3357,20 +3357,22 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
+		<string>Courier New</string>
 		<string>CaskaydiaCove Nerd Font</string>
 		<string>FiraCode Nerd Font</string>
+		<string>SauceCodePro Nerd Font</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{3715, 893}</string>
+		<string>{3180, 1049}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>63</integer>
+	<integer>88</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>606464863.01062095</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -4181,7 +4183,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-13T10:28:19Z</date>
+	<date>2020-04-19T15:51:09Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
