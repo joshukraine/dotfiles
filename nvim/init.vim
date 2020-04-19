@@ -579,7 +579,6 @@ highlight CocInfoSign ctermfg=33 ctermbg=0 guifg=#0087ff guibg=NONE
 highlight CocHintSign ctermfg=226 ctermbg=0 guifg=#ffff00 guibg=NONE
 
 highlight PreProc cterm=italic gui=italic
-highlight Comment cterm=italic gui=italic
 " }}}
 
 " Local {{{
