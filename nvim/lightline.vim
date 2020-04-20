@@ -28,11 +28,6 @@ function! LightlineReadonly()
   return &readonly ? '' : ''
 endfunction
 
-let g:lightline = {
-    \   'colorscheme': 'solarized',
-    \   'component': { 'lineinfo': '⭡ %3l:%-2v' },
-    \ }
-
 let g:lightline.component_function = {
     \  'relativepath': 'LightlineRelativepath',
     \  'fileformat': 'LightlineFileformat',

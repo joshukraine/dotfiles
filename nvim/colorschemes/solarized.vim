@@ -9,3 +9,8 @@ let g:neosolarized_underline = 1
 let g:neosolarized_italic = 1
 
 silent! colorscheme NeoSolarized " https://github.com/altercation/vim-colors-solarized#the-values
+
+let g:lightline = {
+    \   'colorscheme': 'solarized',
+    \   'component': { 'lineinfo': '⭡ %3l:%-2v' },
+    \ }

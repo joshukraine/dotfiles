@@ -6,9 +6,12 @@ set termguicolors
 
 silent! colorscheme night-owl
 
-let g:lightline = { 'colorscheme': 'nightowl' }
-
 highlight clear CursorColumn
 highlight clear ColorColumn
 highlight link CursorColumn CursorLine
 highlight link ColorColumn CursorLine
+
+let g:lightline = {
+    \   'colorscheme': 'nightowl',
+    \   'component': { 'lineinfo': '⭡ %3l:%-2v' },
+    \ }

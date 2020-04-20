@@ -560,10 +560,10 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " }}}
 
 " Appearance {{{
-exe 'source' stdpath('config') . '/lightline.vim'
-
 exe 'source' stdpath('config') . '/colorschemes/night-owl.vim'
 " exe 'source' stdpath('config') . '/colorschemes/solarized.vim'
+
+exe 'source' stdpath('config') . '/lightline.vim'
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=White
