@@ -1062,7 +1062,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2882 204 1690 1022 2560 0 2560 1440 </string>
+	<string>2882 209 1690 1092 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1764,11 +1764,11 @@
 			<key>Name</key>
 			<string>Night Owl</string>
 			<key>Non Ascii Font</key>
-			<string>Menlo-Regular 18</string>
+			<string>FiraCodeNerdFontComplete-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 18</string>
+			<string>MonoLisa-Regular 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -2046,9 +2046,9 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.25</real>
+			<real>1.3400000000000001</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -2711,11 +2711,11 @@
 			<key>Name</key>
 			<string>Solarized Dark</string>
 			<key>Non Ascii Font</key>
-			<string>Menlo-Regular 18</string>
+			<string>FiraCodeNerdFontComplete-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 18</string>
+			<string>MonoLisa-Regular 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -2976,9 +2976,9 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.25</real>
+			<real>1.3400000000000001</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -3010,12 +3010,12 @@
 		<key>screenFrame</key>
 		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{3180, 1049}</string>
+		<string>{3334, 1119}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>94</integer>
+	<integer>95</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>606464863.01062095</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
