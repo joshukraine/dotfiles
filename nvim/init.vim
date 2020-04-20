@@ -578,6 +578,7 @@ highlight CocWarningSign ctermfg=178 ctermbg=0 guifg=#d7af00 guibg=NONE
 highlight CocInfoSign ctermfg=33 ctermbg=0 guifg=#0087ff guibg=NONE
 highlight CocHintSign ctermfg=226 ctermbg=0 guifg=#ffff00 guibg=NONE
 
+highlight htmlArg cterm=italic gui=italic
 highlight PreProc cterm=italic gui=italic
 " }}}
 
