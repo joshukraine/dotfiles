@@ -561,10 +561,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " }}}
 
 " Appearance {{{
-" exe 'source' stdpath('config') . '/colorschemes/material.vim'
-exe 'source' stdpath('config') . '/colorschemes/night-owl.vim'
-" exe 'source' stdpath('config') . '/colorschemes/solarized.vim'
-
+exe 'source' "$DOTFILES/machines/" . hostname() . "/colorscheme.vim"
 exe 'source' stdpath('config') . '/lightline.vim'
 
 highlight clear IncSearch
