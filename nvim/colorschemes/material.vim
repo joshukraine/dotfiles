@@ -16,6 +16,9 @@ highlight clear ColorColumn
 highlight link CursorColumn CursorLine
 highlight link ColorColumn CursorLine
 
+highlight clear Visual
+highlight Visual ctermbg=242 guibg=#37474f
+
 let g:lightline = {
     \   'colorscheme': 'material_vim',
     \   'component': { 'lineinfo': '⭡ %3l:%-2v' },
