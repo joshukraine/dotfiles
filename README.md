@@ -60,6 +60,17 @@ I have used Zsh for years and really liked it. Recently I've switched to Fish, a
 1. Set it as your default shell: `$ chsh -s /usr/local/bin/fish`
 1. Install [Oh My Fish][oh-my-fish]
 
+## Post-install Tasks
+
+After running `install.sh` there are still a couple of things that need to be done.
+
+* Add machine-specific configs as needed. (see Machine-specific Configs below)
+* Set up iTerm2 or Terminal.app profile (see details below).
+* Complete [Brew Bundle][brew-bundle] with `brew bundle install`
+* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
+* After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
+* If using Fish, customize your setup by running the `fish_config` command.
+
 ## Machine-specific Configs
 
 I regularly use two Mac computers: a desktop and laptop. Most of my configs are identical between the two, but there are some some differences. I also occasionally install my dotfiles on other machines (family computer, wife's computer, your computer if I can get to it... 😈) 
@@ -82,16 +93,70 @@ machines/
 
 My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `omf/functions/bb.fish`)
 
-## Post-install Tasks
+## Colorschemes
 
-After running `install.sh` there are still a couple of things that need to be done.
+My all-time favorite colorscheme for code-editing is [Solarized Dark][solarized]. That said, there are times when I like to dabble with something new, just to have some variety. In the past it's been painful to switch colorschemes for vim since I also needed to find a suitable profile for iTerm2, make tweaks to tmux.conf, etc. Sometimes the colorschemes were 24-bit only (think `set termguicolors`) and others were more simple (256-color), like the original version of Solarized.
 
-* Add machine-specific configs as needed. (see Machine-specific Configs above)
-* Set up iTerm2 or Terminal.app profile (see details below).
-* Complete [Brew Bundle][brew-bundle] with `brew bundle install`
-* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
-* After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
-* If using Fish, customize your setup by running the `fish_config` command.
+I've now introduced an approach for switching between colorschemes which I hope will be more straightforward. It's still not a one-step operation, but all the colorschemes and there individual settings can be stored simultaneously and switching between them takes minimal effort.
+
+At the time of this writing, I've incorporated three colorschemes:
+
+1. [Solarized Dark][neo-solarized]
+2. [Night Owl][night-owl]
+3. [Material][material]
+
+Here's how everything is organized:
+
+#### 1. Colorschemes
+
+The settings for individual colorschemes are stored in separate files. To add a new colorscheme, add a file for it here.
+
+```
+nvim/
+└── colorschemes
+    ├── material.vim
+    ├── night-owl.vim
+    └── solarized.vim
+```
+
+#### 2. Machine-specific Config
+
+Every machine I manage has a `colorscheme.vim` file in its directory. That file defines in one line which colorscheme should be used. For example:
+
+```
+" machines/joshuas-imac/colorscheme.vim
+
+exe 'source' stdpath('config') . '/colorschemes/night-owl.vim'
+```
+
+This theme is then loaded in `nvim/init.vim` with the following line (see the Appearance section):
+
+```
+" nvim/init.vim
+
+exe 'source' "$DOTFILES/machines/$HOST_NAME/colorscheme.vim"
+```
+
+#### 3. iTerm2 Profile
+
+Since I use vim in the terminal, I need corresponding iTerm2 profiles for every vim colorscheme. These are stored in `itermcolors/` but of course must be added manually to the iTerm profile.
+
+#### 4. Tmux Status Bar
+
+The last tweak is for Tmux. I like to set a specific hex color code for the status bar background depending on which colorscheme I'm using. Each machine profile now has its own `tmux.conf.status-bar` file. In particular, it can be nice to adjust the background of the status bar to better match the current colorscheme.
+
+```
+# machines/joshuas-imac/tmux.conf.status-bar
+
+set -g status-style bg=#112630 # For Night Owl colorscheme
+# set -g status-style bg=#2c3b41 # For Material colorscheme
+# set -g status-style bg=black # For Solarized colorscheme
+```
+
+### Useful Colorscheme Links
+
+- http://vimcolors.com/
+- https://www.slant.co/topics/480/~best-vim-color-schemes
 
 ## Setting up iTerm2
 
@@ -181,7 +246,10 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
+[material]: https://github.com/kaicataldo/material.vim
+[neo-solarized]: https://github.com/icymind/NeoSolarized
 [neovim]: https://neovim.io/
+[night-owl]: https://github.com/haishanh/night-owl.vim
 [nodejs]: https://nodejs.org/
 [oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
@@ -189,6 +257,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [react]: https://reactjs.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1584547844/screenshots/dotfiles-mar-2020_a5p5do.png
+[solarized]: https://github.com/altercation/solarized
 [starship]: https://starship.rs/
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
