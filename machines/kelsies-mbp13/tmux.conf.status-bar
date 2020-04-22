@@ -4,6 +4,7 @@ set -g status on
 # set -g status-style bg=#2c3b41 # For Material colorscheme
 set -g status-style bg=#112630 # For Night Owl colorscheme
 # set -g status-style bg=#2c323c # For One colorscheme
+# set -g status-style bg=#313640 # For One Half Dark colorscheme
 # set -g status-style bg=black # For Solarized colorscheme
 
 # Status bar settings
