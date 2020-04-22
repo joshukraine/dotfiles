@@ -271,6 +271,8 @@ Plug 'itchyny/lightline.vim'            " Light/configurable statusline/tabline 
 
 " Colors and Syntax Highlighting
 Plug 'icymind/NeoSolarized'             " Solarized colorscheme with better truecolor support   | https://github.com/icymind/NeoSolarized
+Plug 'haishanh/night-owl.vim'           " Vim colorscheme based on sdras/night-owl-vscode-theme | https://github.com/haishanh/night-owl.vim
+Plug 'kaicataldo/material.vim'          " A port of the Material color scheme for Vim/Neovim    | https://github.com/kaicataldo/material.vim
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
@@ -559,16 +561,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " }}}
 
 " Appearance {{{
-set background=dark
-set termguicolors
-
+exe 'source' "$DOTFILES/machines/$HOST_NAME/colorscheme.vim"
 exe 'source' stdpath('config') . '/lightline.vim'
-
-let g:neosolarized_bold = 1
-let g:neosolarized_underline = 1
-let g:neosolarized_italic = 1
-
-silent! colorscheme NeoSolarized " https://github.com/altercation/vim-colors-solarized#the-values
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=White
@@ -578,8 +572,8 @@ highlight CocWarningSign ctermfg=178 ctermbg=0 guifg=#d7af00 guibg=NONE
 highlight CocInfoSign ctermfg=33 ctermbg=0 guifg=#0087ff guibg=NONE
 highlight CocHintSign ctermfg=226 ctermbg=0 guifg=#ffff00 guibg=NONE
 
+highlight htmlArg cterm=italic gui=italic
 highlight PreProc cterm=italic gui=italic
-highlight Comment cterm=italic gui=italic
 " }}}
 
 " Local {{{

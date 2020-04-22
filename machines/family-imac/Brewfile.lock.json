@@ -2,25 +2,25 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "79503805c4c557f842a49c3e0ec4021fac0813be"
+        "revision": "784f4e47c2e527c515454212db158149f869c7f3"
       },
       "homebrew/cask": {
-        "revision": "be13d97b2ee7d9af8fa190ab5e375864af2f97d8"
+        "revision": "bdb4aad9bf2dcf96c3a3ee68161cfbf511f88532"
       },
       "homebrew/cask-versions": {
-        "revision": "09b98129765ad98cfcd45c4c4ec104cb64728810"
+        "revision": "06c50a0cdaed5a8383a11f8f50d4fa0b74ffb78a"
       },
       "homebrew/cask-drivers": {
-        "revision": "2225d32e5fb9bd45f4894efd9810b115981cfa35"
+        "revision": "1a942608ae7b44f77f1d8d3084369db36c89c0b0"
       },
       "homebrew/cask-fonts": {
-        "revision": "ab8b8f1457df8ba66ee0ff23f8ef799b077562f1"
+        "revision": "9449d3910f87f8758328b180e2e4e0f85069fb6f"
       },
       "homebrew/core": {
-        "revision": "fa7cc183982c73c9b84bc704e7e866898d9bf482"
+        "revision": "c24478d60d878a517e72a44f5b517bebccac1407"
       },
       "homebrew/services": {
-        "revision": "64347a3a5761db1b392f1b30b045aeb4592e17a9"
+        "revision": "6e7ea0cff515df8b5d53a6e3066e16cf5e94d03a"
       },
       "puma/puma": {
         "revision": "c6db72ccb20e19ba2a95d236f21e0759ecf1813a"
@@ -931,21 +931,21 @@
         }
       },
       "neovim": {
-        "version": "HEAD-e5da4fd",
+        "version": "HEAD-ca02db1",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-e5da4fd.catalina.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-ca02db1.catalina.bottle.tar.gz",
               "sha256": "389ab254794ea04df8a106bf281c227c4fdee27c609d52951f32b9a0239031d6"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-e5da4fd.mojave.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-ca02db1.mojave.bottle.tar.gz",
               "sha256": "fb6cc38c45be4650a4a750a314cec27f6f7643dc7c22a1f5abae347e1b39b388"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-e5da4fd.high_sierra.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-ca02db1.high_sierra.bottle.tar.gz",
               "sha256": "b2f7450e005f4eb22bfaf650fe7741fa8629393a947b4dd48c9f91e7fc258113"
             }
           }
@@ -1532,7 +1532,7 @@
         }
       },
       "arq": {
-        "version": "6.2.3",
+        "version": "6.2.4",
         "options": {
           "full_name": "arq"
         }
@@ -1806,7 +1806,7 @@
       "mojave": {
         "HOMEBREW_VERSION": "2.2.13",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "fa7cc183982c73c9b84bc704e7e866898d9bf482",
+        "Homebrew/homebrew-core": "c24478d60d878a517e72a44f5b517bebccac1407",
         "CLT": "10.3.0.0.1.1562985497",
         "Xcode": "10.3",
         "macOS": "10.14.6"
