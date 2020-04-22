@@ -1,8 +1,8 @@
 " Settings for Solarized colorscheme
 " https://github.com/icymind/NeoSolarized
 
-set background=dark
 set termguicolors
+set background=dark
 
 let g:neosolarized_bold = 1
 let g:neosolarized_underline = 1

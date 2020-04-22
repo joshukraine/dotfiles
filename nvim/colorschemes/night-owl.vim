@@ -1,8 +1,8 @@
 " Settings for Night Owl colorscheme
 " https://github.com/haishanh/night-owl.vim
 
-set background=dark
 set termguicolors
+set background=dark
 
 silent! colorscheme night-owl
 
