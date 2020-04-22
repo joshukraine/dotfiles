@@ -18,6 +18,7 @@ set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg DOTFILES "$HOME/dotfiles"
 set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden'
+set -xg HOST_NAME (scutil --get HostName)
 
 . $OMF_CONFIG/abbreviations.fish
 
