@@ -1,5 +1,5 @@
 " Settings for Material colorscheme
-" https://github.com/haishanh/night-owl.vim
+" https://github.com/kaicataldo/material.vim
 
 set termguicolors
 set background=dark
