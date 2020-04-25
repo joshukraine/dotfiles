@@ -4,6 +4,37 @@
 
 These are the dotfiles I use on my Mac computers, currently running [macOS Catalina (10.15)][catalina]. They are geared primarily towards web development with [Rails][rails], [React][react], and [Vue][vue]. I use a terminal-based development environment built on [Fish][fish], [Tmux][tmux], and [Neovim][neovim]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
+## Table of Contents
+
+- [Mac Bootstrap Script](#mac-bootstrap-script)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Fish or Zsh?](#fish-or-zsh)
+  - [Zsh Setup](#zsh-setup)
+  - [Fish Setup](#fish-setup)
+- [Post-install Tasks](#post-install-tasks)
+- [Machine-specific Configs](#machine-specific-configs)
+- [Colorschemes](#colorschemes)
+  - [1. Colorschemes](#1-colorschemes)
+  - [2. Machine-specific Config](#2-machine-specific-config)
+  - [3. iTerm2 Profile](#3-iterm2-profile)
+  - [4. Tmux Status Bar](#4-tmux-status-bar)
+  - [Useful Colorscheme Links](#useful-colorscheme-links)
+- [My Favorite Programming Fonts](#my-favorite-programming-fonts)
+  - [Free Fonts](#free-fonts)
+  - [Premium Fonts](#premium-fonts)
+  - [Ligatures](#ligatures)
+  - [Nerd Font Variants](#nerd-font-variants)
+  - [Useful Font Links](#useful-font-links)
+- [Setting up iTerm2](#setting-up-iterm2)
+- [Setting up Terminal.app](#setting-up-terminalapp)
+- [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
+- [Vim vs. Neovim](#vim-vs-neovim)
+- [Identifying Sources of Slow Startup Times](#identifying-sources-of-slow-startup-times)
+- [Some of my favorite dotfile repos](#some-of-my-favorite-dotfile-repos)
+- [Helpful web resources on dotfiles, et al.](#helpful-web-resources-on-dotfiles-et-al)
+- [License](#license)
+
 ## Mac Bootstrap Script
 
 Need to provision a new Mac from scratch? My Mac Bootstrap script installs and configures the software, dotfiles, and general preferences I use for web development.
@@ -99,11 +130,21 @@ My all-time favorite colorscheme for code-editing is [Solarized Dark][solarized]
 
 I've now introduced an approach for switching between colorschemes which I hope will be more straightforward. It's still not a one-step operation, but all the colorschemes and there individual settings can be stored simultaneously and switching between them takes minimal effort.
 
-At the time of this writing, I've incorporated three colorschemes:
+![One Half Dark Screenshot][one-half-dark-screenshot]
+
+*Example of a React app with the One Half Dark colorscheme*
+
+At the time of this writing, I've incorporated nine colorschemes, all of which require true color support.
 
 1. [Solarized Dark][neo-solarized]
-2. [Night Owl][night-owl]
-3. [Material][material]
+1. [One Half Dark][one-half-dark]
+1. [Tender][tender]
+1. [Oceanic Next][oceanic-next]
+1. [Night Owl][night-owl]
+1. [Nightfly][nightfly]
+1. [Nord Vim][nord]
+1. [Vim One][vim-one]
+1. [Material][material]
 
 Here's how everything is organized:
 
@@ -116,7 +157,13 @@ nvim/
 └── colorschemes
     ├── material.vim
     ├── night-owl.vim
-    └── solarized.vim
+    ├── nightfly.vim
+    ├── nord.vim
+    ├── oceanic-next.vim
+    ├── onehalfdark.vim
+    ├── solarized.vim
+    ├── tender.vim
+    └── vim-one.vim
 ```
 
 #### 2. Machine-specific Config
@@ -157,6 +204,55 @@ set -g status-style bg=#112630 # For Night Owl colorscheme
 
 - http://vimcolors.com/
 - https://www.slant.co/topics/480/~best-vim-color-schemes
+
+## My Favorite Programming Fonts
+
+I've recently branched out to explore some of the different mono-spaced fonts available, both free and premium. Here is a list of my favorites.
+
+### Free Fonts
+
+*Included in my `Brewfile` and installed by default via [Homebrew Cask Fonts][homebrew-cask-fonts]*
+
+- [Fira Code][fira-code]
+- [Cascadia Code][cascadia-code]
+- [Victor Mono][victor-mono]
+- [JetBrains Mono][jetbrains-mono]
+- [Iosveka][iosevka]
+
+### Premium Fonts
+
+*You have to give people money if you want these.* 🤑
+
+- [MonoLisa][monolisa]
+- [Dank Mono][dank-mono]
+
+### Ligatures
+
+I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it's hard to go back to a sans-ligature typeface. Therefore all the fonts I've included in my fave's list *do* include ligatures, although some have more than others.
+
+### Nerd Font Variants
+
+I use [Devicons][devicons] in my editor, and these require patched fonts in order to display properly. For most free fonts, there are pre-patched [Nerd Font][nerd-fonts-downloads] variants that include the various glyphs and icons.
+
+[Homebrew Cask Fonts][homebrew-cask-fonts] includes both original and Nerd Font variants. For example:
+
+```sh
+# Original font
+$ brew cask install font-fira-code
+
+# Patched variant
+$ brew cask install font-firacode-nerd-font
+```
+
+If using a font that does not have a patched variant (e.g. MonoLisa) iTerm2 has an option to use an alternate font for non-ASCII characters.
+
+![iterm2-font-settings][iterm2-font-settings]
+
+### Useful Font Links
+
+- [Nerd Font Downloads][nerd-fonts-downloads]
+- [Programming Fonts - Test Drive][programming-fonts]
+- [Homebrew Cask Fonts][homebrew-cask-fonts]
 
 ## Setting up iTerm2
 
@@ -236,31 +332,50 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
+[cascadia-code]: https://github.com/microsoft/cascadia-code
 [catalina]: https://www.apple.com/macos/catalina/
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [coreutils]: https://formulae.brew.sh/formula/coreutils
+[dank-mono]: https://dank.sh/
+[devicons]: https://github.com/ryanoasis/vim-devicons
+[fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
+[homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
 [homebrew]: http://brew.sh
+[iosevka]: https://typeof.net/Iosevka/
+[iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587816605/screenshots/iterm2-font-settings_k7upta.png
 [iterm2]: https://www.iterm2.com/
 [javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[jetbrains-mono]: https://www.jetbrains.com/lp/mono/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
 [material]: https://github.com/kaicataldo/material.vim
+[monolisa]: https://www.monolisa.dev/
 [neo-solarized]: https://github.com/icymind/NeoSolarized
 [neovim]: https://neovim.io/
+[nerd-fonts-downloads]: https://www.nerdfonts.com/font-downloads
 [night-owl]: https://github.com/haishanh/night-owl.vim
+[nightfly]: https://github.com/bluz71/vim-nightfly-guicolors
 [nodejs]: https://nodejs.org/
+[nord]: https://github.com/arcticicestudio/nord-vim
+[oceanic-next]: https://github.com/mhartington/oceanic-next
 [oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
+[one-half-dark-screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587822657/screenshots/one-half-dark-sample_rn5fds.png
+[one-half-dark]: https://github.com/sonph/onehalf
+[programming-fonts]: https://app.programmingfonts.org/
 [rails]: https://rubyonrails.org/
 [react]: https://reactjs.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1584547844/screenshots/dotfiles-mar-2020_a5p5do.png
 [solarized]: https://github.com/altercation/solarized
 [starship]: https://starship.rs/
+[tender]: https://github.com/jacoborus/tender.vim
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
+[victor-mono]: https://rubjo.github.io/victor-mono/
+[vim-one]: https://github.com/rakr/vim-one
 [vim]: http://www.vim.org/
 [vue]: https://vuejs.org/
 [zsh]: https://www.zsh.org/

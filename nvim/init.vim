@@ -269,10 +269,18 @@ Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                 
 Plug 'ryanoasis/vim-devicons'           " Adds file type icons to Vim                           | https://github.com/ryanoasis/vim-devicons
 Plug 'itchyny/lightline.vim'            " Light/configurable statusline/tabline plugin for Vim  | https://github.com/itchyny/lightline.vim
 
-" Colors and Syntax Highlighting
+" Colorschemes
 Plug 'icymind/NeoSolarized'             " Solarized colorscheme with better truecolor support   | https://github.com/icymind/NeoSolarized
 Plug 'haishanh/night-owl.vim'           " Vim colorscheme based on sdras/night-owl-vscode-theme | https://github.com/haishanh/night-owl.vim
 Plug 'kaicataldo/material.vim'          " A port of the Material color scheme for Vim/Neovim    | https://github.com/kaicataldo/material.vim
+Plug 'rakr/vim-one'                     " Adaptation of Atom One colorscheme for Vim            | https://github.com/rakr/vim-one
+Plug 'bluz71/vim-nightfly-guicolors'    " Another dark color scheme for Vim                     | https://github.com/bluz71/vim-nightfly-guicolors
+Plug 'sonph/onehalf', {'rtp': 'vim/'}   " A colorscheme for (Neo)Vim, iTerm, and more.          | https://github.com/sonph/onehalf
+Plug 'arcticicestudio/nord-vim'         " Vim colorscheme based on the Nord color palette       | https://github.com/arcticicestudio/nord-vim
+Plug 'mhartington/oceanic-next'         " Oceanic Next theme for neovim                         | https://github.com/mhartington/oceanic-next
+Plug 'jacoborus/tender.vim'             " A 24bit colorscheme for Vim, Airline and Lightline    | https://github.com/jacoborus/tender.vim
+
+" Syntax Highlighting
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
@@ -573,6 +581,7 @@ highlight CocInfoSign ctermfg=33 ctermbg=0 guifg=#0087ff guibg=NONE
 highlight CocHintSign ctermfg=226 ctermbg=0 guifg=#ffff00 guibg=NONE
 
 highlight htmlArg cterm=italic gui=italic
+highlight Comment cterm=italic gui=italic
 highlight PreProc cterm=italic gui=italic
 " }}}
 

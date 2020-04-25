@@ -6,7 +6,7 @@ add_newline = false
 disabled = true
 
 [directory]
-style = "bold blue"
+style = "bold bright-blue"
 
 [git_branch]
 style = "bold white"

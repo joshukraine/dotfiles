@@ -1,8 +1,8 @@
 " Settings for Material colorscheme
-" https://github.com/haishanh/night-owl.vim
+" https://github.com/kaicataldo/material.vim
 
-set background=dark
 set termguicolors
+set background=dark
 
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'default'
