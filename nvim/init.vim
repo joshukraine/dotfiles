@@ -276,6 +276,9 @@ Plug 'kaicataldo/material.vim'          " A port of the Material color scheme fo
 Plug 'rakr/vim-one'                     " Adaptation of Atom One colorscheme for Vim            | https://github.com/rakr/vim-one
 Plug 'bluz71/vim-nightfly-guicolors'    " Another dark color scheme for Vim                     | https://github.com/bluz71/vim-nightfly-guicolors
 Plug 'sonph/onehalf', {'rtp': 'vim/'}   " A colorscheme for (Neo)Vim, iTerm, and more.          | https://github.com/sonph/onehalf
+Plug 'arcticicestudio/nord-vim'         " Vim colorscheme based on the Nord color palette       | https://github.com/arcticicestudio/nord-vim
+Plug 'mhartington/oceanic-next'         " Oceanic Next theme for neovim                         | https://github.com/mhartington/oceanic-next
+Plug 'jacoborus/tender.vim'             " A 24bit colorscheme for Vim, Airline and Lightline    | https://github.com/jacoborus/tender.vim
 
 " Syntax Highlighting
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax

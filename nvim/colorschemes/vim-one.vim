@@ -1,4 +1,4 @@
-" Settings for One colorscheme
+" Settings for Vim One colorscheme
 " https://github.com/rakr/vim-one
 
 set termguicolors

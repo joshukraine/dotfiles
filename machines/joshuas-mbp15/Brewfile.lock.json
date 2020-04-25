@@ -5,19 +5,19 @@
         "revision": "784f4e47c2e527c515454212db158149f869c7f3"
       },
       "homebrew/cask": {
-        "revision": "e4c01b1d7a4ff153e4495b2ca9a67f2be3347b8c"
+        "revision": "d493143df1f9ed2ae89e1a376fe7174aeedb5a67"
       },
       "homebrew/cask-versions": {
-        "revision": "0003dfff125468b02a966d0f45d7f561b25ab5ec"
+        "revision": "4cbcc8844ff964663b45347981392e28afd4e0e3"
       },
       "homebrew/cask-drivers": {
-        "revision": "e0650b4d5dff54e04e35a5e02acd30c86c4bcacb"
+        "revision": "61ebb49849447f696ee11835c72480155f0781e7"
       },
       "homebrew/cask-fonts": {
-        "revision": "d71f24256b3134c0c0159b6767e95e0134da94c6"
+        "revision": "ab9f2e72409c19947b4a6fe8d0bd12cf73f7734d"
       },
       "homebrew/core": {
-        "revision": "cd6c90907bee54c409c64415163aa11ca078cf78"
+        "revision": "02f9b1770252e4cffd21a277a75a7a9d79dbc8bc"
       },
       "homebrew/services": {
         "revision": "6e7ea0cff515df8b5d53a6e3066e16cf5e94d03a"
@@ -1857,6 +1857,24 @@
         "options": {
           "full_name": "font-victor-mono"
         }
+      },
+      "font-iosevka-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-iosevka-nerd-font"
+        }
+      },
+      "font-jetbrainsmono-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-jetbrainsmono-nerd-font"
+        }
+      },
+      "font-victormono-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-victormono-nerd-font"
+        }
       }
     },
     "mas": {
@@ -1918,9 +1936,9 @@
   "system": {
     "macos": {
       "catalina": {
-        "HOMEBREW_VERSION": "2.2.13-124-g8e984d6",
+        "HOMEBREW_VERSION": "2.2.13-134-gd5ffb96",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "cd6c90907bee54c409c64415163aa11ca078cf78",
+        "Homebrew/homebrew-core": "02f9b1770252e4cffd21a277a75a7a9d79dbc8bc",
         "CLT": "11.4.1.0.1.1586360307",
         "Xcode": "11.4.1",
         "macOS": "10.15.4"
