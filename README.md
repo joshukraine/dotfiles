@@ -158,6 +158,55 @@ set -g status-style bg=#112630 # For Night Owl colorscheme
 - http://vimcolors.com/
 - https://www.slant.co/topics/480/~best-vim-color-schemes
 
+## My Favorite Programming Fonts
+
+I've recently branched out to explore some of the different mono-spaced fonts available, both free and premium. Here is a list of my favorites.
+
+### Free Fonts
+
+*Included in my `Brewfile` and installed by default via [Homebrew Cask Fonts][homebrew-cask-fonts]*
+
+- [Fira Code][fira-code]
+- [Cascadia Code][cascadia-code]
+- [Victor Mono][victor-mono]
+- [JetBrains Mono][jetbrains-mono]
+- [Iosveka][iosevka]
+
+### Premium Fonts
+
+*You have to give people money if you want these.* 🤑
+
+- [MonoLisa][monolisa]
+- [Dank Mono][dank-mono]
+
+### Ligatures
+
+I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it's hard to go back to a sans-ligature typeface. Therefore all the fonts I've included in my fave's list *do* include ligatures, although some have more than others.
+
+### Nerd Font Variants
+
+I use [Devicons][devicons] in my editor, and these require patched fonts in order to display properly. For most free fonts, there are pre-patched [Nerd Font][nerd-fonts-downloads] variants that include the various glyphs and icons.
+
+[Homebrew Cask Fonts][homebrew-cask-fonts] includes both original and Nerd Font variants. For example:
+
+```sh
+# Original font
+$ brew cask install font-fira-code
+
+# Patched variant
+$ brew cask install font-firacode-nerd-font
+```
+
+If using a font that does not have a patched variant (e.g. MonoLisa) iTerm2 has an option to use an alternate font for non-ASCII characters.
+
+![iterm2-font-settings][iterm2-font-settings]
+
+### Useful Font Links
+
+- [Nerd Font Downloads][nerd-fonts-downloads]
+- [Programming Fonts - Test Drive][programming-fonts]
+- [Homebrew Cask Fonts][homebrew-cask-fonts]
+
 ## Setting up iTerm2
 
 Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
@@ -236,23 +285,34 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
+[cascadia-code]: https://github.com/microsoft/cascadia-code
 [catalina]: https://www.apple.com/macos/catalina/
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [coreutils]: https://formulae.brew.sh/formula/coreutils
+[dank-mono]: https://dank.sh/
+[devicons]: https://github.com/ryanoasis/vim-devicons
+[fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
+[homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
 [homebrew]: http://brew.sh
+[iosevka]: https://typeof.net/Iosevka/
+[iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587816605/screenshots/iterm2-font-settings_k7upta.png
 [iterm2]: https://www.iterm2.com/
 [javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[jetbrains-mono]: https://www.jetbrains.com/lp/mono/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [mac-bootstrap]: http://jsua.co/macos
 [material]: https://github.com/kaicataldo/material.vim
+[monolisa]: https://www.monolisa.dev/
 [neo-solarized]: https://github.com/icymind/NeoSolarized
 [neovim]: https://neovim.io/
+[nerd-fonts-downloads]: https://www.nerdfonts.com/font-downloads
 [night-owl]: https://github.com/haishanh/night-owl.vim
 [nodejs]: https://nodejs.org/
 [oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
+[programming-fonts]: https://app.programmingfonts.org/
 [rails]: https://rubyonrails.org/
 [react]: https://reactjs.org/
 [ruby]: https://www.ruby-lang.org/en
@@ -261,6 +321,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [starship]: https://starship.rs/
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
+[victor-mono]: https://rubjo.github.io/victor-mono/
 [vim]: http://www.vim.org/
 [vue]: https://vuejs.org/
 [zsh]: https://www.zsh.org/
