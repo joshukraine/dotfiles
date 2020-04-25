@@ -130,6 +130,10 @@ My all-time favorite colorscheme for code-editing is [Solarized Dark][solarized]
 
 I've now introduced an approach for switching between colorschemes which I hope will be more straightforward. It's still not a one-step operation, but all the colorschemes and there individual settings can be stored simultaneously and switching between them takes minimal effort.
 
+![One Half Dark Screenshot][one-half-dark-screenshot]
+
+*Example of a React app with the One Half Dark colorscheme*
+
 At the time of this writing, I've incorporated nine colorschemes, all of which require true color support.
 
 1. [Solarized Dark][neo-solarized]
@@ -358,6 +362,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [oceanic-next]: https://github.com/mhartington/oceanic-next
 [oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
+[one-half-dark-screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587822657/screenshots/one-half-dark-sample_rn5fds.png
 [one-half-dark]: https://github.com/sonph/onehalf
 [programming-fonts]: https://app.programmingfonts.org/
 [rails]: https://rubyonrails.org/
