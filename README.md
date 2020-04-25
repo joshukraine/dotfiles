@@ -130,11 +130,17 @@ My all-time favorite colorscheme for code-editing is [Solarized Dark][solarized]
 
 I've now introduced an approach for switching between colorschemes which I hope will be more straightforward. It's still not a one-step operation, but all the colorschemes and there individual settings can be stored simultaneously and switching between them takes minimal effort.
 
-At the time of this writing, I've incorporated three colorschemes:
+At the time of this writing, I've incorporated nine colorschemes, all of which require true color support.
 
 1. [Solarized Dark][neo-solarized]
-2. [Night Owl][night-owl]
-3. [Material][material]
+1. [One Half Dark][one-half-dark]
+1. [Tender][tender]
+1. [Oceanic Next][oceanic-next]
+1. [Night Owl][night-owl]
+1. [Nightfly][nightfly]
+1. [Nord Vim][nord]
+1. [Vim One][vim-one]
+1. [Material][material]
 
 Here's how everything is organized:
 
@@ -147,7 +153,13 @@ nvim/
 └── colorschemes
     ├── material.vim
     ├── night-owl.vim
-    └── solarized.vim
+    ├── nightfly.vim
+    ├── nord.vim
+    ├── oceanic-next.vim
+    ├── onehalfdark.vim
+    ├── solarized.vim
+    ├── tender.vim
+    └── vim-one.vim
 ```
 
 #### 2. Machine-specific Config
@@ -340,9 +352,13 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [neovim]: https://neovim.io/
 [nerd-fonts-downloads]: https://www.nerdfonts.com/font-downloads
 [night-owl]: https://github.com/haishanh/night-owl.vim
+[nightfly]: https://github.com/bluz71/vim-nightfly-guicolors
 [nodejs]: https://nodejs.org/
+[nord]: https://github.com/arcticicestudio/nord-vim
+[oceanic-next]: https://github.com/mhartington/oceanic-next
 [oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
+[one-half-dark]: https://github.com/sonph/onehalf
 [programming-fonts]: https://app.programmingfonts.org/
 [rails]: https://rubyonrails.org/
 [react]: https://reactjs.org/
@@ -350,9 +366,11 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1584547844/screenshots/dotfiles-mar-2020_a5p5do.png
 [solarized]: https://github.com/altercation/solarized
 [starship]: https://starship.rs/
+[tender]: https://github.com/jacoborus/tender.vim
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [victor-mono]: https://rubjo.github.io/victor-mono/
+[vim-one]: https://github.com/rakr/vim-one
 [vim]: http://www.vim.org/
 [vue]: https://vuejs.org/
 [zsh]: https://www.zsh.org/
