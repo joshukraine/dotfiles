@@ -4,6 +4,37 @@
 
 These are the dotfiles I use on my Mac computers, currently running [macOS Catalina (10.15)][catalina]. They are geared primarily towards web development with [Rails][rails], [React][react], and [Vue][vue]. I use a terminal-based development environment built on [Fish][fish], [Tmux][tmux], and [Neovim][neovim]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
 
+## Table of Contents
+
+- [Mac Bootstrap Script](#mac-bootstrap-script)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Fish or Zsh?](#fish-or-zsh)
+  - [Zsh Setup](#zsh-setup)
+  - [Fish Setup](#fish-setup)
+- [Post-install Tasks](#post-install-tasks)
+- [Machine-specific Configs](#machine-specific-configs)
+- [Colorschemes](#colorschemes)
+  - [1. Colorschemes](#1-colorschemes)
+  - [2. Machine-specific Config](#2-machine-specific-config)
+  - [3. iTerm2 Profile](#3-iterm2-profile)
+  - [4. Tmux Status Bar](#4-tmux-status-bar)
+  - [Useful Colorscheme Links](#useful-colorscheme-links)
+- [My Favorite Programming Fonts](#my-favorite-programming-fonts)
+  - [Free Fonts](#free-fonts)
+  - [Premium Fonts](#premium-fonts)
+  - [Ligatures](#ligatures)
+  - [Nerd Font Variants](#nerd-font-variants)
+  - [Useful Font Links](#useful-font-links)
+- [Setting up iTerm2](#setting-up-iterm2)
+- [Setting up Terminal.app](#setting-up-terminalapp)
+- [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
+- [Vim vs. Neovim](#vim-vs-neovim)
+- [Identifying Sources of Slow Startup Times](#identifying-sources-of-slow-startup-times)
+- [Some of my favorite dotfile repos](#some-of-my-favorite-dotfile-repos)
+- [Helpful web resources on dotfiles, et al.](#helpful-web-resources-on-dotfiles-et-al)
+- [License](#license)
+
 ## Mac Bootstrap Script
 
 Need to provision a new Mac from scratch? My Mac Bootstrap script installs and configures the software, dotfiles, and general preferences I use for web development.
