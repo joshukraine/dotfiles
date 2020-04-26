@@ -139,6 +139,7 @@ cask "viber"
 cask "vlc"
 cask "vmware-fusion"
 cask "whatsapp"
+cask "zoomus"
 
 # rubocop:disable Style/NumericLiterals
 mas "Deliveries", id: 924726344
@@ -151,6 +152,7 @@ mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Spark", id: 1176895641
+mas "Things 3", id: 904280696
 mas "ToothFairy", id: 1191449274
 mas "WiFi Explorer", id: 494803304
 mas "e-Sword", id: 968437868
