@@ -128,7 +128,7 @@ My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above 
 
 My all-time favorite colorscheme for code-editing is [Solarized Dark][solarized]. That said, there are times when I like to dabble with something new, just to have some variety. In the past it's been painful to switch colorschemes for vim since I also needed to find a suitable profile for iTerm2, make tweaks to tmux.conf, etc. Sometimes the colorschemes were 24-bit only (think `set termguicolors`) and others were more simple (256-color), like the original version of Solarized.
 
-I've now introduced an approach for switching between colorschemes which I hope will be more straightforward. It's still not a one-step operation, but all the colorschemes and there individual settings can be stored simultaneously and switching between them takes minimal effort.
+I've now introduced an approach for switching between colorschemes which I hope will be more straightforward. It's still not a one-step operation, but all the colorschemes and their individual settings can be stored simultaneously, and switching between them takes minimal effort.
 
 ![One Half Dark Screenshot][one-half-dark-screenshot]
 
