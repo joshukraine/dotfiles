@@ -59,6 +59,7 @@ brew "memcached"
 brew "mono"
 brew "most"
 brew "multitail"
+brew "neofetch"
 brew "neovim", args: ["HEAD"]
 brew "onefetch"
 brew "overmind"
