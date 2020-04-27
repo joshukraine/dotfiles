@@ -61,8 +61,8 @@ abbr -a -g defr 'defaults read'
 abbr -a -g defw 'defaults write'
 
 # Misc
-abbr -a -f neo 'neofetch'
-abbr -a -f one 'onefetch'
+abbr -a -g neo 'neofetch'
+abbr -a -g one 'onefetch'
 abbr -a -g ch 'cht.sh'
 abbr -a -g chs 'cht.sh --shell'
 abbr -a -g color 'colortest -w -s'
