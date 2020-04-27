@@ -5,7 +5,7 @@
         "revision": "784f4e47c2e527c515454212db158149f869c7f3"
       },
       "homebrew/cask": {
-        "revision": "82ad5431a40b1dffb33aad21e72ec90b8790de0c"
+        "revision": "d3634f306134235949cbe01dc7243513508ea7bf"
       },
       "homebrew/cask-versions": {
         "revision": "71bf8d837d86d226cb144df095a9efc42e63455c"
@@ -17,7 +17,7 @@
         "revision": "a624c89faf91b3ee1d4743d705ccff4e624ec181"
       },
       "homebrew/core": {
-        "revision": "01df69af2d5860409ba651cd360a7e46225c9071"
+        "revision": "f21eb378c8855cf9332e1f305f6b6dbeaeadf000"
       },
       "homebrew/services": {
         "revision": "6e7ea0cff515df8b5d53a6e3066e16cf5e94d03a"
@@ -1525,6 +1525,27 @@
             }
           }
         }
+      },
+      "neofetch": {
+        "version": "7.0.0",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/neofetch-7.0.0.catalina.bottle.tar.gz",
+              "sha256": "bfb4c9f42eee7659b0028a7d4de28524d5a6eb8f1199f83789fa0242b37c456e"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/neofetch-7.0.0.mojave.bottle.tar.gz",
+              "sha256": "bfb4c9f42eee7659b0028a7d4de28524d5a6eb8f1199f83789fa0242b37c456e"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/neofetch-7.0.0.high_sierra.bottle.tar.gz",
+              "sha256": "bfb4c9f42eee7659b0028a7d4de28524d5a6eb8f1199f83789fa0242b37c456e"
+            }
+          }
+        }
       }
     },
     "cask": {
@@ -1945,7 +1966,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.13-151-gbdc7ebf",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "01df69af2d5860409ba651cd360a7e46225c9071",
+        "Homebrew/homebrew-core": "f21eb378c8855cf9332e1f305f6b6dbeaeadf000",
         "CLT": "11.4.1.0.1.1586360307",
         "Xcode": "11.4.1",
         "macOS": "10.15.4"
