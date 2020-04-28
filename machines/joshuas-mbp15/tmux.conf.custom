@@ -1,3 +1,6 @@
+# pane colors
+set -g pane-border-style bg=default,fg="#5c6370"
+
 # Status bar background color.
 # set -g status-style bg=#2c3b41 # For Material colorscheme
 # set -g status-style bg=#112630 # For Night Owl colorscheme
