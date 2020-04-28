@@ -1,21 +1,20 @@
-# Enable UTF-8 support in status bar
-set -g status on
+# pane colors
+set -g pane-border-style bg=default,fg=$BLACK
+set -g pane-active-border-style bg=default,fg=$BRIGHT_BLUE
 
+# set the color of the window list
+setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
+
+# Status bar settings
+set -g status-left "#[fg=$GREEN][#S] #[fg=$RED]w#I #[fg=$BRIGHT_BLUE]p#P"
+
+# Status bar background color.
 # set -g status-style bg=#2c3b41 # For Material colorscheme
 # set -g status-style bg=#112630 # For Night Owl colorscheme
 # set -g status-style bg=#3B4252 # For Nord colorscheme
 # set -g status-style bg=#343d46 # For Oceanic Next colorscheme
 # set -g status-style bg=#313640 # For One Half Dark colorscheme
 set -g status-style bg=#323232 # For Tender Dark colorscheme
-# set -g status-style bg=black # For Solarized colorscheme
 # set -g status-style bg=#2c323c # For Vim One colorscheme
-
-# Status bar settings
-set -g status-left-length 60
-set -g status-left "#[fg=green][#S] #[fg=red]w#I #[fg=blue]p#P"
-set -g status-right-length 60
-set -g status-right " #[fg=white]%a, %b %d | %H:%M "
-set -g status-interval 15 # default is 15
-set -g status-justify centre
 
 # vim: set filetype=tmux:
