@@ -134,7 +134,7 @@ I've now introduced an approach for switching between colorschemes which I hope 
 
 *Example of a React app with the One Half Dark colorscheme*
 
-At the time of this writing, I've incorporated nine colorschemes, all of which require true color support.
+At the time of this writing, I've incorporated ten colorschemes, all of which require true color support.
 
 1. [Solarized Dark][neo-solarized]
 1. [One Half Dark][one-half-dark]
@@ -145,6 +145,7 @@ At the time of this writing, I've incorporated nine colorschemes, all of which r
 1. [Nord Vim][nord]
 1. [Vim One][vim-one]
 1. [Material][material]
+1. [Gruvbox][gruvbox]
 
 Here's how everything is organized:
 
@@ -341,6 +342,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
+[gruvbox]: https://github.com/morhetz/gruvbox
 [homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
 [homebrew]: http://brew.sh
 [iosevka]: https://typeof.net/Iosevka/
