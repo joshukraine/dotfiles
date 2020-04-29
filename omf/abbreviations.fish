@@ -75,8 +75,12 @@ abbr -a -g tlw 'tmux list-windows'
 abbr -a -g mux 'tmuxinator'
 
 # Neovim
-abbr -a -g vis 'nvim -S'
+abbr -a -g vi 'nvim'
 abbr -a -g vi0 'nvim -u NONE'
+abbr -a -g vim 'nvim'
+abbr -a -g vir 'nvim -R'
+abbr -a -g vis 'nvim -S'
+abbr -a -g vv 'nvim --version | less'
 
 # asdf
 abbr -a -g ala 'asdf list-all'
