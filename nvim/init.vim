@@ -257,7 +257,6 @@ Plug 'diepm/vim-rest-console'           " A REST console for Vim.               
 Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the cursor           | https://github.com/rhysd/git-messenger.vim
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
-Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quotes in pair     | https://github.com/jiangmiao/auto-pairs
 Plug 'reedes/vim-textobj-quote'         " Use ‘curly’ quote characters in Vim                   | https://github.com/reedes/vim-textobj-quote
 
 " Code Completion
@@ -472,6 +471,7 @@ let g:coc_global_extensions = [
             \ 'coc-emmet',
             \ 'coc-eslint',
             \ 'coc-html',
+            \ 'coc-pairs',
             \ 'coc-json',
             \ 'coc-marketplace',
             \ 'coc-prettier',
