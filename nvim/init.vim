@@ -178,6 +178,15 @@ augroup window_resize
   autocmd!
   autocmd VimResized * :wincmd =
 augroup END
+
+" https://github.com/reedes/vim-textobj-quote#configuration
+augroup textobj_quote
+  autocmd!
+  autocmd FileType markdown call textobj#quote#init()
+  autocmd FileType textile call textobj#quote#init()
+  autocmd FileType text call textobj#quote#init({'educate': 0})
+augroup END
+
 " }}}
 
 " Mappings {{{
@@ -250,6 +259,7 @@ Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the c
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
 Plug 'jiangmiao/auto-pairs'             " insert or delete brackets, parens, quotes in pair     | https://github.com/jiangmiao/auto-pairs
+Plug 'reedes/vim-textobj-quote'         " Use ‘curly’ quote characters in Vim                   | https://github.com/reedes/vim-textobj-quote
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
