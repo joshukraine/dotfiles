@@ -149,7 +149,6 @@ augroup file_types
   autocmd Bufread,BufNewFile *Brewfile,pryrc set filetype=ruby
   autocmd Bufread,BufNewFile *prettierrc,*stylelintrc,*browserslistrc,*babelrc set filetype=json
   autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh,opts set filetype=zsh
-  autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'modula2' otherwise, see :set filetype?
   autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
   autocmd Bufread,BufNewFile *.asciidoc,*.adoc,*.asc,*.ad set filetype=asciidoctor
 augroup END
