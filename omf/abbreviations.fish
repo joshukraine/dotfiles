@@ -79,7 +79,7 @@ abbr -a -g vi 'nvim'
 abbr -a -g vi0 'nvim -u NONE'
 abbr -a -g vim 'nvim'
 abbr -a -g vir 'nvim -R'
-abbr -a -g vis 'nvim -S'
+abbr -a -g vs 'nvim -S'
 abbr -a -g vv 'nvim --version | less'
 
 # asdf
