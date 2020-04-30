@@ -1,20 +1,23 @@
-# pane colors
-set -g pane-border-style bg=default,fg=$BLACK
-set -g pane-active-border-style bg=default,fg=$BRIGHT_BLUE
-
 # set the color of the window list
 setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
 
+# set colors for the active window
+setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
+
+# pane colors
+set -g pane-border-style bg=default,fg="#665c54"
+
 # Status bar settings
-set -g status-left "#[fg=$GREEN][#S] #[fg=$RED]w#I #[fg=$BRIGHT_BLUE]p#P"
+set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
 
 # Status bar background color.
+set -g status-style bg="#3c3836" # For Gruvbox colorscheme
 # set -g status-style bg=#2c3b41 # For Material colorscheme
 # set -g status-style bg=#112630 # For Night Owl colorscheme
 # set -g status-style bg=#3B4252 # For Nord colorscheme
 # set -g status-style bg=#343d46 # For Oceanic Next colorscheme
 # set -g status-style bg=#313640 # For One Half Dark colorscheme
-set -g status-style bg=#323232 # For Tender Dark colorscheme
+# set -g status-style bg=#323232 # For Tender Dark colorscheme
 # set -g status-style bg=#2c323c # For Vim One colorscheme
 
 # vim: set filetype=tmux:
