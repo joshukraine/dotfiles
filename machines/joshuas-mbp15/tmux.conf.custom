@@ -1,5 +1,14 @@
+# set the color of the window list
+setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
+
+# set colors for the active window
+setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
+
 # pane colors
 set -g pane-border-style bg=default,fg="#665c54"
+
+# Status bar settings
+set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
 
 # Status bar background color.
 set -g status-style bg="#3c3836" # For Gruvbox colorscheme
