@@ -3,3 +3,4 @@ vim/.netrwhist
 .gitconfig.local
 .zshrc.local
 .vimrc.local
+local/*

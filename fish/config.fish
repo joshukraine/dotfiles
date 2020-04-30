@@ -32,6 +32,6 @@ end
 
 fish_vi_key_bindings
 
-if test -e ~/.fish.local
-  . ~/.fish.local
+if test -e $DOTFILES/local/config.fish.local
+  source $DOTFILES/local/config.fish.local
 end
