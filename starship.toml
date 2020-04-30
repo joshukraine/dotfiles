@@ -9,10 +9,10 @@ disabled = true
 style = "bold blue"
 
 [git_branch]
-style = "bold white"
+style = "bold bright-white"
 
 [git_status]
-style = "bold white"
+style = "bold bright-white"
 ahead.style = "purple"
 ahead.value =""
 behind.style = "cyan"
