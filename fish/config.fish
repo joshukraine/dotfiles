@@ -20,7 +20,7 @@ set -xg DOTFILES "$HOME/dotfiles"
 set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden'
 set -xg HOST_NAME (scutil --get HostName)
 
-. $OMF_CONFIG/abbreviations.fish
+. $DOTFILES/fish/abbreviations.fish
 
 fish_vi_key_bindings
 
