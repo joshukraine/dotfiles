@@ -7,6 +7,12 @@ abbr -a -g duf 'du -sh *'
 abbr -a -g mkdir 'mkdir -pv'
 abbr -a -g mv 'mv -iv'
 
+# Config dir access
+abbr -a -g cdot 'cd $DOTFILES'
+abbr -a -g cdxc 'cd $XDG_CONFIG_HOME'
+abbr -a -g cdxd 'cd $XDG_DATA_HOME'
+abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
+
 # Moving around
 abbr -a -g .. 'cd ..'
 abbr -a -g ... 'cd ../../'
