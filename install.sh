@@ -26,6 +26,7 @@ dotfiles_backup() {
 
 set -e # Terminate script if anything exits with a non-zero value
 
+FISH_DIR="${HOME}/.config/fish"
 DOTFILES_DIR=$HOME/dotfiles
 
 if [ -z "$XDG_CONFIG_HOME" ]; then
@@ -36,6 +37,15 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 else
   CONFIG_DIR=$XDG_CONFIG_HOME
 fi
+
+if [ ! -d "${HOME}/.config/fish" ]; then
+  mkdir "${HOME}/.config/fish"
+fi
+
+fish_files=(
+"config.fish"
+"abbreviations.fish"
+)
 
 home_files=(
 "asdfrc"
@@ -58,7 +68,6 @@ home_files=(
 
 config_dirs=(
 "nvim"
-"omf"
 "ranger"
 )
 
@@ -106,6 +115,34 @@ for item in "${config_dirs[@]}"; do
   dotfiles_echo "-> Linking $DOTFILES_DIR/$item to $CONFIG_DIR/$item..."
   ln -nfs "$DOTFILES_DIR"/"$item" "$CONFIG_DIR"/"$item"
 done
+
+for item in "${fish_files[@]}"; do
+  if [ -e "${FISH_DIR}/${item}" ]; then
+    dotfiles_echo "${item} exists."
+    if [ -L "${FISH_DIR}/${item}" ]; then
+      dotfiles_echo "Symbolic link detected. Removing..."
+      rm -v "${FISH_DIR}/${item}"
+    else
+      dotfiles_echo "Backing up..."
+      dotfiles_backup "${FISH_DIR}/${item}"
+    fi
+  fi
+  dotfiles_echo "-> Linking ${DOTFILES_DIR}/fish/${item} to ${FISH_DIR}/${item}..."
+  ln -nfs "${DOTFILES_DIR}/fish/${item}" "${FISH_DIR}/${item}"
+done
+
+if [ -d "${FISH_DIR}"/functions ]; then
+  dotfiles_echo "Directory ${item} exists."
+  if [ -L "${FISH_DIR}"/functions ]; then
+    dotfiles_echo "Symbolic link detected. Removing..."
+    rm -v "${FISH_DIR}"/functions
+  else
+    dotfiles_echo "Backing up..."
+    dotfiles_backup "${FISH_DIR}/${item}"
+  fi
+fi
+dotfiles_echo "-> Linking ${DOTFILES_DIR}/fish/functions to ${FISH_DIR}/functions..."
+ln -nfs "${DOTFILES_DIR}/fish/functions" "${FISH_DIR}/functions"
 
 if [ -e "$CONFIG_DIR"/starship.toml ]; then
   dotfiles_echo "starship.toml exists."
