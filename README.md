@@ -18,7 +18,7 @@ These are the dotfiles I use on my Mac computers, currently running [macOS Catal
   - [1. Colorschemes](#1-colorschemes)
   - [2. Machine-specific Config](#2-machine-specific-config)
   - [3. iTerm2 Profile](#3-iterm2-profile)
-  - [4. Tmux Status Bar](#4-tmux-status-bar)
+  - [4. Tmux Custom Overrides](#4-tmux-custom-overrides)
   - [Useful Colorscheme Links](#useful-colorscheme-links)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
   - [Free Fonts](#free-fonts)
@@ -156,6 +156,7 @@ The settings for individual colorschemes are stored in separate files. To add a 
 ```
 nvim/
 └── colorschemes
+    ├── gruvbox.vim
     ├── material.vim
     ├── night-owl.vim
     ├── nightfly.vim
@@ -174,7 +175,7 @@ Every machine I manage has a `colorscheme.vim` file in its directory. That file 
 ```
 " machines/joshuas-imac/colorscheme.vim
 
-exe 'source' stdpath('config') . '/colorschemes/night-owl.vim'
+exe 'source' stdpath('config') . '/colorschemes/gruvbox.vim'
 ```
 
 This theme is then loaded in `nvim/init.vim` with the following line (see the Appearance section):
@@ -189,16 +190,26 @@ exe 'source' "$DOTFILES/machines/$HOST_NAME/colorscheme.vim"
 
 Since I use vim in the terminal, I need corresponding iTerm2 profiles for every vim colorscheme. These are stored in `itermcolors/` but of course must be added manually to the iTerm profile.
 
-#### 4. Tmux Status Bar
+#### 4. Tmux Custom Overrides
 
-The last tweak is for Tmux. I like to set a specific hex color code for the status bar background depending on which colorscheme I'm using. Each machine profile now has its own `tmux.conf.status-bar` file. In particular, it can be nice to adjust the background of the status bar to better match the current colorscheme.
+The last tweak is for Tmux. I like to set custom hex color codes for the status bar depending on which colorscheme I'm using. Each machine profile now has its own `tmux.conf.custom` file. In particular, it can be nice to adjust the background of the status bar to better match the current colorscheme.
+
+The main `tmux.conf` file contains all the settings that Tmux needs. However, any setting that is re-declared in `machines/$HOST_NAME/tmux.conf.custom` will override the defaults.
 
 ```
-# machines/joshuas-imac/tmux.conf.status-bar
+# machines/joshuas-imac/tmux.conf.custom
 
-set -g status-style bg=#112630 # For Night Owl colorscheme
+# pane colors
+set -g pane-border-style bg=default,fg="#665c54"
+
+# Status bar settings
+set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
+
+# Status bar background color.
+set -g status-style bg="#3c3836" # For Gruvbox colorscheme
 # set -g status-style bg=#2c3b41 # For Material colorscheme
-# set -g status-style bg=black # For Solarized colorscheme
+# set -g status-style bg=#112630 # For Night Owl colorscheme
+[...]
 ```
 
 ### Useful Colorscheme Links
