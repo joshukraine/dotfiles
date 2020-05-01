@@ -62,15 +62,15 @@ All of the above and more are included in [Mac Bootstrap][mac-bootstrap]
 
 ## Installation
 
-The install script will try to detect your default shell using `$SHELL` and provide the appropriate setup. Supported options are Fish and Zsh.
+The install script will create the needed directories and symlinks for your setup, adding config files for both Zsh and Fish.
 
 1. Setup your shell. (See Fish/Zsh instructions below.)
 
-1. Install the dotfiles.
+1. Run the installation script.
 
 ```sh
 $ git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-$ sh ~/dotfiles/install.sh
+$ bash ~/dotfiles/install.sh
 ```
 
 ## Fish or Zsh?
@@ -89,7 +89,7 @@ I have used Zsh for years and really liked it. Recently I've switched to Fish, a
 1. Install Fish: `$ brew install fish`
 1. Add Fish to `/etc/shells`: `$ echo /usr/local/bin/fish | sudo tee -a /etc/shells`
 1. Set it as your default shell: `$ chsh -s /usr/local/bin/fish`
-1. Install [Oh My Fish][oh-my-fish]
+1. Restart your terminal emulator. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
 
 ## Post-install Tasks
 
@@ -122,7 +122,7 @@ machines/
     └── [...]
 ```
 
-My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `omf/functions/bb.fish`)
+My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `fish/functions/bb.fish`)
 
 ## Colorschemes
 
