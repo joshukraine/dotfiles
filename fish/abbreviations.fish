@@ -10,6 +10,8 @@ abbr -a -g mv 'mv -iv'
 # Config dir access
 abbr -a -g cdot 'cd $DOTFILES'
 abbr -a -g cdxc 'cd $XDG_CONFIG_HOME'
+abbr -a -g cdfi 'cd $XDG_CONFIG_HOME/fish'
+abbr -a -g cdnv 'cd $XDG_CONFIG_HOME/nvim'
 abbr -a -g cdxd 'cd $XDG_DATA_HOME'
 abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
 
