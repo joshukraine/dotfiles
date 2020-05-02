@@ -26,20 +26,26 @@ dotfiles_backup() {
 
 set -e # Terminate script if anything exits with a non-zero value
 
-DOTFILES_DIR="${HOME}/dotfiles"
-FISH_DIR="${HOME}/.config/fish"
+if [ -z "$DOTFILES" ]; then
+  export DOTFILES="${HOME}/dotfiles"
+fi
+
+if [ -z "$HOST_NAME" ]; then
+  HOST_NAME=$(scutil --get HostName)
+  export HOST_NAME
+fi
 
 if [ -z "$XDG_CONFIG_HOME" ]; then
   if [ ! -d "${HOME}/.config" ]; then
     mkdir "${HOME}/.config"
   fi
-  CONFIG_DIR="${HOME}/.config"
-else
-  CONFIG_DIR=$XDG_CONFIG_HOME
+  export XDG_CONFIG_HOME="${HOME}/.config"
 fi
 
-if [ ! -d "${HOME}/.config/fish" ]; then
-  mkdir "${HOME}/.config/fish"
+FISH_DIR="${XDG_CONFIG_HOME}/fish"
+
+if [ ! -d "$FISH_DIR" ]; then
+  mkdir "$FISH_DIR"
 fi
 
 fish_files=(
@@ -84,8 +90,8 @@ for item in "${home_files[@]}"; do
       dotfiles_backup "${HOME}/.${item}"
     fi
   fi
-  dotfiles_echo "-> Linking ${DOTFILES_DIR}/${item} to ${HOME}/.${item}..."
-  ln -nfs "${DOTFILES_DIR}/${item}" "${HOME}/.${item}"
+  dotfiles_echo "-> Linking ${DOTFILES}/${item} to ${HOME}/.${item}..."
+  ln -nfs "${DOTFILES}/${item}" "${HOME}/.${item}"
 done
 
 if [ -e "${HOME}/Brewfile" ]; then
@@ -98,22 +104,22 @@ if [ -e "${HOME}/Brewfile" ]; then
     dotfiles_backup "${HOME}/Brewfile"
   fi
 fi
-dotfiles_echo "-> Linking ${DOTFILES_DIR}/Brewfile to ${HOME}/Brewfile..."
-ln -nfs "${DOTFILES_DIR}/Brewfile" "${HOME}/Brewfile"
+dotfiles_echo "-> Linking ${DOTFILES}/Brewfile to ${HOME}/Brewfile..."
+ln -nfs "${DOTFILES}/Brewfile" "${HOME}/Brewfile"
 
 for item in "${config_dirs[@]}"; do
-  if [ -d "${CONFIG_DIR}/${item}" ]; then
+  if [ -d "${XDG_CONFIG_HOME}/${item}" ]; then
     dotfiles_echo "Directory ${item} exists."
-    if [ -L "${CONFIG_DIR}/${item}" ]; then
+    if [ -L "${XDG_CONFIG_HOME}/${item}" ]; then
       dotfiles_echo "Symbolic link detected. Removing..."
-      rm -v "${CONFIG_DIR}/${item}"
+      rm -v "${XDG_CONFIG_HOME}/${item}"
     else
       dotfiles_echo "Backing up..."
-      dotfiles_backup "${CONFIG_DIR}/${item}"
+      dotfiles_backup "${XDG_CONFIG_HOME}/${item}"
     fi
   fi
-  dotfiles_echo "-> Linking ${DOTFILES_DIR}/${item} to ${CONFIG_DIR}/${item}..."
-  ln -nfs "${DOTFILES_DIR}/${item}" "${CONFIG_DIR}/${item}"
+  dotfiles_echo "-> Linking ${DOTFILES}/${item} to ${XDG_CONFIG_HOME}/${item}..."
+  ln -nfs "${DOTFILES}/${item}" "${XDG_CONFIG_HOME}/${item}"
 done
 
 for item in "${fish_files[@]}"; do
@@ -127,8 +133,8 @@ for item in "${fish_files[@]}"; do
       dotfiles_backup "${FISH_DIR}/${item}"
     fi
   fi
-  dotfiles_echo "-> Linking ${DOTFILES_DIR}/fish/${item} to ${FISH_DIR}/${item}..."
-  ln -nfs "${DOTFILES_DIR}/fish/${item}" "${FISH_DIR}/${item}"
+  dotfiles_echo "-> Linking ${DOTFILES}/fish/${item} to ${FISH_DIR}/${item}..."
+  ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
 done
 
 if [ -d "${FISH_DIR}"/functions ]; then
@@ -141,28 +147,28 @@ if [ -d "${FISH_DIR}"/functions ]; then
     dotfiles_backup "${FISH_DIR}/${item}"
   fi
 fi
-dotfiles_echo "-> Linking ${DOTFILES_DIR}/fish/functions to ${FISH_DIR}/functions..."
-ln -nfs "${DOTFILES_DIR}/fish/functions" "${FISH_DIR}/functions"
+dotfiles_echo "-> Linking ${DOTFILES}/fish/functions to ${FISH_DIR}/functions..."
+ln -nfs "${DOTFILES}/fish/functions" "${FISH_DIR}/functions"
 
-if [ -e "${CONFIG_DIR}/starship.toml" ]; then
+if [ -e "${XDG_CONFIG_HOME}/starship.toml" ]; then
   dotfiles_echo "starship.toml exists."
-  if [ -L "${CONFIG_DIR}/starship.toml" ]; then
+  if [ -L "${XDG_CONFIG_HOME}/starship.toml" ]; then
     dotfiles_echo "Symbolic link detected. Removing..."
-    rm -v "${CONFIG_DIR}/starship.toml"
+    rm -v "${XDG_CONFIG_HOME}/starship.toml"
   else
     dotfiles_echo "Backing up..."
-    dotfiles_backup "${CONFIG_DIR}/starship.toml"
+    dotfiles_backup "${XDG_CONFIG_HOME}/starship.toml"
   fi
 fi
-dotfiles_echo "-> Linking ${DOTFILES_DIR}/starship.toml to ${CONFIG_DIR}/starship.toml..."
-ln -nfs "${DOTFILES_DIR}/starship.toml" "${CONFIG_DIR}/starship.toml"
+dotfiles_echo "-> Linking ${DOTFILES}/starship.toml to ${XDG_CONFIG_HOME}/starship.toml..."
+ln -nfs "${DOTFILES}/starship.toml" "${XDG_CONFIG_HOME}/starship.toml"
 
 dotfiles_echo "-> Installing vim-plug plugins..."
 nvim --headless +PlugInstall +qall
 
 dotfiles_echo "-> Installing custom terminfo entries..."
-tic -x "${DOTFILES_DIR}/terminfo/tmux-256color.terminfo"
-tic -x "${DOTFILES_DIR}/terminfo/xterm-256color-italic.terminfo"
+tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
+tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
 
 dotfiles_echo "Dotfiles installation complete!"
 
