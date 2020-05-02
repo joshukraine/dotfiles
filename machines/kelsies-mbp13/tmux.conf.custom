@@ -1,10 +1,11 @@
 # Status bar background color.
-# set -g status-style bg=#2c3b41 # For Material colorscheme
-# set -g status-style bg=#112630 # For Night Owl colorscheme
-set -g status-style bg=#3B4252 # For Nord colorscheme
-# set -g status-style bg=#313640 # For One Half Dark colorscheme
-# set -g status-style bg=#323232 # For Tender Dark colorscheme
-# set -g status-style bg=black # For Solarized colorscheme
-# set -g status-style bg=#2c323c # For Vim One colorscheme
+# set -g status-style bg="#3c3836" # For Gruvbox colorscheme
+# set -g status-style bg="#2c3b41" # For Material colorscheme
+# set -g status-style bg="#112630" # For Night Owl colorscheme
+set -g status-style bg="#3b4252" # For Nord colorscheme
+# set -g status-style bg="#343d46" # For Oceanic Next colorscheme
+# set -g status-style bg="#313640" # For One Half Dark colorscheme
+# set -g status-style bg="#323232" # For Tender Dark colorscheme
+# set -g status-style bg="#2c323c" # For Vim One colorscheme
 
 # vim: set filetype=tmux:
