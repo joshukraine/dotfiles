@@ -35,6 +35,11 @@ if [ -z "$HOST_NAME" ]; then
   export HOST_NAME
 fi
 
+if [ ! -d "${DOTFILES}/machines/${HOST_NAME}" ]; then
+  mkdir "${DOTFILES}/machines/${HOST_NAME}"
+  cp "$DOTFILES"/machines/default-mac/* "${DOTFILES}/machines/${HOST_NAME}/"
+fi
+
 if [ -z "$XDG_CONFIG_HOME" ]; then
   if [ ! -d "${HOME}/.config" ]; then
     mkdir "${HOME}/.config"
