@@ -18,7 +18,7 @@ These are the dotfiles I use on my Mac computers, currently running [macOS Catal
   - [1. Colorschemes](#1-colorschemes)
   - [2. Machine-specific Config](#2-machine-specific-config)
   - [3. iTerm2 Profile](#3-iterm2-profile)
-  - [4. Tmux Status Bar](#4-tmux-status-bar)
+  - [4. Tmux Custom Overrides](#4-tmux-custom-overrides)
   - [Useful Colorscheme Links](#useful-colorscheme-links)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
   - [Free Fonts](#free-fonts)
@@ -52,7 +52,7 @@ The dotfiles assume you are running macOS with the following software pre-instal
 * [Ruby][ruby]
 * [Node.js][nodejs]
 * [Fish][fish] or [Zsh][zsh]
-* [Oh My Fish][oh-my-fish] or [Oh-My-Zsh][oh-my-zsh]
+* [Oh-My-Zsh][oh-my-zsh] (if using zsh)
 * [Neovim][neovim]
 * [Tmux][tmux]
 * [asdf][asdf]
@@ -62,20 +62,20 @@ All of the above and more are included in [Mac Bootstrap][mac-bootstrap]
 
 ## Installation
 
-The install script will try to detect your default shell using `$SHELL` and provide the appropriate setup. Supported options are Fish and Zsh.
+The install script will create the needed directories and symlinks for your setup, adding config files for both Zsh and Fish.
 
 1. Setup your shell. (See Fish/Zsh instructions below.)
 
-1. Install the dotfiles.
+1. Run the installation script.
 
 ```sh
 $ git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-$ sh ~/dotfiles/install.sh
+$ bash ~/dotfiles/install.sh
 ```
 
 ## Fish or Zsh?
 
-I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script will link configs for both Fish and Zsh shells. After completing the installation, switch to the shell you want to use.
+I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script will link configs for both Fish and Zsh shells.
 
 ### Zsh Setup
 
@@ -89,7 +89,7 @@ I have used Zsh for years and really liked it. Recently I've switched to Fish, a
 1. Install Fish: `$ brew install fish`
 1. Add Fish to `/etc/shells`: `$ echo /usr/local/bin/fish | sudo tee -a /etc/shells`
 1. Set it as your default shell: `$ chsh -s /usr/local/bin/fish`
-1. Install [Oh My Fish][oh-my-fish]
+1. Restart your terminal emulator. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
 
 ## Post-install Tasks
 
@@ -98,7 +98,7 @@ After running `install.sh` there are still a couple of things that need to be do
 * Add machine-specific configs as needed. (see Machine-specific Configs below)
 * Set up iTerm2 or Terminal.app profile (see details below).
 * Complete [Brew Bundle][brew-bundle] with `brew bundle install`
-* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
+* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/dotfiles/local/config.fish.local`, and `~/.zshrc.local` as needed.
 * After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
 * If using Fish, customize your setup by running the `fish_config` command.
 
@@ -122,7 +122,7 @@ machines/
     └── [...]
 ```
 
-My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `omf/functions/bb.fish`)
+My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `fish/functions/bb.fish`)
 
 ## Colorschemes
 
@@ -156,6 +156,7 @@ The settings for individual colorschemes are stored in separate files. To add a 
 ```
 nvim/
 └── colorschemes
+    ├── gruvbox.vim
     ├── material.vim
     ├── night-owl.vim
     ├── nightfly.vim
@@ -174,7 +175,7 @@ Every machine I manage has a `colorscheme.vim` file in its directory. That file 
 ```
 " machines/joshuas-imac/colorscheme.vim
 
-exe 'source' stdpath('config') . '/colorschemes/night-owl.vim'
+exe 'source' stdpath('config') . '/colorschemes/gruvbox.vim'
 ```
 
 This theme is then loaded in `nvim/init.vim` with the following line (see the Appearance section):
@@ -189,16 +190,26 @@ exe 'source' "$DOTFILES/machines/$HOST_NAME/colorscheme.vim"
 
 Since I use vim in the terminal, I need corresponding iTerm2 profiles for every vim colorscheme. These are stored in `itermcolors/` but of course must be added manually to the iTerm profile.
 
-#### 4. Tmux Status Bar
+#### 4. Tmux Custom Overrides
 
-The last tweak is for Tmux. I like to set a specific hex color code for the status bar background depending on which colorscheme I'm using. Each machine profile now has its own `tmux.conf.status-bar` file. In particular, it can be nice to adjust the background of the status bar to better match the current colorscheme.
+The last tweak is for Tmux. I like to set custom hex color codes for the status bar depending on which colorscheme I'm using. Each machine profile now has its own `tmux.conf.custom` file. In particular, it can be nice to adjust the background of the status bar to better match the current colorscheme.
+
+The main `tmux.conf` file contains all the settings that Tmux needs. However, any setting that is re-declared in `machines/$HOST_NAME/tmux.conf.custom` will override the defaults.
 
 ```
-# machines/joshuas-imac/tmux.conf.status-bar
+# machines/joshuas-imac/tmux.conf.custom
 
-set -g status-style bg=#112630 # For Night Owl colorscheme
+# pane colors
+set -g pane-border-style bg=default,fg="#665c54"
+
+# Status bar settings
+set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
+
+# Status bar background color.
+set -g status-style bg="#3c3836" # For Gruvbox colorscheme
 # set -g status-style bg=#2c3b41 # For Material colorscheme
-# set -g status-style bg=black # For Solarized colorscheme
+# set -g status-style bg=#112630 # For Night Owl colorscheme
+[...]
 ```
 
 ### Useful Colorscheme Links
@@ -362,7 +373,6 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [nord]: https://github.com/arcticicestudio/nord-vim
 [oceanic-next]: https://github.com/mhartington/oceanic-next
-[oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [one-half-dark-screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587822657/screenshots/one-half-dark-sample_rn5fds.png
 [one-half-dark]: https://github.com/sonph/onehalf

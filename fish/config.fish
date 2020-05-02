@@ -1,10 +1,10 @@
-set fish_greeting ''
+set fish_greeting
 
 # PATH
-set PATH '/usr/local/sbin' $PATH
-set PATH '/usr/local/bin' $PATH
-set PATH "$HOME/.cargo/bin" $PATH
-set PATH "$HOME/bin" $PATH
+set -x PATH '/usr/local/sbin' $PATH
+set -x PATH '/usr/local/bin' $PATH
+set -x PATH "$HOME/.cargo/bin" $PATH
+set -x PATH "$HOME/bin" $PATH
 
 # Environment variables - https://fishshell.com/docs/current/commands.html#set
 set -xg EDITOR 'nvim'
@@ -20,16 +20,18 @@ set -xg DOTFILES "$HOME/dotfiles"
 set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden'
 set -xg HOST_NAME (scutil --get HostName)
 
-. $OMF_CONFIG/abbreviations.fish
+if status is-interactive
+  source $XDG_CONFIG_HOME/fish/abbreviations.fish
+
+  # https://github.com/starship/starship#fish
+  starship init fish | source
+
+  # https://asdf-vm.com/#/core-manage-asdf-vm?id=add-to-your-shell
+  source ~/.asdf/asdf.fish
+end
 
 fish_vi_key_bindings
 
-# https://github.com/starship/starship#fish
-starship init fish | source
-
-# asdf
-. $HOME/.asdf/asdf.fish
-
-if test -e ~/.fish.local
-  . ~/.fish.local
+if test -e $DOTFILES/local/config.fish.local
+  source $DOTFILES/local/config.fish.local
 end

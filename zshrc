@@ -9,12 +9,14 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export DISABLE_AUTO_TITLE=true
 export _Z_OWNER=$USER
+export ZSH_DISABLE_COMPFIX=true
 export RUBY_CONFIGURE_OPTS="--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export DOTFILES="$HOME/dotfiles"
-export TERM="screen-256color"
+HOST_NAME=$(scutil --get HostName)
+export HOST_NAME
 
 . $DOTFILES/zsh/oh-my-zsh
 . $DOTFILES/zsh/opts

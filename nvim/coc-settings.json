@@ -53,5 +53,9 @@
     "vue": ["javascript", "typescript", "html", "css"]
   },
 
-  "vetur.validation.style": false
+  "vetur.validation.style": false,
+
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  }
 }

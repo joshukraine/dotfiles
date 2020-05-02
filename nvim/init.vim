@@ -469,6 +469,7 @@ let g:vrc_curl_opts = {
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
             \ 'coc-css',
+            \ 'coc-diagnostic',
             \ 'coc-emmet',
             \ 'coc-eslint',
             \ 'coc-html',
@@ -596,9 +597,7 @@ highlight CocWarningSign ctermfg=178 ctermbg=0 guifg=#d7af00 guibg=NONE
 highlight CocInfoSign ctermfg=33 ctermbg=0 guifg=#0087ff guibg=NONE
 highlight CocHintSign ctermfg=226 ctermbg=0 guifg=#ffff00 guibg=NONE
 
-highlight htmlArg cterm=italic gui=italic
 highlight Comment cterm=italic gui=italic
-highlight PreProc cterm=italic gui=italic
 " }}}
 
 " Local {{{
