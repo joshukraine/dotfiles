@@ -52,7 +52,7 @@ The dotfiles assume you are running macOS with the following software pre-instal
 * [Ruby][ruby]
 * [Node.js][nodejs]
 * [Fish][fish] or [Zsh][zsh]
-* [Oh My Fish][oh-my-fish] or [Oh-My-Zsh][oh-my-zsh]
+* [Oh-My-Zsh][oh-my-zsh] (if using zsh)
 * [Neovim][neovim]
 * [Tmux][tmux]
 * [asdf][asdf]
@@ -75,7 +75,7 @@ $ bash ~/dotfiles/install.sh
 
 ## Fish or Zsh?
 
-I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script will link configs for both Fish and Zsh shells. After completing the installation, switch to the shell you want to use.
+I have used Zsh for years and really liked it. Recently I've switched to Fish, and am loving that too! I've kept both of my configs intact in my dotfiles. Running the install script will link configs for both Fish and Zsh shells.
 
 ### Zsh Setup
 
@@ -98,7 +98,7 @@ After running `install.sh` there are still a couple of things that need to be do
 * Add machine-specific configs as needed. (see Machine-specific Configs below)
 * Set up iTerm2 or Terminal.app profile (see details below).
 * Complete [Brew Bundle][brew-bundle] with `brew bundle install`
-* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/.fish.local`, and `~/.zshrc.local` as needed.
+* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/dotfiles/local/config.fish.local`, and `~/.zshrc.local` as needed.
 * After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
 * If using Fish, customize your setup by running the `fish_config` command.
 
@@ -373,7 +373,6 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [nord]: https://github.com/arcticicestudio/nord-vim
 [oceanic-next]: https://github.com/mhartington/oceanic-next
-[oh-my-fish]: https://github.com/oh-my-fish/oh-my-fish
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [one-half-dark-screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587822657/screenshots/one-half-dark-sample_rn5fds.png
 [one-half-dark]: https://github.com/sonph/onehalf
