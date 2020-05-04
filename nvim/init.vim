@@ -263,9 +263,13 @@ Plug 'reedes/vim-textobj-quote'         " Use ‘curly’ quote characters in Vi
 Plug 'neoclide/coc.nvim',
             \ {'branch': 'release'}                   " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
-Plug 'joshukraine/vscode-es7-javascript-react-snippets',
-            \ {'branch': 'coc-nvim-patch'}            " React VSCode snippets                   | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
 Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
+
+" After initial install of vscode-es7-javascript-react-snippets plugin:
+" $ cd $XDG_DATA_HOME/nvim/plugged/vscode-es7-javascript-react-snippets/
+" $ yarn install && yarn compile
+" https://github.com/dsznajder/vscode-es7-javascript-react-snippets/issues/116
+Plug 'dsznajder/vscode-es7-javascript-react-snippets', " React VSCode snippets                  | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
