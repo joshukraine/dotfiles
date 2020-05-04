@@ -294,6 +294,7 @@ Plug 'arcticicestudio/nord-vim'         " Vim colorscheme based on the Nord colo
 Plug 'mhartington/oceanic-next'         " Oceanic Next theme for neovim                         | https://github.com/mhartington/oceanic-next
 Plug 'jacoborus/tender.vim'             " A 24bit colorscheme for Vim, Airline and Lightline    | https://github.com/jacoborus/tender.vim
 Plug 'morhetz/gruvbox'                  " Retro groove color scheme for Vim                     | https://github.com/morhetz/gruvbox
+Plug 'joshukraine/vim-monokai-tasty',   " My fork of patstockwell/vim-monokai-tasty             | https://github.com/joshukraine/vim-monokai-tasty
 
 " Syntax Highlighting
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
