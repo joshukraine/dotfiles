@@ -134,18 +134,19 @@ I've now introduced an approach for switching between colorschemes which I hope 
 
 *Example of a React app with the One Half Dark colorscheme*
 
-At the time of this writing, I've incorporated ten colorschemes, all of which require true color support.
+At the time of this writing, I've incorporated 11 colorschemes, all of which require true color support.
 
-1. [Solarized Dark][neo-solarized]
-1. [One Half Dark][one-half-dark]
-1. [Tender][tender]
-1. [Oceanic Next][oceanic-next]
+1. [Gruvbox][gruvbox]
+1. [Material][material]
 1. [Night Owl][night-owl]
 1. [Nightfly][nightfly]
 1. [Nord Vim][nord]
+1. [Oceanic Next][oceanic-next]
+1. [One Half Dark][one-half-dark]
+1. [Solarized Dark][neo-solarized]
+1. [Tender][tender]
 1. [Vim One][vim-one]
-1. [Material][material]
-1. [Gruvbox][gruvbox]
+1. [vim-monokai-tasty][vim-monokai-tasty]
 
 Here's how everything is organized:
 
@@ -165,6 +166,7 @@ nvim/
     ├── onehalfdark.vim
     ├── solarized.vim
     ├── tender.vim
+    ├── vim-monokai-tasty.vim
     └── vim-one.vim
 ```
 
@@ -199,16 +201,18 @@ The main `tmux.conf` file contains all the settings that Tmux needs. However, an
 ```
 # machines/joshuas-imac/tmux.conf.custom
 
-# pane colors
+# Gruvbox {{{
+setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
+setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
 set -g pane-border-style bg=default,fg="#665c54"
-
-# Status bar settings
 set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
+set -g status-style bg="#3c3836"
+# }}}
 
-# Status bar background color.
-set -g status-style bg="#3c3836" # For Gruvbox colorscheme
-# set -g status-style bg=#2c3b41 # For Material colorscheme
-# set -g status-style bg=#112630 # For Night Owl colorscheme
+# Material {{{
+# set -g status-style bg="#2c3b41"
+# }}}
+
 [...]
 ```
 
@@ -387,6 +391,7 @@ Copyright &copy; 2020 Joshua Steele. [MIT License][license]
 [terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [victor-mono]: https://rubjo.github.io/victor-mono/
+[vim-monokai-tasty]: https://github.com/joshukraine/vim-monokai-tasty
 [vim-one]: https://github.com/rakr/vim-one
 [vim]: http://www.vim.org/
 [vue]: https://vuejs.org/
