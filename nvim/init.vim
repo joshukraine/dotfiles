@@ -57,7 +57,7 @@ set number
 set relativenumber
 
 " Highlight tabs and trailing whitespace
-set list listchars=tab:»·,trail:·,nbsp:+
+set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:+
 
 " UTF encoding
 set encoding=utf-8
