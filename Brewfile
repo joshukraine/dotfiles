@@ -88,7 +88,6 @@ brew "unixodbc" # asdf dependency
 brew "w3m"
 brew "wget"
 brew "xz"
-brew "yarn"
 brew "zsh"
 
 # homebrew-cask
