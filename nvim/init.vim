@@ -1,4 +1,8 @@
 " Settings {{{
+" NOTE: Some settings provided by vim-sensible.
+" $XDG_DATA_HOME/nvim/plugged/vim-sensible/plugin/sensible.vim
+" https://github.com/tpope/vim-sensible
+
 " https://github.com/christoomey/vim-tmux-navigator/issues/72
 set shell=/bin/bash\ -i
 
