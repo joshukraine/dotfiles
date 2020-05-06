@@ -151,7 +151,7 @@ augroup file_types
   autocmd!
   autocmd Bufread,BufNewFile *.spv set filetype=php
   autocmd Bufread,BufNewFile *Brewfile,pryrc set filetype=ruby
-  autocmd Bufread,BufNewFile *prettierrc,*stylelintrc,*browserslistrc,*babelrc set filetype=json
+  autocmd Bufread,BufNewFile *prettierrc,*stylelintrc,*babelrc set filetype=json
   autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh,opts set filetype=zsh
   autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
   autocmd Bufread,BufNewFile *.asciidoc,*.adoc,*.asc,*.ad set filetype=asciidoctor
