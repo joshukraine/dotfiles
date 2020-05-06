@@ -242,7 +242,7 @@ cmap w!! w !sudo tee >/dev/null %
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 if !filereadable(autoload_plug_path)
   silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
-              \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+        \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
   autocmd VimEnter * PlugInstall --sync | exe 'source' stdpath('config') . '/init.vim'
 endif
 unlet autoload_plug_path
@@ -265,7 +265,7 @@ Plug 'reedes/vim-textobj-quote'         " Use ‘curly’ quote characters in Vi
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
-            \ {'branch': 'release'}                   " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
+      \ {'branch': 'release'}                   " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
 Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
 
@@ -308,8 +308,8 @@ Plug 'joshukraine/vim-monokai-tasty',   " My fork of patstockwell/vim-monokai-ta
 Plug 'hail2u/vim-css3-syntax'           " CSS3 syntax                                           | https://github.com/hail2u/vim-css3-syntax
 Plug 'cakebaker/scss-syntax.vim'        " Vim syntax file for scss (Sassy CSS)                  | https://github.com/cakebaker/scss-syntax.vim
 Plug 'pangloss/vim-javascript',
-            \ { 'for': ['javascript', 'vue']
-            \}                          " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
+      \ { 'for': ['javascript', 'vue']
+      \}                                " Javascript indentation and syntax support in Vim.     | https://github.com/pangloss/vim-javascript
 Plug 'maxmellon/vim-jsx-pretty'         " JSX and TSX syntax pretty highlighting for vim.       | https://github.com/MaxMEllon/vim-jsx-pretty
 Plug 'posva/vim-vue'                    " Syntax Highlight for Vue.js components                | https://github.com/posva/vim-vue
 Plug 'elzr/vim-json'                    " A better JSON for Vim                                 | https://github.com/elzr/vim-json
@@ -345,24 +345,24 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
-            \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
-            \ '\.rar$']
+      \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
+      \ '\.rar$']
 let NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
 let g:NERDTreeIndicatorMapCustom = {
-            \ "Modified"  : "✹",
-            \ "Staged"    : "✚",
-            \ "Untracked" : "",
-            \ "Renamed"   : "➜",
-            \ "Unmerged"  : "═",
-            \ "Deleted"   : "✖",
-            \ "Dirty"     : "✹",
-            \ "Clean"     : "✔︎",
-            \ 'Ignored'   : '☒',
-            \ "Unknown"   : ""
-            \ }
+      \ "Modified"  : "✹",
+      \ "Staged"    : "✚",
+      \ "Untracked" : "",
+      \ "Renamed"   : "➜",
+      \ "Unmerged"  : "═",
+      \ "Deleted"   : "✖",
+      \ "Dirty"     : "✹",
+      \ "Clean"     : "✔︎",
+      \ 'Ignored'   : '☒',
+      \ "Unknown"   : ""
+      \ }
 
 " Vim DevIcons
 exe 'source' stdpath('config') . '/extras/devicons.vim'
@@ -439,9 +439,9 @@ map <leader>t :Files<CR>
 map <leader>y :Rg<CR>
 
 command! -bang -nargs=* Rg
-            \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-            \   fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   fzf#vim#with_preview(), <bang>0)
 
 " Custom rails.vim commands
 " command! Rroutes :e config/routes.rb
@@ -472,44 +472,45 @@ nmap <F8> :TagbarToggle<CR>
 
 " Vim REST Console (VRC)
 let g:vrc_curl_opts = {
-            \ '-L': '',
-            \ '-i': '',
-            \ }
+      \ '-L': '',
+      \ '-i': '',
+      \ }
 
 " Coc
 " https://github.com/neoclide/coc.nvim
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
-            \ 'coc-css',
-            \ 'coc-diagnostic',
-            \ 'coc-emmet',
-            \ 'coc-eslint',
-            \ 'coc-html',
-            \ 'coc-pairs',
-            \ 'coc-json',
-            \ 'coc-marketplace',
-            \ 'coc-prettier',
-            \ 'coc-snippets',
-            \ 'coc-solargraph',
-            \ 'coc-stylelintplus',
-            \ 'coc-tailwindcss',
-            \ 'coc-tsserver',
-            \ 'coc-vetur',
-            \ 'coc-yaml',
-            \ ]
+      \ 'coc-css',
+      \ 'coc-diagnostic',
+      \ 'coc-emmet',
+      \ 'coc-eslint',
+      \ 'coc-html',
+      \ 'coc-pairs',
+      \ 'coc-json',
+      \ 'coc-marketplace',
+      \ 'coc-prettier',
+      \ 'coc-snippets',
+      \ 'coc-solargraph',
+      \ 'coc-stylelintplus',
+      \ 'coc-tailwindcss',
+      \ 'coc-tsserver',
+      \ 'coc-vetur',
+      \ 'coc-yaml',
+      \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Format code on <CR>. (e.g, indent after open braces, pressing enter)
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-the-completion-experience
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
