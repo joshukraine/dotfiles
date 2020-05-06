@@ -318,6 +318,7 @@ Plug 'habamax/vim-asciidoctor'          " Asciidoctor plugin for Vim            
 Plug 'dag/vim-fish'                     " Vim support for editing fish scripts                  | https://github.com/dag/vim-fish
 Plug 'cespare/vim-toml'                 " Vim syntax for TOML                                   | https://github.com/cespare/vim-toml
 Plug 'leafgarland/typescript-vim'       " Typescript syntax files for Vim                       | https://github.com/leafgarland/typescript-vim
+Plug 'Yggdroot/indentLine'              " Display indention levels with thin vertical lines     | https://github.com/Yggdroot/indentLine
 
 " Tim Pope
 Plug 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
@@ -365,6 +366,10 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " Vim DevIcons
 exe 'source' stdpath('config') . '/extras/devicons.vim'
+
+" indentLine
+let g:indentLine_color_gui = '#3c3836'
+let g:indentLine_char = '▏'
 
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
