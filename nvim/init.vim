@@ -371,6 +371,10 @@ exe 'source' stdpath('config') . '/extras/devicons.vim'
 let g:indentLine_color_gui = '#3c3836'
 let g:indentLine_char = '▏'
 
+" vim-json
+" https://github.com/Yggdroot/indentLine/issues/140#issuecomment-620465182
+let g:vim_json_syntax_conceal = 0
+
 " GitGutter
 nnoremap <F6> :GitGutterToggle<CR>
 nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
