@@ -190,3 +190,13 @@ abbr -a -g yupl 'yarn upgrade --latest'
 abbr -a -g yv 'yarn version'
 abbr -a -g yw 'yarn workspace'
 abbr -a -g yws 'yarn workspaces'
+
+# Ruby Gems
+abbr -a -g gel 'gem cleanup'
+abbr -a -g gemv 'gem environment'
+abbr -a -g gins 'gem install'
+abbr -a -g gli 'gem list'
+abbr -a -g gout 'gem outdated'
+abbr -a -g guns 'gem uninstall'
+abbr -a -g gup 'gem update'
+abbr -a -g gus 'gem update --system'
