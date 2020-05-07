@@ -11,9 +11,7 @@ silent! colorscheme gruvbox
 highlight Include ctermfg=108 guifg=#8ec07c cterm=italic gui=italic
 highlight htmlArg ctermfg=214 guifg=#fabd2f cterm=italic gui=italic
 
-highlight link htmlTag GruvboxGray
-highlight link htmlTagName GruvboxBlue
-highlight link jsxCloseString htmlTag
+highlight link jsxCloseString GruvboxGray
 highlight link jsxAttrib htmlArg
 highlight link NERDTreeFlags GruvboxBlue
 highlight link GitGutterChange GruvboxYellow
