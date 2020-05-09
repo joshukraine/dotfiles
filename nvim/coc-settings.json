@@ -4,6 +4,8 @@
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "ﯦ",
 
+  "diagnostic.checkCurrentLine": true,
+
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
