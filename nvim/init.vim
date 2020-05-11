@@ -510,6 +510,8 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+" TIP: <C-w>p will close the preview window.
+
 " Format code on <CR>. (e.g, indent after open braces, pressing enter)
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-the-completion-experience
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
