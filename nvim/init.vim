@@ -203,7 +203,6 @@ map <leader>x :x<CR>
 map <leader>ra :%s/
 map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
-inoremap <C-[> <Esc> " Return to normal mode faster
 inoremap jj <C-c> " jj to switch back to normal mode
 nnoremap <leader>4 <c-^> " Switch between the last two files
 nnoremap <leader>5 :bnext<CR>
