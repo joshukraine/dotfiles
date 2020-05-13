@@ -11,7 +11,9 @@
 # }}}
 
 # Night Owl {{{
-# set -g status-style bg="#112630"
+set -g pane-border-style bg=default,fg=$BLACK
+setw -g window-status-current-style fg="#ffffff",bg=$RED
+set -g status-style bg="#112630"
 # }}}
 
 # Nord {{{
@@ -35,9 +37,9 @@
 # }}}
 
 # vim-monokai-tasty {{{
-setw -g window-status-current-style fg=$BRIGHT_WHITE,bg=$RED
-set -g pane-border-style bg=default,fg="#444444"
-set -g status-style bg="#303030"
+# setw -g window-status-current-style fg=$BRIGHT_WHITE,bg=$RED
+# set -g pane-border-style bg=default,fg="#444444"
+# set -g status-style bg="#303030"
 # }}}
 
 # vim:filetype=tmux:foldmethod=marker:foldenable
