@@ -363,7 +363,6 @@ let g:NERDTreeIndicatorMapCustom = {
 exe 'source' stdpath('config') . '/extras/devicons.vim'
 
 " indentLine
-let g:indentLine_color_gui = '#3c3836'
 let g:indentLine_char = '▏'
 
 " vim-json

@@ -11,6 +11,8 @@ highlight clear ColorColumn
 highlight link CursorColumn CursorLine
 highlight link ColorColumn CursorLine
 
+let g:indentLine_color_gui = '#1d3b53'
+
 let g:lightline = {
     \   'colorscheme': 'nightowl',
     \   'component': { 'lineinfo': '⭡ %3l:%-2v' },

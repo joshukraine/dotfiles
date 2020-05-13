@@ -36,6 +36,8 @@ highlight CocWarningHighlight cterm=undercurl gui=undercurl guisp=#fabd2f
 highlight CocInfoHighlight cterm=undercurl gui=undercurl guisp=#83a598
 highlight CocHintHighlight cterm=undercurl gui=undercurl guisp=#fe8019
 
+let g:indentLine_color_gui = '#3c3836'
+
 let g:lightline = {
     \   'colorscheme': 'gruvbox',
     \   'component': { 'lineinfo': '⭡ %3l:%-2v' },
