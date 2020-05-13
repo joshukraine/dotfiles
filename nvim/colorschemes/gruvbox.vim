@@ -28,10 +28,6 @@ highlight link CocDiagnosticsWarning GruvboxYellow
 highlight link CocDiagnosticsInfo GruvboxBlue
 highlight link CocDiagnosticsHint GruvboxOrange
 
-highlight link CocDiagnosticsWarning GruvboxYellow
-highlight link CocDiagnosticsInfo GruvboxBlue
-highlight link CocDiagnosticsHint GruvboxOrange
-
 highlight CocWarningHighlight cterm=undercurl gui=undercurl guisp=#fabd2f
 highlight CocInfoHighlight cterm=undercurl gui=undercurl guisp=#83a598
 highlight CocHintHighlight cterm=undercurl gui=undercurl guisp=#fe8019
