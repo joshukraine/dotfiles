@@ -343,7 +343,7 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 
 ## License
 
-Copyright &copy; 2020 Joshua Steele. [MIT License][license]
+Copyright &copy; 2014–2020 Joshua Steele. [MIT License][license]
 
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
