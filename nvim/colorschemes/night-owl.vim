@@ -8,6 +8,9 @@ silent! colorscheme night-owl
 
 highlight VertSplit ctermfg=243 guifg=#1d3b53
 
+highlight htmlArg ctermfg=214 guifg=#fabd2f cterm=italic gui=italic
+highlight jsxAttrib ctermfg=149 guifg=#addb67 cterm=italic gui=italic
+
 highlight CocWarningSign ctermfg=11 guifg=#fab005
 highlight CocInfoSign    ctermfg=12 guifg=#15aabf
 highlight CocHintSign    ctermfg=130 guifg=#ff922b
