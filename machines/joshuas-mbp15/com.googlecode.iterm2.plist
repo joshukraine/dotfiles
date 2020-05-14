@@ -3254,7 +3254,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 496 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>270 114 1270 912 0 0 1680 1050 </string>
+	<string>270 168 1410 852 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>264 201 1270 746 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -3968,7 +3968,7 @@
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>MonoLisa-Regular 16</string>
+			<string>OperatorMonoLig-Book 17</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4257,20 +4257,11 @@
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
-		<string>VictorMono Nerd Font</string>
-		<string>FiraCode Nerd Font</string>
-		<string>Dank Mono</string>
-		<string>CaskaydiaCove Nerd Font</string>
-		<string>Iosevka Nerd Font</string>
-		<string>JetBrainsMono Nerd Font</string>
-		<string>MonoLisa</string>
+		<string>Operator Mono Lig</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>MonoLisa</string>
-		<string>VictorMono Nerd Font</string>
-		<string>Dank Mono</string>
-		<string>FiraCode Nerd Font</string>
+		<string>Operator Mono Lig</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
@@ -4284,7 +4275,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>1A82FD0A-AF32-46BA-B0C2-E52FAB98377A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>129</integer>
+	<integer>130</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>

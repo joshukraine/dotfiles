@@ -3418,6 +3418,8 @@
 	<string>{1000, 448}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
 	<string>{841, 448}</string>
+	<key>NSOverlayScrollersFallBackForAccessoryViews</key>
+	<false/>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -3470,7 +3472,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>1003 768 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3028 216 1550 1057 2560 0 2560 1440 </string>
+	<string>2814 204 1550 1057 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4172,7 +4174,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MonoLisa-Regular 17</string>
+			<string>OperatorMonoLig-Book 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4450,9 +4452,10 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.10beta3</string>
-		<string>3.3.10beta4</string>
 		<string>3.3.10beta2</string>
+		<string>3.3.10beta4</string>
+		<string>3.3.10beta3</string>
+		<string>3.3.20200513-nightly</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
@@ -4472,20 +4475,19 @@
 	<key>NoSyncBFPRecents</key>
 	<array>
 		<string>FiraCode Nerd Font</string>
-		<string>MonoLisa</string>
-		<string>Dank Mono</string>
+		<string>Operator Mono Lig</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{2560, 0}, {2560, 1440}}</string>
+		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{2893, 1295}</string>
+		<string>{1209, 736}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>166</integer>
+	<integer>211</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4603,6 +4605,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>selectionLength</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>path</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -4614,6 +4624,14 @@
 				<string>triggerName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>parentSession</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -4739,6 +4757,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>selection</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>autoNameFormat</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -4815,6 +4841,14 @@
 				<true/>
 				<key>name</key>
 				<string>style</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4983,11 +5017,11 @@
 		<array>
 			<dict>
 				<key>isTerminal</key>
-				<false/>
+				<true/>
 				<key>name</key>
-				<string>currentSession</string>
+				<string>tmuxWindow</string>
 				<key>nonterminalContext</key>
-				<integer>1</integer>
+				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -5185,17 +5219,17 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>tmuxWindow</string>
+				<string>currentSession</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
-				<true/>
+				<false/>
 				<key>name</key>
 				<string>currentSession</string>
 				<key>nonterminalContext</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 		</array>
 		<key>4</key>
@@ -5226,6 +5260,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NoSyncRestoreWindowsCount</key>
+	<integer>0</integer>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
 	<real>606139327.90684104</real>
 	<key>OnlyWhenMoreTabs</key>
@@ -5300,7 +5336,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-04T07:01:39Z</date>
+	<date>2020-05-14T10:13:03Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
