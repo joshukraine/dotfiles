@@ -261,6 +261,7 @@ Plug 'rhysd/git-messenger.vim'          " Reveal the commit messages under the c
 Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim   | https://github.com/terryma/vim-multiple-cursors
 Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in the gutter     | https://github.com/airblade/vim-gitgutter
 Plug 'reedes/vim-textobj-quote'         " Use ‘curly’ quote characters in Vim                   | https://github.com/reedes/vim-textobj-quote
+Plug 'norcalli/nvim-colorizer.lua'      " The fastest Neovim colorizer.                         | https://github.com/norcalli/nvim-colorizer.lua
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
@@ -611,6 +612,10 @@ exe 'source' stdpath('config') . '/lightline.vim'
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=White
 highlight Comment cterm=italic gui=italic
+
+" nvim-colorizer.lua
+lua require'colorizer'.setup()
+
 " }}}
 
 " Local {{{
