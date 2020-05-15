@@ -294,7 +294,8 @@ Plug 'rakr/vim-one'                     " Adaptation of Atom One colorscheme for
 Plug 'bluz71/vim-nightfly-guicolors'    " Another dark color scheme for Vim                     | https://github.com/bluz71/vim-nightfly-guicolors
 Plug 'sonph/onehalf', {'rtp': 'vim/'}   " A colorscheme for (Neo)Vim, iTerm, and more.          | https://github.com/sonph/onehalf
 Plug 'arcticicestudio/nord-vim'         " Vim colorscheme based on the Nord color palette       | https://github.com/arcticicestudio/nord-vim
-Plug 'mhartington/oceanic-next'         " Oceanic Next theme for neovim                         | https://github.com/mhartington/oceanic-next
+Plug 'joshukraine/oceanic-next',
+      \ {'branch': 'js/color-tweaks'}   " Oceanic Next theme for neovim                         | https://github.com/joshukraine/oceanic-next
 Plug 'jacoborus/tender.vim'             " A 24bit colorscheme for Vim, Airline and Lightline    | https://github.com/jacoborus/tender.vim
 Plug 'morhetz/gruvbox'                  " Retro groove color scheme for Vim                     | https://github.com/morhetz/gruvbox
 Plug 'joshukraine/vim-monokai-tasty',   " My fork of patstockwell/vim-monokai-tasty             | https://github.com/joshukraine/vim-monokai-tasty

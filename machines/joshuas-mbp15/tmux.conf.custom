@@ -11,9 +11,9 @@
 # }}}
 
 # Night Owl {{{
-set -g pane-border-style bg=default,fg=$BLACK
-setw -g window-status-current-style fg="#ffffff",bg=$RED
-set -g status-style bg="#112630"
+# set -g pane-border-style bg=default,fg=$BLACK
+# setw -g window-status-current-style fg="#ffffff",bg=$RED
+# set -g status-style bg="#112630"
 # }}}
 
 # Nord {{{
@@ -21,7 +21,8 @@ set -g status-style bg="#112630"
 # }}}
 
 # Oceanic Next {{{
-# set -g status-style bg="#343d46"
+set -g pane-border-style bg=default,fg="#314e5d"
+set -g status-style bg="#20343e"
 # }}}
 
 # One Half Dark {{{

@@ -1,9 +1,9 @@
 # Gruvbox {{{
-setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
-setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
-set -g pane-border-style bg=default,fg="#665c54"
-set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
-set -g status-style bg="#3c3836"
+# setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
+# setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
+# set -g pane-border-style bg=default,fg="#665c54"
+# set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
+# set -g status-style bg="#3c3836"
 # }}}
 
 # Material {{{
@@ -11,6 +11,8 @@ set -g status-style bg="#3c3836"
 # }}}
 
 # Night Owl {{{
+# set -g pane-border-style bg=default,fg=$BLACK
+# setw -g window-status-current-style fg="#ffffff",bg=$RED
 # set -g status-style bg="#112630"
 # }}}
 
@@ -19,7 +21,8 @@ set -g status-style bg="#3c3836"
 # }}}
 
 # Oceanic Next {{{
-# set -g status-style bg="#343d46"
+set -g pane-border-style bg=default,fg="#314e5d"
+set -g status-style bg="#20343e"
 # }}}
 
 # One Half Dark {{{
