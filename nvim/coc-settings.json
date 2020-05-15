@@ -25,7 +25,7 @@
     "haml"
   ],
 
-  "prettier.disableLanguages": ["vue"],
+  "prettier.disableLanguages": [],
   "prettier.singleQuote": true,
 
   "css.validate": false,
