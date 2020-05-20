@@ -174,6 +174,7 @@ nvim --headless +PlugInstall +qall
 dotfiles_echo "-> Installing custom terminfo entries..."
 tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
 tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
+tic -xe alacritty,alacritty-direct "${DOTFILES}/terminfo/alacritty.info"
 
 dotfiles_echo "Dotfiles installation complete!"
 
