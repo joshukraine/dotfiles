@@ -83,13 +83,13 @@ home_files=(
 )
 
 config_dirs=(
-"alacritty"
 "nvim"
 "ranger"
 )
 
 dotfiles_echo "Installing dotfiles..."
 
+dotfiles_echo "-> Linking basic dotfiles..."
 for item in "${home_files[@]}"; do
   if [ -e "${HOME}/.${item}" ]; then
     dotfiles_echo ".${item} exists."
@@ -105,6 +105,7 @@ for item in "${home_files[@]}"; do
   ln -nfs "${DOTFILES}/${item}" "${HOME}/.${item}"
 done
 
+dotfiles_echo "-> Linking Brewfile..."
 if [ -e "${HOME}/Brewfile" ]; then
   dotfiles_echo "Brewfile exists."
   if [ -L "${HOME}/Brewfile" ]; then
@@ -118,6 +119,7 @@ fi
 dotfiles_echo "-> Linking ${DOTFILES}/Brewfile to ${HOME}/Brewfile..."
 ln -nfs "${DOTFILES}/Brewfile" "${HOME}/Brewfile"
 
+dotfiles_echo "-> Linking general config directories..."
 for item in "${config_dirs[@]}"; do
   if [ -d "${XDG_CONFIG_HOME}/${item}" ]; then
     dotfiles_echo "Directory ${item} exists."
@@ -133,6 +135,7 @@ for item in "${config_dirs[@]}"; do
   ln -nfs "${DOTFILES}/${item}" "${XDG_CONFIG_HOME}/${item}"
 done
 
+dotfiles_echo "-> Linking Fish configs..."
 for item in "${fish_files[@]}"; do
   if [ -e "${FISH_DIR}/${item}" ]; then
     dotfiles_echo "${item} exists."
@@ -163,7 +166,7 @@ for item in "${fish_dirs[@]}"; do
   ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
 done
 
-
+dotfiles_echo "-> Linking Starship config..."
 if [ -e "${XDG_CONFIG_HOME}/starship.toml" ]; then
   dotfiles_echo "starship.toml exists."
   if [ -L "${XDG_CONFIG_HOME}/starship.toml" ]; then
@@ -177,13 +180,27 @@ fi
 dotfiles_echo "-> Linking ${DOTFILES}/starship.toml to ${XDG_CONFIG_HOME}/starship.toml..."
 ln -nfs "${DOTFILES}/starship.toml" "${XDG_CONFIG_HOME}/starship.toml"
 
+dotfiles_echo "-> Linking Alacritty config..."
+if [ -e "${XDG_CONFIG_HOME}/alacritty" ]; then
+  dotfiles_echo "${XDG_CONFIG_HOME}/alacritty exists."
+  if [ -L "${XDG_CONFIG_HOME}/alacritty" ]; then
+    dotfiles_echo "Symbolic link detected. Removing..."
+    rm -v "${XDG_CONFIG_HOME}/alacritty"
+  else
+    dotfiles_echo "Backing up..."
+    dotfiles_backup "${XDG_CONFIG_HOME}/alacritty"
+  fi
+fi
+dotfiles_echo "-> Linking ${DOTFILES}/machines/${HOST_NAME}/alacritty to ${XDG_CONFIG_HOME}/alacritty..."
+ln -nfs "${DOTFILES}/machines/${HOST_NAME}/alacritty" "${XDG_CONFIG_HOME}/alacritty"
+
 dotfiles_echo "-> Installing vim-plug plugins..."
 nvim --headless +PlugInstall +qall
 
 dotfiles_echo "-> Installing custom terminfo entries..."
 tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
 tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
-tic -xe alacritty,alacritty-direct "${DOTFILES}/terminfo/alacritty.info"
+sudo tic -xe alacritty,alacritty-direct "${DOTFILES}/terminfo/alacritty.info"
 
 dotfiles_echo "Dotfiles installation complete!"
 
