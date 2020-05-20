@@ -93,6 +93,7 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
 cask "1password"
+cask "alacritty"
 cask "alfred"
 cask "arq"
 cask "balenaetcher"
