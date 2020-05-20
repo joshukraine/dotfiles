@@ -78,6 +78,7 @@ home_files=(
 )
 
 config_dirs=(
+"alacritty"
 "nvim"
 "ranger"
 )
