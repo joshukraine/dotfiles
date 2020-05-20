@@ -58,6 +58,11 @@ fish_files=(
 "abbreviations.fish"
 )
 
+fish_dirs=(
+"completions"
+"functions"
+)
+
 home_files=(
 "asdfrc"
 "default-gems"
@@ -143,18 +148,21 @@ for item in "${fish_files[@]}"; do
   ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
 done
 
-if [ -d "${FISH_DIR}"/functions ]; then
-  dotfiles_echo "Directory ${item} exists."
-  if [ -L "${FISH_DIR}"/functions ]; then
-    dotfiles_echo "Symbolic link detected. Removing..."
-    rm -v "${FISH_DIR}"/functions
-  else
-    dotfiles_echo "Backing up..."
-    dotfiles_backup "${FISH_DIR}/${item}"
+for item in "${fish_dirs[@]}"; do
+  if [ -d "${FISH_DIR}/${item}" ]; then
+    dotfiles_echo "Directory ${item} exists."
+    if [ -L "${FISH_DIR}/${item}" ]; then
+      dotfiles_echo "Symbolic link detected. Removing..."
+      rm -v "${FISH_DIR}/${item}"
+    else
+      dotfiles_echo "Backing up..."
+      dotfiles_backup "${FISH_DIR}/${item}"
+    fi
   fi
-fi
-dotfiles_echo "-> Linking ${DOTFILES}/fish/functions to ${FISH_DIR}/functions..."
-ln -nfs "${DOTFILES}/fish/functions" "${FISH_DIR}/functions"
+  dotfiles_echo "-> Linking ${DOTFILES}/fish/${item} to ${FISH_DIR}/${item}..."
+  ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
+done
+
 
 if [ -e "${XDG_CONFIG_HOME}/starship.toml" ]; then
   dotfiles_echo "starship.toml exists."
