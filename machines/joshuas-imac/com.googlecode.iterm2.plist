@@ -3472,14 +3472,14 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>1003 768 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2882 204 1410 1092 2560 0 2560 1440 </string>
+	<string>2814 204 1550 1057 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
-			<true/>
+			<false/>
 			<key>Allow Title Reporting</key>
 			<false/>
 			<key>Ambiguous Double Width</key>
@@ -4174,7 +4174,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>OperatorMonoLig-Book 18</string>
+			<string>OperatorMonoSSmNerdFontComplete-Book 17</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4439,7 +4439,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<true/>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1.3400000000000001</real>
 			<key>Visual Bell</key>
@@ -4458,36 +4458,24 @@
 		<string>3.3.20200513-nightly</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
-	<array>
-		<string>Office Code Pro</string>
-		<string>Iosevka</string>
-		<string>Hasklig</string>
-		<string>JetBrains Mono</string>
-		<string>Fira Code</string>
-		<string>FiraCode Nerd Font</string>
-		<string>Dank Mono</string>
-		<string>Cascadia Code</string>
-		<string>Monoid</string>
-		<string>Source Code Pro</string>
-		<string>Victor Mono</string>
-		<string>MonoLisa</string>
-	</array>
+	<array/>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>FiraCode Nerd Font</string>
-		<string>Operator Mono Lig</string>
+		<string>Menlo</string>
+		<string>Andale Mono</string>
+		<string>OperatorMonoSSm Nerd Font</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{1284, 764}</string>
+		<string>{1366, 534}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>213</integer>
+	<integer>231</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5336,7 +5324,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-14T10:13:03Z</date>
+	<date>2020-05-20T07:21:43Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
