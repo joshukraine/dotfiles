@@ -1,11 +1,48 @@
-# Status bar background color.
-# set -g status-style bg="#3c3836" # For Gruvbox colorscheme
-# set -g status-style bg="#2c3b41" # For Material colorscheme
-# set -g status-style bg="#112630" # For Night Owl colorscheme
-# set -g status-style bg="#3B4252" # For Nord colorscheme
-# set -g status-style bg="#343d46" # For Oceanic Next colorscheme
-# set -g status-style bg="#313640" # For One Half Dark colorscheme
-# set -g status-style bg="#323232" # For Tender Dark colorscheme
-# set -g status-style bg="#2c323c" # For Vim One colorscheme
+# Terminfo — Alacritty {{{
+# set -g default-terminal 'alacritty'
+# set -ga terminal-overrides ',alacritty*:Tc'
+# }}}
 
-# vim: set filetype=tmux:
+# Gruvbox {{{
+# setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
+# setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
+# set -g pane-border-style bg=default,fg="#665c54"
+# set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
+# set -g status-style bg="#3c3836"
+# }}}
+
+# Material {{{
+# set -g status-style bg="#2c3b41"
+# }}}
+
+# Night Owl {{{
+# set -g status-style bg="#112630"
+# }}}
+
+# Nord {{{
+# set -g status-style bg="#3b4252"
+# }}}
+
+# Oceanic Next {{{
+# set -g status-style bg="#343d46"
+# }}}
+
+# One Half Dark {{{
+# set -g status-style bg="#313640"
+# }}}
+
+# Tender Dark {{{
+# set -g status-style bg="#323232"
+# }}}
+
+# Vim One {{{
+# set -g status-style bg="#2c323c"
+# }}}
+
+# vim-monokai-tasty {{{
+# setw -g window-status-current-style fg=$BRIGHT_WHITE,bg=$RED
+# set -g pane-border-style bg=default,fg="#444444"
+# set -g status-style bg="#303030"
+# }}}
+
+# vim:filetype=tmux:foldmethod=marker:foldenable
