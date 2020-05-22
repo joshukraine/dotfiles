@@ -2,7 +2,7 @@
 
 ![dotfiles screenshot][screenshot]
 
-These are the dotfiles I use on my Mac computers, currently running [macOS Catalina (10.15)][catalina]. They are geared primarily towards web development with [Rails][rails], [React][react], and [Vue][vue]. I use a terminal-based development environment built on [Fish][fish], [Tmux][tmux], and [Neovim][neovim]. Also included are my [iTerm2][iterm2] and [Terminal.app][terminal] profiles.
+These are the dotfiles I use on my Mac computers, currently running [macOS Catalina (10.15)][catalina]. They are geared primarily towards web development with [Rails][rails], [React][react], and [Vue][vue]. I use a terminal-based development environment built on [Fish][fish], [Tmux][tmux], and [Neovim][neovim]. Also included are my [iTerm2][iterm2] and [Alacritty][alacritty] profiles.
 
 ## Table of Contents
 
@@ -13,11 +13,13 @@ These are the dotfiles I use on my Mac computers, currently running [macOS Catal
   - [Zsh Setup](#zsh-setup)
   - [Fish Setup](#fish-setup)
 - [Post-install Tasks](#post-install-tasks)
+- [Setting up iTerm2](#setting-up-iterm2)
+- [Setting up Alacritty](#setting-up-alacritty)
 - [Machine-specific Configs](#machine-specific-configs)
 - [Colorschemes](#colorschemes)
   - [1. Colorschemes](#1-colorschemes)
   - [2. Machine-specific Config](#2-machine-specific-config)
-  - [3. iTerm2 Profile](#3-iterm2-profile)
+  - [3. Terminal Colorschemes](#3-terminal-colorschemes)
   - [4. Tmux Custom Overrides](#4-tmux-custom-overrides)
   - [Useful Colorscheme Links](#useful-colorscheme-links)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
@@ -26,8 +28,6 @@ These are the dotfiles I use on my Mac computers, currently running [macOS Catal
   - [Ligatures](#ligatures)
   - [Nerd Font Variants](#nerd-font-variants)
   - [Useful Font Links](#useful-font-links)
-- [Setting up iTerm2](#setting-up-iterm2)
-- [Setting up Terminal.app](#setting-up-terminalapp)
 - [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
 - [Vim vs. Neovim](#vim-vs-neovim)
 - [Identifying Sources of Slow Startup Times](#identifying-sources-of-slow-startup-times)
@@ -96,11 +96,29 @@ I have used Zsh for years and really liked it. Recently I've switched to Fish, a
 After running `install.sh` there are still a couple of things that need to be done.
 
 * Add machine-specific configs as needed. (see Machine-specific Configs below)
-* Set up iTerm2 or Terminal.app profile (see details below).
+* Set up iTerm2 or Alacritty profile (see details below).
 * Complete [Brew Bundle][brew-bundle] with `brew bundle install`
 * Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, `~/dotfiles/local/config.fish.local`, and `~/.zshrc.local` as needed.
 * After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
 * If using Fish, customize your setup by running the `fish_config` command.
+
+## Setting up iTerm2
+
+Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
+
+1. Open iTerm2.
+1. Select iTerm2 > Preferences.
+1. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
+1. Press "Browse" and point it to `~/dotfiles/machines/<hostname>/com.googlecode.iterm2.plist`.
+1. Restart iTerm2.
+
+## Setting up Alacritty
+
+Getting set up after a fresh install is simple.
+
+1. Tweak preferences in `~/dotfiles/machines/<hostname>/alacritty.yml`.
+1. Uncomment Alacritty terminfo lines in  `~/dotfiles/machines/<hostname>/tmux.conf.custom`
+1. Run Alacritty!
 
 ## Machine-specific Configs
 
@@ -113,13 +131,21 @@ machines/
 ├── joshuas-imac
 │   ├── Brewfile -> ../../Brewfile
 │   ├── Brewfile.lock.json
+│   ├── alacritty.yml
+│   ├── colors.fish
+│   ├── colorscheme.vim
 │   ├── com.googlecode.iterm2.plist
-│   └── [...]
+│   ├── starship.toml
+│   └── tmux.conf.custom
 └── joshuas-mbp15
     ├── Brewfile -> ../../Brewfile
     ├── Brewfile.lock.json
+    ├── alacritty.yml
+    ├── colors.fish
+    ├── colorscheme.vim
     ├── com.googlecode.iterm2.plist
-    └── [...]
+    ├── starship.toml
+    └── tmux.conf.custom
 ```
 
 My current [Homebrew Bundle][brew-bundle] approach depends heavily on the above setup. I have a Fish function (`bb`) which runs a machine-specific `Brewfile` based on the `hostname` of the current computer. (See `fish/functions/bb.fish`)
@@ -188,9 +214,14 @@ This theme is then loaded in `nvim/init.vim` with the following line (see the Ap
 exe 'source' "$DOTFILES/machines/$HOST_NAME/colorscheme.vim"
 ```
 
-#### 3. iTerm2 Profile
+#### 3. Terminal Colorschemes
 
-Since I use vim in the terminal, I need corresponding iTerm2 profiles for every vim colorscheme. These are stored in `itermcolors/` but of course must be added manually to the iTerm profile.
+Since I use vim in the terminal, I need corresponding iTerm2 or Alacritty colorschemes for every vim colorscheme. My iTerm2 colorschemes are stored in `itermcolors/`, but of course must be added manually to the iTerm profile. Alacritty colorschemes are defined in `~/dotfiles/machines/<hostname>/alacritty.yml`.
+
+Multiple pre-made colorschemes are available online for both iTerm2 and Alacritty:
+
+* [iTerm2 colorschemes][iterm2-colorschemes]
+* [Alacritty colorschemes][alacritty-colorschemes]
 
 #### 4. Tmux Custom Overrides
 
@@ -239,12 +270,15 @@ I've recently branched out to explore some of the different mono-spaced fonts av
 
 *You have to give people money if you want these.* 🤑
 
+- [Operator Mono][operator-mono]
 - [MonoLisa][monolisa]
 - [Dank Mono][dank-mono]
 
 ### Ligatures
 
-I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it's hard to go back to a sans-ligature typeface. Therefore all the fonts I've included in my fave's list *do* include ligatures, although some have more than others.
+I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it's hard to go back to a sans-ligature typeface. Therefore †all the fonts I've included in my fave's list *do* include ligatures, although some have more than others.
+
+† *Operator Mono does not include ligatures but [can be easily patched][operator-mono-lig] to add them.*
 
 ### Nerd Font Variants
 
@@ -269,27 +303,6 @@ If using a font that does not have a patched variant (e.g. MonoLisa) iTerm2 has 
 - [Nerd Font Downloads][nerd-fonts-downloads]
 - [Programming Fonts - Test Drive][programming-fonts]
 - [Homebrew Cask Fonts][homebrew-cask-fonts]
-
-## Setting up iTerm2
-
-Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
-
-1. Open iTerm2.
-1. Select iTerm2 > Preferences.
-1. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
-1. Press "Browse" and point it to `~/dotfiles/machines/<hostname>/com.googlecode.iterm2.plist`.
-1. Restart iTerm2.
-
-## Setting up Terminal.app
-
-Getting set up after a fresh install is simple.
-
-1. Open Terminal.app.
-1. Select Terminal > Preferences. (But really you'll just press &#8984;, right? So much faster.)
-1. Select the Profiles tab.
-1. Click the gear icon and select Import...
-1. Select `~/dotfiles/machines/<hostname>/solarized-dark.terminal` and click Open.
-1. Click the Default button to keep using this profile in new Terminal windows.
 
 ## A Note about Vim performance and Ruby files
 
@@ -345,6 +358,8 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 
 Copyright &copy; 2014–2020 Joshua Steele. [MIT License][license]
 
+[alacritty-colorschemes]: https://github.com/alacritty/alacritty/wiki/Color-schemes
+[alacritty]: https://github.com/alacritty/alacritty
 [asdf]: https://github.com/asdf-vm/asdf
 [blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
@@ -361,6 +376,7 @@ Copyright &copy; 2014–2020 Joshua Steele. [MIT License][license]
 [homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
 [homebrew]: http://brew.sh
 [iosevka]: https://typeof.net/Iosevka/
+[iterm2-colorschemes]: https://github.com/mbadolato/iTerm2-Color-Schemes
 [iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587816605/screenshots/iterm2-font-settings_k7upta.png
 [iterm2]: https://www.iterm2.com/
 [javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
@@ -380,6 +396,8 @@ Copyright &copy; 2014–2020 Joshua Steele. [MIT License][license]
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [one-half-dark-screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587822657/screenshots/one-half-dark-sample_rn5fds.png
 [one-half-dark]: https://github.com/sonph/onehalf
+[operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
+[operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
 [programming-fonts]: https://app.programmingfonts.org/
 [rails]: https://rubyonrails.org/
 [react]: https://reactjs.org/
@@ -388,7 +406,6 @@ Copyright &copy; 2014–2020 Joshua Steele. [MIT License][license]
 [solarized]: https://github.com/altercation/solarized
 [starship]: https://starship.rs/
 [tender]: https://github.com/jacoborus/tender.vim
-[terminal]: https://en.wikipedia.org/wiki/Terminal_(macOS)
 [tmux]: https://github.com/tmux/tmux/wiki
 [victor-mono]: https://rubjo.github.io/victor-mono/
 [vim-monokai-tasty]: https://github.com/joshukraine/vim-monokai-tasty
