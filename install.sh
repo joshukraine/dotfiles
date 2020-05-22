@@ -53,16 +53,6 @@ if [ ! -d "$FISH_DIR" ]; then
   mkdir "$FISH_DIR"
 fi
 
-fish_files=(
-"config.fish"
-"abbreviations.fish"
-)
-
-fish_dirs=(
-"completions"
-"functions"
-)
-
 home_files=(
 "asdfrc"
 "default-gems"
@@ -84,6 +74,21 @@ home_files=(
 config_dirs=(
 "nvim"
 "ranger"
+)
+
+config_files=(
+"alacritty.yml"
+"starship.toml"
+)
+
+fish_dirs=(
+"completions"
+"functions"
+)
+
+fish_files=(
+"config.fish"
+"abbreviations.fish"
 )
 
 dotfiles_echo "Installing dotfiles..."
@@ -118,7 +123,7 @@ fi
 dotfiles_echo "-> Linking ${DOTFILES}/Brewfile to ${HOME}/Brewfile..."
 ln -nfs "${DOTFILES}/Brewfile" "${HOME}/Brewfile"
 
-dotfiles_echo "-> Linking general config directories..."
+dotfiles_echo "-> Linking config directories..."
 for item in "${config_dirs[@]}"; do
   if [ -d "${XDG_CONFIG_HOME}/${item}" ]; then
     dotfiles_echo "Directory ${item} exists."
@@ -134,22 +139,23 @@ for item in "${config_dirs[@]}"; do
   ln -nfs "${DOTFILES}/${item}" "${XDG_CONFIG_HOME}/${item}"
 done
 
-dotfiles_echo "-> Linking Fish configs..."
-for item in "${fish_files[@]}"; do
-  if [ -e "${FISH_DIR}/${item}" ]; then
+dotfiles_echo "-> Linking config files..."
+for item in "${config_files[@]}"; do
+  if [ -e "${XDG_CONFIG_HOME}/${item}" ]; then
     dotfiles_echo "${item} exists."
-    if [ -L "${FISH_DIR}/${item}" ]; then
+    if [ -L "${XDG_CONFIG_HOME}/${item}" ]; then
       dotfiles_echo "Symbolic link detected. Removing..."
-      rm -v "${FISH_DIR}/${item}"
+      rm -v "${XDG_CONFIG_HOME}/${item}"
     else
       dotfiles_echo "Backing up..."
-      dotfiles_backup "${FISH_DIR}/${item}"
+      dotfiles_backup "${XDG_CONFIG_HOME}/${item}"
     fi
   fi
-  dotfiles_echo "-> Linking ${DOTFILES}/fish/${item} to ${FISH_DIR}/${item}..."
-  ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
+  dotfiles_echo "-> Linking ${DOTFILES}/machines/${HOST_NAME}/${item} to ${XDG_CONFIG_HOME}/${item}..."
+  ln -nfs "${DOTFILES}/machines/${HOST_NAME}/${item}" "${XDG_CONFIG_HOME}/$item"
 done
 
+dotfiles_echo "-> Linking Fish config directories..."
 for item in "${fish_dirs[@]}"; do
   if [ -d "${FISH_DIR}/${item}" ]; then
     dotfiles_echo "Directory ${item} exists."
@@ -165,33 +171,21 @@ for item in "${fish_dirs[@]}"; do
   ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
 done
 
-dotfiles_echo "-> Linking Starship config..."
-if [ -e "${XDG_CONFIG_HOME}/starship.toml" ]; then
-  dotfiles_echo "starship.toml exists."
-  if [ -L "${XDG_CONFIG_HOME}/starship.toml" ]; then
-    dotfiles_echo "Symbolic link detected. Removing..."
-    rm -v "${XDG_CONFIG_HOME}/starship.toml"
-  else
-    dotfiles_echo "Backing up..."
-    dotfiles_backup "${XDG_CONFIG_HOME}/starship.toml"
+dotfiles_echo "-> Linking Fish config files..."
+for item in "${fish_files[@]}"; do
+  if [ -e "${FISH_DIR}/${item}" ]; then
+    dotfiles_echo "${item} exists."
+    if [ -L "${FISH_DIR}/${item}" ]; then
+      dotfiles_echo "Symbolic link detected. Removing..."
+      rm -v "${FISH_DIR}/${item}"
+    else
+      dotfiles_echo "Backing up..."
+      dotfiles_backup "${FISH_DIR}/${item}"
+    fi
   fi
-fi
-dotfiles_echo "-> Linking ${DOTFILES}/starship.toml to ${XDG_CONFIG_HOME}/starship.toml..."
-ln -nfs "${DOTFILES}/starship.toml" "${XDG_CONFIG_HOME}/starship.toml"
-
-dotfiles_echo "-> Linking Alacritty config..."
-if [ -e "${XDG_CONFIG_HOME}/alacritty" ]; then
-  dotfiles_echo "${XDG_CONFIG_HOME}/alacritty exists."
-  if [ -L "${XDG_CONFIG_HOME}/alacritty" ]; then
-    dotfiles_echo "Symbolic link detected. Removing..."
-    rm -v "${XDG_CONFIG_HOME}/alacritty"
-  else
-    dotfiles_echo "Backing up..."
-    dotfiles_backup "${XDG_CONFIG_HOME}/alacritty"
-  fi
-fi
-dotfiles_echo "-> Linking ${DOTFILES}/machines/${HOST_NAME}/alacritty to ${XDG_CONFIG_HOME}/alacritty..."
-ln -nfs "${DOTFILES}/machines/${HOST_NAME}/alacritty" "${XDG_CONFIG_HOME}/alacritty"
+  dotfiles_echo "-> Linking ${DOTFILES}/fish/${item} to ${FISH_DIR}/${item}..."
+  ln -nfs "${DOTFILES}/fish/${item}" "${FISH_DIR}/${item}"
+done
 
 dotfiles_echo "-> Installing vim-plug plugins..."
 nvim --headless +PlugInstall +qall
