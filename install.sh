@@ -76,7 +76,6 @@ home_files=(
 "npmrc"
 "pryrc"
 "rubocop.yml"
-"svgo.yml"
 "tmux.conf"
 "tool-versions"
 "zshrc"
