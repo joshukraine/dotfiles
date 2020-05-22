@@ -614,7 +614,7 @@ highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black g
 highlight Comment cterm=italic gui=italic
 
 " nvim-colorizer.lua
-lua require'colorizer'.setup()
+lua require 'colorizer'.setup()
 
 " }}}
 
