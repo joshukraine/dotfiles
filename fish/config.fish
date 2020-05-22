@@ -1,11 +1,5 @@
 set fish_greeting
 
-# PATH
-set -x PATH '/usr/local/sbin' $PATH
-set -x PATH '/usr/local/bin' $PATH
-set -x PATH "$HOME/.cargo/bin" $PATH
-set -x PATH "$HOME/bin" $PATH
-
 # Environment variables - https://fishshell.com/docs/current/commands.html#set
 set -xg EDITOR 'nvim'
 set -xg BUNDLER_EDITOR $EDITOR
