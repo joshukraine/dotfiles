@@ -613,9 +613,9 @@ highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=White
 highlight Comment cterm=italic gui=italic
 
-" nvim-colorizer.lua
-lua require 'colorizer'.setup()
-
+if exists('g:loaded_colorizer')
+  lua require 'colorizer'.setup()
+endif
 " }}}
 
 " Local {{{
