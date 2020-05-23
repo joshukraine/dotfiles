@@ -18,8 +18,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-   columns: 100
-   lines: 30
+    columns: 100
+    lines: 30
 
   # Window position (changes require restart)
   #
@@ -34,8 +34,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-   x: 5
-   y: 5
+    x: 5
+    y: 5
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -60,7 +60,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Fullscreen
+  #startup_mode: Windowed
 
   # Window title
   #title: Alacritty
@@ -97,10 +97,10 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: OperatorMonoSSm Nerd Font
+    family: FiraCode Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Book
+    style: Regular
 
   # Bold font face
   bold:
@@ -108,32 +108,32 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: OperatorMonoSSm Nerd Font
+    family: FiraCode Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Medium
 
   # Italic font face
-  italic:
+  #italic:
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: OperatorMonoSSm Nerd Font
+    #family: monospace
 
     # The `style` can be specified to pick a specific face.
-    style: Light Italic
+    #style: Italic
 
   # Bold italic font face
-  bold_italic:
+  #bold_italic:
     # Font family
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: OperatorMonoSSm Nerd Font
+    #family: monospace
 
     # The `style` can be specified to pick a specific face.
-    style: Medium Italic
+    #style: Bold Italic
 
   # Point size
   size: 16.0
@@ -170,40 +170,28 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Oceanic Next)
-# https://github.com/alacritty/alacritty/wiki/Color-schemes#oceanic-next
-colors:
+# Colors (Tomorrow Night Bright)
+#colors:
   # Default colors
-  primary:
-    background: '#1b2b34'
-    foreground: '#d8dee9'
+  #primary:
+  #  background: '#000000'
+  #  foreground: '#eaeaea'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '#1b2b34'
-    cursor: '#ffffff'
+    # Bright and dim foreground colors
+    #
+    # The dimmed foreground color is calculated automatically if it is not present.
+    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # is `false`, the normal foreground color will be used.
+    #dim_foreground: '#9a9a9a'
+    #bright_foreground: '#ffffff'
 
-  # Normal colors
-  normal:
-    black:   '#343d46'
-    red:     '#EC5f67'
-    green:   '#99C794'
-    yellow:  '#FAC863'
-    blue:    '#6699cc'
-    magenta: '#c594c5'
-    cyan:    '#5fb3b3'
-    white:   '#d8dee9'
-
-  # Bright colors
-  bright:
-    black:   '#343d46'
-    red:     '#EC5f67'
-    green:   '#99C794'
-    yellow:  '#FAC863'
-    blue:    '#6699cc'
-    magenta: '#c594c5'
-    cyan:    '#5fb3b3'
-    white:   '#d8dee9'
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
+  #cursor:
+  #  text: '#000000'
+  #  cursor: '#ffffff'
 
   # Selection colors
   #
@@ -290,7 +278,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-# background_opacity: 1.0
+#background_opacity: 1.0
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
