@@ -53,6 +53,21 @@ if [ ! -d "$FISH_DIR" ]; then
   mkdir "$FISH_DIR"
 fi
 
+# Ensure Yarn is available in PATH for when Neovim runs plugin installation.
+# https://github.com/yarnpkg/website/blob/96485d6901f1545a72f413e8df6a6851dece4d75/install.sh#L81
+dotfiles_echo "Adding Yarn to PATH..."
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Also make sure we have Node, needed by Yarn.
+dotfiles_echo "Adding asdf (Node/Ruby) to PATH..."
+export PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
+
+dotfiles_echo "Checking PATH..."
+echo "$PATH"
+
+dotfiles_echo "Do we have Yarn? --> $(command -v yarn)"
+dotfiles_echo "Do we have Node? --> $(command -v node)"
+
 home_files=(
 "asdfrc"
 "default-gems"
