@@ -284,7 +284,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git statu
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
-Plug 'ryanoasis/vim-devicons'           " Adds file type icons to Vim                           | https://github.com/ryanoasis/vim-devicons
+Plug 'ryanoasis/vim-devicons', { 'commit': '58e57b6' } " Adds file type icons to Vim             | https://github.com/ryanoasis/vim-devicons
 Plug 'itchyny/lightline.vim'            " Light/configurable statusline/tabline plugin for Vim  | https://github.com/itchyny/lightline.vim
 
 " Colorschemes
