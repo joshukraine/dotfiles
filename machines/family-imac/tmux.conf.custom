@@ -1,3 +1,8 @@
+# Terminfo — Alacritty {{{
+# set -g default-terminal 'alacritty'
+# set -ga terminal-overrides ',alacritty*:Tc'
+# }}}
+
 # Gruvbox {{{
 # setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
 # setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED

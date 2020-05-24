@@ -1,0 +1,49 @@
+# https://starship.rs/config/
+
+add_newline = false
+
+[package]
+disabled = true
+
+[directory]
+style = "bold blue"
+
+[git_branch]
+style = "bold bright-white"
+
+[git_status]
+style = "bold bright-white"
+ahead.style = "purple"
+ahead.value =""
+behind.style = "cyan"
+behind.value = ""
+conflicted.style = "yellow"
+deleted.style = "black"
+diverged.value = ""
+modified.style = "red"
+modified.value = "*"
+modified_count.enabled = true
+modified_count.style = "red"
+renamed.style = "purple"
+staged.style = "green"
+staged.value = "+"
+stashed.style = "yellow"
+stashed_count.enabled = true
+stashed_count.style = "yellow"
+untracked.style = "cyan"
+show_sync_count = true
+
+[git_commit]
+only_detached = true
+style = "bold black"
+prefix = ""
+suffix = " "
+
+[ruby]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[python]
+symbol = " "
