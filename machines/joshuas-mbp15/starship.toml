@@ -9,7 +9,7 @@ disabled = true
 style = "bold blue"
 
 [git_branch]
-style = "bold bright-white"
+style = "bold #ffffff"
 
 [git_status]
 style = "bold bright-white"
