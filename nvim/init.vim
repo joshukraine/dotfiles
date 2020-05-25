@@ -616,10 +616,6 @@ exe 'source' stdpath('config') . '/lightline.vim'
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=White
 highlight Comment cterm=italic gui=italic
-
-if exists('g:loaded_colorizer')
-  lua require 'colorizer'.setup()
-endif
 " }}}
 
 " Local {{{
