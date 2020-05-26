@@ -479,10 +479,6 @@ let g:vrc_curl_opts = {
 " Coc
 " https://github.com/neoclide/coc.nvim
 
-" Make sure coc.nvim can always find Node.
-" https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim#requirements
-let g:coc_node_path = '$HOME/.asdf/shims/node'
-
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
       \ 'coc-css',
