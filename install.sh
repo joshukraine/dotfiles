@@ -206,7 +206,6 @@ dotfiles_echo "-> Installing vim-plug plugins..."
 nvim --headless +PlugInstall +qall
 
 dotfiles_echo "-> Initializing fish_user_paths..."
-command fish -c "set -xg HOST_NAME (scutil --get HostName)"
 command fish -c "set -U fish_user_paths $HOME/bin $HOME/.yarn/bin /usr/local/bin /usr/local/sbin"
 
 dotfiles_echo "-> Installing custom terminfo entries..."
