@@ -1,6 +1,6 @@
 # Terminfo — Alacritty {{{
-set -g default-terminal 'alacritty'
-set -ga terminal-overrides ',alacritty*:Tc'
+# set -g default-terminal 'alacritty'
+# set -ga terminal-overrides ',alacritty*:Tc'
 # }}}
 
 # Gruvbox {{{

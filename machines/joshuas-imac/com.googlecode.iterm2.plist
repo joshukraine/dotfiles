@@ -3470,7 +3470,7 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>3640 966 400 129 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1003 768 620 392 0 0 2560 1417 </string>
+	<string>3530 768 620 392 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>2814 204 1550 1057 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
@@ -3479,7 +3479,7 @@
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
-			<false/>
+			<true/>
 			<key>Allow Title Reporting</key>
 			<false/>
 			<key>Ambiguous Double Width</key>
@@ -4173,8 +4173,10 @@
 			<string>FiraCodeNerdFontComplete-Regular 17</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
-			<string>OperatorMonoSSmNerdFontComplete-Book 17</string>
+			<string>OperatorMonoSSmLig-Book 17</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4439,7 +4441,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1.3400000000000001</real>
 			<key>Visual Bell</key>
@@ -4454,6 +4456,7 @@
 	<array>
 		<string>3.3.10beta2</string>
 		<string>3.3.10beta4</string>
+		<string>3.3.11beta1</string>
 		<string>3.3.10beta3</string>
 		<string>3.3.20200513-nightly</string>
 	</array>
@@ -4461,21 +4464,20 @@
 	<array/>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Menlo</string>
-		<string>Andale Mono</string>
+		<string>Operator Mono SSm Lig</string>
 		<string>OperatorMonoSSm Nerd Font</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {2560, 1440}}</string>
+		<string>{{2560, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{1366, 534}</string>
+		<string>{3109, 989}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>231</integer>
+	<integer>244</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5324,11 +5326,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-20T07:21:43Z</date>
+	<date>2020-05-29T08:31:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>2108366572</integer>
+	<integer>2837145522</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -5392,7 +5394,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.10beta4</string>
+	<string>3.3.11beta1</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
