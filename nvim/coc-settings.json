@@ -17,6 +17,11 @@
     "vue"
   ],
 
+  "javascript.format.enabled": false,
+  "javascript.showUnused": false,
+  "javascript.suggestionActions.enabled": false,
+  "javascript.validate.enable": false,
+
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
