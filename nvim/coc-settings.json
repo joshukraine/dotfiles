@@ -26,9 +26,7 @@
     "javascript": "javascriptreact"
   },
 
-  "emmet.excludeLanguages": [
-    "haml"
-  ],
+  "emmet.excludeLanguages": ["haml"],
 
   "prettier.disableLanguages": [],
   "prettier.singleQuote": true,
