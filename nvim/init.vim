@@ -336,7 +336,7 @@ call plug#end()
 
 " rainbow_parentheses.vim
 let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#pairs = [['(', ')'], ['{', '}']]
 
 augroup rainbow_parentheses
   autocmd!
