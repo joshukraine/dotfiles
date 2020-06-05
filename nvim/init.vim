@@ -265,7 +265,7 @@ Plug 'norcalli/nvim-colorizer.lua'      " The fastest Neovim colorizer.         
 
 " Code Completion
 Plug 'neoclide/coc.nvim',
-      \ {'branch': 'release'}                   " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
+      \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
 Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
 Plug 'dsznajder/vscode-es7-javascript-react-snippets',
