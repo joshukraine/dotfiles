@@ -268,8 +268,8 @@ Plug 'neoclide/coc.nvim',
       \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
 Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
-Plug 'dsznajder/vscode-es7-javascript-react-snippets',
-      \ { 'do': 'yarn install --frozen-lockfile && yarn compile' } " React VSCode snippets      | https://github.com/dsznajder/vscode-es7-javascript-react-snippets
+Plug 'joshukraine/vscode-es7-javascript-react-snippets',
+      \ { 'do': 'yarn install --frozen-lockfile && yarn compile' } " React VSCode snippets      | https://github.com/joshukraine/vscode-es7-javascript-react-snippets
 
 " Ruby-specific
 Plug 'vim-ruby/vim-ruby'                " Vim/Ruby Configuration Files                          | https://github.com/vim-ruby/vim-ruby
