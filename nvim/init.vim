@@ -316,7 +316,6 @@ Plug 'dag/vim-fish'                     " Vim support for editing fish scripts  
 Plug 'cespare/vim-toml'                 " Vim syntax for TOML                                   | https://github.com/cespare/vim-toml
 Plug 'leafgarland/typescript-vim'       " Typescript syntax files for Vim                       | https://github.com/leafgarland/typescript-vim
 Plug 'Yggdroot/indentLine'              " Display indention levels with thin vertical lines     | https://github.com/Yggdroot/indentLine
-Plug 'junegunn/rainbow_parentheses.vim' " Simpler Rainbow Parentheses                           | https://github.com/junegunn/rainbow_parentheses.vim
 
 " Tim Pope
 Plug 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
@@ -333,15 +332,6 @@ Plug 'christoomey/vim-tmux-runner'      " Command runner for sending commands fr
 call plug#end()
 
 " Plugin-specifc Mappings & Settings
-
-" rainbow_parentheses.vim
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['{', '}']]
-
-augroup rainbow_parentheses
-  autocmd!
-  autocmd FileType ruby,javascript,typescript,json,vim RainbowParentheses
-augroup END
 
 " Far.vim
 let g:far#source = 'agnvim'
