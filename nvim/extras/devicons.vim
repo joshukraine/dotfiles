@@ -177,5 +177,5 @@ autocmd filetype nerdtree syn match vue_icon #﵂# containedin=NERDTreeFlags
 autocmd filetype nerdtree syn match xml_icon ## containedin=NERDTreeFlags
 
 autocmd filetype nerdtree syn match git_add_icon #✚# containedin=ALL
-autocmd filetype nerdtree syn match git_mod_icon #*# containedin=ALL
+autocmd filetype nerdtree syn match git_mod_icon #✹# containedin=ALL
 autocmd filetype nerdtree syn match git_untracked_icon ## containedin=ALL

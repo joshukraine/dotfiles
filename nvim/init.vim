@@ -349,7 +349,7 @@ let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
 let g:NERDTreeIndicatorMapCustom = {
-      \ "Modified"  : "*",
+      \ "Modified"  : "✹",
       \ "Staged"    : "✚",
       \ "Untracked" : "",
       \ "Renamed"   : "➜",
