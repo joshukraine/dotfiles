@@ -3464,7 +3464,7 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>0 163 224 275 0 0 2560 1417 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>3419 727 841 470 0 0 2560 1440 </string>
+	<string>3340 744 1000 448 0 0 2560 1440 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
 	<string>3092 978 735 382 2560 0 2560 1440 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
@@ -4170,13 +4170,13 @@
 			<key>Name</key>
 			<string>iMac Primary</string>
 			<key>Non Ascii Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 17</string>
+			<string>FiraCodeNerdFontComplete-Regular 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>OperatorMonoSSmLig-Book 17</string>
+			<string>OperatorMonoSSmLig-Book 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4454,11 +4454,13 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.10beta2</string>
-		<string>3.3.10beta4</string>
-		<string>3.3.11beta1</string>
 		<string>3.3.10beta3</string>
 		<string>3.3.20200513-nightly</string>
+		<string>3.3.11beta1</string>
+		<string>3.3.12beta2</string>
+		<string>3.3.10beta2</string>
+		<string>3.3.10beta4</string>
+		<string>3.3.12beta1</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array/>
@@ -4477,7 +4479,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>244</integer>
+	<integer>303</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5326,11 +5328,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-29T08:31:05Z</date>
+	<date>2020-06-26T14:26:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>2837145522</integer>
+	<integer>2362407967</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -5394,7 +5396,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.11beta1</string>
+	<string>3.3.12beta2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
