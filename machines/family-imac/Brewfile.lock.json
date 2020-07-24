@@ -2,22 +2,22 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "c3162a3b89a066cf37ad165f5a155da18e70d9f8"
+        "revision": "b9a71195a26f91a02e0368307dc4d23fdde7159c"
       },
       "homebrew/cask": {
-        "revision": "57fbb14cd6752f9e06f7cf7ce6f60b95d051a1a9"
+        "revision": "d7fc907963199addca6aba1fa43089581880674a"
       },
       "homebrew/cask-versions": {
-        "revision": "0942e612866f4fcfdbf0aeb02ab28c516625f686"
+        "revision": "b0e70f4851d92fe6ab57553a064261f72ce6fce0"
       },
       "homebrew/cask-drivers": {
-        "revision": "fb0ad0b4b2b7f9bddab5f7d36babbe9371130f07"
+        "revision": "e9b64e5c60e1768146056b44f89e80b9fd667339"
       },
       "homebrew/cask-fonts": {
-        "revision": "25257f5ba6a4e3de92b4be319478ea56516953f9"
+        "revision": "f8bb829f42f3ab980171ff11acc3228171742e60"
       },
       "homebrew/core": {
-        "revision": "baf7d4f16f4c55002ec0e154417ace9ecb8dfaa0"
+        "revision": "ceca2a9c74a41b6e1da1e753f8bec670b8634148"
       },
       "homebrew/services": {
         "revision": "0751891ca39d3cbbe396dc9f1291466303f24a56"
@@ -295,22 +295,22 @@
         }
       },
       "cmake": {
-        "version": "3.17.3",
+        "version": "3.18.0",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/cmake-3.17.3.catalina.bottle.1.tar.gz",
-              "sha256": "8546864336108d217502a797033a72568b0325bf739495dff49c39d7f429fd07"
+              "url": "https://homebrew.bintray.com/bottles/cmake-3.18.0.catalina.bottle.tar.gz",
+              "sha256": "4822a39fbbb0e3b3c134bf7e09c89fec8da3ebd0de371de705cc62f4051d865a"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/cmake-3.17.3.mojave.bottle.1.tar.gz",
-              "sha256": "a4e96287fc974242d6399ba2e3e040cfc99e7c1f574873e95491c88244744306"
+              "url": "https://homebrew.bintray.com/bottles/cmake-3.18.0.mojave.bottle.tar.gz",
+              "sha256": "99f3b99f0bdd3dfd06b4ef1b9fbf9fd4cdffdd30ee52add434f80988075d1f0d"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/cmake-3.17.3.high_sierra.bottle.1.tar.gz",
-              "sha256": "32321684bf5d7d4270db1a6c8fe2bb4c5f18e4a3a00fc7b3c628939c842301ff"
+              "url": "https://homebrew.bintray.com/bottles/cmake-3.18.0.high_sierra.bottle.tar.gz",
+              "sha256": "168e2838e13a799b2a42642e8976f73c5daeaa16031dd8fedd724d384c7bdb54"
             }
           }
         }
@@ -722,7 +722,7 @@
         }
       },
       "libtool": {
-        "version": "2.4.6_1",
+        "version": "2.4.6_2",
         "bottle": {
           "cellar": ":any",
           "prefix": "/usr/local",
@@ -911,21 +911,21 @@
         }
       },
       "neovim": {
-        "version": "HEAD-ca02db1",
+        "version": "HEAD-326b87f",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-ca02db1.catalina.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-326b87f.catalina.bottle.tar.gz",
               "sha256": "389ab254794ea04df8a106bf281c227c4fdee27c609d52951f32b9a0239031d6"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-ca02db1.mojave.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-326b87f.mojave.bottle.tar.gz",
               "sha256": "fb6cc38c45be4650a4a750a314cec27f6f7643dc7c22a1f5abae347e1b39b388"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-ca02db1.high_sierra.bottle.tar.gz",
+              "url": "https://homebrew.bintray.com/bottles/neovim-HEAD-326b87f.high_sierra.bottle.tar.gz",
               "sha256": "b2f7450e005f4eb22bfaf650fe7741fa8629393a947b4dd48c9f91e7fc258113"
             }
           }
@@ -1470,19 +1470,19 @@
     },
     "cask": {
       "1password": {
-        "version": "7.4.3",
+        "version": "7.6",
         "options": {
           "full_name": "1password"
         }
       },
       "arq": {
-        "version": "6.2.4",
+        "version": "6.2.46",
         "options": {
           "full_name": "arq"
         }
       },
       "bartender": {
-        "version": "3.1.07",
+        "version": "3.1.23",
         "options": {
           "full_name": "bartender"
         }
@@ -1530,7 +1530,7 @@
         }
       },
       "google-chrome": {
-        "version": "81.0.4044.113",
+        "version": "84.0.4147.89",
         "options": {
           "full_name": "google-chrome"
         }
@@ -1548,13 +1548,13 @@
         }
       },
       "iterm2-beta": {
-        "version": "3.3.10beta3",
+        "version": "3.4.0beta2",
         "options": {
           "full_name": "iterm2-beta"
         }
       },
       "little-snitch": {
-        "version": "4.5",
+        "version": "4.5.2",
         "options": {
           "full_name": "little-snitch"
         }
@@ -1566,19 +1566,19 @@
         }
       },
       "microsoft-excel": {
-        "version": "16.36.20041300",
+        "version": "16.39.20071300",
         "options": {
           "full_name": "microsoft-excel"
         }
       },
       "microsoft-word": {
-        "version": "16.36.20041300",
+        "version": "16.39.20071300",
         "options": {
           "full_name": "microsoft-word"
         }
       },
       "skype": {
-        "version": "8.59.0.77",
+        "version": "8.62.0.85",
         "options": {
           "full_name": "skype"
         }
@@ -1596,7 +1596,7 @@
         }
       },
       "alfred": {
-        "version": "4.0.9_1144",
+        "version": "4.1_1167",
         "options": {
           "full_name": "alfred"
         }
@@ -1614,7 +1614,7 @@
         }
       },
       "carbon-copy-cloner": {
-        "version": "5.1.16.5965",
+        "version": "5.1.20.6044",
         "options": {
           "full_name": "carbon-copy-cloner"
         }
@@ -1690,6 +1690,12 @@
         "options": {
           "full_name": "whatsapp"
         }
+      },
+      "font-fira-code-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-fira-code-nerd-font"
+        }
       }
     },
     "mas": {
@@ -1707,15 +1713,15 @@
       },
       "Magnet": {
         "id": "441258766",
-        "version": "2.4.5"
+        "version": "2.4.6"
       },
       "Marked 2": {
         "id": "890031187",
-        "version": "2.5.36"
+        "version": "2.5.43"
       },
       "Numbers": {
         "id": "409203825",
-        "version": "6.2.1"
+        "version": "10.1"
       },
       "OmniGraffle": {
         "id": "1142578753",
@@ -1723,11 +1729,11 @@
       },
       "Pages": {
         "id": "409201541",
-        "version": "8.2.1"
+        "version": "10.1"
       },
       "Pixelmator Pro": {
         "id": "1289583905",
-        "version": "1.6.1"
+        "version": "1.7"
       },
       "Spark": {
         "id": "1176895641",
@@ -1739,7 +1745,7 @@
       },
       "WiFi Explorer": {
         "id": "494803304",
-        "version": "2.6"
+        "version": "2.6.2"
       },
       "e-Sword": null,
       "iNet Network Scanner": null
@@ -1754,6 +1760,14 @@
         "CLT": "10.3.0.0.1.1562985497",
         "Xcode": "10.3",
         "macOS": "10.14.6"
+      },
+      "catalina": {
+        "HOMEBREW_VERSION": "2.4.8",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "ceca2a9c74a41b6e1da1e753f8bec670b8634148",
+        "CLT": "11.5.0.0.1.1588476445",
+        "Xcode": "11.5",
+        "macOS": "10.15.6"
       }
     }
   }
