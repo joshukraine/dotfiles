@@ -96,7 +96,6 @@ cask "micro-snitch"
 cask "microsoft-excel"
 cask "microsoft-word"
 cask "skype"
-cask "steam"
 cask "viber"
 
 # rubocop:disable Style/NumericLiterals
