@@ -11,7 +11,7 @@ set -xg XDG_CONFIG_HOME "$HOME/.config"
 set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg DOTFILES "$HOME/dotfiles"
-set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
+set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore-vcs --glob "!{node_modules,.git,Library}"'
 set -xg HOST_NAME (scutil --get HostName)
 
 fish_vi_key_bindings
