@@ -65,3 +65,5 @@ export KEYTIMEOUT=1
 [[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
 
 . $HOME/dotfiles/zsh/profiler.stop
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
