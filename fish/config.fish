@@ -12,6 +12,7 @@ set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg DOTFILES "$HOME/dotfiles"
 set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
+set -xg FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -xg HOST_NAME (scutil --get HostName)
 
 fish_vi_key_bindings
