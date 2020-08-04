@@ -1,0 +1,33 @@
+# https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+
+# Don't print lines longer than this limit in bytes. Longer lines are omitted,
+# and only the number of matches in that line is printed.
+--max-columns=150
+
+# Show a preview for long lines.
+--max-columns-preview
+
+# Files/folders to ignore
+--glob=!**/galaxy/roles/*
+--glob=!**/node_modules/*
+--glob=!.config/htop
+--glob=!.git/*
+--glob=!Gemfile.lock
+--glob=!Library/*
+--glob=!Movies/*
+--glob=!coverage/*
+--glob=!lib/bf_curriculum/*
+--glob=!log/*
+--glob=!tmp/*
+--glob=!vendor/*
+--glob=!yarn.lock
+
+# Set the colors.
+--colors=line:none
+--colors=line:style:bold
+
+# Searches case insensitively if the pattern is all lowercase.
+# Search case sensitively otherwise.
+--smart-case
+
+# vim: set filetype=fish:
