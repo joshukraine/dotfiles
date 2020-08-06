@@ -11,10 +11,13 @@ set -xg XDG_CONFIG_HOME "$HOME/.config"
 set -xg XDG_DATA_HOME "$HOME/.local/share"
 set -xg XDG_CACHE_HOME "$HOME/.cache"
 set -xg DOTFILES "$HOME/dotfiles"
-set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
-set -xg FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -xg RIPGREP_CONFIG_PATH $DOTFILES/ripgreprc
 set -xg HOST_NAME (scutil --get HostName)
+
+# FZF specific
+set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
+set -xg FZF_DEFAULT_OPTS '--height 50% --layout=reverse --border'
+set -xg FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 
 fish_vi_key_bindings
 
