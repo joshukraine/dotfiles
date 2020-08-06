@@ -18,6 +18,7 @@ set -xg HOST_NAME (scutil --get HostName)
 set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
 set -xg FZF_DEFAULT_OPTS '--height 50% --layout=reverse --border'
 set -xg FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+set -xg FZF_ALT_C_COMMAND 'fd --type d . --color=never'
 
 fish_vi_key_bindings
 
