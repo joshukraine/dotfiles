@@ -1,3 +1,5 @@
+# https://fishshell.com/docs/current/cmds/abbr.html
+
 # General UNIX
 abbr -a -g c clear
 abbr -a -g df 'df -h'

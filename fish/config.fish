@@ -1,24 +1,26 @@
+#  https://fishshell.com/docs/current/index.html
+
 set fish_greeting
 
 # Environment variables - https://fishshell.com/docs/current/cmds/set.html
-set -xg EDITOR 'nvim'
-set -xg BUNDLER_EDITOR $EDITOR
-set -xg MANPAGER 'less -X' # Don’t clear the screen after quitting a manual page
-set -xg HOMEBREW_CASK_OPTS '--appdir=/Applications'
-set -xg SOURCE_ANNOTATION_DIRECTORIES 'spec'
-set -xg RUBY_CONFIGURE_OPTS '--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
-set -xg XDG_CONFIG_HOME "$HOME/.config"
-set -xg XDG_DATA_HOME "$HOME/.local/share"
-set -xg XDG_CACHE_HOME "$HOME/.cache"
-set -xg DOTFILES "$HOME/dotfiles"
-set -xg RIPGREP_CONFIG_PATH $DOTFILES/ripgreprc
-set -xg HOST_NAME (scutil --get HostName)
+set -gx EDITOR 'nvim'
+set -gx BUNDLER_EDITOR $EDITOR
+set -gx MANPAGER 'less -X' # Don’t clear the screen after quitting a manual page
+set -gx HOMEBREW_CASK_OPTS '--appdir=/Applications'
+set -gx SOURCE_ANNOTATION_DIRECTORIES 'spec'
+set -gx RUBY_CONFIGURE_OPTS '--with-opt-dir=/usr/local/opt/openssl:/usr/local/opt/readline:/usr/local/opt/libyaml:/usr/local/opt/gdbm'
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx DOTFILES "$HOME/dotfiles"
+set -gx RIPGREP_CONFIG_PATH "$DOTFILES/ripgreprc"
+set -gx HOST_NAME (scutil --get HostName)
 
-# FZF specific
-set -xg FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
-set -xg FZF_DEFAULT_OPTS '--height 50% --layout=reverse --border'
-set -xg FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
-set -xg FZF_ALT_C_COMMAND 'fd --type d . --color=never'
+# FZF specific - https://github.com/junegunn/fzf#key-bindings-for-command-line
+set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
+set -gx FZF_DEFAULT_OPTS '--height 50% --layout=reverse --border'
+set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+set -gx FZF_ALT_C_COMMAND 'fd --type d . --color=never'
 
 fish_vi_key_bindings
 
