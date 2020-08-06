@@ -7,6 +7,9 @@
 # Show a preview for long lines.
 --max-columns-preview
 
+# Limit search depth for directories.
+--max-depth=6
+
 # Files/folders to ignore
 --glob=!**/galaxy/roles/*
 --glob=!**/node_modules/*

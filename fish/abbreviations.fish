@@ -1,3 +1,5 @@
+# https://fishshell.com/docs/current/cmds/abbr.html
+
 # General UNIX
 abbr -a -g c clear
 abbr -a -g df 'df -h'
@@ -71,10 +73,6 @@ abbr -a -g grup 'git remote add upstream'
 abbr -a -g grv 'git remote -v'
 abbr -a -g gs 'git status'
 abbr -a -g gtl 'git tag --list'
-
-# Finding stuff!
-abbr -a -g fd 'find . -type d -name'
-abbr -a -g ff 'find . -type f -name'
 
 # macOS Finder
 abbr -a -g defr 'defaults read'

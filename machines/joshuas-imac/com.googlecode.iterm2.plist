@@ -3470,9 +3470,9 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>3640 966 400 129 2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>3530 768 620 392 2560 0 2560 1417 </string>
+	<string>3530 786 620 392 2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2814 204 1550 1057 2560 0 2560 1440 </string>
+	<string>2882 204 1410 987 2560 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4180,13 +4180,13 @@
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Reduce Flicker</key>
 			<true/>
 			<key>Right Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Rows</key>
 			<integer>35</integer>
 			<key>Screen</key>
@@ -4454,13 +4454,16 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
+		<string>3.3.12beta3</string>
 		<string>3.3.10beta3</string>
 		<string>3.3.20200513-nightly</string>
 		<string>3.3.11beta1</string>
 		<string>3.3.12beta2</string>
 		<string>3.3.10beta2</string>
+		<string>3.4.0beta2</string>
 		<string>3.3.10beta4</string>
 		<string>3.3.12beta1</string>
+		<string>3.4.0beta1</string>
 	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array/>
@@ -4478,8 +4481,10 @@
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>27378105-D459-48A4-A80A-57ABB7319891</string>
+	<key>NoSyncLastOSVersion</key>
+	<string>Version 10.15.6 (Build 19G73)</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>303</integer>
+	<integer>364</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5324,15 +5329,15 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing_new.xml?shard=74</string>
+	<string>https://iterm2.com/appcasts/testing_modern.xml?shard=74</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-26T14:26:05Z</date>
+	<date>2020-08-04T17:52:18Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>2362407967</integer>
+	<integer>3361712020</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -5396,7 +5401,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.12beta2</string>
+	<string>3.4.0beta2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
