@@ -15,7 +15,6 @@
 --glob=!**/node_modules/*
 --glob=!.config/htop
 --glob=!.git/*
---glob=!Gemfile.lock
 --glob=!Library/*
 --glob=!Movies/*
 --glob=!coverage/*
@@ -23,7 +22,6 @@
 --glob=!log/*
 --glob=!tmp/*
 --glob=!vendor/*
---glob=!yarn.lock
 
 # Set the colors.
 --colors=line:none
