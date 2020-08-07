@@ -1,5 +1,4 @@
-function ygs
+function ygs -d "Build a Nuxt site and serve from the dist/ folder."
     yarn generate
-    and cd dist
-    and http-server -p 8080
+    and http-server dist/ -p 8080
 end
