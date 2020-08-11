@@ -13,13 +13,16 @@
 # Files/folders to ignore
 --glob=!**/galaxy/roles/*
 --glob=!**/node_modules/*
+--glob=!.cache/*
 --glob=!.config/htop
 --glob=!.git/*
 --glob=!Library/*
 --glob=!Movies/*
 --glob=!coverage/*
+--glob=!dist/*
 --glob=!lib/bf_curriculum/*
 --glob=!log/*
+--glob=!public/*
 --glob=!tmp/*
 --glob=!vendor/*
 
