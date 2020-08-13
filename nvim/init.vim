@@ -439,9 +439,8 @@ map <leader>t :Files<CR>
 map <leader>y :Rg<CR>
 
 command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-      \   fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " Custom rails.vim commands
 " command! Rroutes :e config/routes.rb
