@@ -149,12 +149,13 @@ command! PrettyJSON :call <sid>PrettyJSON()
 " specify syntax highlighting for specific files
 augroup file_types
   autocmd!
+  autocmd Bufread,BufNewFile *.asciidoc,*.adoc,*.asc,*.ad set filetype=asciidoctor
+  autocmd Bufread,BufNewFile *.mdx set filetype=markdown
   autocmd Bufread,BufNewFile *.spv set filetype=php
   autocmd Bufread,BufNewFile *Brewfile,pryrc set filetype=ruby
   autocmd Bufread,BufNewFile *prettierrc,*stylelintrc,*babelrc set filetype=json
   autocmd Bufread,BufNewFile aliases,functions,prompt,tmux,oh-my-zsh,opts set filetype=zsh
   autocmd Bufread,BufNewFile gitconfig set filetype=gitconfig
-  autocmd Bufread,BufNewFile *.asciidoc,*.adoc,*.asc,*.ad set filetype=asciidoctor
 augroup END
 
 " Remove trailing whitespace on save for specified file types.
