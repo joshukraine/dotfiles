@@ -318,6 +318,8 @@ Plug 'cespare/vim-toml'                 " Vim syntax for TOML                   
 Plug 'leafgarland/typescript-vim'       " Typescript syntax files for Vim                       | https://github.com/leafgarland/typescript-vim
 Plug 'Yggdroot/indentLine'              " Display indention levels with thin vertical lines     | https://github.com/Yggdroot/indentLine
 Plug 'jparise/vim-graphql'              " GraphQL file detection, syntax highlighting, ...      | https://github.com/jparise/vim-graphql
+Plug 'styled-components/vim-styled-components',
+      \ { 'branch': 'main' }            " Vim bundle for styled components                      | https://github.com/styled-components/vim-styled-components
 
 " Tim Pope
 Plug 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
