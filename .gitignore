@@ -1,6 +1,7 @@
-vim/bundle
-vim/.netrwhist
 .gitconfig.local
-.zshrc.local
 .vimrc.local
+.zshrc.local
+Brewfile.lock.json
 local/*
+vim/.netrwhist
+vim/bundle
