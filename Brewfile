@@ -159,3 +159,5 @@ mas "WiFi Explorer", id: 494803304
 mas "e-Sword", id: 968437868
 mas "iNet Network Scanner", id: 403304796
 # rubocop:enable Style/NumericLiterals
+
+# vim: set filetype=ruby:

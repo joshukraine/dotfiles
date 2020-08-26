@@ -79,7 +79,6 @@ home_files=(
 "gitsh_completions"
 "hushlogin"
 "npmrc"
-"pryrc"
 "rubocop.yml"
 "tmux.conf"
 "tool-versions"
@@ -88,6 +87,7 @@ home_files=(
 
 config_dirs=(
 "nvim"
+"pry"
 "ranger"
 )
 
