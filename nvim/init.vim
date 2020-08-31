@@ -337,7 +337,7 @@ call plug#end()
 " Plugin-specifc Mappings & Settings
 
 " Far.vim
-let g:far#source = 'agnvim'
+let g:far#source = 'rg'
 let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
 
 " NERDTree
