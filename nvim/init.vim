@@ -263,9 +263,10 @@ Plug 'airblade/vim-gitgutter'           " A Vim plugin which shows a git diff in
 Plug 'reedes/vim-textobj-quote'         " Use ‘curly’ quote characters in Vim                   | https://github.com/reedes/vim-textobj-quote
 Plug 'norcalli/nvim-colorizer.lua'      " The fastest Neovim colorizer.                         | https://github.com/norcalli/nvim-colorizer.lua
 
-" Code Completion
+" Code Completion & Linting
 Plug 'neoclide/coc.nvim',
       \ {'branch': 'release'}                         " Intellisense engine for vim8 & neovim   | https://github.com/neoclide/coc.nvim
+Plug 'dense-analysis/ale'                             " Asynchronous Lint Engine                | https://github.com/dense-analysis/ale
 Plug 'sdras/vue-vscode-snippets'                      " Vue VSCode Snippets                     | https://github.com/sdras/vue-vscode-snippets
 Plug 'mattn/emmet-vim'                                " emmet for vim                           | https://github.com/mattn/emmet-vim
 Plug 'joshukraine/vscode-es7-javascript-react-snippets',
@@ -477,6 +478,17 @@ let g:vrc_curl_opts = {
       \ '-L': '',
       \ '-i': '',
       \ }
+
+" ALE
+let g:ale_disable_lsp = 1
+let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '!!'
+
+let g:ale_linters = {
+\   'haml': ['hamllint'],
+\}
 
 " Coc
 " https://github.com/neoclide/coc.nvim
