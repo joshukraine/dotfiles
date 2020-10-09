@@ -12,32 +12,22 @@ style = "bold blue"
 style = "bold bright-white"
 
 [git_status]
+ahead = "[](purple)[$count](white)"
+behind = "[](cyan)[$count](white)"
+conflicted = '[=$count](yellow)'
+deleted = '[✘$count](black)'
+diverged = "[](cyan)[$ahead_count](white)[](purple)[$behind_count](white)"
+modified = '[*$count](red)'
+renamed = "[»$count](purple)"
+staged = "[+$count](green)"
+stashed = "[\\$$count](yellow)"
 style = "bold bright-white"
-ahead.style = "purple"
-ahead.value =""
-behind.style = "cyan"
-behind.value = ""
-conflicted.style = "yellow"
-deleted.style = "black"
-diverged.value = ""
-modified.style = "red"
-modified.value = "*"
-modified_count.enabled = true
-modified_count.style = "red"
-renamed.style = "purple"
-staged.style = "green"
-staged.value = "+"
-stashed.style = "yellow"
-stashed_count.enabled = true
-stashed_count.style = "yellow"
-untracked.style = "cyan"
-show_sync_count = true
+untracked = "[?$count](cyan)"
 
 [git_commit]
 only_detached = true
 style = "bold black"
-prefix = ""
-suffix = " "
+format = "[$hash]($style) "
 
 [ruby]
 symbol = " "
