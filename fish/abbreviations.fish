@@ -157,6 +157,19 @@ abbr -a -g rs 'rails server'
 abbr -a -g rsp 'rspec .'
 abbr -a -g rtp 'rails db:test:prepare'
 
+# NPM
+abbr -a -g nb 'npm build'
+abbr -a -g ncl 'npm clean'
+abbr -a -g nd 'npm dev'
+abbr -a -g ndv 'npm develop'
+abbr -a -g nit 'npm init'
+abbr -a -g nig 'npm install -g'
+abbr -a -g ni 'npm install'
+abbr -a -g ns 'npm serve'
+abbr -a -g nst 'npm start'
+abbr -a -g nt 'npm test'
+abbr -a -g nv 'npm --version'
+
 # Yarn
 abbr -a -g y 'yarn'
 abbr -a -g ya 'yarn add'
