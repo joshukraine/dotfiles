@@ -90,6 +90,7 @@ abbr -a -g ra 'ranger'
 # Tmux
 abbr -a -g tl 'tmux ls'
 abbr -a -g tlw 'tmux list-windows'
+abbr -a -g mux 'tmuxinator'
 
 # Neovim
 abbr -a -g vi 'nvim'
