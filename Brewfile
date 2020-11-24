@@ -122,7 +122,6 @@ cask "hazel"
 cask "istat-menus"
 cask "iterm2-beta"
 cask "messenger"
-cask "marked"
 cask "micro-snitch"
 cask "microsoft-edge"
 cask "microsoft-excel"
@@ -150,6 +149,7 @@ mas "Deliveries", id: 924726344
 mas "Evernote", id: 406056744
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
+mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
 mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
