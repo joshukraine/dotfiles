@@ -138,11 +138,8 @@ cask "slack"
 cask "tableplus"
 cask "telegram"
 cask "toggl-track"
-cask "viber"
-cask "vlc"
 cask "vmware-fusion"
 cask "whatsapp"
-cask "zoomus"
 
 # rubocop:disable Style/NumericLiterals
 mas "Deliveries", id: 924726344
