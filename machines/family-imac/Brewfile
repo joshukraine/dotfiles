@@ -50,7 +50,6 @@ brew "libxslt" # asdf dependency
 brew "libyaml" # asdf dependency
 brew "mas"
 brew "media-info"
-brew "mono"
 brew "most"
 brew "neovim", args: ["HEAD"]
 brew "onefetch"
