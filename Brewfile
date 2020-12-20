@@ -59,7 +59,6 @@ brew "libyaml" # asdf dependency
 brew "mas"
 brew "media-info"
 brew "memcached"
-brew "mono"
 brew "most"
 brew "multitail"
 brew "neofetch"
