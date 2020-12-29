@@ -18,6 +18,7 @@
 --glob=!.git/*
 --glob=!Library/*
 --glob=!Movies/*
+--glob=!build*
 --glob=!coverage/*
 --glob=!dist/*
 --glob=!lib/bf_curriculum/*
