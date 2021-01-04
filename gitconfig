@@ -90,6 +90,9 @@
 [include]
   path = ~/.gitconfig.local
 
+[init]
+  defaultBranch = master
+
 [mailmap]
   # Display commit author names based on global mailmap file.
   file = ~/.mailmap
