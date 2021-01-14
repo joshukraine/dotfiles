@@ -1,7 +1,10 @@
 setlocal spell spelllang=en_us
 set complete+=kspell
 
-set conceallevel=2
+" WARNING: The conceallevel setting may be overridden by the indentLine plugin.
+" To disable in a Markdown file, run :IndentLinesToggle
+" https://github.com/Yggdroot/indentLine#customization
+set conceallevel=0
 
 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 setlocal wrap linebreak nolist textwidth=0 wrapmargin=0
