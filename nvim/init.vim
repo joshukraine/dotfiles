@@ -442,6 +442,9 @@ nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'p
 " nnoremap <leader>fc :VtrFlushCommand<cr>
 " nnoremap <leader>sf :VtrSendFile<cr>
 
+" indentLine
+nnoremap <leader>it :IndentLinesToggle<CR>
+
 " FZF
 map <leader>b :Buffers<CR>
 map <leader>t :Files<CR>
