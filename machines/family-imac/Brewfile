@@ -18,7 +18,6 @@ brew "openssl"
 brew "openssl@1.1" # wget dependency
 
 brew "advancecomp"
-brew "ansible"
 brew "asciidoctor"
 brew "autoconf" # asdf dependency
 brew "automake" # asdf dependency
@@ -54,7 +53,7 @@ brew "most"
 brew "neovim", args: ["HEAD"]
 brew "onefetch"
 brew "perl"
-brew "python"
+brew "python3"
 brew "ranger"
 brew "readline"
 brew "ripgrep"
