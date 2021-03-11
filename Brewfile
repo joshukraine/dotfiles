@@ -70,7 +70,7 @@ brew "perl"
 brew "pgcli"
 brew "postgresql", restart_service: true
 brew "puma/puma/puma-dev"
-brew "python"
+brew "python3"
 brew "ranger"
 brew "readline"
 brew "redis"
