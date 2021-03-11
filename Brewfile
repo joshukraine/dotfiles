@@ -21,7 +21,6 @@ brew "openssl"
 brew "openssl@1.1" # wget dependency
 
 brew "advancecomp"
-brew "ansible"
 brew "asciidoctor"
 brew "autoconf" # asdf dependency
 brew "automake" # asdf dependency
