@@ -55,6 +55,7 @@
   },
 
   "vetur.validation.style": false,
+  "vetur.ignoreProjectWarning": true,
 
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
