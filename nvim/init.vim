@@ -285,7 +285,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting rub
 Plug 'junegunn/fzf', { 'do': './install --bin' } " A command-line fuzzy finder                  | https://github.com/junegunn/fzf
 Plug 'junegunn/fzf.vim'                 " FZF for Vim                                           | https://github.com/junegunn/fzf.vim
 Plug 'preservim/nerdtree'               " A tree explorer plugin for vim                        | https://github.com/preservim/nerdtree
-Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status               | https://github.com/Xuyuanp/nerdtree-git-plugin
+" Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status               | https://github.com/Xuyuanp/nerdtree-git-plugin
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
@@ -358,18 +358,18 @@ let NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-      \ "Modified"  : "✹",
-      \ "Staged"    : "✚",
-      \ "Untracked" : "",
-      \ "Renamed"   : "»",
-      \ "Unmerged"  : "═",
-      \ "Deleted"   : "✖",
-      \ "Dirty"     : "~",
-      \ "Clean"     : "✔︎",
-      \ 'Ignored'   : '☒',
-      \ "Unknown"   : ""
-      \ }
+" let g:NERDTreeGitStatusIndicatorMapCustom = {
+"       \ "Modified"  : "✹",
+"       \ "Staged"    : "✚",
+"       \ "Untracked" : "",
+"       \ "Renamed"   : "»",
+"       \ "Unmerged"  : "═",
+"       \ "Deleted"   : "✖",
+"       \ "Dirty"     : "~",
+"       \ "Clean"     : "✔︎",
+"       \ 'Ignored'   : '☒',
+"       \ "Unknown"   : ""
+"       \ }
 
 " Vim DevIcons
 exe 'source' stdpath('config') . '/extras/devicons.vim'

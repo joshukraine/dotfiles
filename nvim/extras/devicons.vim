@@ -3,6 +3,11 @@
 " https://github.com/ryanoasis/vim-devicons/pull/135
 let g:WebDevIconsOS = 'Darwin'
 
+" https://github.com/ryanoasis/vim-devicons/issues/257
+" https://github.com/ryanoasis/vim-devicons/issues/248
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+
 if exists("g:loaded_webdevicons")
   call webdevicons#refresh()
 endif
