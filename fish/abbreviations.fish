@@ -161,7 +161,7 @@ abbr -a -g rtp 'bin/rails db:test:prepare'
 # NPM
 abbr -a -g nb 'npm build'
 abbr -a -g ncl 'npm clean'
-abbr -a -g nd 'npm dev'
+abbr -a -g nd 'npm run dev'
 abbr -a -g ndv 'npm develop'
 abbr -a -g nit 'npm init'
 abbr -a -g nig 'npm install -g'
