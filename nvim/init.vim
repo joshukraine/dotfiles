@@ -209,6 +209,9 @@ nnoremap <leader>5 :bnext<CR>
 nnoremap <leader>6 :bprev<CR>
 map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 
+" Disable Ex mode
+nnoremap Q <Nop>
+
 " Move tabs left/right
 noremap <A-Left>  :-tabmove<cr>
 noremap <A-Right> :+tabmove<cr>
