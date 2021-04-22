@@ -1,6 +1,7 @@
 # https://starship.rs/config/
 
 add_newline = false
+command_timeout = 2000
 
 [package]
 disabled = true
