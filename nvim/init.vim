@@ -196,18 +196,18 @@ augroup END
 let mapleader = "\<Space>"
 
 " Misc
-map <leader>r :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
-map <leader>q :q<CR>
-map <leader>w :w<CR>
-map <leader>x :x<CR>
-map <leader>ra :%s/
-map <leader>h :nohl<CR> " Clear highlights
-map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
+nnoremap <leader>r :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>x :x<CR>
+nnoremap <leader>ra :%s/
+nnoremap <leader>h :nohl<CR> " Clear highlights
+nnoremap <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap jj <C-c> " jj to switch back to normal mode
 nnoremap <leader>4 <c-^> " Switch between the last two files
 nnoremap <leader>5 :bnext<CR>
 nnoremap <leader>6 :bprev<CR>
-map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
+nnoremap <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 
 " Disable Ex mode
 nnoremap Q <Nop>
@@ -220,10 +220,10 @@ noremap <A-Right> :+tabmove<cr>
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Delete all lines beginning with '#' regardless of leading space.
-map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
+nnoremap <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 
 " Run 'git blame' on a selection of code
-vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+vnoremap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 " zoom a vim pane like in tmux
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
@@ -453,9 +453,9 @@ nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'p
 nnoremap <leader>it :IndentLinesToggle<CR>
 
 " FZF
-map <leader>b :Buffers<CR>
-map <leader>t :Files<CR>
-map <leader>y :Rg<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>t :Files<CR>
+nnoremap <leader>y :Rg<CR>
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case --glob "!yarn.lock" '.shellescape(<q-args>), 1,
