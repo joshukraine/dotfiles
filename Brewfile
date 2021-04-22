@@ -4,13 +4,14 @@
 
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/cask-versions"
 tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "puma/puma"
 tap "stripe/stripe-cli"
+tap "teamookla/speedtest"
 tap "universal-ctags/universal-ctags"
 
 # Homebrew
@@ -77,6 +78,7 @@ brew "ripgrep"
 brew "rlwrap"
 brew "rsync"
 brew "shellcheck"
+brew "speedtest"
 brew "sqlite"
 brew "ssh-copy-id"
 brew "starship"
