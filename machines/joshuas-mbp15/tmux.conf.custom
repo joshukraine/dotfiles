@@ -26,8 +26,8 @@
 # }}}
 
 # Oceanic Next {{{
-set -g pane-border-style bg=default,fg="#314e5d"
-set -g status-style bg="#20343e"
+# set -g pane-border-style bg=default,fg="#314e5d"
+# set -g status-style bg="#20343e"
 # }}}
 
 # One Half Dark {{{
@@ -35,7 +35,7 @@ set -g status-style bg="#20343e"
 # }}}
 
 # Tender Dark {{{
-# set -g status-style bg="#323232"
+set -g status-style bg="#323232"
 # }}}
 
 # Vim One {{{
