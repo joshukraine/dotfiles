@@ -205,6 +205,8 @@ nnoremap <leader>h :nohl<CR> " Clear highlights
 nnoremap <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap jj <C-c> " jj to switch back to normal mode
 nnoremap <leader>4 <c-^> " Switch between the last two files
+nnoremap <leader>1 :set wrap<CR>
+nnoremap <leader>2 :set nowrap<CR>
 nnoremap <leader>5 :bnext<CR>
 nnoremap <leader>6 :bprev<CR>
 nnoremap <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
