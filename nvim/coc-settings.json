@@ -21,6 +21,7 @@
   "javascript.validate.enable": false,
 
   "emmet.includeLanguages": {
+    "eruby": "html",
     "javascript": "javascriptreact"
   },
 
