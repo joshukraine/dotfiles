@@ -60,7 +60,6 @@ brew "mas"
 brew "media-info"
 brew "memcached"
 brew "most"
-brew "multitail"
 brew "neofetch"
 brew "neovim", args: ["HEAD"]
 brew "onefetch"
