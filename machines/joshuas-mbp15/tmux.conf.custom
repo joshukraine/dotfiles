@@ -1,3 +1,8 @@
+# Horizontal Git/Htop Splits {{{
+bind-key g split-window -h -p 35 \; send-keys 'g' Enter
+bind-key h split-window -h -p 35 "htop"
+# }}}
+
 # Terminfo — Alacritty {{{
 # set -g default-terminal 'alacritty'
 # set -ga terminal-overrides ',alacritty*:Tc'
@@ -22,7 +27,7 @@
 # }}}
 
 # Nord {{{
-# set -g status-style bg="#3b4252"
+set -g status-style bg="#3b4252"
 # }}}
 
 # Oceanic Next {{{
@@ -35,7 +40,7 @@
 # }}}
 
 # Tender Dark {{{
-set -g status-style bg="#323232"
+# set -g status-style bg="#323232"
 # }}}
 
 # Vim One {{{

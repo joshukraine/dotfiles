@@ -22,7 +22,7 @@
 # }}}
 
 # Nord {{{
-# set -g status-style bg="#3b4252"
+set -g status-style bg="#3b4252"
 # }}}
 
 # Oceanic Next {{{
@@ -35,7 +35,7 @@
 # }}}
 
 # Tender Dark {{{
-set -g status-style bg="#323232"
+# set -g status-style bg="#323232"
 # }}}
 
 # Vim One {{{
