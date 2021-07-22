@@ -25,14 +25,14 @@ abbr -a -g ..... 'cd ../../../../'
 abbr -a -g - 'cd -'
 
 # Tree
-abbr -a -g t1 'tree -L 1'
-abbr -a -g t1a 'tree -La 1'
-abbr -a -g t2 'tree -L 2'
-abbr -a -g t2a 'tree -La 2'
-abbr -a -g t3 'tree -L 3'
-abbr -a -g t3a 'tree -La 3'
-abbr -a -g t4 'tree -L 4'
-abbr -a -g t4a 'tree -La 4'
+abbr -a -g t1 'tree -CFL 1'
+abbr -a -g t1a 'tree -CFLa 1'
+abbr -a -g t2 'tree -CFL 2'
+abbr -a -g t2a 'tree -CFLa 2'
+abbr -a -g t3 'tree -CFL 3'
+abbr -a -g t3a 'tree -CFLa 3'
+abbr -a -g t4 'tree -CFL 4'
+abbr -a -g t4a 'tree -CFLa 4'
 abbr -a -g tree 'tree -CF'
 
 # Git
