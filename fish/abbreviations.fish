@@ -160,6 +160,7 @@ abbr -a -g rdr3 'bin/rails db:rollback STEP=3'
 abbr -a -g rgm 'bin/rails generate migration'
 abbr -a -g rs 'bin/rails server'
 abbr -a -g rsp 'bin/rspec .'
+abbr -a -g crsp 'env COVERAGE=true bin/rspec .'
 abbr -a -g rtp 'bin/rails db:test:prepare'
 
 # NPM
