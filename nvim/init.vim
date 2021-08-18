@@ -505,7 +505,6 @@ let g:ale_sign_warning = '!!'
 
 let g:ale_linters = {
 \   'haml': ['hamllint'],
-\   'eruby': ['ruumba'],
 \}
 
 " Coc

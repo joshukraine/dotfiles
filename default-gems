@@ -3,6 +3,5 @@ haml_lint
 neovim
 pry
 rubocop
-ruumba
 solargraph
 tmuxinator
