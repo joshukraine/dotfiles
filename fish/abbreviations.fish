@@ -162,6 +162,7 @@ abbr -a -g rs 'bin/rails server'
 abbr -a -g rsp 'bin/rspec .'
 abbr -a -g crsp 'env COVERAGE=true bin/rspec .'
 abbr -a -g rtp 'bin/rails db:test:prepare'
+abbr -a -g cred 'bin/rails credentials:edit --environment'
 
 # NPM
 abbr -a -g nb 'npm build'
