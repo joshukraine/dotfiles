@@ -19,7 +19,8 @@ let s:css3   = ''
 let s:fish   = ''
 let s:git    = ''
 let s:gulp   = ''
-let s:haml   = ''
+let s:erb   = ''
+let s:haml   = 'h'
 let s:html5  = ''
 let s:info   = ''
 let s:js     = ''
@@ -52,6 +53,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['conf']     = s:config
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']      = s:css3
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['fish']     = s:fish
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['haml']     = s:haml
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['erb']      = s:erb
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html']     = s:html5
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js']       = s:js
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json']     = s:json
@@ -73,7 +75,6 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['xml']      = s:xml
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yml']      = s:config
 
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols                         = {} " needed
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.html\.erb$']       = s:haml
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.js\.erb$']         = s:js
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.scss\.erb$']       = s:sass
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Brewfile$']            = s:ruby
@@ -127,7 +128,7 @@ autocmd filetype nerdtree highlight favicon_icon ctermbg=none ctermfg=178 guifg=
 autocmd filetype nerdtree highlight fish_icon ctermbg=none ctermfg=97 guifg=#875faf
 autocmd filetype nerdtree highlight git_icon ctermbg=none ctermfg=166 guifg=#d75f00
 autocmd filetype nerdtree highlight gulpfile_icon ctermbg=none ctermfg=124 guifg=#af0000
-autocmd filetype nerdtree highlight haml_icon ctermbg=none ctermfg=160 guifg=#d70000
+autocmd filetype nerdtree highlight haml_icon ctermbg=none ctermfg=137 guifg=#af875f
 autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=166 guifg=#d75f00
 autocmd filetype nerdtree highlight info_icon ctermbg=none ctermfg=31 guifg=#0087af
 autocmd filetype nerdtree highlight js_icon ctermbg=none ctermfg=178 guifg=#d7af00
@@ -140,6 +141,7 @@ autocmd filetype nerdtree highlight npm_icon ctermbg=none ctermfg=160 guifg=#d70
 autocmd filetype nerdtree highlight procfile_icon ctermbg=none ctermfg=97 guifg=#875faf
 autocmd filetype nerdtree highlight rest_icon ctermbg=none ctermfg=2 guifg=#859900
 autocmd filetype nerdtree highlight ruby_icon ctermbg=none ctermfg=160 guifg=#d70000
+autocmd filetype nerdtree highlight erb_icon ctermbg=none ctermfg=160 guifg=#d70000
 autocmd filetype nerdtree highlight scss_icon ctermbg=none ctermfg=205 guifg=#ff5faf
 autocmd filetype nerdtree highlight sh_icon ctermbg=none ctermfg=97 guifg=#875faf
 autocmd filetype nerdtree highlight svg_icon ctermbg=none ctermfg=205 guifg=#ff5faf
@@ -159,7 +161,8 @@ autocmd filetype nerdtree syn match favicon_icon ## containedin=NERDTreeFlags
 autocmd filetype nerdtree syn match fish_icon ## containedin=NERDTreeFlags
 autocmd filetype nerdtree syn match git_icon ## containedin=NERDTreeFlags
 autocmd filetype nerdtree syn match gulpfile_icon ## containedin=NERDTreeFlags
-autocmd filetype nerdtree syn match haml_icon ## containedin=NERDTreeFlags
+autocmd filetype nerdtree syn match haml_icon #h# containedin=NERDTreeFlags
+autocmd filetype nerdtree syn match erb_icon ## containedin=NERDTreeFlags
 autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFlags,html
 autocmd filetype nerdtree syn match info_icon ## containedin=NERDTreeFlags
 autocmd filetype nerdtree syn match js_icon ## containedin=NERDTreeFlags
