@@ -210,6 +210,8 @@ nnoremap <leader>2 :set nowrap<CR>
 nnoremap <leader>5 :bnext<CR>
 nnoremap <leader>6 :bprev<CR>
 nnoremap <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
+nnoremap <leader>cc :set cursorcolumn!<CR>
+nnoremap <leader>cl :set cursorline!<CR>
 
 " Disable Ex mode
 nnoremap Q <Nop>
