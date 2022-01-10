@@ -1,4 +1,3 @@
-@sanity/cli
 @vue/cli
 gulp-cli
 http-server
