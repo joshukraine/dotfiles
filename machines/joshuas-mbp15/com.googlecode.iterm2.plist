@@ -3895,11 +3895,11 @@
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>MonoLisa-Regular 14</string>
+			<string>OperatorMonoSSmLig-Book 14</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
-			<integer>2</integer>
+			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -4160,7 +4160,7 @@
 			<key>Use Non-ASCII Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.1699999999999999</real>
+			<real>1.3</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
