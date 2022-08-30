@@ -60,7 +60,7 @@ brew "overmind"
 brew "pandoc"
 brew "perl"
 brew "pgcli"
-brew "postgresql@14", restart_service: changed
+brew "postgresql@14", restart_service: :changed
 brew "python3"
 brew "ranger"
 brew "readline"
