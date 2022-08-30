@@ -8,7 +8,7 @@
 --max-columns-preview
 
 # Limit search depth for directories.
---max-depth=6
+--max-depth=8
 
 # Files/folders to ignore
 --glob=!**/galaxy/roles/*
