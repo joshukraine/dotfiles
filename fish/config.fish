@@ -30,9 +30,6 @@ if status is-interactive
   # https://github.com/starship/starship#fish
   starship init fish | source
 
-  # https://asdf-vm.com/#/core-manage-asdf-vm?id=add-to-your-shell
-  source ~/.asdf/asdf.fish
-
   if test -e $DOTFILES/machines/$HOST_NAME/colors.fish
     source $DOTFILES/machines/$HOST_NAME/colors.fish
   end
@@ -45,3 +42,5 @@ end
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
+
+source /usr/local/opt/asdf/libexec/asdf.fish
