@@ -61,6 +61,7 @@ brew "pandoc"
 brew "perl"
 brew "pgcli"
 brew "postgresql@14", restart_service: :changed
+brew "pstree"
 brew "python3"
 brew "ranger"
 brew "readline"
@@ -92,19 +93,21 @@ cask "1password"
 cask "alfred"
 # cask "arq"
 # cask "bartender"
-# cask "brave-browser"
+cask "brave-browser"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "daisydisk"
 # cask "dash"
 # cask "discord"
 cask "dropbox"
+cask "expressvpn"
 cask "firefox"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-fira-code-nerd-font"
 cask "font-iosevka-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font"
+cask "freedom"
 cask "google-chrome"
 # cask "handbrake"
 cask "hazel"
@@ -123,13 +126,16 @@ cask "notion"
 cask "postico"
 # cask "postman"
 # cask "screenflick"
+cask "signal"
 # cask "skype"
 cask "slack"
 cask "tableplus"
 cask "telegram"
 cask "toggl-track"
-# cask "vmware-fusion"
+cask "viber"
+cask "vmware-fusion"
 cask "whatsapp"
+cask "zoom"
 
 # rubocop:disable Style/NumericLiterals
 mas "Keynote", id: 409183694
@@ -139,7 +145,7 @@ mas "Numbers", id: 409203825
 mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
-# mas "Things 3", id: 904280696
+mas "Things 3", id: 904280696
 # mas "ToothFairy", id: 1191449274
 # mas "WiFi Explorer", id: 494803304
 mas "e-Sword", id: 968437868
