@@ -111,13 +111,14 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font"
 cask "freedom"
 cask "google-chrome"
+cask "grammarly-desktop"
 # cask "handbrake"
 cask "hazel"
-# cask "istat-menus"
+cask "istat-menus"
 cask "iterm2-beta"
 cask "messenger"
 # cask "micro-snitch"
-# cask "microsoft-edge"
+cask "microsoft-edge"
 cask "microsoft-excel"
 cask "microsoft-word"
 cask "ngrok"
@@ -140,6 +141,7 @@ cask "whatsapp"
 cask "zoom"
 
 # rubocop:disable Style/NumericLiterals
+mas "1Password for Safari", id: 1569813296
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
