@@ -3626,13 +3626,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.15351898968219757</real>
+				<real>0.20392156862745098</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.12613683938980103</real>
+				<real>0.16862745098039217</real>
 				<key>Red Component</key>
-				<real>0.082745037972927094</real>
+				<real>0.10588235294117647</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
