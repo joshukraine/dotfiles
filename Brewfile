@@ -89,6 +89,7 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/Homebrew/homebrew-cask
 cask "1password"
+cask "affinity-publisher"
 # cask "alacritty"
 cask "alfred"
 cask "arq"
