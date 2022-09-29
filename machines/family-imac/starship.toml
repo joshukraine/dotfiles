@@ -1,4 +1,5 @@
 # https://starship.rs/config/
+# https://www.nerdfonts.com/cheat-sheet
 
 add_newline = false
 command_timeout = 2000
@@ -7,10 +8,11 @@ command_timeout = 2000
 disabled = true
 
 [directory]
-style = "bold blue"
+style = "bold bright-blue"
 
 [git_branch]
 style = "bold bright-white"
+symbol = " "
 
 [git_status]
 ahead = "[](purple)[$count](white)"
