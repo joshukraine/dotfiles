@@ -1,7 +1,7 @@
 bundler
+foreman
 haml_lint
 neovim
-pry
 rubocop
 solargraph
 tmuxinator
