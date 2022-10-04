@@ -78,6 +78,7 @@ home_files=(
 "gitmessage"
 "gitsh_completions"
 "hushlogin"
+"irbrc"
 "npmrc"
 "rubocop.yml"
 "tmux.conf"
