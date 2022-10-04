@@ -15,6 +15,7 @@ if defined?(PryDebugger) || defined?(PryByebug)
   Pry.config.prompt = Pry::Prompt[:nav]
 end
 
+# https://github.com/amazing-print/amazing_print#pry-integration
 if defined?(AmazingPrint)
   require "amazing_print"
   AmazingPrint.pry!

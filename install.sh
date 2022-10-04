@@ -80,6 +80,7 @@ home_files=(
 "hushlogin"
 "irbrc"
 "npmrc"
+"pryrc"
 "rubocop.yml"
 "tmux.conf"
 "tool-versions"
@@ -88,7 +89,6 @@ home_files=(
 
 config_dirs=(
 "nvim"
-"pry"
 "ranger"
 )
 
