@@ -420,6 +420,10 @@ nnoremap <silent> <F4> :BufExplorer<CR>
 " Obsession
 map <leader>ob :Obsession<CR>
 
+" vim-textobj-quote
+map <silent> <leader>qc <Plug>ReplaceWithCurly
+map <silent> <leader>qs <Plug>ReplaceWithStraight
+
 " vim-test
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
