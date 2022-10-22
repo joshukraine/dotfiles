@@ -421,8 +421,8 @@ nnoremap <silent> <F4> :BufExplorer<CR>
 map <leader>ob :Obsession<CR>
 
 " vim-textobj-quote
-map <silent> <leader>qc <Plug>ReplaceWithCurly
-map <silent> <leader>qs <Plug>ReplaceWithStraight
+map <silent> <leader>rc <Plug>ReplaceWithCurly
+map <silent> <leader>rs <Plug>ReplaceWithStraight
 
 " vim-test
 nmap <silent> t<C-n> :TestNearest<CR>
