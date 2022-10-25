@@ -51,6 +51,11 @@
     "vue": ["javascript", "typescript", "html", "css"]
   },
 
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "eruby": "html"
+  },
+
   "vetur.validation.style": false,
   "vetur.ignoreProjectWarning": true,
 

@@ -530,7 +530,7 @@ let g:coc_global_extensions = [
       \ 'coc-snippets',
       \ 'coc-solargraph',
       \ 'coc-stylelintplus',
-      \ 'coc-tailwindcss',
+      \ '@yaegassy/coc-tailwindcss3',
       \ 'coc-tsserver',
       \ 'coc-vetur',
       \ 'coc-yaml',
