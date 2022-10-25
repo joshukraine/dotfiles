@@ -1,46 +1,7 @@
 {
-  "diagnostic.errorSign": "",
-  "diagnostic.warningSign": "",
-  "diagnostic.infoSign": "",
-  "diagnostic.hintSign": "ﯦ",
-
-  "eslint.run": "onSave",
-  "eslint.autoFixOnSave": true,
-  "eslint.filetypes": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact",
-    "vue"
-  ],
-
-  "javascript.format.enabled": false,
-  "javascript.showUnused": false,
-  "javascript.suggestionActions.enabled": false,
-  "javascript.validate.enable": false,
-
-  "emmet.includeLanguages": {
-    "eruby": "html",
-    "javascript": "javascriptreact"
-  },
-
-  "emmet.excludeLanguages": ["haml"],
-
-  "prettier.disableLanguages": [],
-  "prettier.singleQuote": true,
-
-  "css.validate": false,
-
-  "solargraph.autoformat": true,
-  "solargraph.completion": true,
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "solargraph.hover": true,
-  "solargraph.rename": true,
-
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "eruby",
     "html",
     "javascript",
     "javascriptreact",
@@ -50,6 +11,41 @@
     "typescript.tsx",
     "typescriptreact"
   ],
+
+  "css.validate": false,
+
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": "ﯦ",
+
+  "emmet.includeLanguages": {
+    "eruby": "html",
+    "javascript": "javascriptreact"
+  },
+  "emmet.excludeLanguages": ["haml"],
+
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+
+  "html.filetypes": ["html", "eruby"],
+  "html.format.enable": true,
+  "html.format.templating": true,
+
+  "javascript.format.enabled": false,
+  "javascript.showUnused": false,
+  "javascript.suggestionActions.enabled": false,
+  "javascript.validate.enable": false,
+
+  "prettier.disableLanguages": ["yaml"],
+  "prettier.singleQuote": true,
+
+  "solargraph.autoformat": true,
+  "solargraph.completion": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "solargraph.hover": true,
+  "solargraph.rename": true,
 
   "snippets.extends": {
     "vue": ["javascript", "typescript", "html", "css"]
