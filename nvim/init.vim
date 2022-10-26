@@ -362,6 +362,7 @@ let NERDTreeWinSize=25
 "       \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
 "       \ '\.rar$', '\.git$']
 let NERDTreeMinimalUI = 1
+let g:NERDTreeMinimalMenu=1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
