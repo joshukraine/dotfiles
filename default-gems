@@ -1,7 +1,7 @@
 amazing_print
 bundler
 foreman
-haml_lint
+erb_lint
 neovim
 rubocop
 solargraph

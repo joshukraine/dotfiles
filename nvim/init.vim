@@ -351,7 +351,7 @@ call plug#end()
 
 " Far.vim
 let g:far#source = 'rg'
-let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
+let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.erb', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
 
 " NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
@@ -511,6 +511,11 @@ let g:ale_sign_warning = '!!'
 
 let g:ale_linters = {
 \   'haml': ['hamllint'],
+\   'eruby': ['erblint'],
+\}
+
+let g:ale_fixers = {
+\   'eruby': ['erblint'],
 \}
 
 " Coc
