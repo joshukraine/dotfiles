@@ -518,6 +518,11 @@ let g:ale_fixers = {
 \   'eruby': ['erblint'],
 \}
 
+" Use `[a` and `]a` to navigate ALE diagnostics
+" https://github.com/dense-analysis/ale/blob/a83a3659acd3c32c47cad85b7f996e178186732d/plugin/ale.vim#L292
+nmap <silent> [a <Plug>(ale_previous)
+nmap <silent> ]a <Plug>(ale_next)
+
 " Coc
 " https://github.com/neoclide/coc.nvim
 
