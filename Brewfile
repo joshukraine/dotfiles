@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # https://github.com/Homebrew/homebrew-bundle
 
 tap "homebrew/bundle"

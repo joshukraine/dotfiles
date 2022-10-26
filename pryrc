@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 if defined?(PryDebugger) || defined?(PryByebug)
   # Aliases
   Pry.commands.alias_command "..", "cd .."
