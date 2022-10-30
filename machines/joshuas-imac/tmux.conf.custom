@@ -22,12 +22,12 @@
 # }}}
 
 # Nord {{{
-# set -g status-style bg="#3b4252"
+set -g status-style bg="#3b4252"
 # }}}
 
 # Oceanic Next {{{
-set -g pane-border-style bg=default,fg="#314e5d"
-set -g status-style bg="#20343e"
+# set -g pane-border-style bg=default,fg="#314e5d"
+# set -g status-style bg="#20343e"
 # }}}
 
 # One Half Dark {{{
