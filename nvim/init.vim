@@ -3,6 +3,9 @@
 " $XDG_DATA_HOME/nvim/plugged/vim-sensible/plugin/sensible.vim
 " https://github.com/tpope/vim-sensible
 
+" Disable netrw for nvim-tree
+exe 'source' stdpath('config') . '/lua/netrw.lua'
+
 " https://github.com/christoomey/vim-tmux-navigator/issues/72
 set shell=/bin/bash\ -i
 
@@ -291,6 +294,8 @@ Plug 'nelstrom/vim-textobj-rubyblock'   " A custom text object for selecting rub
 " Searching and Navigation
 Plug 'junegunn/fzf', { 'do': './install --bin' } " A command-line fuzzy finder                  | https://github.com/junegunn/fzf
 Plug 'junegunn/fzf.vim'                 " FZF for Vim                                           | https://github.com/junegunn/fzf.vim
+Plug 'nvim-tree/nvim-web-devicons'      " File icons for nvim-tree                              | https://github.com/nvim-tree/nvim-web-devicons
+Plug 'nvim-tree/nvim-tree.lua'          " A file explorer tree for neovim written in lua        | https://github.com/nvim-tree/nvim-tree.lua
 Plug 'preservim/nerdtree'               " A tree explorer plugin for vim                        | https://github.com/preservim/nerdtree
 " Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status               | https://github.com/Xuyuanp/nerdtree-git-plugin
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
@@ -353,9 +358,14 @@ call plug#end()
 let g:far#source = 'rg'
 let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.erb', '**/*.haml', '**/*.js', '**/*.css', '**/*.scss', '**/*.rb']
 
+" nvim-tree
+exe 'source' stdpath('config') . '/lua/nvim-tree-config.lua'
+nmap <silent> <F3> :NvimTreeToggle<CR>
+map <leader>\ :NvimTreeToggle<CR>
+
 " NERDTree
-nmap <silent> <F3> :NERDTreeToggle<CR>
-map <leader>\ :NERDTreeToggle<CR>
+" nmap <silent> <F3> :NERDTreeToggle<CR>
+" map <leader>\ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=25
 " let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
