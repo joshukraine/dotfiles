@@ -114,9 +114,6 @@ set diffopt=vertical
 " always show signcolumns
 set signcolumn=auto
 
-" Set built-in file system explorer to use layout similar to the NERDTree plugin
-let g:netrw_liststyle=3
-
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
 
@@ -171,12 +168,6 @@ augroup fold_settings
   autocmd!
   autocmd FileType json setlocal foldmethod=syntax
   autocmd FileType json normal zR
-augroup END
-
-" Close vim if only nerdtree window is left
-augroup nerdtree_settings
-  autocmd!
-  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " automatically rebalance windows on vim resize
@@ -296,8 +287,6 @@ Plug 'junegunn/fzf', { 'do': './install --bin' } " A command-line fuzzy finder  
 Plug 'junegunn/fzf.vim'                 " FZF for Vim                                           | https://github.com/junegunn/fzf.vim
 Plug 'nvim-tree/nvim-web-devicons'      " File icons for nvim-tree                              | https://github.com/nvim-tree/nvim-web-devicons
 Plug 'nvim-tree/nvim-tree.lua'          " A file explorer tree for neovim written in lua        | https://github.com/nvim-tree/nvim-tree.lua
-Plug 'preservim/nerdtree'               " A tree explorer plugin for vim                        | https://github.com/preservim/nerdtree
-" Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status               | https://github.com/Xuyuanp/nerdtree-git-plugin
 Plug 'brooth/far.vim'                   " Find And Replace Vim plugin                           | https://github.com/brooth/far.vim
 Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plug 'easymotion/vim-easymotion'        " Vim motions on speed!                                 | https://github.com/easymotion/vim-easymotion
@@ -362,35 +351,6 @@ let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.erb', '**/*.h
 exe 'source' stdpath('config') . '/lua/nvim-tree-config.lua'
 nmap <silent> <F3> :NvimTreeToggle<CR>
 map <leader>\ :NvimTreeToggle<CR>
-
-" NERDTree
-" nmap <silent> <F3> :NERDTreeToggle<CR>
-" map <leader>\ :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-let NERDTreeWinSize=25
-" let NERDTreeIgnore=['\.png$', '\.jpg$', '\.gif$', '\.mp3$', '\.ogg$', '\.mp4$',
-"       \ '\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$',
-"       \ '\.rar$', '\.git$']
-let NERDTreeMinimalUI = 1
-let g:NERDTreeMinimalMenu=1
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-
-" let g:NERDTreeGitStatusIndicatorMapCustom = {
-"       \ "Modified"  : "✹",
-"       \ "Staged"    : "✚",
-"       \ "Untracked" : "",
-"       \ "Renamed"   : "»",
-"       \ "Unmerged"  : "═",
-"       \ "Deleted"   : "✖",
-"       \ "Dirty"     : "~",
-"       \ "Clean"     : "✔︎",
-"       \ 'Ignored'   : '☒',
-"       \ "Unknown"   : ""
-"       \ }
-
-" Vim DevIcons
-exe 'source' stdpath('config') . '/extras/devicons.vim'
 
 " indentLine
 let g:indentLine_char = '▏'
