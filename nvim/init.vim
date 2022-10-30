@@ -365,9 +365,9 @@ nnoremap <F7> :GitGutterLineHighlightsToggle<CR>
 let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_preview_win_floating = 0
 let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_sign_added = '█'
-let g:gitgutter_sign_modified = '█'
-let g:gitgutter_sign_removed = '▄'
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = '-'
 
 nmap ]g <Plug>(GitGutterNextHunk)
 nmap [g <Plug>(GitGutterPrevHunk)
