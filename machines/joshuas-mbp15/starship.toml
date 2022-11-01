@@ -33,7 +33,7 @@ style = "bold black"
 format = "[$hash]($style) "
 
 [ruby]
-symbol = " "
+symbol = " "
 
 [nodejs]
 symbol = " "
