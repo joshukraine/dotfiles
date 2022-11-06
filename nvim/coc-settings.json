@@ -1,16 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "eruby",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "ruby",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact"
-  ],
+  "coc.preferences.formatOnSave": true,
 
   "css.validate": false,
   "diagnostic.errorSign": "",
@@ -31,7 +20,6 @@
   "html.format.enable": true,
   "html.format.templating": true,
 
-  "javascript.format.enabled": false,
   "javascript.showUnused": false,
   "javascript.suggestionActions.enabled": false,
   "javascript.validate.enable": false,
