@@ -88,18 +88,14 @@ brew "zsh"
 # https://github.com/Homebrew/homebrew-cask
 cask "1password"
 cask "affinity-publisher"
-# cask "alacritty"
 cask "alfred"
 cask "arq"
-# cask "bartender"
 cask "brave-browser"
 cask "busycal"
 cask "busycontacts"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "daisydisk"
-# cask "dash"
-# cask "discord"
 cask "dropbox"
 cask "expressvpn"
 cask "firefox"
@@ -112,25 +108,17 @@ cask "freedom"
 cask "google-chrome"
 cask "google-drive"
 cask "grammarly-desktop"
-# cask "handbrake"
 cask "hazel"
 cask "istat-menus"
 cask "iterm2-beta"
 cask "messenger"
-# cask "micro-snitch"
 cask "microsoft-edge"
 cask "microsoft-excel"
 cask "microsoft-word"
 cask "ngrok"
 cask "notion"
-# cask "opera"
-# cask "pdftotext"
-# cask "pgadmin4"
 cask "postico"
-# cask "postman"
-# cask "screenflick"
 cask "signal"
-# cask "skype"
 cask "slack"
 cask "tableplus"
 cask "telegram"
@@ -151,10 +139,7 @@ mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Things 3", id: 904280696
-# mas "ToothFairy", id: 1191449274
-# mas "WiFi Explorer", id: 494803304
 mas "e-Sword", id: 968437868
-# mas "iNet Network Scanner", id: 403304796
 # rubocop:enable Style/NumericLiterals
 
 # vim: set filetype=ruby:
