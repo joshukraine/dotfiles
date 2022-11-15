@@ -87,12 +87,9 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/Homebrew/homebrew-cask
 cask "1password"
-cask "affinity-publisher"
 cask "alfred"
 cask "arq"
 cask "brave-browser"
-cask "busycal"
-cask "busycontacts"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "daisydisk"
@@ -130,7 +127,6 @@ cask "zoom"
 
 # rubocop:disable Style/NumericLiterals
 mas "1Password for Safari", id: 1569813296
-mas "Gemini 2: The Duplicate Finder", id: 1090488118
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
