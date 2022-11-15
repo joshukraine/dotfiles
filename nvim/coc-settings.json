@@ -1,6 +1,10 @@
 {
   "coc.preferences.formatOnSave": true,
 
+  "[markdown]": {
+    "coc.preferences.formatOnSave": false
+  },
+
   "css.validate": false,
   "diagnostic.errorSign": "",
   "diagnostic.warningSign": "",
