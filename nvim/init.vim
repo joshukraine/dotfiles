@@ -499,21 +499,22 @@ nmap <silent> ]a <Plug>(ale_next)
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
+      \ '@yaegassy/coc-tailwindcss3',
+      \ '@yaegassy/coc-volar',
+      \ '@yaegassy/coc-volar-tools',
       \ 'coc-css',
       \ 'coc-diagnostic',
       \ 'coc-emmet',
       \ 'coc-eslint',
       \ 'coc-html',
-      \ 'coc-pairs',
       \ 'coc-json',
       \ 'coc-marketplace',
+      \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-snippets',
       \ 'coc-solargraph',
       \ 'coc-stylelintplus',
-      \ '@yaegassy/coc-tailwindcss3',
       \ 'coc-tsserver',
-      \ 'coc-vetur',
       \ 'coc-yaml',
       \ ]
 
