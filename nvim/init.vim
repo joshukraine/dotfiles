@@ -198,14 +198,17 @@ nnoremap <leader>ra :%s/
 nnoremap <leader>h :nohl<CR> " Clear highlights
 nnoremap <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
 inoremap jj <C-c> " jj to switch back to normal mode
-nnoremap <leader>4 <c-^> " Switch between the last two files
-nnoremap <leader>1 :set wrap<CR>
-nnoremap <leader>2 :set nowrap<CR>
-nnoremap <leader>5 :bnext<CR>
-nnoremap <leader>6 :bprev<CR>
 nnoremap <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 nnoremap <leader>cc :set cursorcolumn!<CR>
 nnoremap <leader>cl :set cursorline!<CR>
+
+" Numeric leaders
+nnoremap <leader>1 :set wrap<CR>
+nnoremap <leader>2 :set nowrap<CR>
+nnoremap <leader>3 :NvimTreeToggle<CR>
+nnoremap <leader>4 <c-^> " Switch between the last two files
+nnoremap <leader>5 :bnext<CR>
+nnoremap <leader>6 :bprev<CR>
 
 " Disable Ex mode
 nnoremap Q <Nop>
@@ -349,8 +352,8 @@ let g:far#file_mask_favorites = ['%', '**/*.*', '**/*.html', '**/*.erb', '**/*.h
 
 " nvim-tree
 exe 'source' stdpath('config') . '/lua/nvim-tree-config.lua'
-nmap <silent> <F3> :NvimTreeToggle<CR>
 map <leader>\ :NvimTreeToggle<CR>
+" Also see Numeric leaders above
 
 " indentLine
 let g:indentLine_char = '▏'
