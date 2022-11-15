@@ -23,6 +23,10 @@
   "html.filetypes": ["html", "eruby"],
   "html.format.enable": true,
   "html.format.templating": true,
+  "html.format.wrapLineLength": 80,
+  "html.format.indentInnerHtml": false,
+  "html.autoCreateQuotes": false,
+  "html.format.wrapAttributes": "force-aligned",
 
   "javascript.showUnused": false,
   "javascript.suggestionActions.enabled": false,
