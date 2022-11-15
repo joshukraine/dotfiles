@@ -605,6 +605,9 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 map <leader>p :Prettier<CR>
+nnoremap <leader>cd :CocDisable<CR>
+nnoremap <leader>ce :CocEnable<CR>
+nnoremap <leader>cr :CocRestart<CR>
 
 " Using CocList
 " Show all diagnostics
