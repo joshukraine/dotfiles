@@ -13,6 +13,17 @@ require("nvim-tree").setup({
   renderer = {
     group_empty = true,
   },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = false,
+    debounce_delay = 50,
+    icons = {
+      hint = "ﯦ",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
   filters = {
     dotfiles = true,
   },
