@@ -1,6 +1,10 @@
 {
   "coc.preferences.formatOnSave": true,
 
+  "[markdown]": {
+    "coc.preferences.formatOnSave": false
+  },
+
   "css.validate": false,
   "diagnostic.errorSign": "",
   "diagnostic.warningSign": "",
@@ -19,6 +23,10 @@
   "html.filetypes": ["html", "eruby"],
   "html.format.enable": true,
   "html.format.templating": true,
+  "html.format.wrapLineLength": 80,
+  "html.format.indentInnerHtml": false,
+  "html.autoCreateQuotes": false,
+  "html.format.wrapAttributes": "force-aligned",
 
   "javascript.showUnused": false,
   "javascript.suggestionActions.enabled": false,
@@ -42,9 +50,6 @@
   "tailwindCSS.includeLanguages": {
     "eruby": "html"
   },
-
-  "vetur.validation.style": false,
-  "vetur.ignoreProjectWarning": true,
 
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
