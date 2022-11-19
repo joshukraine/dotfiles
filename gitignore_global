@@ -1,5 +1,5 @@
-# Created by https://www.gitignore.io/api/vim,node,ruby,nuxt,linux,macos
-# Edit at https://www.gitignore.io/?templates=vim,node,ruby,nuxt,linux,macos
+# Created by https://www.toptal.com/developers/gitignore/api/macos,linux,vim,rails,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,linux,vim,rails,node
 
 ### Linux ###
 *~
@@ -44,6 +44,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
 ### Node ###
 # Logs
 logs
@@ -51,6 +55,11 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
 pids
@@ -63,6 +72,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+*.lcov
 
 # nyc test coverage
 .nyc_output
@@ -83,14 +93,26 @@ build/Release
 node_modules/
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# TypeScript cache
+*.tsbuildinfo
 
 # Optional npm cache directory
 .npm
 
 # Optional eslint cache
 .eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
 # Optional REPL history
 .node_repl_history
@@ -101,21 +123,39 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv environment variable files
 .env
-.env.*
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
+.parcel-cache
 
-# next.js build output
+# Next.js build output
 .next
+out
 
-# nuxt.js build output
+# Nuxt.js build / generate output
 .nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
 
 # vuepress build output
 .vuepress/dist
+
+# vuepress v2.x temp and cache directory
+.temp
+
+# Docusaurus cache and generated files
+.docusaurus
 
 # Serverless directories
 .serverless/
@@ -126,74 +166,97 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-### Nuxt ###
-# gitignore template for Nuxt.js projects
-#
-# Recommended template: Node.gitignore
+# TernJS port file
+.tern-port
 
-# Nuxt build
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
 
- # Nuxt generate
-dist
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
 
-### Ruby ###
-*.gem
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
+
+# Optional stylelint cache
+
+# SvelteKit build / generate output
+.svelte-kit
+
+### Rails ###
 *.rbc
-/.config
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+/public/system
 /coverage/
-/InstalledFiles
-/pkg/
-/spec/reports/
-/spec/examples.txt
-/test/tmp/
-/test/version_tmp/
-/tmp/
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
 
-# Ignore master key for decrypting credentials (Rails 5.2+)
-/config/master.key
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
 
-# Used by dotenv library to load environment variables.
-# .env
+# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
+config/initializers/secret_token.rb
+config/master.key
 
-## Specific to RubyMotion:
-.dat*
-.repl_history
-build/
-*.bridgesupport
-build-iPhoneOS/
-build-iPhoneSimulator/
+# Only include if you have production secrets in this file, which is no longer a Rails default
+# config/secrets.yml
 
-## Specific to RubyMotion (use of CocoaPods):
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# vendor/Pods/
-
-## Documentation cache and generated files:
-/.yardoc/
-/_yardoc/
-/doc/
-/rdoc/
+# dotenv, dotenv-rails
+# TODO Comment out these rules if environment variables can be committed
+.env*.local
 
 ## Environment normalization:
-/.bundle/
+/.bundle
 /vendor/bundle
-/lib/bundler/man/
 
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
-# .ruby-version
-# .ruby-gemset
+# these should all be checked in to normalize the environment:
+# Gemfile.lock, .ruby-version, .ruby-gemset
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+# if using bower-rails ignore default bower_components path bower.json files
+/vendor/assets/bower_components
+*.bowerrc
+bower.json
+
+# Ignore pow environment settings
+.powenv
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore precompiled javascript packs
+/public/packs
+/public/packs-test
+/public/assets
+
+# Ignore yarn files
+/yarn-error.log
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+/public/uploads
+
 ### Vim ###
 # Swap
 [._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
@@ -201,6 +264,7 @@ build-iPhoneSimulator/
 
 # Session
 Session.vim
+Sessionx.vim
 
 # Temporary
 .netrwhist
@@ -209,6 +273,6 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.gitignore.io/api/vim,node,ruby,nuxt,linux,macos
+# End of https://www.toptal.com/developers/gitignore/api/macos,linux,vim,rails,node
 
 *.local
