@@ -3,7 +3,8 @@
 set fish_greeting
 
 # Environment variables - https://fishshell.com/docs/current/cmds/set.html
-set -gx EDITOR 'nvim'
+# set -gx EDITOR 'nvim' # Neovim
+set -gx EDITOR 'lvim' # LunarVim
 set -gx BUNDLER_EDITOR $EDITOR
 set -gx MANPAGER 'less -X' # Don’t clear the screen after quitting a manual page
 set -gx HOMEBREW_CASK_OPTS '--appdir=/Applications'
