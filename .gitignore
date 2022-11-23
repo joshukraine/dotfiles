@@ -3,5 +3,6 @@
 .zshrc.local
 Brewfile.lock.json
 local/*
+lvim/plugin/packer_compiled.lua
 vim/.netrwhist
 vim/bundle
