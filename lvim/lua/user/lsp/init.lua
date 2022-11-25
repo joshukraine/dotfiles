@@ -1,5 +1,5 @@
 require("user.lsp.code-actions")
-require("user.lsp.config")
+require("user.lsp.base")
 require("user.lsp.emmet-ls")
 require("user.lsp.formatters")
 require("user.lsp.linters")
