@@ -6,11 +6,11 @@ lvim.plugins = {
   { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
   { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
   { "janko/vim-test" },
-  { "christoomey/vim-tmux-runner" },
+  { "christoomey/vim-tmux-runner" }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
   { "tpope/vim-surround" },
   { "tpope/vim-rails" },
   { "tpope/vim-obsession" },
-  { "sdras/vue-vscode-snippets"}, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
+  { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
   {
     "phaazon/hop.nvim",
     event = "BufRead",

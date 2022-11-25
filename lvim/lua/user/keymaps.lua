@@ -13,7 +13,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<C-i>"] = ":set cursorcolumn!<CR>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-lvim.keys.normal_mode["<leader>ra"] = ":%s/"
 
 -- Window sizing
 lvim.keys.normal_mode["<Up>"] = ":resize +2<CR>"

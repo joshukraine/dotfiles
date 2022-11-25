@@ -1,27 +1,28 @@
-lvim.builtin.which_key.mappings["1"] = { ":Obsession<CR>", "Toggle Session" }
+lvim.builtin.which_key.mappings["1"] = { ":Obsession<cr>", "Toggle Session" }
 lvim.builtin.which_key.mappings["2"] = {
-  "<cmd>lua require('user.functions').toggle_colorcolumn()<CR>",
+  "<cmd>lua require('user.functions').toggle_colorcolumn()<cr>",
   "ColorColumn"
 }
 lvim.builtin.which_key.mappings["3"] = {
-  "<cmd>lua require('user.functions').toggle_option('relativenumber')<CR>",
+  "<cmd>lua require('user.functions').toggle_option('relativenumber')<cr>",
   "RelativeNumber"
 }
 lvim.builtin.which_key.mappings["4"] = { "<C-^>", "Previous Buffer" }
 lvim.builtin.which_key.mappings["5"] = {
-  "<cmd>lua require('user.functions').toggle_option('wrap')<CR>",
+  "<cmd>lua require('user.functions').toggle_option('wrap')<cr>",
   "Wrap"
 }
-lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<CR>", "Save without formatting" }
-lvim.builtin.which_key.mappings["b-"] = { ":wincmd _<CR>:wincmd |<CR>", "Zoom Window In" }
-lvim.builtin.which_key.mappings["b="] = { ":wincmd =<CR>", "Balance Windows" }
+lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
+lvim.builtin.which_key.mappings["b-"] = { ":wincmd _<cr>:wincmd |<cr>", "Zoom Window In" }
+lvim.builtin.which_key.mappings["b="] = { ":wincmd =<cr>", "Balance Windows" }
+lvim.builtin.which_key.mappings["sl"] = { ":%s/", "Replace" }
 
-lvim.builtin.which_key.mappings["t"] = {
+lvim.builtin.which_key.mappings["D"] = {
   name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<CR>", "trouble" },
-  w = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "workspace" },
-  d = { "<cmd>TroubleToggle document_diagnostics<CR>", "document" },
-  q = { "<cmd>TroubleToggle quickfix<CR>", "quickfix" },
-  l = { "<cmd>TroubleToggle loclist<CR>", "loclist" },
-  r = { "<cmd>TroubleToggle lsp_references<CR>", "references" },
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
