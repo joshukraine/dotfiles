@@ -34,6 +34,16 @@ lvim.keys.normal_mode["<leader>1"] = ":set wrap<CR>"
 lvim.keys.normal_mode["<leader>2"] = ":set nowrap<CR>"
 lvim.keys.normal_mode["<leader>4"] = "<c-^>"
 
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
+
 -- Obsession
 lvim.keys.normal_mode["<leader>ob"] = ":Obsession<CR>"
 
@@ -41,4 +51,4 @@ lvim.keys.normal_mode["<leader>ob"] = ":Obsession<CR>"
 lvim.keys.insert_mode["jj"] = "<ESC>"
 
 -- VISUAL mode ----------------------------------------------------------------
-lvim.keys.visual_mode["p"] = "\"_dP"
+-- lvim.keys.visual_mode["p"] = "\"_dP"
