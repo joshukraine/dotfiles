@@ -26,3 +26,19 @@ lvim.builtin.which_key.mappings["D"] = {
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
+
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Test",
+  n = { "<cmd>TestNearest<cr>", "Nearest" },
+  f = { "<cmd>TestFile<cr>", "File" },
+  s = { "<cmd>TestSuite<cr>", "Suite" },
+  l = { "<cmd>TestLast<cr>", "Last" },
+  g = { "<cmd>TestVisit<cr>", "Visit" },
+}
+
+lvim.builtin.which_key.mappings["v"] = {
+  name = "VTR",
+  a = { "<cmd>VtrAttachToPane<CR>", "Attach" },
+  k = { "<cmd>VtrKillRunner<CR>", "Kill" },
+  f = { "<cmd>VtrFocusRunner<CR>", "Focus" },
+}
