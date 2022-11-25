@@ -1,4 +1,5 @@
 require("user.base")
+require("user.functions")
 require("user.plugins")
 require("user.options")
 require("user.keymaps")
