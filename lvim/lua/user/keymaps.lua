@@ -21,14 +21,6 @@ lvim.keys.normal_mode["<Down>"] = ":resize -2<CR>"
 lvim.keys.normal_mode["<Left>"] = ":vertical resize +2<CR>"
 lvim.keys.normal_mode["<Right>"] = ":vertical resize -2<CR>"
 
--- Numeric leaders
-lvim.keys.normal_mode["<leader>1"] = ":set wrap<CR>"
-lvim.keys.normal_mode["<leader>2"] = ":set nowrap<CR>"
-lvim.keys.normal_mode["<leader>4"] = "<c-^>"
-
--- Obsession
-lvim.keys.normal_mode["<leader>ob"] = ":Obsession<CR>"
-
 -- INSERT mode ----------------------------------------------------------------
 lvim.keys.insert_mode["jj"] = "<ESC>"
 
