@@ -5,7 +5,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.terminal.active = false
 lvim.builtin.treesitter.highlight.enable = true
 lvim.colorscheme = "lunar"
-lvim.format_on_save.enabled = false
+lvim.format_on_save.enabled = true
 lvim.log.level = "warn"
 lvim.lsp.installer.setup.automatic_installation = true
 
