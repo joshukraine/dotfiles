@@ -24,6 +24,7 @@ local options = {
   writebackup = false,
   smarttab = true,
   shell = "/bin/bash -i", -- Needed since I use fish as main shell
+  colorcolumn = "0",
 }
 
 for k, v in pairs(options) do
