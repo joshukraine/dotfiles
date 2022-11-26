@@ -16,6 +16,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "html",
   "javascript",
   "json",
+  "json5",
+  "jsonc",
   "lua",
   "python",
   "ruby",
