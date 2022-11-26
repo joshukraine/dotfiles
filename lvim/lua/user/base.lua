@@ -9,6 +9,10 @@ lvim.format_on_save.enabled = true
 lvim.log.level = "warn"
 lvim.lsp.installer.setup.automatic_installation = true
 
+lvim.builtin.illuminate.options = {
+  under_cursor = false,
+}
+
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "css",
