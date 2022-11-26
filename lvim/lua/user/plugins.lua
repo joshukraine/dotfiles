@@ -38,10 +38,6 @@ lvim.plugins = {
       vim.cmd("let g:minimap_auto_start_win_enter = 0")
     end,
   },
-  { -- https://github.com/folke/trouble.nvim
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
   { -- https://github.com/windwp/nvim-ts-autotag
     "windwp/nvim-ts-autotag",
     config = function()

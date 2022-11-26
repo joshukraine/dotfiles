@@ -18,15 +18,15 @@ lvim.builtin.which_key.mappings["b-"] = { ":wincmd _<cr>:wincmd |<cr>", "Zoom Wi
 lvim.builtin.which_key.mappings["b="] = { ":wincmd =<cr>", "Balance Windows" }
 lvim.builtin.which_key.mappings["sl"] = { ":%s/", "Replace" }
 
-lvim.builtin.which_key.mappings["D"] = {
-  name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<cr>", "trouble" },
-  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
-  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
-  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
-}
+-- lvim.builtin.which_key.mappings["D"] = {
+--   name = "Diagnostics",
+--   t = { "<cmd>TroubleToggle<cr>", "trouble" },
+--   w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+--   d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+--   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+--   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+--   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+-- }
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "Test",
