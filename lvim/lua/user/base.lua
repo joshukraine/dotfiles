@@ -32,3 +32,18 @@ lvim.builtin.treesitter.ensure_installed = {
   "vue",
   "yaml",
 }
+
+lvim.lsp.installer.ensure_installed = {
+  "bash-language-server",
+  "css-lsp",
+  "emmet-ls",
+  "html-lsp",
+  "json-lsp",
+  "lua-language-server",
+  "solargraph",
+  "tailwindcss-language-server",
+  "typescript-language-server",
+  "vim-language-server",
+  "vue-language-server",
+  "yaml-language-server",
+}
