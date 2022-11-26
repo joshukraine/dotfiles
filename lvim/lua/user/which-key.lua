@@ -8,7 +8,8 @@ lvim.builtin.which_key.mappings["3"] = {
   "RelativeNumber"
 }
 lvim.builtin.which_key.mappings["4"] = { "<C-^>", "Previous Buffer" }
-lvim.builtin.which_key.mappings["5"] = {
+lvim.builtin.which_key.mappings["5"] = { "<cmd>MinimapToggle<cr>", "Minimap" }
+lvim.builtin.which_key.mappings["6"] = {
   "<cmd>lua require('user.functions').toggle_option('wrap')<cr>",
   "Wrap"
 }

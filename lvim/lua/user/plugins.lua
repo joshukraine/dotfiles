@@ -4,6 +4,10 @@ lvim.plugins = {
   { "kana/vim-textobj-user" }, -- Create your own text objects | https://github.com/kana/vim-textobj-user
   { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
   { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
+  { "tpope/vim-surround" },
+  { "tpope/vim-rails" },
+  { "tpope/vim-obsession" },
+  { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
   {
     "janko/vim-test",
     config = function()
@@ -17,15 +21,21 @@ lvim.plugins = {
       vim.cmd("let g:VtrUseVtrMaps = 0")
     end,
   }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
-  { "tpope/vim-surround" },
-  { "tpope/vim-rails" },
-  { "tpope/vim-obsession" },
-  { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
   { -- https://github.com/andymass/vim-matchup
     "andymass/vim-matchup",
     event = "CursorMoved",
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  },
+  {
+    'wfxr/minimap.vim',
+    run = "cargo install --locked code-minimap",
+    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+    config = function()
+      vim.cmd("let g:minimap_width = 10")
+      vim.cmd("let g:minimap_auto_start = 0")
+      vim.cmd("let g:minimap_auto_start_win_enter = 0")
     end,
   },
   { -- https://github.com/folke/trouble.nvim
