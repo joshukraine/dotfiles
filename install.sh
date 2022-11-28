@@ -207,7 +207,7 @@ dotfiles_echo "-> Installing vim-plug plugins..."
 nvim --headless +PlugInstall +qall
 
 dotfiles_echo "-> Initializing fish_user_paths..."
-command fish -c "set -U fish_user_paths $HOME/bin $HOME/.yarn/bin /usr/local/bin /usr/local/sbin"
+command fish -c "set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/bin $HOME/.yarn/bin /usr/local/bin /usr/local/sbin"
 
 dotfiles_echo "-> Installing custom terminfo entries..."
 tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
