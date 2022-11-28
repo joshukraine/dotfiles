@@ -9,16 +9,14 @@ lvim.keys.normal_mode["<C-Right>"] = false
 
 -- NORMAL mode ----------------------------------------------------------------
 -- General
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<C-i>"] = ":set cursorcolumn!<CR>"
-lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
-lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<cr>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<cr>"
 
 -- Window sizing
-lvim.keys.normal_mode["<Up>"] = ":resize +2<CR>"
-lvim.keys.normal_mode["<Down>"] = ":resize -2<CR>"
-lvim.keys.normal_mode["<Left>"] = ":vertical resize +2<CR>"
-lvim.keys.normal_mode["<Right>"] = ":vertical resize -2<CR>"
+lvim.keys.normal_mode["<Up>"] = ":resize +2<cr>"
+lvim.keys.normal_mode["<Down>"] = ":resize -2<cr>"
+lvim.keys.normal_mode["<Left>"] = ":vertical resize +2<cr>"
+lvim.keys.normal_mode["<Right>"] = ":vertical resize -2<cr>"
 
 -- INSERT mode ----------------------------------------------------------------
 lvim.keys.insert_mode["jj"] = "<ESC>"

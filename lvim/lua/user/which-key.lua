@@ -1,4 +1,4 @@
-lvim.builtin.which_key.mappings["1"] = { ":Obsession<cr>", "Toggle Session" }
+lvim.builtin.which_key.mappings["1"] = { ":set cursorcolumn!<cr>", "CursorColumn" }
 lvim.builtin.which_key.mappings["2"] = {
   "<cmd>lua require('user.functions').toggle_colorcolumn()<cr>",
   "ColorColumn"
@@ -13,6 +13,7 @@ lvim.builtin.which_key.mappings["6"] = {
   "<cmd>lua require('user.functions').toggle_option('wrap')<cr>",
   "Wrap"
 }
+lvim.builtin.which_key.mappings["7"] = { ":Obsession<cr>", "Toggle Session" }
 lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 lvim.builtin.which_key.mappings["b-"] = { ":wincmd _<cr>:wincmd |<cr>", "Zoom Window In" }
 lvim.builtin.which_key.mappings["b="] = { ":wincmd =<cr>", "Balance Windows" }
