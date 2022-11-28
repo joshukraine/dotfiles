@@ -11,4 +11,7 @@ formatters.setup {
       "vue",
     }
   },
+  {
+    command = "yamlfmt"
+  }
 }
