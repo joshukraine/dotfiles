@@ -58,4 +58,8 @@ lvim.plugins = {
       })
     end,
   },
+  {
+    "ggandor/lightspeed.nvim",
+    event = "BufRead",
+  },
 }
