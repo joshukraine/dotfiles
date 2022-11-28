@@ -85,6 +85,7 @@ brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "w3m"
 brew "wget"
 brew "xz"
+brew "yamllint"
 brew "zsh"
 
 # homebrew-cask
