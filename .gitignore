@@ -6,3 +6,4 @@ local/*
 lvim/plugin/packer_compiled.lua
 vim/.netrwhist
 vim/bundle
+fish_variables
