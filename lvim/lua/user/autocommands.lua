@@ -7,6 +7,12 @@ create_autocmd("TextYankPost", {
   group = yankGrp,
 })
 
--- vim.cmd [[
---   autocmd BufRead,BufNewFile *.html.erb set filetype=eruby.html
--- ]]
+
+local textobj_quote = create_augroup("textobj_quote", { clear = true })
+create_autocmd("FileType", {
+  group = textobj_quote,
+  pattern = { "markdown", "textile" },
+  callback = function()
+    vim.fn["textobj#quote#init"]()
+  end
+})

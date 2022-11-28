@@ -62,4 +62,7 @@ lvim.plugins = {
     "ggandor/lightspeed.nvim",
     event = "BufRead",
   },
+  { -- Use ‘curly’ quote characters in Vim | https://github.com/reedes/vim-textobj-quote
+    "reedes/vim-textobj-quote"
+  }
 }
