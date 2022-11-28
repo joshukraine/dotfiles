@@ -1,7 +1,8 @@
-local api = vim.api
+local create_autocmd = vim.api.nvim_create_autocmd
+local create_augroup = vim.api.nvim_create_augroup
 
-local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
-api.nvim_create_autocmd("TextYankPost", {
+local yankGrp = create_augroup("YankHighlight", { clear = true })
+create_autocmd("TextYankPost", {
   command = "silent! lua vim.highlight.on_yank()",
   group = yankGrp,
 })
