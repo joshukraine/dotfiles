@@ -6,7 +6,6 @@ linters.setup {
     args = { "--severity", "warning" },
   },
   { name = "jsonlint" },
-  { name = "proselint" },
   { name = "rubocop" },
   { name = "yamllint" },
 }
