@@ -8,11 +8,46 @@ create_autocmd("TextYankPost", {
 })
 
 
-local textobj_quote = create_augroup("textobj_quote", { clear = true })
+local fold_settings = create_augroup("fold_settings", { clear = true })
 create_autocmd("FileType", {
-  group = textobj_quote,
-  pattern = { "markdown", "textile" },
-  callback = function()
-    vim.fn["textobj#quote#init"]()
-  end
+  group = fold_settings,
+  pattern = { "json", },
+  command = [[ setlocal foldmethod=syntax ]],
+})
+create_autocmd("FileType", {
+  group = fold_settings,
+  pattern = { "json", },
+  command = [[ normal zR ]],
+})
+
+local file_types = create_augroup("file_types", { clear = true })
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = file_types,
+  pattern = { "*.{asciidoc,adoc,asc,ad}", },
+  command = [[ set filetype=asciidoctor ]],
+})
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = file_types,
+  pattern = { "*.{prettierrc,stylelintrc,babelrc,eslintrc}", },
+  command = [[ set filetype=json ]],
+})
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = file_types,
+  pattern = { "gitconfig", },
+  command = [[ set filetype=gitconfig ]],
+})
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = file_types,
+  pattern = { "*.spv", },
+  command = [[ set filetype=php ]],
+})
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = file_types,
+  pattern = { "*.mdx", },
+  command = [[ set filetype=markdown ]],
+})
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = file_types,
+  pattern = { "{aliases,functions,prompt,tmux,oh-my-zsh,opts}", },
+  command = [[ set filetype=zsh ]],
 })
