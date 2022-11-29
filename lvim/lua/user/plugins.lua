@@ -64,5 +64,8 @@ lvim.plugins = {
   },
   { -- Use ‘curly’ quote characters in Vim | https://github.com/reedes/vim-textobj-quote
     "reedes/vim-textobj-quote"
+  },
+  { -- Asciidoctor plugin for Vim | https://github.com/habamax/vim-asciidoctor
+    "habamax/vim-asciidoctor"
   }
 }
