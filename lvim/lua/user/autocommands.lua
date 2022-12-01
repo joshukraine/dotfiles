@@ -23,11 +23,6 @@ create_autocmd("FileType", {
 local file_types = create_augroup("file_types", { clear = true })
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   group = file_types,
-  pattern = { "*.{asciidoc,adoc,asc,ad}", },
-  command = [[ set filetype=asciidoctor ]],
-})
-create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
-  group = file_types,
   pattern = { "*.{prettierrc,stylelintrc,babelrc,eslintrc}", },
   command = [[ set filetype=json ]],
 })
