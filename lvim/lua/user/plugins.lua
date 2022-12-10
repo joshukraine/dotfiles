@@ -1,13 +1,13 @@
 lvim.plugins = {
-  { -- One dark and light colorscheme for neovim >= 0.5.0 written in lua | https://github.com/navarasu/onedark.nvim
-    "navarasu/onedark.nvim",
-    config = function()
-      require("onedark").setup {
-        style = "deep"
-      }
-      require("onedark").load()
-    end
-  },
+  -- { -- One dark and light colorscheme for neovim >= 0.5.0 written in lua | https://github.com/navarasu/onedark.nvim
+  --   "navarasu/onedark.nvim",
+  --   config = function()
+  --     require("onedark").setup {
+  --       style = "deep"
+  --     }
+  --     require("onedark").load()
+  --   end
+  -- },
   { "vim-ruby/vim-ruby" }, -- Vim/Ruby Configuration Files | https://github.com/vim-ruby/vim-ruby
   { "kana/vim-textobj-user" }, -- Create your own text objects | https://github.com/kana/vim-textobj-user
   { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
