@@ -14,6 +14,7 @@ lvim.plugins = {
   { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
   { "tpope/vim-surround" },
   { "tpope/vim-rails" },
+  { "tpope/vim-repeat" },
   { "tpope/vim-obsession" },
   { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
   {
