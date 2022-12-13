@@ -23,7 +23,7 @@ M.config = function()
     table.insert(
       lvim.builtin.alpha.dashboard.section.buttons.val,
       7,
-      button("l", "  Restore Session", "<cmd>lua require('persistence').load({ last = true })<cr>")
+      button("l", "  Restore Session", "<cmd>lua require('persistence').load()<cr>")
     )
   end
 end
