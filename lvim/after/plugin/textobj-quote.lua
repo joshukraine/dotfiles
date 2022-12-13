@@ -8,12 +8,12 @@ create_autocmd("FileType", {
   pattern = { "markdown", "textile" },
   callback = function()
     vim.fn["textobj#quote#init"]()
-  end
+  end,
 })
 create_autocmd("FileType", {
   group = textobj_quote,
   pattern = { "text" },
   callback = function()
     vim.fn["textobj#quote#init"]({ educate = 0 })
-  end
+  end,
 })

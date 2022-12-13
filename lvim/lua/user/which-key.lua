@@ -1,16 +1,16 @@
 lvim.builtin.which_key.mappings["1"] = { ":set cursorcolumn!<cr>", "CursorColumn" }
 lvim.builtin.which_key.mappings["2"] = {
   "<cmd>lua require('user.functions').toggle_colorcolumn()<cr>",
-  "ColorColumn"
+  "ColorColumn",
 }
 lvim.builtin.which_key.mappings["3"] = {
   "<cmd>lua require('user.functions').toggle_option('relativenumber')<cr>",
-  "RelativeNumber"
+  "RelativeNumber",
 }
 lvim.builtin.which_key.mappings["4"] = { "<C-^>", "Previous Buffer" }
 lvim.builtin.which_key.mappings["5"] = {
   "<cmd>lua require('user.functions').toggle_option('wrap')<cr>",
-  "Wrap"
+  "Wrap",
 }
 lvim.builtin.which_key.mappings["6"] = { "<cmd>lua require('persistence').load()<cr>", "Restore Session" }
 lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }

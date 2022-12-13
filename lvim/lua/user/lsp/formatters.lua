@@ -1,6 +1,6 @@
-local formatters = require "lvim.lsp.null-ls.formatters"
+local formatters = require("lvim.lsp.null-ls.formatters")
 
-formatters.setup {
+formatters.setup({
   {
     command = "prettier",
     filetypes = {
@@ -9,12 +9,12 @@ formatters.setup {
       "javascriptreact",
       "typescriptreact",
       "vue",
-    }
+    },
   },
   {
-    command = "yamlfmt"
+    command = "yamlfmt",
   },
   {
-    command = "stylua"
+    command = "stylua",
   },
-}
+})

@@ -7,43 +7,42 @@ create_autocmd("TextYankPost", {
   group = yankGrp,
 })
 
-
 local fold_settings = create_augroup("fold_settings", { clear = true })
 create_autocmd("FileType", {
   group = fold_settings,
-  pattern = { "json", },
+  pattern = { "json" },
   command = [[ setlocal foldmethod=syntax ]],
 })
 create_autocmd("FileType", {
   group = fold_settings,
-  pattern = { "json", },
+  pattern = { "json" },
   command = [[ normal zR ]],
 })
 
 local file_types = create_augroup("file_types", { clear = true })
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   group = file_types,
-  pattern = { "*.{prettierrc,stylelintrc,babelrc,eslintrc}", },
+  pattern = { "*.{prettierrc,stylelintrc,babelrc,eslintrc}" },
   command = [[ set filetype=json ]],
 })
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   group = file_types,
-  pattern = { "gitconfig", },
+  pattern = { "gitconfig" },
   command = [[ set filetype=gitconfig ]],
 })
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   group = file_types,
-  pattern = { "*.spv", },
+  pattern = { "*.spv" },
   command = [[ set filetype=php ]],
 })
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   group = file_types,
-  pattern = { "*.mdx", },
+  pattern = { "*.mdx" },
   command = [[ set filetype=markdown ]],
 })
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   group = file_types,
-  pattern = { "{aliases,functions,prompt,tmux,oh-my-zsh,opts}", },
+  pattern = { "{aliases,functions,prompt,tmux,oh-my-zsh,opts}" },
   command = [[ set filetype=zsh ]],
 })
 
@@ -63,7 +62,7 @@ lvim.autocommands = {
           "netrw",
         }
 
-        local map = require('mini.map')
+        local map = require("mini.map")
         if vim.tbl_contains(exclude_ft, vim.o.filetype) then
           vim.b.minimap_disable = true
           map.close()

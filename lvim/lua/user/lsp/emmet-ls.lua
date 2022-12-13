@@ -9,6 +9,6 @@ local opts = {
     "typescript",
     "typescriptreact",
     "vue",
-  }
+  },
 }
 require("lvim.lsp.manager").setup("emmet_ls", opts)

@@ -5,15 +5,15 @@ local opts = {
     "javascriptreact",
     "typescriptreact",
     "vue",
-    "json"
+    "json",
   },
   settings = {
     css = {
       lint = {
-        unknownAtRules = "ignore"
-      }
-    }
-  }
+        unknownAtRules = "ignore",
+      },
+    },
+  },
 }
 
 require("lvim.lsp.manager").setup("volar", opts)
