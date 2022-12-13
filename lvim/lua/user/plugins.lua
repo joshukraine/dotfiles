@@ -1,59 +1,67 @@
 lvim.plugins = {
-  -- { -- One dark and light colorscheme for neovim >= 0.5.0 written in lua | https://github.com/navarasu/onedark.nvim
-  --   "navarasu/onedark.nvim",
-  --   config = function()
-  --     require("onedark").setup {
-  --       style = "deep"
-  --     }
-  --     require("onedark").load()
-  --   end
-  -- },
-  { "vim-ruby/vim-ruby" }, -- Vim/Ruby Configuration Files | https://github.com/vim-ruby/vim-ruby
-  { "kana/vim-textobj-user" }, -- Create your own text objects | https://github.com/kana/vim-textobj-user
-  { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
-  { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
-  { "tpope/vim-surround" },
-  { "tpope/vim-rails" },
-  { "tpope/vim-repeat" },
-  { "tpope/vim-obsession" },
-  { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
-  {
-    "janko/vim-test",
-    config = function()
-      vim.cmd("let test#strategy = 'vtr'")
-    end,
-  },
-  {
-    "christoomey/vim-tmux-runner",
-    config = function()
-      vim.cmd("let g:VtrPercentage = 25")
-      vim.cmd("let g:VtrUseVtrMaps = 0")
-    end,
-  }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
-  { -- https://github.com/andymass/vim-matchup
+  -- General
+  { -- Highlight, navigate, and operate on sets of matching text | https://github.com/andymass/vim-matchup
     "andymass/vim-matchup",
     event = "CursorMoved",
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
   },
-  {
-    'wfxr/minimap.vim',
-    run = "cargo install --locked code-minimap",
-    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+  { -- General-purpose motion plugin | https://github.com/ggandor/leap.nvim
+    "ggandor/leap.nvim",
+    requires = { "tpope/vim-repeat" },
     config = function()
-      vim.cmd("let g:minimap_width = 10")
-      vim.cmd("let g:minimap_auto_start = 0")
-      vim.cmd("let g:minimap_auto_start_win_enter = 0")
+      require("leap").add_default_mappings()
+    end
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    module = "persistence",
+    config = function()
+      require("persistence").setup()
     end,
   },
-  { -- https://github.com/windwp/nvim-ts-autotag
+  { "tpope/vim-repeat" },
+  { "tpope/vim-surround" },
+
+  -- Ruby/Rails/Vue
+  { "kana/vim-textobj-user" }, -- Create your own text objects | https://github.com/kana/vim-textobj-user
+  { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
+  { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
+  { "tpope/vim-rails" }, -- Ruby on Rails power tools | https://github.com/tpope/vim-rails
+  { "vim-ruby/vim-ruby" }, -- Vim/Ruby Configuration Files | https://github.com/vim-ruby/vim-ruby
+
+  -- Testing
+  {
+    "janko/vim-test",
+    config = function()
+      vim.cmd("let test#strategy = 'vtr'")
+    end,
+  },
+
+  -- Tmux
+  { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
+  { -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
+    "christoomey/vim-tmux-runner",
+    config = function()
+      vim.cmd("let g:VtrPercentage = 25")
+      vim.cmd("let g:VtrUseVtrMaps = 0")
+    end,
+  },
+
+  -- Markdown & AsciiDoc
+  { "habamax/vim-asciidoctor" }, -- Asciidoctor plugin for Vim | https://github.com/habamax/vim-asciidoctor
+  { "reedes/vim-textobj-quote" }, -- Use ‘curly’ quote characters in Vim | https://github.com/reedes/vim-textobj-quote
+
+  -- Misc
+  { -- Use treesitter to autoclose and autorename html tags | https://github.com/windwp/nvim-ts-autotag
     "windwp/nvim-ts-autotag",
     config = function()
       require("nvim-ts-autotag").setup()
     end,
   },
-  { -- https://github.com/norcalli/nvim-colorizer.lua
+  { -- A high-performance color highlighter for Neovim | https://github.com/norcalli/nvim-colorizer.lua
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
@@ -67,14 +75,4 @@ lvim.plugins = {
       })
     end,
   },
-  {
-    "ggandor/lightspeed.nvim",
-    event = "BufRead",
-  },
-  { -- Use ‘curly’ quote characters in Vim | https://github.com/reedes/vim-textobj-quote
-    "reedes/vim-textobj-quote"
-  },
-  { -- Asciidoctor plugin for Vim | https://github.com/habamax/vim-asciidoctor
-    "habamax/vim-asciidoctor"
-  }
 }
