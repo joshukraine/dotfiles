@@ -1,3 +1,4 @@
+require("user.alpha").config()
 require("user.base")
 require("user.functions")
 require("user.options")
