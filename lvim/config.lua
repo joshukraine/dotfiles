@@ -1,4 +1,4 @@
-require("user.alpha").config()
+require("user.dashboard").config()
 require("user.base")
 require("user.functions")
 require("user.options")
