@@ -8,12 +8,11 @@ lvim.builtin.which_key.mappings["3"] = {
   "RelativeNumber"
 }
 lvim.builtin.which_key.mappings["4"] = { "<C-^>", "Previous Buffer" }
-lvim.builtin.which_key.mappings["5"] = { "<cmd>MinimapToggle<cr>", "Minimap" }
-lvim.builtin.which_key.mappings["6"] = {
+lvim.builtin.which_key.mappings["5"] = {
   "<cmd>lua require('user.functions').toggle_option('wrap')<cr>",
   "Wrap"
 }
-lvim.builtin.which_key.mappings["7"] = { ":Obsession<cr>", "Toggle Session" }
+lvim.builtin.which_key.mappings["6"] = { "<cmd>lua require('persistence').load()<cr>", "Restore Session" }
 lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 lvim.builtin.which_key.mappings["b-"] = { ":wincmd _<cr>:wincmd |<cr>", "Zoom Window In" }
 lvim.builtin.which_key.mappings["b="] = { ":wincmd =<cr>", "Balance Windows" }
