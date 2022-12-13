@@ -101,7 +101,7 @@ lvim.plugins = {
         },
         window = {
           side = 'right',
-          width = 20, -- set to 1 for a pure scrollbar :)
+          width = 15, -- set to 1 for a pure scrollbar :)
           winblend = 15,
           show_integration_count = false,
         },
