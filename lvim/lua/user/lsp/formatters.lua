@@ -13,5 +13,8 @@ formatters.setup {
   },
   {
     command = "yamlfmt"
-  }
+  },
+  {
+    command = "stylua"
+  },
 }
