@@ -4,5 +4,9 @@
 vim.opt.cursorcolumn = false
 vim.opt.relativenumber = true
 vim.opt.shell = "/bin/bash -i" -- Needed since I use fish as main shell
-
-vim.cmd [[set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:+]]
+vim.opt.list = true
+vim.opt.listchars:append { tab = "»·" }
+vim.opt.listchars:append { trail = "·" }
+vim.opt.listchars:append { extends = "…" }
+vim.opt.listchars:append { precedes = "…" }
+vim.opt.listchars:append { nbsp = "+" }
