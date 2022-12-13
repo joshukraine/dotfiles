@@ -3,7 +3,6 @@
 set fish_greeting
 
 # Environment variables - https://fishshell.com/docs/current/cmds/set.html
-# set -gx EDITOR 'nvim' # Neovim
 set -gx EDITOR 'lvim' # LunarVim
 set -gx GIT_EDITOR 'lvim' # LunarVim
 set -gx BUNDLER_EDITOR $EDITOR
