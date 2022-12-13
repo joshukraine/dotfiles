@@ -33,8 +33,8 @@ lvim.plugins = {
   { "vim-ruby/vim-ruby" }, -- Vim/Ruby Configuration Files | https://github.com/vim-ruby/vim-ruby
 
   -- Testing
-  {
-    "janko/vim-test",
+  { -- A Vim wrapper for running tests on different granularities | https://github.com/vim-test/vim-test
+    "vim-test/vim-test",
     config = function()
       vim.cmd("let test#strategy = 'vtr'")
     end,
