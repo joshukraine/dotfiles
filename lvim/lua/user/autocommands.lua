@@ -62,7 +62,11 @@ lvim.autocommands = {
           "netrw",
         }
 
-        local map = require("mini.map")
+        local status_ok, map = pcall(require, "mini.map")
+        if not status_ok then
+          return
+        end
+
         if vim.tbl_contains(exclude_ft, vim.o.filetype) then
           vim.b.minimap_disable = true
           map.close()
