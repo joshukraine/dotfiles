@@ -93,7 +93,6 @@ abbr -a -g spt 'speedtest'
 # Tmux
 abbr -a -g tl 'tmux ls'
 abbr -a -g tlw 'tmux list-windows'
-abbr -a -g mux 'tmuxinator'
 
 # Neovim / LunarVim
 abbr -a -g lv 'lvim'
@@ -223,3 +222,12 @@ abbr -a -g gout 'gem outdated'
 abbr -a -g guns 'gem uninstall'
 abbr -a -g gup 'gem update'
 abbr -a -g gus 'gem update --system'
+
+# Tmuxinator
+abbr -a -g mux 'tmuxinator'
+abbr -a -g ms 'tmuxinator start'
+abbr -a -g msb 'tmuxinator start bible_first_online'
+abbr -a -g msc 'tmuxinator start bf_curriculum'
+abbr -a -g msd 'tmuxinator start dot'
+abbr -a -g msm 'tmuxinator start mux'
+abbr -a -g mso 'tmuxinator start ofreport'
