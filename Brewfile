@@ -11,7 +11,6 @@ tap "jesseduffield/lazygit"
 # tap "puma/puma"
 tap "stripe/stripe-cli"
 tap "teamookla/speedtest"
-tap "universal-ctags/universal-ctags"
 
 # Homebrew
 # https://github.com/Homebrew/brew/
@@ -81,7 +80,6 @@ brew "tldr"
 brew "tmux"
 brew "trash"
 brew "tree"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "w3m"
 brew "wget"
 brew "xz"
