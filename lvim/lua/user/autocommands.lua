@@ -1,5 +1,15 @@
-local create_autocmd = vim.api.nvim_create_autocmd
 local create_augroup = vim.api.nvim_create_augroup
+local create_autocmd = vim.api.nvim_create_autocmd
+
+create_augroup("reload_config_on_save", {})
+create_autocmd("BufWritePost", {
+  group = "reload_config_on_save",
+  pattern = os.getenv("HOME") .. "/dotfiles/**/*.lua", -- Allows for symlinked config
+  desc = "Trigger LvimReload on saving config.lua",
+  callback = function()
+    require("lvim.config"):reload()
+  end,
+})
 
 local yankGrp = create_augroup("YankHighlight", { clear = true })
 create_autocmd("TextYankPost", {
