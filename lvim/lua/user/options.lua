@@ -3,7 +3,6 @@
 --
 -- See :h option-list for more available options
 
-vim.opt.cursorcolumn = false
 vim.opt.list = true
 vim.opt.listchars:append({ extends = "…" })
 vim.opt.listchars:append({ nbsp = "+" })
