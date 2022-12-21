@@ -84,3 +84,5 @@ brew "zsh"
 cask "font-fira-code-nerd-font"
 cask "alacritty"
 cask "iterm2-beta"
+
+# vim: set filetype=ruby:
