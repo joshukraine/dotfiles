@@ -4,7 +4,8 @@ local create_autocmd = vim.api.nvim_create_autocmd
 create_augroup("reload_config_on_save", {})
 create_autocmd("BufWritePost", {
   group = "reload_config_on_save",
-  pattern = os.getenv("HOME") .. "/dotfiles/**/*.lua", -- Allows for symlinked config
+  -- pattern = os.getenv("HOME") .. "/dotfiles/**/*.lua", -- Allows for symlinked config
+  pattern = require("user.functions").get_lvim_config_path(),
   desc = "Trigger LvimReload on saving config.lua",
   callback = function()
     require("lvim.config"):reload()
