@@ -1,8 +1,9 @@
 amazing_print
 bundler
-foreman
 erb_lint
+foreman
 neovim
+overcommit
 rubocop
 solargraph
 tmuxinator
