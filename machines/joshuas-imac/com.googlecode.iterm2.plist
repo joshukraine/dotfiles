@@ -4925,13 +4925,13 @@
 			<key>Name</key>
 			<string>iMac Primary</string>
 			<key>Non Ascii Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 16</string>
+			<string>FiraCodeNerdFontCompleteM-Regular 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>OperatorMonoSSmLig-Book 16</string>
+			<string>DankMono-Regular 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -5200,7 +5200,7 @@
 			<key>Use Non-ASCII Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.05</real>
+			<real>1.03</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
