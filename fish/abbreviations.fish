@@ -75,6 +75,7 @@ abbr -a -g grup 'git remote add upstream'
 abbr -a -g grv 'git remote -v'
 abbr -a -g gs 'git status'
 abbr -a -g gtl 'git tag --list'
+abbr -a -g oc 'overcommit'
 
 # macOS Finder
 abbr -a -g defr 'defaults read'
