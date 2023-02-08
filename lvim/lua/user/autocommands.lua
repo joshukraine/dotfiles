@@ -93,6 +93,13 @@ lvim.autocommands = {
     },
   },
   {
+    { "BufWritePre" },
+    {
+      pattern = { "*" },
+      command = [[%s/\s\+$//e]],
+    },
+  },
+  {
     { "ColorScheme" },
     {
       desc = "Set custom highlights",
