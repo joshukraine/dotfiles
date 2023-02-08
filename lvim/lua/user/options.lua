@@ -11,3 +11,4 @@ vim.opt.listchars:append({ tab = "»·" })
 vim.opt.listchars:append({ trail = "·" })
 vim.opt.relativenumber = true
 vim.opt.shell = "/bin/bash -i" -- Needed since I use fish as my main shell
+vim.opt.regexpengine = 1
