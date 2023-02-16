@@ -15,7 +15,7 @@ set -gx BUNDLER_EDITOR $EDITOR
 set -gx MANPAGER 'less -X' # Don’t clear the screen after quitting a manual page
 set -gx HOMEBREW_CASK_OPTS '--appdir=/Applications'
 set -gx SOURCE_ANNOTATION_DIRECTORIES 'spec'
-set -gx RUBY_CONFIGURE_OPTS "--with-opt-dir=$HOMEBREW_REPOSITORY/opt/openssl:$HOMEBREW_REPOSITORY/opt/readline:$HOMEBREW_REPOSITORY/opt/libyaml:$HOMEBREW_REPOSITORY/opt/gdbm"
+set -gx RUBY_CONFIGURE_OPTS "--with-opt-dir=$HOMEBREW_PREFIX/opt/openssl:$HOMEBREW_PREFIX/opt/readline:$HOMEBREW_PREFIX/opt/libyaml:$HOMEBREW_PREFIX/opt/gdbm"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
