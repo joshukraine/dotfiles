@@ -1,0 +1,115 @@
+# Terminfo — Alacritty {{{
+# set -g default-terminal 'alacritty'
+# set -ga terminal-overrides ',alacritty*:Tc'
+# }}}
+
+# Gruvbox {{{
+# setw -g window-status-style fg=$BLACK,bg=$BRIGHT_BLUE
+# setw -g window-status-current-style fg="#fbf1c7",bg=$BRIGHT_RED
+# set -g pane-border-style bg=default,fg="#665c54"
+# set -g status-left "#[fg=$BRIGHT_GREEN][#S] #[fg=$RED]w#I #[fg=$BLUE]p#P"
+# set -g status-style bg="#3c3836"
+# }}}
+
+# Material {{{
+# set -g status-style bg="#2c3b41"
+# }}}
+
+# Night Owl {{{
+# set -g pane-border-style bg=default,fg=$BLACK
+# setw -g window-status-current-style fg="#ffffff",bg=$RED
+# set -g status-style bg="#112630"
+# }}}
+
+# Nord {{{
+# set -g status-style bg="#3b4252"
+# }}}
+
+# Oceanic Next {{{
+# set -g pane-border-style bg=default,fg="#314e5d"
+# set -g status-style bg="#20343e"
+# }}}
+
+# One Half Dark {{{
+# set -g status-style bg="#313640"
+# }}}
+
+# Tender Dark {{{
+# set -g status-style bg="#323232"
+# }}}
+
+# Vim One {{{
+# set -g status-style bg="#2c323c"
+# }}}
+
+# vim-monokai-tasty {{{
+# setw -g window-status-current-style fg=$BRIGHT_WHITE,bg=$RED
+# set -g pane-border-style bg=default,fg="#444444"
+# set -g status-style bg="#303030"
+# }}}
+
+# tokyonight_storm {{{
+set -g mode-style "fg=#7aa2f7,bg=#3b4261"
+
+set -g message-style "fg=#7aa2f7,bg=#3b4261"
+set -g message-command-style "fg=#7aa2f7,bg=#3b4261"
+
+set -g pane-border-style "fg=#3b4261"
+set -g pane-active-border-style "fg=#7aa2f7"
+
+set -g status "on"
+set -g status-justify "left"
+
+set -g status-style "fg=#7aa2f7,bg=#1f2335"
+
+set -g status-left-length "100"
+set -g status-right-length "100"
+
+set -g status-left-style NONE
+set -g status-right-style NONE
+
+set -g status-left "#[fg=#1d202f,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#1f2335,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=#1f2335,bg=#1f2335,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#1f2335] #{prefix_highlight} #[fg=#3b4261,bg=#1f2335,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %Y-%m-%d  %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#1d202f,bg=#7aa2f7,bold] #h "
+
+setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=#1f2335"
+setw -g window-status-separator ""
+setw -g window-status-style "NONE,fg=#a9b1d6,bg=#1f2335"
+setw -g window-status-format "#[fg=#1f2335,bg=#1f2335,nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=#1f2335,bg=#1f2335,nobold,nounderscore,noitalics]"
+setw -g window-status-current-format "#[fg=#1f2335,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261,bold] #I  #W #F #[fg=#3b4261,bg=#1f2335,nobold,nounderscore,noitalics]"
+
+# tmux-plugins/tmux-prefix-highlight support
+set -g @prefix_highlight_output_prefix "#[fg=#e0af68]#[bg=#1f2335]#[fg=#1f2335]#[bg=#e0af68]"
+set -g @prefix_highlight_output_suffix ""
+# }}}
+
+# One Dark Navarasu {{{
+# set -g mode-style "fg=#54b0fd,bg=#21283b"
+
+# set -g message-style "fg=#54b0fd,bg=#21283b"
+# set -g message-command-style "fg=#54b0fd,bg=#21283b"
+
+# set -g pane-border-style "fg=#21283b"
+# set -g pane-active-border-style "fg=#54b0fd"
+
+# set -g status "on"
+# set -g status-justify "left"
+
+# set -g status-style "fg=#54b0fd,bg=#21283b"
+
+# set -g status-left-length "100"
+# set -g status-right-length "100"
+
+# set -g status-left-style NONE
+# set -g status-right-style NONE
+
+# set -g status-left "#[fg=#1d202f,bg=#54b0fd,bold] #S #[fg=#54b0fd,bg=#21283b,nobold,nounderscore,noitalics]"
+# set -g status-right "#[fg=#21283b,bg=#21283b,nobold,nounderscore,noitalics]#[fg=#54b0fd,bg=#21283b] #{prefix_highlight} #[fg=#21283b,bg=#21283b,nobold,nounderscore,noitalics]#[fg=#54b0fd,bg=#21283b] %Y-%m-%d  %I:%M %p #[fg=#54b0fd,bg=#21283b,nobold,nounderscore,noitalics]#[fg=#1d202f,bg=#54b0fd,bold] #h "
+
+# setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=#21283b"
+# setw -g window-status-separator ""
+# setw -g window-status-style "NONE,fg=#a9b1d6,bg=#21283b"
+# setw -g window-status-format "#[fg=#21283b,bg=#21283b,nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=#21283b,bg=#21283b,nobold,nounderscore,noitalics]"
+# setw -g window-status-current-format "#[fg=#21283b,bg=#21283b,nobold,nounderscore,noitalics]#[fg=#54b0fd,bg=#21283b,bold] #I  #W #F #[fg=#21283b,bg=#21283b,nobold,nounderscore,noitalics]"
+# }}}
+
+# vim:filetype=tmux:foldmethod=marker:foldenable
