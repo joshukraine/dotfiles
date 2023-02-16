@@ -124,7 +124,6 @@ cask "signal"
 cask "slack"
 cask "tableplus"
 cask "telegram"
-cask "toggl-track"
 cask "viber"
 cask "vmware-fusion"
 cask "whatsapp"
@@ -140,6 +139,7 @@ mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Things 3", id: 904280696
+mas "Toggl Track", id: 1291898086
 mas "e-Sword", id: 968437868
 # rubocop:enable Style/NumericLiterals
 
