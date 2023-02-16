@@ -113,6 +113,7 @@ abbr -a -g ucl 'fish_update_completions'
 
 # Homebrew
 abbr -a -g brc 'brew cleanup'
+abbr -a -g brb 'brew bundle'
 abbr -a -g brd 'brew doctor'
 abbr -a -g brg 'brew upgrade'
 abbr -a -g bri 'brew info'
