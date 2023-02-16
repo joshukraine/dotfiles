@@ -17,7 +17,6 @@ tap "teamookla/speedtest"
 
 brew "advancecomp"
 brew "asciidoctor"
-brew "asdf"
 brew "awscli"
 brew "bash"
 brew "bash-completion"
