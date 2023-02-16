@@ -1,6 +1,5 @@
 # https://github.com/Homebrew/homebrew-bundle
 
-tap "1password/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
@@ -91,7 +90,6 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/Homebrew/homebrew-cask
 cask "1password"
-cask "1password-cli"
 cask "alfred"
 cask "arq"
 cask "brave-browser"

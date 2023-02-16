@@ -38,11 +38,6 @@ if status is-interactive
   if test -e $DOTFILES/local/config.fish.local
     source $DOTFILES/local/config.fish.local
   end
-
-  # 1Password completion
-  if type -sq op
-    op completion fish | source
-  end
 end
 
 # tabtab source for packages
@@ -50,4 +45,3 @@ end
 [ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
 
 source /usr/local/opt/asdf/libexec/asdf.fish
-source /Users/joshukraine/.config/op/plugins.sh
