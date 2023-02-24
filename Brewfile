@@ -127,7 +127,6 @@ cask "slack"
 cask "tableplus"
 cask "telegram"
 cask "viber"
-cask "vmware-fusion"
 cask "whatsapp"
 cask "zoom"
 
@@ -137,10 +136,8 @@ mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
-mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
-mas "Things 3", id: 904280696
 mas "Toggl Track", id: 1291898086
 mas "e-Sword", id: 968437868
 # rubocop:enable Style/NumericLiterals
