@@ -88,14 +88,20 @@ brew "zsh"
 
 # homebrew-cask
 # https://github.com/Homebrew/homebrew-cask
-cask "1password"
+#
+# Critical Programs
+# These are programs I usually need to install immediately on a new machine.
+# For this reason, they don't do so well being managed by Homebrew.
+# cask "1password"
+# cask "google-chrome"
+# cask "dropbox"
+
 cask "alfred"
 cask "arq"
 cask "brave-browser"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "daisydisk"
-cask "dropbox"
 cask "expressvpn"
 cask "firefox"
 cask "font-caskaydia-cove-nerd-font"
@@ -104,7 +110,6 @@ cask "font-iosevka-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font"
 cask "freedom"
-cask "google-chrome"
 cask "google-drive"
 cask "grammarly-desktop"
 cask "hazel"
