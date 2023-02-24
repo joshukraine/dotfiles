@@ -24,6 +24,13 @@ dotfiles_backup() {
   fi
 }
 
+if ! command -v lvim >/dev/null; then
+  dotfiles_echo "LunarVim is required but was not found. Please install LunarVim and then run this script again."
+  dotfiles_echo "https://www.lunarvim.org/docs/installation"
+  dotfiles_echo "Exiting..."
+  exit 1
+fi
+
 set -e # Terminate script if anything exits with a non-zero value
 
 if [ -z "$DOTFILES" ]; then
