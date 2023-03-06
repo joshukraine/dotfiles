@@ -8,7 +8,6 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "jesseduffield/lazygit"
-# tap "puma/puma"
 tap "stripe/stripe-cli"
 tap "teamookla/speedtest"
 
@@ -53,8 +52,8 @@ brew "most"
 brew "neofetch"
 brew "neovim"
 brew "onefetch"
-brew "openssl"
 brew "openssl@1.1" # wget dependency
+brew "openssl@3"
 brew "overmind"
 brew "pandoc"
 brew "perl"
@@ -70,11 +69,11 @@ brew "rlwrap"
 brew "rsync"
 brew "rust"
 brew "shellcheck"
-brew "speedtest"
 brew "sqlite"
 brew "ssh-copy-id"
 brew "starship"
 brew "stripe/stripe-cli/stripe"
+brew "teamookla/speedtest/speedtest"
 brew "the_silver_searcher"
 brew "tldr"
 brew "tmux"
@@ -134,6 +133,7 @@ cask "zoom"
 
 # rubocop:disable Style/NumericLiterals
 mas "1Password for Safari", id: 1569813296
+mas "e-Sword X", id: 968437868
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
@@ -141,7 +141,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Toggl Track", id: 1291898086
-mas "e-Sword", id: 968437868
 # rubocop:enable Style/NumericLiterals
 
 # vim: set filetype=ruby:
