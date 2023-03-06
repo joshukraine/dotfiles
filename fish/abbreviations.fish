@@ -104,9 +104,11 @@ abbr -a -g vir 'nvim -R'
 abbr -a -g vv 'nvim --version | less'
 
 # asdf
-abbr -a -g ala 'asdf list-all'
+abbr -a -g ail 'asdf install lua'
 abbr -a -g ain 'asdf install nodejs'
+abbr -a -g aip 'asdf install python'
 abbr -a -g air 'asdf install ruby'
+abbr -a -g ala 'asdf list-all'
 
 # https://fishshell.com/docs/current/commands.html#fish_update_completions
 abbr -a -g ucl 'fish_update_completions'
