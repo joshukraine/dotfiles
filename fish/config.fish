@@ -51,3 +51,4 @@ end
 [ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
 
 source ~/.asdf/asdf.fish
+source ~/.config/op/plugins.sh
