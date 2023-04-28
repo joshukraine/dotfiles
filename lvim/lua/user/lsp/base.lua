@@ -1,1 +1,1 @@
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "html" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "html", "standardrb" })
