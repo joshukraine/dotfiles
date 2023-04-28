@@ -20,6 +20,14 @@ lvim.builtin.which_key.mappings["7"] = {
   "<cmd>lua require('persistence').load()<cr>",
   "Restore Session",
 }
+lvim.builtin.which_key.mappings["8"] = {
+  ":Educate<cr>",
+  "Curly Quotes ON",
+}
+lvim.builtin.which_key.mappings["9"] = {
+  ":NoEducate<cr>",
+  "Curly Quotes OFF",
+}
 lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 lvim.builtin.which_key.mappings["Q"] = { ":q<cr>", "Quit Window" }
 lvim.builtin.which_key.mappings["q"] = { ":qa<cr>", "Quit All" }
