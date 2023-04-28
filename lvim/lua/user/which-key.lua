@@ -25,7 +25,7 @@ lvim.builtin.which_key.mappings["Q"] = { ":q<cr>", "Quit Window" }
 lvim.builtin.which_key.mappings["q"] = { ":qa<cr>", "Quit All" }
 lvim.builtin.which_key.mappings["b-"] = { ":wincmd _<cr>:wincmd |<cr>", "Zoom Window In" }
 lvim.builtin.which_key.mappings["b="] = { ":wincmd =<cr>", "Balance Windows" }
-lvim.builtin.which_key.mappings["sl"] = { ":%s/", "Replace" }
+lvim.builtin.which_key.mappings["sa"] = { ":%s/", "Replace" }
 
 -- lvim.builtin.which_key.mappings["D"] = {
 --   name = "Diagnostics",
