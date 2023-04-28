@@ -38,7 +38,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   "emmet_ls",
   "html",
   "jsonls",
-  "sumneko_lua",
+  "lua_ls",
   "solargraph",
   "tailwindcss",
   "tsserver",
