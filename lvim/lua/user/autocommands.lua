@@ -114,6 +114,7 @@ lvim.autocommands = {
         vim.api.nvim_set_hl(0, "IlluminatedWordRead", { link = "CursorLine" })
         vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "CursorLine" })
         vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "CursorLine" })
+        vim.api.nvim_set_hl(0, "NvimTreeFolderIcon", { fg = "#e0af68" })
       end,
     },
   },
