@@ -15,19 +15,11 @@ M.config = function()
       hl = "Comment",
     },
   }
-  local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
-  if status_ok then
-    local function button(sc, txt, keybind, keybind_opts)
-      local b = dashboard.button(sc, txt, keybind, keybind_opts)
-      b.opts.hl_shortcut = "Macro"
-      return b
-    end
-    table.insert(
-      lvim.builtin.alpha.dashboard.section.buttons.val,
-      7,
-      button("l", "  Restore Session", "<cmd>lua require('persistence').load()<cr>")
-    )
-  end
+  table.insert(lvim.builtin.alpha.dashboard.section.buttons.entries, {
+    "l",
+    "  Restore Session",
+    "<cmd>lua require('persistence').load()<cr>",
+  })
 end
 
 return M
