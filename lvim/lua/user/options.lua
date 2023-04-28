@@ -13,3 +13,10 @@ vim.opt.relativenumber = true
 vim.opt.shell = "/bin/bash -i" -- Needed since I use fish as my main shell
 vim.opt.regexpengine = 1
 -- vim.opt.colorcolumn = "81"
+
+-- vim-test
+vim.g["test#strategy"] = "vtr"
+
+-- vim-tmux-runner
+vim.g["VtrPercentage"] = 25
+vim.g["VtrUseVtrMaps"] = 0

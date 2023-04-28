@@ -3,7 +3,7 @@ lvim.plugins = {
   {
     -- General-purpose motion plugin | https://github.com/ggandor/leap.nvim
     "ggandor/leap.nvim",
-    requires = { "tpope/vim-repeat" },
+    dependencies = { "tpope/vim-repeat" },
     config = function()
       require("leap").add_default_mappings()
     end,
@@ -11,43 +11,32 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
     config = function()
-      require("persistence").setup()
+      require("persistence").setup({
+        dir = vim.fn.expand(vim.fn.stdpath("config") .. "/session/"),
+        options = { "buffers", "curdir", "tabpages", "winsize" },
+      })
     end,
   },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
 
   -- Ruby/Rails/Vue
-  { "kana/vim-textobj-user" },          -- Create your own text objects | https://github.com/kana/vim-textobj-user
-  { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
-  { "sdras/vue-vscode-snippets" },      -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
-  { "tpope/vim-rails" },                -- Ruby on Rails power tools | https://github.com/tpope/vim-rails
-  { "vim-ruby/vim-ruby" },              -- Vim/Ruby Configuration Files | https://github.com/vim-ruby/vim-ruby
+  { "kana/vim-textobj-user" }, -- Create your own text objects | https://github.com/kana/vim-textobj-user
+  -- { "nelstrom/vim-textobj-rubyblock" }, -- A custom text object for selecting ruby blocks | https://github.com/nelstrom/vim-textobj-rubyblock
+  { "sdras/vue-vscode-snippets" }, -- Vue VSCode Snippets | https://github.com/sdras/vue-vscode-snippets
+  { "tpope/vim-rails" }, -- Ruby on Rails power tools | https://github.com/tpope/vim-rails
+  { "vim-ruby/vim-ruby" }, -- Vim/Ruby Configuration Files | https://github.com/vim-ruby/vim-ruby
 
   -- Testing
-  {
-    -- A Vim wrapper for running tests on different granularities | https://github.com/vim-test/vim-test
-    "vim-test/vim-test",
-    config = function()
-      vim.cmd("let test#strategy = 'vtr'")
-    end,
-  },
+  { "vim-test/vim-test" }, -- A Vim wrapper for running tests on different granularities | https://github.com/vim-test/vim-test
 
   -- Tmux
   { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
-  {
-    -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
-    "christoomey/vim-tmux-runner",
-    config = function()
-      vim.cmd("let g:VtrPercentage = 25")
-      vim.cmd("let g:VtrUseVtrMaps = 0")
-    end,
-  },
+  { "christoomey/vim-tmux-runner" }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
   -- Markdown & AsciiDoc
-  { "habamax/vim-asciidoctor" },  -- Asciidoctor plugin for Vim | https://github.com/habamax/vim-asciidoctor
+  { "habamax/vim-asciidoctor" }, -- Asciidoctor plugin for Vim | https://github.com/habamax/vim-asciidoctor
   { "reedes/vim-textobj-quote" }, -- Use ‘curly’ quote characters in Vim | https://github.com/reedes/vim-textobj-quote
 
   -- Misc
@@ -63,13 +52,13 @@ lvim.plugins = {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
-        RGB = true,      -- #RGB hex codes
-        RRGGBB = true,   -- #RRGGBB hex codes
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
         RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true,   -- CSS rgb() and rgba() functions
-        hsl_fn = true,   -- CSS hsl() and hsla() functions
-        css = true,      -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true,   -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
       })
     end,
   },
