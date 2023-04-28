@@ -56,11 +56,13 @@ create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   pattern = { "{aliases,functions,prompt,tmux,oh-my-zsh,opts}" },
   command = [[ set filetype=zsh ]],
 })
-create_autocmd({ "VimEnter" }, {
-  group = "file_types",
-  pattern = { "COMMIT_EDITMSG" },
-  command = [[ exec 'norm gg' | startinsert! ]],
-})
+
+-- Go straight to INSERT mode in commit message
+-- create_autocmd({ "VimEnter" }, {
+--   group = "file_types",
+--   pattern = { "COMMIT_EDITMSG" },
+--   command = [[ exec 'norm gg' | startinsert! ]],
+-- })
 
 lvim.autocommands = {
   {
