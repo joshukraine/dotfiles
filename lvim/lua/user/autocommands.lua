@@ -56,6 +56,12 @@ create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   pattern = { "{aliases,functions,prompt,tmux,oh-my-zsh,opts}" },
   command = [[ set filetype=zsh ]],
 })
+-- disable autocmd set filetype=eruby.yaml from rails.vim
+create_autocmd("FileType", {
+  group = "file_types",
+  pattern = "eruby.yaml",
+  command = [[set filetype=yaml]],
+})
 
 -- Go straight to INSERT mode in commit message
 -- create_autocmd({ "VimEnter" }, {
