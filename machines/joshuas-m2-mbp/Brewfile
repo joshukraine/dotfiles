@@ -82,6 +82,7 @@ brew "tldr"
 brew "tmux" # Remember to pin version!
 brew "trash"
 brew "tree"
+brew "universal-ctags"
 brew "w3m"
 brew "wget"
 brew "xz"
