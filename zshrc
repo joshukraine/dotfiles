@@ -22,3 +22,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # zap
 . $DOTFILES/zsh/zap.zsh
+
+source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
