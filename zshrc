@@ -14,6 +14,8 @@ export HOST_NAME
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+eval "$(starship init zsh)"
+
 # asdf
 . $HOME/.asdf/asdf.sh
 
