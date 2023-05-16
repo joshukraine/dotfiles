@@ -1,5 +1,3 @@
-# SYMLINK ME! --> ln -s $HOME/dotfiles/yamllint $XDG_CONFIG_HOME/yamllint
-#
 # REFERENCE:
 # https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
 ---
