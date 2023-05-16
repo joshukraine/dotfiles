@@ -26,3 +26,9 @@ eval "$(starship init zsh)"
 . $DOTFILES/zsh/zap.zsh
 
 source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
+
+typeset -A ZSH_HIGHLIGHT_REGEXP
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main regexp)
+
+ZSH_HIGHLIGHT_REGEXP=('^[[:blank:][:space:]]*('${(j:|:)${(Qk)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
+ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(Qk)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=magenta)
