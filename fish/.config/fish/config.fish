@@ -33,13 +33,10 @@ fish_vi_key_bindings
 
 if status is-interactive
     source $XDG_CONFIG_HOME/fish/abbreviations.fish
+    source $XDG_CONFIG_HOME/fish/colors.fish
 
     # https://github.com/starship/starship#fish
     starship init fish | source
-
-    if test -e $DOTFILES/machines/$HOST_NAME/colors.fish
-        source $DOTFILES/machines/$HOST_NAME/colors.fish
-    end
 
     if test -e $DOTFILES/local/config.fish.local
         source $DOTFILES/local/config.fish.local
