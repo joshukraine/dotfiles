@@ -2,6 +2,28 @@
 
 ![dotfiles screenshot][screenshot]
 
+## 🚧 Under Construction!
+
+I am currently in the process of revamping significant portions of my dotfiles.
+
+### What's Staying the Same
+
+Most of the core features of my dotfiles will not change. For example, I am still using:
+
+- macOS
+- Neovim
+- Tmux
+- Ruby/Node development focus
+
+### What I Plan to Change
+
+- Use [LunarVim](https://www.lunarvim.org/) as my Neovim config
+- Switch back to Zsh; drop support for Fish
+- Decouple my dotfiles from my Mac Bootstrap script
+- Implement GNU Stow (or similar) for managing symlinks
+
+---
+
 These are the dotfiles I use on my Mac computers, currently running [macOS Catalina (10.15)][catalina]. They are geared primarily towards web development with [Rails][rails], [React][react], and [Vue][vue]. I use a terminal-based development environment built on [Fish][fish], [Tmux][tmux], and [Neovim][neovim]. Also included are my [iTerm2][iterm2] and [Alacritty][alacritty] profiles.
 
 ## Table of Contents
