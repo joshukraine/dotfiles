@@ -1,9 +1,8 @@
 # yamllint disable rule:line-length
-#
-# SYMLINK ME! --> ln -s $HOME/dotfiles/lazygit/config.yml $XDG_CONFIG_HOME/lazygit/config.yml
-#
+
 # REFERENCE:
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
 gui:
   # stuff relating to the UI
   scrollHeight: 2 # how many lines you scroll by
