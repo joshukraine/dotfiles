@@ -21,13 +21,3 @@ _darcs
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
-
-itermcolors
-legacy
-local
-machines
-spell
-terminfo
-example.rest
-vim-performance.md
-install.sh
