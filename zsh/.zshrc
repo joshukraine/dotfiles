@@ -1,4 +1,4 @@
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
 export DOTFILES="$HOME/dotfiles"
 export EDITOR="lvim"
 export GIT_EDITOR="lvim"
