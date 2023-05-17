@@ -1,5 +1,3 @@
-# SYMLINK ME! --> ln -s $HOME/dotfiles/machines/$HOST_NAME/starship.toml $XDG_CONFIG_HOME/starship.toml
-#
 # REFERENCE:
 # https://starship.rs/config/
 # https://www.nerdfonts.com/cheat-sheet
