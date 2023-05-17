@@ -4868,13 +4868,13 @@
 			<key>Name</key>
 			<string>M2 MacBook Pro</string>
 			<key>Non Ascii Font</key>
-			<string>FiraCodeNerdFontComplete-Regular 18</string>
+			<string>FiraCodeNerdFontComplete-Regular 17</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>OperatorMonoSSmLig-Book 18</string>
+			<string>ComicCodeLigatures-Regular 17</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -5217,7 +5217,7 @@
 			<key>Use Underline Color (Light)</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.03</real>
+			<real>0.81999999999999995</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
