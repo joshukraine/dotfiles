@@ -14,7 +14,7 @@
         "revision": "3bbe4e7139ed910e75029bf0fa31c44291d5a0ea"
       },
       "homebrew/cask-versions": {
-        "revision": "9e37844d5e239eeb3cfbf08fe02c4edfe7455bec"
+        "revision": "017d23741d563146f74098eee81399dda7817be6"
       },
       "homebrew/core": {
         "revision": "57df49fc4aae6306f755c75e8b9e317f6e4cbffa"
@@ -478,45 +478,45 @@
         }
       },
       "dos2unix": {
-        "version": "7.4.4",
+        "version": "7.5.0",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
           "files": {
             "arm64_ventura": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:409862cf46f3a9e797e00fadd99b1b0ab91fa3b35ca90850201da18d8237736a",
-              "sha256": "409862cf46f3a9e797e00fadd99b1b0ab91fa3b35ca90850201da18d8237736a"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:f30f0ff347c2857d90a0558af2fa674bcb4d4daadf08da970b9741f7ee24d914",
+              "sha256": "f30f0ff347c2857d90a0558af2fa674bcb4d4daadf08da970b9741f7ee24d914"
             },
             "arm64_monterey": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:e27df73c86db8d637e45c7f3340085167283bea6f851193012fb2971e41383bb",
-              "sha256": "e27df73c86db8d637e45c7f3340085167283bea6f851193012fb2971e41383bb"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:9fbbcc220adea02b5584446aacf757c097be5c13e2803a8bf4f772ef51cf6501",
+              "sha256": "9fbbcc220adea02b5584446aacf757c097be5c13e2803a8bf4f772ef51cf6501"
             },
             "arm64_big_sur": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:550706a3e815721c59b383fe9f96b8acb37d26db438e63ddd16b12a274ccdb2d",
-              "sha256": "550706a3e815721c59b383fe9f96b8acb37d26db438e63ddd16b12a274ccdb2d"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:2542b8e620eee7b5f7565aa11469d66a93ec43b366a0b494dbe8338fc5dcbe47",
+              "sha256": "2542b8e620eee7b5f7565aa11469d66a93ec43b366a0b494dbe8338fc5dcbe47"
             },
             "ventura": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:03551760b2512e697def9b15f4f5e2334c28b8a8dcef869eb0d1d84e8a585fd1",
-              "sha256": "03551760b2512e697def9b15f4f5e2334c28b8a8dcef869eb0d1d84e8a585fd1"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:f9dd335c6b5e2329c843cb45fd9159188a20668f83f17f83bb74d8787b5c3b30",
+              "sha256": "f9dd335c6b5e2329c843cb45fd9159188a20668f83f17f83bb74d8787b5c3b30"
             },
             "monterey": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:77f8c69017871d222c573bd5feea094359bee82bed4fca43e8b813013a96b266",
-              "sha256": "77f8c69017871d222c573bd5feea094359bee82bed4fca43e8b813013a96b266"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:2f6fea4d8d5b4dbf1038d8dfd53708b89dafbf0e2800a673e8ecb65546ccd325",
+              "sha256": "2f6fea4d8d5b4dbf1038d8dfd53708b89dafbf0e2800a673e8ecb65546ccd325"
             },
             "big_sur": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:0e5527b8459a486b36d31d8a71928a3e3bf1174ceb5381a13efef5b443dadf32",
-              "sha256": "0e5527b8459a486b36d31d8a71928a3e3bf1174ceb5381a13efef5b443dadf32"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:8f5a9c2dc29d0df1daa304c5fca1dcbba5e9c14fd3cd85144ba6a871be31c48c",
+              "sha256": "8f5a9c2dc29d0df1daa304c5fca1dcbba5e9c14fd3cd85144ba6a871be31c48c"
             },
             "x86_64_linux": {
               "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:62e5062ae0c2adaf715a86fed63774c0761e92628635abfc5f2490da588f37e5",
-              "sha256": "62e5062ae0c2adaf715a86fed63774c0761e92628635abfc5f2490da588f37e5"
+              "url": "https://ghcr.io/v2/homebrew/core/dos2unix/blobs/sha256:a699ed735f09fa9c74be0fc6955f85d3f36f06f8e5f2a97331e1c9d290e7a604",
+              "sha256": "a699ed735f09fa9c74be0fc6955f85d3f36f06f8e5f2a97331e1c9d290e7a604"
             }
           }
         }
@@ -3668,7 +3668,7 @@
         }
       },
       "viber": {
-        "version": "20.0.0,2004",
+        "version": "20.1.0,2010",
         "options": {
           "full_name": "viber"
         }
