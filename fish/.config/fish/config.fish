@@ -25,7 +25,7 @@ set -gx HOST_NAME (scutil --get HostName)
 
 # FZF specific - https://github.com/junegunn/fzf#key-bindings-for-command-line
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore-vcs'
-set -gx FZF_DEFAULT_OPTS '--height 50% --layout=reverse --border'
+set -gx FZF_DEFAULT_OPTS '--height 75% --layout=reverse --border'
 set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -gx FZF_ALT_C_COMMAND 'fd --type d . --color=never'
 
