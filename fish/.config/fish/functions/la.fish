@@ -1,3 +1,3 @@
 function la
-    exa -lahF $argv
+    ls -lahF --git $argv
 end
