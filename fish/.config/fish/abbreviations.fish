@@ -2,6 +2,7 @@
 
 # General UNIX
 abbr -a -g c clear
+abbr -a -g cv 'command -v'
 abbr -a -g df 'df -h'
 abbr -a -g du 'du -h'
 abbr -a -g dud 'du -d 1 -h'
@@ -17,6 +18,7 @@ abbr -a -g cdnv 'cd $XDG_CONFIG_HOME/nvim'
 abbr -a -g cdlv 'cd $XDG_CONFIG_HOME/lvim'
 abbr -a -g cdxd 'cd $XDG_DATA_HOME'
 abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
+abbr -a -g cdlb 'cd $HOME/.local/bin'
 
 # Moving around
 abbr -a -g .. 'cd ..'
@@ -25,16 +27,14 @@ abbr -a -g .... 'cd ../../../'
 abbr -a -g ..... 'cd ../../../../'
 abbr -a -g - 'cd -'
 
-# Tree
-abbr -a -g t1 'tree -CFL 1'
-abbr -a -g t1a 'tree -CFLa 1'
-abbr -a -g t2 'tree -CFL 2'
-abbr -a -g t2a 'tree -CFLa 2'
-abbr -a -g t3 'tree -CFL 3'
-abbr -a -g t3a 'tree -CFLa 3'
-abbr -a -g t4 'tree -CFL 4'
-abbr -a -g t4a 'tree -CFLa 4'
-abbr -a -g tree 'tree -CF'
+# Tree - requires exa
+abbr -a -g tree 'll --tree --level=2'
+abbr -a -g t2 'll --tree --level=2'
+abbr -a -g t2a 'll --tree --level=2 -a'
+abbr -a -g t3 'll --tree --level=3'
+abbr -a -g t3a 'll --tree --level=3 -a'
+abbr -a -g t4 'll --tree --level=4'
+abbr -a -g t4a 'll --tree --level=4 -a'
 
 # Git
 abbr -a -g ga 'git add'
@@ -87,7 +87,6 @@ abbr -a -g one 'onefetch'
 abbr -a -g ch 'cht.sh'
 abbr -a -g chs 'cht.sh --shell'
 abbr -a -g color 'colortest -w -s'
-abbr -a -g cv 'command -v'
 abbr -a -g ra 'ranger'
 abbr -a -g spt 'speedtest'
 
