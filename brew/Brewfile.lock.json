@@ -11,10 +11,10 @@
         "revision": "aded9481aad24feabc70abd24485f7d07e6d4cab"
       },
       "homebrew/cask-fonts": {
-        "revision": "05f1237ea49f7bea85cce74fe3a66c97755585f8"
+        "revision": "3bbe4e7139ed910e75029bf0fa31c44291d5a0ea"
       },
       "homebrew/cask-versions": {
-        "revision": "6d6b48ec88abe5d4785006c3e1512b16d6818f65"
+        "revision": "9e37844d5e239eeb3cfbf08fe02c4edfe7455bec"
       },
       "homebrew/core": {
         "revision": "57df49fc4aae6306f755c75e8b9e317f6e4cbffa"
@@ -26,7 +26,7 @@
         "revision": "d445dd7210a24420b39f261391f6e46e32d06ce5"
       },
       "stripe/stripe-cli": {
-        "revision": "6d16d9f012fe66bcb93033127f5035bf9fe3a142"
+        "revision": "3cf06386d700c1337f4f11f725a2854938c3dfb9"
       },
       "teamookla/speedtest": {
         "revision": "1ff487f465bb01c3007c0bc17f1f793244ee2eaa"
@@ -2595,7 +2595,7 @@
         }
       },
       "stripe/stripe-cli/stripe": {
-        "version": "1.14.5",
+        "version": "1.14.6",
         "bottle": false
       },
       "the_silver_searcher": {
@@ -3500,7 +3500,7 @@
         }
       },
       "brave-browser": {
-        "version": "1.51.114.0,151.114",
+        "version": "1.51.118.0,151.118",
         "options": {
           "full_name": "brave-browser"
         }
@@ -3662,7 +3662,7 @@
         }
       },
       "telegram": {
-        "version": "9.6,245681",
+        "version": "9.6.3,245683",
         "options": {
           "full_name": "telegram"
         }
@@ -3775,7 +3775,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.18-53-g49b4a79",
+        "HOMEBREW_VERSION": "4.0.18-64-g946478a",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
