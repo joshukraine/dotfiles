@@ -88,9 +88,4 @@ if command -v fish >/dev/null; then
     command fish -c "set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/.bin $HOME/.yarn/bin $HOMEBREW_PREFIX/bin"
 fi
 
-dotfiles_echo "-> Installing custom terminfo entries..."
-tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
-tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
-sudo tic -xe alacritty,alacritty-direct "${DOTFILES}/terminfo/alacritty.info"
-
 dotfiles_echo "Dotfiles installation complete!"
