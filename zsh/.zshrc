@@ -11,6 +11,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export DOTFILES="$HOME/dotfiles"
 HOST_NAME=$(scutil --get HostName)
 export HOST_NAME
+export ABBR_USER_ABBREVIATIONS_FILE="$XDG_CONFIG_HOME/zsh-abbr/abbreviations.zsh"
 
 if [ $(arch) = arm64 ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
