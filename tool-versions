@@ -1,2 +1,4 @@
 ruby 3.1.2
-nodejs 19.1.0
+nodejs 19.6.0
+lua 5.4.4
+python 3.11.2 2.7.18

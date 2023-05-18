@@ -2,6 +2,10 @@
 .vimrc.local
 .zshrc.local
 Brewfile.lock.json
+fish_variables
+fzf_key_bindings.fish
 local/*
+lvim/plugin/packer_compiled.lua
+lvim/session
 vim/.netrwhist
 vim/bundle

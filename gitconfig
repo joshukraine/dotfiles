@@ -59,6 +59,7 @@
 
 [commit]
   template = ~/.gitmessage
+  gpgsign = true
 
 [core]
   autocrlf     = input
@@ -66,7 +67,7 @@
   ignorecase   = false
   safecrlf     = warn
   abbrev       = 7
-  editor       = nvim
+  editor       = lvim
 
 [diff]
   tool = vimdiff3
@@ -119,3 +120,9 @@
 
 [url "https://"]
   insteadOf = git://
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign

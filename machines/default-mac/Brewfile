@@ -7,7 +7,6 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "puma/puma"
-tap "universal-ctags/universal-ctags"
 
 # Need to install openssl before libyaml
 brew "openssl"
@@ -74,7 +73,6 @@ brew "tldr"
 brew "tmux"
 brew "trash"
 brew "tree"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "unixodbc" # asdf dependency
 brew "w3m"
 brew "wget"
@@ -86,3 +84,5 @@ brew "zsh"
 cask "font-fira-code-nerd-font"
 cask "alacritty"
 cask "iterm2-beta"
+
+# vim: set filetype=ruby:

@@ -79,7 +79,6 @@ cask "alfred"
 cask "arq"
 cask "bartender"
 cask "carbon-copy-cloner"
-cask "clover-configurator"
 cask "daisydisk"
 cask "dropbox"
 cask "font-caskaydiacove-nerd-font"
@@ -103,3 +102,5 @@ mas "Pixelmator Pro", id: 1289583905
 mas "WiFi Explorer", id: 494803304
 mas "e-Sword", id: 968437868
 # rubocop:enable Style/NumericLiterals
+
+# vim: set filetype=ruby:

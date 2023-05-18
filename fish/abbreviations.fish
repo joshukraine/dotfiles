@@ -14,6 +14,7 @@ abbr -a -g cdot 'cd $DOTFILES'
 abbr -a -g cdxc 'cd $XDG_CONFIG_HOME'
 abbr -a -g cdfi 'cd $XDG_CONFIG_HOME/fish'
 abbr -a -g cdnv 'cd $XDG_CONFIG_HOME/nvim'
+abbr -a -g cdlv 'cd $XDG_CONFIG_HOME/lvim'
 abbr -a -g cdxd 'cd $XDG_DATA_HOME'
 abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
 
@@ -74,6 +75,7 @@ abbr -a -g grup 'git remote add upstream'
 abbr -a -g grv 'git remote -v'
 abbr -a -g gs 'git status'
 abbr -a -g gtl 'git tag --list'
+abbr -a -g oc 'overcommit'
 
 # macOS Finder
 abbr -a -g defr 'defaults read'
@@ -92,26 +94,28 @@ abbr -a -g spt 'speedtest'
 # Tmux
 abbr -a -g tl 'tmux ls'
 abbr -a -g tlw 'tmux list-windows'
-abbr -a -g mux 'tmuxinator'
 
-# Neovim
-abbr -a -g vi 'nvim'
+# Neovim / LunarVim
+abbr -a -g lv 'lvim'
+abbr -a -g nv 'nvim'
+abbr -a -g vi 'lvim'
 abbr -a -g vi0 'nvim -u NONE'
-abbr -a -g vim 'nvim'
 abbr -a -g vir 'nvim -R'
-abbr -a -g vs 'nvim -S'
 abbr -a -g vv 'nvim --version | less'
 
 # asdf
-abbr -a -g ala 'asdf list-all'
+abbr -a -g ail 'asdf install lua'
 abbr -a -g ain 'asdf install nodejs'
+abbr -a -g aip 'asdf install python'
 abbr -a -g air 'asdf install ruby'
+abbr -a -g ala 'asdf list-all'
 
 # https://fishshell.com/docs/current/commands.html#fish_update_completions
 abbr -a -g ucl 'fish_update_completions'
 
 # Homebrew
 abbr -a -g brc 'brew cleanup'
+abbr -a -g brb 'brew bundle'
 abbr -a -g brd 'brew doctor'
 abbr -a -g brg 'brew upgrade'
 abbr -a -g bri 'brew info'
@@ -222,3 +226,14 @@ abbr -a -g gout 'gem outdated'
 abbr -a -g guns 'gem uninstall'
 abbr -a -g gup 'gem update'
 abbr -a -g gus 'gem update --system'
+
+# Tmuxinator
+abbr -a -g mux 'tmuxinator'
+abbr -a -g ms 'tmuxinator start'
+abbr -a -g msa 'tmuxinator start mac-bootstrap'
+abbr -a -g msb 'tmuxinator start bible_first_online'
+abbr -a -g msc 'tmuxinator start bf_curriculum'
+abbr -a -g msd 'tmuxinator start dot'
+abbr -a -g msm 'tmuxinator start mux'
+abbr -a -g msn 'tmuxinator start obsidian'
+abbr -a -g mso 'tmuxinator start ofreport'

@@ -1,5 +1,6 @@
 # https://github.com/Homebrew/homebrew-bundle
 
+tap "1password/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
@@ -7,17 +8,15 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
-# tap "puma/puma"
+tap "jesseduffield/lazygit"
 tap "stripe/stripe-cli"
 tap "teamookla/speedtest"
-tap "universal-ctags/universal-ctags"
 
 # Homebrew
 # https://github.com/Homebrew/brew/
 
 brew "advancecomp"
 brew "asciidoctor"
-brew "asdf"
 brew "awscli"
 brew "bash"
 brew "bash-completion"
@@ -33,16 +32,18 @@ brew "fish"
 brew "fontforge"
 brew "fonttools"
 brew "fzf"
+brew "gh"
 brew "gifsicle"
 brew "git"
 brew "git-quick-stats"
-brew "gmp" # Vim dependency
+brew "gmp"
 brew "highlight"
 brew "htop"
 brew "httpie"
 brew "imagemagick"
 brew "jhead"
 brew "jq"
+brew "lazygit"
 brew "less"
 brew "libtermkey"
 brew "mas"
@@ -52,8 +53,8 @@ brew "most"
 brew "neofetch"
 brew "neovim"
 brew "onefetch"
-brew "openssl"
-brew "openssl@1.1" # wget dependency
+brew "openssl@1.1"
+brew "openssl@3"
 brew "overmind"
 brew "pandoc"
 brew "perl"
@@ -67,34 +68,42 @@ brew "redis"
 brew "ripgrep"
 brew "rlwrap"
 brew "rsync"
+brew "rust"
 brew "shellcheck"
-brew "speedtest"
 brew "sqlite"
 brew "ssh-copy-id"
 brew "starship"
 brew "stripe/stripe-cli/stripe"
+brew "teamookla/speedtest/speedtest"
 brew "the_silver_searcher"
 brew "tldr"
 brew "tmux"
 brew "trash"
 brew "tree"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "w3m"
 brew "wget"
 brew "xz"
+brew "yamllint"
 brew "zsh"
 
 # homebrew-cask
 # https://github.com/Homebrew/homebrew-cask
-cask "1password"
+#
+# Critical Programs
+# These are programs I usually need to install immediately on a new machine.
+# For this reason, they don't do so well being managed by Homebrew.
+# cask "1password"
+# cask "google-chrome"
+# cask "dropbox"
+
+cask "1password-cli"
 cask "alfred"
 cask "arq"
+cask "bartender"
 cask "brave-browser"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "daisydisk"
-cask "dropbox"
-cask "expressvpn"
 cask "firefox"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-fira-code-nerd-font"
@@ -102,7 +111,6 @@ cask "font-iosevka-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font"
 cask "freedom"
-cask "google-chrome"
 cask "google-drive"
 cask "grammarly-desktop"
 cask "hazel"
@@ -113,29 +121,29 @@ cask "microsoft-edge"
 cask "microsoft-excel"
 cask "microsoft-word"
 cask "ngrok"
+cask "expressvpn"
 cask "notion"
+cask "obsidian"
 cask "postico"
 cask "signal"
 cask "slack"
 cask "tableplus"
 cask "telegram"
-cask "toggl-track"
+cask "todoist"
 cask "viber"
-cask "vmware-fusion"
 cask "whatsapp"
 cask "zoom"
 
 # rubocop:disable Style/NumericLiterals
 mas "1Password for Safari", id: 1569813296
+mas "e-Sword X", id: 968437868
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
-mas "OmniGraffle", id: 1142578753
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
-mas "Things 3", id: 904280696
-mas "e-Sword", id: 968437868
+mas "Toggl Track", id: 1291898086
 # rubocop:enable Style/NumericLiterals
 
 # vim: set filetype=ruby:
