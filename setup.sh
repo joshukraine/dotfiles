@@ -112,7 +112,7 @@ done
 
 dotfiles_echo "Setting up symlinks with GNU Stow..."
 
-cd "$DOTFILES"/ # stow needs to run from inside dotfiles dir
+  cd "${HOME}/dotfiles/" # stow needs to run from inside dotfiles dir
 
 for item in *; do
     if [ -d "$item" ]; then

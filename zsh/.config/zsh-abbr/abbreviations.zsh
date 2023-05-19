@@ -13,7 +13,7 @@ abbr "mv"="mv -iv"
 abbr "src"="source $HOME/.zshrc"
 
 # Config dir access
-abbr "cdot"="cd $DOTFILES"
+abbr "cdot"="cd $HOME/dotfiles"
 abbr "cdxc"="cd $XDG_CONFIG_HOME"
 abbr "cdfi"="cd $XDG_CONFIG_HOME/fish"
 abbr "cdnv"="cd $XDG_CONFIG_HOME/nvim"

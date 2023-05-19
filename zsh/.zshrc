@@ -17,8 +17,6 @@ export RUBY_CONFIGURE_OPTS="--with-opt-dir=$HOMEBREW_PREFIX/opt/openssl:$HOMEBRE
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-export DOTFILES="$HOME/dotfiles"
-export HOST_NAME=$(scutil --get HostName)
 export ABBR_USER_ABBREVIATIONS_FILE="$XDG_CONFIG_HOME/zsh-abbr/abbreviations.zsh"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
