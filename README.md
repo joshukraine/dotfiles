@@ -24,6 +24,9 @@ Most of the core features of my dotfiles will not change. For example, I am stil
 
 ```
 git clone -b zsh-plus-stow https://github.com/joshukraine/dotfiles.git
+```
+
+```
 bash ~/dotfiles/setup.sh
 ```
 

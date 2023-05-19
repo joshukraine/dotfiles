@@ -15,8 +15,7 @@ dotfiles_echo() {
 }
 
 backup_stow_conflict() {
-    dotfiles_echo "Conflict detected: ${1}"
-    dotfiles_echo "Backing up..."
+    dotfiles_echo "Conflict detected: ${1} Backing up.."
     local BACKUP_SUFFIX
     BACKUP_SUFFIX="$(date +%Y-%m-%d)_$(date +%s)"
     mv -v "$1" "${1}_${BACKUP_SUFFIX}"
@@ -76,10 +75,10 @@ dotfiles_echo "Checking your system architecture..."
 arch="$(uname -m)"
 
 if [ "$arch" == "arm64" ]; then
-    dotfiles_echo "-> You're on Apple Silicon! Setting HOMEBREW_PREFIX to /opt/homebrew..."
+    dotfiles_echo "You're on Apple Silicon! Setting HOMEBREW_PREFIX to /opt/homebrew..."
     HOMEBREW_PREFIX="/opt/homebrew"
 else
-    dotfiles_echo "-> You're on an Intel Mac! Setting HOMEBREW_PREFIX to /usr/local..."
+    dotfiles_echo "You're on an Intel Mac! Setting HOMEBREW_PREFIX to /usr/local..."
     HOMEBREW_PREFIX="/usr/local"
 fi
 
@@ -111,7 +110,7 @@ for item in "${stow_conflicts[@]}"; do
     fi
 done
 
-dotfiles_echo "-> Setting up symlinks with GNU Stow..."
+dotfiles_echo "Setting up symlinks with GNU Stow..."
 
 cd "$DOTFILES"/ # stow needs to run from inside dotfiles dir
 
@@ -122,12 +121,15 @@ for item in *; do
 done
 
 if command -v fish >/dev/null; then
-    dotfiles_echo "-> Initializing fish_user_paths..."
+    dotfiles_echo "Initializing fish_user_paths..."
     command fish -c "set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/.bin $HOME/.yarn/bin $HOMEBREW_PREFIX/bin"
 fi
 
 dotfiles_echo "Dotfiles setup complete!"
-dotfiles_echo "Possible next steps:"
-dotfiles_echo "-> Install LunarVim (https://www.lunarvim.org)"
-dotfiles_echo "-> Install Zap (https://www.zapzsh.org)"
-dotfiles_echo "-> Install Homebrew packages (brew bundle install)"
+echo
+echo "Possible next steps:"
+echo "-> Install LunarVim (https://www.lunarvim.org)"
+echo "-> Install Zap (https://www.zapzsh.org)"
+echo "-> Install Homebrew packages (brew bundle install)"
+echo "-> Set up iTerm2 preferences (Settings > General > Preferences)"
+echo
