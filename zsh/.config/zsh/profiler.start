@@ -1,7 +1,7 @@
 # Credit goes to https://esham.io/2018/02/zsh-profiling
 if [ -f $HOME/.zshrc.profiler ]; then
 
-   source $HOME/dotfiles/zsh/profiler
+   source $HOME/.config/zsh/profiler
    zmodload zsh/datetime
    setopt PROMPT_SUBST
    PS4='+$EPOCHREALTIME %N:%i> '

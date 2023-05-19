@@ -1,3 +1,5 @@
+. $HOME/.config/zsh/profiler.start
+
 if [ $(arch) = arm64 ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 else
@@ -41,3 +43,5 @@ autoload -Uz compinit && compinit
 
 # De-dupe $PATH
 typeset -U path
+
+. $HOME/.config/zsh/profiler.stop
