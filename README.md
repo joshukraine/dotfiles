@@ -18,13 +18,13 @@ Most of the core features of my dotfiles will not change. For example, I am stil
 ### What I Plan to Change
 
 - Use [LunarVim](https://www.lunarvim.org/) as my Neovim config
-- Switch back to Zsh; drop support for Fish
-- Decouple my dotfiles from my Mac Bootstrap script
+- Switch back to Zsh; keep support for Fish
+- Archive Mac Bootstrap script; Laptop fork instead
 - Implement GNU Stow (or similar) for managing symlinks
 
 ```
-$ git clone -b zsh-plus-stow https://github.com/joshukraine/dotfiles.git
-$ bash ~/dotfiles/install.sh
+git clone -b zsh-plus-stow https://github.com/joshukraine/dotfiles.git
+bash ~/dotfiles/setup.sh
 ```
 
 ---
