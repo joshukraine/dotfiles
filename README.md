@@ -81,6 +81,7 @@ I’ve made the following changes to my fork of Laptop:
 - Remove Heroku-related code
 - Customize Homebrew bundle
 - Install asdf via git instead of Homebrew
+- Add python and lua asdf plugins
 
 ### ⚠️ 2. Check for Stow conflicts
 
