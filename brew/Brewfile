@@ -61,6 +61,7 @@ brew "perl"
 brew "pgcli"
 brew "postgresql@14", restart_service: :changed
 brew "pstree"
+brew "python"
 brew "ranger"
 brew "readline"
 brew "redis", restart_service: :changed
