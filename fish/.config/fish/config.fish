@@ -21,7 +21,6 @@ set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx DOTFILES "$HOME/dotfiles"
 set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
-set -gx HOST_NAME (scutil --get HostName)
 
 # FZF specific - https://github.com/junegunn/fzf#key-bindings-for-command-line
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore-vcs'
