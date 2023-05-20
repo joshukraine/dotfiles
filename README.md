@@ -350,8 +350,7 @@ I'm currently trying out Neovim, and so far things are working nicely. For now I
 
 **More info:**
 
-* https://neovim.io/doc/user/nvim.html#nvim-from-vim
-* https://neovim.io/doc/user/vim_diff.html#vim-differences
+&#9657; [What I’ve learned about slow performance in Vim](https://gist.github.com/joshukraine/3bfff4e9b553624b09789bc02cdd0ce6)
 
 ## Identifying Sources of Slow Startup Times
 
