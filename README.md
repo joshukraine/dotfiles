@@ -161,18 +161,48 @@ My Zsh and Fish configs mostly have functional parity:
 
 Zsh is now the default shell on macOS. However, it’s helpful to add an entry enabling the Homebrew version of Zsh (`$HOMEBREW_PREFIX/bin/zsh`) instead of the default (`/bin/zsh`) version.
 
-1. Install Zsh from Homebrew: `$ brew install zsh`
-1. Add Zsh (Homebrew version) to `/etc/shells`: `$ echo $HOMEBREW_PREFIX/bin/zsh | sudo tee -a /etc/shells`
-1. Set it as your default shell: `$ chsh -s $(which zsh)`
-1. Install [Zap][zap]. (Required for functional parity with Fish)
-1. Restart your computer.
+Ensure that you have Zsh from Homebrew. (`which zsh`) If not:
+
+```sh
+brew install zsh
+```
+
+Add Zsh (Homebrew version) to `/etc/shells`:
+
+```sh
+echo $HOMEBREW_PREFIX/bin/zsh | sudo tee -a /etc/shells
+```
+
+Set it as your default shell:
+
+```sh
+chsh -s $(which zsh)
+```
+
+Install [Zap][zap]. (Required for functional parity with Fish)
+Restart your terminal.
 
 ### Fish Setup
 
-1. Install Fish: `$ brew install fish`
-1. Add Fish to `/etc/shells`: `$ echo $HOMEBREW_PREFIX/bin/fish | sudo tee -a /etc/shells`
-1. Set it as your default shell: `$ chsh -s $(which fish)`
-1. Restart your terminal emulator. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
+Install Fish from Homebrew:
+
+```sh
+ brew install fish
+```
+
+Add Fish to `/etc/shells`:
+
+```sh
+echo $HOMEBREW_PREFIX/bin/fish | sudo tee -a /etc/shells
+```
+
+Set it as your default shell:
+
+```sh
+chsh -s $(which fish)
+```
+
+Restart your terminal. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
 
 ## Setting up iTerm2
 
