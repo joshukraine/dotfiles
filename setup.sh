@@ -143,6 +143,13 @@ if command -v fish >/dev/null; then
   command fish -c "set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/.bin $HOME/.yarn/bin $HOMEBREW_PREFIX/bin"
 fi
 
+if [ ! -d "${HOME}/.terminfo" ]; then
+  dotfiles_echo "Installing custom terminfo entries..."
+  # These entries enable, among other things, italic text in the terminal.
+  tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
+  tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
+fi
+
 dotfiles_echo "Dotfiles setup complete!"
 echo
 echo "Possible next steps:"
