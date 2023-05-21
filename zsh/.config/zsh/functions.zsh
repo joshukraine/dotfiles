@@ -99,6 +99,11 @@ function rlv() {
   asdf list-all ruby | rg '^\d'
 }
 
+# Thanks to https://github.com/Shpota/sha256
+function sha256() {
+    printf "%s %s\n" "$1" "$2" | sha256sum --check
+}
+
 # Create a new session named for current directory, or attach if exists.
 function tna() {
   tmux new-session -As $(basename "$PWD" | tr . -)
