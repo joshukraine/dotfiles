@@ -82,6 +82,7 @@ I’ve made the following changes to my fork of Laptop:
 - Customize Homebrew bundle
 - Install asdf via git instead of Homebrew
 - Add python and lua asdf plugins
+- Install a few basic gems and npm packages
 
 ### ⚠️ 2. Check for Stow conflicts
 
