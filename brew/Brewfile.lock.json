@@ -1128,45 +1128,45 @@
         }
       },
       "imagemagick": {
-        "version": "7.1.1-9",
+        "version": "7.1.1-10",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
           "files": {
             "arm64_ventura": {
               "cellar": "/opt/homebrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:7545c573640efc1b16614db993de97962c9840aac157a6ed6da6bd2295b81704",
-              "sha256": "7545c573640efc1b16614db993de97962c9840aac157a6ed6da6bd2295b81704"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:adef1989a2c1cb05df643ca464170891e361ab90b10414b68a3dfb5c39d3c553",
+              "sha256": "adef1989a2c1cb05df643ca464170891e361ab90b10414b68a3dfb5c39d3c553"
             },
             "arm64_monterey": {
               "cellar": "/opt/homebrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:c8531082c3e430b6ebda4a266b0a75f289c8bf90f73a7be17dd22070d19981a6",
-              "sha256": "c8531082c3e430b6ebda4a266b0a75f289c8bf90f73a7be17dd22070d19981a6"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:7179f152e98929b7a0f928815c561b7d7826f5ba721c367989626e04e54faec0",
+              "sha256": "7179f152e98929b7a0f928815c561b7d7826f5ba721c367989626e04e54faec0"
             },
             "arm64_big_sur": {
               "cellar": "/opt/homebrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:d5379b7787f91b325903bb0fd5b54f3f5a8a67810957dc00e1a53e859de1dec4",
-              "sha256": "d5379b7787f91b325903bb0fd5b54f3f5a8a67810957dc00e1a53e859de1dec4"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:0808ca46ecdfa50172f537143a8d4de073ed82c6985891361106345a535637f8",
+              "sha256": "0808ca46ecdfa50172f537143a8d4de073ed82c6985891361106345a535637f8"
             },
             "ventura": {
               "cellar": "/usr/local/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:74e30a16d5ecf8933e3102bcd4f1c64dff51e5402aba375f77201f67a204914a",
-              "sha256": "74e30a16d5ecf8933e3102bcd4f1c64dff51e5402aba375f77201f67a204914a"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:2c500424ced43b993f9d4ccbcc302b96b0355a80cc6609056ba151cd66cbf28e",
+              "sha256": "2c500424ced43b993f9d4ccbcc302b96b0355a80cc6609056ba151cd66cbf28e"
             },
             "monterey": {
               "cellar": "/usr/local/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:34300a77e3dd0d6af5fee424a6ae02f665b9872a0e1c534cdc5234403720e374",
-              "sha256": "34300a77e3dd0d6af5fee424a6ae02f665b9872a0e1c534cdc5234403720e374"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:1f3ad5d39e159df62e0aa7d35cbcd234898701808cb4fb85d7c52a76b6dbb42b",
+              "sha256": "1f3ad5d39e159df62e0aa7d35cbcd234898701808cb4fb85d7c52a76b6dbb42b"
             },
             "big_sur": {
               "cellar": "/usr/local/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:7ec9ec11d987ec2ccac2f3d25982e229e3a449ec1194ab690c3bf0bb33d22c36",
-              "sha256": "7ec9ec11d987ec2ccac2f3d25982e229e3a449ec1194ab690c3bf0bb33d22c36"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:2f78e49068702e670fd07ce19b12e82695deed33a28848adb15c4e81f30b7aa0",
+              "sha256": "2f78e49068702e670fd07ce19b12e82695deed33a28848adb15c4e81f30b7aa0"
             },
             "x86_64_linux": {
               "cellar": "/home/linuxbrew/.linuxbrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:6a3387fb7be34f2002c07489045e514ed4824f31e1e7095d63137014cd67a1b6",
-              "sha256": "6a3387fb7be34f2002c07489045e514ed4824f31e1e7095d63137014cd67a1b6"
+              "url": "https://ghcr.io/v2/homebrew/core/imagemagick/blobs/sha256:95d87a3ee0ec55db34d3e54f98696737796e10e8e580f87272f2d808d745786f",
+              "sha256": "95d87a3ee0ec55db34d3e54f98696737796e10e8e580f87272f2d808d745786f"
             }
           }
         }
