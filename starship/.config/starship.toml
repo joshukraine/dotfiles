@@ -13,7 +13,7 @@ style = "bold bright-blue"
 
 [git_branch]
 style = "bold bright-white"
-symbol = " "
+symbol = "󰘬 "
 
 [git_status]
 ahead = "[](purple)[$count](white)"
@@ -40,4 +40,4 @@ symbol = " "
 symbol = " "
 
 [python]
-symbol = " "
+symbol = "󰌠 "
