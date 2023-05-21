@@ -1,6 +1,6 @@
 #  https://fishshell.com/docs/current/index.html
 
-set fish_greeting
+# set fish_greeting # supress fish greeting
 
 if test (arch) = "arm64"
     eval (/opt/homebrew/bin/brew shellenv)
