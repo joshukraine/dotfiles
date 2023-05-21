@@ -1,11 +1,12 @@
 .gitconfig.local
 .vimrc.local
 .zshrc.local
-Brewfile.lock.json
+config.fish.local
 fish_variables
 fzf_key_bindings.fish
+lazygit/.config/lazygit/state.yml
 local/*
-lvim/plugin/packer_compiled.lua
-lvim/session
+lvim/.config/lvim/plugin/packer_compiled.lua
+lvim/.config/lvim/session
 vim/.netrwhist
 vim/bundle
