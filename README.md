@@ -348,7 +348,7 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [programming-fonts]: https://app.programmingfonts.org/
 [rails]: https://rubyonrails.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1584547844/screenshots/dotfiles-mar-2020_a5p5do.png
+[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1684653444/screenshots/dotfiles-may-2023-3_pbykid.png
 [starship]: https://starship.rs/
 [tmux]: https://github.com/tmux/tmux/wiki
 [victor-mono]: https://rubjo.github.io/victor-mono/
