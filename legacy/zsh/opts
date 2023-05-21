@@ -1,4 +1,0 @@
-setopt auto_cd
-setopt prompt_subst
-setopt transient_rprompt # only show the rprompt on the current prompt
-
