@@ -19,7 +19,6 @@ backup_stow_conflict() {
   local BACKUP_SUFFIX
   BACKUP_SUFFIX="$(date +%Y-%m-%d)_$(date +%s)"
   mv -v "$1" "${1}_${BACKUP_SUFFIX}"
-  dotfiles_echo "Moved $1 to ${1}_${BACKUP_SUFFIX}."
 }
 
 osname=$(uname)
