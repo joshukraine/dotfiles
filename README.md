@@ -72,6 +72,8 @@ This is what I would do if I bought a new Mac computer today. The steps below as
 
 ### 💻 1. Run my fork of thoughtbot’s Laptop
 
+&#9657; **[github.com/joshukraine/laptop][joshuas-laptop]**
+
 Download the `mac` script:
 
 ```sh
