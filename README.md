@@ -72,13 +72,13 @@ This is what I would do if I bought a new Mac computer today. The steps below as
 
 ### 💻 1. Run my fork of thoughtbot’s Laptop
 
-Download the `mac` script: ([joshukraine/laptop](joshuas-laptop))
+Download the `mac` script:
 
 ```sh
 curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/main/mac
 ```
 
-Download `.local.laptop` for additional customizations: ([joshukraine/dotfiles](dotfiles))
+Download `.local.laptop` for additional customizations:
 
 ```sh
 curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/laptop/.laptop.local
@@ -347,7 +347,6 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [coreutils]: https://formulae.brew.sh/formula/coreutils
 [dank-mono]: https://philpl.gumroad.com/l/dank-mono
 [devicons]: https://github.com/ryanoasis/vim-devicons
-[dotfiles]: https://github.com/joshukraine/dotfiles
 [fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
