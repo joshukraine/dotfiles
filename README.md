@@ -78,11 +78,11 @@ It is worth noting that the Laptop script is idempotent and can be safely run mu
 
 I’ve made the following changes to my fork of Laptop:
 
-- Remove Heroku-related code
-- Customize Homebrew bundle
 - Install asdf via git instead of Homebrew
-- Add python and lua asdf plugins
-- Install a few basic gems and npm packages
+- Comment out Heroku-related code
+- Comment out unused Homebrew taps and formulae
+
+Additional customizations are in `$HOME/.laptop.local`.
 
 ### ⚠️ 2. Check for Stow conflicts
 

@@ -110,6 +110,7 @@ stow_conflicts=(
   ".gitmessage"
   ".hushlogin"
   ".irbrc"
+  ".laptop.local"
   ".local/bin/colortest"
   ".local/bin/git-brst"
   ".local/bin/git-cm"
