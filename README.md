@@ -72,9 +72,33 @@ This is what I would do if I bought a new Mac computer today. The steps below as
 
 ### 💻 1. Run my fork of thoughtbot’s Laptop
 
-It is worth noting that the Laptop script is idempotent and can be safely run multiple times to ensure a consistent baseline configuration.
+Download the `mac` script: ([joshukraine/laptop](joshuas-laptop))
 
-&#9657; **[github.com/joshukraine/laptop][joshuas-laptop]**
+```sh
+curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/main/mac
+```
+
+Download `.local.laptop` for additional customizations: ([joshukraine/dotfiles](dotfiles))
+
+```sh
+curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/laptop/.laptop.local
+```
+
+Review both scripts before proceeding:
+
+```sh
+less mac
+```
+
+```sh
+less .laptop.local
+```
+
+Execute the `mac` script:
+
+```sh
+sh mac 2>&1 | tee ~/laptop.log
+```
 
 I’ve made the following changes to my fork of Laptop:
 
@@ -82,7 +106,7 @@ I’ve made the following changes to my fork of Laptop:
 - Comment out Heroku-related code
 - Comment out unused Homebrew taps and formulae
 
-Additional customizations are in `$HOME/.laptop.local`.
+It is worth noting that the Laptop script (`mac`) is idempotent and can be safely run multiple times to ensure a consistent baseline configuration.
 
 ### ⚠️ 2. Check for Stow conflicts
 
@@ -323,6 +347,7 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [coreutils]: https://formulae.brew.sh/formula/coreutils
 [dank-mono]: https://philpl.gumroad.com/l/dank-mono
 [devicons]: https://github.com/ryanoasis/vim-devicons
+[dotfiles]: https://github.com/joshukraine/dotfiles
 [fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
 [git]: https://git-scm.com/
