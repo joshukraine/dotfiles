@@ -3,6 +3,10 @@
 # Laptop extras
 # https://github.com/joshukraine/laptop
 
+fancy_echo "Updating PATH..."
+# shellcheck disable=SC2016
+append_to_zshrc 'export PATH="$HOME/.local/bin:$PATH"'
+
 fancy_echo "Adding additional Homebrew formulae ..."
 brew bundle --file=- <<EOF
 tap "1password/tap"
