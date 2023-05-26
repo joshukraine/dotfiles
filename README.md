@@ -68,7 +68,11 @@ All of the above and more are included installed with my fork of [Laptop][joshua
 
 ## 🌟 New Mac Bootstrap
 
-This is what I would do if I bought a new Mac computer today. The steps below assume you have already completed the basics like checking for software updates and logging in to iCloud.
+This is what I would do if I bought a new Mac computer today. The steps below assume you have already completed the basics:
+
+- Log in to iCloud
+- Check for software updates
+- [Install Xcode Command Line Tools][install-clt]
 
 ### 💻 1. Run my fork of thoughtbot’s Laptop
 
@@ -356,6 +360,7 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [gruvbox]: https://github.com/morhetz/gruvbox
 [homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
 [homebrew]: http://brew.sh
+[install-clt]: https://www.freecodecamp.org/news/install-xcode-command-line-tools/
 [install-lunar-vim]: https://www.lunarvim.org/docs/installation
 [iosevka]: https://typeof.net/Iosevka/
 [iterm2-colorschemes]: https://github.com/mbadolato/iTerm2-Color-Schemes
