@@ -17,7 +17,7 @@ M.config = function()
   }
   table.insert(lvim.builtin.alpha.dashboard.section.buttons.entries, {
     "l",
-    "  Restore Session",
+    "󰁯  Restore Session",
     "<cmd>lua require('persistence').load()<cr>",
   })
 end
