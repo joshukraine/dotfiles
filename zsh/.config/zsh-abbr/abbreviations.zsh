@@ -90,6 +90,7 @@ abbr "chs"="cht.sh --shell"
 abbr "color"="colortest -w -s"
 abbr "ra"="ranger"
 abbr "spt"="speedtest"
+abbr "s2"="sha256"
 
 # Tmux
 abbr "tl"="tmux ls"
