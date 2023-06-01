@@ -163,6 +163,14 @@ if [ ! -d "${HOME}/.terminfo" ]; then
   tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
 fi
 
+if [ -d "/Applications/iTerm.app" ]; then
+  # Specify the preferences directory
+  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$DOTFILES/iterm"
+
+  # Tell iTerm2 to use the custom preferences in the directory
+  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+fi
+
 dotfiles_echo "Dotfiles setup complete!"
 echo
 echo "Possible next steps:"
