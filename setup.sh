@@ -29,8 +29,7 @@ if [ "$osname" != "Darwin" ]; then
 fi
 
 if ! command -v stow >/dev/null; then
-  dotfiles_echo "GNU Stow is required but was not found. Try:"
-  dotfiles_echo "brew install stow"
+  dotfiles_echo "GNU Stow is required but was not found. Try: brew install stow"
   dotfiles_echo "Exiting..."
   exit 1
 fi
@@ -164,6 +163,8 @@ if [ ! -d "${HOME}/.terminfo" ]; then
 fi
 
 if [ -d "/Applications/iTerm.app" ]; then
+  dotfiles_echo "Setting up iTerm2 preferences..."
+
   # Specify the preferences directory
   defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$DOTFILES/iterm"
 
@@ -177,5 +178,4 @@ echo "Possible next steps:"
 echo "-> Install LunarVim (https://www.lunarvim.org)"
 echo "-> Install Zap (https://www.zapzsh.org)"
 echo "-> Install Homebrew packages (brew bundle install)"
-echo "-> Set up iTerm2 preferences (Settings > General > Preferences)"
 echo
