@@ -171,7 +171,7 @@ brew bundle install
 
 ### 🛠️ 7. Complete post-install tasks
 
-- [ ] Set up iTerm2 preferences. (see details below)
+- [ ] Set up iTerm2 preferences. (Now handled automatically in `setup.sh` script)
 - [ ] Launch LunarVim (`lvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings.
 - [ ] Set up [1Password CLI][1p-cli-start] for managing secrets.
 - [ ] Set up [1Password SSH key management][1p-cli-ssh].
@@ -237,6 +237,8 @@ chsh -s $(which fish)
 Restart your terminal. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
 
 ## Setting up iTerm2
+
+*UPDATE: This is now done automatically if you run `setup.sh`.*
 
 Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
 
