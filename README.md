@@ -64,7 +64,7 @@ The dotfiles assume you are running macOS with (at minimum) the following softwa
 * [Tmux][tmux]
 * [Starship][starship]
 
-All of the above and more are included installed with my fork of [Laptop][joshuas-laptop].
+All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
 ## 🌟 New Mac Bootstrap
 
