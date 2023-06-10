@@ -25,6 +25,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
+. "$DOTFILES/local/.zshrc.local"
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
