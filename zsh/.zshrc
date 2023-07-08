@@ -27,8 +27,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
 . "$DOTFILES/local/.zshrc.local"
 
-export HISTSIZE=1000000
-export SAVEHIST=1000000
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
 export HISTFILE=~/.zsh_history
 export HIST_STAMPS="yyyy-mm-dd"
 
