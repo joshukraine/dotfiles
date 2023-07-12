@@ -103,7 +103,6 @@ brew "libyaml" # should be installed after openssl
 
 cask "1password-cli"
 cask "alfred"
-cask "arq"
 cask "bartender"
 cask "brave-browser"
 cask "carbon-copy-cloner"
