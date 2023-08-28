@@ -50,10 +50,10 @@
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-ruby": { "branch": "master", "commit": "0960d0f59ce2bb576177a3cfed2bb55c53552a71" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
-  "vim-test": { "branch": "master", "commit": "837640f1cb74067aa326d533a8b4609800a55a8d" },
+  "vim-test": { "branch": "master", "commit": "7585ad2aa2dc8d4ffef0739a02cad8a30d75bfbb" },
   "vim-textobj-quote": { "branch": "master", "commit": "7ce5b324ebd21f3bc98ec11e534ed4e9677834c9" },
   "vim-textobj-user": { "branch": "master", "commit": "41a675ddbeefd6a93664a4dc52f302fe3086a933" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "cdd66d6a37d991bba7997d593586fc51a5b37aa8" },
+  "vim-tmux-navigator": { "branch": "master", "commit": "addb64a772cb4a3ae1f1363583012b2cada2cd66" },
   "vim-tmux-runner": { "branch": "master", "commit": "eead441119d9863227f4c39dac7890aa09d6b4cd" },
   "vue-vscode-snippets": { "branch": "main", "commit": "69c744b2a4898d0009b0c552efa74c491d4e7e3f" },
   "which-key.nvim": { "branch": "main", "commit": "4acffc92953a90a790603bfdab7c92319ab167b1" }
