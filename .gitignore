@@ -8,5 +8,6 @@ lazygit/.config/lazygit/state.yml
 local/*
 lvim/.config/lvim/plugin/packer_compiled.lua
 lvim/.config/lvim/session
+tmux/.config/tmux/plugins
 vim/.netrwhist
 vim/bundle
