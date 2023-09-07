@@ -32,7 +32,11 @@ lvim.plugins = {
   { "vim-test/vim-test" }, -- A Vim wrapper for running tests on different granularities | https://github.com/vim-test/vim-test
 
   -- Tmux
-  { "christoomey/vim-tmux-navigator" }, -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
+  {
+    -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
   { "christoomey/vim-tmux-runner" }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
   -- Markdown & AsciiDoc
