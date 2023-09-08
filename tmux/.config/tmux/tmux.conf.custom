@@ -49,6 +49,7 @@
 # }}}
 
 # tokyonight_storm {{{
+# https://github.com/folke/tokyonight.nvim/tree/main/extras/tmux
 set -g mode-style "fg=#7aa2f7,bg=#3b4261"
 
 set -g message-style "fg=#7aa2f7,bg=#3b4261"
