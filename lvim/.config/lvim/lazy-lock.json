@@ -48,7 +48,7 @@
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
   "vim-rails": { "branch": "master", "commit": "2b8c4fc831e0de2681beda0a2f48222812920a1d" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "vim-ruby": { "branch": "master", "commit": "0960d0f59ce2bb576177a3cfed2bb55c53552a71" },
+  "vim-ruby": { "branch": "master", "commit": "e1c115949d733164ecedd333bc6e007ac84d9757" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-test": { "branch": "master", "commit": "7585ad2aa2dc8d4ffef0739a02cad8a30d75bfbb" },
   "vim-textobj-quote": { "branch": "master", "commit": "7ce5b324ebd21f3bc98ec11e534ed4e9677834c9" },

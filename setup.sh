@@ -97,6 +97,7 @@ stow_conflicts=(
   ".config/nvim"
   ".config/ranger"
   ".config/starship.toml"
+  ".config/tmux"
   ".config/yamllint"
   ".config/zsh"
   ".config/zsh-abbr"
@@ -119,7 +120,6 @@ stow_conflicts=(
   ".pryrc"
   ".ripgreprc"
   ".rubocop.yml"
-  ".tmux.conf"
   ".tool-versions"
   ".zshrc"
   "Brewfile"
@@ -172,10 +172,16 @@ if [ -d "/Applications/iTerm.app" ]; then
   defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 fi
 
+if [ ! -d "${DOTFILES}/tmux/.config/tmux/plugins" ]; then
+  dotfiles_echo "Installing Tmux Plugin Manager..."
+  git clone https://github.com/tmux-plugins/tpm "${DOTFILES}/tmux/.config/tmux/plugins/tpm"
+fi
+
 dotfiles_echo "Dotfiles setup complete!"
 echo
 echo "Possible next steps:"
 echo "-> Install LunarVim (https://www.lunarvim.org)"
 echo "-> Install Zap (https://www.zapzsh.org)"
 echo "-> Install Homebrew packages (brew bundle install)"
+echo "-> Install Tmux plugins with <prefix> + I (https://github.com/tmux-plugins/tpm)"
 echo
