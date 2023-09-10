@@ -172,6 +172,7 @@ brew bundle install
 ### 🛠️ 7. Complete post-install tasks
 
 - [ ] Set up iTerm2 preferences. (Now handled automatically in `setup.sh` script)
+- [ ] Install Tmux plugins with `<prefix> + I` (https://github.com/tmux-plugins/tpm)
 - [ ] Launch LunarVim (`lvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings.
 - [ ] Set up [1Password CLI][1p-cli-start] for managing secrets.
 - [ ] Set up [1Password SSH key management][1p-cli-ssh].
