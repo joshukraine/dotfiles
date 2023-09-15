@@ -8,6 +8,7 @@ tap "jesseduffield/lazygit"
 tap "olets/tap"
 tap "stripe/stripe-cli"
 tap "teamookla/speedtest"
+tap "oven-sh/bun"
 
 # Homebrew
 # https://github.com/Homebrew/brew/
@@ -19,6 +20,7 @@ brew "awscli"
 brew "bash"
 brew "bash-completion"
 brew "bat"
+brew "bun"
 brew "cloc"
 brew "cmake"
 brew "coreutils"

@@ -39,6 +39,9 @@
       },
       "olets/tap": {
         "revision": "88023aa348f0408d8c212709f7351f01302a7a24"
+      },
+      "oven-sh/bun": {
+        "revision": "234f6a263a0f3b5298e70299f812a8464bcd1cc9"
       }
     },
     "brew": {
@@ -3683,6 +3686,10 @@
             }
           }
         }
+      },
+      "bun": {
+        "version": "1.0.1",
+        "bottle": false
       }
     },
     "cask": {
