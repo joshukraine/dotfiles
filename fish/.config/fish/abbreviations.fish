@@ -239,3 +239,7 @@ abbr -a -g msl 'tmuxinator start laptop'
 abbr -a -g msm 'tmuxinator start mux'
 abbr -a -g msn 'tmuxinator start obsidian'
 abbr -a -g mso 'tmuxinator start ofreport'
+
+# Local servers
+abbr -a -g hts 'http-server'
+abbr -a -g lvs 'live-server'

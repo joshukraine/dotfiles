@@ -241,4 +241,8 @@ abbr "msm"="tmuxinator start mux"
 abbr "msn"="tmuxinator start obsidian"
 abbr "mso"="tmuxinator start ofreport"
 
+# Local servers
+abbr "hts"="http-server"
+abbr "lvs"="live-server"
+
 # vim: set filetype=zsh:
