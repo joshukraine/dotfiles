@@ -1,5 +1,6 @@
 gulp-cli
 http-server
+live-server
 neovim
 pug
 stylelint
