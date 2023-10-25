@@ -61,6 +61,7 @@ brew "overmind"
 brew "pandoc"
 brew "perl"
 brew "pgcli"
+brew "php"
 brew "postgresql@14", restart_service: :changed
 brew "pstree"
 brew "python"
