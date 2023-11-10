@@ -92,6 +92,7 @@ stow_conflicts=(
   ".bashrc"
   ".config/alacritty.yml"
   ".config/fish"
+  ".config/kitty"
   ".config/lazygit"
   ".config/lvim"
   ".config/nvim"
