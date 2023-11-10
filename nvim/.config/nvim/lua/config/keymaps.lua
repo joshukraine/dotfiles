@@ -8,3 +8,18 @@ vim.keymap.set(
   require("telescope.builtin").resume,
   { noremap = true, silent = true, desc = "Resume" }
 )
+
+-- Remove key mappings that conflict with macOS
+vim.keymap.del("n", "<C-Up>")
+vim.keymap.del("n", "<C-Down>")
+vim.keymap.del("n", "<C-Left>")
+vim.keymap.del("n", "<C-Right>")
+
+-- Resize with simple arrow keys
+vim.keymap.set("n", "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
+-- Back to normal mode
+vim.keymap.set("i", "jj", "<ESC>")
