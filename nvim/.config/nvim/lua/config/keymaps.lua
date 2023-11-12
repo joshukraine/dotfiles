@@ -35,3 +35,9 @@ vim.keymap.set("n", "<leader>m", "<cmd>lua MiniMap.toggle()<cr>", { desc = "Mini
 
 -- Toggle curly quotes
 vim.keymap.set("n", "<leader>uE", "<cmd>ToggleEducate<cr>", { desc = "Toggle curly quotes (Educate)" })
+
+-- Save without formatting
+vim.keymap.set("n", "<leader>qQ", "<cmd>noautocmd w<cr>", { desc = "Save without formatting" })
+
+-- Buffer search/replace
+vim.keymap.set("n", "<leader>sr", ":%s/", { desc = "Buffer search/replace" })
