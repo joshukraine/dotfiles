@@ -45,6 +45,13 @@ export FZF_ALT_C_COMMAND="fd --type d . --color=never"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# homebrew completions
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # Load and initialise completion system
 autoload -Uz compinit && compinit
 
