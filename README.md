@@ -54,15 +54,15 @@ bash ~/dotfiles/setup.sh
 
 The dotfiles assume you are running macOS with (at minimum) the following software pre-installed:
 
-* [Git][git]
-* [Homebrew][homebrew] (including [coreutils][coreutils])
-* [asdf][asdf]
-* [Ruby][ruby]
-* [Node.js][nodejs]
-* [Zsh][zsh] and/or [Fish][fish]
-* [Neovim][neovim]
-* [Tmux][tmux]
-* [Starship][starship]
+- [Git][git]
+- [Homebrew][homebrew] (including [coreutils][coreutils])
+- [asdf][asdf]
+- [Ruby][ruby]
+- [Node.js][nodejs]
+- [Zsh][zsh] and/or [Fish][fish]
+- [Neovim][neovim]
+- [Tmux][tmux]
+- [Starship][starship]
 
 All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
@@ -129,6 +129,7 @@ git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 ```
 
 Read
+
 ```sh
 less ~/dotfiles/setup.sh
 ```
@@ -143,13 +144,13 @@ If you do encounter Stow conflicts, resolve these and run setup again. The scrip
 
 ### 🌙 4. Install LunarVim
 
-[LunarVim][lunar-vim] describes itself as *“An IDE layer for Neovim with sane defaults.”* I’ve used it for some time now and found it to be delightful. It’s pretty stable and has made configuring Neovim much simpler.
+[LunarVim][lunar-vim] describes itself as _“An IDE layer for Neovim with sane defaults.”_ I’ve used it for some time now and found it to be delightful. It’s pretty stable and has made configuring Neovim much simpler.
 
 &#9657; **[lunarvim.org/docs/installation][install-lunar-vim]**
 
 ### ⚡️ 5. Install Zap
 
-[Zap][zap] describes itself as a *“minimal zsh plugin manager that does what you expect.”*
+[Zap][zap] describes itself as a _“minimal zsh plugin manager that does what you expect.”_
 
 &#9657; **[zapzsh.org][zap]**
 
@@ -239,7 +240,7 @@ Restart your terminal. This will create the `~/.config` and `~/.local` directori
 
 ## Setting up iTerm2
 
-*UPDATE: This is now done automatically if you run `setup.sh`.*
+_UPDATE: This is now done automatically if you run `setup.sh`._
 
 Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
 
@@ -257,7 +258,7 @@ Over the years, I’ve branched out to explore a variety of mono-spaced fonts, b
 
 ### Free Fonts
 
-*Included in my `Brewfile` and installed by default via [Homebrew Cask Fonts][homebrew-cask-fonts]*
+_Included in my `Brewfile` and installed by default via [Homebrew Cask Fonts][homebrew-cask-fonts]_
 
 - [Fira Code][fira-code]
 - [Cascadia Code][cascadia-code]
@@ -267,7 +268,7 @@ Over the years, I’ve branched out to explore a variety of mono-spaced fonts, b
 
 ### Premium Fonts
 
-*You have to give people money if you want these.* 🤑
+_You have to give people money if you want these._ 🤑
 
 - [Operator Mono][operator-mono]
 - [MonoLisa][monolisa]
@@ -276,9 +277,9 @@ Over the years, I’ve branched out to explore a variety of mono-spaced fonts, b
 
 ### Ligatures
 
-I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it’s hard to go back to a sans-ligature typeface. Therefore all† the fonts I’ve included in my fave’s list *do* include ligatures, although some have more than others.
+I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it’s hard to go back to a sans-ligature typeface. Therefore all† the fonts I’ve included in my fave’s list _do_ include ligatures, although some have more than others.
 
-† *Operator Mono does not include ligatures but [can be easily patched][operator-mono-lig] to add them.*
+† _Operator Mono does not include ligatures but [can be easily patched][operator-mono-lig] to add them._
 
 ### Nerd Font Variants
 
@@ -316,30 +317,30 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 
 ## Some of my favorite dotfile repos
 
-* Pro Vim (https://github.com/Integralist/ProVim)
-* Trevor Brown (https://github.com/Stratus3D/dotfiles)
-* Chris Toomey (https://github.com/christoomey/dotfiles)
-* thoughtbot (https://github.com/thoughtbot/dotfiles)
-* Lars Kappert (https://github.com/webpro/dotfiles)
-* Ryan Bates (https://github.com/ryanb/dotfiles)
-* Ben Orenstein (https://github.com/r00k/dotfiles)
-* Joshua Clayton (https://github.com/joshuaclayton/dotfiles)
-* Drew Neil (https://github.com/nelstrom/dotfiles)
-* Kevin Suttle (https://github.com/kevinSuttle/OSXDefaults)
-* Carlos Becker (https://github.com/caarlos0/dotfiles)
-* Zach Holman (https://github.com/holman/dotfiles/)
-* Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
-* Paul Irish (https://github.com/paulirish/dotfiles)
+- Pro Vim (https://github.com/Integralist/ProVim)
+- Trevor Brown (https://github.com/Stratus3D/dotfiles)
+- Chris Toomey (https://github.com/christoomey/dotfiles)
+- thoughtbot (https://github.com/thoughtbot/dotfiles)
+- Lars Kappert (https://github.com/webpro/dotfiles)
+- Ryan Bates (https://github.com/ryanb/dotfiles)
+- Ben Orenstein (https://github.com/r00k/dotfiles)
+- Joshua Clayton (https://github.com/joshuaclayton/dotfiles)
+- Drew Neil (https://github.com/nelstrom/dotfiles)
+- Kevin Suttle (https://github.com/kevinSuttle/OSXDefaults)
+- Carlos Becker (https://github.com/caarlos0/dotfiles)
+- Zach Holman (https://github.com/holman/dotfiles/)
+- Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
+- Paul Irish (https://github.com/paulirish/dotfiles)
 
 ## Helpful web resources on dotfiles, et al.
 
-* http://dotfiles.github.io/
-* https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
-* http://code.tutsplus.com/tutorials/setting-up-a-mac-dev-machine-from-zero-to-hero-with-dotfiles--net-35449
-* https://github.com/webpro/awesome-dotfiles
-* http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
-* http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
-* https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
+- http://dotfiles.github.io/
+- https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
+- http://code.tutsplus.com/tutorials/setting-up-a-mac-dev-machine-from-zero-to-hero-with-dotfiles--net-35449
+- https://github.com/webpro/awesome-dotfiles
+- http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
+- http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
+- https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
 
 ## License
 
