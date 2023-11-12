@@ -4,6 +4,6 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = { style = "moon" }, -- night, storm, day, moon
+    opts = { style = "storm" }, -- night, storm, day, moon
   },
 }
