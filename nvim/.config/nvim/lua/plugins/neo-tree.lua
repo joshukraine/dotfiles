@@ -53,4 +53,5 @@ return {
       },
     },
   },
+  vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { fg = "#e0af68" }),
 }
