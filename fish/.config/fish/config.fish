@@ -2,7 +2,7 @@
 
 # set fish_greeting # supress fish greeting
 
-if test (arch) = "arm64"
+if test (arch) = arm64
     eval (/opt/homebrew/bin/brew shellenv)
 else
     eval (/usr/local/bin/brew shellenv)
@@ -14,7 +14,7 @@ set -gx GIT_EDITOR nvim
 set -gx BUNDLER_EDITOR $EDITOR
 set -gx MANPAGER 'less -X' # Don’t clear the screen after quitting a manual page
 set -gx HOMEBREW_CASK_OPTS '--appdir=/Applications'
-set -gx SOURCE_ANNOTATION_DIRECTORIES 'spec'
+set -gx SOURCE_ANNOTATION_DIRECTORIES spec
 set -gx RUBY_CONFIGURE_OPTS "--with-opt-dir=$HOMEBREW_PREFIX/opt/openssl:$HOMEBREW_PREFIX/opt/readline:$HOMEBREW_PREFIX/opt/libyaml:$HOMEBREW_PREFIX/opt/gdbm"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_DATA_HOME "$HOME/.local/share"
