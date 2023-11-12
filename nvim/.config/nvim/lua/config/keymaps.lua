@@ -24,5 +24,11 @@ vim.keymap.set("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase
 -- Back to normal mode
 vim.keymap.set("i", "jj", "<ESC>")
 
+-- Equalize splits
+vim.keymap.set("n", "<leader>b=", "<cmd>wincmd =<cr>", { desc = "Balance windows" })
+
+-- Zoom current buffer
+vim.keymap.set("n", "<leader>bz", "<cmd>wincmd _<cr>:wincmd |<cr>", { desc = "Zoom buffer" })
+
 -- Toggle MiniMap
 vim.keymap.set("n", "<leader>m", "<cmd>lua MiniMap.toggle()<cr>", { desc = "MiniMap" })
