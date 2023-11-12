@@ -10,6 +10,9 @@
 # Limit search depth for directories.
 --max-depth=8
 
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
+
 # Files/folders to ignore
 --glob=!**/galaxy/roles/*
 --glob=!**/node_modules/*
