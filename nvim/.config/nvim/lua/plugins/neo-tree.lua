@@ -17,6 +17,7 @@ return {
             ".DS_Store",
             "thumbs.db",
             "node_modules",
+            ".git",
           },
           hide_by_pattern = {
             --"*.meta",
