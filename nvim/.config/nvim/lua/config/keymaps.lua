@@ -35,10 +35,18 @@ vim.keymap.set("n", "<leader>qQ", "<cmd>noautocmd w<cr>", { desc = "Save without
 -- Buffer search/replace
 vim.keymap.set("n", "<leader>sr", ":%s/", { desc = "Buffer search/replace" })
 
--- Toggle ColorColumn
+-- Toggle CursorColumn
 vim.keymap.set(
   "n",
   "<leader>uo",
+  "<cmd>lua require('config.functions').toggle_option('cursorcolumn')<cr>",
+  { desc = "Toggle CursorColumn" }
+)
+
+-- Toggle ColorColumn
+vim.keymap.set(
+  "n",
+  "<leader>uO",
   "<cmd>lua require('config.functions').toggle_colorcolumn()<cr>",
   { desc = "Toggle ColorColumn" }
 )
