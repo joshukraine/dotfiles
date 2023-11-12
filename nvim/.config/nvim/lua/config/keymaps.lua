@@ -2,13 +2,6 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- vim.keymap.set(
---   "n",
---   "<leader>sx",
---   require("telescope.builtin").resume,
---   { noremap = true, silent = true, desc = "Resume" }
--- )
-
 -- Remove key mappings that conflict with macOS
 vim.keymap.del("n", "<C-Up>")
 vim.keymap.del("n", "<C-Down>")
@@ -41,3 +34,11 @@ vim.keymap.set("n", "<leader>qQ", "<cmd>noautocmd w<cr>", { desc = "Save without
 
 -- Buffer search/replace
 vim.keymap.set("n", "<leader>sr", ":%s/", { desc = "Buffer search/replace" })
+
+-- Toggle ColorColumn
+vim.keymap.set(
+  "n",
+  "<leader>uo",
+  "<cmd>lua require('config.functions').toggle_colorcolumn()<cr>",
+  { desc = "Toggle ColorColumn" }
+)
