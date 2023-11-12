@@ -7,8 +7,8 @@ else
 fi
 
 export PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
-export EDITOR="lvim" # LunarVim
-export GIT_EDITOR="lvim" # LunarVim
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
 export BUNDLER_EDITOR=$EDITOR
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
