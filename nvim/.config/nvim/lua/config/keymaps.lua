@@ -9,10 +9,10 @@ vim.keymap.del("n", "<C-Left>")
 vim.keymap.del("n", "<C-Right>")
 
 -- Resize with simple arrow keys
-vim.keymap.set("n", "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-vim.keymap.set("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+vim.keymap.set("n", "<Up>", "<cmd>resize +10<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<Down>", "<cmd>resize -10<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<Left>", "<cmd>vertical resize -10<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<Right>", "<cmd>vertical resize +10<cr>", { desc = "Increase window width" })
 
 -- Back to normal mode
 vim.keymap.set("i", "jj", "<ESC>")
