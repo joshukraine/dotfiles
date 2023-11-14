@@ -38,7 +38,8 @@ brew "zsh-abbr"
 
 cask "1password-cli"
 cask "font-fira-code-nerd-font"
-cask "iterm2"
+# cask "iterm2"
+cask "kitty"
 EOF
 
 fancy_echo "Installing latest Python ..."
@@ -52,7 +53,7 @@ install_asdf_language "lua"
 fancy_echo "Installing basic gems..."
 gem install bundler
 gem install neovim
-gem install tmuxinator
+# gem install tmuxinator
 
 fancy_echo "Installing basic npm packages..."
 npm install -g http-server
