@@ -23,7 +23,7 @@ return {
           }),
         },
         symbols = {
-          encode = map.gen_encode_symbols.dot("4x2"),
+          encode = map.gen_encode_symbols.dot("3x2"),
         },
         window = {
           side = "right",
