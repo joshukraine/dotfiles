@@ -37,7 +37,7 @@ brew "yamllint"
 brew "zsh-abbr"
 
 cask "1password-cli"
-cask "font-fira-code-nerd-font"
+cask "font-cascadia-code"
 # cask "iterm2"
 cask "kitty"
 EOF
