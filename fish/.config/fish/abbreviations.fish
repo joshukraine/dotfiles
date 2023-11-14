@@ -27,7 +27,7 @@ abbr -a -g .... 'cd ../../../'
 abbr -a -g ..... 'cd ../../../../'
 abbr -a -g - 'cd -'
 
-# Tree - requires exa
+# Tree - requires eza
 abbr -a -g tree 'll --tree --level=2'
 abbr -a -g t2 'll --tree --level=2'
 abbr -a -g t2a 'll --tree --level=2 -a'

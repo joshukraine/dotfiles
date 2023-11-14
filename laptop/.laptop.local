@@ -16,7 +16,7 @@ tap "olets/tap"
 
 brew "bat"
 brew "diff-so-fancy"
-brew "exa"
+brew "eza"
 brew "fd"
 brew "fish"
 brew "fzf"

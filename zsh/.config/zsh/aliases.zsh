@@ -2,9 +2,9 @@
 alias cat='bat --paging=never'
 alias cp='gcp -iv'
 
-# ls > exa
+# ls > eza
 # Other aliases handled by exa plugin
-# https://github.com/zap-zsh/exa
+# https://github.com/zap-zsh/exa (now uses eza)
 alias l='ll'
 
 # Middleman

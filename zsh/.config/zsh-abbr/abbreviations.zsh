@@ -29,7 +29,7 @@ abbr "...."="cd ../../../"
 abbr "....."="cd ../../../../"
 abbr "-"="cd -"
 
-# Tree - requires exa
+# Tree - requires eza
 abbr "t2"="ll --tree --level=2"
 abbr "t2a"="ll --tree --level=2 -a"
 abbr "t3"="ll --tree --level=3"
