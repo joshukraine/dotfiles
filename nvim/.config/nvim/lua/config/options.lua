@@ -5,5 +5,5 @@
 vim.opt.listchars:append({ extends = "…" })
 vim.opt.listchars:append({ nbsp = "+" })
 vim.opt.listchars:append({ precedes = "…" })
-vim.opt.listchars:append({ tab = "»·" })
+vim.opt.listchars:append({ tab = "·»" })
 vim.opt.listchars:append({ trail = "·" })
