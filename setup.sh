@@ -91,7 +91,6 @@ cd "${DOTFILES}/" # stow needs to run from inside dotfiles dir
 stow_conflicts=(
 	".asdfrc"
 	".bashrc"
-	".config/alacritty.yml"
 	".config/fish"
 	".config/kitty"
 	".config/lazygit"
