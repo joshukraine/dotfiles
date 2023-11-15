@@ -47,4 +47,11 @@ end
 [ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
 
 source ~/.asdf/asdf.fish
-source ~/.config/op/plugins.sh
+
+set OP_PLUGINS "$HOME/.config/op"
+
+if test -d "$OP_PLUGINS"
+    source ~/.config/op/plugins.sh
+else
+    echo "Directory does not exist: $OP_PLUGINS. Please reference https://developer.1password.com/docs/cli for installation instructions."
+end
