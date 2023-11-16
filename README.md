@@ -442,7 +442,7 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1684653444/screenshots/dotfiles-may-2023-3_pbykid.png
+[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
 [smoke-test-output]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700085278/screenshots/smoke-test_tddntp.png
 [starship]: https://starship.rs/
 [symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/NerdFontsSymbolsOnly.zip
