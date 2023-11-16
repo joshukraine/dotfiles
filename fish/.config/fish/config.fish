@@ -27,6 +27,7 @@ set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore-vcs'
 set -gx FZF_DEFAULT_OPTS '--height 75% --layout=reverse --border'
 set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -gx FZF_ALT_C_COMMAND 'fd --type d . --color=never'
+set -gx RANGER_LOAD_DEFAULT_RC false
 
 fish_vi_key_bindings
 
