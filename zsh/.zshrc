@@ -7,8 +7,8 @@ else
 fi
 
 export PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
-export EDITOR="lvim" # LunarVim
-export GIT_EDITOR="lvim" # LunarVim
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
 export BUNDLER_EDITOR=$EDITOR
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -20,6 +20,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export DOTFILES="$HOME/dotfiles"
 export ABBR_USER_ABBREVIATIONS_FILE="$XDG_CONFIG_HOME/zsh-abbr/abbreviations.zsh"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export RANGER_LOAD_DEFAULT_RC=false
 
 . "$XDG_CONFIG_HOME/zsh/plugins.zsh" # Includes Zap - https://www.zapzsh.org
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
@@ -44,6 +45,13 @@ export FZF_ALT_C_COMMAND="fd --type d . --color=never"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# homebrew completions
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
 # Load and initialise completion system
 autoload -Uz compinit && compinit

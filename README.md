@@ -4,10 +4,10 @@
 
 ## 🤩 Highlights
 
-- [Neovim][neovim] editor configured with [LunarVim][lunar-vim] IDE layer
+- [Neovim][neovim] editor configured with [LazyVim][lunar-vim]💤
 - [Starship][starship] prompt
 - Shell support for both [Zsh][zsh] and [Fish][fish] with 90% functional parity
-- Flexible, terminal-based dev environment with [Tmux][tmux]
+- Flexible, terminal-based dev environment with [kitty][kitty]!😻 (or [iTerm2][iterm2]+[Tmux][tmux])
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot’s [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
@@ -18,12 +18,13 @@
 - [Prerequisites](#-prerequisites)
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
-  - [Zsh Setup](#zsh-setup)
-  - [Fish Setup](#fish-setup)
-- [Setting up iTerm2](#setting-up-iterm2)
+- [About Neovim Distributions](#about-neovim-distributions)
+- [Good-bye, Tmux?](#-good-bye-tmux)
+- [Hello, kitty!](#-hello-kitty)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
+- [Nerd Fonts and Icons](#nerd-fonts-and-icons)
 - [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
-- [Identifying Sources of Slow Startup Times (Zsh)](#identifying-sources-of-slow-startup-times)
+- [Identifying Sources of Slow Startup Times (Zsh)](#identifying-sources-of-slow-startup-times-zsh)
 - [Some of my favorite dotfile repos](#some-of-my-favorite-dotfile-repos)
 - [Helpful web resources on dotfiles, et al.](#helpful-web-resources-on-dotfiles-et-al)
 - [License](#license)
@@ -54,15 +55,14 @@ bash ~/dotfiles/setup.sh
 
 The dotfiles assume you are running macOS with (at minimum) the following software pre-installed:
 
-* [Git][git]
-* [Homebrew][homebrew] (including [coreutils][coreutils])
-* [asdf][asdf]
-* [Ruby][ruby]
-* [Node.js][nodejs]
-* [Zsh][zsh] and/or [Fish][fish]
-* [Neovim][neovim]
-* [Tmux][tmux]
-* [Starship][starship]
+- [Git][git]
+- [Homebrew][homebrew] (including [coreutils][coreutils])
+- [asdf][asdf]
+- [Ruby][ruby]
+- [Node.js][nodejs]
+- [Zsh][zsh] and/or [Fish][fish]
+- [Neovim][neovim]
+- [Starship][starship]
 
 All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
@@ -129,6 +129,7 @@ git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 ```
 
 Read
+
 ```sh
 less ~/dotfiles/setup.sh
 ```
@@ -141,21 +142,16 @@ bash ~/dotfiles/setup.sh
 
 If you do encounter Stow conflicts, resolve these and run setup again. The script is idempotent, so you can run it multiple times safely.
 
-### 🌙 4. Install LunarVim
+### ⚡️ 4. Install Zap
 
-[LunarVim][lunar-vim] describes itself as *“An IDE layer for Neovim with sane defaults.”* I’ve used it for some time now and found it to be delightful. It’s pretty stable and has made configuring Neovim much simpler.
-
-&#9657; **[lunarvim.org/docs/installation][install-lunar-vim]**
-
-### ⚡️ 5. Install Zap
-
-[Zap][zap] describes itself as a *“minimal zsh plugin manager that does what you expect.”*
+[Zap][zap] describes itself as a _“minimal zsh plugin manager that does what you expect.”_
 
 &#9657; **[zapzsh.org][zap]**
 
-After copying/pasting the install command for Zap, be sure to add the `--keep` flag to prevent Zap from replacing you existing `.zshrc` file.
+> [!IMPORTANT]
+> After copying/pasting the install command for Zap, be sure to add the `--keep` flag to prevent Zap from replacing you existing `.zshrc` file.
 
-### 🍺 6. Install remaining Homebrew packages
+### 🍺 5. Install remaining Homebrew packages
 
 Review the included `Brewfile` and make desired adjustments.
 
@@ -169,15 +165,14 @@ Install the bundle.
 brew bundle install
 ```
 
-### 🛠️ 7. Complete post-install tasks
+### 🛠️ 6. Complete post-install tasks
 
-- [ ] Set up iTerm2 preferences. (Now handled automatically in `setup.sh` script)
-- [ ] Install Tmux plugins with `<prefix> + I` (https://github.com/tmux-plugins/tpm)
-- [ ] Launch LunarVim (`lvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings.
+- [ ] Launch LazyVim (`nvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings. Plugins should install automatically on first launch.
+- [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`, `~/dotfiles/local/config.fish.local`.
 - [ ] Set up [1Password CLI][1p-cli-start] for managing secrets.
 - [ ] Set up [1Password SSH key management][1p-cli-ssh].
-- [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`, `~/dotfiles/local/config.fish.local`.
 - [ ] If using Fish, customize your setup by running the `fish_config` command.
+- [ ] If using Tmux, install Tmux plugins with `<prefix> + I` (https://github.com/tmux-plugins/tpm)
 
 ## Zsh or Fish?
 
@@ -190,8 +185,8 @@ My Zsh and Fish configs mostly have functional parity:
 - Same prompt (Starship)
 - Same essential abbreviations and functions
 
-### Zsh Setup
-
+<details>
+  <summary><strong>Zsh Setup Instructions</strong></summary>
 Zsh is now the default shell on macOS. However, it’s helpful to add an entry enabling the Homebrew version of Zsh (`$HOMEBREW_PREFIX/bin/zsh`) instead of the default (`/bin/zsh`) version.
 
 Ensure that you have Zsh from Homebrew. (`which zsh`) If not:
@@ -213,10 +208,13 @@ chsh -s $(which zsh)
 ```
 
 Install [Zap][zap]. (Required for functional parity with Fish)
+
 Restart your terminal.
 
-### Fish Setup
+</details>
 
+<details>
+  <summary><strong>Fish Setup Instructions</strong></summary>
 Install Fish from Homebrew:
 
 ```sh
@@ -237,19 +235,45 @@ chsh -s $(which fish)
 
 Restart your terminal. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
 
-## Setting up iTerm2
+</details>
 
-*UPDATE: This is now done automatically if you run `setup.sh`.*
+## About Neovim Distributions
 
-Thanks to a [great blog post][blog-post] by Trevor Brown, I learned that you can quickly set up iTerm2 by exporting your profile. Here are the steps.
+**TL;DR:** Just install [LazyVim][lazyvim]💤
 
-1. Open iTerm2.
-1. Select iTerm2 > Settings. (&#8984;,)
-1. Under the General tab, select “Preferences”.
-1. Check the box labeled “Load preferences from a custom folder or URL:”
-1. Press “Browse” and navigate to `~/dotfiles/iterm/com.googlecode.iterm2.plist`.
-1. Press “Open”.
-1. Restart iTerm2.
+📺 [Zero to IDE with LazyVim][zero-to-ide-lazyvim-video]
+
+Back in the day if you wanted to use Vim (and later Neovim) you had to code a ton of configuration on your own. With Vim we got Vimscript 🤢, but then came Neovim which brought us Lua 🤩. I went from ye olde crunchy `.vimrc` to the more adventurous `init.vim` to the blessed path of `init.lua`. 😇
+
+Meanwhile, there were the VS Code boys across the fence, bragging about their fancy icons, shiny tabs, and the oh-so-cool LSP. I confess, I even tried VS Code for a bit. That didn't last long. 😬
+
+But Neovim has caught up. And wow have they. caught. up. Not only do we have native LSP support in Neovim (have had for a while now — v0.5), but we are solidly in the era of pre-baked Neovim distributions that are really challenging the notion of Vim/Neovim austere, command-line editors. (I will say that I think we owe a lot to VS Code for raising the bar here. But I'm still glad I'm with Neovim. 😉)
+
+If you want a quick primer on Neovim distros, **check out the YouTube video below**. I started with [LunarVim][lunar-vim] (my first entry into distro-land) and now I'm with [LazyVim][lazyvim] and the [Folke gang][folke]. Bottom line: you can still config [Neovim from scratch][neovim-from-scratch] if you want to, but you can get a HUGE head-start by just grabbing a distro and tweaking it to your needs.
+
+📺 [I tried Neovim Distributions so you don't have to][i-tried-neovim-distros-video]
+
+Boy, when I reminisce about the days of writing PHP for Internet Explorer in BBEdit...
+
+## 🫣 Good-bye, Tmux?
+
+I have nothing but warm fuzzy feelings towards Tmux. ... Ok, _mostly_ warm and fuzzy. Tmux is amazing, and once I learned how to use it, it forever changed the way I came to see my terminal. I now expect the ability to spawn as many splits/panes/windows as needed, at any time, in any arrangement I choose, easily accessible through keyboard shortcuts.
+
+But as anyone who has used Tmux can tell you, it's not without its trade-offs: copy/paste issues, color problems, font irregularities, etc. Yes, it was worth it, and somehow I always found workarounds. Still, at the end of the day, I don't consider myself a “Tmux power user”. That is, I don't usually need multiple sessions (tabs will do) or even persistence. I'm mostly here for the layouts. And for that, I found [kitty][kitty]...
+
+## 😸 Hello, kitty!
+
+The argument can be made that kitty vs. Tmux is an [apples-to-oranges](https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j214m0r/) comparison. kitty is a terminal _emulator_ whereas Tmux is a terminal _multiplexer_. But if you don't need all the features of Tmux (and you don't want to hassle with the Tmux overhead) I think kitty is a fine, much lighter replacement. As one Reddit user put it:
+
+> “...basic mutiplexer = Kitty; advanced multiplexer = TMUX”.[^1]
+
+In addition to native split-pane support (think Tmux Lite), kitty brings a host of other cool features to the party including speed (GPU-based), excellent font support, extensible with “kittens”, and highly configurable via `kitty.conf`. In essence, kitty has allowed me to greatly simplify my development environment by going from Vim+iTerm2+Tmux to simply Vim+kitty.
+
+I'm glad Tmux exists, I'm grateful for what it's taught me, and I'll probably use it again from time to time. Meanwhile, kitty is awesome...and I can finally [change my colorscheme](https://sw.kovidgoyal.net/kitty/kittens/themes/) without having to reconcile THREE colorschemes! 🤪
+
+### Still not convinced?
+
+Fear not: if you're using these dotfiles and you'd rather stay with iTerm2 and Tmux, **I've kept all of the Tmux-related configs, functions, aliases and abbreviations I had before**. I'm not installing Tmux by default anymore, but you need only uncomment the appropriate lines in `.laptop.local` and `Brewfile`, and you're back in business.
 
 ## My Favorite Programming Fonts
 
@@ -257,34 +281,34 @@ Over the years, I’ve branched out to explore a variety of mono-spaced fonts, b
 
 ### Free Fonts
 
-*Included in my `Brewfile` and installed by default via [Homebrew Cask Fonts][homebrew-cask-fonts]*
+_Included in my `Brewfile` and installed by default via [Homebrew Cask Fonts][homebrew-cask-fonts]_
 
-- [Fira Code][fira-code]
 - [Cascadia Code][cascadia-code]
-- [Victor Mono][victor-mono]
+- [Fira Code][fira-code]
+- [Hack][hack]
 - [JetBrains Mono][jetbrains-mono]
-- [Iosveka][iosevka]
+- [Monaspace Argon][monaspace]
+- [Monaspace Neon][monaspace]
+- [Symbols Nerd Font Mono][symbols-nerd-font-mono] (for icons only)
 
 ### Premium Fonts
 
-*You have to give people money if you want these.* 🤑
+_You have to give people money if you want these._ 🤑
 
 - [Operator Mono][operator-mono]
 - [MonoLisa][monolisa]
-- [Dank Mono][dank-mono]
 - [Comic Code][comic-code]
 
 ### Ligatures
 
-I first discovered ligatures through [Fira Code][fira-code], which IMO is probably the king of programming fonts. After using Fira Code, it’s hard to go back to a sans-ligature typeface. Therefore all† the fonts I’ve included in my fave’s list *do* include ligatures, although some have more than others.
+I first discovered ligatures through [Fira Code][fira-code], which IMHO is probably the king of programming fonts. After using Fira Code, it’s hard to go back to a sans-ligature typeface. Therefore all the fonts I’ve included in my fave’s list _do_ include ligatures, although some have more than others.
 
-† *Operator Mono does not include ligatures but [can be easily patched][operator-mono-lig] to add them.*
+> [!NOTE]
+> Operator Mono does not include ligatures but [can be easily patched][operator-mono-lig] to add them.
 
-### Nerd Font Variants
+## Nerd Fonts and Icons
 
-I use [Devicons][devicons] in my editor, and these require patched fonts in order to display properly. For most free fonts, there are pre-patched [Nerd Font][nerd-fonts-downloads] variants that include the various glyphs and icons.
-
-[Homebrew Cask Fonts][homebrew-cask-fonts] includes both original and Nerd Font variants. For example:
+Back in the day, I started using the [Devicons][devicons] plugin so I could have fancy file-type icons in Vim. (Remember NERDTree?) In order for this to work, one had to install patched “Nerd-font” versions of whatever programming font one wanted to use. For example:
 
 ```sh
 # Original font
@@ -294,19 +318,49 @@ $ brew install --cask font-fira-code
 $ brew install --cask font-fira-code-nerd-font
 ```
 
-If using a font that does not have a patched variant (e.g. MonoLisa) iTerm2 has an option to use an alternate font for non-ASCII characters.
+Patching fonts with icons still works fine of course, and is, I think, pretty widely used. However, during my exploration of kitty, I discovered that [there is a different (better?) approach](https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font) to icon fonts.
+
+These days, you probably don't need a special plugin like Devicons to get icons in your file tree; you just need to have the icons on your system. (That much I knew.) But as it turns out, _you also don't need a patched version of your chosen mono-spaced font_. You can get most if not all the icons you need and use them alongside _any_ font by just installing the `Symbols Nerd Font Mono` font.
+
+Leveraging this approach depends on your terminal. In iTerm2, for example, you need to check “Use a different font for non-ASCII text” in the Preferences panel. Then select `Symbols Nerd Font Mono` font under “Non-ASCII font”. (see screenshot below)
 
 ![iterm2-font-settings][iterm2-font-settings]
 
+kitty does things a little differently. If you install a patched font, it will mostly work. Mostly. But the “kitty way” can be broken down in three steps:
+
+1. Install a normal, un-patched mono-spaced font, such as `Cascadia Code`
+1. Install a dedicated icon font, such as `Symbols Nerd Font Mono`
+1. Create a set of Unicode symbol maps[^2] to tell kitty which font to use for which icons (symbols)
+
+More work up front, maybe, but less guesswork in the long-term once you understand what's going on. And if you're using my dotfiles, you have it easy. **All the fonts you need are installed in `Brewfile`, and I have a set of Unicode symbol maps ready to go.** 😎
+
+> [!NOTE]
+> To learn more about Nerd fonts in terminals, as well as Unicode symbol maps and all the rest, be sure to check out [Effective Nerd Fonts in Multiple Terminals](https://youtu.be/mQdB_kHyZn8?si=1mY6_oXEE8hr8lAp&t=289) by [Elijah Manor](https://www.youtube.com/@ElijahManor)
+
+### 🧪 Nerd Font Smoke Test
+
+If you want to check whether icons and ligatures are working properly, try running the included `nerd-font-smoke-test.sh` script from the root of the `dotfiles` folder like so:
+
+```sh
+bash nerd-font-smoke-test.sh
+```
+
+If your terminal is configured correctly, the output of the test should look like this:
+
+![smoke-test-output][smoke-test-output]
+
+Again, thank you, Elijah Manor!
+
 ### Useful Font Links
 
-- [Nerd Font Downloads][nerd-fonts-downloads]
+- [Nerd Fonts][nerd-fonts]
+- [Nerd Font Cheat Sheet][nerd-font-cheat-sheet]
 - [Programming Fonts - Test Drive][programming-fonts]
 - [Homebrew Cask Fonts][homebrew-cask-fonts]
 
 ## A Note about Vim performance and Ruby files
 
-I recently discovered a resolution to some significant performance issues I had been experiencing running Vim on macOS. These issues were particularly painful when editing Ruby files. I’ve documented what I learned here:
+Once upon a time, I almost left Vim due to some crippling performance issues. These issues were particularly painful when editing Ruby files. I documented what I learned here:
 
 &#9657; [What I’ve learned about slow performance in Vim](https://gist.github.com/joshukraine/3bfff4e9b553624b09789bc02cdd0ce6)
 
@@ -314,80 +368,106 @@ I recently discovered a resolution to some significant performance issues I had 
 
 The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and starting a new login shell. To see the top 20 lines that are taking the most time use the `zshrc_profiler_view`. `zshrc_profiler` parameters are number of lines to show (20) and path to profiler log file (`$TMPDIR/zshrc_profiler.${PID}log`).
 
+## Awesome Neovim Dotfiles, Distros, and Starters
+
+- https://github.com/LazyVim/lazyvim
+- https://github.com/lunarvim/lunar-vim
+- https://github.com/NvChad/NvChad
+- https://github.com/LunarVim/Launch.nvim
+- https://github.com/folke/dot
+- https://github.com/nvim-lua/kickstart.nvim
+- https://github.com/ThePrimeagen/init.lua
+- https://github.com/elijahmanor/dotfiles
+- https://github.com/cpow/cpow-dotfiles
+- https://github.com/josean-dev/dev-environment-files
+- https://github.com/glepnir/nvim
+- https://github.com/numToStr/dotfiles
+- https://github.com/jdhao/nvim-config
+- https://github.com/brainfucksec/neovim-lua
+- https://github.com/disrupted/dotfiles
+- https://github.com/topics/neovim-dotfiles
+- https://github.com/topics/neovim-config
+
 ## Some of my favorite dotfile repos
 
-* Pro Vim (https://github.com/Integralist/ProVim)
-* Trevor Brown (https://github.com/Stratus3D/dotfiles)
-* Chris Toomey (https://github.com/christoomey/dotfiles)
-* thoughtbot (https://github.com/thoughtbot/dotfiles)
-* Lars Kappert (https://github.com/webpro/dotfiles)
-* Ryan Bates (https://github.com/ryanb/dotfiles)
-* Ben Orenstein (https://github.com/r00k/dotfiles)
-* Joshua Clayton (https://github.com/joshuaclayton/dotfiles)
-* Drew Neil (https://github.com/nelstrom/dotfiles)
-* Kevin Suttle (https://github.com/kevinSuttle/OSXDefaults)
-* Carlos Becker (https://github.com/caarlos0/dotfiles)
-* Zach Holman (https://github.com/holman/dotfiles/)
-* Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
-* Paul Irish (https://github.com/paulirish/dotfiles)
+- Pro Vim (https://github.com/Integralist/ProVim)
+- Trevor Brown (https://github.com/Stratus3D/dotfiles)
+- Chris Toomey (https://github.com/christoomey/dotfiles)
+- thoughtbot (https://github.com/thoughtbot/dotfiles)
+- Lars Kappert (https://github.com/webpro/dotfiles)
+- Ryan Bates (https://github.com/ryanb/dotfiles)
+- Ben Orenstein (https://github.com/r00k/dotfiles)
+- Joshua Clayton (https://github.com/joshuaclayton/dotfiles)
+- Drew Neil (https://github.com/nelstrom/dotfiles)
+- Kevin Suttle (https://github.com/kevinSuttle/OSXDefaults)
+- Carlos Becker (https://github.com/caarlos0/dotfiles)
+- Zach Holman (https://github.com/holman/dotfiles/)
+- Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
+- Paul Irish (https://github.com/paulirish/dotfiles)
 
 ## Helpful web resources on dotfiles, et al.
 
-* http://dotfiles.github.io/
-* https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
-* http://code.tutsplus.com/tutorials/setting-up-a-mac-dev-machine-from-zero-to-hero-with-dotfiles--net-35449
-* https://github.com/webpro/awesome-dotfiles
-* http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
-* http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
-* https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
+- http://dotfiles.github.io/
+- https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
+- http://code.tutsplus.com/tutorials/setting-up-a-mac-dev-machine-from-zero-to-hero-with-dotfiles--net-35449
+- https://github.com/webpro/awesome-dotfiles
+- http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
+- http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
+- https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
 
 ## License
 
 Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 
+[^1]: https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j21m4i4/
+[^2]: https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map
+
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
 [1p-cli-start]: https://developer.1password.com/docs/cli/get-started
 [asdf]: https://asdf-vm.com/
-[blog-post]: http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
 [brew-bundle]: https://github.com/Homebrew/homebrew-bundle
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [comic-code]: https://tosche.net/fonts/comic-code
 [coreutils]: https://formulae.brew.sh/formula/coreutils
-[dank-mono]: https://philpl.gumroad.com/l/dank-mono
 [devicons]: https://github.com/ryanoasis/vim-devicons
 [fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
+[folke]: https://github.com/folke
 [git]: https://git-scm.com/
 [gnu-stow]: https://www.gnu.org/software/stow/
-[gruvbox]: https://github.com/morhetz/gruvbox
+[hack]: https://sourcefoundry.org/hack
 [homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
 [homebrew]: http://brew.sh
+[i-tried-neovim-distros-video]: https://youtu.be/bbHtl0Pxzj8
 [install-clt]: https://www.freecodecamp.org/news/install-xcode-command-line-tools/
 [install-lunar-vim]: https://www.lunarvim.org/docs/installation
-[iosevka]: https://typeof.net/Iosevka/
-[iterm2-colorschemes]: https://github.com/mbadolato/iTerm2-Color-Schemes
-[iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1587816605/screenshots/iterm2-font-settings_k7upta.png
+[iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700122897/screenshots/iterm2-config_xqevqo.png
 [iterm2]: https://www.iterm2.com/
 [jetbrains-mono]: https://www.jetbrains.com/lp/mono/
 [joshuas-laptop]: https://github.com/joshukraine/laptop
+[kitty]: https://sw.kovidgoyal.net/kitty/
 [laptop]: https://github.com/thoughtbot/laptop
+[lazyvim]: https://www.lazyvim.org/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [lunar-vim]: https://www.lunarvim.org/
+[monaspace]: https://monaspace.githubnext.com
 [monolisa]: https://www.monolisa.dev/
+[neovim-from-scratch]: https://youtu.be/J9yqSdvAKXY
 [neovim]: https://neovim.io/
-[nerd-fonts-downloads]: https://www.nerdfonts.com/font-downloads
+[nerd-font-cheat-sheet]: https://www.nerdfonts.com/cheat-sheet
+[nerd-fonts]: https://www.nerdfonts.com/
 [nodejs]: https://nodejs.org/
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
 [programming-fonts]: https://app.programmingfonts.org/
-[rails]: https://rubyonrails.org/
 [ruby]: https://www.ruby-lang.org/en
-[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1684653444/screenshots/dotfiles-may-2023-3_pbykid.png
+[screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
+[smoke-test-output]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700085278/screenshots/smoke-test_tddntp.png
 [starship]: https://starship.rs/
+[symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/NerdFontsSymbolsOnly.zip
 [tmux]: https://github.com/tmux/tmux/wiki
-[victor-mono]: https://rubjo.github.io/victor-mono/
-[vue]: https://vuejs.org/
 [zap]: https://www.zapzsh.org/
+[zero-to-ide-lazyvim-video]: https://youtu.be/N93cTbtLCIM
 [zsh-abbr]: https://zsh-abbr.olets.dev/
 [zsh]: https://zsh.sourceforge.io/

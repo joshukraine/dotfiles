@@ -31,13 +31,20 @@ lvim.plugins = {
   -- Testing
   { "vim-test/vim-test" }, -- A Vim wrapper for running tests on different granularities | https://github.com/vim-test/vim-test
 
-  -- Tmux
+  -- Kitty
   {
-    -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
-    "christoomey/vim-tmux-navigator",
-    lazy = false,
+    -- Seamless navigation between kitty panes and vim splits | https://github.com/knubie/vim-kitty-navigator
+    "knubie/vim-kitty-navigator",
+    build = "cp ./*.py ~/.config/kitty/",
   },
-  { "christoomey/vim-tmux-runner" }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
+
+  -- Tmux
+  -- {
+  --   -- Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
+  --   "christoomey/vim-tmux-navigator",
+  --   lazy = false,
+  -- },
+  -- { "christoomey/vim-tmux-runner" }, -- Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
   -- Markdown & AsciiDoc
   { "habamax/vim-asciidoctor" }, -- Asciidoctor plugin for Vim | https://github.com/habamax/vim-asciidoctor

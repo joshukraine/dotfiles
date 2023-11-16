@@ -1,0 +1,15 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.editor.navic",
+    "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.lang.tailwind",
+    "lazyvim.plugins.extras.lang.yaml",
+    "lazyvim.plugins.extras.linting.eslint",
+    "lazyvim.plugins.extras.test.core",
+    "lazyvim.plugins.extras.ui.edgy"
+  ],
+  "news": {
+    "NEWS.md": "2123"
+  },
+  "version": 2
+}

@@ -15,7 +15,7 @@ vim.opt.regexpengine = 1
 -- vim.opt.colorcolumn = "81"
 
 -- vim-test
-vim.g["test#strategy"] = "vtr"
+vim.g["test#strategy"] = "kitty"
 
 -- vim-tmux-runner
 vim.g["VtrPercentage"] = 25

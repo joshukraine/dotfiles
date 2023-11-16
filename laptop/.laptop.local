@@ -16,7 +16,7 @@ tap "olets/tap"
 
 brew "bat"
 brew "diff-so-fancy"
-brew "exa"
+brew "eza"
 brew "fd"
 brew "fish"
 brew "fzf"
@@ -31,14 +31,17 @@ brew "rust"
 brew "shellcheck"
 brew "starship"
 brew "stow"
+# brew "tmux"
 brew "tree"
 brew "wget"
 brew "yamllint"
 brew "zsh-abbr"
 
 cask "1password-cli"
-cask "font-fira-code-nerd-font"
+cask "font-cascadia-code"
+cask "font-symbols-only-nerd-font"
 cask "iterm2"
+cask "kitty"
 EOF
 
 fancy_echo "Installing latest Python ..."
@@ -52,7 +55,7 @@ install_asdf_language "lua"
 fancy_echo "Installing basic gems..."
 gem install bundler
 gem install neovim
-gem install tmuxinator
+# gem install tmuxinator
 
 fancy_echo "Installing basic npm packages..."
 npm install -g http-server

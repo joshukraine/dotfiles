@@ -8,7 +8,8 @@
 ################################################################################
 
 dotfiles_echo() {
-  local fmt="$1"; shift
+  local fmt="$1"
+  shift
 
   # shellcheck disable=SC2059
   printf "\\n[DOTFILES] ${fmt}\\n" "$@"
@@ -90,8 +91,8 @@ cd "${DOTFILES}/" # stow needs to run from inside dotfiles dir
 stow_conflicts=(
   ".asdfrc"
   ".bashrc"
-  ".config/alacritty.yml"
   ".config/fish"
+  ".config/kitty"
   ".config/lazygit"
   ".config/lvim"
   ".config/nvim"
@@ -150,16 +151,9 @@ for item in *; do
   fi
 done
 
-if command -v fish >/dev/null; then
+if command -v fish &>/dev/null; then
   dotfiles_echo "Initializing fish_user_paths..."
   command fish -c "set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/.bin $HOME/.yarn/bin $HOMEBREW_PREFIX/bin"
-fi
-
-if [ ! -d "${HOME}/.terminfo" ]; then
-  dotfiles_echo "Installing custom terminfo entries..."
-  # These entries enable, among other things, italic text in the terminal.
-  tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
-  tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
 fi
 
 if [ -d "/Applications/iTerm.app" ]; then
@@ -172,16 +166,30 @@ if [ -d "/Applications/iTerm.app" ]; then
   defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 fi
 
-if [ ! -d "${DOTFILES}/tmux/.config/tmux/plugins" ]; then
-  dotfiles_echo "Installing Tmux Plugin Manager..."
-  git clone https://github.com/tmux-plugins/tpm "${DOTFILES}/tmux/.config/tmux/plugins/tpm"
+if command -v tmux &>/dev/null; then
+  if [ ! -d "${HOME}/.terminfo" ]; then
+    dotfiles_echo "Installing custom terminfo entries..."
+    # These entries enable, among other things, italic text in the terminal.
+    tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
+    tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
+  fi
+
+  if [ ! -d "${DOTFILES}/tmux/.config/tmux/plugins" ]; then
+    dotfiles_echo "Installing Tmux Plugin Manager..."
+    git clone https://github.com/tmux-plugins/tpm "${DOTFILES}/tmux/.config/tmux/plugins/tpm"
+  fi
 fi
 
 dotfiles_echo "Dotfiles setup complete!"
+
 echo
 echo "Possible next steps:"
-echo "-> Install LunarVim (https://www.lunarvim.org)"
 echo "-> Install Zap (https://www.zapzsh.org)"
 echo "-> Install Homebrew packages (brew bundle install)"
-echo "-> Install Tmux plugins with <prefix> + I (https://github.com/tmux-plugins/tpm)"
+if command -v tmux &>/dev/null; then
+  echo "-> Install Tmux plugins with <prefix> + I (https://github.com/tmux-plugins/tpm)"
+fi
+echo "-> Set up 1Password CLI (https://developer.1password.com/docs/cli)"
+echo "-> Check out documentation for LazyVim (https://www.lazyvim.org/)"
+
 echo

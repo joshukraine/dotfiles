@@ -6,8 +6,8 @@ else
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-export EDITOR="lvim" # LunarVim
-export GIT_EDITOR="lvim" # LunarVim
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
 export BUNDLER_EDITOR=$EDITOR
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -28,9 +28,9 @@ alias df='df -h'
 alias du='du -h'
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
-alias l='exa -lhF'
-alias la='exa -lahF'
-alias ls='exa'
+alias l='eza -lhF'
+alias la='eza -lahF'
+alias ls='eza'
 alias lv='lvim'
 alias mkdir='mkdir -pv'
 alias mv='mv -iv'

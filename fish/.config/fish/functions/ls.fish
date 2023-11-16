@@ -1,3 +1,3 @@
 function ls
-    exa --group-directories-first --icons $argv
+    eza --group-directories-first --icons $argv
 end

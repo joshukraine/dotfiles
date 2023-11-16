@@ -37,7 +37,7 @@ format = "[$hash]($style) "
 symbol = " "
 
 [nodejs]
-symbol = " "
+symbol = "󰎙 "
 
 [python]
 symbol = "󰌠 "
