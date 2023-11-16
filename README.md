@@ -368,6 +368,26 @@ Once upon a time, I almost left Vim due to some crippling performance issues. Th
 
 The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and starting a new login shell. To see the top 20 lines that are taking the most time use the `zshrc_profiler_view`. `zshrc_profiler` parameters are number of lines to show (20) and path to profiler log file (`$TMPDIR/zshrc_profiler.${PID}log`).
 
+## Awesome Neovim Dotfiles, Distros, and Starters
+
+- https://github.com/LazyVim/lazyvim
+- https://github.com/lunarvim/lunar-vim
+- https://github.com/NvChad/NvChad
+- https://github.com/LunarVim/Launch.nvim
+- https://github.com/folke/dot
+- https://github.com/nvim-lua/kickstart.nvim
+- https://github.com/ThePrimeagen/init.lua
+- https://github.com/elijahmanor/dotfiles
+- https://github.com/cpow/cpow-dotfiles
+- https://github.com/josean-dev/dev-environment-files
+- https://github.com/glepnir/nvim
+- https://github.com/numToStr/dotfiles
+- https://github.com/jdhao/nvim-config
+- https://github.com/brainfucksec/neovim-lua
+- https://github.com/disrupted/dotfiles
+- https://github.com/topics/neovim-dotfiles
+- https://github.com/topics/neovim-config
+
 ## Some of my favorite dotfile repos
 
 - Pro Vim (https://github.com/Integralist/ProVim)
