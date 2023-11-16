@@ -68,6 +68,8 @@ brew "pandoc"
 brew "perl"
 brew "pgcli"
 brew "php"
+brew "pillow" # required for image previews in ranger
+brew "poppler" # required for pdf previews in ranger
 brew "postgresql@14", restart_service: :changed
 brew "pstree"
 brew "python"
