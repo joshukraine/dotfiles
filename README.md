@@ -31,7 +31,7 @@
 
 ## ⚡️ Quick Setup
 
-Make sure macOS is up to date and you have installed the [required software](#prerequisites).
+Make sure macOS is up to date and you have installed the [required software](#-prerequisites).
 
 Clone this repo.
 
