@@ -25,6 +25,7 @@
 - [Nerd Fonts and Icons](#nerd-fonts-and-icons)
 - [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
 - [Identifying Sources of Slow Startup Times (Zsh)](#identifying-sources-of-slow-startup-times-zsh)
+- [Awesome Neovim Dotfiles, Distros, and Starters](#awesome-neovim-dotfiles-distros-and-starters)
 - [Some of my favorite dotfile repos](#some-of-my-favorite-dotfile-repos)
 - [Helpful web resources on dotfiles, et al.](#helpful-web-resources-on-dotfiles-et-al)
 - [License](#license)
