@@ -4,7 +4,7 @@
 
 ## 🤩 Highlights
 
-- [Neovim][neovim] editor configured with [LazyVim][lunar-vim]💤
+- [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
 - [Starship][starship] prompt
 - Shell support for both [Zsh][zsh] and [Fish][fish] with 90% functional parity
 - Flexible, terminal-based dev environment with [kitty][kitty]!😻 (or [iTerm2][iterm2]+[Tmux][tmux])
