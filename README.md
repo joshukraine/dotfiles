@@ -309,7 +309,7 @@ I first discovered ligatures through [Fira Code][fira-code], which IMHO is proba
 
 ## Nerd Fonts and Icons
 
-Back in the day, I started using the [Devicons][devicons] plugin so I could have fancy file-type icons in Vim. (Remember NERDTree?) In order for this to work, one had to install patched “Nerd-font” versions of whatever programming font one wanted to use. For example:
+Back in the day, I started using the [VimDevicons][devicons] plugin so I could have fancy file-type icons in Vim. (Remember NERDTree?) In order for this to work, one had to install patched “Nerd-font” versions of whatever programming font one wanted to use. For example:
 
 ```sh
 # Original font
@@ -319,9 +319,7 @@ $ brew install --cask font-fira-code
 $ brew install --cask font-fira-code-nerd-font
 ```
 
-Patching fonts with icons still works fine of course, and is, I think, pretty widely used. However, during my exploration of kitty, I discovered that [there is a different (better?) approach](https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font) to icon fonts.
-
-These days, you probably don't need a special plugin like Devicons to get icons in your file tree; you just need to have the icons on your system. (That much I knew.) But as it turns out, _you also don't need a patched version of your chosen mono-spaced font_. You can get most if not all the icons you need and use them alongside _any_ font by just installing the `Symbols Nerd Font Mono` font.
+Patching fonts with icons still works fine of course, and is, I think, pretty widely used. However, during my exploration of kitty, I discovered that [there is a different (better?) approach](https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font) to icon fonts. It turns out, you don't need a patched version of your chosen mono-spaced font. You can get most if not all the icons you need and use them alongside _any_ font by just installing the `Symbols Nerd Font Mono` font.
 
 Leveraging this approach depends on your terminal. In iTerm2, for example, you need to check “Use a different font for non-ASCII text” in the Preferences panel. Then select `Symbols Nerd Font Mono` font under “Non-ASCII font”. (see screenshot below)
 
@@ -372,7 +370,7 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 ## Awesome Neovim Dotfiles, Distros, and Starters
 
 - https://github.com/LazyVim/lazyvim
-- https://github.com/lunarvim/lunar-vim
+- https://github.com/LunarVim/LunarVim
 - https://github.com/NvChad/NvChad
 - https://github.com/LunarVim/Launch.nvim
 - https://github.com/folke/dot
