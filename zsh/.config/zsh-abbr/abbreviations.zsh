@@ -20,7 +20,9 @@ abbr "cdnv"="cd $XDG_CONFIG_HOME/nvim"
 abbr "cdlv"="cd $XDG_CONFIG_HOME/lvim"
 abbr "cdxd"="cd $XDG_DATA_HOME"
 abbr "cdxa"="cd $XDG_CACHE_HOME"
+abbr "cdxs"="cd $XDG_STATE_HOME"
 abbr "cdlb"="cd $HOME/.local/bin"
+abbr "cdbn"="cd $HOME/.bin"
 
 # Moving around
 abbr ".."="cd .."

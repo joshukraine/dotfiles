@@ -18,7 +18,9 @@ abbr -a -g cdnv 'cd $XDG_CONFIG_HOME/nvim'
 abbr -a -g cdlv 'cd $XDG_CONFIG_HOME/lvim'
 abbr -a -g cdxd 'cd $XDG_DATA_HOME'
 abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
+abbr -a -g cdxs 'cd $XDG_STATE_HOME'
 abbr -a -g cdlb 'cd $HOME/.local/bin'
+abbr -a -g cdbn 'cd $HOME/.bin'
 
 # Moving around
 abbr -a -g .. 'cd ..'
