@@ -248,7 +248,7 @@ Back in the day if you wanted to use Vim (and later Neovim) you had to code a to
 
 Meanwhile, there were the VS Code boys across the fence, bragging about their fancy icons, shiny tabs, and the oh-so-cool LSP. I confess, I even tried VS Code for a bit. That didn't last long. 😬
 
-But Neovim has caught up. And wow have they. caught. up. Not only do we have native LSP support in Neovim (have had for a while now — v0.5), but we are solidly in the era of pre-baked Neovim distributions that are really challenging the notion of Vim/Neovim austere, command-line editors. (I will say that I think we owe a lot to VS Code for raising the bar here. But I'm still glad I'm with Neovim. 😉)
+But Neovim has caught up. And wow have they. caught. up. Not only do we have native LSP support in Neovim (have had for a while now — v0.5), but we are solidly in the era of pre-baked Neovim distributions that are really challenging the notion of Vim/Neovim as austere, command-line editors. (I will say that I think we owe a lot to VS Code for raising the bar here. But I'm still glad I'm with Neovim. 😉)
 
 If you want a quick primer on Neovim distros, **check out the YouTube video below**. I started with [LunarVim][lunar-vim] (my first entry into distro-land) and now I'm with [LazyVim][lazyvim] and the [Folke gang][folke]. Bottom line: you can still config [Neovim from scratch][neovim-from-scratch] if you want to, but you can get a HUGE head-start by just grabbing a distro and tweaking it to your needs.
 
@@ -266,7 +266,7 @@ But as anyone who has used Tmux can tell you, it's not without its trade-offs: c
 
 The argument can be made that kitty vs. Tmux is an [apples-to-oranges](https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j214m0r/) comparison. kitty is a terminal _emulator_ whereas Tmux is a terminal _multiplexer_. But if you don't need all the features of Tmux (and you don't want to hassle with the Tmux overhead) I think kitty is a fine, much lighter replacement. As one Reddit user put it:
 
-> “...basic mutiplexer = Kitty; advanced multiplexer = TMUX”.[^1]
+> “...basic multiplexer = Kitty; advanced multiplexer = TMUX”.[^1]
 
 In addition to native split-pane support (think Tmux Lite), kitty brings a host of other cool features to the party including speed (GPU-based), excellent font support, extensible with “kittens”, and highly configurable via `kitty.conf`. In essence, kitty has allowed me to greatly simplify my development environment by going from Vim+iTerm2+Tmux to simply Vim+kitty.
 
