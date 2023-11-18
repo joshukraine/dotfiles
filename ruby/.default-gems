@@ -1,6 +1,10 @@
 amazing_print
 bundler
+erb_lint
 foreman
 neovim
 overcommit
-rubocop
+ruby-lsp
+ruby-lsp-rails
+standard
+standard-rails
