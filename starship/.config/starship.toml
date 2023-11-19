@@ -53,5 +53,5 @@ zsh_indicator = '%'
 
 [time]
 disabled = false
-format = '[󱑂 $time]($style) '
+format = '[󱑎 $time]($style) '
 style = "bright-black"
