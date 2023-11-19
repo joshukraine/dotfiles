@@ -28,7 +28,7 @@ create_autocmd({ "VimEnter" }, {
   command = [[ exec 'norm gg' | startinsert! ]],
 })
 
-create_autocmd({ "BufEnter", "Filetype" }, {
+create_autocmd({ "VimEnter", "Filetype" }, {
   desc = "Open mini.map and exclude some filetypes",
   pattern = { "*" },
   callback = function()
