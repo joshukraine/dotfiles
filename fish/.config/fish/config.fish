@@ -22,13 +22,14 @@ set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_STATE_HOME "$HOME/.local/state"
 set -gx DOTFILES "$HOME/dotfiles"
 set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
+set -gx RANGER_LOAD_DEFAULT_RC false
+set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # FZF specific - https://github.com/junegunn/fzf#key-bindings-for-command-line
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore-vcs'
 set -gx FZF_DEFAULT_OPTS '--height 75% --layout=reverse --border'
 set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -gx FZF_ALT_C_COMMAND 'fd --type d . --color=never'
-set -gx RANGER_LOAD_DEFAULT_RC false
 
 fish_vi_key_bindings
 
