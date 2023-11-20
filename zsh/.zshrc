@@ -28,6 +28,7 @@ export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
+. "$HOME/.secrets/.zshrc.local"
 . "$DOTFILES/local/.zshrc.local"
 
 export HISTSIZE=1000000000
