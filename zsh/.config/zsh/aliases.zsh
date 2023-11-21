@@ -28,6 +28,7 @@ alias mass='mas search'
 alias masu='mas upgrade'
 
 # Finder
+# You can also toggle hidden files from the Finder GUI with Cmd + Shift + .
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 alias o='open . &'
