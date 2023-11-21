@@ -55,6 +55,7 @@ abbr -a -g gdc 'git diff --cached'
 abbr -a -g gdf 'git diff'
 abbr -a -g gf 'git fetch'
 abbr -a -g gfu 'git fetch upstream'
+abbr -a -g gg lazygit
 abbr -a -g glo 'git log'
 abbr -a -g gm 'git merge'
 abbr -a -g gpl 'git pull'
