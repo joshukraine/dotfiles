@@ -28,32 +28,33 @@ create_autocmd({ "VimEnter" }, {
   command = [[ exec 'norm gg' | startinsert! ]],
 })
 
-create_autocmd({ "VimEnter", "Filetype" }, {
-  desc = "Open mini.map and exclude some filetypes",
-  pattern = { "*" },
-  callback = function()
-    local exclude_ft = {
-      "NvimTree",
-      "TelescopePrompt",
-      "alpha",
-      "dashboard",
-      "lazy",
-      "netrw",
-      "qf",
-      "toggleterm",
-      "gitcommit",
-    }
-
-    local status_ok, map = pcall(require, "mini.map")
-    if not status_ok then
-      return
-    end
-
-    if vim.tbl_contains(exclude_ft, vim.o.filetype) then
-      vim.b.minimap_disable = true
-      map.close()
-    elseif vim.o.buftype == "" then
-      map.open()
-    end
-  end,
-})
+-- Uncomment this section to launch mini map when vim starts
+-- create_autocmd({ "VimEnter", "Filetype" }, {
+--   desc = "Open mini.map and exclude some filetypes",
+--   pattern = { "*" },
+--   callback = function()
+--     local exclude_ft = {
+--       "NvimTree",
+--       "TelescopePrompt",
+--       "alpha",
+--       "dashboard",
+--       "lazy",
+--       "netrw",
+--       "qf",
+--       "toggleterm",
+--       "gitcommit",
+--     }
+--
+--     local status_ok, map = pcall(require, "mini.map")
+--     if not status_ok then
+--       return
+--     end
+--
+--     if vim.tbl_contains(exclude_ft, vim.o.filetype) then
+--       vim.b.minimap_disable = true
+--       map.close()
+--     elseif vim.o.buftype == "" then
+--       map.open()
+--     end
+--   end,
+-- })
