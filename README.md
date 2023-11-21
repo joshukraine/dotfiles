@@ -5,7 +5,7 @@
 ## 🤩 Highlights
 
 - [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
-- [Starship][starship] prompt
+- [Starship][starship] prompt (or [Powerlevel10K][p10k])
 - Shell support for both [Zsh][zsh] and [Fish][fish] with 90% functional parity
 - Flexible, terminal-based dev environment with [kitty][kitty]!😻 (or [iTerm2][iterm2]+[Tmux][tmux])
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
@@ -173,6 +173,7 @@ brew bundle install
 - [ ] Set up [1Password CLI][1p-cli-start] for managing secrets.
 - [ ] Set up [1Password SSH key management][1p-cli-ssh].
 - [ ] If using Fish, customize your setup by running the `fish_config` command.
+- [ ] If using Zsh, edit `.zshrc` and `plugins.zsh` to select either [Starship][starship] or [Powerlevel10K][p10k] as your prompt.
 - [ ] If using Tmux, install Tmux plugins with `<prefix> + I` (https://github.com/tmux-plugins/tpm)
 
 ## Zsh or Fish?
@@ -459,6 +460,7 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
+[p10k]: https://github.com/romkatv/powerlevel10k
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
