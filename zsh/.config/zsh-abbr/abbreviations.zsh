@@ -134,6 +134,17 @@ abbr "bsl"="brew services list"
 abbr "bsr"="brew services restart"
 abbr "bsv"="brew services"
 
+# Yabai
+abbr "yb0"="yabai --stop-service"
+abbr "yb1"="yabai --start-service"
+abbr "ybr"="yabai --restart-service"
+
+# skhd
+abbr "sk0"="skhd --stop-service"
+abbr "sk1"="skhd --start-service"
+abbr "skr"="skhd --restart-service"
+abbr "skd"="skhd --reload"
+
 # Ansible
 abbr "ans"="ansible"
 abbr "anp"="ansible-playbook"

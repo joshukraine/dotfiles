@@ -133,6 +133,17 @@ abbr -a -g bsl 'brew services list'
 abbr -a -g bsr 'brew services restart'
 abbr -a -g bsv 'brew services'
 
+# Yabai
+abbr -a -g yb0 "yabai --stop-service"
+abbr -a -g yb1 "yabai --start-service"
+abbr -a -g ybr "yabai --restart-service"
+
+# skhd
+abbr -a -g sk0 "skhd --stop-service"
+abbr -a -g sk1 "skhd --start-service"
+abbr -a -g skr "skhd --restart-service"
+abbr -a -g skd "skhd --reload"
+
 # Ansible
 abbr -a -g ans ansible
 abbr -a -g anp ansible-playbook
