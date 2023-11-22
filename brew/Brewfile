@@ -142,7 +142,6 @@ cask "viber"
 cask "whatsapp"
 cask "zoom"
 
-# rubocop:disable Style/NumericLiterals
 mas "1Password for Safari", id: 1569813296
 mas "e-Sword X", id: 968437868
 mas "Keynote", id: 409183694
@@ -153,6 +152,5 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Toggl Track", id: 1291898086
-# rubocop:enable Style/NumericLiterals
 
 # vim: set filetype=ruby:
