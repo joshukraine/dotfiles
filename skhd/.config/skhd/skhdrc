@@ -1,30 +1,12 @@
+################################################################################
+# WINDOWS
+################################################################################
+
 # change window focus within space
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
-
-#change focus between external displays (left and right)
-alt - s: yabai -m display --focus west
-alt - g: yabai -m display --focus east
-
-# rotate layout clockwise
-shift + alt - r : yabai -m space --rotate 270
-
-# flip along y-axis
-shift + alt - y : yabai -m space --mirror y-axis
-
-# flip along x-axis
-shift + alt - x : yabai -m space --mirror x-axis
-
-# toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
-
-# maximize a window
-shift + alt - m : yabai -m window --toggle zoom-fullscreen
-
-# balance out tree of windows (resize to occupy same area)
-ctrl + alt - e : yabai -m space --balance
 
 # swap windows
 shift + alt - j : yabai -m window --swap south
@@ -38,11 +20,29 @@ ctrl + alt - k : yabai -m window --warp north
 ctrl + alt - h : yabai -m window --warp west
 ctrl + alt - l : yabai -m window --warp east
 
-# move window to display left and right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+# ROTATE layout clockwise
+shift + alt - r : yabai -m space --rotate 270
 
-#move window to prev and next space
+# FLIP along y-axis
+shift + alt - y : yabai -m space --mirror y-axis
+
+# FLIP along x-axis
+shift + alt - x : yabai -m space --mirror x-axis
+
+# TOGGLE window float
+shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# MAXIMIZE a window
+shift + alt - m : yabai -m window --toggle zoom-fullscreen
+
+# BALANCE out tree of windows (resize to occupy same area)
+shift + alt - e : yabai -m space --balance
+
+################################################################################
+# SPACES
+################################################################################
+
+#move window to PREV and NEXT space
 ctrl + alt - p : yabai -m window --space prev;
 ctrl + alt - n : yabai -m window --space next;
 
@@ -55,7 +55,26 @@ shift + alt - 5 : yabai -m window --space 5;
 shift + alt - 6 : yabai -m window --space 6;
 shift + alt - 7 : yabai -m window --space 7;
 
+################################################################################
+# DISPLAYS
+################################################################################
+
+#change focus between external displays (left and right)
+alt - s: yabai -m display --focus west
+alt - g: yabai -m display --focus east
+
+# move window to display left and right
+shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
+shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+
+################################################################################
+# MISC
+################################################################################
+
 # stop/start/restart yabai
 ctrl + alt - q : yabai --stop-service
 ctrl + alt - s : yabai --start-service
 ctrl + alt - r : yabai --restart-service
+
+# open terminal, blazingly fast compared to iTerm/Hyper
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~

@@ -1,4 +1,4 @@
-# https://github.com/koekeishiya/yabai/wiki
+# https://github.com/koekeishiya/yabai/wiki/Configuration
 
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
@@ -6,18 +6,27 @@ yabai -m config layout bsp
 # New window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
 
-# padding set to 12px
-yabai -m config top_padding 10
+# Set all padding and gaps to specified value (default: 0)
+yabai -m config top_padding    10
 yabai -m config bottom_padding 10
-yabai -m config left_padding 10
-yabai -m config right_padding 10
-yabai -m config window_gap 10
+yabai -m config left_padding   10
+yabai -m config right_padding  10
+yabai -m config window_gap     10
+
+# Override gaps for space 2 only
+# yabai -m config --space 2 window_gap 0
+
+# on or off (default: off)
+yabai -m config auto_balance off
+
+# Floating point value between 0 and 1 (default: 0.5)
+yabai -m config split_ratio 0.7
 
 # center mouse on window with focus
 yabai -m config mouse_follows_focus on
 
 # modifier for clicking and dragging with mouse
-yabai -m config mouse_modifier alt
+yabai -m config mouse_modifier ctrl
 
 # set modifier + left-click drag to move window
 yabai -m config mouse_action1 move
@@ -28,8 +37,21 @@ yabai -m config mouse_action2 resize
 # when window is dropped in center of another window, swap them (on edges it will split it)
 yabai -m mouse_drop_action swap
 
-yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^Calculator$" manage=off
-yabai -m rule --add app="^CleanMyMac X$" manage=off
-yabai -m rule --add app="^Todoist$" manage=off
+# App blacklist
 yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^Bartender 5$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Carbon Copy Cloner$" manage=off
+yabai -m rule --add app="^CleanMyMac X$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Hyperkey$" manage=off
+yabai -m rule --add app="^Notion$" manage=off
+yabai -m rule --add app="^Proton Drive$" manage=off
+yabai -m rule --add app="^ProtonVPN$" manage=off
+yabai -m rule --add app="^Steam$" manage=off
+yabai -m rule --add app="^Superkey$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Todoist$" manage=off
+
+# whitelist strategy
+# yabai -m rule --add app!="^(Brave|kitty|Calendar|Obsidian|Messages|Notes|Toggl|Slack)$" manage=off
