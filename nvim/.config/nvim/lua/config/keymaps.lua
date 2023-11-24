@@ -2,6 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local util = require("config.util")
+
+util.cowboy()
+
 -- Remove key mappings that conflict with macOS
 vim.keymap.del("n", "<C-Up>")
 vim.keymap.del("n", "<C-Down>")
@@ -39,7 +43,7 @@ vim.keymap.set("v", "<leader>cs", ":'<,'>sort<cr>", { desc = "Sort selected line
 vim.keymap.set(
   "n",
   "<leader>uo",
-  "<cmd>lua require('config.functions').toggle_option('cursorcolumn')<cr>",
+  "<cmd>lua require('config.util').toggle_option('cursorcolumn')<cr>",
   { desc = "Toggle CursorColumn" }
 )
 
@@ -47,6 +51,6 @@ vim.keymap.set(
 vim.keymap.set(
   "n",
   "<leader>uO",
-  "<cmd>lua require('config.functions').toggle_colorcolumn()<cr>",
+  "<cmd>lua require('config.util').toggle_colorcolumn()<cr>",
   { desc = "Toggle ColorColumn" }
 )
