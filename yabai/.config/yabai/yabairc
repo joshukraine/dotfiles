@@ -39,6 +39,8 @@ yabai -m mouse_drop_action swap
 
 # App blacklist
 yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^AirPort Utility$" manage=off
+yabai -m rule --add app="^Alfred Preferences$" manage=off
 yabai -m rule --add app="^Bartender 5$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Carbon Copy Cloner$" manage=off
@@ -48,10 +50,12 @@ yabai -m rule --add app="^Hyperkey$" manage=off
 yabai -m rule --add app="^Notion$" manage=off
 yabai -m rule --add app="^Proton Drive$" manage=off
 yabai -m rule --add app="^ProtonVPN$" manage=off
-yabai -m rule --add app="^Steam$" manage=off
+yabai -m rule --add app="^Steam.*$" manage=off
 yabai -m rule --add app="^Superkey$" manage=off
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Terminal$" manage=off
 yabai -m rule --add app="^Todoist$" manage=off
+yabai -m rule --add app="^UTM$" manage=off
 
 # whitelist strategy
 # yabai -m rule --add app!="^(Brave|kitty|Calendar|Obsidian|Messages|Notes|Toggl|Slack)$" manage=off
