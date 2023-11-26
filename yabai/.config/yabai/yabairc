@@ -45,6 +45,7 @@ yabai -m rule --add app="^Bartender 5$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Carbon Copy Cloner$" manage=off
 yabai -m rule --add app="^CleanMyMac X$" manage=off
+yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Hyperkey$" manage=off
 yabai -m rule --add app="^Notion$" manage=off
