@@ -37,26 +37,30 @@ yabai -m config mouse_action2 resize
 # when window is dropped in center of another window, swap them (on edges it will split it)
 yabai -m mouse_drop_action swap
 
-# App blacklist
-yabai -m rule --add app="^1Password$" manage=off
-yabai -m rule --add app="^AirPort Utility$" manage=off
-yabai -m rule --add app="^Alfred Preferences$" manage=off
-yabai -m rule --add app="^Bartender 5$" manage=off
-yabai -m rule --add app="^Calculator$" manage=off
-yabai -m rule --add app="^Carbon Copy Cloner$" manage=off
-yabai -m rule --add app="^CleanMyMac X$" manage=off
-yabai -m rule --add app="^FaceTime$" manage=off
-yabai -m rule --add app="^Finder$" manage=off
-yabai -m rule --add app="^Hyperkey$" manage=off
-yabai -m rule --add app="^Notion$" manage=off
-yabai -m rule --add app="^Proton Drive$" manage=off
-yabai -m rule --add app="^ProtonVPN$" manage=off
-yabai -m rule --add app="^Steam.*$" manage=off
-yabai -m rule --add app="^Superkey$" manage=off
-yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^Terminal$" manage=off
-yabai -m rule --add app="^Todoist$" manage=off
-yabai -m rule --add app="^UTM$" manage=off
+yabai_apps=(
+  "Affinity Designer"
+  "Affinity Photo"
+  "Affinity Publisher"
+  "Brave Browser"
+  "Calendar"
+  "Mail"
+  "Marked 2"
+  "Messages"
+  "Messenger"
+  "Notes"
+  "Obsidian"
+  "Slack"
+  "Toggl Track"
+  "e-Sword"
+  "kitty"
+)
+
+YABAI_APPS_REGEX="$(
+  IFS=\|
+  echo "${yabai_apps[*]}"
+)"
 
 # whitelist strategy
-# yabai -m rule --add app!="^(Brave|kitty|Calendar|Obsidian|Messages|Notes|Toggl|Slack)$" manage=off
+yabai -m rule --add app!="${YABAI_APPS_REGEX}" manage=off
+
+echo "$(date '+%F %T%z') yabai configuration loaded"
