@@ -273,6 +273,9 @@ In addition to native split-pane support (think Tmux Lite), kitty brings a host 
 
 I'm glad Tmux exists, I'm grateful for what it's taught me, and I'll probably use it again from time to time. Meanwhile, kitty is awesome...and I can finally [change my colorscheme](https://sw.kovidgoyal.net/kitty/kittens/themes/) without having to reconcile THREE colorschemes! 🤪
 
+> [!NOTE]
+> Be sure to [get yourself a cool icon](https://youtu.be/ZaYTv2eBNr8) for kitty! HINT: Get [this one](https://github.com/DinkDonk/kitty-icon). 😻
+
 ### Still not convinced?
 
 Fear not: if you're using these dotfiles and you'd rather stay with iTerm2 and Tmux, **I've kept all of the Tmux-related configs, functions, aliases and abbreviations I had before**. I'm not installing Tmux by default anymore, but you need only uncomment the appropriate lines in `.laptop.local` and `Brewfile`, and you're back in business.
