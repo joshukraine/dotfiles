@@ -32,3 +32,6 @@ fi
 
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init zsh)"

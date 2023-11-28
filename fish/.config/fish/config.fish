@@ -40,6 +40,9 @@ if status is-interactive
     # https://github.com/starship/starship#fish
     starship init fish | source
 
+    # https://github.com/ajeetdsouza/zoxide
+    zoxide init fish | source
+
     if test -e $HOME/.secrets/config.fish.local
         source $HOME/.secrets/config.fish.local
     end

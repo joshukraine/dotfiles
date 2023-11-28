@@ -101,6 +101,7 @@ brew "wget"
 brew "xz"
 brew "yamllint"
 brew "yarn"
+brew "zoxide"
 brew "zsh"
 
 # homebrew-cask
