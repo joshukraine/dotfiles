@@ -23,7 +23,7 @@ yabai -m config auto_balance off
 yabai -m config split_ratio 0.7
 
 # center mouse on window with focus
-yabai -m config mouse_follows_focus on
+yabai -m config mouse_follows_focus off
 
 # modifier for clicking and dragging with mouse
 yabai -m config mouse_modifier ctrl
