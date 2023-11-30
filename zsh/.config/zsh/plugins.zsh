@@ -15,17 +15,19 @@ plug "romkatv/powerlevel10k"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # https://asdf-vm.com
-. $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/asdf.sh
+# echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
 OP_PLUGINS="$XDG_CONFIG_HOME/op"
 
-if [ -d "$OP_PLUGINS" ]; then
-  # https://developer.1password.com/docs/cli
-  . $XDG_CONFIG_HOME/op/plugins.sh
-else
-  echo "Directory does not exist: $OP_PLUGINS. Please reference https://developer.1password.com/docs/cli for installation instructions."
-fi
+# if [ -d "$OP_PLUGINS" ]; then
+#   # https://developer.1password.com/docs/cli
+#   . $XDG_CONFIG_HOME/op/plugins.sh
+# else
+#   echo "Directory does not exist: $OP_PLUGINS. Please reference https://developer.1password.com/docs/cli for installation instructions."
+# fi
 
 # https://zsh-abbr.olets.dev
 . $HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh

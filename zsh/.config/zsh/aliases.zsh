@@ -32,3 +32,49 @@ alias masu='mas upgrade'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 alias o='open . &'
+
+# Tmux
+alias tmux='tmux -u'
+alias ta='tmux attach -t'
+alias tad='tmux attach -d -t'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias tksv='tmux kill-server'
+
+# Vim
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
+
+# Exa
+alias ll='exa -al --color=always --git'
+alias l='exa -a --color=always --git'
+alias ls='exa --color=always --git'
+
+# Path's
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias temp='cd /Volumes/book-dev/temp'
+
+# Zsh
+alias zshconfig='code ~/.zshrc'
+
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gco='git checkout'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gbr='git branch -r'
+alias gpush='git push origin main'
+alias gpull='git pull origin main'
+alias glog='git log --oneline --graph --decorate --all'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gds='git diff --staged'
+alias gl='git pull'
+alias gpl='git pull origin main'
+

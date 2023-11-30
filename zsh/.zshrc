@@ -35,7 +35,7 @@ export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
-. "$HOME/.secrets/.zshrc.local"
+# . "$HOME/.secrets/.zshrc.local"
 
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
@@ -68,4 +68,5 @@ autoload -Uz compinit && compinit
 # De-dupe $PATH
 typeset -U path
 
-. "$HOME/.config/zsh/profiler.stop"
+# . "$HOME/.config/zsh/profiler.stop"
+# . "$HOME/.config/zsh/profiler.start"
