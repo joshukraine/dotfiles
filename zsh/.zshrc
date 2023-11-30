@@ -70,3 +70,4 @@ typeset -U path
 
 # . "$HOME/.config/zsh/profiler.stop"
 # . "$HOME/.config/zsh/profiler.start"
+# bindkey \^U backward-kill-line

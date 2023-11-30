@@ -37,3 +37,6 @@ OP_PLUGINS="$XDG_CONFIG_HOME/op"
 
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
+
+# KeyBindings
+. $HOME/dotfiles/zsh/.config/zsh/key-bindings.zsh
