@@ -55,6 +55,9 @@ map a :push %mkdir<space>
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 # map r push :rename<space>
 
+# bulk rename files in vim
+map br $vimv $fx
+
 # make sure trash folder exists
 # %mkdir -p ~/.trash
 
