@@ -4,4 +4,7 @@ if defined?(AmazingPrint)
   AmazingPrint.irb!
 end
 
+# https://github.com/vitallium/irb-theme-tokyonight
+require "irb/theme/tokyonight/storm"
+
 # vim: set filetype=ruby:
