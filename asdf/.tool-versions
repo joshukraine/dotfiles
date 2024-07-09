@@ -1,4 +1,4 @@
-ruby 3.2.2
-nodejs 20.6.1
+ruby 3.3.3
+nodejs 22.3.0
+python 3.12.4 2.7.18
 lua 5.4.6
-python 3.11.5 2.7.18
