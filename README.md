@@ -147,7 +147,7 @@ If you do encounter Stow conflicts, resolve these and run setup again. The scrip
 
 [Zap][zap] describes itself as a _“minimal zsh plugin manager that does what you expect.”_
 
-&#9657; **[zapzsh.org][zap]**
+&#9657; **[zapzsh.com][zap]**
 
 > [!IMPORTANT]
 > After copying/pasting the install command for Zap, be sure to add the `--keep` flag to prevent Zap from replacing you existing `.zshrc` file.
@@ -423,6 +423,7 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 
 [^1]: https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j21m4i4/
+
 [^2]: https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map
 
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
@@ -471,7 +472,7 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [starship]: https://starship.rs/
 [symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/NerdFontsSymbolsOnly.zip
 [tmux]: https://github.com/tmux/tmux/wiki
-[zap]: https://www.zapzsh.org/
+[zap]: https://www.zapzsh.com/
 [zero-to-ide-lazyvim-video]: https://youtu.be/N93cTbtLCIM
 [zsh-abbr]: https://zsh-abbr.olets.dev/
 [zsh]: https://zsh.sourceforge.io/
