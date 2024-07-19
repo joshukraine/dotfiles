@@ -114,7 +114,7 @@ cask "brave-browser"
 cask "carbon-copy-cloner"
 cask "cleanmymac"
 cask "daisydisk"
-cask "evernote"
+# cask "evernote"
 cask "firefox"
 cask "font-cascadia-code"
 cask "font-fira-code"
@@ -123,11 +123,11 @@ cask "font-jetbrains-mono"
 cask "font-monaspace"
 cask "font-source-code-pro"
 cask "font-symbols-only-nerd-font"
-cask "freedom"
+# cask "freedom"
 cask "google-drive"
 cask "grammarly-desktop"
 cask "hazel"
-cask "hyperkey"
+# cask "hyperkey"
 cask "istat-menus"
 cask "iterm2"
 cask "kitty"
@@ -150,11 +150,11 @@ cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "e-Sword X", id: 968437868
 mas "Keynote", id: 409183694
-mas "Logic Pro", id: 634148309
+# mas "Logic Pro", id: 634148309
 mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Pixelmator Pro", id: 1289583905
+# mas "Pixelmator Pro", id: 1289583905
 mas "Toggl Track", id: 1291898086
 
 # vim: set filetype=ruby:
