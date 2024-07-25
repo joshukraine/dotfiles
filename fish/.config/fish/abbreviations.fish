@@ -90,7 +90,6 @@ abbr -a -g one onefetch
 abbr -a -g ch 'cht.sh'
 abbr -a -g chs 'cht.sh --shell'
 abbr -a -g color 'colortest -w -s'
-abbr -a -g ra ranger
 abbr -a -g spt speedtest
 abbr -a -g s2 sha256
 

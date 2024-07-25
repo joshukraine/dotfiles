@@ -91,7 +91,6 @@ abbr "one"="onefetch"
 abbr "ch"="cht.sh"
 abbr "chs"="cht.sh --shell"
 abbr "color"="colortest -w -s"
-abbr "ra"="ranger"
 abbr "spt"="speedtest"
 abbr "s2"="sha256"
 

@@ -22,7 +22,6 @@ set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_STATE_HOME "$HOME/.local/state"
 set -gx DOTFILES "$HOME/dotfiles"
 set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
-set -gx RANGER_LOAD_DEFAULT_RC false
 set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # FZF specific - https://github.com/junegunn/fzf#key-bindings-for-command-line

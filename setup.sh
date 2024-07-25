@@ -96,7 +96,6 @@ stow_conflicts=(
   ".config/lazygit"
   ".config/lvim"
   ".config/nvim"
-  ".config/ranger"
   ".config/starship.toml"
   ".config/tmux"
   ".config/yamllint"
