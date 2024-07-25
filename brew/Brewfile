@@ -4,7 +4,6 @@ tap "1password/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "jesseduffield/lazygit"
-# tap "koekeishiya/formulae"
 tap "olets/tap"
 tap "oven-sh/bun"
 tap "stripe/stripe-cli"
@@ -33,6 +32,7 @@ brew "docutils"
 brew "dos2unix"
 brew "eza"
 brew "fd"
+brew "ffmpegthumbnailer"
 brew "fish"
 brew "fontforge"
 brew "fonttools"
@@ -45,13 +45,11 @@ brew "gmp"
 brew "gnu-sed"
 brew "highlight"
 brew "htop"
-brew "hugo"
 brew "httpie"
+brew "hugo"
 brew "imagemagick"
 brew "jhead"
 brew "jq"
-# brew "koekeishiya/formulae/skhd"
-# brew "koekeishiya/formulae/yabai"
 brew "lazygit"
 brew "less"
 brew "libtermkey"
@@ -73,12 +71,11 @@ brew "pgcli"
 brew "php"
 brew "pillow" # required for image previews in ranger
 brew "poppler" # required for pdf previews in ranger
-brew "postgresql@14", restart_service: :changed
+brew "postgresql@14", restart_service: true
 brew "pstree"
 brew "python"
-brew "ranger"
 brew "readline"
-brew "redis", restart_service: :changed
+brew "redis", restart_service: true
 brew "ripgrep"
 brew "rlwrap"
 brew "rsync"
@@ -95,13 +92,14 @@ brew "tldr"
 # brew "tmux"
 brew "trash"
 brew "tree"
+brew "unar"
 brew "universal-ctags"
 brew "w3m"
 brew "wget"
-brew "xplr"
 brew "xz"
 brew "yamllint"
 brew "yarn"
+brew "yazi"
 brew "zoxide"
 brew "zsh"
 
@@ -151,11 +149,11 @@ cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "e-Sword X", id: 968437868
 mas "Keynote", id: 409183694
-# mas "Logic Pro", id: 634148309
+mas "Logic Pro", id: 634148309
 mas "Marked 2", id: 890031187
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-# mas "Pixelmator Pro", id: 1289583905
+mas "Speedtest", id: 1153157709
 mas "Toggl Track", id: 1291898086
 
 # vim: set filetype=ruby:
