@@ -62,16 +62,19 @@ return {
             pinned = true,
             open = "Neotree position=right git_status",
           },
-          -- {
-          --   title = "Neo-Tree Buffers",
-          --   ft = "neo-tree",
-          --   filter = function(buf)
-          --     return vim.b[buf].neo_tree_source == "buffers"
-          --   end,
-          --   pinned = true,
-          --   open = "Neotree position=top buffers",
-          -- },
+          {
+            title = "Neo-Tree Buffers",
+            ft = "neo-tree",
+            filter = function(buf)
+              return vim.b[buf].neo_tree_source == "buffers"
+            end,
+            pinned = true,
+            open = "Neotree position=top buffers",
+          },
           "neo-tree",
+        },
+        right = {
+          { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
         },
         keys = {
           -- increase width
