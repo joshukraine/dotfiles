@@ -8,6 +8,13 @@ local create_autocmd = vim.api.nvim_create_autocmd
 create_augroup("file_types", { clear = true })
 
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  desc = "Recognize .gemrc as yaml",
+  group = "file_types",
+  pattern = { ".gemrc" },
+  command = [[ set filetype=yaml ]],
+})
+
+create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   desc = "Recognize mdx files as markdown",
   group = "file_types",
   pattern = { "*.mdx" },
