@@ -1,3 +1,7 @@
+-- Disable edgy.nvim for now.
+-- stylua: ignore
+if true then return {} end
+
 return {
   {
     "folke/edgy.nvim",
