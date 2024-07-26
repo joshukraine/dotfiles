@@ -11,17 +11,19 @@ return {
       },
       signs = true,
     },
-    -- servers = {
-    --   standardrb = {
-    --     mason = false,
-    --     cmd = { "standardrb", "--lsp" },
-    --     filetypes = { "ruby", "rakefile" },
-    --   },
-    --   ruby_ls = {
-    --     mason = false,
-    --     cmd = { "ruby-lsp" },
-    --     formatter = "auto",
-    --   },
-    -- },
+    servers = {
+      -- https://github.com/Shopify/ruby-lsp/blob/main/EDITORS.md
+      ruby_lsp = {
+        mason = false,
+        cmd = { "/Users/joshukraine/.asdf/shims/ruby-lsp" },
+        formatter = "auto",
+      },
+      -- https://github.com/standardrb/standard
+      standardrb = {
+        mason = false,
+        cmd = { "/Users/joshukraine/.asdf/shims/standardrb", "--lsp" },
+        filetypes = { "ruby", "rakefile" },
+      },
+    },
   },
 }
