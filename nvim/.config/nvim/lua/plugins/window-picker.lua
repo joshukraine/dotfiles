@@ -1,4 +1,6 @@
 -- https://github.com/s1n7ax/nvim-window-picker
+-- stylua: ignore
+if true then return {} end
 
 return {
   {
