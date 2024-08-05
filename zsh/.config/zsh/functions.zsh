@@ -228,3 +228,8 @@ function yy() {
   fi
   rm -f -- "$tmp"
 }
+
+function update_jumpstart() {
+    git fetch jumpstart-pro
+    git merge jumpstart-pro/main
+}
