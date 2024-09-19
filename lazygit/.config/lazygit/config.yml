@@ -1,8 +1,3 @@
-# yamllint disable rule:line-length
-
-# REFERENCE:
-# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
-
 gui:
     # stuff relating to the UI
     scrollHeight: 2 # how many lines you scroll by
@@ -131,7 +126,7 @@ keybinding:
         scrollDownMain-alt1: 'J' # main panel scroll down
         scrollUpMain-alt2: '<c-u>' # main panel scroll up
         scrollDownMain-alt2: '<c-d>' # main panel scroll down
-        executeCustomCommand: ':'
+        executeShellCommand: ':'
         createRebaseOptionsMenu: 'm'
         pushFiles: 'P'
         pullFiles: 'p'
