@@ -1,7 +1,0 @@
-{
-  "html.format.templating": true,
-  "html.format.wrapLineLength": 80,
-  "html.format.indentInnerHtml": false,
-  "html.autoCreateQuotes": false,
-  "html.format.wrapAttributes": "force-aligned"
-}
