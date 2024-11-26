@@ -18,14 +18,14 @@ plug "romkatv/powerlevel10k"
 . $HOME/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
-OP_PLUGINS="$XDG_CONFIG_HOME/op"
-
-if [ -d "$OP_PLUGINS" ]; then
-  # https://developer.1password.com/docs/cli
-  . $XDG_CONFIG_HOME/op/plugins.sh
-else
-  echo "Directory does not exist: $OP_PLUGINS. Please reference https://developer.1password.com/docs/cli for installation instructions."
-fi
+# OP_PLUGINS="$XDG_CONFIG_HOME/op"
+#
+# if [ -d "$OP_PLUGINS" ]; then
+#   # https://developer.1password.com/docs/cli
+#   . $XDG_CONFIG_HOME/op/plugins.sh
+# else
+#   echo "Directory does not exist: $OP_PLUGINS. Please reference https://developer.1password.com/docs/cli for installation instructions."
+# fi
 
 # https://zsh-abbr.olets.dev
 . $HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh
