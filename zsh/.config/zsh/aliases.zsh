@@ -32,3 +32,9 @@ alias masu='mas upgrade'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 alias o='open . &'
+
+# Neovim
+# https://github.com/richin13/asdf-neovim
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
+alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+# alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
