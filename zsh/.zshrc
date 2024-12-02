@@ -67,4 +67,9 @@ autoload -Uz compinit && compinit
 # De-dupe $PATH
 typeset -U path
 
+# GitHub Copilot CLI
+if command -v gh >/dev/null && gh extension list | grep -q 'copilot'; then
+  eval "$(gh copilot alias -- zsh)"
+fi
+
 . "$HOME/.config/zsh/profiler.stop"
