@@ -29,6 +29,7 @@ export DOTFILES="$HOME/dotfiles"
 export ABBR_USER_ABBREVIATIONS_FILE="$XDG_CONFIG_HOME/zsh-abbr/abbreviations.zsh"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
 
 . "$XDG_CONFIG_HOME/zsh/plugins.zsh" # Includes Zap - https://www.zapzsh.org
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
