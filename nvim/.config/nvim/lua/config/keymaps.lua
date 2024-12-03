@@ -33,9 +33,6 @@ vim.keymap.set("n", "<leader>m", "<cmd>lua MiniMap.toggle()<cr>", { desc = "Mini
 -- Save without formatting
 vim.keymap.set("n", "<leader>qQ", "<cmd>noautocmd w<cr>", { desc = "Save without formatting" })
 
--- Buffer search/replace
-vim.keymap.set("n", "<leader>sr", ":%s/", { desc = "Buffer search/replace" })
-
 -- Sort text in a list
 vim.keymap.set("v", "<leader>cs", ":'<,'>sort<cr>", { desc = "Sort selected lines" })
 
