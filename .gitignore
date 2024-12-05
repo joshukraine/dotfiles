@@ -6,6 +6,7 @@ config.fish.local
 fish_variables
 fzf_key_bindings.fish
 kitty.conf.bak
+startup.conf
 lazygit/.config/lazygit/state.yml
 local/*
 lvim/.config/lvim/plugin/packer_compiled.lua
