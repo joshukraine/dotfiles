@@ -5,6 +5,8 @@ if defined?(AmazingPrint)
 end
 
 # https://github.com/vitallium/irb-theme-tokyonight
-require "irb/theme/tokyonight/storm"
+if defined?(Irb::Theme::Tokyonight)
+  require "irb/theme/tokyonight/storm"
+end
 
 # vim: set filetype=ruby:
