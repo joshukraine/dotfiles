@@ -59,7 +59,7 @@
 
 [commit]
   template = ~/.gitmessage
-  gpgsign = true
+  gpgSign = true
 
 [core]
   autocrlf     = input
@@ -88,6 +88,9 @@
   modified  = red
   untracked = cyan
 
+[gpg]
+  program = /opt/homebrew/bin/gpg
+
 [include]
   path = ~/.gitconfig.local
 
@@ -115,14 +118,11 @@
 [status]
   submoduleSummary = true
 
+[tag]
+  gpgSign = true
+
 [url "https://github.com/"]
   insteadOf = git@github.com:
 
 [url "https://"]
   insteadOf = git://
-
-[gpg]
-  format = ssh
-
-[gpg "ssh"]
-  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
