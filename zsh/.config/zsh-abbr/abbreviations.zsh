@@ -259,4 +259,17 @@ abbr "mso"="tmuxinator start ofreport"
 abbr "hts"="http-server"
 abbr "lvs"="live-server"
 
+# Docker
+abbr "dc"="docker compose"
+abbr "dcu"="docker compose up -d"
+abbr "dcb"="docker compose up --build -d"
+abbr "dcd"="docker compose down"
+abbr "dcv"="docker compose down -v"
+abbr "dce"="docker compose exec"
+abbr "dl"="docker logs"
+abbr "dim"="docker images"
+abbr "dnet"="docker network"
+abbr "dps"="docker ps"
+abbr "dpsa"="docker ps -a"
+
 # vim: set filetype=zsh:

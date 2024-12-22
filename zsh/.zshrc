@@ -36,6 +36,7 @@ export GPG_TTY=$(tty)
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
+. "$XDG_CONFIG_HOME/zsh/docker.sh"
 . "$HOME/.secrets/.zshrc.local"
 
 export HISTSIZE=1000000000

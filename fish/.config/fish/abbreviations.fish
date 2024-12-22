@@ -257,3 +257,16 @@ abbr -a -g mso 'tmuxinator start ofreport'
 # Local servers
 abbr -a -g hts http-server
 abbr -a -g lvs live-server
+
+# Docker
+abbr -a -g dc 'docker compose'
+abbr -a -g dcu 'docker compose up -d'
+abbr -a -g dcb 'docker compose up --build -d'
+abbr -a -g dcd 'docker compose down'
+abbr -a -g dcv 'docker compose down -v'
+abbr -a -g dce 'docker compose exec'
+abbr -a -g dl 'docker logs'
+abbr -a -g dim 'docker images'
+abbr -a -g dnet 'docker network'
+abbr -a -g dps 'docker ps'
+abbr -a -g dpsa 'docker ps -a'
