@@ -1,5 +1,9 @@
 -- https://www.lazyvim.org/configuration/recipes#supertab
 
+-- Uncomment the conditional to disable this config.
+-- stylua: ignore
+if true then return {} end
+
 return {
   -- Disable default <tab> and <s-tab> behavior in LuaSnip
   {
