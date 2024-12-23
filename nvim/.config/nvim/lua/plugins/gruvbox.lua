@@ -27,7 +27,14 @@ return {
       inverse = false, -- invert background for search, diffs, statuslines and errors
       contrast = "soft", -- can be "hard", "soft" or empty string
       palette_overrides = {},
-      overrides = {},
+      overrides = {
+        IncSearch = { fg = "#504945", bg = "#ebdbb2" },
+        Search = { bg = "#665c54" },
+        StatusLine = { link = "lualine_c_normal" },
+        FlashLabel = { link = "DiffDelete" },
+        YankyPut = { bg = "#ebdbb2" },
+        YankyYanked = { bg = "#ebdbb2" },
+      },
       dim_inactive = false,
       transparent_mode = false,
     },
