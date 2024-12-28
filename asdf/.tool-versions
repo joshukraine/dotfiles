@@ -1,5 +1,5 @@
 ruby 3.3.6
 nodejs 22.3.0
 python 3.12.4 2.7.18
-lua 5.4.6
+lua 5.1
 neovim nightly
