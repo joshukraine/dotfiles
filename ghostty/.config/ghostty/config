@@ -1,0 +1,35 @@
+# To generate a new list of the default values:
+# ghostty +show-config --default --docs > ~/dotfiles/ghostty/config-default
+#
+# Online documentation:
+# https://ghostty.org/docs/config/reference
+
+theme = tokyonight_moon
+
+# Font settings
+font-family = Cascadia Code
+font-size = 17
+adjust-cell-height = 4
+
+# Cursor settings
+cursor-style = block
+shell-integration-features = no-cursor
+
+# Window settings
+window-padding-x = 10
+window-padding-y = 10
+window-width = 140
+window-height = 35
+window-save-state = always
+
+# Split navigation
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+l=goto_split:right
+
+# Split resizing
+keybind = super+ctrl+down=resize_split:down,100
+keybind = super+ctrl+left=resize_split:left,100
+keybind = super+ctrl+up=resize_split:up,100
+keybind = super+ctrl+right=resize_split:right,100
