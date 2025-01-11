@@ -92,6 +92,7 @@ stow_conflicts=(
   ".asdfrc"
   ".bashrc"
   ".config/fish"
+  ".config/ghostty"
   ".config/kitty"
   ".config/lazygit"
   ".config/lvim"
