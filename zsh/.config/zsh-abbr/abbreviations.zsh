@@ -271,5 +271,6 @@ abbr "dim"="docker images"
 abbr "dnet"="docker network"
 abbr "dps"="docker ps"
 abbr "dpsa"="docker ps -a"
+abbr "dsp"="docker system prune --all"
 
 # vim: set filetype=zsh:
