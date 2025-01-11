@@ -7,6 +7,7 @@ plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zap-zsh/exa"
 # plug "romkatv/powerlevel10k"
+plug "zsh-users/zsh-history-substring-search"
 
 # https://starship.rs
 eval "$(starship init zsh)"
@@ -35,3 +36,13 @@ fpath=(${ASDF_DIR}/completions $fpath)
 
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
+
+# https://github.com/zsh-users/zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_PREFIXED=1
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
+
+unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND
+unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
