@@ -95,7 +95,6 @@ stow_conflicts=(
   ".config/ghostty"
   ".config/kitty"
   ".config/lazygit"
-  ".config/lvim"
   ".config/nvim"
   ".config/starship.toml"
   ".config/tmux"
