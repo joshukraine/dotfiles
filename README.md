@@ -429,7 +429,6 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
 [1p-cli-start]: https://developer.1password.com/docs/cli/get-started
 [asdf]: https://asdf-vm.com/
-[brew-bundle]: https://github.com/Homebrew/homebrew-bundle
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [comic-code]: https://tosche.net/fonts/comic-code
@@ -445,7 +444,6 @@ Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
 [homebrew]: http://brew.sh
 [i-tried-neovim-distros-video]: https://youtu.be/bbHtl0Pxzj8
 [install-clt]: https://www.freecodecamp.org/news/install-xcode-command-line-tools/
-[install-lunar-vim]: https://www.lunarvim.org/docs/installation
 [iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700122897/screenshots/iterm2-config_xqevqo.png
 [iterm2]: https://www.iterm2.com/
 [jetbrains-mono]: https://www.jetbrains.com/lp/mono/
