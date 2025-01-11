@@ -2,6 +2,9 @@
 # https://starship.rs/config/
 # https://www.nerdfonts.com/cheat-sheet
 
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 add_newline = false
 command_timeout = 2000
 
@@ -18,17 +21,18 @@ style = "bold bright-white"
 symbol = "󰘬 "
 
 [git_status]
-ahead = "[](purple)[$count](white)"
-behind = "[](cyan)[$count](white)"
-conflicted = '[=$count](yellow)'
-deleted = '[✘$count](bright-black)'
-diverged = "[](cyan)[$ahead_count](white)[](purple)[$behind_count](white)"
-modified = '[*$count](red)'
-renamed = "[»$count](purple)"
-staged = "[+$count](green)"
-stashed = "[\\$$count](yellow)"
+format = '([\[$all_status$ahead_behind \]]($style) )'
+ahead = " [](purple)[$count](white)"
+behind = " [](cyan)[$count](white)"
+conflicted = ' [=$count](yellow)'
+deleted = ' [✘$count](bright-black)'
+diverged = " [](cyan)[$ahead_count](white)[](purple)[$behind_count](white)"
+modified = ' [*$count](red)'
+renamed = " [»$count](purple)"
+staged = " [+$count](green)"
+stashed = " [\\$$count](yellow)"
 style = "bold bright-white"
-untracked = "[?$count](cyan)"
+untracked = " [?$count](cyan)"
 
 [git_commit]
 only_detached = true
@@ -44,12 +48,18 @@ symbol = "󰎙 "
 [python]
 symbol = "󰌠 "
 
-[shell]
+# [shell]
+# disabled = false
+# style = 'cyan'
+# bash_indicator = '\$'
+# fish_indicator = '󰈺'
+# zsh_indicator = '%'
+
+[os]
 disabled = false
-style = 'cyan'
-bash_indicator = '\$'
-fish_indicator = '󰈺'
-zsh_indicator = '%'
+
+[os.symbols]
+Macos = " "
 
 [time]
 disabled = false
