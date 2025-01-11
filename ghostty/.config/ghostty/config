@@ -17,7 +17,7 @@ shell-integration-features = no-cursor
 
 # Window settings
 window-padding-x = 10
-window-padding-y = 10
+window-padding-y = 10,0
 window-width = 140
 window-height = 35
 window-save-state = always
