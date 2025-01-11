@@ -6,13 +6,13 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zap-zsh/exa"
-plug "romkatv/powerlevel10k"
+# plug "romkatv/powerlevel10k"
 
 # https://starship.rs
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # https://asdf-vm.com
 . $HOME/.asdf/asdf.sh
