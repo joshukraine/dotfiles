@@ -2,3 +2,16 @@
 
 # MD013/line-length : Line length : https://github.com/DavidAnson/markdownlint/blob/v0.37.3/doc/md013.md
 MD013: false
+
+# MD026/no-trailing-punctuation : Trailing punctuation in heading : https://github.com/DavidAnson/markdownlint/blob/v0.37.3/doc/md026.md
+MD026:
+  # Punctuation characters
+  punctuation: ",;:。，；：！"
+
+# MD033/no-inline-html : Inline HTML : https://github.com/DavidAnson/markdownlint/blob/v0.37.3/doc/md033.md
+MD033:
+  # Allowed elements
+  allowed_elements: [details, summary, strong]
+
+# MD034/no-bare-urls : Bare URL used : https://github.com/DavidAnson/markdownlint/blob/v0.37.3/doc/md034.md
+MD034: false
