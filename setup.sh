@@ -183,7 +183,7 @@ dotfiles_echo "Dotfiles setup complete!"
 
 echo
 echo "Possible next steps:"
-echo "-> Install Zap (https://www.zapzsh.org)"
+echo "-> Install Zap (https://www.zapzsh.com)"
 echo "-> Install Homebrew packages (brew bundle install)"
 if command -v tmux &>/dev/null; then
   echo "-> Install Tmux plugins with <prefix> + I (https://github.com/tmux-plugins/tpm)"

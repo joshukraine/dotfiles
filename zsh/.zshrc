@@ -32,7 +32,7 @@ export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/
 export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
 export GPG_TTY=$(tty)
 
-. "$XDG_CONFIG_HOME/zsh/plugins.zsh" # Includes Zap - https://www.zapzsh.org
+. "$XDG_CONFIG_HOME/zsh/plugins.zsh" # Includes Zap - https://www.zapzsh.com
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"

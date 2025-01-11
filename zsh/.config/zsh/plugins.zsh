@@ -1,4 +1,4 @@
-# https://github.com/zap-zsh/zap | https://www.zapzsh.org
+# https://github.com/zap-zsh/zap | https://www.zapzsh.com
 
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
