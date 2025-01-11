@@ -9,7 +9,7 @@ theme = tokyonight_moon
 # Font settings
 font-family = Cascadia Code
 font-size = 17
-adjust-cell-height = 4
+adjust-cell-height = 6
 
 # Cursor settings
 cursor-style = block
