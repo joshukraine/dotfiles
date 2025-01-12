@@ -420,7 +420,7 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 
 ## License
 
-Copyright &copy; 2014–2023 Joshua Steele. [MIT License][license]
+Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 
 [^1]: https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j21m4i4/
 
