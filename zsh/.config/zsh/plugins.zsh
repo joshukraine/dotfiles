@@ -10,7 +10,9 @@ plug "zap-zsh/exa"
 plug "zsh-users/zsh-history-substring-search"
 
 # https://starship.rs
-eval "$(starship init zsh)"
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(starship init zsh)"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
