@@ -11,5 +11,18 @@ return {
       },
       signs = true,
     },
+    servers = {
+      -- https://shopify.github.io/ruby-lsp/editors.html#lazyvim-lsp
+      ruby_lsp = {
+        mason = false,
+        cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
+      },
+      -- https://github.com/standardrb/standard
+      standardrb = {
+        mason = false,
+        cmd = { vim.fn.expand("~/.asdf/shims/standardrb"), "--lsp" },
+        filetypes = { "ruby", "rakefile" },
+      },
+    },
   },
 }
