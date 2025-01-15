@@ -4,4 +4,7 @@ foreman
 irb-theme-tokyonight
 neovim
 overcommit
+rubocop
+ruby-lsp
+standard
 tmuxinator
