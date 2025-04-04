@@ -1,9 +1,5 @@
 # https://github.com/Homebrew/homebrew-bundle
 
-tap "1password/tap"
-tap "homebrew/bundle"
-tap "homebrew/services"
-tap "jesseduffield/lazygit"
 tap "olets/tap"
 tap "stripe/stripe-cli"
 tap "teamookla/speedtest"
