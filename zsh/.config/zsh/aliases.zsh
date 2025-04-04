@@ -2,6 +2,9 @@
 alias cat='bat --paging=never'
 alias cp='gcp -iv'
 
+# Alwyas use Neovim as EDITOR
+alias vim='nvim'
+
 # ls > eza
 # Other aliases handled by exa plugin
 # https://github.com/zap-zsh/exa (now uses eza)
