@@ -111,7 +111,7 @@ brew "zsh"
 # homebrew-cask
 # https://github.com/Homebrew/homebrew-cask
 
-cask "1password-cli"
+# cask "1password-cli"
 cask "alfred"
 cask "bartender"
 cask "brave-browser"
