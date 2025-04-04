@@ -1,3 +1,7 @@
+-- Uncomment the conditional to disable this config.
+-- stylua: ignore
+if true then return {} end
+
 return {
   "echasnovski/mini.files",
   keys = {

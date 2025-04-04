@@ -1,3 +1,7 @@
+-- Uncomment the conditional to disable this config.
+-- stylua: ignore
+if true then return {} end
+
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 -- https://www.lazyvim.org/plugins/editor#neo-treenvim
 
