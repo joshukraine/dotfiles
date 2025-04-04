@@ -8,6 +8,10 @@
 -- https://github.com/saghen/blink.cmp
 -- Documentation site: https://cmp.saghen.dev/
 
+-- https://www.lazyvim.org/extras/coding/blink
+-- https://github.com/saghen/blink.cmp
+-- Documentation site: https://cmp.saghen.dev/
+
 -- NOTE: Specify the trigger character(s) used for luasnip
 local trigger_text = ";"
 
@@ -17,7 +21,7 @@ return {
   -- In case there are breaking changes and you want to go back to the last
   -- working release
   -- https://github.com/Saghen/blink.cmp/releases
-  -- version = "v0.9.3",
+  -- version = "v0.13.1",
   dependencies = {
     "moyiz/blink-emoji.nvim",
     -- "Kaiser-Yang/blink-cmp-dictionary",
@@ -27,21 +31,20 @@ return {
     -- assumed related to blink, so disabled blink and in fact it was related
     -- :lua print(vim.bo[0].filetype)
     -- So I'm disabling blink.cmp for Telescope
-    -- opts.enabled = function()
-    --   -- Get the current buffer's filetype
-    --   local filetype = vim.bo[0].filetype
-    --   -- Disable for Telescope buffers
-    --   if filetype == "TelescopePrompt" or filetype == "minifiles" then
-    --     return false
-    --   end
-    --   return true
-    -- end
+    opts.enabled = function()
+      -- Get the current buffer's filetype
+      local filetype = vim.bo[0].filetype
+      -- Disable for Telescope buffers
+      if filetype == "TelescopePrompt" or filetype == "minifiles" or filetype == "snacks_picker_input" then
+        return false
+      end
+      return true
+    end
 
     -- NOTE: The new way to enable LuaSnip
     -- Merge custom sources with the existing ones from lazyvim
     -- NOTE: by default lazyvim already includes the lazydev source, so not adding it here again
     opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
-      -- default = { "lsp", "path", "snippets", "buffer", "copilot", "dadbod", "emoji", "dictionary" },
       default = { "lsp", "path", "snippets", "buffer", "copilot", "dadbod", "emoji" },
       providers = {
         lsp = {
@@ -49,6 +52,7 @@ return {
           enabled = true,
           module = "blink.cmp.sources.lsp",
           kind = "LSP",
+          min_keyword_length = 2,
           -- When linking markdown notes, I would get snippets and text in the
           -- suggestions, I want those to show only if there are no LSP
           -- suggestions
@@ -67,6 +71,7 @@ return {
           -- suggestions, I want those to show only if there are no path
           -- suggestions
           fallbacks = { "snippets", "buffer" },
+          -- min_keyword_length = 2,
           opts = {
             trailing_slash = false,
             label_trailing_slash = true,
@@ -81,13 +86,13 @@ return {
           enabled = true,
           max_items = 3,
           module = "blink.cmp.sources.buffer",
-          min_keyword_length = 4,
+          min_keyword_length = 2,
           score_offset = 15, -- the higher the number, the higher the priority
         },
         snippets = {
           name = "snippets",
           enabled = true,
-          max_items = 8,
+          max_items = 15,
           min_keyword_length = 2,
           module = "blink.cmp.sources.snippets",
           score_offset = 85, -- the higher the number, the higher the priority
@@ -101,27 +106,33 @@ return {
           end,
           -- After accepting the completion, delete the trigger_text characters
           -- from the final inserted text
+          -- Modified transform_items function based on suggestion by `synic` so
+          -- that the luasnip source is not reloaded after each transformation
+          -- https://github.com/linkarzu/dotfiles-latest/discussions/7#discussion-7849902
+          -- NOTE: I also tried to add the ";" prefix to all of the snippets loaded from
+          -- friendly-snippets in the luasnip.lua file, but I was unable to do
+          -- so, so I still have to use the transform_items here
+          -- This removes the ";" only for the friendly-snippets snippets
           transform_items = function(_, items)
+            local line = vim.api.nvim_get_current_line()
             local col = vim.api.nvim_win_get_cursor(0)[2]
-            local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-            local trigger_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-            if trigger_pos then
+            local before_cursor = line:sub(1, col)
+            local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
+            if start_pos then
               for _, item in ipairs(items) do
-                item.textEdit = {
-                  newText = item.insertText or item.label,
-                  range = {
-                    start = { line = vim.fn.line(".") - 1, character = trigger_pos - 1 },
-                    ["end"] = { line = vim.fn.line(".") - 1, character = col },
-                  },
-                }
+                if not item.trigger_text_modified then
+                  ---@diagnostic disable-next-line: inject-field
+                  item.trigger_text_modified = true
+                  item.textEdit = {
+                    newText = item.insertText or item.label,
+                    range = {
+                      start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
+                      ["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
+                    },
+                  }
+                end
               end
             end
-            -- NOTE: After the transformation, I have to reload the luasnip source
-            -- Otherwise really crazy stuff happens and I spent way too much time
-            -- figuring this out
-            vim.schedule(function()
-              require("blink.cmp").reload("snippets")
-            end)
             return items
           end,
         },
@@ -130,13 +141,15 @@ return {
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
+          min_keyword_length = 2,
           score_offset = 85, -- the higher the number, the higher the priority
         },
         -- https://github.com/moyiz/blink-emoji.nvim
         emoji = {
           module = "blink-emoji",
           name = "Emoji",
-          score_offset = 15, -- the higher the number, the higher the priority
+          score_offset = 93, -- the higher the number, the higher the priority
+          min_keyword_length = 2,
           opts = { insert = true }, -- Insert emoji (default) or complete its name
         },
         -- https://github.com/Kaiser-Yang/blink-cmp-dictionary
@@ -161,7 +174,13 @@ return {
         --     -- Do not specify a file, just the path, and in the path you need to
         --     -- have your .txt files
         --     dictionary_directories = { vim.fn.expand("~/github/dotfiles-latest/dictionaries") },
+        --     -- Notice I'm also adding the words I add to the spell dictionary
+        --     dictionary_files = {
+        --       vim.fn.expand("~/github/dotfiles-latest/neovim/neobean/spell/en.utf-8.add"),
+        --       vim.fn.expand("~/github/dotfiles-latest/neovim/neobean/spell/es.utf-8.add"),
+        --     },
         --     -- --  NOTE: To disable the definitions uncomment this section below
+        --     --
         --     -- separate_output = function(output)
         --     --   local items = {}
         --     --   for line in output:gmatch("[^\r\n]+") do
@@ -185,21 +204,22 @@ return {
           async = true,
         },
       },
-      -- command line completion, thanks to dpetka2001 in reddit
-      -- https://www.reddit.com/r/neovim/comments/1hjjf21/comment/m37fe4d/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-      -- cmdline = function()
-      --   local type = vim.fn.getcmdtype()
-      --   if type == "/" or type == "?" then
-      --     return { "buffer" }
-      --   end
-      --   if type == ":" then
-      --     return { "cmdline" }
-      --   end
-      --   return {}
-      -- end,
     })
 
+    opts.cmdline = {
+      enabled = true,
+    }
+
     opts.completion = {
+      -- accept = {
+      --   auto_brackets = {
+      --     enabled = true,
+      --     default_brackets = { ";", "" },
+      --     override_brackets_for_filetypes = {
+      --       markdown = { ";", "" },
+      --     },
+      --   },
+      -- },
       --   keyword = {
       --     -- 'prefix' will fuzzy match on the text before the cursor
       --     -- 'full' will fuzzy match on the text before *and* after the cursor
@@ -215,10 +235,6 @@ return {
           border = "single",
         },
       },
-      -- Displays a preview of the selected item on the current line
-      ghost_text = {
-        enabled = true,
-      },
     }
 
     -- opts.fuzzy = {
@@ -231,23 +247,14 @@ return {
     -- }
 
     opts.snippets = {
-      preset = "luasnip",
-      -- This comes from the luasnip extra, if you don't add it, won't be able to
-      -- jump forward or backward in luasnip snippets
-      -- https://www.lazyvim.org/extras/coding/luasnip#blinkcmp-optional
-      expand = function(snippet)
-        require("luasnip").lsp_expand(snippet)
-      end,
-      active = function(filter)
-        if filter and filter.direction then
-          return require("luasnip").jumpable(filter.direction)
-        end
-        return require("luasnip").in_snippet()
-      end,
-      jump = function(direction)
-        require("luasnip").jump(direction)
-      end,
+      preset = "luasnip", -- Choose LuaSnip as the snippet engine
     }
+
+    -- -- To specify the options for snippets
+    -- opts.sources.providers.snippets.opts = {
+    --   use_show_condition = true, -- Enable filtering of snippets dynamically
+    --   show_autosnippets = true, -- Display autosnippets in the completion menu
+    -- }
 
     -- The default preset used by lazyvim accepts completions with enter
     -- I don't like using enter because if on markdown and typing
