@@ -88,9 +88,6 @@
   modified  = red
   untracked = cyan
 
-[gpg]
-  program = /opt/homebrew/bin/gpg
-
 [include]
   path = ~/.gitconfig.local
 
