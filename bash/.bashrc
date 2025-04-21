@@ -68,9 +68,9 @@ function src() {
 eval "$(starship init bash)"
 
 # shellcheck disable=SC1091
-. "$HOME/.asdf/asdf.sh"
+# . "$HOME/.asdf/asdf.sh"
 # shellcheck disable=SC1091
-. "$HOME/.asdf/completions/asdf.bash"
+# . "$HOME/.asdf/completions/asdf.bash"
 
 # shellcheck disable=SC1090
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -109,9 +109,11 @@ abbr "vv"="nvim --version | less"
 # asdf
 abbr "ail"="asdf install lua"
 abbr "ain"="asdf install nodejs"
+abbr "ainl"="asdf install nodejs latest"
 abbr "aip"="asdf install python"
 abbr "air"="asdf install ruby"
-abbr "ala"="asdf list-all"
+abbr "airl"="asdf install ruby latest"
+abbr "ala"="asdf list all"
 
 # https://fishshell.com/docs/current/commands.html#fish_update_completions
 abbr "ucl"="fish_update_completions"

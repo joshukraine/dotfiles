@@ -13,7 +13,7 @@ else
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-export PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/.local/bin:$HOME/.bin:$PATH"
 export EDITOR="nvim"
 export GIT_EDITOR="nvim"
 export BUNDLER_EDITOR=$EDITOR

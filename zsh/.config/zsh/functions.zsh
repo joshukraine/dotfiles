@@ -126,7 +126,7 @@ function randpw() {
 }
 
 function rlv() {
-  asdf list-all ruby | rg '^\d'
+  asdf list all ruby | rg '^\d'
 }
 
 # Thanks to https://github.com/Shpota/sha256
