@@ -15,7 +15,6 @@ abbr -a -g cdot 'cd $DOTFILES'
 abbr -a -g cdxc 'cd $XDG_CONFIG_HOME'
 abbr -a -g cdfi 'cd $XDG_CONFIG_HOME/fish'
 abbr -a -g cdnv 'cd $XDG_CONFIG_HOME/nvim'
-abbr -a -g cdlv 'cd $XDG_CONFIG_HOME/lvim'
 abbr -a -g cdxd 'cd $XDG_DATA_HOME'
 abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
 abbr -a -g cdxs 'cd $XDG_STATE_HOME'
@@ -97,10 +96,9 @@ abbr -a -g s2 sha256
 abbr -a -g tl 'tmux ls'
 abbr -a -g tlw 'tmux list-windows'
 
-# Neovim / LunarVim
-abbr -a -g lv lvim
+# Neovim
 abbr -a -g nv nvim
-abbr -a -g vi lvim
+abbr -a -g vi nvim
 abbr -a -g vi0 'nvim -u NONE'
 abbr -a -g vir 'nvim -R'
 abbr -a -g vv 'nvim --version | less'

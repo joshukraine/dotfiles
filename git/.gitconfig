@@ -67,7 +67,7 @@
   ignorecase   = false
   safecrlf     = warn
   abbrev       = 7
-  editor       = lvim
+  editor       = nvim
 
 [diff]
   tool = vimdiff3
