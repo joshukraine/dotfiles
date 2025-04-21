@@ -1,5 +1,5 @@
-ruby 3.4.1
-nodejs 22.3.0
+ruby 3.4.3
+nodejs 23.11.0
 python 3.12.4 2.7.18
 lua 5.1
 neovim stable
