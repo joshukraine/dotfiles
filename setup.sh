@@ -91,6 +91,7 @@ cd "${DOTFILES}/" # stow needs to run from inside dotfiles dir
 stow_conflicts=(
   ".asdfrc"
   ".bashrc"
+  "CLAUDE.md"
   ".config/fish"
   ".config/ghostty"
   ".config/kitty"
