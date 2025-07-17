@@ -7,7 +7,7 @@
 - [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
 - [Starship][starship] prompt (or [Powerlevel10K][p10k])
 - Shell support for both [Zsh][zsh] and [Fish][fish] with 90% functional parity
-- Flexible, terminal-based dev environment with [kitty][kitty]!😻 (or [iTerm2][iterm2]+[Tmux][tmux])
+- Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot’s [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
@@ -19,8 +19,6 @@
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
 - [About Neovim Distributions](#about-neovim-distributions)
-- [Good-bye, Tmux?](#-good-bye-tmux)
-- [Hello, kitty!](#-hello-kitty)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
 - [Nerd Fonts and Icons](#nerd-fonts-and-icons)
 - [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
@@ -174,7 +172,7 @@ brew bundle install
 - [ ] Set up [1Password SSH key management][1p-cli-ssh].
 - [ ] If using Fish, customize your setup by running the `fish_config` command.
 - [ ] If using Zsh, edit `.zshrc` and `plugins.zsh` to select either [Starship][starship] or [Powerlevel10K][p10k] as your prompt.
-- [ ] If using Tmux, install Tmux plugins with `<prefix> + I` (https://github.com/tmux-plugins/tpm)
+- [ ] If using Tmux, install Tmux plugins with `<prefix> + I` (<https://github.com/tmux-plugins/tpm>)
 
 ## Zsh or Fish?
 
@@ -256,29 +254,6 @@ If you want a quick primer on Neovim distros, **check out the YouTube video belo
 📺 [I tried Neovim Distributions so you don't have to][i-tried-neovim-distros-video]
 
 Boy, when I reminisce about the days of writing PHP for Internet Explorer in BBEdit...
-
-## 🫣 Good-bye, Tmux?
-
-I have nothing but warm fuzzy feelings towards Tmux. ... Ok, _mostly_ warm and fuzzy. Tmux is amazing, and once I learned how to use it, it forever changed the way I came to see my terminal. I now expect the ability to spawn as many splits/panes/windows as needed, at any time, in any arrangement I choose, easily accessible through keyboard shortcuts.
-
-But as anyone who has used Tmux can tell you, it's not without its trade-offs: copy/paste issues, color problems, font irregularities, etc. Yes, it was worth it, and somehow I always found workarounds. Still, at the end of the day, I don't consider myself a “Tmux power user”. That is, I don't usually need multiple sessions (tabs will do) or even persistence. I'm mostly here for the layouts. And for that, I found [kitty][kitty]...
-
-## 😸 Hello, kitty!
-
-The argument can be made that kitty vs. Tmux is an [apples-to-oranges](https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j214m0r/) comparison. kitty is a terminal _emulator_ whereas Tmux is a terminal _multiplexer_. But if you don't need all the features of Tmux (and you don't want to hassle with the Tmux overhead) I think kitty is a fine, much lighter replacement. As one Reddit user put it:
-
-> “...basic multiplexer = Kitty; advanced multiplexer = TMUX”.[^1]
-
-In addition to native split-pane support (think Tmux Lite), kitty brings a host of other cool features to the party including speed (GPU-based), excellent font support, extensible with “kittens”, and highly configurable via `kitty.conf`. In essence, kitty has allowed me to greatly simplify my development environment by going from Vim+iTerm2+Tmux to simply Vim+kitty.
-
-I'm glad Tmux exists, I'm grateful for what it's taught me, and I'll probably use it again from time to time. Meanwhile, kitty is awesome...and I can finally [change my colorscheme](https://sw.kovidgoyal.net/kitty/kittens/themes/) without having to reconcile THREE colorschemes! 🤪
-
-> [!NOTE]
-> Be sure to [get yourself a cool icon](https://youtu.be/ZaYTv2eBNr8) for kitty! HINT: Get [this one](https://github.com/DinkDonk/kitty-icon). 😻
-
-### Still not convinced?
-
-Fear not: if you're using these dotfiles and you'd rather stay with iTerm2 and Tmux, **I've kept all of the Tmux-related configs, functions, aliases and abbreviations I had before**. I'm not installing Tmux by default anymore, but you need only uncomment the appropriate lines in `.laptop.local` and `Brewfile`, and you're back in business.
 
 ## My Favorite Programming Fonts
 
@@ -373,58 +348,57 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 
 ## Awesome Neovim Dotfiles, Distros, and Starters
 
-- https://github.com/LazyVim/lazyvim
-- https://github.com/LunarVim/LunarVim
-- https://github.com/NvChad/NvChad
-- https://github.com/LunarVim/Launch.nvim
-- https://github.com/folke/dot
-- https://github.com/nvim-lua/kickstart.nvim
-- https://github.com/ThePrimeagen/init.lua
-- https://github.com/elijahmanor/dotfiles
-- https://github.com/cpow/cpow-dotfiles
-- https://github.com/josean-dev/dev-environment-files
-- https://github.com/glepnir/nvim
-- https://github.com/numToStr/dotfiles
-- https://github.com/jdhao/nvim-config
-- https://github.com/brainfucksec/neovim-lua
-- https://github.com/disrupted/dotfiles
-- https://github.com/topics/neovim-dotfiles
-- https://github.com/topics/neovim-config
+- <https://github.com/LazyVim/lazyvim>
+- <https://github.com/LunarVim/LunarVim>
+- <https://github.com/NvChad/NvChad>
+- <https://github.com/LunarVim/Launch.nvim>
+- <https://github.com/folke/dot>
+- <https://github.com/nvim-lua/kickstart.nvim>
+- <https://github.com/ThePrimeagen/init.lua>
+- <https://github.com/elijahmanor/dotfiles>
+- <https://github.com/cpow/cpow-dotfiles>
+- <https://github.com/josean-dev/dev-environment-files>
+- <https://github.com/glepnir/nvim>
+- <https://github.com/numToStr/dotfiles>
+- <https://github.com/jdhao/nvim-config>
+- <https://github.com/brainfucksec/neovim-lua>
+- <https://github.com/disrupted/dotfiles>
+- <https://github.com/topics/neovim-dotfiles>
+- <https://github.com/topics/neovim-config>
 
 ## Some of my favorite dotfile repos
 
-- Pro Vim (https://github.com/Integralist/ProVim)
-- Trevor Brown (https://github.com/Stratus3D/dotfiles)
-- Chris Toomey (https://github.com/christoomey/dotfiles)
-- thoughtbot (https://github.com/thoughtbot/dotfiles)
-- Lars Kappert (https://github.com/webpro/dotfiles)
-- Ryan Bates (https://github.com/ryanb/dotfiles)
-- Ben Orenstein (https://github.com/r00k/dotfiles)
-- Joshua Clayton (https://github.com/joshuaclayton/dotfiles)
-- Drew Neil (https://github.com/nelstrom/dotfiles)
-- Kevin Suttle (https://github.com/kevinSuttle/OSXDefaults)
-- Carlos Becker (https://github.com/caarlos0/dotfiles)
-- Zach Holman (https://github.com/holman/dotfiles/)
-- Mathias Bynens (https://github.com/mathiasbynens/dotfiles/)
-- Paul Irish (https://github.com/paulirish/dotfiles)
+- Pro Vim (<https://github.com/Integralist/ProVim>)
+- Trevor Brown (<https://github.com/Stratus3D/dotfiles>)
+- Chris Toomey (<https://github.com/christoomey/dotfiles>)
+- thoughtbot (<https://github.com/thoughtbot/dotfiles>)
+- Lars Kappert (<https://github.com/webpro/dotfiles>)
+- Ryan Bates (<https://github.com/ryanb/dotfiles>)
+- Ben Orenstein (<https://github.com/r00k/dotfiles>)
+- Joshua Clayton (<https://github.com/joshuaclayton/dotfiles>)
+- Drew Neil (<https://github.com/nelstrom/dotfiles>)
+- Kevin Suttle (<https://github.com/kevinSuttle/OSXDefaults>)
+- Carlos Becker (<https://github.com/caarlos0/dotfiles>)
+- Zach Holman (<https://github.com/holman/dotfiles/>)
+- Mathias Bynens (<https://github.com/mathiasbynens/dotfiles/>)
+- Paul Irish (<https://github.com/paulirish/dotfiles>)
 
-## Helpful web resources on dotfiles, et al.
+## Helpful web resources on dotfiles, et al
 
-- http://dotfiles.github.io/
-- https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
-- http://code.tutsplus.com/tutorials/setting-up-a-mac-dev-machine-from-zero-to-hero-with-dotfiles--net-35449
-- https://github.com/webpro/awesome-dotfiles
-- http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
-- http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
-- https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
+- <http://dotfiles.github.io/>
+- <https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789>
+- <http://code.tutsplus.com/tutorials/setting-up-a-mac-dev-machine-from-zero-to-hero-with-dotfiles--net-35449>
+- <https://github.com/webpro/awesome-dotfiles>
+- <http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/>
+- <http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/>
+- <https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell>
 
 ## License
 
 Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 
-[^1]: https://www.reddit.com/r/KittyTerminal/comments/zxileg/comment/j21m4i4/
 
-[^2]: https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map
+[^2]: <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map>
 
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
 [1p-cli-start]: https://developer.1password.com/docs/cli/get-started
@@ -437,6 +411,7 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [fira-code]: https://github.com/tonsky/FiraCode
 [fish]: http://fishshell.com/
 [folke]: https://github.com/folke
+[ghostty]: https://ghostty.org/
 [git]: https://git-scm.com/
 [gnu-stow]: https://www.gnu.org/software/stow/
 [hack]: https://sourcefoundry.org/hack
@@ -445,10 +420,8 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [i-tried-neovim-distros-video]: https://youtu.be/bbHtl0Pxzj8
 [install-clt]: https://www.freecodecamp.org/news/install-xcode-command-line-tools/
 [iterm2-font-settings]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700122897/screenshots/iterm2-config_xqevqo.png
-[iterm2]: https://www.iterm2.com/
 [jetbrains-mono]: https://www.jetbrains.com/lp/mono/
 [joshuas-laptop]: https://github.com/joshukraine/laptop
-[kitty]: https://sw.kovidgoyal.net/kitty/
 [laptop]: https://github.com/thoughtbot/laptop
 [lazyvim]: https://www.lazyvim.org/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
