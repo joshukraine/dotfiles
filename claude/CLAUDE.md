@@ -5,6 +5,7 @@ This file provides project-agnostic guidance to Claude Code (claude.ai/code) acr
 ## Git Commit Guidelines
 
 ### Conventional Commits
+
 Always use [Conventional Commits](https://www.conventionalcommits.org/) format:
 
 ```
@@ -16,6 +17,7 @@ Always use [Conventional Commits](https://www.conventionalcommits.org/) format:
 ```
 
 **Types:**
+
 - `feat` - New feature
 - `fix` - Bug fix
 - `docs` - Documentation changes
@@ -29,6 +31,7 @@ Always use [Conventional Commits](https://www.conventionalcommits.org/) format:
 - `revert` - Reverting previous commits
 
 **Examples:**
+
 ```
 feat(auth): add OAuth login support
 fix: resolve memory leak in user service
@@ -37,6 +40,7 @@ chore: update dependencies to latest versions
 ```
 
 ### Commit Best Practices
+
 - Keep subject line under 50 characters
 - Use present tense: "add feature" not "added feature"
 - Use imperative mood: "fix bug" not "fixes bug"
@@ -49,6 +53,7 @@ chore: update dependencies to latest versions
 ## Code Quality Standards
 
 ### Security
+
 - Never commit secrets, API keys, or sensitive data
 - Use environment variables or secure vaults for secrets
 - Follow principle of least privilege
@@ -56,12 +61,14 @@ chore: update dependencies to latest versions
 - Keep dependencies updated and scan for vulnerabilities
 
 ### Documentation
+
 - Write clear, concise comments for complex logic
 - Update README files when adding features
 - Document API changes and breaking changes
 - Include examples in documentation
 
 ### Testing
+
 - Write tests for new features and bug fixes
 - Maintain good test coverage
 - Use descriptive test names that explain the behavior
@@ -70,13 +77,16 @@ chore: update dependencies to latest versions
 ## Development Workflow
 
 ### Branch Naming
+
 Use descriptive branch names:
+
 - `feat/feature-name` - New features
 - `fix/bug-description` - Bug fixes
 - `docs/update-readme` - Documentation updates
 - `chore/dependency-update` - Maintenance tasks
 
 ### Pull Requests
+
 - Write clear PR titles using Conventional Commits format
 - Include description of changes and why they're needed
 - Reference related issues
@@ -86,6 +96,7 @@ Use descriptive branch names:
 ## Code Style
 
 ### General Principles
+
 - Write self-documenting code with clear variable and function names
 - Follow established patterns and conventions in the codebase
 - Prefer readability over cleverness
@@ -93,6 +104,7 @@ Use descriptive branch names:
 - Use consistent formatting (leverage auto-formatters when available)
 
 ### Error Handling
+
 - Handle errors gracefully with appropriate error messages
 - Use specific exception types rather than generic ones
 - Log errors with sufficient context for debugging
@@ -101,13 +113,16 @@ Use descriptive branch names:
 ## Project Setup
 
 ### Dependencies
+
 - Pin dependency versions in production
 - Regularly update dependencies and test for breaking changes
 - Use lock files to ensure consistent environments
 - Document system requirements and installation steps
 
 ### Configuration
+
 - Use configuration files for environment-specific settings
 - Provide sensible defaults
 - Document all configuration options
 - Separate configuration from code
+
