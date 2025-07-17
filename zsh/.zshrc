@@ -57,6 +57,9 @@ then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
+# Docker CLI completions
+fpath=(/Users/joshukraine/.docker/completions $fpath)
+
 # Load and initialise completion system
 autoload -Uz compinit && compinit
 
