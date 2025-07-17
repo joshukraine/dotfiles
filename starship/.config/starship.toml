@@ -55,13 +55,13 @@ symbol = "󰌠 "
 # fish_indicator = '󰈺'
 # zsh_indicator = '%'
 
-[os]
-disabled = false
+# [os]
+# disabled = false
 
-[os.symbols]
-Macos = " "
+# [os.symbols]
+# Macos = " "
 
-[time]
-disabled = false
-format = '[󱑎 $time]($style) '
-style = "bright-black"
+# [time]
+# disabled = false
+# format = '[󱑎 $time]($style) '
+# style = "bright-black"
