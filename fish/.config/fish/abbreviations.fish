@@ -49,7 +49,7 @@ abbr -a -g gca 'git commit --amend'
 abbr -a -g gcl 'git clone'
 abbr -a -g gcm 'git cm'
 abbr -a -g gco 'git checkout'
-abbr -a -g gcom 'git checkout master'
+# abbr -a -g gcom 'git checkout master' # Use gcom function instead.
 abbr -a -g gdc 'git diff --cached'
 abbr -a -g gdf 'git diff'
 abbr -a -g gf 'git fetch'

@@ -97,8 +97,40 @@ function g() {
   fi
 }
 
+# function gbrm() {
+#   git branch --merged master | grep -v "^\*\|  master" | xargs -n 1 git branch -d
+# }
+
 function gbrm() {
-  git branch --merged master | grep -v "^\*\|  master" | xargs -n 1 git branch -d
+  # Make sure we're inside a git repo
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # Fetch latest info (optional — uncomment if you want it always up to date)
+  # git fetch origin > /dev/null 2>&1
+
+  # Get default branch from remote
+  local default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+
+  # Fallback if needed
+  if [[ -z "$default_branch" ]]; then
+    if git show-ref --quiet refs/heads/main; then
+      default_branch="main"
+    elif git show-ref --quiet refs/heads/master; then
+      default_branch="master"
+    else
+      echo "Could not determine default branch."
+      return 1
+    fi
+  fi
+
+  echo "Pruning branches merged into '$default_branch'..."
+
+  git branch --merged "$default_branch" | \
+    grep -vE "^\*|  $default_branch" | \
+    xargs -n 1 git branch -d
 }
 
 function gl() {
@@ -111,6 +143,83 @@ function glg() {
 
 function gwip() {
   git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"
+}
+
+function gcom() {
+  local do_pull=0
+
+  # Help message
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  printf "%s\n" "Usage: gcom [OPTION]
+Switch to the default Git branch (e.g., main or master), with optional pull.
+
+Options:
+  -p          Pull latest changes after switching to the default branch
+  -h, --help  Show this help message
+
+Examples:
+  gcom        # Checkout default branch only
+  gcom -p     # Checkout default branch and pull latest changes"
+  return 0
+  fi
+
+  # Pull flag
+  if [[ "$1" == "-p" ]]; then
+    do_pull=1
+  fi
+
+  # Check if we're in a Git repo
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # Check for uncommitted changes
+  if ! git diff-index --quiet HEAD --; then
+    echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
+    read -r "response?Continue anyway? (y/N): "
+    if [[ "$response" != "y" && "$response" != "Y" ]]; then
+      echo "Aborted."
+      return 1
+    fi
+  fi
+
+  echo "Fetching latest from origin..."
+  git fetch origin > /dev/null 2>&1
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to fetch from origin."
+    return 1
+  fi
+
+  # Determine default branch
+  local default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+
+  if [[ -z "$default_branch" ]]; then
+    if git show-ref --quiet refs/heads/main; then
+      default_branch="main"
+    elif git show-ref --quiet refs/heads/master; then
+      default_branch="master"
+    else
+      echo "Could not determine default branch."
+      return 1
+    fi
+  fi
+
+  echo "Switching to $default_branch"
+  git checkout "$default_branch"
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to checkout $default_branch"
+    return 1
+  fi
+
+  if [[ $do_pull -eq 1 ]]; then
+    echo "Pulling latest changes..."
+    git pull
+    if [[ $? -ne 0 ]]; then
+      echo "Failed to pull changes."
+      return 1
+    fi
+  fi
 }
 
 function path() {
@@ -164,60 +273,60 @@ function ygs() {
 }
 
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
-function _rails_command () {
-  if [ -e "bin/rails" ]; then
-    bin/rails $@
-  else
-    command rails $@
-  fi
-}
+# function _rails_command () {
+#   if [ -e "bin/rails" ]; then
+#     bin/rails $@
+#   else
+#     command rails $@
+#   fi
+# }
 
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
-function _rake_command () {
-  if [ -e "bin/rake" ]; then
-    bin/rake $@
-  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-    bundle exec rake $@
-  else
-    command rake $@
-  fi
-}
+# function _rake_command () {
+#   if [ -e "bin/rake" ]; then
+#     bin/rake $@
+#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+#     bundle exec rake $@
+#   else
+#     command rake $@
+#   fi
+# }
 
-function _rspec_command () {
-  if [ -e "bin/rspec" ]; then
-    bin/rspec $@
-  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-    bundle exec rspec $@
-  else
-    command rspec $@
-  fi
-}
+# function _rspec_command () {
+#   if [ -e "bin/rspec" ]; then
+#     bin/rspec $@
+#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+#     bundle exec rspec $@
+#   else
+#     command rspec $@
+#   fi
+# }
 
-function _spring_command () {
-  if [ -e "bin/spring" ]; then
-    bin/spring $@
-  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-    bundle exec spring $@
-  else
-    command spring $@
-  fi
-}
+# function _spring_command () {
+#   if [ -e "bin/spring" ]; then
+#     bin/spring $@
+#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+#     bundle exec spring $@
+#   else
+#     command spring $@
+#   fi
+# }
 
-function _mina_command () {
-  if [ -e "bin/mina" ]; then
-    bin/mina $@
-  elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-    bundle exec mina $@
-  else
-    command mina $@
-  fi
-}
+# function _mina_command () {
+#   if [ -e "bin/mina" ]; then
+#     bin/mina $@
+#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
+#     bundle exec mina $@
+#   else
+#     command mina $@
+#   fi
+# }
 
-function n_test_runs() {
-  for (( n=0; n<$1; n++ ));
-  do { time bundle exec rspec ./spec; } 2>> time.txt;
-  done
-}
+# function n_test_runs() {
+#   for (( n=0; n<$1; n++ ));
+#   do { time bundle exec rspec ./spec; } 2>> time.txt;
+#   done
+# }
 
 # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
 function yy() {
