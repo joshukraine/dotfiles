@@ -42,15 +42,21 @@ Examples:
         end
     end
 
-    echo "Fetching latest from origin..."
-    git fetch origin >/dev/null 2>&1
-    if test $status -ne 0
-        echo "Failed to fetch from origin."
-        return 1
+    # Check if remote exists before fetching
+    if git remote | grep -q "^origin\$"
+        echo "Fetching latest from origin..."
+        git fetch origin >/dev/null 2>&1
+        if test $status -ne 0
+            echo "Failed to fetch from origin."
+            return 1
+        end
     end
 
-    # Try to get the default branch from remote
-    set default_branch (git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }')
+    # Try to get the default branch from remote if it exists
+    set default_branch ""
+    if git remote | grep -q "^origin\$"
+        set default_branch (git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }')
+    end
 
     # Fallback if needed
     if test -z "$default_branch"

@@ -184,15 +184,23 @@ Examples:
     fi
   fi
 
-  echo "Fetching latest from origin..."
-  git fetch origin > /dev/null 2>&1
-  if [[ $? -ne 0 ]]; then
-    echo "Failed to fetch from origin."
-    return 1
+  # Check if remote exists before fetching
+  if git remote | grep -q "^origin$"; then
+    echo "Fetching latest from origin..."
+    git fetch origin > /dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+      echo "Failed to fetch from origin."
+      return 1
+    fi
   fi
 
   # Determine default branch
-  local default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+  local default_branch=""
+  
+  # Try to get default branch from remote if it exists
+  if git remote | grep -q "^origin$"; then
+    default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+  fi
 
   if [[ -z "$default_branch" ]]; then
     if git show-ref --quiet refs/heads/main; then
