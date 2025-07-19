@@ -53,6 +53,11 @@ end
 
 source ~/.asdf/asdf.fish
 
+# Configure npm to use asdf's Node for global packages
+if command -v npm >/dev/null
+    set -gx npm_config_prefix (dirname (dirname (which node)))
+end
+
 set OP_PLUGINS "$HOME/.config/op"
 
 if test -d "$OP_PLUGINS"

@@ -39,6 +39,11 @@ export GPG_TTY=$(tty)
 . "$XDG_CONFIG_HOME/zsh/docker.sh"
 . "$HOME/.zshrc.local"
 
+# Configure npm to use asdf's Node for global packages
+if command -v npm >/dev/null; then
+    export npm_config_prefix=$(dirname $(dirname $(which node)))
+fi
+
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 export HISTFILE=~/.zsh_history
