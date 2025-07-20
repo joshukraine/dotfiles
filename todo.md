@@ -43,9 +43,11 @@
 
 ## Phase 2: Major Improvements (Medium Impact, Medium Risk)
 
-### 1. Create Shared Configuration Framework ❌
+### 1. Create Shared Configuration Framework ⚡
+- [x] Create `shared/environment.sh` - Common environment variables (Zsh)
+- [x] Create `shared/environment.fish` - Common environment variables (Fish)
+- [x] Update Fish and Zsh configs to use shared environment files
 - [ ] Create `shared/abbreviations.yaml` - Single source for all abbreviations
-- [ ] Create `shared/environment.sh` - Common environment variables
 - [ ] Create `shared/functions/` directory with shell-agnostic definitions
 - [ ] Build generators for Fish and Zsh specific configs
 
