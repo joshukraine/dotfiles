@@ -50,7 +50,33 @@
 - [x] Create `shared/abbreviations.yaml` - Single source for all abbreviations (196 abbrs!)
 - [x] Build generators for Fish and Zsh specific configs
 - [x] Generate shell-specific abbreviation files with proper headers
+- [x] **ISSUE FOUND**: Missing abbreviations from original configs need restoration
 - [ ] Create `shared/functions/` directory (lower priority - functions already mostly consolidated)
+
+### 1a. Restore Missing Abbreviations ✅
+**Priority: HIGH** - Several important abbreviations were lost during YAML conversion
+
+**Missing Categories:**
+- Shell-specific: `src` (Zsh reload)
+- Development tools: `gg` (lazygit), `hm` (hivemind), `neo` (neofetch), `ch` (cht.sh)
+- Rails shortcuts: `r` (bin/rails), `rc` (bin/rails console)  
+- NPM: `ni` (install), `ns` (serve), `nt` (test)
+- Git: `gs` (git status)
+
+**Conflicts to resolve:**
+- `ys`: Current=`yarn start` vs Original=`yarn serve` 
+
+**Implementation Tasks:**
+- [x] Add missing abbreviations to YAML file
+- [x] Resolve `ys` conflict (kept `ys` = start, added `yserve` = serve)
+- [x] Regenerate Fish/Zsh abbreviation files
+- [x] Test abbreviations work in both shells
+- [x] Update documentation if needed
+
+**Results:**
+- Fish: 207 abbreviations (excludes shell-specific `src`)
+- Zsh: 208 abbreviations (includes `src` for sourcing .zshrc)
+- All missing abbreviations restored successfully
 
 ### 2. Create Smart Git Branch Functions ❌
 - [ ] Implement `gpum` function that detects default branch and pushes to it
@@ -132,10 +158,10 @@
 ## Progress Tracking
 
 **Phase 1 Completion**: 5/5 ✅  
-**Phase 2 Completion**: 0/6 ❌  
+**Phase 2 Completion**: 2/7 ⚠️ (Shared config + Missing abbreviations)  
 **Phase 3 Completion**: 0/3 ❌  
 
-**Overall Progress**: 36% (5/14 major sections)
+**Overall Progress**: 47% (7/15 major sections)
 
 ---
 

@@ -33,6 +33,11 @@ EOF
 
 # Process each category in the YAML file
 yq eval '. as $root | keys | .[]' "$YAML_FILE" | while read -r category; do
+    # Skip shell-specific category for Fish
+    if [[ "$category" == "shell" ]]; then
+        continue
+    fi
+    
     echo "# $(echo "$category" | tr '_' ' ' | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) substr($i,2) }}1')" >> "$OUTPUT_FILE"
     
     yq eval ".${category} | to_entries | .[] | \"abbr -a -g \" + .key + \" '\" + .value + \"'\"" "$YAML_FILE" >> "$OUTPUT_FILE"
