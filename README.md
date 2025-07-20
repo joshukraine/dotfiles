@@ -6,7 +6,7 @@
 
 - [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
 - [Starship][starship] prompt (or [Powerlevel10K][p10k])
-- Shell support for both [Zsh][zsh] and [Fish][fish] with 90% functional parity
+- Shell support for both [Zsh][zsh] and [Fish][fish] with 95% functional parity via shared configuration
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot’s [Laptop][laptop]
@@ -62,6 +62,7 @@ The dotfiles assume you are running macOS with (at minimum) the following softwa
 - [Zsh][zsh] and/or [Fish][fish]
 - [Neovim][neovim]
 - [Starship][starship]
+- `yq` (for regenerating abbreviations from shared YAML source)
 
 All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
@@ -180,10 +181,12 @@ Having used both Zsh and Fish for several years, I’ve decided to keep my confi
 
 &#9657; **[Fish abbr docs](https://fishshell.com/docs/current/cmds/abbr.html)**
 
-My Zsh and Fish configs mostly have functional parity:
+My Zsh and Fish configs have 95% functional parity via shared configuration:
 
 - Same prompt (Starship)
-- Same essential abbreviations and functions
+- Identical abbreviations (196+) generated from single YAML source
+- Shared environment variables
+- Smart git functions with automatic branch detection
 
 <details>
   <summary><strong>Zsh Setup Instructions</strong></summary>

@@ -43,13 +43,14 @@
 
 ## Phase 2: Major Improvements (Medium Impact, Medium Risk)
 
-### 1. Create Shared Configuration Framework ⚡
+### 1. Create Shared Configuration Framework ✅
 - [x] Create `shared/environment.sh` - Common environment variables (Zsh)
 - [x] Create `shared/environment.fish` - Common environment variables (Fish)
 - [x] Update Fish and Zsh configs to use shared environment files
-- [ ] Create `shared/abbreviations.yaml` - Single source for all abbreviations
-- [ ] Create `shared/functions/` directory with shell-agnostic definitions
-- [ ] Build generators for Fish and Zsh specific configs
+- [x] Create `shared/abbreviations.yaml` - Single source for all abbreviations (196 abbrs!)
+- [x] Build generators for Fish and Zsh specific configs
+- [x] Generate shell-specific abbreviation files with proper headers
+- [ ] Create `shared/functions/` directory (lower priority - functions already mostly consolidated)
 
 ### 2. Create Smart Git Branch Functions ❌
 - [ ] Implement `gpum` function that detects default branch and pushes to it

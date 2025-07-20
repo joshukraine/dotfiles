@@ -104,9 +104,13 @@ mux     # tmuxinator (session management)
 
 The repository maintains parallel configurations for both Zsh and Fish shells:
 
-- Shared abbreviations defined in both `fish/.config/fish/abbreviations.fish` and `zsh/.config/zsh-abbr/abbreviations.zsh`
+- **Shared configuration framework** eliminates duplication:
+  - `shared/environment.sh` and `shared/environment.fish` - Common environment variables
+  - `shared/abbreviations.yaml` - Single source for all 196+ abbreviations
+  - Shell-specific files generated via `shared/generate-*-abbr.sh` scripts
 - Both use Starship for consistent prompting
 - Fish uses native abbreviations, Zsh uses zsh-abbr plugin for Fish-like behavior
+- Smart git functions with automatic branch detection (gpum, grbm, gcom, gbrm)
 
 ### Stow-based Symlink Management
 
@@ -138,10 +142,34 @@ The repository maintains parallel configurations for both Zsh and Fish shells:
 
 - `setup.sh` - Main installation script
 - `brew/Brewfile` - Homebrew package definitions
-- `fish/.config/fish/abbreviations.fish` - Fish shell abbreviations
-- `zsh/.config/zsh-abbr/abbreviations.zsh` - Zsh abbreviations
+- `shared/abbreviations.yaml` - **Single source of truth for all abbreviations**
+- `shared/environment.sh` and `shared/environment.fish` - Shared environment variables
+- `shared/generate-*-abbr.sh` - Scripts to generate shell-specific abbreviations
+- `fish/.config/fish/abbreviations.fish` - **Generated** Fish shell abbreviations
+- `zsh/.config/zsh-abbr/abbreviations.zsh` - **Generated** Zsh abbreviations
 - `nvim/.config/nvim/lua/config/lazy.lua` - LazyVim configuration entry point
 - `local/` - Contains example local configuration files for customization
+
+## Shared Configuration System
+
+The dotfiles use a shared configuration framework to eliminate duplication between Fish and Zsh:
+
+### Adding/Modifying Abbreviations
+
+1. Edit `shared/abbreviations.yaml` (single source of truth)
+2. Regenerate shell-specific files:
+   ```bash
+   cd ~/dotfiles/shared
+   ./generate-fish-abbr.sh    # Updates fish/.config/fish/abbreviations.fish
+   ./generate-zsh-abbr.sh     # Updates zsh/.config/zsh-abbr/abbreviations.zsh
+   ```
+
+### Environment Variables
+
+- **Shared**: Edit `shared/environment.sh` and `shared/environment.fish`
+- **Shell-specific**: Edit in respective shell configs (`fish/config.fish` or `zsh/.zshrc`)
+
+**⚠️ Important**: Never edit generated abbreviation files directly - changes will be overwritten!
 
 ## Customization
 
