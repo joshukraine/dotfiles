@@ -340,3 +340,151 @@ function update_jumpstart() {
     git fetch jumpstart-pro
     git merge jumpstart-pro/main
 }
+
+# Push current branch to origin with upstream tracking (smart default branch detection)
+function gpum() {
+  # Help message
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  printf "%s\n" "Usage: gpum [OPTION]
+Push current branch to origin with upstream tracking to the default branch.
+Intelligently detects whether to use 'main' or 'master' as the default branch.
+
+Options:
+  -h, --help  Show this help message
+
+Examples:
+  gpum        # Push current branch to origin with upstream tracking"
+  return 0
+  fi
+
+  # Check if we're in a Git repo
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # Get current branch
+  local current_branch=$(git branch --show-current)
+  if [[ -z "$current_branch" ]]; then
+    echo "Could not determine current branch."
+    return 1
+  fi
+
+  # Check if remote exists
+  if ! git remote | grep -q "^origin$"; then
+    echo "No 'origin' remote found."
+    return 1
+  fi
+
+  # Determine default branch
+  local default_branch=""
+  
+  # Try to get default branch from remote
+  default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+  
+  # Fallback if needed
+  if [[ -z "$default_branch" ]]; then
+    if git show-ref --quiet refs/heads/main; then
+      default_branch="main"
+    elif git show-ref --quiet refs/heads/master; then
+      default_branch="master"
+    else
+      echo "Could not determine default branch."
+      return 1
+    fi
+  fi
+
+  echo "Pushing $current_branch to origin with upstream tracking..."
+  git push -u origin "$current_branch"
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to push to origin."
+    return 1
+  fi
+
+  echo "Successfully pushed $current_branch to origin (default branch: $default_branch)"
+}
+
+# Rebase current branch against default branch (smart branch detection)
+function grbm() {
+  # Help message
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  printf "%s\n" "Usage: grbm [OPTION]
+Rebase current branch against the default branch (main or master).
+Intelligently detects the default branch and fetches latest changes.
+
+Options:
+  -h, --help  Show this help message
+
+Examples:
+  grbm        # Rebase current branch against default branch"
+  return 0
+  fi
+
+  # Check if we're in a Git repo
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # Get current branch
+  local current_branch=$(git branch --show-current)
+  if [[ -z "$current_branch" ]]; then
+    echo "Could not determine current branch."
+    return 1
+  fi
+
+  # Check for uncommitted changes
+  if ! git diff-index --quiet HEAD --; then
+    echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
+    read -r "response?Continue anyway? (y/N): "
+    if [[ "$response" != "y" && "$response" != "Y" ]]; then
+      echo "Aborted."
+      return 1
+    fi
+  fi
+
+  # Check if remote exists and fetch
+  if git remote | grep -q "^origin$"; then
+    echo "Fetching latest from origin..."
+    git fetch origin > /dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+      echo "Failed to fetch from origin."
+      return 1
+    fi
+  fi
+
+  # Determine default branch
+  local default_branch=""
+  
+  # Try to get default branch from remote
+  if git remote | grep -q "^origin$"; then
+    default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+  fi
+  
+  # Fallback if needed
+  if [[ -z "$default_branch" ]]; then
+    if git show-ref --quiet refs/heads/main; then
+      default_branch="main"
+    elif git show-ref --quiet refs/heads/master; then
+      default_branch="master"
+    else
+      echo "Could not determine default branch."
+      return 1
+    fi
+  fi
+
+  # Don't rebase if we're already on the default branch
+  if [[ "$current_branch" == "$default_branch" ]]; then
+    echo "Already on default branch ($default_branch). Nothing to rebase."
+    return 0
+  fi
+
+  echo "Rebasing $current_branch against $default_branch..."
+  git rebase "origin/$default_branch"
+  if [[ $? -ne 0 ]]; then
+    echo "Rebase failed. You may need to resolve conflicts manually."
+    return 1
+  fi
+
+  echo "Successfully rebased $current_branch against $default_branch"
+}
