@@ -5,7 +5,8 @@ Create a git commit with a meaningful message based on the current changes.
 **IMPORTANT**: Never include "🤖 Generated with Claude Code" or any similar attribution in commit messages.
 
 ## Command Options
-* `--no-verify`: Skip running the pre-commit checks (lint, build, generate:docs)
+
+- `--no-verify`: Skip running the pre-commit checks (lint, build, generate:docs)
 
 ## Your task
 
@@ -30,24 +31,31 @@ Create a git commit with a meaningful message based on the current changes.
 
 ## Best Practices for Commits
 
-* **Verify before committing**: Ensure code is linted, builds correctly, and documentation is updated
-* **Atomic commits**: Each commit should contain related changes that serve a single purpose
-* **Split large changes**: If changes touch multiple concerns, split them into separate commits
-* **Conventional commit format**: Use the format `<type>: <description>` where type is one of:
-   * `feat`: A new feature
-   * `fix`: A bug fix
-   * `docs`: Documentation changes
-   * `style`: Code style changes (formatting, etc)
-   * `refactor`: Code changes that neither fix bugs nor add features
-   * `perf`: Performance improvements
-   * `test`: Adding or fixing tests
-   * `chore`: Changes to the build process, tools, etc.
-* **Present tense, imperative mood**: Write commit messages as commands (e.g., "add feature" not "added feature")
-* **Concise first line**: Keep the first line under 72 characters
+- **Verify before committing**: Ensure code is linted, builds correctly, and documentation is updated
+- **Atomic commits**: Each commit should contain related changes that serve a single purpose
+- **Split large changes**: If changes touch multiple concerns, split them into separate commits
+- **Conventional commit format**: Use the format `<type>: <description>` where type is one of:
+  - `feat`: A new feature
+  - `fix`: A bug fix
+  - `docs`: Documentation changes
+  - `style`: Code style changes (formatting, etc)
+  - `refactor`: Code changes that neither fix bugs nor add features
+  - `perf`: Performance improvements
+  - `test`: Adding or fixing tests
+  - `chore`: Changes to the build process, tools, etc.
+- **Subject line formatting**:
+  - Keep under 50 characters
+  - Use present tense, imperative mood (e.g., "add feature" not "added feature" or "fixes bug")
+  - Capitalize first letter of description
+  - No period at end of subject line
+- **Message structure**:
+  - Include body when change needs explanation
+  - Reference issues/PRs in footer when applicable (e.g., "Fixes #123", "Closes #456")
 
 ## Guidelines for Splitting Commits
 
 When analyzing the diff, consider splitting commits based on these criteria:
+
 1. **Different concerns**: Changes to unrelated parts of the codebase
 2. **Different types of changes**: Mixing features, fixes, refactoring, etc.
 3. **File patterns**: Changes to different types of files (e.g., source code vs documentation)
@@ -62,3 +70,4 @@ When analyzing the diff, consider splitting commits based on these criteria:
 🎯 Commit created: abc1234
 ❓ Push to remote? (y/n)
 ```
+
