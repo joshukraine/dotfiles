@@ -32,7 +32,6 @@ The repository is organized with each top-level directory representing a tool or
 - `terminfo/` - Custom terminal information files
 - `tmux/` - Tmux terminal multiplexer configuration
 - `yamllint/` - YAML linter configuration
-- `yazi/` - Yazi terminal file manager configuration
 - `zsh/` - Zsh configuration with zsh-abbr for abbreviations
 
 ## Common Commands
