@@ -18,7 +18,6 @@ The repository is organized with each top-level directory representing a tool or
 - `fish/` - Fish shell configuration with abbreviations and functions
 - `ghostty/` - Ghostty terminal emulator configuration
 - `git/` - Git configuration and global gitignore
-- `iterm/` - iTerm2 terminal emulator configuration and color schemes
 - `kitty/` - Kitty terminal emulator configuration
 - `laptop/` - Laptop setup scripts and configuration
 - `lazygit/` - Lazygit terminal UI configuration

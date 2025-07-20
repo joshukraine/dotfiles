@@ -156,15 +156,6 @@ if command -v fish &>/dev/null; then
   command fish -c "set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/.bin $HOME/.yarn/bin $HOMEBREW_PREFIX/bin"
 fi
 
-if [ -d "/Applications/iTerm.app" ]; then
-  dotfiles_echo "Setting up iTerm2 preferences..."
-
-  # Specify the preferences directory
-  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$DOTFILES/iterm"
-
-  # Tell iTerm2 to use the custom preferences in the directory
-  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-fi
 
 if command -v tmux &>/dev/null; then
   if [ ! -d "${HOME}/.terminfo" ]; then

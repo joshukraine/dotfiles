@@ -24,7 +24,7 @@ function M.cowboy()
   local ok = true
   for _, key in ipairs({ "h", "j", "k", "l", "+", "-" }) do
     local count = 0
-    local timer = assert(vim.loop.new_timer())
+    local timer = assert((vim.uv or vim.loop).new_timer())
     local map = key
     vim.keymap.set("n", key, function()
       if vim.v.count > 0 then
