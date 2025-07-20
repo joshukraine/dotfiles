@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Create a new tmux session with a specific name
+# Usage: tn <session-name>
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: tn <session-name>"
+    exit 1
+fi
+
+tmux new -s "$*"

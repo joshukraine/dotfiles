@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# Update from jumpstart-pro remote
+# Usage: update_jumpstart
+
+set -euo pipefail
+
+git fetch jumpstart-pro
+git merge jumpstart-pro/main

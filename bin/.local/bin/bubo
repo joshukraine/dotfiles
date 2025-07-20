@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Update Homebrew and show outdated packages
+# Usage: bubo
+
+set -euo pipefail
+
+brew update && brew outdated
