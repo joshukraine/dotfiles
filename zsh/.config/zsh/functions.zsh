@@ -238,10 +238,6 @@ function pi() {
   ping -Anc 5 1.1.1.1
 }
 
-function randpw() {
-  openssl rand -base64 4 | md5 | head -c$1 ; echo
-}
-
 function rlv() {
   asdf list all ruby | rg '^\d'
 }
