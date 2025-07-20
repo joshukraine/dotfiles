@@ -10,17 +10,30 @@ This is a personal dotfiles repository for macOS using GNU Stow for symlink mana
 
 The repository is organized with each top-level directory representing a tool or application configuration:
 
-- `fish/` - Fish shell configuration with abbreviations and functions
-- `zsh/` - Zsh configuration with zsh-abbr for abbreviations
-- `nvim/` - Neovim configuration using LazyVim distribution
-- `ghostty/` - Ghostty terminal emulator configuration
-- `kitty/` - Kitty terminal emulator configuration
-- `git/` - Git configuration and global gitignore
-- `brew/` - Homebrew Brewfile for package management
-- `starship/` - Starship prompt configuration
-- `tmux/` - Tmux configuration (optional, not installed by default)
+- `asdf/` - asdf version manager configuration
+- `bash/` - Bash shell configuration
 - `bin/` - Custom shell scripts and utilities
+- `brew/` - Homebrew Brewfile for package management
+- `claude/` - Claude AI assistant configuration
+- `fish/` - Fish shell configuration with abbreviations and functions
+- `ghostty/` - Ghostty terminal emulator configuration
+- `git/` - Git configuration and global gitignore
+- `iterm/` - iTerm2 terminal emulator configuration and color schemes
+- `kitty/` - Kitty terminal emulator configuration
+- `laptop/` - Laptop setup scripts and configuration
+- `lazygit/` - Lazygit terminal UI configuration
+- `markdown/` - Markdown-related configuration
+- `node/` - Node.js configuration
+- `nvim/` - Neovim configuration using LazyVim distribution
+- `rc/` - Various RC files (.inputrc, .curlrc, etc.)
+- `ruby/` - Ruby configuration (.gemrc, .irbrc)
 - `spell/` - Custom spell dictionaries for multiple languages
+- `starship/` - Starship prompt configuration
+- `terminfo/` - Custom terminal information files
+- `tmux/` - Tmux terminal multiplexer configuration
+- `yamllint/` - YAML linter configuration
+- `yazi/` - Yazi terminal file manager configuration
+- `zsh/` - Zsh configuration with zsh-abbr for abbreviations
 
 ## Common Commands
 
@@ -71,6 +84,22 @@ src     # source ~/.zshrc
 fish_config  # Open Fish configuration UI
 ```
 
+### Tmux Management
+
+Common tmux commands and abbreviations available:
+
+```bash
+tl      # tmux ls (list sessions)
+tlw     # tmux list-windows
+tn      # Create new tmux session with name
+tna     # Create/attach to session named after current directory
+ta      # Attach to existing tmux session
+tk      # Kill tmux session
+tka     # Kill all tmux sessions
+tsrc    # Source tmux configuration
+mux     # tmuxinator (session management)
+```
+
 ## Architecture Notes
 
 ### Dual Shell Support
@@ -99,7 +128,7 @@ The repository maintains parallel configurations for both Zsh and Fish shells:
 - Primary terminal: ghostty (GPU-accelerated, modern terminal)
 - Alternative: kitty (also GPU-accelerated with native split support)
 - Font setup includes Nerd Font symbols for icons without patched fonts
-- Tmux configuration available but not installed by default
+- Tmux installed and configured by default for terminal multiplexing
 
 ### Package Management
 
