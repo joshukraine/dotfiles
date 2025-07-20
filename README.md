@@ -38,16 +38,23 @@ Clone this repo.
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 ```
 
-Read the setup script.
+Read the setup script and check available options.
 
 ```sh
 less ~/dotfiles/setup.sh
+~/dotfiles/setup.sh --help
+```
+
+Preview what the setup script will do (dry-run mode).
+
+```sh
+~/dotfiles/setup.sh --dry-run
 ```
 
 Run the setup script.
 
 ```sh
-bash ~/dotfiles/setup.sh
+~/dotfiles/setup.sh
 ```
 
 ## ✅ Prerequisites
@@ -128,16 +135,18 @@ Clone
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 ```
 
-Read
+Read and preview
 
 ```sh
 less ~/dotfiles/setup.sh
+~/dotfiles/setup.sh --help
+~/dotfiles/setup.sh --dry-run  # Preview changes without applying them
 ```
 
 Setup
 
 ```sh
-bash ~/dotfiles/setup.sh
+~/dotfiles/setup.sh
 ```
 
 If you do encounter Stow conflicts, resolve these and run setup again. The script is idempotent, so you can run it multiple times safely.
