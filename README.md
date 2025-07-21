@@ -18,6 +18,7 @@
 - [Prerequisites](#-prerequisites)
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
+- [Shared Configuration Framework](#shared-configuration-framework)
 - [About Neovim Distributions](#about-neovim-distributions)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
 - [Nerd Fonts and Icons](#nerd-fonts-and-icons)
