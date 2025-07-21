@@ -48,7 +48,7 @@ chore: update dependencies to latest versions
 - No period at end of subject line
 - Include body when change needs explanation
 - Reference issues/PRs in footer when applicable
-- Never include Claude Code generation snippets (e.g., "🤖 Generated with [Claude Code]") in commit messages
+- DO NOT include "🤖 Generated with Claude Code" or any similar attribution in commit messages.
 
 ## Code Quality Standards
 
@@ -92,6 +92,7 @@ Use descriptive branch names:
 - Reference related issues
 - Ensure CI passes before requesting review
 - Keep PRs focused and atomic when possible
+- OK to include standard Claude Code attribution messages in PR descriptions, comments, and reviews.
 
 ## Code Style
 
@@ -125,4 +126,3 @@ Use descriptive branch names:
 - Provide sensible defaults
 - Document all configuration options
 - Separate configuration from code
-

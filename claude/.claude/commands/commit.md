@@ -2,7 +2,10 @@
 
 Create a git commit with a meaningful message based on the current changes.
 
-**IMPORTANT**: Never include "🤖 Generated with Claude Code" or any similar attribution in commit messages.
+**IMPORTANT**:
+
+- DO NOT include "🤖 Generated with Claude Code" or any similar attribution in commit messages.
+- DO include standard Claude Code attribution messages in PR descriptions, comments, and reviews.
 
 ## Command Options
 
@@ -70,4 +73,3 @@ When analyzing the diff, consider splitting commits based on these criteria:
 🎯 Commit created: abc1234
 ❓ Push to remote? (y/n)
 ```
-
