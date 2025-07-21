@@ -76,6 +76,11 @@ bats tests/abbreviations/
 
 # Utilities only
 bats tests/utilities/
+
+# Specific function tests
+bats tests/git_functions/test_gpum.bats      # Just gpum tests
+bats tests/git_functions/test_grbm.bats     # Just grbm tests  
+bats tests/git_functions/test_gcom.bats     # Just gcom tests
 ```
 
 ### Run individual test files
@@ -220,11 +225,29 @@ The workflow:
 
 The framework aims to test:
 
-- ✅ **Core git functions**: gpum, grbm, gcom, gbrm
+- ✅ **Smart git functions**: gpum (comprehensive), grbm, gcom, gbrm (basic)
 - ✅ **Key abbreviations**: 20+ most critical abbreviations  
-- ⏳ **Development utilities**: Directory navigation functions
-- ⏳ **Environment loading**: Variable and path setup
-- ⏳ **tmux functions**: Session management utilities
+- ✅ **Development utilities**: git-cm, git-check-uncommitted, tat (tmux session manager)
+- ✅ **Environment loading**: Variable and path setup
+- ✅ **Bin script utilities**: Key scripts in bin/.local/bin directory
+
+### Current Test Coverage (101 tests)
+
+**Abbreviations (11 tests)**
+- Cross-shell compatibility validation (Fish + Zsh)
+- Core abbreviation categories (unix, git, homebrew, claude, tmux, system)
+- File structure and generation validation
+
+**Git Functions (78 tests)**
+- **gpum**: 12 comprehensive tests (help, error cases, branch detection, push scenarios)
+- **grbm**: 20 tests (help, git validation, branch detection, rebase scenarios)
+- **gcom**: 22 tests (help, checkout with/without pull, branch detection)
+- **gbrm**: 12 tests (branch removal, default branch detection, edge cases)
+- **git-check-uncommitted**: 17 tests (status detection, prompt handling, edge cases)
+
+**Utility Scripts (12 tests)**
+- **git-cm**: 9 tests (commit wrapper functionality, argument handling)
+- **tat**: 9 tests (tmux session creation, directory name handling)
 
 ## Troubleshooting
 
