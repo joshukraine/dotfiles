@@ -33,3 +33,6 @@ keybind = super+ctrl+down=resize_split:down,100
 keybind = super+ctrl+left=resize_split:left,100
 keybind = super+ctrl+up=resize_split:up,100
 keybind = super+ctrl+right=resize_split:right,100
+
+# Reload config
+keybind = super+shift+comma=reload_config
