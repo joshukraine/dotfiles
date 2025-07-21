@@ -18,6 +18,16 @@ abbr -a -g mv 'mv -iv'
 abbr -a -g neo 'neofetch'
 abbr -a -g ch 'cht.sh'
 
+# Claude Code
+abbr -a -g cl 'claude'
+abbr -a -g clsp 'claude --dangerously-skip-permissions'
+abbr -a -g clh 'claude --help'
+abbr -a -g clv 'claude --version'
+abbr -a -g clr 'claude --resume'
+abbr -a -g cli 'claude --interactive'
+abbr -a -g clri 'claude --resume --interactive'
+abbr -a -g clspi 'claude --dangerously-skip-permissions --interactive'
+
 # Homebrew
 abbr -a -g brc 'brew cleanup'
 abbr -a -g brb 'brew bundle'

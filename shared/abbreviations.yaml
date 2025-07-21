@@ -22,6 +22,17 @@ system:
   neo: "neofetch"
   ch: "cht.sh"
 
+# Claude Code
+claude_code:
+  cl: "claude"
+  clsp: "claude --dangerously-skip-permissions"
+  clh: "claude --help"
+  clv: "claude --version"
+  clr: "claude --resume"
+  cli: "claude --interactive"
+  clri: "claude --resume --interactive"
+  clspi: "claude --dangerously-skip-permissions --interactive"
+
 # Homebrew
 homebrew:
   brc: "brew cleanup"

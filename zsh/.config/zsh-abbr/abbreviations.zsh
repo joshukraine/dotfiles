@@ -21,6 +21,16 @@ abbr "src"="source $HOME/.zshrc"
 abbr "neo"="neofetch"
 abbr "ch"="cht.sh"
 
+# Claude Code
+abbr "cl"="claude"
+abbr "clsp"="claude --dangerously-skip-permissions"
+abbr "clh"="claude --help"
+abbr "clv"="claude --version"
+abbr "clr"="claude --resume"
+abbr "cli"="claude --interactive"
+abbr "clri"="claude --resume --interactive"
+abbr "clspi"="claude --dangerously-skip-permissions --interactive"
+
 # Homebrew
 abbr "brc"="brew cleanup"
 abbr "brb"="brew bundle"
