@@ -103,7 +103,8 @@ test_fish_abbreviation() {
   
   if [ -f "$fish_abbr_file" ]; then
     # Extract the abbreviation expansion from the Fish file
-    local actual=$(fish -c "source '$fish_abbr_file'; abbr --show | grep '^$abbr ' | cut -d' ' -f2-" 2>/dev/null)
+    # Format: abbr -a -g abbr_name 'expansion'
+    local actual=$(grep "^abbr -a -g $abbr " "$fish_abbr_file" | sed "s/^abbr -a -g $abbr '//" | sed "s/'$//" 2>/dev/null)
     
     if [ "$actual" = "$expected" ]; then
       return 0
@@ -127,7 +128,8 @@ test_zsh_abbreviation() {
   
   if [ -f "$zsh_abbr_file" ]; then
     # Extract the abbreviation expansion from the Zsh file
-    local actual=$(grep "abbr $abbr=" "$zsh_abbr_file" | cut -d'"' -f2 2>/dev/null)
+    # Format: abbr "abbr_name"="expansion"
+    local actual=$(grep "^abbr \"$abbr\"=" "$zsh_abbr_file" | cut -d'"' -f4 2>/dev/null)
     
     if [ "$actual" = "$expected" ]; then
       return 0
