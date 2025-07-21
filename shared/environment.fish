@@ -1,6 +1,6 @@
 # Shared environment variables for Fish shell
 # This file mirrors environment.sh but uses Fish syntax
-# Generated from shared/environment.sh - keep in sync
+# Keep manually synchronized with shared/environment.sh
 
 # Editor configuration
 set -gx EDITOR nvim

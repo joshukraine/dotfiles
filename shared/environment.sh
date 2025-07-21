@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# Shared environment variables for both Fish and Zsh shells
+# Shared environment variables for Zsh shell
 # This file reduces duplication and ensures consistency across shells.
+# Fish uses the parallel shared/environment.fish file.
 #
 # Usage:
-#   Fish: source ~/dotfiles/shared/environment.sh in config.fish
 #   Zsh:  source ~/dotfiles/shared/environment.sh in .zshrc
 
 # Editor configuration
