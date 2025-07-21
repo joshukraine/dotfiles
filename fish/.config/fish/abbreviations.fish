@@ -317,6 +317,7 @@ abbr -a -g saf 'defaults write com.apple.finder AppleShowAllFiles -bool false &&
 # Middleman
 abbr -a -g mm 'bundle exec middleman'
 abbr -a -g mmb 'bundle exec middleman build'
+abbr -a -g mmbc 'bundle exec middleman build --clean'
 abbr -a -g mmc 'bundle exec middleman console'
 abbr -a -g mms 'bundle exec middleman server'
 

@@ -15,7 +15,7 @@ unix:
 
 # Shell-specific (handled conditionally by generators)
 shell:
-  src: "source $HOME/.zshrc"  # Zsh only
+  src: "source $HOME/.zshrc" # Zsh only
 
 # System tools
 system:
@@ -341,5 +341,7 @@ finder:
 middleman:
   mm: "bundle exec middleman"
   mmb: "bundle exec middleman build"
+  mmbc: "bundle exec middleman build --clean"
   mmc: "bundle exec middleman console"
   mms: "bundle exec middleman server"
+

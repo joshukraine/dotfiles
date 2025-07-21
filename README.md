@@ -257,12 +257,33 @@ The dotfiles use a unified configuration system that eliminates duplication betw
 
 - **`shared/abbreviations.yaml`** - Single source of truth for all 196+ abbreviations
 - **`shared/environment.sh` and `shared/environment.fish`** - Common environment variables
-- **`shared/generate-fish-abbr.sh` and `shared/generate-zsh-abbr.sh`** - Scripts to generate shell-specific abbreviations
+- **`shared/generate-all-abbr.sh`** - Unified script to regenerate abbreviations for all shells
+- **`shared/generate-fish-abbr.sh` and `shared/generate-zsh-abbr.sh`** - Individual shell-specific generation scripts
 
 ### Adding or Modifying Abbreviations
 
 1. Edit `~/dotfiles/shared/abbreviations.yaml`
-2. Regenerate the shell-specific files:
+2. Regenerate all abbreviations (from any directory):
+
+```bash
+reload-abbr    # Available as a shell function - works from anywhere!
+```
+
+3. Reload your shell configuration:
+   - Fish: `exec fish` or open a new terminal
+   - Zsh: `src` or open a new terminal
+
+<details>
+  <summary><strong>Alternative methods</strong></summary>
+
+**Manual script execution:**
+
+```bash
+cd ~/dotfiles/shared
+./generate-all-abbr.sh     # Updates both Fish and Zsh abbreviation files
+```
+
+**Individual shell regeneration:**
 
 ```bash
 cd ~/dotfiles/shared
@@ -270,9 +291,7 @@ cd ~/dotfiles/shared
 ./generate-zsh-abbr.sh     # Updates zsh/.config/zsh-abbr/abbreviations.zsh
 ```
 
-3. Reload your shell configuration:
-   - Fish: `exec fish` or open a new terminal
-   - Zsh: `src` or open a new terminal
+</details>
 
 > [!IMPORTANT]
 > Never edit the generated abbreviation files directly - changes will be overwritten!
@@ -493,7 +512,7 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
 [smoke-test-output]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700085278/screenshots/smoke-test_tddntp.png
 [starship]: https://starship.rs/
-[symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/NerdFontsSymbolsOnly.zip
+[symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip
 [tmux]: https://github.com/tmux/tmux/wiki
 [zap]: https://www.zapzsh.com/
 [zero-to-ide-lazyvim-video]: https://youtu.be/N93cTbtLCIM

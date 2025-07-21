@@ -320,6 +320,7 @@ abbr "saf"="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # Middleman
 abbr "mm"="bundle exec middleman"
 abbr "mmb"="bundle exec middleman build"
+abbr "mmbc"="bundle exec middleman build --clean"
 abbr "mmc"="bundle exec middleman console"
 abbr "mms"="bundle exec middleman server"
 
