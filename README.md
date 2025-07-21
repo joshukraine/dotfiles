@@ -19,6 +19,7 @@
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
 - [Shared Configuration Framework](#shared-configuration-framework)
+- [Markdown Linting](#markdown-linting)
 - [About Neovim Distributions](#about-neovim-distributions)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
 - [Nerd Fonts and Icons](#nerd-fonts-and-icons)
@@ -307,6 +308,53 @@ The shared configuration includes intelligent git functions that automatically d
 
 These functions work with both `main` and `master` branch names automatically.
 
+## Markdown Linting
+
+This repository includes a complete markdownlint setup for consistent markdown formatting across all projects.
+
+### Features
+
+- **Global Configuration**: Uses `~/.markdownlint.yaml` with sensible defaults:
+  - Disabled line length rule (MD013) for better readability
+  - Allows common inline HTML elements (`details`, `summary`, `strong`)
+  - Supports trailing punctuation including CJK characters
+  - Allows bare URLs (MD034 disabled)
+- **Shell Abbreviations**: Quick access via `mdl` commands
+- **Editor Integration**: Works seamlessly with Neovim/LazyVim
+- **CI/CD Support**: Includes sample GitHub Actions workflow
+
+### Usage
+
+```bash
+# Install markdownlint-cli2 (if not already installed)
+brew bundle install
+
+# Lint files using abbreviations
+mdl README.md              # Lint single file
+mdlf README.md             # Auto-fix single file
+mdla                       # Lint all .md files recursively
+mdlaf                      # Fix all .md files recursively
+
+# Or use the global helper script
+mdl-global README.md       # Always uses ~/.markdownlint.yaml
+```
+
+### CI Integration
+
+Copy the example workflow to any project:
+
+```bash
+cp ~/dotfiles/.github/workflows/markdownlint.yml.example .github/workflows/markdownlint.yml
+```
+
+This will run markdownlint on all markdown files in pull requests and pushes.
+
+### Customization
+
+- **Global config**: Edit `~/dotfiles/markdown/.markdownlint.yaml`
+- **Project-specific**: Create `.markdownlint.yaml` in your project root
+- **Add abbreviations**: Edit `~/dotfiles/shared/abbreviations.yaml` and run `reload-abbr`
+
 ## About Neovim Distributions
 
 > [!TIP]
@@ -467,7 +515,6 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 ## License
 
 Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
-
 
 [^2]: <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map>
 
