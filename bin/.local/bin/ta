@@ -4,8 +4,8 @@
 # Usage: ta <session-name>
 
 if [[ $# -eq 0 ]]; then
-    echo "Usage: ta <session-name>"
-    exit 1
+  echo "Usage: ta <session-name>"
+  exit 1
 fi
 
 tmux attach -t "$*"

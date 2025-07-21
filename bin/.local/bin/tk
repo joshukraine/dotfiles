@@ -4,8 +4,8 @@
 # Usage: tk <session-name>
 
 if [[ $# -eq 0 ]]; then
-    echo "Usage: tk <session-name>"
-    exit 1
+  echo "Usage: tk <session-name>"
+  exit 1
 fi
 
 tmux kill-session -t "$*"

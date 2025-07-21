@@ -12,18 +12,18 @@
 TMP_FILE_NAME=/tmp/git_upstream_status_delta
 
 git for-each-ref --format="%(refname:short) %(upstream:short)" refs/ | \
-    while read -r local remote
-    do
-        if [ -x "$remote" ]; then
-            branches=("$local")
-        else
-            branches=("$local" "$remote")
-        fi;
-        for branch in "${branches[@]}"; do
-            master="origin/master"
-            git rev-list --left-right "${branch}"..."${master}" -- 2>/dev/null > $TMP_FILE_NAME || continue
-            LEFT_AHEAD=$(grep -c '^<' $TMP_FILE_NAME)
-            RIGHT_AHEAD=$(grep -c '^>' $TMP_FILE_NAME)
-            echo "$branch (ahead $LEFT_AHEAD) | (behind $RIGHT_AHEAD) $master"
-        done
-    done | grep -v "^origin/master" | sort | uniq
+  while read -r local remote
+  do
+      if [ -x "$remote" ]; then
+          branches=("$local")
+      else
+          branches=("$local" "$remote")
+      fi;
+      for branch in "${branches[@]}"; do
+          master="origin/master"
+          git rev-list --left-right "${branch}"..."${master}" -- 2>/dev/null > $TMP_FILE_NAME || continue
+          LEFT_AHEAD=$(grep -c '^<' $TMP_FILE_NAME)
+          RIGHT_AHEAD=$(grep -c '^>' $TMP_FILE_NAME)
+          echo "$branch (ahead $LEFT_AHEAD) | (behind $RIGHT_AHEAD) $master"
+      done
+  done | grep -v "^origin/master" | sort | uniq

@@ -4,8 +4,8 @@
 # Usage: tka
 
 if ! tmux list-sessions >/dev/null 2>&1; then
-    echo "No tmux sessions to kill."
-    exit 0
+  echo "No tmux sessions to kill."
+  exit 0
 fi
 
 tmux list-sessions | cut -d: -f1 | xargs -I {} tmux kill-session -t {}

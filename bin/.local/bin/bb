@@ -6,10 +6,10 @@
 set -euo pipefail
 
 if [[ -e "$HOME/Brewfile" ]]; then
-    echo "-> Bundling Brewfile located at $HOME/Brewfile"
-    sleep 2
-    brew bundle --file "$HOME/Brewfile"
+  echo "-> Bundling Brewfile located at $HOME/Brewfile"
+  sleep 2
+  brew bundle --file "$HOME/Brewfile"
 else
-    echo "Brewfile not found."
-    exit 1
+  echo "Brewfile not found."
+  exit 1
 fi
