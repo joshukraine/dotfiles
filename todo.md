@@ -58,7 +58,7 @@
 
 **Missing Categories:**
 - Shell-specific: `src` (Zsh reload)
-- Development tools: `gg` (lazygit), `hm` (hivemind), `fast` (fastfetch), `ch` (cht.sh)
+- Development tools: `gg` (lazygit), `hm` (hivemind), `fast` (fastfetch)
 - Rails shortcuts: `r` (bin/rails), `rc` (bin/rails console)  
 - NPM: `ni` (install), `ns` (serve), `nt` (test)
 - Git: `gs` (git status)

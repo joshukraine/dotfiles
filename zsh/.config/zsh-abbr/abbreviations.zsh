@@ -19,7 +19,6 @@ abbr "src"="source $HOME/.zshrc"
 
 # System
 abbr "fast"="fastfetch"
-abbr "ch"="cht.sh"
 
 # Claude Code
 abbr "cl"="claude"

@@ -16,7 +16,6 @@ abbr -a -g mv 'mv -iv'
 
 # System
 abbr -a -g fast 'fastfetch'
-abbr -a -g ch 'cht.sh'
 
 # Claude Code
 abbr -a -g cl 'claude'
