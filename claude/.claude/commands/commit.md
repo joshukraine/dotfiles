@@ -2,11 +2,6 @@
 
 Create a git commit with a meaningful message based on the current changes.
 
-**IMPORTANT**:
-
-- DO NOT include "🤖 Generated with Claude Code" or any similar attribution in commit messages.
-- DO include standard Claude Code attribution messages in PR descriptions, comments, and reviews.
-
 ## Command Options
 
 - `--no-verify`: Skip running the pre-commit checks (lint, build, generate:docs)
