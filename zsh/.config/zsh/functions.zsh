@@ -78,14 +78,8 @@ Examples:
   fi
 
   # Check for uncommitted changes
-  if ! git diff-index --quiet HEAD --; then
-    echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
-    printf "Continue anyway? (y/N): "
-    read -r response
-    if [[ "$response" != "y" && "$response" != "Y" ]]; then
-      echo "Aborted."
-      return 1
-    fi
+  if ! git-check-uncommitted --prompt; then
+    return 1
   fi
 
   # Check if remote exists before fetching
@@ -295,14 +289,8 @@ Examples:
   fi
 
   # Check for uncommitted changes
-  if ! git diff-index --quiet HEAD --; then
-    echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
-    printf "Continue anyway? (y/N): "
-    read -r response
-    if [[ "$response" != "y" && "$response" != "Y" ]]; then
-      echo "Aborted."
-      return 1
-    fi
+  if ! git-check-uncommitted --prompt; then
+    return 1
   fi
 
   # Check if remote exists and fetch

@@ -31,13 +31,8 @@ Examples:
     end
 
     # Check for uncommitted changes
-    if not git diff-index --quiet HEAD --
-        echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
-        read -P "Continue anyway? (y/N): " -l response
-        if test "$response" != y -a "$response" != Y
-            echo "Aborted."
-            return 1
-        end
+    if not git-check-uncommitted --prompt
+        return 1
     end
 
     # Check if remote exists and fetch
