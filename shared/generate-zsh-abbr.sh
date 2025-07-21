@@ -6,6 +6,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Load shared utilities
+source "$SCRIPT_DIR/generator-utils.sh"
 YAML_FILE="$SCRIPT_DIR/abbreviations.yaml"
 OUTPUT_FILE="$SCRIPT_DIR/../zsh/.config/zsh-abbr/abbreviations.zsh"
 
@@ -33,7 +36,12 @@ EOF
 
 # Process each category in the YAML file
 yq eval '. as $root | keys | .[]' "$YAML_FILE" | while read -r category; do
-    echo "# $(echo "$category" | tr '_' ' ' | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) substr($i,2) }}1')" >> "$OUTPUT_FILE"
+    # Skip shell-specific categories for Zsh (currently none, but structure is ready)
+    if should_skip_category "zsh" "$category"; then
+        continue
+    fi
+    
+    echo "# $(to_title_case "$category")" >> "$OUTPUT_FILE"
     
     yq eval ".${category} | to_entries | .[] | \"abbr \\\"\" + .key + \"\\\"=\\\"\" + .value + \"\\\"\"" "$YAML_FILE" >> "$OUTPUT_FILE"
     
