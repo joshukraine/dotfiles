@@ -47,9 +47,6 @@ function fs() {
   fi;
 }
 
-# function gbrm() {
-#   git branch --merged master | grep -v "^\*\|  master" | xargs -n 1 git branch -d
-# }
 
 function gcom() {
   local do_pull=0

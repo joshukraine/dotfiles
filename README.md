@@ -303,7 +303,7 @@ The shared configuration includes intelligent git functions that automatically d
 - `gpum` - Pull from upstream main/master
 - `grbm` - Rebase on main/master
 - `gcom` - Checkout main/master
-- `gbrm` - Create branch from main/master
+- `gbrm` - Remove branches merged into main/master
 
 These functions work with both `main` and `master` branch names automatically.
 
