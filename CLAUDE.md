@@ -158,6 +158,7 @@ The dotfiles use a shared configuration framework to eliminate duplication betwe
 
 1. Edit `shared/abbreviations.yaml` (single source of truth)
 2. Regenerate shell-specific files:
+
    ```bash
    cd ~/dotfiles/shared
    ./generate-fish-abbr.sh    # Updates fish/.config/fish/abbreviations.fish
@@ -179,9 +180,29 @@ Local customizations should be placed in `*.local` files:
 - `~/.laptop.local` - Additional laptop setup customizations
 - `~/dotfiles/local/config.fish.local` - Fish-specific local configuration
 
+## Scratchpads
+
+For temporary files, notes, and debugging during development work with Claude Code:
+
+- **Location**: Use `scratchpads/` directory (ignored by git)
+- **Organization**: Subdirectories by type (`pr-reviews/`, `planning/`, `debugging/`, `notes/`)
+- **Naming**: Include timestamps for organization (e.g., `pr-review-70-20250721-211241.md`)
+- **Purpose**: Working files that should not be committed to repository
+
+Example structure:
+
+```
+scratchpads/
+├── pr-reviews/
+│   └── pr-review-70-20250721-211241.md
+├── planning/
+│   └── phase-3-roadmap-20250721.md
+└── debugging/
+    └── shell-function-debug-20250721.md
+```
+
 ## Platform Support
 
 - **macOS only** - setup script checks for Darwin and exits on other platforms
 - **Apple Silicon and Intel** - automatically detects architecture and sets HOMEBREW_PREFIX accordingly
 - **XDG Base Directory** support with automatic directory creation
-

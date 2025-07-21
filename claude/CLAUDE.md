@@ -124,3 +124,7 @@ Use descriptive branch names:
 - Provide sensible defaults
 - Document all configuration options
 - Separate configuration from code
+
+## Scratchpad Management
+
+Use `/setup-scratchpads` in any project to create standardized organization for temporary files, notes, and debugging materials. This sets up git-ignored directories with consistent structure across all projects.
