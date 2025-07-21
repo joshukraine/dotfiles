@@ -193,7 +193,7 @@ Having used both Zsh and Fish for several years, I’ve decided to keep my confi
 My Zsh and Fish configs have 95% functional parity via shared configuration:
 
 - Same prompt (Starship)
-- Identical abbreviations (196+) generated from single YAML source
+- Identical abbreviations (250+) generated from single YAML source
 - Shared environment variables
 - Smart git functions with automatic branch detection
 
@@ -255,7 +255,7 @@ The dotfiles use a unified configuration system that eliminates duplication betw
 
 ### Key Components
 
-- **`shared/abbreviations.yaml`** - Single source of truth for all 196+ abbreviations
+- **`shared/abbreviations.yaml`** - Single source of truth for all 250+ abbreviations
 - **`shared/environment.sh` and `shared/environment.fish`** - Common environment variables
 - **`shared/generate-all-abbr.sh`** - Unified script to regenerate abbreviations for all shells
 - **`shared/generate-fish-abbr.sh` and `shared/generate-zsh-abbr.sh`** - Individual shell-specific generation scripts
