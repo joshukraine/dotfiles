@@ -4,7 +4,7 @@
 #
 # https://zsh-abbr.olets.dev
 
-# Unix
+# unix
 abbr "c"="clear"
 abbr "cv"="command -v"
 abbr "df"="df -h"
@@ -14,13 +14,13 @@ abbr "duf"="du -sh *"
 abbr "mkdir"="mkdir -pv"
 abbr "mv"="mv -iv"
 
-# Shell
+# shell
 abbr "src"="source $HOME/.zshrc"
 
-# System
+# system
 abbr "fast"="fastfetch"
 
-# Claude Code
+# claude code
 abbr "cl"="claude"
 abbr "clsp"="claude --dangerously-skip-permissions"
 abbr "clh"="claude --help"
@@ -32,7 +32,7 @@ abbr "clcp"="claude --continue --print"
 abbr "clup"="claude update"
 abbr "clmcp"="claude mcp"
 
-# Homebrew
+# homebrew
 abbr "brc"="brew cleanup"
 abbr "brb"="brew bundle"
 abbr "brd"="brew doctor"
@@ -50,7 +50,7 @@ abbr "bsl"="brew services list"
 abbr "bsr"="brew services restart"
 abbr "bsv"="brew services"
 
-# Config Dirs
+# config dirs
 abbr "cdot"="cd $DOTFILES"
 abbr "cdxc"="cd $XDG_CONFIG_HOME"
 abbr "cdfi"="cd $XDG_CONFIG_HOME/fish"
@@ -61,14 +61,14 @@ abbr "cdxs"="cd $XDG_STATE_HOME"
 abbr "cdlb"="cd $HOME/.local/bin"
 abbr "cdbn"="cd $HOME/.bin"
 
-# Navigation
+# navigation
 abbr ".."="cd .."
 abbr "..."="cd ../../"
 abbr "...."="cd ../../../"
 abbr "....."="cd ../../../../"
 abbr "-"="cd -"
 
-# Tree
+# tree
 abbr "tree"="ll --tree --level=2"
 abbr "t2"="ll --tree --level=2"
 abbr "t2a"="ll --tree --level=2 -a"
@@ -77,28 +77,28 @@ abbr "t3a"="ll --tree --level=3 -a"
 abbr "t4"="ll --tree --level=4"
 abbr "t4a"="ll --tree --level=4 -a"
 
-# Dev Tools
+# dev tools
 abbr "gg"="lazygit"
 abbr "hm"="hivemind"
 
-# Markdown
+# markdown
 abbr "mdl"="markdownlint-cli2 --config ~/.markdownlint.yaml"
 abbr "mdlf"="markdownlint-cli2 --config ~/.markdownlint.yaml --fix"
 abbr "mdla"="markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'"
 abbr "mdlaf"="markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
 
-# Local Servers
+# local servers
 abbr "hts"="http-server"
 abbr "lvs"="live-server"
 
-# Neovim
+# neovim
 abbr "nv"="nvim"
 abbr "vi"="nvim"
 abbr "vi0"="nvim -u NONE"
 abbr "vir"="nvim -R"
 abbr "vv"="nvim --version | less"
 
-# Git
+# git
 abbr "ga"="git add"
 abbr "gaa"="git add --all"
 abbr "gap"="git add --patch"
@@ -150,7 +150,7 @@ abbr "gst"="git status"
 abbr "gsts"="git status --short"
 abbr "gt"="git tag"
 
-# Docker
+# docker
 abbr "dc"="docker compose"
 abbr "dcu"="docker compose up"
 abbr "dcud"="docker compose up -d"
@@ -186,7 +186,7 @@ abbr "drun"="docker run"
 abbr "dst"="docker start"
 abbr "dstp"="docker stop"
 
-# Rails
+# rails
 abbr "RED"="RAILS_ENV=development"
 abbr "REP"="RAILS_ENV=production"
 abbr "RET"="RAILS_ENV=test"
@@ -222,7 +222,7 @@ abbr "rs"="bin/rails server"
 abbr "rsp"="bin/rspec ."
 abbr "rtp"="bin/rails db:test:prepare"
 
-# Ruby
+# ruby
 abbr "b"="bundle"
 abbr "be"="bundle exec"
 abbr "ber"="bundle exec rspec"
@@ -238,7 +238,7 @@ abbr "guns"="gem uninstall"
 abbr "gup"="gem update"
 abbr "gus"="gem update --system"
 
-# Npm
+# npm
 abbr "nb"="npm build"
 abbr "ncl"="npm clean"
 abbr "nd"="npm run dev"
@@ -251,7 +251,7 @@ abbr "ns"="npm serve"
 abbr "nst"="npm start"
 abbr "nt"="npm test"
 
-# Asdf
+# asdf
 abbr "ail"="asdf install lua"
 abbr "ain"="asdf install nodejs"
 abbr "ainl"="asdf install nodejs latest"
@@ -269,11 +269,11 @@ abbr "ares"="asdf reshim"
 abbr "aup"="asdf update"
 abbr "aupp"="asdf update --all && asdf plugin update --all"
 
-# Tmux
+# tmux
 abbr "tl"="tmux ls"
 abbr "tlw"="tmux list-windows"
 
-# Tmuxinator
+# tmuxinator
 abbr "mux"="tmuxinator"
 abbr "ms"="tmuxinator start"
 abbr "msb1"="tmuxinator start bfo1"
@@ -286,7 +286,7 @@ abbr "msl"="tmuxinator start laptop"
 abbr "msm"="tmuxinator start mux"
 abbr "mso"="tmuxinator start ofreport"
 
-# Yarn
+# yarn
 abbr "y"="yarn"
 abbr "ya"="yarn add"
 abbr "yad"="yarn add --dev"
@@ -324,17 +324,17 @@ abbr "yv"="yarn version"
 abbr "yw"="yarn workspace"
 abbr "yws"="yarn workspaces"
 
-# Postgresql
+# postgresql
 abbr "startpost"="pg_ctl -D /opt/homebrew/var/postgres start"
 abbr "stoppost"="pg_ctl -D /opt/homebrew/var/postgres stop"
 abbr "statpost"="pg_ctl -D /opt/homebrew/var/postgres status"
 abbr "psq"="psql -U postgres"
 
-# Finder
+# finder
 abbr "haf"="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 abbr "saf"="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Middleman
+# middleman
 abbr "mm"="bundle exec middleman"
 abbr "mmb"="bundle exec middleman build"
 abbr "mmbc"="bundle exec middleman build --clean"

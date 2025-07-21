@@ -4,7 +4,7 @@
 #
 # https://fishshell.com/docs/current/cmds/abbr.html
 
-# Unix
+# unix
 abbr -a -g c 'clear'
 abbr -a -g cv 'command -v'
 abbr -a -g df 'df -h'
@@ -14,10 +14,10 @@ abbr -a -g duf 'du -sh *'
 abbr -a -g mkdir 'mkdir -pv'
 abbr -a -g mv 'mv -iv'
 
-# System
+# system
 abbr -a -g fast 'fastfetch'
 
-# Claude Code
+# claude code
 abbr -a -g cl 'claude'
 abbr -a -g clsp 'claude --dangerously-skip-permissions'
 abbr -a -g clh 'claude --help'
@@ -29,7 +29,7 @@ abbr -a -g clcp 'claude --continue --print'
 abbr -a -g clup 'claude update'
 abbr -a -g clmcp 'claude mcp'
 
-# Homebrew
+# homebrew
 abbr -a -g brc 'brew cleanup'
 abbr -a -g brb 'brew bundle'
 abbr -a -g brd 'brew doctor'
@@ -47,7 +47,7 @@ abbr -a -g bsl 'brew services list'
 abbr -a -g bsr 'brew services restart'
 abbr -a -g bsv 'brew services'
 
-# Config Dirs
+# config dirs
 abbr -a -g cdot 'cd $DOTFILES'
 abbr -a -g cdxc 'cd $XDG_CONFIG_HOME'
 abbr -a -g cdfi 'cd $XDG_CONFIG_HOME/fish'
@@ -58,14 +58,14 @@ abbr -a -g cdxs 'cd $XDG_STATE_HOME'
 abbr -a -g cdlb 'cd $HOME/.local/bin'
 abbr -a -g cdbn 'cd $HOME/.bin'
 
-# Navigation
+# navigation
 abbr -a -g .. 'cd ..'
 abbr -a -g ... 'cd ../../'
 abbr -a -g .... 'cd ../../../'
 abbr -a -g ..... 'cd ../../../../'
 abbr -a -g - 'cd -'
 
-# Tree
+# tree
 abbr -a -g tree 'll --tree --level=2'
 abbr -a -g t2 'll --tree --level=2'
 abbr -a -g t2a 'll --tree --level=2 -a'
@@ -74,28 +74,28 @@ abbr -a -g t3a 'll --tree --level=3 -a'
 abbr -a -g t4 'll --tree --level=4'
 abbr -a -g t4a 'll --tree --level=4 -a'
 
-# Dev Tools
+# dev tools
 abbr -a -g gg 'lazygit'
 abbr -a -g hm 'hivemind'
 
-# Markdown
+# markdown
 abbr -a -g mdl 'markdownlint-cli2 --config ~/.markdownlint.yaml'
 abbr -a -g mdlf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix'
 abbr -a -g mdla 'markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md''
 abbr -a -g mdlaf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md''
 
-# Local Servers
+# local servers
 abbr -a -g hts 'http-server'
 abbr -a -g lvs 'live-server'
 
-# Neovim
+# neovim
 abbr -a -g nv 'nvim'
 abbr -a -g vi 'nvim'
 abbr -a -g vi0 'nvim -u NONE'
 abbr -a -g vir 'nvim -R'
 abbr -a -g vv 'nvim --version | less'
 
-# Git
+# git
 abbr -a -g ga 'git add'
 abbr -a -g gaa 'git add --all'
 abbr -a -g gap 'git add --patch'
@@ -147,7 +147,7 @@ abbr -a -g gst 'git status'
 abbr -a -g gsts 'git status --short'
 abbr -a -g gt 'git tag'
 
-# Docker
+# docker
 abbr -a -g dc 'docker compose'
 abbr -a -g dcu 'docker compose up'
 abbr -a -g dcud 'docker compose up -d'
@@ -183,7 +183,7 @@ abbr -a -g drun 'docker run'
 abbr -a -g dst 'docker start'
 abbr -a -g dstp 'docker stop'
 
-# Rails
+# rails
 abbr -a -g RED 'RAILS_ENV=development'
 abbr -a -g REP 'RAILS_ENV=production'
 abbr -a -g RET 'RAILS_ENV=test'
@@ -219,7 +219,7 @@ abbr -a -g rs 'bin/rails server'
 abbr -a -g rsp 'bin/rspec .'
 abbr -a -g rtp 'bin/rails db:test:prepare'
 
-# Ruby
+# ruby
 abbr -a -g b 'bundle'
 abbr -a -g be 'bundle exec'
 abbr -a -g ber 'bundle exec rspec'
@@ -235,7 +235,7 @@ abbr -a -g guns 'gem uninstall'
 abbr -a -g gup 'gem update'
 abbr -a -g gus 'gem update --system'
 
-# Npm
+# npm
 abbr -a -g nb 'npm build'
 abbr -a -g ncl 'npm clean'
 abbr -a -g nd 'npm run dev'
@@ -248,7 +248,7 @@ abbr -a -g ns 'npm serve'
 abbr -a -g nst 'npm start'
 abbr -a -g nt 'npm test'
 
-# Asdf
+# asdf
 abbr -a -g ail 'asdf install lua'
 abbr -a -g ain 'asdf install nodejs'
 abbr -a -g ainl 'asdf install nodejs latest'
@@ -266,11 +266,11 @@ abbr -a -g ares 'asdf reshim'
 abbr -a -g aup 'asdf update'
 abbr -a -g aupp 'asdf update --all && asdf plugin update --all'
 
-# Tmux
+# tmux
 abbr -a -g tl 'tmux ls'
 abbr -a -g tlw 'tmux list-windows'
 
-# Tmuxinator
+# tmuxinator
 abbr -a -g mux 'tmuxinator'
 abbr -a -g ms 'tmuxinator start'
 abbr -a -g msb1 'tmuxinator start bfo1'
@@ -283,7 +283,7 @@ abbr -a -g msl 'tmuxinator start laptop'
 abbr -a -g msm 'tmuxinator start mux'
 abbr -a -g mso 'tmuxinator start ofreport'
 
-# Yarn
+# yarn
 abbr -a -g y 'yarn'
 abbr -a -g ya 'yarn add'
 abbr -a -g yad 'yarn add --dev'
@@ -321,17 +321,17 @@ abbr -a -g yv 'yarn version'
 abbr -a -g yw 'yarn workspace'
 abbr -a -g yws 'yarn workspaces'
 
-# Postgresql
+# postgresql
 abbr -a -g startpost 'pg_ctl -D /opt/homebrew/var/postgres start'
 abbr -a -g stoppost 'pg_ctl -D /opt/homebrew/var/postgres stop'
 abbr -a -g statpost 'pg_ctl -D /opt/homebrew/var/postgres status'
 abbr -a -g psq 'psql -U postgres'
 
-# Finder
+# finder
 abbr -a -g haf 'defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
 abbr -a -g saf 'defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
-# Middleman
+# middleman
 abbr -a -g mm 'bundle exec middleman'
 abbr -a -g mmb 'bundle exec middleman build'
 abbr -a -g mmbc 'bundle exec middleman build --clean'
