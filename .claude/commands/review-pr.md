@@ -1,5 +1,3 @@
-<!-- markdownlint-disable MD041 -->
-
 Please review the GitHub pull request: $ARGUMENTS
 
 Follow these steps:
@@ -86,4 +84,3 @@ Follow these steps:
 – If PR is ready, suggest next steps (merge, request final review, etc.)
 
 Remember to use the GitHub CLI (`gh`) for all GitHub-related tasks.
-

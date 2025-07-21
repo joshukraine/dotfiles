@@ -1,5 +1,3 @@
-<!-- markdownlint-disable MD041 -->
-
 Please analyze and fix the GitHub issue: $ARGUMENTS.
 
 Follow these steps:
