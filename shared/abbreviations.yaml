@@ -88,6 +88,13 @@ dev_tools:
   gg: "lazygit"
   hm: "hivemind"
 
+# Markdown
+markdown:
+  mdl: "markdownlint-cli2 --config ~/.markdownlint.yaml"
+  mdlf: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix"
+  mdla: "markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'"
+  mdlaf: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
+
 # Local servers
 local_servers:
   hts: "http-server"

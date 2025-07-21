@@ -78,6 +78,12 @@ abbr -a -g t4a 'll --tree --level=4 -a'
 abbr -a -g gg 'lazygit'
 abbr -a -g hm 'hivemind'
 
+# Markdown
+abbr -a -g mdl 'markdownlint-cli2 --config ~/.markdownlint.yaml'
+abbr -a -g mdlf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix'
+abbr -a -g mdla 'markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md''
+abbr -a -g mdlaf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md''
+
 # Local Servers
 abbr -a -g hts 'http-server'
 abbr -a -g lvs 'live-server'
