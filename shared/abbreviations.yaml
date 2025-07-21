@@ -29,9 +29,11 @@ claude_code:
   clh: "claude --help"
   clv: "claude --version"
   clr: "claude --resume"
-  cli: "claude --interactive"
-  clri: "claude --resume --interactive"
-  clspi: "claude --dangerously-skip-permissions --interactive"
+  clc: "claude --continue"
+  clp: "claude --print"
+  clcp: "claude --continue --print"
+  clup: "claude update"
+  clmcp: "claude mcp"
 
 # Homebrew
 homebrew:
