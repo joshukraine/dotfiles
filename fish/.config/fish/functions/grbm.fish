@@ -1,27 +1,18 @@
-function gcom
+function grbm
     # Show help message
     if test (count $argv) -gt 0
         switch $argv[1]
             case -h --help
-                printf "%s\n" "Usage: gcom [OPTION]
-Switch to the default Git branch (e.g., main or master), with optional pull.
+                printf "%s\n" "Usage: grbm [OPTION]
+Rebase current branch against the default branch (main or master).
+Intelligently detects the default branch and fetches latest changes.
 
 Options:
-  -p          Pull latest changes after switching to the default branch
   -h, --help  Show this help message
 
 Examples:
-  gcom        # Checkout default branch only
-  gcom -p     # Checkout default branch and pull latest changes"
+  grbm        # Rebase current branch against default branch"
                 return 0
-        end
-    end
-
-    # Pull flag
-    set do_pull 0
-    if test (count $argv) -gt 0
-        if test "$argv[1]" = -p
-            set do_pull 1
         end
     end
 
@@ -32,12 +23,19 @@ Examples:
         return 1
     end
 
+    # Get current branch
+    set current_branch (git branch --show-current)
+    if test -z "$current_branch"
+        echo "Could not determine current branch."
+        return 1
+    end
+
     # Check for uncommitted changes
     if not git-check-uncommitted --prompt
         return 1
     end
 
-    # Check if remote exists before fetching
+    # Check if remote exists and fetch
     if git remote | grep -q "^origin\$"
         echo "Fetching latest from origin..."
         git fetch origin >/dev/null 2>&1
@@ -47,12 +45,14 @@ Examples:
         end
     end
 
-    # Try to get the default branch from remote if it exists
+    # Determine default branch
     set default_branch ""
+    
+    # Try to get default branch from remote
     if git remote | grep -q "^origin\$"
         set default_branch (git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }')
     end
-
+    
     # Fallback if needed
     if test -z "$default_branch"
         if git show-ref --quiet refs/heads/main
@@ -65,19 +65,18 @@ Examples:
         end
     end
 
-    echo "Switching to $default_branch"
-    git checkout $default_branch
+    # Don't rebase if we're already on the default branch
+    if test "$current_branch" = "$default_branch"
+        echo "Already on default branch ($default_branch). Nothing to rebase."
+        return 0
+    end
+
+    echo "Rebasing $current_branch against $default_branch..."
+    git rebase origin/$default_branch
     if test $status -ne 0
-        echo "Failed to checkout $default_branch"
+        echo "Rebase failed. You may need to resolve conflicts manually."
         return 1
     end
 
-    if test $do_pull -eq 1
-        echo "Pulling latest changes..."
-        git pull
-        if test $status -ne 0
-            echo "Failed to pull changes."
-            return 1
-        end
-    end
+    echo "Successfully rebased $current_branch against $default_branch"
 end

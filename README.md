@@ -5,8 +5,8 @@
 ## 🤩 Highlights
 
 - [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
-- [Starship][starship] prompt (or [Powerlevel10K][p10k])
-- Shell support for both [Zsh][zsh] and [Fish][fish] with 90% functional parity
+- [Starship][starship] prompt
+- Shell support for both [Zsh][zsh] and [Fish][fish] with 95% functional parity via shared configuration
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot’s [Laptop][laptop]
@@ -18,6 +18,8 @@
 - [Prerequisites](#-prerequisites)
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
+- [Shared Configuration Framework](#shared-configuration-framework)
+- [Markdown Linting](#markdown-linting)
 - [About Neovim Distributions](#about-neovim-distributions)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
 - [Nerd Fonts and Icons](#nerd-fonts-and-icons)
@@ -38,16 +40,23 @@ Clone this repo.
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 ```
 
-Read the setup script.
+Read the setup script and check available options.
 
 ```sh
 less ~/dotfiles/setup.sh
+~/dotfiles/setup.sh --help
+```
+
+Preview what the setup script will do (dry-run mode).
+
+```sh
+~/dotfiles/setup.sh --dry-run
 ```
 
 Run the setup script.
 
 ```sh
-bash ~/dotfiles/setup.sh
+~/dotfiles/setup.sh
 ```
 
 ## ✅ Prerequisites
@@ -62,6 +71,7 @@ The dotfiles assume you are running macOS with (at minimum) the following softwa
 - [Zsh][zsh] and/or [Fish][fish]
 - [Neovim][neovim]
 - [Starship][starship]
+- [`yq`][yq] (for regenerating abbreviations from shared YAML source)
 
 All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
@@ -127,16 +137,18 @@ Clone
 git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
 ```
 
-Read
+Read and preview
 
 ```sh
 less ~/dotfiles/setup.sh
+~/dotfiles/setup.sh --help
+~/dotfiles/setup.sh --dry-run  # Preview changes without applying them
 ```
 
 Setup
 
 ```sh
-bash ~/dotfiles/setup.sh
+~/dotfiles/setup.sh
 ```
 
 If you do encounter Stow conflicts, resolve these and run setup again. The script is idempotent, so you can run it multiple times safely.
@@ -168,11 +180,10 @@ brew bundle install
 
 - [ ] Launch LazyVim (`nvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings. Plugins should install automatically on first launch.
 - [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`, `~/dotfiles/local/config.fish.local`.
-- [ ] Set up [1Password CLI][1p-cli-start] for managing secrets.
-- [ ] Set up [1Password SSH key management][1p-cli-ssh].
+- [ ] (Optional) Set up [1Password CLI][1p-cli-start] for managing secrets.
+- [ ] (Optional) Set up [1Password SSH key management][1p-cli-ssh].
 - [ ] If using Fish, customize your setup by running the `fish_config` command.
-- [ ] If using Zsh, edit `.zshrc` and `plugins.zsh` to select either [Starship][starship] or [Powerlevel10K][p10k] as your prompt.
-- [ ] If using Tmux, install Tmux plugins with `<prefix> + I` (<https://github.com/tmux-plugins/tpm>)
+- [ ] Install Tmux plugins with `<prefix> + I` (<https://github.com/tmux-plugins/tpm>)
 
 ## Zsh or Fish?
 
@@ -180,10 +191,12 @@ Having used both Zsh and Fish for several years, I’ve decided to keep my confi
 
 &#9657; **[Fish abbr docs](https://fishshell.com/docs/current/cmds/abbr.html)**
 
-My Zsh and Fish configs mostly have functional parity:
+My Zsh and Fish configs have 95% functional parity via shared configuration:
 
 - Same prompt (Starship)
-- Same essential abbreviations and functions
+- Identical abbreviations (250+) generated from single YAML source
+- Shared environment variables
+- Smart git functions with automatic branch detection
 
 <details>
   <summary><strong>Zsh Setup Instructions</strong></summary>
@@ -237,9 +250,115 @@ Restart your terminal. This will create the `~/.config` and `~/.local` directori
 
 </details>
 
+## Shared Configuration Framework
+
+The dotfiles use a unified configuration system that eliminates duplication between Fish and Zsh shells:
+
+### Key Components
+
+- **`shared/abbreviations.yaml`** - Single source of truth for all 250+ abbreviations
+- **`shared/environment.sh` and `shared/environment.fish`** - Common environment variables
+- **`shared/generate-all-abbr.sh`** - Unified script to regenerate abbreviations for all shells
+- **`shared/generate-fish-abbr.sh` and `shared/generate-zsh-abbr.sh`** - Individual shell-specific generation scripts
+
+### Adding or Modifying Abbreviations
+
+1. Edit `~/dotfiles/shared/abbreviations.yaml`
+2. Regenerate all abbreviations (from any directory):
+
+```bash
+reload-abbr    # Available as a shell function - works from anywhere!
+```
+
+3. Reload your shell configuration:
+   - Fish: `exec fish` or open a new terminal
+   - Zsh: `src` or open a new terminal
+
+<details>
+  <summary><strong>Alternative methods</strong></summary>
+
+**Manual script execution:**
+
+```bash
+cd ~/dotfiles/shared
+./generate-all-abbr.sh     # Updates both Fish and Zsh abbreviation files
+```
+
+**Individual shell regeneration:**
+
+```bash
+cd ~/dotfiles/shared
+./generate-fish-abbr.sh    # Updates fish/.config/fish/abbreviations.fish
+./generate-zsh-abbr.sh     # Updates zsh/.config/zsh-abbr/abbreviations.zsh
+```
+
+</details>
+
+> [!IMPORTANT]
+> Never edit the generated abbreviation files directly - changes will be overwritten!
+
+### Smart Git Functions
+
+The shared configuration includes intelligent git functions that automatically detect your main branch:
+
+- `gpum` - Pull from upstream main/master
+- `grbm` - Rebase on main/master
+- `gcom` - Checkout main/master
+- `gbrm` - Remove branches merged into main/master
+
+These functions work with both `main` and `master` branch names automatically.
+
+## Markdown Linting
+
+This repository includes a complete markdownlint setup for consistent markdown formatting across all projects.
+
+### Features
+
+- **Global Configuration**: Uses `~/.markdownlint.yaml` with sensible defaults:
+  - Disabled line length rule (MD013) for better readability
+  - Allows common inline HTML elements (`details`, `summary`, `strong`)
+  - Supports trailing punctuation including CJK characters
+  - Allows bare URLs (MD034 disabled)
+- **Shell Abbreviations**: Quick access via `mdl` commands
+- **Editor Integration**: Works seamlessly with Neovim/LazyVim
+- **CI/CD Support**: Includes sample GitHub Actions workflow
+
+### Usage
+
+```bash
+# Install markdownlint-cli2 (if not already installed)
+brew bundle install
+
+# Lint files using abbreviations
+mdl README.md              # Lint single file
+mdlf README.md             # Auto-fix single file
+mdla                       # Lint all .md files recursively
+mdlaf                      # Fix all .md files recursively
+
+# Or use the global helper script
+mdl-global README.md       # Always uses ~/.markdownlint.yaml
+```
+
+### CI Integration
+
+Copy the example workflow to any project:
+
+```bash
+cp ~/dotfiles/.github/workflows/markdownlint.yml.example .github/workflows/markdownlint.yml
+```
+
+This will run markdownlint on all markdown files in pull requests and pushes.
+
+### Customization
+
+- **Global config**: Edit `~/dotfiles/markdown/.markdownlint.yaml`
+- **Project-specific**: Create `.markdownlint.yaml` in your project root
+- **Add abbreviations**: Edit `~/dotfiles/shared/abbreviations.yaml` and run `reload-abbr`
+
 ## About Neovim Distributions
 
-**TL;DR:** Just install [LazyVim][lazyvim]💤
+> [!TIP]
+> **TL;DR:** Just install [LazyVim][lazyvim]💤
 
 📺 [Zero to IDE with LazyVim][zero-to-ide-lazyvim-video]
 
@@ -397,7 +516,6 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 
 Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 
-
 [^2]: <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map>
 
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
@@ -435,13 +553,13 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
-[p10k]: https://github.com/romkatv/powerlevel10k
+[yq]: https://github.com/mikefarah/yq
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
 [smoke-test-output]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700085278/screenshots/smoke-test_tddntp.png
 [starship]: https://starship.rs/
-[symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/NerdFontsSymbolsOnly.zip
+[symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip
 [tmux]: https://github.com/tmux/tmux/wiki
 [zap]: https://www.zapzsh.com/
 [zero-to-ide-lazyvim-video]: https://youtu.be/N93cTbtLCIM

@@ -48,7 +48,6 @@ chore: update dependencies to latest versions
 - No period at end of subject line
 - Include body when change needs explanation
 - Reference issues/PRs in footer when applicable
-- Never include Claude Code generation snippets (e.g., "🤖 Generated with [Claude Code]") in commit messages
 
 ## Code Quality Standards
 
@@ -126,3 +125,6 @@ Use descriptive branch names:
 - Document all configuration options
 - Separate configuration from code
 
+## Scratchpad Management
+
+Use `/setup-scratchpads` in any project to create standardized organization for temporary files, notes, and debugging materials. This sets up git-ignored directories with consistent structure across all projects.

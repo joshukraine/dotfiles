@@ -2,8 +2,6 @@
 
 Create a git commit with a meaningful message based on the current changes.
 
-**IMPORTANT**: Never include "🤖 Generated with Claude Code" or any similar attribution in commit messages.
-
 ## Command Options
 
 - `--no-verify`: Skip running the pre-commit checks (lint, build, generate:docs)
@@ -70,4 +68,3 @@ When analyzing the diff, consider splitting commits based on these criteria:
 🎯 Commit created: abc1234
 ❓ Push to remote? (y/n)
 ```
-

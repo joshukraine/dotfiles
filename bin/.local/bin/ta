@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Attach to an existing tmux session with a specific name
+# Usage: ta <session-name>
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: ta <session-name>"
+  exit 1
+fi
+
+tmux attach -t "$*"

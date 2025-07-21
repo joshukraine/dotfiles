@@ -1,0 +1,365 @@
+# Shared abbreviations for Fish and Zsh shells
+# This YAML file is the single source of truth for all shell abbreviations
+# Generators will create shell-specific files from this source
+
+# General UNIX commands
+unix:
+  c: "clear"
+  cv: "command -v"
+  df: "df -h"
+  du: "du -h"
+  dud: "du -d 1 -h"
+  duf: "du -sh *"
+  mkdir: "mkdir -pv"
+  mv: "mv -iv"
+
+# Shell-specific (handled conditionally by generators)
+shell:
+  src: "source $HOME/.zshrc" # Zsh only
+
+# System tools
+system:
+  fast: "fastfetch"
+
+# Claude Code
+claude_code:
+  cl: "claude"
+  clsp: "claude --dangerously-skip-permissions"
+  clh: "claude --help"
+  clv: "claude --version"
+  clr: "claude --resume"
+  clc: "claude --continue"
+  clp: "claude --print"
+  clcp: "claude --continue --print"
+  clup: "claude update"
+  clmcp: "claude mcp"
+
+# Homebrew
+homebrew:
+  brc: "brew cleanup"
+  brb: "brew bundle"
+  brd: "brew doctor"
+  brg: "brew upgrade"
+  bri: "brew info"
+  brl: "brew list -1"
+  brlf: "brew list | fzf"
+  bro: "brew outdated"
+  brs: "brew search"
+  bru: "brew update"
+  bs0: "brew services stop"
+  bs1: "brew services start"
+  bsc: "brew services cleanup"
+  bsl: "brew services list"
+  bsr: "brew services restart"
+  bsv: "brew services"
+
+# Config directory access
+config_dirs:
+  cdot: "cd $DOTFILES"
+  cdxc: "cd $XDG_CONFIG_HOME"
+  cdfi: "cd $XDG_CONFIG_HOME/fish"
+  cdnv: "cd $XDG_CONFIG_HOME/nvim"
+  cdxd: "cd $XDG_DATA_HOME"
+  cdxa: "cd $XDG_CACHE_HOME"
+  cdxs: "cd $XDG_STATE_HOME"
+  cdlb: "cd $HOME/.local/bin"
+  cdbn: "cd $HOME/.bin"
+
+# Navigation shortcuts
+navigation:
+  "..": "cd .."
+  "...": "cd ../../"
+  "....": "cd ../../../"
+  ".....": "cd ../../../../"
+  "-": "cd -"
+
+# Tree commands (requires eza)
+tree:
+  tree: "ll --tree --level=2"
+  t2: "ll --tree --level=2"
+  t2a: "ll --tree --level=2 -a"
+  t3: "ll --tree --level=3"
+  t3a: "ll --tree --level=3 -a"
+  t4: "ll --tree --level=4"
+  t4a: "ll --tree --level=4 -a"
+
+# Development tools
+dev_tools:
+  gg: "lazygit"
+  hm: "hivemind"
+
+# Markdown
+markdown:
+  mdl: "markdownlint-cli2 --config ~/.markdownlint.yaml"
+  mdlf: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix"
+  mdla: "markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'"
+  mdlaf: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
+
+# Local servers
+local_servers:
+  hts: "http-server"
+  lvs: "live-server"
+
+# Neovim
+neovim:
+  nv: "nvim"
+  vi: "nvim"
+  vi0: "nvim -u NONE"
+  vir: "nvim -R"
+  vv: "nvim --version | less"
+
+# Git commands
+git:
+  ga: "git add"
+  gaa: "git add --all"
+  gap: "git add --patch"
+  gb: "git branch"
+  gba: "git branch --all"
+  gbm: "git branch -m"
+  gbr: "git branch --remote"
+  gca: "git commit --amend"
+  gcl: "git clone"
+  gcm: "git cm"
+  gco: "git checkout"
+  gcob: "git checkout -b"
+  gcp: "git cherry-pick"
+  gd: "git diff"
+  gdc: "git diff --cached"
+  gdt: "git difftool"
+  gf: "git fetch"
+  gfa: "git fetch --all"
+  gfp: "git fetch --prune"
+  gfu: "git fetch upstream"
+  gl: "git l"
+  glg: "git lg"
+  gll: "git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit"
+  gp: "git push"
+  gpl: "git pull"
+  gps: "git push"
+  gpsf: "git push --force-with-lease"
+  gpst: "git push --tags"
+  gpub: "git publish"
+  gpuo: "git push -u origin"
+  gra: "git remote add"
+  grb: "git rebase"
+  grba: "git rebase --abort"
+  grbc: "git rebase --continue"
+  grbi: "git rebase -i"
+  gre: "git reset"
+  grso: "git remote set-url origin"
+  grsu: "git remote set-url"
+  grup: "git remote add upstream"
+  gs: "git status"
+  gsh: "git show"
+  gss: "git stash"
+  gssa: "git stash apply"
+  gssd: "git stash drop"
+  gssl: "git stash list"
+  gssp: "git stash pop"
+  gsss: "git stash save"
+  gst: "git status"
+  gsts: "git status --short"
+  gt: "git tag"
+
+# Docker
+docker:
+  dc: "docker compose"
+  dcu: "docker compose up"
+  dcud: "docker compose up -d"
+  dcb: "docker compose up --build"
+  dcbd: "docker compose up --build -d"
+  dcd: "docker compose down"
+  dcdv: "docker compose down -v"
+  dce: "docker compose exec"
+  dcr: "docker compose restart"
+  dl: "docker logs"
+  dim: "docker images"
+  dnet: "docker network"
+  dps: "docker ps"
+  dpsa: "docker ps -a"
+  dsp: "docker system prune --all"
+  # Additional Docker abbreviations (kept for compatibility)
+  d: "docker"
+  db: "docker build"
+  dcl: "docker compose logs"
+  dclf: "docker compose logs -f"
+  dcps: "docker compose ps"
+  dcpull: "docker compose pull"
+  dcrm: "docker compose rm"
+  dcstart: "docker compose start"
+  dcstop: "docker compose stop"
+  de: "docker exec"
+  dei: "docker exec -i"
+  deit: "docker exec -it"
+  dexec: "docker exec"
+  dpu: "docker pull"
+  drm: "docker rm"
+  drmi: "docker rmi"
+  drun: "docker run"
+  dst: "docker start"
+  dstp: "docker stop"
+
+# Rails
+rails:
+  RED: "RAILS_ENV=development"
+  REP: "RAILS_ENV=production"
+  RET: "RAILS_ENV=test"
+  bbi: "bin/bundle install"
+  bbo: "bin/bundle outdated"
+  bbu: "bin/bundle update"
+  bd: "bin/dev"
+  cred: "bin/rails credentials:edit --environment"
+  crsp: "env COVERAGE=true bin/rspec ."
+  ocr: "overmind connect rails"
+  om: "overmind start"
+  psp: "bin/rake parallel:spec"
+  r: "bin/rails"
+  rc: "bin/rails console"
+  rcop: "rubocop"
+  rdb: "bin/rails dbconsole"
+  rdbc: "bin/rails db:create"
+  rdbd: "bin/rails db:drop"
+  rdm: "bin/rails db:migrate"
+  rdms: "bin/rails db:migrate:status"
+  rdr: "bin/rails db:rollback"
+  rdr2: "bin/rails db:rollback STEP=2"
+  rdr3: "bin/rails db:rollback STEP=3"
+  rdbs: "bin/rails db:seed"
+  rg: "bin/rails generate"
+  rgc: "bin/rails generate controller"
+  rgm: "bin/rails generate migration"
+  rgs: "bin/rails generate stimulus"
+  rr: "bin/rails routes"
+  rrc: "bin/rails routes controller"
+  rrg: "bin/rails routes | grep"
+  rs: "bin/rails server"
+  rsp: "bin/rspec ."
+  rtp: "bin/rails db:test:prepare"
+
+# Ruby/Bundle
+ruby:
+  b: "bundle"
+  be: "bundle exec"
+  ber: "bundle exec rspec"
+  beri: "bundle exec rspec --init"
+  bes: "bundle exec standardrb"
+  besf: "bundle exec standardrb --fix"
+  gel: "gem cleanup"
+  gemv: "gem environment"
+  gins: "gem install"
+  gli: "gem list"
+  gout: "gem outdated"
+  guns: "gem uninstall"
+  gup: "gem update"
+  gus: "gem update --system"
+
+# NPM
+npm:
+  nb: "npm build"
+  ncl: "npm clean"
+  nd: "npm run dev"
+  ndv: "npm develop"
+  ni: "npm install"
+  nid: "npm install -D"
+  nig: "npm install -g"
+  nit: "npm init"
+  ns: "npm serve"
+  nst: "npm start"
+  nt: "npm test"
+
+# ASDF
+asdf:
+  ail: "asdf install lua"
+  ain: "asdf install nodejs"
+  ainl: "asdf install nodejs latest"
+  aip: "asdf install python"
+  air: "asdf install ruby"
+  airl: "asdf install ruby latest"
+  ala: "asdf list all"
+  ali: "asdf list"
+  aui: "asdf install"
+  agl: "asdf global"
+  all: "asdf local"
+  acl: "asdf current"
+  aun: "asdf uninstall"
+  ares: "asdf reshim"
+  aup: "asdf update"
+  aupp: "asdf update --all && asdf plugin update --all"
+
+# Tmux
+tmux:
+  tl: "tmux ls"
+  tlw: "tmux list-windows"
+
+# Tmuxinator
+tmuxinator:
+  mux: "tmuxinator"
+  ms: "tmuxinator start"
+  msb1: "tmuxinator start bfo1"
+  msb2: "tmuxinator start bfo2"
+  msbc: "tmuxinator start bf_curriculum"
+  msc: "tmuxinator start comix_distro"
+  msd: "tmuxinator start dot"
+  mse: "tmuxinator start euroteamoutreach"
+  msl: "tmuxinator start laptop"
+  msm: "tmuxinator start mux"
+  mso: "tmuxinator start ofreport"
+
+# Yarn
+yarn:
+  y: "yarn"
+  ya: "yarn add"
+  yad: "yarn add --dev"
+  yag: "yarn add --global"
+  yap: "yarn add --peer"
+  yarn-upgrade: "yarn upgrade-interactive --latest"
+  yb: "yarn build"
+  ycc: "yarn cache clean"
+  yd: "yarn dev"
+  yga: "yarn global add"
+  ygl: "yarn global list"
+  ygr: "yarn global remove"
+  ygu: "yarn global upgrade"
+  yh: "yarn help"
+  yi: "yarn install"
+  yic: "yarn install --check-files"
+  yif: "yarn install --frozen-lockfile"
+  yin: "yarn init"
+  yln: "yarn link"
+  yls: "yarn list"
+  yout: "yarn outdated"
+  yp: "yarn pack"
+  ypub: "yarn publish"
+  yr: "yarn run"
+  yre: "yarn remove"
+  ys: "yarn serve"
+  yst: "yarn start"
+  yt: "yarn test"
+  ytc: "yarn test --coverage"
+  yuc: "yarn global upgrade && yarn cache clean"
+  yui: "yarn upgrade-interactive"
+  yuil: "yarn upgrade-interactive --latest"
+  yup: "yarn upgrade"
+  yv: "yarn version"
+  yw: "yarn workspace"
+  yws: "yarn workspaces"
+
+# PostgreSQL
+postgresql:
+  startpost: "pg_ctl -D /opt/homebrew/var/postgres start"
+  stoppost: "pg_ctl -D /opt/homebrew/var/postgres stop"
+  statpost: "pg_ctl -D /opt/homebrew/var/postgres status"
+  psq: "psql -U postgres"
+
+# Finder (macOS)
+finder:
+  haf: "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+  saf: "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Middleman
+middleman:
+  mm: "bundle exec middleman"
+  mmb: "bundle exec middleman build"
+  mmbc: "bundle exec middleman build --clean"
+  mmc: "bundle exec middleman console"
+  mms: "bundle exec middleman server"

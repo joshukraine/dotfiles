@@ -1,45 +1,3 @@
-function aua() {
-  asdf update && asdf plugin-update --all
-}
-
-function bb() {
-  if [ -e $HOME/Brewfile ]; then
-    echo "-> Bundling Brewfile located at $HOME/Brewfile"
-    sleep 2
-    brew bundle --file $HOME/Brewfile
-  else
-    echo "Brewfile not found."
-  fi
-}
-
-function bbc() {
-  if [ -e $HOME/Brewfile ]; then
-    echo "-> Running bundle cleanup dry-run for Brewfile located at $HOME/Brewfile"
-    sleep 2
-    brew bundle cleanup --file $HOME/Brewfile
-  else
-    echo "Brewfile not found."
-  fi
-}
-
-function bbcf() {
-  if [ -e $HOME/Brewfile ]; then
-    echo "-> Running bundle cleanup (force) for Brewfile located at $HOME/Brewfile"
-    sleep 2
-    brew bundle cleanup --force --file $HOME/Brewfile
-  else
-    echo "Brewfile not found."
-  fi
-}
-
-function bubo() {
-  brew update && brew outdated
-}
-
-copy() {
-    printf "%s" "$*" | tr -d "\n" | pbcopy
-}
-
 function ct() {
   ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
 }
@@ -89,61 +47,6 @@ function fs() {
   fi;
 }
 
-function g() {
-  if [[ $# -gt 0 ]]; then
-    git "$@"
-  else
-    clear && git status --short --branch && echo
-  fi
-}
-
-# function gbrm() {
-#   git branch --merged master | grep -v "^\*\|  master" | xargs -n 1 git branch -d
-# }
-
-function gbrm() {
-  # Make sure we're inside a git repo
-  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    echo "Not a git repository."
-    return 1
-  fi
-
-  # Fetch latest info (optional — uncomment if you want it always up to date)
-  # git fetch origin > /dev/null 2>&1
-
-  # Get default branch from remote
-  local default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
-
-  # Fallback if needed
-  if [[ -z "$default_branch" ]]; then
-    if git show-ref --quiet refs/heads/main; then
-      default_branch="main"
-    elif git show-ref --quiet refs/heads/master; then
-      default_branch="master"
-    else
-      echo "Could not determine default branch."
-      return 1
-    fi
-  fi
-
-  echo "Pruning branches merged into '$default_branch'..."
-
-  git branch --merged "$default_branch" | \
-    grep -vE "^\*|  $default_branch" | \
-    xargs -n 1 git branch -d
-}
-
-function gl() {
-  git log --date=format:"%b %d, %Y" --pretty=format:"%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n%C(blue)%aN <%ae> | %cd%n"
-}
-
-function glg() {
-  git log --graph --stat --date=format:"%b %d, %Y" --pretty=format:"%C(yellow bold)%h%Creset%C(white)%d%Creset %s%n%C(blue)%aN <%ae> | %cd%n"
-}
-
-function gwip() {
-  git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"
-}
 
 function gcom() {
   local do_pull=0
@@ -175,13 +78,8 @@ Examples:
   fi
 
   # Check for uncommitted changes
-  if ! git diff-index --quiet HEAD --; then
-    echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
-    read -r "response?Continue anyway? (y/N): "
-    if [[ "$response" != "y" && "$response" != "Y" ]]; then
-      echo "Aborted."
-      return 1
-    fi
+  if ! git-check-uncommitted --prompt; then
+    return 1
   fi
 
   # Check if remote exists before fetching
@@ -238,46 +136,8 @@ function pi() {
   ping -Anc 5 1.1.1.1
 }
 
-function randpw() {
-  openssl rand -base64 4 | md5 | head -c$1 ; echo
-}
-
 function rlv() {
   asdf list all ruby | rg '^\d'
-}
-
-# Thanks to https://github.com/Shpota/sha256
-function sha256() {
-    printf "%s %s\n" "$1" "$2" | sha256sum --check
-}
-
-# Create a new session named for current directory, or attach if exists.
-function tna() {
-  tmux new-session -As $(basename "$PWD" | tr . -)
-}
-
-# Makes creating a new tmux session (with a specific name) easier
-function tn() {
-  tmux new -s $1
-}
-
-# Makes attaching to an existing tmux session (with a specific name) easier
-function ta() {
-  tmux attach -t $1
-}
-
-# Makes deleting a tmux session easier
-function tk() {
-  tmux kill-session -t $1
-}
-
-# Kill all tmux sessions
-function tka() {
-  tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}
-}
-
-function ygs() {
-  yarn generate && http-server dist/ -p 8080
 }
 
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
@@ -336,7 +196,197 @@ function ygs() {
 #   done
 # }
 
-function update_jumpstart() {
-    git fetch jumpstart-pro
-    git merge jumpstart-pro/main
+# Push current branch to origin with upstream tracking (smart default branch detection)
+function gpum() {
+  # Help message
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  printf "%s\n" "Usage: gpum [OPTION]
+Push current branch to origin with upstream tracking to the default branch.
+Intelligently detects whether to use 'main' or 'master' as the default branch.
+
+Options:
+  -h, --help  Show this help message
+
+Examples:
+  gpum        # Push current branch to origin with upstream tracking"
+  return 0
+  fi
+
+  # Check if we're in a Git repo
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # Get current branch
+  local current_branch=$(git branch --show-current)
+  if [[ -z "$current_branch" ]]; then
+    echo "Could not determine current branch."
+    return 1
+  fi
+
+  # Check if remote exists
+  if ! git remote | grep -q "^origin$"; then
+    echo "No 'origin' remote found."
+    return 1
+  fi
+
+  # Determine default branch
+  local default_branch=""
+  
+  # Try to get default branch from remote
+  default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+  
+  # Fallback if needed
+  if [[ -z "$default_branch" ]]; then
+    if git show-ref --quiet refs/heads/main; then
+      default_branch="main"
+    elif git show-ref --quiet refs/heads/master; then
+      default_branch="master"
+    else
+      echo "Could not determine default branch."
+      return 1
+    fi
+  fi
+
+  echo "Pushing $current_branch to origin with upstream tracking..."
+  git push -u origin "$current_branch"
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to push to origin."
+    return 1
+  fi
+
+  echo "Successfully pushed $current_branch to origin (default branch: $default_branch)"
+}
+
+# Rebase current branch against default branch (smart branch detection)
+function grbm() {
+  # Help message
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  printf "%s\n" "Usage: grbm [OPTION]
+Rebase current branch against the default branch (main or master).
+Intelligently detects the default branch and fetches latest changes.
+
+Options:
+  -h, --help  Show this help message
+
+Examples:
+  grbm        # Rebase current branch against default branch"
+  return 0
+  fi
+
+  # Check if we're in a Git repo
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not a git repository."
+    return 1
+  fi
+
+  # Get current branch
+  local current_branch=$(git branch --show-current)
+  if [[ -z "$current_branch" ]]; then
+    echo "Could not determine current branch."
+    return 1
+  fi
+
+  # Check for uncommitted changes
+  if ! git-check-uncommitted --prompt; then
+    return 1
+  fi
+
+  # Check if remote exists and fetch
+  if git remote | grep -q "^origin$"; then
+    echo "Fetching latest from origin..."
+    git fetch origin > /dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+      echo "Failed to fetch from origin."
+      return 1
+    fi
+  fi
+
+  # Determine default branch
+  local default_branch=""
+  
+  # Try to get default branch from remote
+  if git remote | grep -q "^origin$"; then
+    default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+  fi
+  
+  # Fallback if needed
+  if [[ -z "$default_branch" ]]; then
+    if git show-ref --quiet refs/heads/main; then
+      default_branch="main"
+    elif git show-ref --quiet refs/heads/master; then
+      default_branch="master"
+    else
+      echo "Could not determine default branch."
+      return 1
+    fi
+  fi
+
+  # Don't rebase if we're already on the default branch
+  if [[ "$current_branch" == "$default_branch" ]]; then
+    echo "Already on default branch ($default_branch). Nothing to rebase."
+    return 0
+  fi
+
+  echo "Rebasing $current_branch against $default_branch..."
+  git rebase "origin/$default_branch"
+  if [[ $? -ne 0 ]]; then
+    echo "Rebase failed. You may need to resolve conflicts manually."
+    return 1
+  fi
+
+  echo "Successfully rebased $current_branch against $default_branch"
+}
+
+# Regenerate abbreviations for all shells from shared YAML source
+function reload-abbr() {
+  # Help message
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    printf "%s\n" "Usage: reload-abbr [OPTION]
+Regenerate abbreviations for all shells from shared YAML source.
+This command can be run from any directory.
+
+Options:
+  -h, --help  Show this help message
+
+Examples:
+  reload-abbr  # Regenerate all abbreviations from shared/abbreviations.yaml"
+    return 0
+  fi
+
+  # Find the dotfiles directory
+  local dotfiles_dir="$HOME/dotfiles"
+  if [[ ! -d "$dotfiles_dir" ]]; then
+    echo "❌ Error: Dotfiles directory not found at $dotfiles_dir"
+    return 1
+  fi
+
+  # Check if the generation script exists
+  local generate_script="$dotfiles_dir/shared/generate-all-abbr.sh"
+  if [[ ! -f "$generate_script" ]]; then
+    echo "❌ Error: Generation script not found at $generate_script"
+    return 1
+  fi
+
+  # Check if script is executable
+  if [[ ! -x "$generate_script" ]]; then
+    echo "❌ Error: Generation script is not executable: $generate_script"
+    echo "Run: chmod +x $generate_script"
+    return 1
+  fi
+
+  # Run the generation script
+  echo "🔄 Regenerating abbreviations from any directory..."
+  "$generate_script"
+  local exit_code=$?
+
+  if [[ $exit_code -eq 0 ]]; then
+    echo
+    echo "💡 Don't forget to reload your shell to use the new abbreviations:"
+    echo "   Fish: exec fish"
+    echo "   Zsh:  src"
+  fi
+
+  return $exit_code
 }

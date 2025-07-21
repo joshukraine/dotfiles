@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# Smart git wrapper - shows status if no args, otherwise runs git command
+# Usage: g [git-args...]
+
+if [[ $# -eq 0 ]]; then
+  clear && git status --short --branch && echo
+else
+  git "$@"
+fi

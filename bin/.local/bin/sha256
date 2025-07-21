@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Verify SHA256 checksum
+# Usage: sha256 <expected-hash> <file>
+
+if [[ $# -ne 2 ]]; then
+  echo "Usage: sha256 <expected-hash> <file>"
+  exit 1
+fi
+
+printf "%s %s\n" "$1" "$2" | sha256sum --check

@@ -1,0 +1,30 @@
+name: Markdown Lint
+
+on:
+  push:
+    paths:
+      - '**/*.md'
+      - '.markdownlint.*'
+      - '.github/workflows/markdownlint.yml'
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '.markdownlint.*'
+      - '.github/workflows/markdownlint.yml'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Markdown Lint
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          # Use the config file from your dotfiles
+          config: '.markdownlint.yaml'
+          # Lint all markdown files in the repository
+          globs: '**/*.md'
+          # Optional: fix simple issues automatically
+          # fix: true

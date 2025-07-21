@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# Copy text to clipboard via pbcopy
+# Usage: copy [text]
+
+# Join all arguments and copy to clipboard without newline
+printf "%s" "$*" | tr -d "\n" | pbcopy

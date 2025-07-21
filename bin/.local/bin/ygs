@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Build a Nuxt site and serve from the dist/ folder
+# Usage: ygs
+
+set -euo pipefail
+
+yarn generate && http-server dist/ -p 8080
