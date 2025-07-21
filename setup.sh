@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e # Terminate script if anything exits with a non-zero value
+
 ################################################################################
 # setup.sh
 #
@@ -402,7 +404,6 @@ show_next_steps() {
 }
 
 # Error handling
-set -e # Terminate script if anything exits with a non-zero value
 trap 'dotfiles_error "Script failed at line $LINENO"' ERR
 
 # Run main function

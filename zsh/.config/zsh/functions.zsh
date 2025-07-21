@@ -80,7 +80,8 @@ Examples:
   # Check for uncommitted changes
   if ! git diff-index --quiet HEAD --; then
     echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
-    read -r "response?Continue anyway? (y/N): "
+    printf "Continue anyway? (y/N): "
+    read -r response
     if [[ "$response" != "y" && "$response" != "Y" ]]; then
       echo "Aborted."
       return 1
@@ -296,7 +297,8 @@ Examples:
   # Check for uncommitted changes
   if ! git diff-index --quiet HEAD --; then
     echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
-    read -r "response?Continue anyway? (y/N): "
+    printf "Continue anyway? (y/N): "
+    read -r response
     if [[ "$response" != "y" && "$response" != "Y" ]]; then
       echo "Aborted."
       return 1
