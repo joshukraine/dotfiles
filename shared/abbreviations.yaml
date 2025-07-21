@@ -326,8 +326,8 @@ yarn:
   ypub: "yarn publish"
   yr: "yarn run"
   yre: "yarn remove"
-  ys: "yarn start"
-  yserve: "yarn serve"
+  ys: "yarn serve"
+  yst: "yarn start"
   yt: "yarn test"
   ytc: "yarn test --coverage"
   yuc: "yarn global upgrade && yarn cache clean"
@@ -357,4 +357,3 @@ middleman:
   mmbc: "bundle exec middleman build --clean"
   mmc: "bundle exec middleman console"
   mms: "bundle exec middleman server"
-
