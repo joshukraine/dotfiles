@@ -5,7 +5,7 @@
 ## 🤩 Highlights
 
 - [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
-- [Starship][starship] prompt (or [Powerlevel10K][p10k])
+- [Starship][starship] prompt
 - Shell support for both [Zsh][zsh] and [Fish][fish] with 95% functional parity via shared configuration
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
@@ -69,7 +69,7 @@ The dotfiles assume you are running macOS with (at minimum) the following softwa
 - [Zsh][zsh] and/or [Fish][fish]
 - [Neovim][neovim]
 - [Starship][starship]
-- `yq` (for regenerating abbreviations from shared YAML source)
+- [`yq`][yq] (for regenerating abbreviations from shared YAML source)
 
 All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
@@ -178,11 +178,10 @@ brew bundle install
 
 - [ ] Launch LazyVim (`nvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings. Plugins should install automatically on first launch.
 - [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`, `~/dotfiles/local/config.fish.local`.
-- [ ] Set up [1Password CLI][1p-cli-start] for managing secrets.
-- [ ] Set up [1Password SSH key management][1p-cli-ssh].
+- [ ] (Optional) Set up [1Password CLI][1p-cli-start] for managing secrets.
+- [ ] (Optional) Set up [1Password SSH key management][1p-cli-ssh].
 - [ ] If using Fish, customize your setup by running the `fish_config` command.
-- [ ] If using Zsh, edit `.zshrc` and `plugins.zsh` to select either [Starship][starship] or [Powerlevel10K][p10k] as your prompt.
-- [ ] If using Tmux, install Tmux plugins with `<prefix> + I` (<https://github.com/tmux-plugins/tpm>)
+- [ ] Install Tmux plugins with `<prefix> + I` (<https://github.com/tmux-plugins/tpm>)
 
 ## Zsh or Fish?
 
@@ -249,9 +248,49 @@ Restart your terminal. This will create the `~/.config` and `~/.local` directori
 
 </details>
 
+## Shared Configuration Framework
+
+The dotfiles use a unified configuration system that eliminates duplication between Fish and Zsh shells:
+
+### Key Components
+
+- **`shared/abbreviations.yaml`** - Single source of truth for all 196+ abbreviations
+- **`shared/environment.sh` and `shared/environment.fish`** - Common environment variables
+- **`shared/generate-fish-abbr.sh` and `shared/generate-zsh-abbr.sh`** - Scripts to generate shell-specific abbreviations
+
+### Adding or Modifying Abbreviations
+
+1. Edit `~/dotfiles/shared/abbreviations.yaml`
+2. Regenerate the shell-specific files:
+
+```bash
+cd ~/dotfiles/shared
+./generate-fish-abbr.sh    # Updates fish/.config/fish/abbreviations.fish
+./generate-zsh-abbr.sh     # Updates zsh/.config/zsh-abbr/abbreviations.zsh
+```
+
+3. Reload your shell configuration:
+   - Fish: `exec fish` or open a new terminal
+   - Zsh: `src` or open a new terminal
+
+> [!IMPORTANT]
+> Never edit the generated abbreviation files directly - changes will be overwritten!
+
+### Smart Git Functions
+
+The shared configuration includes intelligent git functions that automatically detect your main branch:
+
+- `gpum` - Pull from upstream main/master
+- `grbm` - Rebase on main/master
+- `gcom` - Checkout main/master
+- `gbrm` - Create branch from main/master
+
+These functions work with both `main` and `master` branch names automatically.
+
 ## About Neovim Distributions
 
-**TL;DR:** Just install [LazyVim][lazyvim]💤
+> [!TIP]
+> **TL;DR:** Just install [LazyVim][lazyvim]💤
 
 📺 [Zero to IDE with LazyVim][zero-to-ide-lazyvim-video]
 
@@ -447,7 +486,7 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
-[p10k]: https://github.com/romkatv/powerlevel10k
+[yq]: https://github.com/mikefarah/yq
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
