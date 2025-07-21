@@ -19,7 +19,7 @@ shell:
 
 # System tools
 system:
-  neo: "neofetch"
+  fast: "fastfetch"
   ch: "cht.sh"
 
 # Claude Code

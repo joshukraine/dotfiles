@@ -18,7 +18,7 @@ abbr "mv"="mv -iv"
 abbr "src"="source $HOME/.zshrc"
 
 # System
-abbr "neo"="neofetch"
+abbr "fast"="fastfetch"
 abbr "ch"="cht.sh"
 
 # Claude Code

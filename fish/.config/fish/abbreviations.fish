@@ -15,7 +15,7 @@ abbr -a -g mkdir 'mkdir -pv'
 abbr -a -g mv 'mv -iv'
 
 # System
-abbr -a -g neo 'neofetch'
+abbr -a -g fast 'fastfetch'
 abbr -a -g ch 'cht.sh'
 
 # Claude Code
