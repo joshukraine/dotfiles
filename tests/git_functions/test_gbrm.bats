@@ -192,6 +192,7 @@ teardown() {
   
   # Count branches before
   local branch_count_before
+  # shellcheck disable=SC2126
   branch_count_before=$(git branch | grep -v main | wc -l)
   
   run gbrm
@@ -199,6 +200,7 @@ teardown() {
   
   # Should have removed the merged branches
   local branch_count_after
+  # shellcheck disable=SC2126
   branch_count_after=$(git branch | grep -v main | wc -l)
   [ "$branch_count_after" -lt "$branch_count_before" ]
 }
