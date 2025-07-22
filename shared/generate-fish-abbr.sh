@@ -59,4 +59,3 @@ EOF
 
 echo "✅ Generated Fish abbreviations: $OUTPUT_FILE"
 echo "📊 Total abbreviations: $(grep -c '^abbr' "$OUTPUT_FILE")"
-

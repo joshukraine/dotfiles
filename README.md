@@ -266,9 +266,9 @@ The dotfiles use a unified configuration system that eliminates duplication betw
 1. Edit `~/dotfiles/shared/abbreviations.yaml`
 2. Regenerate all abbreviations (from any directory):
 
-```bash
-reload-abbr    # Available as a shell function - works from anywhere!
-```
+   ```bash
+   reload-abbr    # Available as a shell function - works from anywhere!
+   ```
 
 3. Reload your shell configuration:
    - Fish: `exec fish` or open a new terminal
@@ -426,8 +426,8 @@ Leveraging this approach depends on your terminal. In iTerm2, for example, you n
 kitty does things a little differently. If you install a patched font, it will mostly work. Mostly. But the “kitty way” can be broken down in three steps:
 
 1. Install a normal, un-patched mono-spaced font, such as `Cascadia Code`
-1. Install a dedicated icon font, such as `Symbols Nerd Font Mono`
-1. Create a set of Unicode symbol maps[^2] to tell kitty which font to use for which icons (symbols)
+2. Install a dedicated icon font, such as `Symbols Nerd Font Mono`
+3. Create a set of Unicode symbol maps[^2] to tell kitty which font to use for which icons (symbols)
 
 More work up front, maybe, but less guesswork in the long-term once you understand what's going on. And if you're using my dotfiles, you have it easy. **All the fonts you need are installed in `Brewfile`, and I have a set of Unicode symbol maps ready to go.** 😎
 

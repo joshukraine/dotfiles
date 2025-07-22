@@ -46,4 +46,3 @@ should_skip_category() {
 
   return 1 # Should not skip
 }
-

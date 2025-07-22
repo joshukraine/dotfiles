@@ -1,0 +1,88 @@
+# Pre-commit hooks for dotfiles validation
+# Install with: pre-commit install
+# Run manually with: pre-commit run --all-files
+
+repos:
+  # Local dotfiles validation hooks
+  - repo: local
+    hooks:
+      # Shell syntax validation
+      - id: shell-syntax-validation
+        name: Shell Syntax Validation
+        entry: ./scripts/validate-config.sh --validator shell-syntax --ci
+        language: system
+        files: \.(fish|zsh|sh|bash)$
+        pass_filenames: false
+
+      # Abbreviations consistency
+      - id: abbreviations-validation
+        name: Abbreviations Validation
+        entry: ./scripts/validate-config.sh --validator abbreviations --ci
+        language: system
+        files: ^(shared/abbreviations\.yaml|.*abbreviations\.(fish|zsh))$
+        pass_filenames: false
+
+      # Environment variables sync
+      - id: environment-validation
+        name: Environment Variables Validation
+        entry: ./scripts/validate-config.sh --validator environment --ci
+        language: system
+        files: ^shared/environment\.(sh|fish)$
+        pass_filenames: false
+
+      # Markdown linting
+      - id: markdown-validation
+        name: Markdown Validation
+        entry: ./scripts/validate-config.sh --validator markdown --fix --ci
+        language: system
+        files: \.md$
+        exclude: ^scratchpads/
+        pass_filenames: false
+
+  # External validation tools
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      # Basic file checks
+      - id: check-yaml
+        exclude: ^(\.github/|.*\.md)
+      - id: check-toml
+      - id: check-json
+      - id: end-of-file-fixer
+        exclude: ^scratchpads/
+      - id: trailing-whitespace
+        exclude: ^scratchpads/
+      - id: check-merge-conflict
+      - id: check-case-conflict
+
+      # Shell script validation
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+
+  # Shellcheck integration
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.6
+    hooks:
+      - id: shellcheck
+        exclude: ^(scratchpads/|\.github/)
+
+  # YAML validation
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        args: [--config-file=yamllint/.yamllint]
+        exclude: ^scratchpads/
+
+# Global configuration
+default_install_hook_types: [pre-commit, pre-push]
+default_stages: [pre-commit]
+
+# Exclude patterns
+exclude: |
+  (?x)^(
+    scratchpads/.*|
+    \.git/.*|
+    node_modules/.*|
+    vendor/.*
+  )$

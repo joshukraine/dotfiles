@@ -74,7 +74,7 @@ command_exists() {
 get_version() {
   local cmd="$1"
   local version_flag="${2:---version}"
-  
+
   if command_exists "$cmd"; then
     "$cmd" $version_flag 2>/dev/null | head -1 || echo "unknown"
   else
@@ -85,7 +85,7 @@ get_version() {
 # Validate essential development tools
 validate_essential_tools() {
   log_info "Checking essential development tools..."
-  
+
   # Critical tools that must be present
   local essential_tools=(
     "git:Git version control system"
@@ -95,13 +95,13 @@ validate_essential_tools() {
     "tmux:Terminal multiplexer"
     "brew:Homebrew package manager"
   )
-  
+
   local missing_essential=()
-  
+
   for tool_desc in "${essential_tools[@]}"; do
     local tool="${tool_desc%%:*}"
     local description="${tool_desc#*:}"
-    
+
     if command_exists "$tool"; then
       local version
       version=$(get_version "$tool")
@@ -112,13 +112,13 @@ validate_essential_tools() {
       ((MISSING_CRITICAL++))
     fi
   done
-  
+
   if [[ ${#missing_essential[@]} -gt 0 ]]; then
     log_error "Missing essential tools: ${missing_essential[*]}"
     log_error "Install with: brew install ${missing_essential[*]}"
     return 1
   fi
-  
+
   log_success "All essential development tools available"
   return 0
 }
@@ -126,21 +126,21 @@ validate_essential_tools() {
 # Validate validator framework dependencies
 validate_validator_dependencies() {
   log_info "Checking validator framework dependencies..."
-  
+
   # Tools required by validators
   local validator_tools=(
     "yq:YAML processor (for abbreviations validator)"
-    "shellcheck:Shell script linter (for shell-syntax validator)" 
+    "shellcheck:Shell script linter (for shell-syntax validator)"
     "bats:Shell testing framework (for future testing)"
     "stow:Symlink manager (for symlinks validator)"
   )
-  
+
   local missing_validator=()
-  
+
   for tool_desc in "${validator_tools[@]}"; do
     local tool="${tool_desc%%:*}"
     local description="${tool_desc#*:}"
-    
+
     if command_exists "$tool"; then
       local version
       version=$(get_version "$tool")
@@ -151,11 +151,11 @@ validate_validator_dependencies() {
       ((MISSING_CRITICAL++))
     fi
   done
-  
+
   if [[ ${#missing_validator[@]} -gt 0 ]]; then
     log_error "Missing validator dependencies: ${missing_validator[*]}"
     log_error "Install with: brew install ${missing_validator[*]}"
-    
+
     if [[ $FIX_MODE -eq 1 ]]; then
       log_info "Fixing: Installing missing validator dependencies..."
       if brew install "${missing_validator[@]}" >/dev/null 2>&1; then
@@ -168,7 +168,7 @@ validate_validator_dependencies() {
       return 1
     fi
   fi
-  
+
   log_success "All validator dependencies available"
   return 0
 }
@@ -176,7 +176,7 @@ validate_validator_dependencies() {
 # Validate core dotfiles functionality tools
 validate_dotfiles_tools() {
   log_info "Checking dotfiles functionality tools..."
-  
+
   # Tools that enhance dotfiles functionality
   local dotfiles_tools=(
     "rg:ripgrep (for FZF and search)"
@@ -185,13 +185,13 @@ validate_dotfiles_tools() {
     "bat:Better cat with syntax highlighting"
     "fzf:Fuzzy finder"
   )
-  
+
   local missing_tools=0
-  
+
   for tool_desc in "${dotfiles_tools[@]}"; do
     local tool="${tool_desc%%:*}"
     local description="${tool_desc#*:}"
-    
+
     if command_exists "$tool"; then
       local version
       version=$(get_version "$tool")
@@ -202,52 +202,52 @@ validate_dotfiles_tools() {
       ((MISSING_OPTIONAL++))
     fi
   done
-  
+
   if [[ $missing_tools -gt 0 ]]; then
     log_warning "$missing_tools optional dotfiles tools missing"
     log_info "Install missing tools with: brew bundle install"
   else
     log_success "All dotfiles tools available"
   fi
-  
+
   return 0
 }
 
 # Validate Homebrew and Brewfile
 validate_homebrew_setup() {
   log_info "Checking Homebrew setup..."
-  
+
   if ! command_exists "brew"; then
     log_error "Homebrew not installed - required for package management"
     return 1
   fi
-  
+
   # Check Brewfile exists
   if [[ ! -f "$BREWFILE" ]]; then
     log_error "Brewfile not found: brew/Brewfile"
     return 1
   fi
-  
+
   log_success "Brewfile found: brew/Brewfile"
-  
+
   # Count packages in Brewfile
   local total_packages
   total_packages=$(grep -c "^brew\|^cask" "$BREWFILE" 2>/dev/null || echo "0")
-  
+
   if [[ $total_packages -eq 0 ]]; then
     log_warning "No packages defined in Brewfile"
   else
     log_info "Brewfile contains $total_packages packages"
   fi
-  
+
   # Check if brew bundle is available
   if ! brew bundle --help >/dev/null 2>&1; then
     log_error "brew bundle not available - install with: brew tap homebrew/bundle"
     return 1
   fi
-  
+
   log_success "Homebrew bundle available"
-  
+
   # Quick check if Brewfile is valid
   if ! brew bundle check --file="$BREWFILE" >/dev/null 2>&1; then
     log_warning "Some packages in Brewfile are not installed"
@@ -255,42 +255,42 @@ validate_homebrew_setup() {
   else
     log_success "All Brewfile packages are installed"
   fi
-  
+
   return 0
 }
 
 # Validate shell availability and versions
 validate_shell_compatibility() {
   log_info "Checking shell compatibility..."
-  
+
   # Check Fish version (minimum 3.0 recommended)
   if command_exists "fish"; then
     local fish_version
     fish_version=$(get_version "fish")
     local fish_major
     fish_major=$(echo "$fish_version" | grep -o "fish, version [0-9]*" | grep -o "[0-9]*" || echo "0")
-    
+
     if [[ $fish_major -ge 3 ]]; then
       log_success "Fish version compatible: $fish_version"
     else
       log_warning "Fish version may be too old: $fish_version (recommend 3.0+)"
     fi
   fi
-  
+
   # Check Zsh version (minimum 5.0 recommended)
   if command_exists "zsh"; then
     local zsh_version
     zsh_version=$(get_version "zsh")
     local zsh_major
     zsh_major=$(echo "$zsh_version" | grep -o "zsh [0-9]*\.[0-9]*" | cut -d' ' -f2 | cut -d'.' -f1 || echo "0")
-    
+
     if [[ $zsh_major -ge 5 ]]; then
       log_success "Zsh version compatible: $zsh_version"
     else
       log_warning "Zsh version may be too old: $zsh_version (recommend 5.0+)"
     fi
   fi
-  
+
   # Check if shells are available in /etc/shells
   local shells_file="/etc/shells"
   if [[ -f "$shells_file" ]]; then
@@ -299,29 +299,29 @@ validate_shell_compatibility() {
     else
       log_warning "Fish not found in /etc/shells - may need to add it"
     fi
-    
+
     if grep -q "$(command -v zsh)" "$shells_file" 2>/dev/null; then
       log_success "Zsh is registered in /etc/shells"
     else
       log_warning "Zsh not found in /etc/shells - may need to add it"
     fi
   fi
-  
+
   return 0
 }
 
 # Check system compatibility
 validate_system_compatibility() {
   log_info "Checking system compatibility..."
-  
+
   # Check platform
   local platform
   platform=$(uname -s)
-  
+
   case "$platform" in
     Darwin)
       log_success "Running on macOS (supported platform)"
-      
+
       # Check macOS version
       local macos_version
       macos_version=$(sw_vers -productVersion 2>/dev/null || echo "unknown")
@@ -334,7 +334,7 @@ validate_system_compatibility() {
       log_warning "Running on unsupported platform: $platform"
       ;;
   esac
-  
+
   # Check architecture (for Homebrew compatibility)
   local arch
   arch=$(uname -m)
@@ -346,45 +346,45 @@ validate_system_compatibility() {
       log_warning "Architecture may not be fully supported: $arch"
       ;;
   esac
-  
+
   return 0
 }
 
 # Main validation function
 main() {
   local validation_failed=0
-  
+
   # Change to dotfiles root
   cd "$DOTFILES_ROOT"
-  
+
   # Run all dependency validations
   if ! validate_essential_tools; then
     validation_failed=1
   fi
-  
+
   if ! validate_validator_dependencies; then
     validation_failed=1
   fi
-  
+
   if ! validate_dotfiles_tools; then
     # Don't fail on missing optional tools
     :
   fi
-  
+
   if ! validate_homebrew_setup; then
     validation_failed=1
   fi
-  
+
   if ! validate_shell_compatibility; then
     # Don't fail on version warnings
     :
   fi
-  
+
   if ! validate_system_compatibility; then
     # Don't fail on platform warnings
     :
   fi
-  
+
   # Summary
   if [[ $validation_failed -eq 1 ]]; then
     log_error "Dependencies validation failed with $VALIDATION_ERRORS error(s)"

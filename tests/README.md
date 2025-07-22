@@ -15,7 +15,7 @@ The testing framework ensures reliability and cross-shell compatibility for:
 
 ## Directory Structure
 
-```
+```text
 tests/
 ├── README.md                 # This documentation
 ├── helpers/                  # Shared test utilities
@@ -71,7 +71,7 @@ bats tests/ --recursive
 # Git functions only
 bats tests/git_functions/
 
-# Abbreviations only  
+# Abbreviations only
 bats tests/abbreviations/
 
 # Utilities only
@@ -79,7 +79,7 @@ bats tests/utilities/
 
 # Specific function tests
 bats tests/git_functions/test_gpum.bats      # Just gpum tests
-bats tests/git_functions/test_grbm.bats     # Just grbm tests  
+bats tests/git_functions/test_grbm.bats     # Just grbm tests
 bats tests/git_functions/test_gcom.bats     # Just gcom tests
 ```
 
@@ -159,7 +159,7 @@ teardown() {
 #### Shell Helpers (`shell_helpers.bash`)
 
 - `run_fish_function function_name [args...]` - Execute Fish function
-- `run_zsh_function function_name [args...]` - Execute Zsh function  
+- `run_zsh_function function_name [args...]` - Execute Zsh function
 - `test_abbreviation abbr expected [shell_type]` - Test abbreviation expansion
 - `load_environment` - Source shared environment variables
 - `setup_dotfiles_path` - Add bin directory to PATH
@@ -180,7 +180,7 @@ When testing git functions, use the provided git helpers:
 @test "gpum works with main branch repository" {
   setup_main_repo
   create_feature_branch "test-feature"
-  
+
   run run_fish_function gpum
   [ "$status" -eq 0 ]
   assert_contains "$output" "Successfully pushed"
@@ -209,6 +209,7 @@ Tests run automatically in GitHub Actions on:
 - Pull requests to `master`/`main` branches
 
 The workflow:
+
 1. Tests both Fish and Zsh environments
 2. Runs tests in parallel for performance
 3. Enforces 2-minute execution time limit
@@ -226,7 +227,7 @@ The workflow:
 The framework aims to test:
 
 - ✅ **Smart git functions**: gpum (comprehensive), grbm, gcom, gbrm (basic)
-- ✅ **Key abbreviations**: 20+ most critical abbreviations  
+- ✅ **Key abbreviations**: 20+ most critical abbreviations
 - ✅ **Development utilities**: git-cm, git-check-uncommitted, tat (tmux session manager)
 - ✅ **Environment loading**: Variable and path setup
 - ✅ **Bin script utilities**: Key scripts in bin/.local/bin directory
@@ -234,11 +235,13 @@ The framework aims to test:
 ### Current Test Coverage (101 tests)
 
 **Abbreviations (11 tests)**
+
 - Cross-shell compatibility validation (Fish + Zsh)
 - Core abbreviation categories (unix, git, homebrew, claude, tmux, system)
 - File structure and generation validation
 
 **Git Functions (78 tests)**
+
 - **gpum**: 12 comprehensive tests (help, error cases, branch detection, push scenarios)
 - **grbm**: 20 tests (help, git validation, branch detection, rebase scenarios)
 - **gcom**: 22 tests (help, checkout with/without pull, branch detection)
@@ -246,6 +249,7 @@ The framework aims to test:
 - **git-check-uncommitted**: 17 tests (status detection, prompt handling, edge cases)
 
 **Utility Scripts (12 tests)**
+
 - **git-cm**: 9 tests (commit wrapper functionality, argument handling)
 - **tat**: 9 tests (tmux session creation, directory name handling)
 
@@ -269,6 +273,7 @@ If tests are interrupted or cleanup fails, run the cleanup script:
 ```
 
 This will remove:
+
 - All tmux sessions matching test patterns (`tmp-*`, `test-*`, `custom-session`, etc.)
 - Old temporary files in `/tmp`
 
@@ -322,7 +327,7 @@ Abbreviation tests depend on generated files:
 When adding new functions or abbreviations:
 
 1. **Add tests first** - Follow TDD approach
-2. **Test both shells** - Ensure Fish/Zsh compatibility  
+2. **Test both shells** - Ensure Fish/Zsh compatibility
 3. **Include edge cases** - Test error conditions
 4. **Update documentation** - Add examples to this README
 5. **Check performance** - Ensure tests complete quickly

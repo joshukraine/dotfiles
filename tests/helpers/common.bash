@@ -26,7 +26,7 @@ assert_equals() {
   local expected="$1"
   local actual="$2"
   local message="${3:-Values should be equal}"
-  
+
   if [ "$expected" = "$actual" ]; then
     return 0
   else
@@ -41,7 +41,7 @@ assert_not_equals() {
   local expected="$1"
   local actual="$2"
   local message="${3:-Values should not be equal}"
-  
+
   if [ "$expected" != "$actual" ]; then
     return 0
   else
@@ -56,7 +56,7 @@ assert_contains() {
   local haystack="$1"
   local needle="$2"
   local message="${3:-String should contain substring}"
-  
+
   if [[ "$haystack" == *"$needle"* ]]; then
     return 0
   else
@@ -70,7 +70,7 @@ assert_contains() {
 assert_file_exists() {
   local file="$1"
   local message="${2:-File should exist}"
-  
+
   if [ -f "$file" ]; then
     return 0
   else
@@ -83,7 +83,7 @@ assert_file_exists() {
 assert_directory_exists() {
   local dir="$1"
   local message="${2:-Directory should exist}"
-  
+
   if [ -d "$dir" ]; then
     return 0
   else
@@ -96,7 +96,7 @@ assert_directory_exists() {
 assert_command_succeeds() {
   local command="$1"
   local message="${2:-Command should succeed}"
-  
+
   if eval "$command" >/dev/null 2>&1; then
     return 0
   else
@@ -109,7 +109,7 @@ assert_command_succeeds() {
 assert_command_fails() {
   local command="$1"
   local message="${2:-Command should fail}"
-  
+
   if ! eval "$command" >/dev/null 2>&1; then
     return 0
   else
@@ -123,7 +123,7 @@ assert_command_fails() {
 run_with_timeout() {
   local timeout="$1"
   shift
-  
+
   timeout "$timeout" bash -c "$*"
 }
 
@@ -163,27 +163,27 @@ mock_command() {
   local cmd="$1"
   local mock_output="$2"
   local mock_exit_code="${3:-0}"
-  
+
   # Create a temporary mock script
   local mock_script
   mock_script=$(mktemp)
-  
+
   cat > "$mock_script" << EOF
 #!/bin/bash
 echo "$mock_output"
 exit $mock_exit_code
 EOF
-  
+
   chmod +x "$mock_script"
-  
+
   # Add mock to PATH
   local mock_dir
   mock_dir=$(dirname "$mock_script")
   export PATH="$mock_dir:$PATH"
-  
+
   # Rename mock script to command name
   mv "$mock_script" "$mock_dir/$cmd"
-  
+
   # Return cleanup function
   echo "$mock_dir/$cmd"
 }

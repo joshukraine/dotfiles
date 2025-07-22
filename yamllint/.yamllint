@@ -1,0 +1,35 @@
+rules:
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  colons:
+    max-spaces-after: -1
+    level: error
+  commas:
+    max-spaces-after: -1
+    level: error
+  comments: disable
+  comments-indentation: disable
+  document-start: disable
+  empty-lines:
+    max: 3
+    level: error
+  empty-values: disable
+  hyphens:
+    level: error
+  indentation:
+    spaces: consistent
+    indent-sequences: true
+    check-multi-line-strings: false
+  key-duplicates: enable
+  line-length:
+    max: 200
+    level: warning
+  new-line-at-end-of-file: disable
+  octal-values: disable
+  quoted-strings: disable
+  trailing-spaces: disable
+  truthy: disable

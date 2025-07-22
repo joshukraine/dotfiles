@@ -19,7 +19,7 @@ teardown_test_git_repo() {
 # Initialize a basic git repository with initial commit
 init_git_repo() {
   local default_branch="${1:-main}"
-  
+
   # Initialize repository - handle different git versions
   if git init -b "$default_branch" 2>/dev/null; then
     # Modern git supports -b flag
@@ -29,7 +29,7 @@ init_git_repo() {
     git init
     git checkout -b "$default_branch"
   fi
-  
+
   git config user.name "Test User"
   git config user.email "test@example.com"
   echo "# Test Repository" > README.md
@@ -45,7 +45,7 @@ add_mock_origin() {
   git init --bare "$remote_dir"
   git remote add origin "$remote_dir"
   git push -u origin "$default_branch"
-  
+
   # Set up remote HEAD to point to default branch
   cd "$remote_dir"
   git symbolic-ref HEAD "refs/heads/$default_branch"

@@ -68,32 +68,32 @@ log_error() {
 # Check if required tools are available
 check_prerequisites() {
   local missing_tools=()
-  
+
   # Check for markdownlint-cli2
   if ! command -v markdownlint-cli2 >/dev/null 2>&1; then
     missing_tools+=("markdownlint-cli2")
   fi
-  
+
   if [[ ${#missing_tools[@]} -gt 0 ]]; then
     log_error "Missing required tools: ${missing_tools[*]}"
     log_error "Install with: brew install ${missing_tools[*]}"
     return 1
   fi
-  
+
   return 0
 }
 
 # Check markdown configuration file
 check_markdown_config() {
   log_info "Checking markdown configuration..."
-  
+
   if [[ ! -f "$MARKDOWN_CONFIG" ]]; then
     log_error "Markdown configuration not found: markdown/.markdownlint.yaml"
     return 1
   fi
-  
+
   log_success "Markdown configuration found: markdown/.markdownlint.yaml"
-  
+
   # Validate config file syntax (YAML)
   if command -v yq >/dev/null 2>&1; then
     if ! yq eval '.' "$MARKDOWN_CONFIG" >/dev/null 2>&1; then
@@ -102,7 +102,7 @@ check_markdown_config() {
     fi
     log_success "Markdown configuration syntax valid"
   fi
-  
+
   return 0
 }
 
@@ -126,11 +126,11 @@ find_markdown_files() {
 validate_markdown_file() {
   local file="$1"
   local relative_file="${file#"$DOTFILES_ROOT"/}"
-  
+
   # Run markdownlint-cli2 on the file
   local lint_output
   local lint_exit_code=0
-  
+
   if [[ $FIX_MODE -eq 1 ]]; then
     # Run with --fix flag
     lint_output=$(markdownlint-cli2 --config "$MARKDOWN_CONFIG" --fix "$file" 2>&1) || lint_exit_code=$?
@@ -138,7 +138,7 @@ validate_markdown_file() {
     # Run validation only
     lint_output=$(markdownlint-cli2 --config "$MARKDOWN_CONFIG" "$file" 2>&1) || lint_exit_code=$?
   fi
-  
+
   if [[ $lint_exit_code -eq 0 ]]; then
     log_success "Markdown valid: $relative_file"
     if [[ $FIX_MODE -eq 1 && -n "$lint_output" ]]; then
@@ -151,7 +151,7 @@ validate_markdown_file() {
   else
     log_error "Markdown errors: $relative_file"
     ((FILES_WITH_ERRORS++))
-    
+
     # Show error details if verbose
     if [[ $VERBOSE -eq 1 ]]; then
       # Extract just the error messages (skip the summary lines)
@@ -165,7 +165,7 @@ validate_markdown_file() {
         done
       fi
     fi
-    
+
     return 1
   fi
 }
@@ -173,53 +173,53 @@ validate_markdown_file() {
 # Validate all markdown files
 validate_all_markdown() {
   log_info "Validating markdown files..."
-  
+
   local markdown_files=()
   while IFS= read -r file; do
     if [[ -n "$file" ]]; then
       markdown_files+=("$file")
     fi
   done < <(find_markdown_files)
-  
+
   if [[ ${#markdown_files[@]} -eq 0 ]]; then
     log_warning "No markdown files found to validate"
     return 0
   fi
-  
+
   log_info "Found ${#markdown_files[@]} markdown files to validate"
-  
+
   local validation_failed=0
   for file in "${markdown_files[@]}"; do
     if ! validate_markdown_file "$file"; then
       validation_failed=1
     fi
   done
-  
+
   # Summary
   if [[ $FIX_MODE -eq 1 && $FILES_FIXED -gt 0 ]]; then
     log_success "Fixed issues in $FILES_FIXED file(s)"
   fi
-  
+
   if [[ $validation_failed -eq 1 ]]; then
     return 1
   fi
-  
+
   return 0
 }
 
 # Check markdown tool version
 check_markdown_version() {
   log_info "Checking markdownlint-cli2 version..."
-  
+
   local version_output
   version_output=$(markdownlint-cli2 --version 2>&1 | head -1 || echo "unknown")
-  
+
   if [[ "$version_output" =~ markdownlint-cli2[[:space:]]v([0-9]+\.[0-9]+) ]]; then
     log_success "Using $version_output"
   else
     log_warning "Could not determine markdownlint-cli2 version"
   fi
-  
+
   return 0
 }
 
@@ -228,11 +228,11 @@ check_performance() {
   # Count total files being validated
   local file_count
   file_count=$(find_markdown_files | wc -l | tr -d ' ')
-  
+
   if [[ $file_count -gt 50 ]]; then
     log_warning "Validating $file_count markdown files may impact performance"
   fi
-  
+
   return 0
 }
 
@@ -241,34 +241,34 @@ main() {
   local validation_failed=0
   local start_time
   start_time=$(date +%s)
-  
+
   # Change to dotfiles root
   cd "$DOTFILES_ROOT"
-  
+
   # Check prerequisites
   if ! check_prerequisites; then
     return 2
   fi
-  
+
   # Check configuration
   if ! check_markdown_config; then
     return 2
   fi
-  
+
   # Check version and performance
   check_markdown_version
   check_performance
-  
+
   # Run markdown validation
   if ! validate_all_markdown; then
     validation_failed=1
   fi
-  
+
   # Calculate execution time
   local end_time
   end_time=$(date +%s)
   local duration=$((end_time - start_time))
-  
+
   # Summary
   if [[ $validation_failed -eq 1 ]]; then
     log_error "Markdown validation failed with $FILES_WITH_ERRORS file(s) having errors"

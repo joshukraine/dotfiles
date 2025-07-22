@@ -38,7 +38,7 @@ fi
 
 echo
 
-# Generate Zsh abbreviations  
+# Generate Zsh abbreviations
 echo "⚡ Generating Zsh abbreviations..."
 if "$SCRIPT_DIR/generate-zsh-abbr.sh"; then
     zsh_success=true

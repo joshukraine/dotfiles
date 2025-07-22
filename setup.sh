@@ -90,7 +90,7 @@ dotfiles_error() {
 run_command() {
   local cmd="$1"
   local description="$2"
-  
+
   if [[ "$DRY_RUN" == "true" ]]; then
   dotfiles_info "[DRY RUN] Would run: %s" "$cmd"
   if [[ -n "$description" ]]; then
@@ -110,7 +110,7 @@ backup_stow_conflict() {
   local BACKUP_SUFFIX
   BACKUP_SUFFIX="$(date +%Y-%m-%d)_$(date +%s)"
   local backup_path="${1}_${BACKUP_SUFFIX}"
-  
+
   if [[ "$DRY_RUN" == "true" ]]; then
   dotfiles_info "[DRY RUN] Would backup %s to %s" "$1" "$backup_path"
   else
@@ -127,12 +127,12 @@ main() {
   if [[ "$DRY_RUN" == "true" ]]; then
   dotfiles_echo "DRY RUN MODE - No changes will be made"
   fi
-  
+
   dotfiles_echo "Initializing dotfiles setup..."
 
   # Check prerequisites
   check_prerequisites
-  
+
   # Continue with existing setup logic but with improved error handling
   setup_hostname
   setup_directories
@@ -140,7 +140,7 @@ main() {
   setup_symlinks
   setup_shell_integration
   setup_tmux
-  
+
   dotfiles_echo "Dotfiles setup complete!"
   show_next_steps
 }
@@ -158,9 +158,9 @@ check_prerequisites() {
   dotfiles_error "GNU Stow is required but was not found. Try: brew install stow"
   exit 1
   fi
-  
+
   dotfiles_info "Prerequisites check passed"
-  
+
   if [[ "$DRY_RUN" == "false" ]]; then
   dotfiles_info "Requesting sudo access for hostname setup..."
   if ! sudo -v; then
@@ -172,11 +172,11 @@ check_prerequisites() {
 
 setup_hostname() {
   dotfiles_echo "Setting HostName..."
-  
+
   local computer_name local_host_name host_name
   computer_name=$(scutil --get ComputerName)
   local_host_name=$(scutil --get LocalHostName)
-  
+
   if [[ "$DRY_RUN" == "true" ]]; then
   dotfiles_info "[DRY RUN] Would set HostName to: %s" "$local_host_name"
   dotfiles_info "[DRY RUN] Would update NetBIOSName in SMB server config"
@@ -185,7 +185,7 @@ setup_hostname() {
   host_name=$(scutil --get HostName)
   run_command "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server.plist NetBIOSName -string '$host_name'" "Update SMB server NetBIOS name"
   fi
-  
+
   printf "ComputerName:  ==> [%s]\\n" "$computer_name"
   printf "LocalHostName: ==> [%s]\\n" "$local_host_name"
   if [[ "$DRY_RUN" == "false" ]]; then
@@ -197,9 +197,9 @@ setup_directories() {
   if [ -z "$DOTFILES" ]; then
   export DOTFILES="${HOME}/dotfiles"
   fi
-  
+
   dotfiles_info "Using DOTFILES directory: %s" "$DOTFILES"
-  
+
   if [[ ! -d "$DOTFILES" ]]; then
   dotfiles_error "DOTFILES directory not found: %s" "$DOTFILES"
   exit 1
@@ -313,7 +313,7 @@ handle_stow_conflicts() {
     fi
   fi
   done
-  
+
   if [[ $conflicts_found -gt 0 ]]; then
   dotfiles_info "Handled %d potential conflicts" "$conflicts_found"
   else
@@ -342,7 +342,7 @@ setup_symlinks() {
     fi
   fi
   done
-  
+
   dotfiles_info "Processed %d stow packages" "$stow_packages"
 }
 

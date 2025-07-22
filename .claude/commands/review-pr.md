@@ -78,7 +78,7 @@ Follow these steps:
 # FINALIZE
 
 – Mark all resolved issues as complete in scratchpad
-– Reply to any remaining comments with explanations for declined suggestions  
+– Reply to any remaining comments with explanations for declined suggestions
 – Summarize the review session in the scratchpad
 – Note final PR status: ready to merge, needs more work, blocked by external factors
 – If PR is ready, suggest next steps (merge, request final review, etc.)
