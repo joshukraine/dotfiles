@@ -1,0 +1,290 @@
+name: Performance Benchmarking
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  schedule:
+    # Run performance benchmarks daily at 3 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    # Allow manual triggering for performance testing
+
+jobs:
+  benchmark:
+    strategy:
+      matrix:
+        shell: [fish, zsh]
+
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          brew install fish zsh bats-core
+
+      - name: Setup benchmark environment
+        run: |
+          # Create performance data directory
+          mkdir -p performance-data
+
+          # Make test helpers and scripts executable
+          chmod +x tests/helpers/*.bash
+          chmod +x bin/.local/bin/*
+          chmod +x shared/generate-*.sh
+
+          # Install dotfiles bin directory to PATH
+          echo "$GITHUB_WORKSPACE/bin/.local/bin" >> $GITHUB_PATH
+
+          # Set benchmark environment
+          echo "CI=true" >> $GITHUB_ENV
+          echo "BENCHMARK=true" >> $GITHUB_ENV
+
+      - name: Generate abbreviations for testing
+        run: |
+          cd shared
+          ./generate-fish-abbr.sh
+          ./generate-zsh-abbr.sh
+
+      - name: Shell startup performance test
+        run: |
+          echo "⚡ Testing shell startup performance..."
+
+          # Test Fish shell startup time
+          if [[ "${{ matrix.shell }}" == "fish" ]]; then
+            echo "Testing Fish shell startup..."
+            fish_times=()
+
+            for i in {1..10}; do
+              # Use Python for precise timing on macOS
+              duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['fish', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
+              fish_times+=($duration)
+            done
+
+            # Calculate average
+            total=0
+            for time in "${fish_times[@]}"; do
+              total=$((total + time))
+            done
+            fish_avg=$((total / 10))
+
+            echo "Fish startup times: ${fish_times[*]}"
+            echo "Fish average startup time: ${fish_avg}ms"
+            echo "FISH_STARTUP_AVG=${fish_avg}" >> $GITHUB_ENV
+          fi
+
+          # Test Zsh shell startup time
+          if [[ "${{ matrix.shell }}" == "zsh" ]]; then
+            echo "Testing Zsh shell startup..."
+            zsh_times=()
+
+            for i in {1..10}; do
+              # Use Python for precise timing on macOS
+              duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['zsh', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
+              zsh_times+=($duration)
+            done
+
+            # Calculate average
+            total=0
+            for time in "${zsh_times[@]}"; do
+              total=$((total + time))
+            done
+            zsh_avg=$((total / 10))
+
+            echo "Zsh startup times: ${zsh_times[*]}"
+            echo "Zsh average startup time: ${zsh_avg}ms"
+            echo "ZSH_STARTUP_AVG=${zsh_avg}" >> $GITHUB_ENV
+          fi
+
+      - name: Test suite performance benchmark
+        run: |
+          echo "🧪 Benchmarking test suite performance..."
+
+          # Warm up (run once to load any caches)
+          bats tests/ --recursive >/dev/null 2>&1 || true
+
+          # Run performance benchmark
+          test_times=()
+
+          for i in {1..3}; do
+            start_time=$(date +%s)
+            bats tests/ --recursive >/dev/null 2>&1 || true
+            end_time=$(date +%s)
+            duration=$((end_time - start_time))
+            test_times+=($duration)
+          done
+
+          # Calculate average
+          total=0
+          for time in "${test_times[@]}"; do
+            total=$((total + time))
+          done
+          test_avg=$((total / 3))
+
+          echo "Test suite execution times: ${test_times[*]}s"
+          echo "Test suite average time: ${test_avg}s"
+          echo "TEST_SUITE_AVG=${test_avg}" >> $GITHUB_ENV
+
+          # Check against performance target (120 seconds)
+          if [ $test_avg -gt 120 ]; then
+            echo "⚠️ Test suite performance regression: ${test_avg}s > 120s target"
+            echo "PERFORMANCE_REGRESSION=test_suite" >> $GITHUB_ENV
+          fi
+
+      - name: Configuration validation performance
+        run: |
+          echo "🔍 Benchmarking configuration validation performance..."
+
+          # Make validation scripts executable
+          chmod +x scripts/validate-config.sh
+          chmod +x scripts/validators/*.sh
+
+          # Install minimal validation dependencies
+          brew install shellcheck yq >/dev/null 2>&1 || true
+
+          # Run validation performance benchmark
+          validation_times=()
+
+          for i in {1..3}; do
+            start_time=$(date +%s)
+            ./scripts/validate-config.sh --quiet --ci >/dev/null 2>&1 || true
+            end_time=$(date +%s)
+            duration=$((end_time - start_time))
+            validation_times+=($duration)
+          done
+
+          # Calculate average
+          total=0
+          for time in "${validation_times[@]}"; do
+            total=$((total + time))
+          done
+          validation_avg=$((total / 3))
+
+          echo "Validation execution times: ${validation_times[*]}s"
+          echo "Validation average time: ${validation_avg}s"
+          echo "VALIDATION_AVG=${validation_avg}" >> $GITHUB_ENV
+
+          # Check against performance target (45 seconds)
+          if [ $validation_avg -gt 45 ]; then
+            echo "⚠️ Validation performance regression: ${validation_avg}s > 45s target"
+            echo "PERFORMANCE_REGRESSION=validation" >> $GITHUB_ENV
+          fi
+
+      - name: Store performance data
+        run: |
+          echo "💾 Storing performance benchmark data..."
+
+          # Create performance data entry
+          timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          performance_data=$(cat <<EOF
+          {
+            "timestamp": "$timestamp",
+            "os": "macos",
+            "shell": "${{ matrix.shell }}",
+            "commit": "$GITHUB_SHA",
+            "ref": "$GITHUB_REF_NAME",
+            "run_id": "$GITHUB_RUN_ID",
+            "metrics": {
+              "shell_startup_ms": ${FISH_STARTUP_AVG:-${ZSH_STARTUP_AVG:-0}},
+              "test_suite_seconds": ${TEST_SUITE_AVG:-0},
+              "validation_seconds": ${VALIDATION_AVG:-0}
+            },
+            "targets": {
+              "test_suite_max": 120,
+              "validation_max": 45,
+              "shell_startup_max": 1000
+            },
+            "performance_regression": "${PERFORMANCE_REGRESSION:-none}"
+          }
+          EOF
+          )
+
+          echo "$performance_data" > "performance-data/benchmark-macos-${{ matrix.shell }}-$(date +%Y%m%d-%H%M%S).json"
+
+          echo "Performance data stored for macos-${{ matrix.shell }}"
+
+      - name: Generate performance report
+        if: always()
+        run: |
+          echo "## Performance Benchmark Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Platform**: macOS" >> $GITHUB_STEP_SUMMARY
+          echo "**Shell**: ${{ matrix.shell }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Shell startup performance
+          if [[ "${{ matrix.shell }}" == "fish" && -n "$FISH_STARTUP_AVG" ]]; then
+            echo "### Shell Startup Performance" >> $GITHUB_STEP_SUMMARY
+            echo "- **Fish startup time**: ${FISH_STARTUP_AVG}ms" >> $GITHUB_STEP_SUMMARY
+            if [ $FISH_STARTUP_AVG -gt 1000 ]; then
+              echo "  - ⚠️ **Warning**: Exceeds 1000ms target" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "  - ✅ Within performance target" >> $GITHUB_STEP_SUMMARY
+            fi
+          elif [[ "${{ matrix.shell }}" == "zsh" && -n "$ZSH_STARTUP_AVG" ]]; then
+            echo "### Shell Startup Performance" >> $GITHUB_STEP_SUMMARY
+            echo "- **Zsh startup time**: ${ZSH_STARTUP_AVG}ms" >> $GITHUB_STEP_SUMMARY
+            if [ $ZSH_STARTUP_AVG -gt 1000 ]; then
+              echo "  - ⚠️ **Warning**: Exceeds 1000ms target" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "  - ✅ Within performance target" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+          # Test suite performance
+          if [ -n "$TEST_SUITE_AVG" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Test Suite Performance" >> $GITHUB_STEP_SUMMARY
+            echo "- **Average execution time**: ${TEST_SUITE_AVG}s" >> $GITHUB_STEP_SUMMARY
+            echo "- **Target**: <120s" >> $GITHUB_STEP_SUMMARY
+            if [ $TEST_SUITE_AVG -gt 120 ]; then
+              echo "- **Status**: ⚠️ Performance regression detected" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "- **Status**: ✅ Within performance target" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+          # Validation performance
+          if [ -n "$VALIDATION_AVG" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Configuration Validation Performance" >> $GITHUB_STEP_SUMMARY
+            echo "- **Average execution time**: ${VALIDATION_AVG}s" >> $GITHUB_STEP_SUMMARY
+            echo "- **Target**: <45s" >> $GITHUB_STEP_SUMMARY
+            if [ $VALIDATION_AVG -gt 45 ]; then
+              echo "- **Status**: ⚠️ Performance regression detected" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "- **Status**: ✅ Within performance target" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+          # Overall assessment
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Overall Assessment" >> $GITHUB_STEP_SUMMARY
+          if [ "$PERFORMANCE_REGRESSION" != "none" ] && [ -n "$PERFORMANCE_REGRESSION" ]; then
+            echo "❌ **Performance regression detected** in: $PERFORMANCE_REGRESSION" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Recommendations**:" >> $GITHUB_STEP_SUMMARY
+            echo "- Review recent changes that may impact performance" >> $GITHUB_STEP_SUMMARY
+            echo "- Consider optimizing configuration or test suites" >> $GITHUB_STEP_SUMMARY
+            echo "- Monitor performance trends over time" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **All performance metrics within targets**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Benchmark metadata
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "*Benchmark completed: $(date -u)*" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload performance data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-data-macos-${{ matrix.shell }}
+          path: performance-data/
+          retention-days: 90

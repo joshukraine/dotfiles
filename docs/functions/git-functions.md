@@ -1,0 +1,354 @@
+# Git Functions Documentation
+
+Comprehensive guide to smart Git operations and utilities in this dotfiles configuration.
+
+## Overview
+
+The Git functions provide intelligent branch detection, automated workflows, and enhanced Git commands that simplify common development tasks. All functions support both `main` and `master` as default branches.
+
+## Smart Git Functions
+
+### Core Smart Functions (With Help Flags)
+
+#### `gcom` - Switch to Default Branch
+
+Intelligently switches to the repository's default branch (`main` or `master`) with optional pull.
+
+```bash
+# Switch to default branch
+gcom
+
+# Switch to default branch and pull latest changes
+gcom --pull
+
+# Get help
+gcom --help
+```
+
+**Features:**
+
+- Automatically detects `main` or `master` as default branch
+- Handles uncommitted changes gracefully
+- Optional pull from origin
+- Safe error handling with informative messages
+
+#### `gpum` - Push with Upstream Tracking
+
+Pushes the current branch to origin and sets up upstream tracking.
+
+```bash
+# Push current branch and set upstream
+gpum
+
+# Get help
+gpum --help
+```
+
+**Features:**
+
+- Automatically sets upstream tracking for new branches
+- Works with any branch name
+- Provides clear feedback on push status
+
+#### `grbm` - Rebase Against Default Branch
+
+Rebases the current branch against the default branch with latest changes.
+
+```bash
+# Rebase current branch against default
+grbm
+
+# Get help
+grbm --help
+```
+
+**Features:**
+
+- Fetches latest changes before rebasing
+- Detects default branch automatically
+- Checks for uncommitted changes
+- Handles rebase conflicts gracefully
+
+#### `gbrm` - Remove Merged Branches
+
+Removes local branches that have been merged into the default branch.
+
+```bash
+# Remove all merged branches (interactive)
+gbrm
+
+# Force remove without confirmation
+gbrm --force
+
+# Get help
+gbrm --help
+```
+
+**Features:**
+
+- Interactive confirmation by default
+- Protects current branch and default branch
+- Only removes branches merged into default
+- Shows count of removed branches
+
+## Git Utilities
+
+### `g` - Smart Git Wrapper
+
+Wrapper that shows git status when called without arguments, otherwise runs git commands.
+
+```bash
+# Show git status
+g
+
+# Run any git command
+g log --oneline
+g commit -m "message"
+g push origin main
+```
+
+**Usage Pattern:**
+
+- No arguments → `git status`
+- With arguments → `git [arguments]`
+
+### `gl` - Pretty Git Log
+
+Enhanced git log with formatting and date information.
+
+```bash
+# Show formatted git log
+gl
+
+# Show last 10 commits
+gl -10
+
+# Show commits since date
+gl --since="2 weeks ago"
+```
+
+**Output Format:**
+
+- Commit hash (short)
+- Commit date
+- Author name
+- Commit message
+
+### `glg` - Git Log with Graph
+
+Enhanced git log with graph visualization and file statistics.
+
+```bash
+# Show git log with graph
+glg
+
+# Show last 5 commits with graph
+glg -5
+```
+
+**Features:**
+
+- Visual branch graph
+- File change statistics
+- Color-coded output
+- Commit relationships
+
+### `git-cm` - Commit Wrapper
+
+Intelligent commit wrapper that handles messages and editor scenarios.
+
+```bash
+# Commit with message
+git-cm "Add new feature"
+
+# Open editor for commit message
+git-cm
+
+# Commit with multi-line message
+git-cm "Feature: Add user auth
+
+- Add login/logout functionality
+- Add session management
+- Add password validation"
+```
+
+**Behavior:**
+
+- With arguments → Commits with provided message
+- Without arguments → Opens default editor
+- Preserves git commit options
+
+### `git-check-uncommitted` - Uncommitted Changes Check
+
+Utility to check for uncommitted changes with optional user prompt.
+
+```bash
+# Check for uncommitted changes (exit code only)
+git-check-uncommitted
+
+# Check with user prompt for confirmation
+git-check-uncommitted --prompt
+
+# Use in scripts
+if git-check-uncommitted; then
+  echo "Repository is clean"
+else
+  echo "Uncommitted changes detected"
+fi
+```
+
+**Exit Codes:**
+
+- `0` - No uncommitted changes
+- `1` - Uncommitted changes detected
+- `2` - Error (not a git repository)
+
+**With `--prompt` flag:**
+
+- Prompts user to continue if uncommitted changes found
+- Returns appropriate exit code based on user choice
+
+## Integration Examples
+
+### Typical Workflow
+
+```bash
+# Start feature development
+git checkout -b feature/new-feature
+
+# Make changes and commit
+git add .
+git-cm "Implement new feature"
+
+# Push branch with upstream tracking
+gpum
+
+# Rebase against latest default branch
+grbm
+
+# Switch back to default branch
+gcom --pull
+
+# Clean up merged branches
+gbrm
+```
+
+### Script Integration
+
+```bash
+#!/bin/bash
+# deployment-check.sh
+
+# Ensure we're on default branch
+gcom || { echo "Failed to switch to default branch"; exit 1; }
+
+# Check for uncommitted changes
+git-check-uncommitted --prompt || { echo "Deployment cancelled"; exit 1; }
+
+# Fetch latest and rebase
+grbm || { echo "Rebase failed"; exit 1; }
+
+echo "Ready for deployment"
+```
+
+## Cross-Shell Implementation
+
+### Function Availability
+
+| Function | Fish | Zsh | Implementation Location |
+|----------|------|-----|------------------------|
+| `gcom` | ✅ | ✅ | `fish/functions/gcom.fish`, `zsh/functions.zsh` |
+| `gpum` | ✅ | ✅ | `fish/functions/gpum.fish`, `zsh/functions.zsh` |
+| `grbm` | ✅ | ✅ | `fish/functions/grbm.fish`, `zsh/functions.zsh` |
+| `gbrm` | ✅ | ✅ | `bin/.local/bin/gbrm` (shared script) |
+| `g` | ✅ | ✅ | `bin/.local/bin/g` (shared script) |
+| `gl` | ✅ | ✅ | `bin/.local/bin/gl` (shared script) |
+| `glg` | ✅ | ✅ | `bin/.local/bin/glg` (shared script) |
+| `git-cm` | ✅ | ✅ | `bin/.local/bin/git-cm` (shared script) |
+| `git-check-uncommitted` | ✅ | ✅ | `bin/.local/bin/git-check-uncommitted` (shared script) |
+
+### Shared Logic
+
+The smart git functions (`gcom`, `gpum`, `grbm`) share identical logic between Fish and Zsh implementations:
+
+1. **Default Branch Detection**: Both shells use the same branch detection algorithm
+2. **Error Handling**: Consistent error messages and exit codes
+3. **Help System**: Both support `--help` flag with identical output
+4. **Safety Checks**: Same validation for uncommitted changes and repository status
+
+## Error Handling
+
+### Common Error Scenarios
+
+1. **Not a Git Repository**
+
+   ```bash
+   $ gcom
+   Error: Not a git repository
+   ```
+
+2. **Uncommitted Changes**
+
+   ```bash
+   $ gcom
+   Error: You have uncommitted changes. Please commit or stash them first.
+   ```
+
+3. **No Default Branch Found**
+
+   ```bash
+   $ gcom
+   Error: Could not determine default branch (no main or master found)
+   ```
+
+4. **Network Issues**
+
+   ```bash
+   $ gcom --pull
+   Error: Failed to pull from origin
+   ```
+
+### Recovery Strategies
+
+- **Uncommitted Changes**: Use `git stash` or commit changes first
+- **Network Issues**: Check connectivity and repository access
+- **Detached HEAD**: Switch to a named branch first
+- **Merge Conflicts**: Resolve conflicts before continuing with operations
+
+## Testing
+
+All git functions include comprehensive test coverage in `tests/git_functions/`:
+
+- `test_gcom.bats` - Tests for gcom function
+- `test_gpum.bats` - Tests for gpum function
+- `test_grbm.bats` - Tests for grbm function
+- `test_gbrm.bats` - Tests for gbrm function
+
+Run tests with:
+
+```bash
+# Run all git function tests
+bats tests/git_functions/
+
+# Run specific function tests
+bats tests/git_functions/test_gcom.bats
+```
+
+## Related Abbreviations
+
+The following abbreviations complement the git functions:
+
+| Abbreviation | Expansion | Description |
+|--------------|-----------|-------------|
+| `ga` | `git add` | Stage files |
+| `gaa` | `git add --all` | Stage all files |
+| `gcm` | `git-cm` | Commit with message |
+| `gst` | `git status` | Repository status |
+| `gp` | `git push` | Push changes |
+| `gpl` | `git pull` | Pull changes |
+
+See [abbreviations reference](../abbreviations.md) for complete list.
+
+---
+
+*For issues or contributions related to git functions, see the main repository issues.*

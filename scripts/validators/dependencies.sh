@@ -93,8 +93,12 @@ validate_essential_tools() {
     "zsh:Zsh shell"
     "nvim:Neovim editor"
     "tmux:Terminal multiplexer"
-    "brew:Homebrew package manager"
   )
+
+  # Only require Homebrew on macOS
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    essential_tools+=("brew:Homebrew package manager")
+  fi
 
   local missing_essential=()
 
@@ -115,7 +119,11 @@ validate_essential_tools() {
 
   if [[ ${#missing_essential[@]} -gt 0 ]]; then
     log_error "Missing essential tools: ${missing_essential[*]}"
-    log_error "Install with: brew install ${missing_essential[*]}"
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+      log_error "Install with: brew install ${missing_essential[*]}"
+    else
+      log_error "Install with your package manager (e.g., apt install ${missing_essential[*]})"
+    fi
     return 1
   fi
 
@@ -154,14 +162,23 @@ validate_validator_dependencies() {
 
   if [[ ${#missing_validator[@]} -gt 0 ]]; then
     log_error "Missing validator dependencies: ${missing_validator[*]}"
-    log_error "Install with: brew install ${missing_validator[*]}"
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+      log_error "Install with: brew install ${missing_validator[*]}"
+    else
+      log_error "Install with your package manager (e.g., apt install ${missing_validator[*]})"
+    fi
 
     if [[ ${FIX_MODE} -eq 1 ]]; then
       log_info "Fixing: Installing missing validator dependencies..."
-      if brew install "${missing_validator[@]}" >/dev/null 2>&1; then
-        log_success "Fixed: Installed ${missing_validator[*]}"
+      if [[ "$(uname -s)" == "Darwin" ]] && command_exists brew; then
+        if brew install "${missing_validator[@]}" >/dev/null 2>&1; then
+          log_success "Fixed: Installed ${missing_validator[*]}"
+        else
+          log_error "Failed to install missing dependencies"
+          return 1
+        fi
       else
-        log_error "Failed to install missing dependencies"
+        log_warning "Auto-fix not available on this platform"
         return 1
       fi
     else
@@ -215,6 +232,12 @@ validate_dotfiles_tools() {
 
 # Validate Homebrew and Brewfile
 validate_homebrew_setup() {
+  # Skip Homebrew validation on non-macOS systems
+  if [[ "$(uname -s)" != "Darwin" ]]; then
+    log_info "Skipping Homebrew validation on non-macOS system"
+    return 0
+  fi
+
   log_info "Checking Homebrew setup..."
 
   if ! command_exists "brew"; then

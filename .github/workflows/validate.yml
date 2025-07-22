@@ -16,12 +16,11 @@ jobs:
 
       - name: Install validation dependencies
         run: |
+          echo "Installing validation tools via Homebrew..."
           # Install core validation tools
           brew install fish zsh shellcheck yq markdownlint-cli2
-
           # Install dependencies expected by the dependencies validator
           brew install neovim tmux bats-core stow
-
           # Install optional tools to reduce warnings (commonly used in dotfiles)
           brew install ripgrep fd eza bat fzf
 
@@ -31,11 +30,14 @@ jobs:
           echo "Zsh version: $(zsh --version)"
           echo "Shellcheck version: $(shellcheck --version | head -2)"
           echo "yq version: $(yq --version)"
-          echo "markdownlint-cli2 version: $(markdownlint-cli2 --version)"
+          echo "markdownlint-cli2 version: $(markdownlint-cli2 --version || echo 'Not available')"
           echo "Neovim version: $(nvim --version | head -1)"
           echo "Tmux version: $(tmux -V)"
           echo "Bats version: $(bats --version)"
           echo "Stow version: $(stow --version | head -1)"
+
+          # Refresh PATH for newly installed tools
+          hash -r
 
       - name: Make validation scripts executable
         run: |
@@ -46,6 +48,13 @@ jobs:
 
       - name: Validate configuration integrity
         run: |
+          # Debug: Check tool availability
+          echo "🔧 Checking tool availability before validation..."
+          which fish || echo "fish not found in PATH"
+          which zsh || echo "zsh not found in PATH"
+          which shellcheck || echo "shellcheck not found in PATH"
+          which yq || echo "yq not found in PATH"
+
           # Run full validation suite
           echo "🔍 Running configuration validation..."
           ./scripts/validate-config.sh --ci

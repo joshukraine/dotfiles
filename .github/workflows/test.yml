@@ -8,21 +8,21 @@ on:
 
 jobs:
   test:
-    runs-on: macos-latest
-
     strategy:
       matrix:
         shell: [fish, zsh]
+
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Homebrew dependencies
+      - name: Install dependencies
         run: |
+          echo "Installing dependencies via Homebrew..."
           # Install bats-core for testing
           brew install bats-core
-
           # Install shells if not present
           brew install fish
           brew install zsh
@@ -134,6 +134,7 @@ jobs:
           echo "  - Environment: $(ls tests/environment/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
 
           echo "- **Shell compatibility**: Testing ${{ matrix.shell }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Platform**: macOS" >> $GITHUB_STEP_SUMMARY
 
   coverage:
     runs-on: macos-latest
