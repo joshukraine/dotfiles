@@ -35,10 +35,10 @@ setup() {
 teardown() {
   # Restore real tmux command
   restore_tmux
-  
+
   # Cleanup all tracked tmux sessions created during testing
   cleanup_tracked_tmux_sessions
-  
+
   # Additional cleanup for any test-related sessions that might have been missed
   cleanup_all_test_tmux_sessions
 
@@ -92,11 +92,11 @@ teardown() {
   # Instead of testing internal functions, test tat's behavior with existing vs non-existing sessions
   # Create a known session in our mock environment
   export MOCK_TMUX_SESSIONS="test-session"
-  
+
   # Test behavior when session already exists - tat should handle this gracefully
   # We can't easily test session_exists directly, but we can verify tat doesn't crash
   # with different session scenarios
-  
+
   # Test with a custom session name that should work
   run tat "test-session-validation"
   # Should not crash - exact behavior depends on tmux state but shouldn't error
@@ -106,12 +106,12 @@ teardown() {
 @test "tat handles tmux environment detection through behavior" {
   # Test tat behavior when TMUX environment variable is set vs unset
   # This tests the not_in_tmux logic indirectly through tat's behavior
-  
+
   # Test outside of tmux environment
   unset TMUX
   run tat "test-outside-tmux"
   # Should not crash - behavior will depend on actual tmux availability
-  
+
   # Test inside mock tmux environment
   export TMUX="fake-tmux-session"
   run tat "test-inside-tmux"

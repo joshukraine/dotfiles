@@ -5,7 +5,7 @@ alias cp='gcp -iv'
 # Alwyas use Neovim as EDITOR
 alias vim='nvim'
 
-# ls > eza  
+# ls > eza
 # Other aliases handled by exa plugin (uses eza under the hood)
 # https://github.com/zap-zsh/exa
 alias l='ll'

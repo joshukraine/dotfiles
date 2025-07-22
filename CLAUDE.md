@@ -48,6 +48,22 @@ brew bundle install
 # Follow instructions at https://www.zapzsh.com with --keep flag
 ```
 
+### Configuration Validation
+
+```bash
+# Validate all configurations
+./scripts/validate-config.sh
+
+# Run with auto-fix for common issues
+./scripts/validate-config.sh --fix
+
+# Run specific validator (shell-syntax, abbreviations, environment, dependencies, markdown)
+./scripts/validate-config.sh --validator markdown
+
+# Setup git hooks for automatic validation
+./scripts/setup-git-hooks.sh
+```
+
 ### Development Workflow
 
 ```bash
@@ -191,7 +207,7 @@ For temporary files, notes, and debugging during development work with Claude Co
 
 Example structure:
 
-```
+```text
 scratchpads/
 ├── pr-reviews/
 │   └── pr-review-70-20250721-211241.md

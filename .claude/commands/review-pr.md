@@ -24,14 +24,32 @@ Follow these steps:
    – Fetch status checks: `gh api /repos/{owner}/{repo}/commits/{sha}/status`
    – Fetch check runs: `gh api /repos/{owner}/{repo}/commits/{sha}/check-runs`
 
-2. Filter and categorize all blocking issues:
+2. Analyze code quality and architecture:
+   – Review code changes for refactoring opportunities (large files, duplicate code, complex functions)
+   – Check for consistent coding patterns and style adherence
+   – Identify potential performance or maintainability issues
+   – Assess architectural decisions and suggest improvements
+
+3. Assess test coverage and quality:
+   – Review existing test coverage for new/modified code
+   – Identify gaps in test coverage that should be addressed
+   – Check test quality and effectiveness
+   – Suggest additional test scenarios if needed
+
+4. Verify issue integration and PR metadata:
+   – Check what GitHub issues this PR addresses or closes
+   – Verify PR body contains proper "Closes #N" references for all related issues
+   – Review linked issues for integrated/dependent issues that should also be closed
+   – Assess if PR description accurately reflects the current scope of work
+
+5. Filter and categorize all blocking issues:
    – Skip outdated comments (where referenced code has changed)
    – Skip resolved comments or threads marked as resolved
    – Skip simple appreciation comments
    – Focus on actionable feedback: code changes, bug reports, security concerns, performance issues
    – Include all failed automated checks: tests, linting, security scans, build failures
 
-3. Document all identified issues in the scratchpad:
+6. Document all identified issues in the scratchpad:
    – Create a checklist format for tracking progress
    – Think harder about the severity and impact of each issue
    – Prioritize issues based on this analysis
@@ -46,8 +64,13 @@ Follow these steps:
    – Estimated complexity and time required
    – Dependencies between issues
    – Testing requirements after changes
-4. Update scratchpad with the detailed plan
-5. Present the plan and ask for confirmation before proceeding
+4. Prioritize quality improvements:
+   – Address critical refactoring opportunities that improve maintainability
+   – Plan test coverage improvements for new/modified functionality
+   – Ensure proper issue closing references are added to PR body
+   – Verify PR description accurately reflects final scope
+5. Update scratchpad with the detailed plan
+6. Present the plan and ask for confirmation before proceeding
 
 # EXECUTE
 
@@ -78,7 +101,12 @@ Follow these steps:
 # FINALIZE
 
 – Mark all resolved issues as complete in scratchpad
-– Reply to any remaining comments with explanations for declined suggestions  
+– Reply to any remaining comments with explanations for declined suggestions
+– Verify quality improvements completed:
+  – Confirm critical refactoring opportunities have been addressed
+  – Validate test coverage is adequate for new/modified functionality
+  – Ensure all related GitHub issues have proper "Closes #N" references in PR body
+  – Verify PR description accurately reflects final scope and changes
 – Summarize the review session in the scratchpad
 – Note final PR status: ready to merge, needs more work, blocked by external factors
 – If PR is ready, suggest next steps (merge, request final review, etc.)

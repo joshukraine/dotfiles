@@ -34,4 +34,3 @@ create_autocmd({ "VimEnter" }, {
   pattern = { "COMMIT_EDITMSG" },
   command = [[ exec 'norm gg' | startinsert! ]],
 })
-

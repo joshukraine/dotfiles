@@ -5,7 +5,7 @@ function fs -d "Get file/directory size"
     else
         set arg -sh
     end
-    
+
     if test (count $argv) -gt 0
         du $arg -- $argv
     else

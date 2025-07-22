@@ -17,7 +17,6 @@ set -e # Terminate script if anything exits with a non-zero value
 
 # Global variables
 DRY_RUN=false
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 show_help() {
   cat << EOF
@@ -90,16 +89,16 @@ dotfiles_error() {
 run_command() {
   local cmd="$1"
   local description="$2"
-  
-  if [[ "$DRY_RUN" == "true" ]]; then
-  dotfiles_info "[DRY RUN] Would run: %s" "$cmd"
-  if [[ -n "$description" ]]; then
-    dotfiles_info "  Purpose: %s" "$description"
+
+  if [[ "${DRY_RUN}" == "true" ]]; then
+  dotfiles_info "[DRY RUN] Would run: %s" "${cmd}"
+  if [[ -n "${description}" ]]; then
+    dotfiles_info "  Purpose: %s" "${description}"
   fi
   else
-  dotfiles_info "Running: %s" "$cmd"
-  if ! eval "$cmd"; then
-    dotfiles_error "Failed to execute: %s" "$cmd"
+  dotfiles_info "Running: %s" "${cmd}"
+  if ! eval "${cmd}"; then
+    dotfiles_error "Failed to execute: %s" "${cmd}"
     return 1
   fi
   fi
@@ -110,12 +109,12 @@ backup_stow_conflict() {
   local BACKUP_SUFFIX
   BACKUP_SUFFIX="$(date +%Y-%m-%d)_$(date +%s)"
   local backup_path="${1}_${BACKUP_SUFFIX}"
-  
-  if [[ "$DRY_RUN" == "true" ]]; then
-  dotfiles_info "[DRY RUN] Would backup %s to %s" "$1" "$backup_path"
+
+  if [[ "${DRY_RUN}" == "true" ]]; then
+  dotfiles_info "[DRY RUN] Would backup %s to %s" "$1" "${backup_path}"
   else
-  dotfiles_info "Backing up %s to %s" "$1" "$backup_path"
-  if ! mv -v "$1" "$backup_path"; then
+  dotfiles_info "Backing up %s to %s" "$1" "${backup_path}"
+  if ! mv -v "$1" "${backup_path}"; then
     dotfiles_error "Failed to backup %s" "$1"
     return 1
   fi
@@ -124,15 +123,15 @@ backup_stow_conflict() {
 
 # Main script starts here
 main() {
-  if [[ "$DRY_RUN" == "true" ]]; then
+  if [[ "${DRY_RUN}" == "true" ]]; then
   dotfiles_echo "DRY RUN MODE - No changes will be made"
   fi
-  
+
   dotfiles_echo "Initializing dotfiles setup..."
 
   # Check prerequisites
   check_prerequisites
-  
+
   # Continue with existing setup logic but with improved error handling
   setup_hostname
   setup_directories
@@ -140,7 +139,7 @@ main() {
   setup_symlinks
   setup_shell_integration
   setup_tmux
-  
+
   dotfiles_echo "Dotfiles setup complete!"
   show_next_steps
 }
@@ -149,8 +148,8 @@ check_prerequisites() {
   local osname
   osname=$(uname)
 
-  if [ "$osname" != "Darwin" ]; then
-  dotfiles_error "This script only supports macOS. Current OS: %s" "$osname"
+  if [ "${osname}" != "Darwin" ]; then
+  dotfiles_error "This script only supports macOS. Current OS: %s" "${osname}"
   exit 1
   fi
 
@@ -158,10 +157,10 @@ check_prerequisites() {
   dotfiles_error "GNU Stow is required but was not found. Try: brew install stow"
   exit 1
   fi
-  
+
   dotfiles_info "Prerequisites check passed"
-  
-  if [[ "$DRY_RUN" == "false" ]]; then
+
+  if [[ "${DRY_RUN}" == "false" ]]; then
   dotfiles_info "Requesting sudo access for hostname setup..."
   if ! sudo -v; then
     dotfiles_error "Failed to obtain sudo access"
@@ -172,43 +171,43 @@ check_prerequisites() {
 
 setup_hostname() {
   dotfiles_echo "Setting HostName..."
-  
+
   local computer_name local_host_name host_name
   computer_name=$(scutil --get ComputerName)
   local_host_name=$(scutil --get LocalHostName)
-  
-  if [[ "$DRY_RUN" == "true" ]]; then
-  dotfiles_info "[DRY RUN] Would set HostName to: %s" "$local_host_name"
+
+  if [[ "${DRY_RUN}" == "true" ]]; then
+  dotfiles_info "[DRY RUN] Would set HostName to: %s" "${local_host_name}"
   dotfiles_info "[DRY RUN] Would update NetBIOSName in SMB server config"
   else
-  run_command "sudo scutil --set HostName '$local_host_name'" "Set system hostname"
+  run_command "sudo scutil --set HostName '${local_host_name}'" "Set system hostname"
   host_name=$(scutil --get HostName)
-  run_command "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server.plist NetBIOSName -string '$host_name'" "Update SMB server NetBIOS name"
+  run_command "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server.plist NetBIOSName -string '${host_name}'" "Update SMB server NetBIOS name"
   fi
-  
-  printf "ComputerName:  ==> [%s]\\n" "$computer_name"
-  printf "LocalHostName: ==> [%s]\\n" "$local_host_name"
-  if [[ "$DRY_RUN" == "false" ]]; then
+
+  printf "ComputerName:  ==> [%s]\\n" "${computer_name}"
+  printf "LocalHostName: ==> [%s]\\n" "${local_host_name}"
+  if [[ "${DRY_RUN}" == "false" ]]; then
   printf "HostName:      ==> [%s]\\n" "$(scutil --get HostName)"
   fi
 }
 
 setup_directories() {
-  if [ -z "$DOTFILES" ]; then
+  if [ -z "${DOTFILES}" ]; then
   export DOTFILES="${HOME}/dotfiles"
   fi
-  
-  dotfiles_info "Using DOTFILES directory: %s" "$DOTFILES"
-  
-  if [[ ! -d "$DOTFILES" ]]; then
-  dotfiles_error "DOTFILES directory not found: %s" "$DOTFILES"
+
+  dotfiles_info "Using DOTFILES directory: %s" "${DOTFILES}"
+
+  if [[ ! -d "${DOTFILES}" ]]; then
+  dotfiles_error "DOTFILES directory not found: %s" "${DOTFILES}"
   exit 1
   fi
 
-  if [ -z "$XDG_CONFIG_HOME" ]; then
+  if [ -z "${XDG_CONFIG_HOME}" ]; then
   dotfiles_echo "Setting up ~/.config directory..."
   if [ ! -d "${HOME}/.config" ]; then
-    if [[ "$DRY_RUN" == "true" ]]; then
+    if [[ "${DRY_RUN}" == "true" ]]; then
       dotfiles_info "[DRY RUN] Would create directory: %s" "${HOME}/.config"
     else
       run_command "mkdir '${HOME}/.config'" "Create XDG config directory"
@@ -219,7 +218,7 @@ setup_directories() {
 
   if [ ! -d "${HOME}/.local/bin" ]; then
   dotfiles_echo "Setting up ~/.local/bin directory..."
-  if [[ "$DRY_RUN" == "true" ]]; then
+  if [[ "${DRY_RUN}" == "true" ]]; then
     dotfiles_info "[DRY RUN] Would create directory: %s" "${HOME}/.local/bin"
   else
     run_command "mkdir -pv '${HOME}/.local/bin'" "Create local bin directory"
@@ -231,7 +230,7 @@ setup_directories() {
   local arch
   arch="$(uname -m)"
 
-  if [ "$arch" == "arm64" ]; then
+  if [ "${arch}" == "arm64" ]; then
   dotfiles_info "Apple Silicon detected - setting HOMEBREW_PREFIX to /opt/homebrew"
   HOMEBREW_PREFIX="/opt/homebrew"
   else
@@ -243,13 +242,13 @@ setup_directories() {
 handle_stow_conflicts() {
   dotfiles_echo "Checking for potential stow conflicts..."
 
-  if [[ "$DRY_RUN" == "false" ]]; then
+  if [[ "${DRY_RUN}" == "false" ]]; then
   if ! cd "${DOTFILES}/"; then
-    dotfiles_error "Failed to change to DOTFILES directory: %s" "$DOTFILES"
+    dotfiles_error "Failed to change to DOTFILES directory: %s" "${DOTFILES}"
     exit 1
   fi
   else
-  dotfiles_info "[DRY RUN] Would change to directory: %s" "$DOTFILES"
+  dotfiles_info "[DRY RUN] Would change to directory: %s" "${DOTFILES}"
   fi
 
   local stow_conflicts=(
@@ -298,10 +297,10 @@ handle_stow_conflicts() {
       # This is a symlink and we can ignore it.
       dotfiles_info "Symlink already exists (OK): %s" "${HOME}/${item}"
       continue
-    elif [ "$item" == ".tool-versions" ]; then
+    elif [ "${item}" == ".tool-versions" ]; then
       # This was likely generated by Laptop, and we actually want to adopt it for now.
       dotfiles_info "Found %s - will adopt existing file" "${HOME}/.tool-versions"
-      if [[ "$DRY_RUN" == "true" ]]; then
+      if [[ "${DRY_RUN}" == "true" ]]; then
         dotfiles_info "[DRY RUN] Would run: stow --adopt asdf/"
       else
         run_command "stow --adopt asdf/" "Adopt existing .tool-versions file"
@@ -313,9 +312,9 @@ handle_stow_conflicts() {
     fi
   fi
   done
-  
-  if [[ $conflicts_found -gt 0 ]]; then
-  dotfiles_info "Handled %d potential conflicts" "$conflicts_found"
+
+  if [[ ${conflicts_found} -gt 0 ]]; then
+  dotfiles_info "Handled %d potential conflicts" "${conflicts_found}"
   else
   dotfiles_info "No conflicts detected"
   fi
@@ -324,36 +323,36 @@ handle_stow_conflicts() {
 setup_symlinks() {
   dotfiles_echo "Setting up symlinks with GNU Stow..."
 
-  if [[ "$DRY_RUN" == "false" ]] && [[ "$PWD" != "$DOTFILES" ]]; then
+  if [[ "${DRY_RUN}" == "false" ]] && [[ "${PWD}" != "${DOTFILES}" ]]; then
   if ! cd "${DOTFILES}/"; then
-    dotfiles_error "Failed to change to DOTFILES directory: %s" "$DOTFILES"
+    dotfiles_error "Failed to change to DOTFILES directory: %s" "${DOTFILES}"
     exit 1
   fi
   fi
 
   local stow_packages=0
   for item in *; do
-  if [ -d "$item" ]; then
+  if [ -d "${item}" ]; then
     stow_packages=$((stow_packages + 1))
-    if [[ "$DRY_RUN" == "true" ]]; then
-      dotfiles_info "[DRY RUN] Would stow package: %s" "$item"
+    if [[ "${DRY_RUN}" == "true" ]]; then
+      dotfiles_info "[DRY RUN] Would stow package: %s" "${item}"
     else
-      run_command "stow '$item'/" "Stow package: $item"
+      run_command "stow '${item}'/" "Stow package: ${item}"
     fi
   fi
   done
-  
-  dotfiles_info "Processed %d stow packages" "$stow_packages"
+
+  dotfiles_info "Processed %d stow packages" "${stow_packages}"
 }
 
 setup_shell_integration() {
   if command -v fish &>/dev/null; then
   dotfiles_echo "Initializing fish_user_paths..."
-  local fish_cmd="set -U fish_user_paths $HOME/.asdf/shims $HOME/.local/bin $HOME/.bin $HOME/.yarn/bin $HOMEBREW_PREFIX/bin"
-  if [[ "$DRY_RUN" == "true" ]]; then
-    dotfiles_info "[DRY RUN] Would run: fish -c '%s'" "$fish_cmd"
+  local fish_cmd="set -U fish_user_paths ${HOME}/.asdf/shims ${HOME}/.local/bin ${HOME}/.bin ${HOME}/.yarn/bin ${HOMEBREW_PREFIX}/bin"
+  if [[ "${DRY_RUN}" == "true" ]]; then
+    dotfiles_info "[DRY RUN] Would run: fish -c '%s'" "${fish_cmd}"
   else
-    run_command "command fish -c '$fish_cmd'" "Initialize Fish user paths"
+    run_command "command fish -c '${fish_cmd}'" "Initialize Fish user paths"
   fi
   else
   dotfiles_info "Fish shell not found - skipping fish_user_paths setup"
@@ -364,7 +363,7 @@ setup_tmux() {
   if command -v tmux &>/dev/null; then
   if [ ! -d "${HOME}/.terminfo" ]; then
     dotfiles_echo "Installing custom terminfo entries..."
-    if [[ "$DRY_RUN" == "true" ]]; then
+    if [[ "${DRY_RUN}" == "true" ]]; then
       dotfiles_info "[DRY RUN] Would install terminfo entries for tmux and xterm"
     else
       # These entries enable, among other things, italic text in the terminal.
@@ -377,7 +376,7 @@ setup_tmux() {
 
   if [ ! -d "${DOTFILES}/tmux/.config/tmux/plugins" ]; then
     dotfiles_echo "Installing Tmux Plugin Manager..."
-    if [[ "$DRY_RUN" == "true" ]]; then
+    if [[ "${DRY_RUN}" == "true" ]]; then
       dotfiles_info "[DRY RUN] Would clone TPM to: %s" "${DOTFILES}/tmux/.config/tmux/plugins/tpm"
     else
       run_command "git clone https://github.com/tmux-plugins/tpm '${DOTFILES}/tmux/.config/tmux/plugins/tpm'" "Install Tmux Plugin Manager"

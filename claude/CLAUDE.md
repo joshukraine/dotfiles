@@ -8,7 +8,7 @@ This file provides project-agnostic guidance to Claude Code (claude.ai/code) acr
 
 Always use [Conventional Commits](https://www.conventionalcommits.org/) format:
 
-```
+```text
 <type>[optional scope]: <description>
 
 [optional body]
@@ -32,7 +32,7 @@ Always use [Conventional Commits](https://www.conventionalcommits.org/) format:
 
 **Examples:**
 
-```
+```text
 feat(auth): add OAuth login support
 fix: resolve memory leak in user service
 docs: update API documentation

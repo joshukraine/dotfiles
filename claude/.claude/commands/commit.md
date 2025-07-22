@@ -62,7 +62,7 @@ When analyzing the diff, consider splitting commits based on these criteria:
 
 ## Example output format
 
-```
+```text
 ✅ Staged 3 files
 📝 Commit message: "feat: add user authentication system"
 🎯 Commit created: abc1234

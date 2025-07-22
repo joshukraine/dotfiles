@@ -18,12 +18,12 @@ teardown() {
 
 @test "g with no arguments shows git status" {
   setup_main_repo
-  
+
   # Make some changes to have status output
   echo "test file" > test.txt
   git add test.txt
   echo "modified" >> README.md
-  
+
   run g
   # Check for branch name - could be main or master depending on git version/config
   if [[ "$output" == *"## main"* ]]; then
@@ -47,7 +47,7 @@ teardown() {
 
 @test "g with arguments passes through to git" {
   setup_main_repo
-  
+
   run g log --oneline -n 1
   assert_contains "$output" "Initial commit"
   [ "$status" -eq 0 ]
@@ -55,7 +55,7 @@ teardown() {
 
 @test "g handles git command failures" {
   setup_main_repo
-  
+
   run g invalid-command
   assert_contains "$output" "invalid-command"
   [ "$status" -ne 0 ]
@@ -63,7 +63,7 @@ teardown() {
 
 @test "g works in non-git directories" {
   setup_non_git_dir
-  
+
   run g
   assert_contains "$output" "not a git repository"
   [ "$status" -ne 0 ]
@@ -71,12 +71,12 @@ teardown() {
 
 @test "g passes multiple arguments correctly" {
   setup_main_repo
-  
+
   # Create a commit to test against
   echo "test" > file.txt
   git add file.txt
   git commit -m "Add test file"
-  
+
   run g show --name-only HEAD
   assert_contains "$output" "Add test file"
   assert_contains "$output" "file.txt"
@@ -85,7 +85,7 @@ teardown() {
 
 @test "g preserves git exit codes" {
   setup_main_repo
-  
+
   # Force a git error
   run g checkout non-existent-branch
   [ "$status" -eq 1 ]  # Git returns 1 for checkout errors

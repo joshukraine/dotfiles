@@ -38,10 +38,10 @@ Examples:
 
     # Determine default branch
     set default_branch ""
-    
+
     # Try to get default branch from remote
     set default_branch (git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }')
-    
+
     # Fallback if needed
     if test -z "$default_branch"
         if git show-ref --quiet refs/heads/main

@@ -94,7 +94,7 @@ Examples:
 
   # Determine default branch
   local default_branch=""
-  
+
   # Try to get default branch from remote if it exists
   if git remote | grep -q "^origin$"; then
     default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
@@ -233,10 +233,10 @@ Examples:
 
   # Determine default branch
   local default_branch=""
-  
+
   # Try to get default branch from remote
   default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
-  
+
   # Fallback if needed
   if [[ -z "$default_branch" ]]; then
     if git show-ref --quiet refs/heads/main; then
@@ -305,12 +305,12 @@ Examples:
 
   # Determine default branch
   local default_branch=""
-  
+
   # Try to get default branch from remote
   if git remote | grep -q "^origin$"; then
     default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
   fi
-  
+
   # Fallback if needed
   if [[ -z "$default_branch" ]]; then
     if git show-ref --quiet refs/heads/main; then
