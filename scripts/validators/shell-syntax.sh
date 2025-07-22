@@ -170,6 +170,43 @@ validate_zsh_files() {
   return 0
 }
 
+# Auto-fix shellcheck issues using shellcheck's built-in diff functionality
+fix_shellcheck_issues() {
+  local file="$1"
+  local diff_output
+  local temp_patch
+  temp_patch=$(mktemp)
+
+  # Generate shellcheck auto-fix diff
+  diff_output=$(shellcheck -f diff "$file" 2>/dev/null)
+
+  if [[ -n "$diff_output" ]]; then
+    # Save the diff to a temp file and apply it
+    echo "$diff_output" > "$temp_patch"
+
+    # Apply the patch from the dotfiles root directory
+    if cd "$DOTFILES_ROOT" && patch -p1 < "$temp_patch" >/dev/null 2>&1; then
+      log_info "Applied shellcheck auto-fixes to $(basename "$file")"
+      rm -f "$temp_patch"
+      return 0
+    else
+      # Try applying without path stripping in case of relative paths
+      if patch -p0 < "$temp_patch" >/dev/null 2>&1; then
+        log_info "Applied shellcheck auto-fixes to $(basename "$file")"
+        rm -f "$temp_patch"
+        return 0
+      else
+        log_warning "Failed to apply auto-fixes to $(basename "$file")"
+        rm -f "$temp_patch"
+        return 1
+      fi
+    fi
+  fi
+
+  # No fixes available
+  return 1
+}
+
 # Validate shell scripts with shellcheck
 validate_shell_scripts() {
   log_info "Validating shell scripts with shellcheck..."
@@ -196,6 +233,13 @@ validate_shell_scripts() {
 
   for file in "${shell_files[@]}"; do
     local relative_file="${file#"$DOTFILES_ROOT"/}"
+
+    # Attempt auto-fixes if fix mode is enabled
+    if [[ $FIX_MODE -eq 1 ]]; then
+      if fix_shellcheck_issues "$file"; then
+        log_info "Applied auto-fixes to $relative_file"
+      fi
+    fi
 
     # Run shellcheck on the file
     local shellcheck_output
