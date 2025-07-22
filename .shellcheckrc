@@ -1,0 +1,29 @@
+# ShellCheck configuration for dotfiles project
+# https://www.shellcheck.net/wiki/Ignore
+
+# Set shell for shell-specific checks (default to bash)
+shell=bash
+
+# Disable specific warnings globally
+# SC1090: Can't follow non-constant source - Expected for dynamic sourcing
+# SC1091: Not following sourced files - Expected for external files
+disable=SC1090,SC1091
+
+# Enable additional checks
+# Require variable braces for consistency (e.g., ${var} not $var)
+enable=require-variable-braces
+
+# Set minimum severity level to report
+# Supports: error, warning, info, style
+# Default: warning
+min-severity=warning
+
+# External sources directory
+# Tells shellcheck where to look for sourced files
+external-sources=true
+
+# Source path for checking sourced files
+# Add common source directories
+source-path=SCRIPTDIR
+source-path=shared
+source-path=bin/.local/bin
