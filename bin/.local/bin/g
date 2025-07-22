@@ -4,7 +4,11 @@
 # Usage: g [git-args...]
 
 if [[ $# -eq 0 ]]; then
-  clear && git status --short --branch && echo
+  # Clear terminal if possible, but don't fail in CI environments
+  if [[ -n "$TERM" ]]; then
+    clear
+  fi
+  git status --short --branch && echo
 else
   git "$@"
 fi
