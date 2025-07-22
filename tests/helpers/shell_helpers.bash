@@ -229,7 +229,7 @@ setup_tmux_mocking() {
   
   # Create the mock tmux script
   cat > "$MOCK_TMUX_PATH" << 'EOF'
-#!/bin/bash
+#!/usr/bin/env bash
 
 case "$1" in
   "new-session")
@@ -290,8 +290,8 @@ case "$1" in
     local target=""
     if [[ "$2" == "-t" && -n "$3" ]]; then
       target="$3"
-      # Remove from mock sessions  
-      export MOCK_TMUX_SESSIONS=$(echo "$MOCK_TMUX_SESSIONS" | sed "s/ *$target//g")
+      # Remove from mock sessions - handle edge cases with exact matching
+      export MOCK_TMUX_SESSIONS=$(echo "$MOCK_TMUX_SESSIONS" | sed "s/\(^\|  *\)$target\( \|$\)/ /g" | sed 's/^  *//' | sed 's/  *$//')
       echo "Mock: Killed tmux session '$target'"
     fi
     exit 0

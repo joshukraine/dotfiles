@@ -164,9 +164,8 @@ teardown() {
 }
 
 @test "git-check-uncommitted handles empty repository" {
-  # Create empty git repo (no initial commit)
-  export TEST_TEMP_DIR=$(mktemp -d)
-  cd "$TEST_TEMP_DIR"
+  # Create empty git repo (no initial commit) using established infrastructure
+  setup_test_git_repo
   git init
   git config user.name "Test User"
   git config user.email "test@example.com"
