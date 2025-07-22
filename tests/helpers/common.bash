@@ -123,9 +123,8 @@ assert_command_fails() {
 run_with_timeout() {
   local timeout="$1"
   shift
-  local command="$@"
   
-  timeout "$timeout" bash -c "$command"
+  timeout "$timeout" bash -c "$*"
 }
 
 # Skip test with reason
@@ -166,7 +165,8 @@ mock_command() {
   local mock_exit_code="${3:-0}"
   
   # Create a temporary mock script
-  local mock_script=$(mktemp)
+  local mock_script
+  mock_script=$(mktemp)
   
   cat > "$mock_script" << EOF
 #!/bin/bash
@@ -177,7 +177,8 @@ EOF
   chmod +x "$mock_script"
   
   # Add mock to PATH
-  local mock_dir=$(dirname "$mock_script")
+  local mock_dir
+  mock_dir=$(dirname "$mock_script")
   export PATH="$mock_dir:$PATH"
   
   # Rename mock script to command name
@@ -195,9 +196,12 @@ cleanup_mock() {
 
 # Performance measurement
 measure_time() {
-  local start_time=$(date +%s.%N)
+  local start_time
+  local end_time
+  local duration
+  start_time=$(date +%s.%N)
   "$@"
-  local end_time=$(date +%s.%N)
-  local duration=$(echo "$end_time - $start_time" | bc)
+  end_time=$(date +%s.%N)
+  duration=$(echo "$end_time - $start_time" | bc)
   echo "Execution time: ${duration}s"
 }

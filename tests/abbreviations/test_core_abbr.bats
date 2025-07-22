@@ -86,7 +86,8 @@ setup() {
   [ "$status" -eq 0 ]
   
   # Check that it's not empty and has abbreviation entries
-  local abbr_count=$(grep -c "^  [a-zA-Z].*:" "$yaml_file")
+  local abbr_count
+  abbr_count=$(grep -c "^  [a-zA-Z].*:" "$yaml_file")
   [ "$abbr_count" -gt 0 ]
 }
 
@@ -103,8 +104,10 @@ setup() {
 }
 
 @test "abbreviation count matches between shells" {
-  local fish_count=$(grep -c "^abbr -a" "$DOTFILES_DIR/fish/.config/fish/abbreviations.fish" 2>/dev/null || echo "0")
-  local zsh_count=$(grep -c "^abbr " "$DOTFILES_DIR/zsh/.config/zsh-abbr/abbreviations.zsh" 2>/dev/null || echo "0")
+  local fish_count
+  local zsh_count
+  fish_count=$(grep -c "^abbr -a" "$DOTFILES_DIR/fish/.config/fish/abbreviations.fish" 2>/dev/null || echo "0")
+  zsh_count=$(grep -c "^abbr " "$DOTFILES_DIR/zsh/.config/zsh-abbr/abbreviations.zsh" 2>/dev/null || echo "0")
   
   # Allow for small differences due to shell-specific abbreviations
   local diff=$((fish_count - zsh_count))

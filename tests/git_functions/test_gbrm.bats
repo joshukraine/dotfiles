@@ -68,19 +68,26 @@ teardown() {
   git checkout main
   
   # Verify branches exist
-  local branch_count_before=$(git branch | wc -l)
+  local branch_count_before
+  branch_count_before=$(git branch | wc -l)
   
   run gbrm
   [ "$status" -eq 0 ]
   
   # Should have removed merged branches but kept main and current unmerged
   # The exact count depends on git behavior, but we can verify main still exists
-  git branch | grep -q "main"
-  [ "$?" -eq 0 ]
+  if git branch | grep -q "main"; then
+    :
+  else
+    return 1
+  fi
   
   # Unmerged branch should still exist
-  git branch | grep -q "feature/unmerged"
-  [ "$?" -eq 0 ]
+  if git branch | grep -q "feature/unmerged"; then
+    :
+  else
+    return 1
+  fi
 }
 
 @test "gbrm handles case when no branches need removal" {
@@ -116,8 +123,11 @@ teardown() {
   assert_contains "$output" "Removing branches merged into main"
   
   # Main branch should still exist
-  git branch | grep -q "main"
-  [ "$?" -eq 0 ]
+  if git branch | grep -q "main"; then
+    :
+  else
+    return 1
+  fi
 }
 
 @test "gbrm works with master as default branch" {
@@ -133,8 +143,11 @@ teardown() {
   [ "$status" -eq 0 ]
   
   # Master should still exist
-  git branch | grep -q "master"
-  [ "$?" -eq 0 ]
+  if git branch | grep -q "master"; then
+    :
+  else
+    return 1
+  fi
 }
 
 @test "gbrm handles remote detection failure gracefully" {
@@ -178,12 +191,14 @@ teardown() {
   done
   
   # Count branches before
-  local branch_count_before=$(git branch | grep -v main | wc -l)
+  local branch_count_before
+  branch_count_before=$(git branch | grep -v main | wc -l)
   
   run gbrm
   [ "$status" -eq 0 ]
   
   # Should have removed the merged branches
-  local branch_count_after=$(git branch | grep -v main | wc -l)
+  local branch_count_after
+  branch_count_after=$(git branch | grep -v main | wc -l)
   [ "$branch_count_after" -lt "$branch_count_before" ]
 }

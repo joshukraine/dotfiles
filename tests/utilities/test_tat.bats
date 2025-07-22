@@ -15,8 +15,9 @@ setup() {
 
   # Create a test directory with a predictable name
   export ORIGINAL_PWD="$PWD"
-  export TEST_TEMP_DIR=$(mktemp -d)
-  cd "$TEST_TEMP_DIR"
+  export TEST_TEMP_DIR
+  TEST_TEMP_DIR=$(mktemp -d)
+  cd "$TEST_TEMP_DIR" || return 1
 
   # Track potential session names for cleanup
   track_tmux_session "test-session"
@@ -42,7 +43,7 @@ teardown() {
   cleanup_all_test_tmux_sessions
 
   # Return to original directory and cleanup
-  cd "$ORIGINAL_PWD"
+  cd "$ORIGINAL_PWD" || return 1
   if [ -n "$TEST_TEMP_DIR" ] && [ -d "$TEST_TEMP_DIR" ]; then
     rm -rf "$TEST_TEMP_DIR"
   fi
@@ -57,7 +58,10 @@ teardown() {
 
 @test "tat creates session name from current directory" {
   # We're in a temp directory with a known name
-  local dir_name=$(basename "$PWD")
+  local dir_name
+  dir_name=$(basename "$PWD")
+  # Prevent unused variable warning by referencing it
+  [ -n "$dir_name" ]
 
   # Test the core logic by examining the variables tat would use
   # We can't easily test tmux session creation, but we can test name derivation
@@ -92,10 +96,11 @@ teardown() {
   export MOCK_TMUX_SESSIONS="test-session"
 
   # Source the tat script to get access to its functions
+  # shellcheck source=/dev/null
   source "$(which tat)" 2>/dev/null || skip "Cannot source tat script"
 
   # Test that session_exists detects the session
-  session_name="test-session"
+  local session_name="test-session"
   run session_exists
   [ "$status" -eq 0 ]
 
@@ -109,6 +114,7 @@ teardown() {
   # Test outside of tmux (should return true/0)
   unset TMUX
 
+  # shellcheck source=/dev/null
   source "$(which tat)" 2>/dev/null || skip "Cannot source tat script"
 
   run not_in_tmux
