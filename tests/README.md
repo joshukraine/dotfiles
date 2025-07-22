@@ -249,6 +249,48 @@ The framework aims to test:
 - **git-cm**: 9 tests (commit wrapper functionality, argument handling)
 - **tat**: 9 tests (tmux session creation, directory name handling)
 
+## Test Cleanup
+
+### Automatic cleanup
+
+The test suite automatically cleans up resources created during testing:
+
+- **Tmux sessions**: Test-related sessions are tracked and removed after each test
+- **Temporary files**: Git repositories and temp directories are cleaned up
+- **Test state**: Each test runs in isolation with proper setup/teardown
+
+### Manual cleanup
+
+If tests are interrupted or cleanup fails, run the cleanup script:
+
+```bash
+# Clean up any remaining test resources
+./tests/cleanup.bash
+```
+
+This will remove:
+- All tmux sessions matching test patterns (`tmp-*`, `test-*`, `custom-session`, etc.)
+- Old temporary files in `/tmp`
+
+### Tmux session management
+
+**Mock tmux commands during testing:**
+The test suite uses tmux command mocking to prevent terminal hijacking. When `tat` or other tmux utilities are tested, they use mock commands that simulate tmux operations without actually creating or attaching to sessions.
+
+**Session cleanup:**
+Test sessions are automatically tracked and cleaned up, but you can also manually remove them:
+
+```bash
+# List all current tmux sessions
+tmux list-sessions
+
+# Kill specific test sessions
+tmux kill-session -t "session-name"
+
+# Kill all test-related sessions
+tmux list-sessions | grep -E "(tmp-|test-|custom)" | cut -d: -f1 | xargs -I {} tmux kill-session -t {}
+```
+
 ## Troubleshooting
 
 ### Tests failing locally
@@ -257,6 +299,7 @@ The framework aims to test:
 2. Check that Fish and Zsh are available: `which fish zsh`
 3. Verify dotfiles structure: `ls -la shared/abbreviations.yaml`
 4. Run with verbose output: `bats tests/ --verbose-run`
+5. Clean up test resources: `./tests/cleanup.bash`
 
 ### Mock git repositories not working
 

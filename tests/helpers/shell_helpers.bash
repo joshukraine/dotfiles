@@ -27,8 +27,14 @@ run_fish_function() {
   local args="$@"
   
   if load_fish_function "$function_name"; then
-    # Source the fish function and execute it
-    fish -c "source '$FISH_FUNCTION_FILE'; $function_name $args" 2>&1
+    # Source the fish function and execute it, with minimal config to avoid errors
+    # Pass PATH so mocked commands work, and source git-check-uncommitted if it exists
+    local git_check_file="$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted"
+    if [ -f "$git_check_file" ]; then
+      PATH="$PATH" fish --no-config -c "set -x PATH '$PATH'; function git-check-uncommitted; '$git_check_file' \$argv; end; source '$FISH_FUNCTION_FILE'; $function_name $args" 2>&1
+    else
+      PATH="$PATH" fish --no-config -c "set -x PATH '$PATH'; source '$FISH_FUNCTION_FILE'; $function_name $args" 2>&1
+    fi
   else
     echo "Fish function $function_name not found"
     return 1
@@ -180,4 +186,122 @@ restore_path() {
 # Save original PATH
 save_original_path() {
   export ORIGINAL_PATH="$PATH"
+}
+
+# Tmux session management for tests
+TEST_TMUX_SESSIONS=()
+
+# Track a tmux session for cleanup
+track_tmux_session() {
+  local session_name="$1"
+  TEST_TMUX_SESSIONS+=("$session_name")
+}
+
+# Cleanup all tracked tmux sessions
+cleanup_tracked_tmux_sessions() {
+  for session in "${TEST_TMUX_SESSIONS[@]}"; do
+    tmux kill-session -t "$session" 2>/dev/null || true
+  done
+  TEST_TMUX_SESSIONS=()
+}
+
+# Cleanup all test-related tmux sessions
+cleanup_all_test_tmux_sessions() {
+  # Kill sessions that look like test sessions
+  tmux list-sessions -F "#{session_name}" 2>/dev/null | while read -r session; do
+    case "$session" in
+      tmp-*|test-*|*test*|custom-session|My_Custom-Session_Name)
+        tmux kill-session -t "$session" 2>/dev/null || true
+        ;;
+    esac
+  done
+}
+
+# Mock tmux commands to prevent terminal hijacking during tests
+setup_tmux_mocking() {
+  # Create mock tmux commands that don't actually attach or switch
+  export MOCK_TMUX_SESSIONS=""
+  
+  # Override tmux command with a function
+  tmux() {
+    case "$1" in
+      "new-session")
+        # Parse arguments to track session creation
+        local session_name=""
+        local detached=false
+        local attach_existing=false
+        
+        while [[ $# -gt 0 ]]; do
+          case $1 in
+            -s)
+              session_name="$2"
+              shift 2
+              ;;
+            -A|-As)
+              attach_existing=true
+              shift
+              ;;
+            -d|-Ad)
+              detached=true
+              shift
+              ;;
+            *)
+              shift
+              ;;
+          esac
+        done
+        
+        if [[ -n "$session_name" ]]; then
+          # Track the session creation without actually creating it
+          if [[ "$MOCK_TMUX_SESSIONS" != *"$session_name"* ]]; then
+            export MOCK_TMUX_SESSIONS="$MOCK_TMUX_SESSIONS $session_name"
+          fi
+          echo "Mock: Created tmux session '$session_name'"
+          return 0
+        fi
+        ;;
+      "switch-client")
+        # Parse target session
+        local target=""
+        if [[ "$2" == "-t" && -n "$3" ]]; then
+          target="$3"
+        fi
+        echo "Mock: Switched to tmux session '$target'"
+        return 0
+        ;;
+      "list-sessions")
+        # Return mock session list for session_exists checks
+        if [[ -n "$MOCK_TMUX_SESSIONS" ]]; then
+          for session in $MOCK_TMUX_SESSIONS; do
+            echo "$session: 1 windows (created $(date))"
+          done
+        fi
+        return 0
+        ;;
+      "kill-session")
+        # Parse target session for cleanup
+        local target=""
+        if [[ "$2" == "-t" && -n "$3" ]]; then
+          target="$3"
+          # Remove from mock sessions
+          export MOCK_TMUX_SESSIONS=$(echo "$MOCK_TMUX_SESSIONS" | sed "s/ *$target//g")
+          echo "Mock: Killed tmux session '$target'"
+        fi
+        return 0
+        ;;
+      *)
+        # For other tmux commands, call the real tmux but with safe defaults
+        command tmux "$@"
+        ;;
+    esac
+  }
+  
+  # Export the function so it's available in subshells
+  export -f tmux
+}
+
+# Restore real tmux command
+restore_tmux() {
+  unset -f tmux
+  unset MOCK_TMUX_SESSIONS
 }

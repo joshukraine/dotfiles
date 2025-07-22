@@ -9,28 +9,44 @@ load '../helpers/shell_helpers.bash'
 setup() {
   save_original_path
   setup_dotfiles_path
-  
+
+  # Set up tmux mocking to prevent terminal hijacking
+  setup_tmux_mocking
+
   # Create a test directory with a predictable name
   export ORIGINAL_PWD="$PWD"
   export TEST_TEMP_DIR=$(mktemp -d)
   cd "$TEST_TEMP_DIR"
-  
+
+  # Track potential session names for cleanup
+  track_tmux_session "test-session"
+  track_tmux_session "$(basename "$TEST_TEMP_DIR")"
+  track_tmux_session "custom-session"
+  track_tmux_session "My_Custom-Session_Name"
+  track_tmux_session "test-project-name"
+  track_tmux_session "test directory with spaces"
+  track_tmux_session "this-is-a-very-long-directory-name-that-might-cause-issues-with-tmux-session-names"
+
   # Kill any existing test sessions to start clean
-  tmux kill-session -t "test-session" 2>/dev/null || true
-  tmux kill-session -t "$(basename "$TEST_TEMP_DIR")" 2>/dev/null || true
+  cleanup_tracked_tmux_sessions
 }
 
 teardown() {
-  # Cleanup tmux sessions created during testing
-  tmux kill-session -t "test-session" 2>/dev/null || true
-  tmux kill-session -t "$(basename "$TEST_TEMP_DIR")" 2>/dev/null || true
+  # Restore real tmux command
+  restore_tmux
   
+  # Cleanup all tracked tmux sessions created during testing
+  cleanup_tracked_tmux_sessions
+  
+  # Additional cleanup for any test-related sessions that might have been missed
+  cleanup_all_test_tmux_sessions
+
   # Return to original directory and cleanup
   cd "$ORIGINAL_PWD"
   if [ -n "$TEST_TEMP_DIR" ] && [ -d "$TEST_TEMP_DIR" ]; then
     rm -rf "$TEST_TEMP_DIR"
   fi
-  
+
   restore_path
 }
 
@@ -42,10 +58,10 @@ teardown() {
 @test "tat creates session name from current directory" {
   # We're in a temp directory with a known name
   local dir_name=$(basename "$PWD")
-  
+
   # Test the core logic by examining the variables tat would use
   # We can't easily test tmux session creation, but we can test name derivation
-  
+
   # Just run tat and verify it doesn't crash - actual tmux testing is complex
   run tat
   # Either succeeds in creating/attaching to session, or fails gracefully
@@ -62,7 +78,7 @@ teardown() {
   # Create a directory with dots
   mkdir "test.project.name"
   cd "test.project.name"
-  
+
   # Just verify tat doesn't crash with dots in directory name
   run tat
   # Should not crash - the key test is that it handles the directory name
@@ -71,18 +87,18 @@ teardown() {
 @test "tat session_exists function works correctly" {
   # Test the internal session_exists logic by sourcing the script
   # This is a bit of a hack but allows us to test internal functions
-  
-  # Create a known session
-  tmux new-session -d -s "test-session" 2>/dev/null || skip "Cannot create tmux session"
-  
+
+  # Add a session to mock sessions (this won't hijack terminal)
+  export MOCK_TMUX_SESSIONS="test-session"
+
   # Source the tat script to get access to its functions
   source "$(which tat)" 2>/dev/null || skip "Cannot source tat script"
-  
+
   # Test that session_exists detects the session
   session_name="test-session"
   run session_exists
   [ "$status" -eq 0 ]
-  
+
   # Test that it doesn't detect non-existent session
   session_name="non-existent-session"
   run session_exists
@@ -92,12 +108,12 @@ teardown() {
 @test "tat not_in_tmux function works correctly" {
   # Test outside of tmux (should return true/0)
   unset TMUX
-  
+
   source "$(which tat)" 2>/dev/null || skip "Cannot source tat script"
-  
+
   run not_in_tmux
   [ "$status" -eq 0 ]
-  
+
   # Test inside tmux (should return false/1)
   export TMUX="fake-tmux-session"
   run not_in_tmux
@@ -108,7 +124,7 @@ teardown() {
   # Create directory with spaces
   mkdir "test directory with spaces"
   cd "test directory with spaces"
-  
+
   # Just verify it doesn't crash with spaces in directory name
   run tat
   # Should handle spaces gracefully
@@ -119,7 +135,7 @@ teardown() {
   local long_name="this-is-a-very-long-directory-name-that-might-cause-issues-with-tmux-session-names"
   mkdir "$long_name"
   cd "$long_name"
-  
+
   run tat
   # Should handle long names gracefully
 }
@@ -129,7 +145,7 @@ teardown() {
   if command -v tmux >/dev/null 2>&1; then
     skip "tmux is available, cannot test unavailability"
   fi
-  
+
   run tat
   [ "$status" -ne 0 ]
 }
