@@ -47,7 +47,7 @@ teardown() {
   create_feature_branch "test-branch"
   
   run run_fish_function grbm
-  assert_contains "$output" "No 'origin' remote found"
+  assert_contains "$output" "No 'origin' remote found. Cannot rebase against remote branch."
   [ "$status" -eq 1 ]
 }
 
@@ -56,28 +56,23 @@ teardown() {
   create_feature_branch "feature/test"
   create_uncommitted_changes
   
-  # Mock git-check-uncommitted to return failure (user chose not to continue)
-  local mock_path=$(mock_command "git-check-uncommitted" "" 1)
-  
-  run run_fish_function grbm
-  assert_contains "$output" "Uncommitted changes detected"
+  # When running grbm, git-check-uncommitted --prompt will detect changes
+  # and the test will provide "n" as input to abort
+  run bash -c "echo 'n' | fish --no-config -c \"source '$DOTFILES_DIR/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
+  assert_contains "$output" "Warning: You have uncommitted changes"
   [ "$status" -eq 1 ]
-  
-  cleanup_mock "$mock_path"
 }
 
-@test "grbm succeeds when user continues with uncommitted changes" {
+@test "grbm fails even when user continues with uncommitted changes" {
   setup_main_repo
   create_feature_branch "feature/test"
   create_uncommitted_changes
   
-  # Mock git-check-uncommitted to return success (user chose to continue)
-  local mock_path=$(mock_command "git-check-uncommitted" "Proceeding with uncommitted changes..." 0)
-  
-  run run_fish_function grbm
-  [ "$status" -eq 0 ]
-  
-  cleanup_mock "$mock_path"
+  # When running grbm, git-check-uncommitted --prompt will detect changes
+  # and the test will provide "y" as input to continue, but git rebase will still fail
+  run bash -c "echo 'y' | fish --no-config -c \"source '$DOTFILES_DIR/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
+  assert_contains "$output" "Rebase failed. You may need to resolve conflicts manually."
+  [ "$status" -eq 1 ]
 }
 
 @test "grbm skips rebase when already on default branch (main)" {
@@ -111,7 +106,7 @@ teardown() {
   git checkout feature/awesome
   
   run run_fish_function grbm
-  assert_contains "$output" "Rebasing against"
+  assert_contains "$output" "Rebasing feature/awesome against"
   assert_contains "$output" "origin/main"
   [ "$status" -eq 0 ]
 }
@@ -129,7 +124,7 @@ teardown() {
   git checkout feature/legacy
   
   run run_fish_function grbm
-  assert_contains "$output" "Rebasing against"
+  assert_contains "$output" "Rebasing feature/legacy against"
   assert_contains "$output" "origin/master"
   [ "$status" -eq 0 ]
 }

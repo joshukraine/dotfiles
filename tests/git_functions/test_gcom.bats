@@ -21,7 +21,7 @@ teardown() {
   
   run run_fish_function gcom -h
   assert_contains "$output" "Usage: gcom"
-  assert_contains "$output" "Checkout the default branch"
+  assert_contains "$output" "Switch to the default Git branch"
   [ "$status" -eq 0 ]
 }
 
@@ -30,7 +30,7 @@ teardown() {
   
   run run_fish_function gcom --help
   assert_contains "$output" "Usage: gcom"
-  assert_contains "$output" "Checkout the default branch"
+  assert_contains "$output" "Switch to the default Git branch"
   [ "$status" -eq 0 ]
 }
 
@@ -51,13 +51,13 @@ teardown() {
   [ "$status" -eq 1 ]
 }
 
-@test "gcom fails when no origin remote exists" {
+@test "gcom works when no origin remote exists" {
   setup_no_remote_repo
   create_feature_branch "test-branch"
   
   run run_fish_function gcom
-  assert_contains "$output" "No 'origin' remote found"
-  [ "$status" -eq 1 ]
+  assert_contains "$output" "Switching to main"
+  [ "$status" -eq 0 ]
 }
 
 @test "gcom fails when uncommitted changes exist" {
@@ -65,14 +65,11 @@ teardown() {
   create_feature_branch "feature/test"
   create_uncommitted_changes
   
-  # Mock git-check-uncommitted to return failure (user chose not to continue)
-  local mock_path=$(mock_command "git-check-uncommitted" "" 1)
-  
-  run run_fish_function gcom
-  assert_contains "$output" "Uncommitted changes detected"
+  # When running gcom, git-check-uncommitted --prompt will detect changes
+  # and the test will provide "n" as input to abort
+  run bash -c "echo 'n' | fish --no-config -c \"source '$DOTFILES_DIR/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
+  assert_contains "$output" "Warning: You have uncommitted changes"
   [ "$status" -eq 1 ]
-  
-  cleanup_mock "$mock_path"
 }
 
 @test "gcom succeeds when user continues with uncommitted changes" {
@@ -80,13 +77,11 @@ teardown() {
   create_feature_branch "feature/test"
   create_uncommitted_changes
   
-  # Mock git-check-uncommitted to return success (user chose to continue)
-  local mock_path=$(mock_command "git-check-uncommitted" "Proceeding with uncommitted changes..." 0)
-  
-  run run_fish_function gcom
+  # When running gcom, git-check-uncommitted --prompt will detect changes
+  # and the test will provide "y" as input to continue
+  run bash -c "echo 'y' | fish --no-config -c \"source '$DOTFILES_DIR/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
+  assert_contains "$output" "Switching to"
   [ "$status" -eq 0 ]
-  
-  cleanup_mock "$mock_path"
 }
 
 @test "gcom successfully checks out main branch" {

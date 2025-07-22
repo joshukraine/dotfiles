@@ -71,6 +71,12 @@ Examples:
         return 0
     end
 
+    # Check if we have origin remote before rebasing
+    if not git remote | grep -q "^origin\$"
+        echo "No 'origin' remote found. Cannot rebase against remote branch."
+        return 1
+    end
+
     echo "Rebasing $current_branch against $default_branch..."
     git rebase origin/$default_branch
     if test $status -ne 0
@@ -78,5 +84,5 @@ Examples:
         return 1
     end
 
-    echo "Successfully rebased $current_branch against $default_branch"
+    echo "Successfully rebased $current_branch against origin/$default_branch"
 end

@@ -32,4 +32,9 @@ if [[ -z "$default_branch" ]]; then
 fi
 
 echo "Removing branches merged into $default_branch..."
-git branch --merged "$default_branch" | grep -v "^\*\|  $default_branch" | xargs -n 1 git branch -d
+branches_to_remove=$(git branch --merged "$default_branch" | grep -v "^\*\|  $default_branch" || true)
+if [[ -n "$branches_to_remove" ]]; then
+  echo "$branches_to_remove" | xargs -n 1 git branch -d
+else
+  echo "No branches to remove."
+fi
