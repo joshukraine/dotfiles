@@ -66,10 +66,15 @@ jobs:
             fish_times=()
 
             for i in {1..10}; do
-              start_time=$(date +%s%N)
-              fish -c "exit" 2>/dev/null
-              end_time=$(date +%s%N)
-              duration=$((($end_time - $start_time) / 1000000))  # Convert to milliseconds
+              if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+                # macOS doesn't support nanoseconds, use Python for precise timing
+                duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['fish', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
+              else
+                start_time=$(date +%s%N)
+                fish -c "exit" 2>/dev/null
+                end_time=$(date +%s%N)
+                duration=$((($end_time - $start_time) / 1000000))  # Convert to milliseconds
+              fi
               fish_times+=($duration)
             done
 
@@ -91,10 +96,15 @@ jobs:
             zsh_times=()
 
             for i in {1..10}; do
-              start_time=$(date +%s%N)
-              zsh -c "exit" 2>/dev/null
-              end_time=$(date +%s%N)
-              duration=$((($end_time - $start_time) / 1000000))  # Convert to milliseconds
+              if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+                # macOS doesn't support nanoseconds, use Python for precise timing
+                duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['zsh', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
+              else
+                start_time=$(date +%s%N)
+                zsh -c "exit" 2>/dev/null
+                end_time=$(date +%s%N)
+                duration=$((($end_time - $start_time) / 1000000))  # Convert to milliseconds
+              fi
               zsh_times+=($duration)
             done
 
