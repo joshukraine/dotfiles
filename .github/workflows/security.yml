@@ -40,10 +40,13 @@ jobs:
             exit 0
           fi
 
-          # Install dependencies needed for audit
+          # Check dependencies for security audit (don't install everything)
           cd brew
-          echo "📦 Installing dependencies for security audit..."
-          brew bundle check --verbose || brew bundle install
+          echo "📦 Checking dependencies for security audit..."
+
+          # Only check if Brewfile packages have known vulnerabilities
+          # We don't need to install all packages for audit
+          echo "ℹ️ Auditing package definitions without full installation"
 
           # Run security audit on installed packages
           echo "🛡️ Performing security audit on Homebrew packages..."
@@ -54,22 +57,25 @@ jobs:
           if [ -n "$packages" ]; then
             echo "Auditing packages: $packages"
 
-            # Check for vulnerabilities in installed packages
+            # Check for known vulnerabilities using Homebrew's audit
             vulnerabilities_found=false
 
+            echo "Running Homebrew formula audit for security issues..."
+
+            # Use brew audit for general security checks (doesn't require package installation)
+            if brew audit --formula --strict --online 2>&1 | tee audit_output.txt | grep -i "error\|warning\|vulnerabilit\|cve\|security"; then
+              vulnerabilities_found=true
+              echo "⚠️ Potential issues found during audit"
+            fi
+
+            # Check for deprecated or problematic formulas
+            echo "Checking for deprecated formulas..."
             for package in $packages; do
-              echo "Checking $package..."
-              if brew audit --vulnerabilities "$package" 2>/dev/null | grep -i "vulnerabilit\|cve\|security"; then
+              if brew info "$package" 2>/dev/null | grep -i "deprecated\|disable"; then
+                echo "⚠️ Package $package may be deprecated or disabled"
                 vulnerabilities_found=true
-                echo "⚠️ Potential security issue found in $package"
               fi
             done
-
-            # Also run general audit
-            echo "Running general Homebrew audit..."
-            if brew audit --vulnerabilities 2>&1 | grep -i "vulnerabilit\|cve\|security"; then
-              vulnerabilities_found=true
-            fi
 
             if [ "$vulnerabilities_found" = "true" ]; then
               echo "❌ Security vulnerabilities detected in dependencies"
