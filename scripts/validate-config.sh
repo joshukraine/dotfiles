@@ -276,8 +276,10 @@ main() {
   fi
   
   # Get list of validators to run
-  local validators
-  mapfile -t validators < <(get_validators)
+  local validators=()
+  while IFS= read -r validator; do
+    validators+=("$validator")
+  done < <(get_validators)
   
   if [[ ${#validators[@]} -eq 0 ]]; then
     log_error "No validators found"
