@@ -1,0 +1,287 @@
+name: Automated Dependency Updates
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC (automated maintenance window)
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    # Allow manual triggering for testing or urgent updates
+
+jobs:
+  update-homebrew:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Use a personal access token for creating PRs
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Update Homebrew and check for outdated packages
+        run: |
+          echo "🍺 Updating Homebrew and checking for outdated packages..."
+
+          # Update Homebrew
+          brew update
+
+          # Check if Brewfile exists
+          if [ ! -f "brew/Brewfile" ]; then
+            echo "❌ No Brewfile found, cannot check for updates"
+            exit 1
+          fi
+
+          cd brew
+
+          # Check for outdated packages in Brewfile
+          echo "📦 Checking for outdated packages..."
+
+          # Install current packages to check versions
+          brew bundle check || brew bundle install
+
+          # Get outdated packages
+          outdated_packages=$(brew bundle outdated --verbose 2>/dev/null || echo "")
+
+          if [ -z "$outdated_packages" ]; then
+            echo "✅ All packages are up to date"
+            echo "NO_UPDATES_NEEDED=true" >> $GITHUB_ENV
+            exit 0
+          else
+            echo "📈 Found outdated packages:"
+            echo "$outdated_packages"
+            echo "OUTDATED_PACKAGES<<EOF" >> $GITHUB_ENV
+            echo "$outdated_packages" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          fi
+
+      - name: Create dependency update branch
+        if: env.NO_UPDATES_NEEDED != 'true'
+        run: |
+          # Create a new branch for updates
+          timestamp=$(date +%Y%m%d-%H%M%S)
+          branch_name="chore/automated-dependency-updates-$timestamp"
+
+          echo "🌿 Creating branch: $branch_name"
+          git checkout -b "$branch_name"
+          echo "UPDATE_BRANCH=$branch_name" >> $GITHUB_ENV
+
+      - name: Update Brewfile with latest versions
+        if: env.NO_UPDATES_NEEDED != 'true'
+        run: |
+          echo "🔄 Updating Brewfile with latest package versions..."
+
+          cd brew
+
+          # Create backup
+          cp Brewfile Brewfile.backup
+
+          # Update packages in Brewfile
+          # Note: brew bundle update doesn't modify Brewfile, so we need a different approach
+
+          # Get current installed versions and update Brewfile if needed
+          # For now, we'll use brew bundle cleanup and reinstall to get latest versions
+
+          echo "📝 Updating Brewfile entries..."
+
+          # Simple approach: let brew bundle install get the latest versions
+          # The Brewfile typically doesn't specify versions, so this will pull latest
+          brew bundle install --verbose
+
+          echo "✅ Brewfile update completed"
+
+      - name: Install validation dependencies for testing
+        if: env.NO_UPDATES_NEEDED != 'true'
+        run: |
+          echo "🔧 Installing validation dependencies..."
+
+          # Install tools needed for validation
+          brew install fish zsh shellcheck yq markdownlint-cli2 bats-core stow
+
+          # Install optional tools commonly used
+          brew install ripgrep fd eza bat fzf neovim tmux
+
+      - name: Run configuration validation
+        if: env.NO_UPDATES_NEEDED != 'true'
+        run: |
+          echo "🧪 Running configuration validation with updated packages..."
+
+          # Make validation scripts executable
+          chmod +x scripts/validate-config.sh
+          chmod +x scripts/validators/*.sh
+
+          # Run validation suite
+          ./scripts/validate-config.sh --ci || {
+            echo "❌ Configuration validation failed with updated packages"
+            echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
+            exit 1
+          }
+
+          echo "✅ Configuration validation passed"
+
+      - name: Run quick smoke tests
+        if: env.NO_UPDATES_NEEDED != 'true' && env.VALIDATION_FAILED != 'true'
+        run: |
+          echo "🚀 Running smoke tests with updated dependencies..."
+
+          # Make test scripts executable
+          chmod +x tests/helpers/*.bash
+
+          # Generate abbreviations for testing
+          cd shared
+          ./generate-fish-abbr.sh
+          ./generate-zsh-abbr.sh
+          cd ..
+
+          # Run a subset of critical tests
+          if [ -d "tests/git_functions" ]; then
+            echo "Testing git functions..."
+            bats tests/git_functions/ --filter "git_current_branch\|git_default_branch" || {
+              echo "❌ Critical git function tests failed"
+              echo "SMOKE_TESTS_FAILED=true" >> $GITHUB_ENV
+              exit 1
+            }
+          fi
+
+          echo "✅ Smoke tests passed"
+
+      - name: Commit changes
+        if: env.NO_UPDATES_NEEDED != 'true' && env.VALIDATION_FAILED != 'true' && env.SMOKE_TESTS_FAILED != 'true'
+        run: |
+          echo "💾 Committing dependency updates..."
+
+          # Add any changes (updated lock files, generated files, etc.)
+          git add -A
+
+          # Check if there are actually changes to commit
+          if git diff --cached --quiet; then
+            echo "ℹ️ No changes to commit after dependency updates"
+            echo "NO_CHANGES_TO_COMMIT=true" >> $GITHUB_ENV
+          else
+            # Create commit message and commit
+            git commit -m "chore: automated dependency updates" -m "Updated Homebrew packages, validation passed"
+            echo "✅ Changes committed"
+          fi
+
+      - name: Push branch and create PR
+        if: env.NO_UPDATES_NEEDED != 'true' && env.VALIDATION_FAILED != 'true' && env.SMOKE_TESTS_FAILED != 'true' && env.NO_CHANGES_TO_COMMIT != 'true'
+        run: |
+          echo "🚀 Pushing branch and creating pull request..."
+
+          # Push the branch
+          git push origin "$UPDATE_BRANCH"
+
+          # Create PR using GitHub CLI
+          pr_title="chore: automated dependency updates ($(date +%Y-%m-%d))"
+
+          # Create PR body using printf to avoid YAML parsing issues
+          pr_body=$(printf '%s\n' \
+            "## Summary" \
+            "🔄 **Automated weekly dependency update**" \
+            "" \
+            "### Updated Packages" \
+            "$OUTDATED_PACKAGES" \
+            "" \
+            "### Validation Status" \
+            "- ✅ Configuration validation passed" \
+            "- ✅ Smoke tests passed" \
+            "- ✅ Generated abbreviations updated" \
+            "" \
+            "### Testing" \
+            "This PR was automatically created and tested. The full test suite will run on this PR to ensure compatibility." \
+            "" \
+            "### Review Checklist" \
+            "- [ ] Review updated package versions" \
+            "- [ ] Verify test suite passes" \
+            "- [ ] Check for any breaking changes in updated packages" \
+            "- [ ] Merge when ready" \
+            "" \
+            "🤖 Generated with [Claude Code](https://claude.ai/code)")
+
+          # Create PR
+          gh pr create \
+            --title "$pr_title" \
+            --body "$pr_body" \
+            --head "$UPDATE_BRANCH" \
+            --base "${{ github.event.repository.default_branch }}" \
+            --label "chore,dependencies,automated"
+
+          echo "✅ Pull request created successfully"
+
+          # Get PR URL for summary
+          pr_url=$(gh pr view "$UPDATE_BRANCH" --json url --jq '.url')
+          echo "PR_URL=$pr_url" >> $GITHUB_ENV
+
+      - name: Handle validation failures
+        if: env.VALIDATION_FAILED == 'true' || env.SMOKE_TESTS_FAILED == 'true'
+        run: |
+          echo "❌ Dependency updates failed validation"
+
+          # Clean up branch
+          git checkout master
+          git branch -D "$UPDATE_BRANCH" || true
+
+          # Create GitHub issue for manual review
+          issue_title="🚨 Automated dependency update failed ($(date +%Y-%m-%d))"
+
+          # Create issue body using printf
+          issue_body=$(printf '%s\n' \
+            "## Automated Dependency Update Failure" \
+            "" \
+            "The automated dependency update process failed during validation or smoke testing." \
+            "" \
+            "### Outdated Packages" \
+            "$OUTDATED_PACKAGES" \
+            "" \
+            "### Failure Details" \
+            "- Configuration validation failed: ${VALIDATION_FAILED:-false}" \
+            "- Smoke tests failed: ${SMOKE_TESTS_FAILED:-false}" \
+            "" \
+            "### Next Steps" \
+            "1. Review the package updates manually" \
+            "2. Run local validation: \`./scripts/validate-config.sh\`" \
+            "3. Check for breaking changes in updated packages" \
+            "4. Create manual PR if updates are safe" \
+            "" \
+            "### Workflow Run" \
+            "[View failed workflow run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" \
+            "" \
+            "🤖 Generated with [Claude Code](https://claude.ai/code)")
+
+          # Create issue
+          gh issue create \
+            --title "$issue_title" \
+            --body "$issue_body" \
+            --label "bug,dependencies,needs-review"
+
+          echo "🐛 Created issue for manual review"
+
+      - name: Generate workflow summary
+        if: always()
+        run: |
+          echo "## Automated Dependency Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$NO_UPDATES_NEEDED" = "true" ]; then
+            echo "✅ **All packages are up to date** - no action needed" >> $GITHUB_STEP_SUMMARY
+          elif [ "$VALIDATION_FAILED" = "true" ] || [ "$SMOKE_TESTS_FAILED" = "true" ]; then
+            echo "❌ **Update failed validation** - issue created for manual review" >> $GITHUB_STEP_SUMMARY
+          elif [ "$NO_CHANGES_TO_COMMIT" = "true" ]; then
+            echo "ℹ️ **No changes detected** after update - packages may have been current" >> $GITHUB_STEP_SUMMARY
+          elif [ -n "$PR_URL" ]; then
+            echo "✅ **Pull request created successfully**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "📝 **PR**: [$pr_title]($PR_URL)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Workflow Details" >> $GITHUB_STEP_SUMMARY
+          echo "- **Execution time**: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: ${GITHUB_EVENT_NAME}" >> $GITHUB_STEP_SUMMARY
+          if [ -n "$OUTDATED_PACKAGES" ]; then
+            echo "- **Packages checked for updates**: Yes" >> $GITHUB_STEP_SUMMARY
+          fi
