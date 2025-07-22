@@ -51,6 +51,9 @@ jobs:
             # Create symlinks for tools with different names on Ubuntu
             sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd || true
             sudo ln -sf /usr/bin/batcat /usr/local/bin/bat || true
+
+            # Update PATH to include /usr/local/bin
+            echo "/usr/local/bin" >> $GITHUB_PATH
           fi
 
           # Verify installations
@@ -65,6 +68,9 @@ jobs:
           echo "Bats version: $(bats --version)"
           echo "Stow version: $(stow --version | head -1)"
 
+          # Refresh PATH for newly installed tools
+          hash -r
+
       - name: Make validation scripts executable
         run: |
           # Ensure validation framework is executable
@@ -74,6 +80,13 @@ jobs:
 
       - name: Validate configuration integrity
         run: |
+          # Debug: Check tool availability
+          echo "🔧 Checking tool availability before validation..."
+          which fish || echo "fish not found in PATH"
+          which zsh || echo "zsh not found in PATH"
+          which shellcheck || echo "shellcheck not found in PATH"
+          which yq || echo "yq not found in PATH"
+
           # Run full validation suite
           echo "🔍 Running configuration validation..."
           ./scripts/validate-config.sh --ci
