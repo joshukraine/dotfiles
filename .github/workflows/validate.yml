@@ -133,10 +133,7 @@ jobs:
 
   # Separate job that depends on validation passing
   validate-dependencies:
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     needs: validate
     if: success()
 
@@ -146,25 +143,21 @@ jobs:
 
       - name: Validate Brewfile dependencies
         run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            # Check that Brewfile is valid (macOS only)
-            if [ -f "brew/Brewfile" ]; then
-              echo "🍺 Validating Brewfile..."
+          # Check that Brewfile is valid
+          if [ -f "brew/Brewfile" ]; then
+            echo "🍺 Validating Brewfile..."
 
-              # Install Homebrew if not present (should be on macOS runners)
-              if ! command -v brew >/dev/null 2>&1; then
-                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-              fi
-
-              # Validate Brewfile syntax without installing packages
-              cd brew && brew bundle check --verbose || true
-
-              echo "✅ Brewfile validation completed"
-            else
-              echo "ℹ️ No Brewfile found to validate"
+            # Install Homebrew if not present (should be on macOS runners)
+            if ! command -v brew >/dev/null 2>&1; then
+              /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             fi
+
+            # Validate Brewfile syntax without installing packages
+            cd brew && brew bundle check --verbose || true
+
+            echo "✅ Brewfile validation completed"
           else
-            echo "ℹ️ Skipping Brewfile validation on Linux (Homebrew not applicable)"
+            echo "ℹ️ No Brewfile found to validate"
           fi
 
       - name: Validate critical paths

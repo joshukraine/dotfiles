@@ -134,13 +134,10 @@ jobs:
           echo "  - Environment: $(ls tests/environment/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
 
           echo "- **Shell compatibility**: Testing ${{ matrix.shell }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Platform**: ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Platform**: macOS" >> $GITHUB_STEP_SUMMARY
 
   coverage:
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     needs: test
 
     steps:
@@ -149,12 +146,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            brew install bats-core fish zsh
-          else
-            sudo apt-get update
-            sudo apt-get install -y bats fish zsh
-          fi
+          brew install bats-core fish zsh
 
       - name: Coverage analysis
         run: |

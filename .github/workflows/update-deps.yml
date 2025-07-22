@@ -162,12 +162,8 @@ jobs:
             echo "ℹ️ No changes to commit after dependency updates"
             echo "NO_CHANGES_TO_COMMIT=true" >> $GITHUB_ENV
           else
-            # Create commit message
-            commit_message="chore: automated dependency updates
-
-Updated Homebrew packages, validation passed"
-
-            git commit -m "$commit_message"
+            # Create commit message and commit
+            git commit -m "chore: automated dependency updates" -m "Updated Homebrew packages, validation passed"
             echo "✅ Changes committed"
           fi
 
@@ -181,28 +177,32 @@ Updated Homebrew packages, validation passed"
 
           # Create PR using GitHub CLI
           pr_title="chore: automated dependency updates ($(date +%Y-%m-%d))"
-          pr_body="## Summary
-🔄 **Automated weekly dependency update**
 
-### Updated Packages
-$OUTDATED_PACKAGES
+          # Create PR body using printf to avoid YAML parsing issues
+          pr_body=$(printf '%s\n' \
+            "## Summary" \
+            "🔄 **Automated weekly dependency update**" \
+            "" \
+            "### Updated Packages" \
+            "$OUTDATED_PACKAGES" \
+            "" \
+            "### Validation Status" \
+            "- ✅ Configuration validation passed" \
+            "- ✅ Smoke tests passed" \
+            "- ✅ Generated abbreviations updated" \
+            "" \
+            "### Testing" \
+            "This PR was automatically created and tested. The full test suite will run on this PR to ensure compatibility." \
+            "" \
+            "### Review Checklist" \
+            "- [ ] Review updated package versions" \
+            "- [ ] Verify test suite passes" \
+            "- [ ] Check for any breaking changes in updated packages" \
+            "- [ ] Merge when ready" \
+            "" \
+            "🤖 Generated with [Claude Code](https://claude.ai/code)")
 
-### Validation Status
-- ✅ Configuration validation passed
-- ✅ Smoke tests passed
-- ✅ Generated abbreviations updated
-
-### Testing
-This PR was automatically created and tested. The full test suite will run on this PR to ensure compatibility.
-
-### Review Checklist
-- [ ] Review updated package versions
-- [ ] Verify test suite passes
-- [ ] Check for any breaking changes in updated packages
-- [ ] Merge when ready
-
-🤖 Generated with [Claude Code](https://claude.ai/code)"
-
+          # Create PR
           gh pr create \
             --title "$pr_title" \
             --body "$pr_body" \
@@ -227,28 +227,32 @@ This PR was automatically created and tested. The full test suite will run on th
 
           # Create GitHub issue for manual review
           issue_title="🚨 Automated dependency update failed ($(date +%Y-%m-%d))"
-          issue_body="## Automated Dependency Update Failure
 
-The automated dependency update process failed during validation or smoke testing.
+          # Create issue body using printf
+          issue_body=$(printf '%s\n' \
+            "## Automated Dependency Update Failure" \
+            "" \
+            "The automated dependency update process failed during validation or smoke testing." \
+            "" \
+            "### Outdated Packages" \
+            "$OUTDATED_PACKAGES" \
+            "" \
+            "### Failure Details" \
+            "- Configuration validation failed: ${VALIDATION_FAILED:-false}" \
+            "- Smoke tests failed: ${SMOKE_TESTS_FAILED:-false}" \
+            "" \
+            "### Next Steps" \
+            "1. Review the package updates manually" \
+            "2. Run local validation: \`./scripts/validate-config.sh\`" \
+            "3. Check for breaking changes in updated packages" \
+            "4. Create manual PR if updates are safe" \
+            "" \
+            "### Workflow Run" \
+            "[View failed workflow run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" \
+            "" \
+            "🤖 Generated with [Claude Code](https://claude.ai/code)")
 
-### Outdated Packages
-$OUTDATED_PACKAGES
-
-### Failure Details
-- Configuration validation failed: ${VALIDATION_FAILED:-false}
-- Smoke tests failed: ${SMOKE_TESTS_FAILED:-false}
-
-### Next Steps
-1. Review the package updates manually
-2. Run local validation: \`./scripts/validate-config.sh\`
-3. Check for breaking changes in updated packages
-4. Create manual PR if updates are safe
-
-### Workflow Run
-[View failed workflow run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)
-
-🤖 Generated with [Claude Code](https://claude.ai/code)"
-
+          # Create issue
           gh issue create \
             --title "$issue_title" \
             --body "$issue_body" \
