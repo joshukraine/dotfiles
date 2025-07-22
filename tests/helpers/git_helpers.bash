@@ -19,7 +19,17 @@ teardown_test_git_repo() {
 # Initialize a basic git repository with initial commit
 init_git_repo() {
   local default_branch="${1:-main}"
-  git init -b "$default_branch"
+  
+  # Initialize repository - handle different git versions
+  if git init -b "$default_branch" 2>/dev/null; then
+    # Modern git supports -b flag
+    :
+  else
+    # Fallback for older git versions
+    git init
+    git checkout -b "$default_branch"
+  fi
+  
   git config user.name "Test User"
   git config user.email "test@example.com"
   echo "# Test Repository" > README.md

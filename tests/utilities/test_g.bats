@@ -25,7 +25,15 @@ teardown() {
   echo "modified" >> README.md
   
   run g
-  assert_contains "$output" "## main"  # Branch name in short status
+  # Check for branch name - could be main or master depending on git version/config
+  if [[ "$output" == *"## main"* ]]; then
+    assert_contains "$output" "## main"
+  elif [[ "$output" == *"## master"* ]]; then
+    assert_contains "$output" "## master"
+  else
+    echo "Expected branch name (main or master) not found in output: $output"
+    return 1
+  fi
   assert_contains "$output" "A  test.txt"  # Added file
   assert_contains "$output" " M README.md"  # Modified file
   [ "$status" -eq 0 ]
