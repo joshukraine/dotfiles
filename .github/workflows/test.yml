@@ -32,8 +32,35 @@ jobs:
         # Make test helpers executable
         chmod +x tests/helpers/*.bash
         
+        # Make bin scripts executable
+        chmod +x bin/.local/bin/*
+        
         # Install dotfiles bin directory to PATH for testing
         echo "$GITHUB_WORKSPACE/bin/.local/bin" >> $GITHUB_PATH
+        
+        # Set CI environment variable for tmux mocking
+        echo "CI=true" >> $GITHUB_ENV
+    
+    - name: Verify test environment
+      run: |
+        # Verify critical components are available
+        echo "=== Environment Check ==="
+        echo "PATH: $PATH"
+        echo "Working directory: $(pwd)"
+        echo "Git status: $(git --version)"
+        echo "Fish version: $(fish --version)"
+        echo "Zsh version: $(zsh --version)"
+        echo "Tmux version: $(tmux -V)"
+        echo "Bats version: $(bats --version)"
+        
+        # Verify bin scripts are executable and accessible
+        echo "=== Bin Scripts Check ==="
+        ls -la bin/.local/bin/ | head -5
+        which g || echo "g not in PATH"
+        which tat || echo "tat not in PATH"
+        
+        echo "=== Test Structure ==="
+        find tests/ -name "*.bats" | wc -l | xargs echo "Total test files:"
     
     - name: Generate abbreviations
       run: |

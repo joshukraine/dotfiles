@@ -221,87 +221,116 @@ cleanup_all_test_tmux_sessions() {
 setup_tmux_mocking() {
   # Create mock tmux commands that don't actually attach or switch
   export MOCK_TMUX_SESSIONS=""
+  export MOCK_TMUX_ACTIVE="true"
   
-  # Override tmux command with a function
-  tmux() {
-    case "$1" in
-      "new-session")
-        # Parse arguments to track session creation
-        local session_name=""
-        local detached=false
-        local attach_existing=false
-        
-        while [[ $# -gt 0 ]]; do
-          case $1 in
-            -s)
-              session_name="$2"
-              shift 2
-              ;;
-            -A|-As)
-              attach_existing=true
-              shift
-              ;;
-            -d|-Ad)
-              detached=true
-              shift
-              ;;
-            *)
-              shift
-              ;;
-          esac
-        done
-        
-        if [[ -n "$session_name" ]]; then
-          # Track the session creation without actually creating it
-          if [[ "$MOCK_TMUX_SESSIONS" != *"$session_name"* ]]; then
-            export MOCK_TMUX_SESSIONS="$MOCK_TMUX_SESSIONS $session_name"
-          fi
-          echo "Mock: Created tmux session '$session_name'"
-          return 0
-        fi
-        ;;
-      "switch-client")
-        # Parse target session
-        local target=""
-        if [[ "$2" == "-t" && -n "$3" ]]; then
-          target="$3"
-        fi
-        echo "Mock: Switched to tmux session '$target'"
-        return 0
-        ;;
-      "list-sessions")
-        # Return mock session list for session_exists checks
-        if [[ -n "$MOCK_TMUX_SESSIONS" ]]; then
-          for session in $MOCK_TMUX_SESSIONS; do
-            echo "$session: 1 windows (created $(date))"
-          done
-        fi
-        return 0
-        ;;
-      "kill-session")
-        # Parse target session for cleanup
-        local target=""
-        if [[ "$2" == "-t" && -n "$3" ]]; then
-          target="$3"
-          # Remove from mock sessions
-          export MOCK_TMUX_SESSIONS=$(echo "$MOCK_TMUX_SESSIONS" | sed "s/ *$target//g")
-          echo "Mock: Killed tmux session '$target'"
-        fi
-        return 0
-        ;;
-      *)
-        # For other tmux commands, call the real tmux but with safe defaults
-        command tmux "$@"
-        ;;
-    esac
-  }
+  # Create a mock tmux script in a temporary location
+  export MOCK_TMUX_DIR=$(mktemp -d)
+  export MOCK_TMUX_PATH="$MOCK_TMUX_DIR/tmux"
   
-  # Export the function so it's available in subshells
-  export -f tmux
+  # Create the mock tmux script
+  cat > "$MOCK_TMUX_PATH" << 'EOF'
+#!/bin/bash
+
+case "$1" in
+  "new-session")
+    # Parse arguments to track session creation
+    local session_name=""
+    local detached=false
+    local attach_existing=false
+    
+    while [[ $# -gt 0 ]]; do
+      case $1 in
+        -s)
+          session_name="$2"
+          shift 2
+          ;;
+        -A|-As)
+          attach_existing=true
+          shift
+          ;;
+        -d|-Ad)
+          detached=true
+          shift
+          ;;
+        *)
+          shift
+          ;;
+      esac
+    done
+    
+    if [[ -n "$session_name" ]]; then
+      # Track the session creation without actually creating it
+      if [[ "$MOCK_TMUX_SESSIONS" != *"$session_name"* ]]; then
+        export MOCK_TMUX_SESSIONS="$MOCK_TMUX_SESSIONS $session_name"
+      fi
+      echo "Mock: Created tmux session '$session_name'"
+      exit 0
+    fi
+    ;;
+  "switch-client")
+    # Parse target session
+    local target=""
+    if [[ "$2" == "-t" && -n "$3" ]]; then
+      target="$3"
+    fi
+    echo "Mock: Switched to tmux session '$target'"
+    exit 0
+    ;;
+  "list-sessions")
+    # Return mock session list for session_exists checks
+    if [[ -n "$MOCK_TMUX_SESSIONS" ]]; then
+      for session in $MOCK_TMUX_SESSIONS; do
+        echo "$session: 1 windows (created $(date))"
+      done
+    fi
+    exit 0
+    ;;
+  "kill-session")
+    # Parse target session for cleanup
+    local target=""
+    if [[ "$2" == "-t" && -n "$3" ]]; then
+      target="$3"
+      # Remove from mock sessions  
+      export MOCK_TMUX_SESSIONS=$(echo "$MOCK_TMUX_SESSIONS" | sed "s/ *$target//g")
+      echo "Mock: Killed tmux session '$target'"
+    fi
+    exit 0
+    ;;
+  *)
+    # For other tmux commands, call the real tmux but only if it's safe
+    # In CI, we don't want any real tmux commands to run
+    if [[ -n "$CI" ]]; then
+      echo "Mock: tmux $*"
+      exit 0
+    else
+      command tmux "$@"
+    fi
+    ;;
+esac
+EOF
+
+  chmod +x "$MOCK_TMUX_PATH"
+  
+  # Add mock tmux to the front of PATH
+  export ORIGINAL_PATH="$PATH"
+  export PATH="$MOCK_TMUX_DIR:$PATH"
 }
 
 # Restore real tmux command
 restore_tmux() {
-  unset -f tmux
+  # Restore original PATH
+  if [[ -n "$ORIGINAL_PATH" ]]; then
+    export PATH="$ORIGINAL_PATH"
+  fi
+  
+  # Clean up mock tmux directory
+  if [[ -n "$MOCK_TMUX_DIR" && -d "$MOCK_TMUX_DIR" ]]; then
+    rm -rf "$MOCK_TMUX_DIR"
+  fi
+  
+  # Clean up environment variables
   unset MOCK_TMUX_SESSIONS
+  unset MOCK_TMUX_ACTIVE
+  unset MOCK_TMUX_DIR
+  unset MOCK_TMUX_PATH
 }
