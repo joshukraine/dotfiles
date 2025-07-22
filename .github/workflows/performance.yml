@@ -15,10 +15,9 @@ jobs:
   benchmark:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
         shell: [fish, zsh]
 
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -26,12 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            brew install fish zsh bats-core
-          else
-            sudo apt-get update
-            sudo apt-get install -y fish zsh bats
-          fi
+          brew install fish zsh bats-core
 
       - name: Setup benchmark environment
         run: |
@@ -66,15 +60,8 @@ jobs:
             fish_times=()
 
             for i in {1..10}; do
-              if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-                # macOS doesn't support nanoseconds, use Python for precise timing
-                duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['fish', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
-              else
-                start_time=$(date +%s%N)
-                fish -c "exit" 2>/dev/null
-                end_time=$(date +%s%N)
-                duration=$((($end_time - $start_time) / 1000000))  # Convert to milliseconds
-              fi
+              # Use Python for precise timing on macOS
+              duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['fish', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
               fish_times+=($duration)
             done
 
@@ -96,15 +83,8 @@ jobs:
             zsh_times=()
 
             for i in {1..10}; do
-              if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-                # macOS doesn't support nanoseconds, use Python for precise timing
-                duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['zsh', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
-              else
-                start_time=$(date +%s%N)
-                zsh -c "exit" 2>/dev/null
-                end_time=$(date +%s%N)
-                duration=$((($end_time - $start_time) / 1000000))  # Convert to milliseconds
-              fi
+              # Use Python for precise timing on macOS
+              duration=$(python3 -c "import time; start=time.time(); __import__('subprocess').run(['zsh', '-c', 'exit'], capture_output=True); print(int((time.time()-start)*1000))")
               zsh_times+=($duration)
             done
 
@@ -164,13 +144,7 @@ jobs:
           chmod +x scripts/validators/*.sh
 
           # Install minimal validation dependencies
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            brew install shellcheck yq >/dev/null 2>&1 || true
-          else
-            sudo apt-get install -y shellcheck >/dev/null 2>&1 || true
-            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 >/dev/null 2>&1 || true
-            sudo chmod +x /usr/local/bin/yq || true
-          fi
+          brew install shellcheck yq >/dev/null 2>&1 || true
 
           # Run validation performance benchmark
           validation_times=()
@@ -206,12 +180,11 @@ jobs:
 
           # Create performance data entry
           timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-          os_short=$(echo "${{ matrix.os }}" | sed 's/-latest//')
 
           performance_data=$(cat <<EOF
           {
             "timestamp": "$timestamp",
-            "os": "$os_short",
+            "os": "macos",
             "shell": "${{ matrix.shell }}",
             "commit": "$GITHUB_SHA",
             "ref": "$GITHUB_REF_NAME",
@@ -231,16 +204,16 @@ jobs:
           EOF
           )
 
-          echo "$performance_data" > "performance-data/benchmark-${os_short}-${{ matrix.shell }}-$(date +%Y%m%d-%H%M%S).json"
+          echo "$performance_data" > "performance-data/benchmark-macos-${{ matrix.shell }}-$(date +%Y%m%d-%H%M%S).json"
 
-          echo "Performance data stored for $os_short-${{ matrix.shell }}"
+          echo "Performance data stored for macos-${{ matrix.shell }}"
 
       - name: Generate performance report
         if: always()
         run: |
           echo "## Performance Benchmark Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Platform**: ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Platform**: macOS" >> $GITHUB_STEP_SUMMARY
           echo "**Shell**: ${{ matrix.shell }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
@@ -312,6 +285,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: performance-data-${{ matrix.os }}-${{ matrix.shell }}
+          name: performance-data-macos-${{ matrix.shell }}
           path: performance-data/
           retention-days: 90

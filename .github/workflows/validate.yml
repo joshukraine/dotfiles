@@ -8,10 +8,7 @@ on:
 
 jobs:
   validate:
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -19,42 +16,13 @@ jobs:
 
       - name: Install validation dependencies
         run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            echo "Installing validation tools via Homebrew..."
-            # Install core validation tools
-            brew install fish zsh shellcheck yq markdownlint-cli2
-            # Install dependencies expected by the dependencies validator
-            brew install neovim tmux bats-core stow
-            # Install optional tools to reduce warnings (commonly used in dotfiles)
-            brew install ripgrep fd eza bat fzf
-          else
-            echo "Installing validation tools via apt..."
-            sudo apt-get update
-            # Install core validation tools
-            sudo apt-get install -y fish zsh shellcheck
-
-            # Install yq (different approach on Ubuntu)
-            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-            sudo chmod +x /usr/local/bin/yq
-
-            # Install markdownlint-cli2 via npm (requires node)
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            sudo npm install -g markdownlint-cli2
-
-            # Install other dependencies
-            sudo apt-get install -y neovim tmux bats stow
-
-            # Install modern tools (may not be available in older Ubuntu versions)
-            sudo apt-get install -y ripgrep fd-find bat fzf || echo "Some tools may not be available"
-
-            # Create symlinks for tools with different names on Ubuntu
-            sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd || true
-            sudo ln -sf /usr/bin/batcat /usr/local/bin/bat || true
-
-            # Update PATH to include /usr/local/bin
-            echo "/usr/local/bin" >> $GITHUB_PATH
-          fi
+          echo "Installing validation tools via Homebrew..."
+          # Install core validation tools
+          brew install fish zsh shellcheck yq markdownlint-cli2
+          # Install dependencies expected by the dependencies validator
+          brew install neovim tmux bats-core stow
+          # Install optional tools to reduce warnings (commonly used in dotfiles)
+          brew install ripgrep fd eza bat fzf
 
           # Verify installations
           echo "=== Validation Tools Check ==="

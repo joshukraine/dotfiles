@@ -10,10 +10,9 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
         shell: [fish, zsh]
 
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -21,23 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            echo "Installing dependencies via Homebrew..."
-            # Install bats-core for testing
-            brew install bats-core
-            # Install shells if not present
-            brew install fish
-            brew install zsh
-          else
-            echo "Installing dependencies via apt..."
-            sudo apt-get update
-            # Install bats-core for testing
-            sudo apt-get install -y bats
-            # Install shells
-            sudo apt-get install -y fish zsh
-            # Install git (should already be present but ensure it's available)
-            sudo apt-get install -y git
-          fi
+          echo "Installing dependencies via Homebrew..."
+          # Install bats-core for testing
+          brew install bats-core
+          # Install shells if not present
+          brew install fish
+          brew install zsh
 
       - name: Setup test environment
         run: |
