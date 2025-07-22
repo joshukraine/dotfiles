@@ -25,8 +25,8 @@ set -euo pipefail
 
 # Script directory and dotfiles root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-VALIDATORS_DIR="$SCRIPT_DIR/validators"
+DOTFILES_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+VALIDATORS_DIR="${SCRIPT_DIR}/validators"
 
 # Configuration
 VERBOSE=1
@@ -53,13 +53,13 @@ fi
 
 # Logging functions
 log_info() {
-  if [[ $VERBOSE -eq 1 && $CI_MODE -eq 0 ]]; then
+  if [[ ${VERBOSE} -eq 1 && ${CI_MODE} -eq 0 ]]; then
     echo -e "${BLUE}ℹ${NC} $1" >&2
   fi
 }
 
 log_success() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo -e "${GREEN}✓${NC} $1" >&2
   else
     echo "SUCCESS: $1" >&2
@@ -67,7 +67,7 @@ log_success() {
 }
 
 log_warning() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo -e "${YELLOW}⚠${NC} $1" >&2
   else
     echo "WARNING: $1" >&2
@@ -75,7 +75,7 @@ log_warning() {
 }
 
 log_error() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo -e "${RED}✗${NC} $1" >&2
   else
     echo "ERROR: $1" >&2
@@ -93,11 +93,11 @@ get_available_validators() {
     markdown) echo "markdown:Validate markdown formatting" ;;
     *)
       # Return all validators
-      for validator_file in "$VALIDATORS_DIR"/*.sh; do
-        if [[ -f "$validator_file" ]]; then
+      for validator_file in "${VALIDATORS_DIR}"/*.sh; do
+        if [[ -f "${validator_file}" ]]; then
           local validator_name
-          validator_name="$(basename "$validator_file" .sh)"
-          get_available_validators "$validator_name"
+          validator_name="$(basename "${validator_file}" .sh)"
+          get_available_validators "${validator_name}"
         fi
       done
       ;;
@@ -111,10 +111,10 @@ show_validators() {
 
   local validators
   while IFS= read -r line; do
-    if [[ -n "$line" ]]; then
+    if [[ -n "${line}" ]]; then
       local name="${line%%:*}"
       local desc="${line#*:}"
-      printf "    %-16s %s\n" "$name" "$desc"
+      printf "    %-16s %s\n" "${name}" "${desc}"
     fi
   done < <(get_available_validators | sort)
 }
@@ -204,15 +204,15 @@ parse_args() {
 # Check if validator exists and is executable
 validate_validator() {
   local validator_name="$1"
-  local validator_path="$VALIDATORS_DIR/$validator_name.sh"
+  local validator_path="${VALIDATORS_DIR}/${validator_name}.sh"
 
-  if [[ ! -f "$validator_path" ]]; then
-    log_error "Validator not found: $validator_name"
+  if [[ ! -f "${validator_path}" ]]; then
+    log_error "Validator not found: ${validator_name}"
     return 1
   fi
 
-  if [[ ! -x "$validator_path" ]]; then
-    log_error "Validator not executable: $validator_name"
+  if [[ ! -x "${validator_path}" ]]; then
+    log_error "Validator not executable: ${validator_name}"
     return 1
   fi
 
@@ -222,9 +222,9 @@ validate_validator() {
 # Run a specific validator
 run_validator() {
   local validator_name="$1"
-  local validator_path="$VALIDATORS_DIR/$validator_name.sh"
+  local validator_path="${VALIDATORS_DIR}/${validator_name}.sh"
 
-  log_info "Running validator: $validator_name"
+  log_info "Running validator: ${validator_name}"
 
   # Set up environment for validator
   export DOTFILES_ROOT
@@ -235,19 +235,19 @@ run_validator() {
 
   # Run the validator and capture exit code
   local exit_code=0
-  "$validator_path"
+  "${validator_path}"
   exit_code=$?
 
-  if [[ $exit_code -eq 0 ]]; then
-    log_success "Validation passed: $validator_name"
-  elif [[ $exit_code -eq 1 ]]; then
-    log_error "Validation failed: $validator_name"
+  if [[ ${exit_code} -eq 0 ]]; then
+    log_success "Validation passed: ${validator_name}"
+  elif [[ ${exit_code} -eq 1 ]]; then
+    log_error "Validation failed: ${validator_name}"
     ((VALIDATION_ERRORS++))
-  elif [[ $exit_code -eq 2 ]]; then
-    log_error "Validator error: $validator_name"
+  elif [[ ${exit_code} -eq 2 ]]; then
+    log_error "Validator error: ${validator_name}"
     return 2
   else
-    log_error "Validator returned unexpected exit code $exit_code: $validator_name"
+    log_error "Validator returned unexpected exit code ${exit_code}: ${validator_name}"
     ((VALIDATION_ERRORS++))
   fi
 
@@ -256,8 +256,8 @@ run_validator() {
 
 # Get list of available validators
 get_validators() {
-  if [[ -n "$SPECIFIC_VALIDATOR" ]]; then
-    echo "$SPECIFIC_VALIDATOR"
+  if [[ -n "${SPECIFIC_VALIDATOR}" ]]; then
+    echo "${SPECIFIC_VALIDATOR}"
     return
   fi
 
@@ -272,28 +272,28 @@ get_validators() {
 
   # First run priority validators in order
   for validator in "${priority_validators[@]}"; do
-    if [[ -f "$VALIDATORS_DIR/$validator.sh" ]]; then
-      echo "$validator"
+    if [[ -f "${VALIDATORS_DIR}/${validator}.sh" ]]; then
+      echo "${validator}"
     fi
   done
 
   # Then run any remaining validators
-  for validator_file in "$VALIDATORS_DIR"/*.sh; do
-    if [[ -f "$validator_file" ]]; then
+  for validator_file in "${VALIDATORS_DIR}"/*.sh; do
+    if [[ -f "${validator_file}" ]]; then
       local validator_name
-      validator_name="$(basename "$validator_file" .sh)"
+      validator_name="$(basename "${validator_file}" .sh)"
 
       # Skip if already in priority list
       local skip=0
       for priority_validator in "${priority_validators[@]}"; do
-        if [[ "$validator_name" == "$priority_validator" ]]; then
+        if [[ "${validator_name}" == "${priority_validator}" ]]; then
           skip=1
           break
         fi
       done
 
-      if [[ $skip -eq 0 ]]; then
-        echo "$validator_name"
+      if [[ ${skip} -eq 0 ]]; then
+        echo "${validator_name}"
       fi
     fi
   done
@@ -305,17 +305,17 @@ main() {
   start_time=$(date +%s)
 
   # Change to dotfiles root directory
-  cd "$DOTFILES_ROOT"
+  cd "${DOTFILES_ROOT}"
 
   # Validate environment
-  if [[ ! -d "$VALIDATORS_DIR" ]]; then
-    log_error "Validators directory not found: $VALIDATORS_DIR"
+  if [[ ! -d "${VALIDATORS_DIR}" ]]; then
+    log_error "Validators directory not found: ${VALIDATORS_DIR}"
     exit 2
   fi
 
   # Check for specific validator if requested
-  if [[ -n "$SPECIFIC_VALIDATOR" ]]; then
-    if ! validate_validator "$SPECIFIC_VALIDATOR"; then
+  if [[ -n "${SPECIFIC_VALIDATOR}" ]]; then
+    if ! validate_validator "${SPECIFIC_VALIDATOR}"; then
       exit 2
     fi
   fi
@@ -323,7 +323,7 @@ main() {
   # Get list of validators to run
   local validators=()
   while IFS= read -r validator; do
-    validators+=("$validator")
+    validators+=("${validator}")
   done < <(get_validators)
 
   if [[ ${#validators[@]} -eq 0 ]]; then
@@ -332,11 +332,11 @@ main() {
   fi
 
   log_info "Starting configuration validation..."
-  log_info "Dotfiles root: $DOTFILES_ROOT"
-  if [[ $FIX_MODE -eq 1 ]]; then
+  log_info "Dotfiles root: ${DOTFILES_ROOT}"
+  if [[ ${FIX_MODE} -eq 1 ]]; then
     log_info "Fix mode: enabled"
   fi
-  if [[ $REPORT_MODE -eq 1 ]]; then
+  if [[ ${REPORT_MODE} -eq 1 ]]; then
     log_info "Report mode: enabled"
   fi
 
@@ -345,13 +345,13 @@ main() {
   for validator in "${validators[@]}"; do
     ((validator_count++))
 
-    if [[ $VERBOSE -eq 1 ]]; then
+    if [[ ${VERBOSE} -eq 1 ]]; then
       echo
-      log_info "[$validator_count/${#validators[@]}] Validator: $validator"
+      log_info "[${validator_count}/${#validators[@]}] Validator: ${validator}"
     fi
 
-    if ! run_validator "$validator"; then
-      log_error "Validator execution failed: $validator"
+    if ! run_validator "${validator}"; then
+      log_error "Validator execution failed: ${validator}"
       exit 2
     fi
   done
@@ -363,15 +363,15 @@ main() {
 
   # Summary
   echo
-  if [[ $VALIDATION_ERRORS -eq 0 ]]; then
+  if [[ ${VALIDATION_ERRORS} -eq 0 ]]; then
     log_success "All validations passed! (${duration}s)"
-    if [[ $duration -gt 30 ]]; then
+    if [[ ${duration} -gt 30 ]]; then
       log_warning "Validation took longer than 30s target: ${duration}s"
     fi
     exit 0
   else
-    log_error "Validation failed with $VALIDATION_ERRORS error(s) (${duration}s)"
-    if [[ $FIX_MODE -eq 1 ]]; then
+    log_error "Validation failed with ${VALIDATION_ERRORS} error(s) (${duration}s)"
+    if [[ ${FIX_MODE} -eq 1 ]]; then
       log_info "Some issues may have been automatically fixed. Please review changes."
     fi
     exit 1

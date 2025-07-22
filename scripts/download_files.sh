@@ -36,18 +36,18 @@ DIR="yazi-config/preset"
 DEST_DIR="./downloaded_files"
 
 # Create the destination directory if it doesn't exist
-mkdir -p "$DEST_DIR"
+mkdir -p "${DEST_DIR}"
 
 # Fetch the file list from GitHub API
-FILE_LIST=$(curl -s "https://api.github.com/repos/$REPO/contents/$DIR?ref=$BRANCH" | jq -r '.[].download_url')
+FILE_LIST=$(curl -s "https://api.github.com/repos/${REPO}/contents/${DIR}?ref=${BRANCH}" | jq -r '.[].download_url')
 
 # Loop through each file URL and download it
-for FILE_URL in $FILE_LIST; do
-  FILE_NAME=$(basename "$FILE_URL")
-  echo "Downloading $FILE_NAME..."
-  curl -s -L "$FILE_URL" -o "$DEST_DIR/$FILE_NAME"
+for FILE_URL in ${FILE_LIST}; do
+  FILE_NAME=$(basename "${FILE_URL}")
+  echo "Downloading ${FILE_NAME}..."
+  curl -s -L "${FILE_URL}" -o "${DEST_DIR}/${FILE_NAME}"
 done
 
-echo "All files downloaded to $DEST_DIR"
+echo "All files downloaded to ${DEST_DIR}"
 
 # Thank you ChatGPT for this script 🙂

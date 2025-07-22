@@ -4,14 +4,15 @@
 
 # Create a temporary directory for git repository testing
 setup_test_git_repo() {
-  export TEST_TEMP_DIR=$(mktemp -d)
-  cd "$TEST_TEMP_DIR"
+  export TEST_TEMP_DIR
+  TEST_TEMP_DIR=$(mktemp -d)
+  cd "${TEST_TEMP_DIR}" || exit
 }
 
 # Clean up temporary git repository
 teardown_test_git_repo() {
-  if [ -n "$TEST_TEMP_DIR" ] && [ -d "$TEST_TEMP_DIR" ]; then
-    rm -rf "$TEST_TEMP_DIR"
+  if [ -n "${TEST_TEMP_DIR}" ] && [ -d "${TEST_TEMP_DIR}" ]; then
+    rm -rf "${TEST_TEMP_DIR}"
     unset TEST_TEMP_DIR
   fi
 }
@@ -21,13 +22,13 @@ init_git_repo() {
   local default_branch="${1:-main}"
 
   # Initialize repository - handle different git versions
-  if git init -b "$default_branch" 2>/dev/null; then
+  if git init -b "${default_branch}" 2>/dev/null; then
     # Modern git supports -b flag
     :
   else
     # Fallback for older git versions
     git init
-    git checkout -b "$default_branch"
+    git checkout -b "${default_branch}"
   fi
 
   git config user.name "Test User"
@@ -41,21 +42,21 @@ init_git_repo() {
 add_mock_origin() {
   local default_branch="${1:-main}"
   # Create a bare repo to simulate remote
-  local remote_dir="$TEST_TEMP_DIR/remote"
-  git init --bare "$remote_dir"
-  git remote add origin "$remote_dir"
-  git push -u origin "$default_branch"
+  local remote_dir="${TEST_TEMP_DIR}/remote"
+  git init --bare "${remote_dir}"
+  git remote add origin "${remote_dir}"
+  git push -u origin "${default_branch}"
 
   # Set up remote HEAD to point to default branch
-  cd "$remote_dir"
-  git symbolic-ref HEAD "refs/heads/$default_branch"
-  cd "$TEST_TEMP_DIR"
+  cd "${remote_dir}" || exit
+  git symbolic-ref HEAD "refs/heads/${default_branch}"
+  cd "${TEST_TEMP_DIR}" || exit
 }
 
 # Create a feature branch
 create_feature_branch() {
   local branch_name="${1:-feature/test-branch}"
-  git checkout -b "$branch_name"
+  git checkout -b "${branch_name}"
   echo "Feature work" >> feature.txt
   git add feature.txt
   git commit -m "Add feature work"
@@ -94,8 +95,9 @@ setup_no_remote_repo() {
 
 # Simulate non-git directory
 setup_non_git_dir() {
-  export TEST_TEMP_DIR=$(mktemp -d)
-  cd "$TEST_TEMP_DIR"
+  export TEST_TEMP_DIR
+  TEST_TEMP_DIR=$(mktemp -d)
+  cd "${TEST_TEMP_DIR}" || exit
   echo "Not a git repository" > file.txt
 }
 

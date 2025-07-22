@@ -30,17 +30,17 @@ MISSING_CRITICAL=0
 MISSING_OPTIONAL=0
 
 # File paths
-BREWFILE="$DOTFILES_ROOT/brew/Brewfile"
+BREWFILE="${DOTFILES_ROOT}/brew/Brewfile"
 
 # Logging functions
 log_info() {
-  if [[ $VERBOSE -eq 1 && $CI_MODE -eq 0 ]]; then
+  if [[ ${VERBOSE} -eq 1 && ${CI_MODE} -eq 0 ]]; then
     echo "  ℹ $1" >&2
   fi
 }
 
 log_success() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ✓ $1" >&2
   else
     echo "DEPENDENCIES_SUCCESS: $1" >&2
@@ -48,7 +48,7 @@ log_success() {
 }
 
 log_warning() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ⚠ $1" >&2
   else
     echo "DEPENDENCIES_WARNING: $1" >&2
@@ -57,7 +57,7 @@ log_warning() {
 }
 
 log_error() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ✗ $1" >&2
   else
     echo "DEPENDENCIES_ERROR: $1" >&2
@@ -75,8 +75,8 @@ get_version() {
   local cmd="$1"
   local version_flag="${2:---version}"
 
-  if command_exists "$cmd"; then
-    "$cmd" $version_flag 2>/dev/null | head -1 || echo "unknown"
+  if command_exists "${cmd}"; then
+    "${cmd}" "${version_flag}" 2>/dev/null | head -1 || echo "unknown"
   else
     echo "not installed"
   fi
@@ -102,13 +102,13 @@ validate_essential_tools() {
     local tool="${tool_desc%%:*}"
     local description="${tool_desc#*:}"
 
-    if command_exists "$tool"; then
+    if command_exists "${tool}"; then
       local version
-      version=$(get_version "$tool")
-      log_success "$description available: $version"
+      version=$(get_version "${tool}")
+      log_success "${description} available: ${version}"
     else
-      missing_essential+=("$tool")
-      log_error "$description missing: $tool"
+      missing_essential+=("${tool}")
+      log_error "${description} missing: ${tool}"
       ((MISSING_CRITICAL++))
     fi
   done
@@ -141,13 +141,13 @@ validate_validator_dependencies() {
     local tool="${tool_desc%%:*}"
     local description="${tool_desc#*:}"
 
-    if command_exists "$tool"; then
+    if command_exists "${tool}"; then
       local version
-      version=$(get_version "$tool")
-      log_success "$description available: $version"
+      version=$(get_version "${tool}")
+      log_success "${description} available: ${version}"
     else
-      missing_validator+=("$tool")
-      log_error "$description missing: $tool"
+      missing_validator+=("${tool}")
+      log_error "${description} missing: ${tool}"
       ((MISSING_CRITICAL++))
     fi
   done
@@ -156,7 +156,7 @@ validate_validator_dependencies() {
     log_error "Missing validator dependencies: ${missing_validator[*]}"
     log_error "Install with: brew install ${missing_validator[*]}"
 
-    if [[ $FIX_MODE -eq 1 ]]; then
+    if [[ ${FIX_MODE} -eq 1 ]]; then
       log_info "Fixing: Installing missing validator dependencies..."
       if brew install "${missing_validator[@]}" >/dev/null 2>&1; then
         log_success "Fixed: Installed ${missing_validator[*]}"
@@ -192,19 +192,19 @@ validate_dotfiles_tools() {
     local tool="${tool_desc%%:*}"
     local description="${tool_desc#*:}"
 
-    if command_exists "$tool"; then
+    if command_exists "${tool}"; then
       local version
-      version=$(get_version "$tool")
-      log_success "$description available: $version"
+      version=$(get_version "${tool}")
+      log_success "${description} available: ${version}"
     else
-      log_warning "$description missing: $tool"
+      log_warning "${description} missing: ${tool}"
       ((missing_tools++))
       ((MISSING_OPTIONAL++))
     fi
   done
 
-  if [[ $missing_tools -gt 0 ]]; then
-    log_warning "$missing_tools optional dotfiles tools missing"
+  if [[ ${missing_tools} -gt 0 ]]; then
+    log_warning "${missing_tools} optional dotfiles tools missing"
     log_info "Install missing tools with: brew bundle install"
   else
     log_success "All dotfiles tools available"
@@ -223,7 +223,7 @@ validate_homebrew_setup() {
   fi
 
   # Check Brewfile exists
-  if [[ ! -f "$BREWFILE" ]]; then
+  if [[ ! -f "${BREWFILE}" ]]; then
     log_error "Brewfile not found: brew/Brewfile"
     return 1
   fi
@@ -232,12 +232,12 @@ validate_homebrew_setup() {
 
   # Count packages in Brewfile
   local total_packages
-  total_packages=$(grep -c "^brew\|^cask" "$BREWFILE" 2>/dev/null || echo "0")
+  total_packages=$(grep -c "^brew\|^cask" "${BREWFILE}" 2>/dev/null || echo "0")
 
-  if [[ $total_packages -eq 0 ]]; then
+  if [[ ${total_packages} -eq 0 ]]; then
     log_warning "No packages defined in Brewfile"
   else
-    log_info "Brewfile contains $total_packages packages"
+    log_info "Brewfile contains ${total_packages} packages"
   fi
 
   # Check if brew bundle is available
@@ -249,7 +249,7 @@ validate_homebrew_setup() {
   log_success "Homebrew bundle available"
 
   # Quick check if Brewfile is valid
-  if ! brew bundle check --file="$BREWFILE" >/dev/null 2>&1; then
+  if ! brew bundle check --file="${BREWFILE}" >/dev/null 2>&1; then
     log_warning "Some packages in Brewfile are not installed"
     log_info "Run 'brew bundle install' to install missing packages"
   else
@@ -268,12 +268,12 @@ validate_shell_compatibility() {
     local fish_version
     fish_version=$(get_version "fish")
     local fish_major
-    fish_major=$(echo "$fish_version" | grep -o "fish, version [0-9]*" | grep -o "[0-9]*" || echo "0")
+    fish_major=$(echo "${fish_version}" | grep -o "fish, version [0-9]*" | grep -o "[0-9]*" || echo "0")
 
-    if [[ $fish_major -ge 3 ]]; then
-      log_success "Fish version compatible: $fish_version"
+    if [[ ${fish_major} -ge 3 ]]; then
+      log_success "Fish version compatible: ${fish_version}"
     else
-      log_warning "Fish version may be too old: $fish_version (recommend 3.0+)"
+      log_warning "Fish version may be too old: ${fish_version} (recommend 3.0+)"
     fi
   fi
 
@@ -282,25 +282,25 @@ validate_shell_compatibility() {
     local zsh_version
     zsh_version=$(get_version "zsh")
     local zsh_major
-    zsh_major=$(echo "$zsh_version" | grep -o "zsh [0-9]*\.[0-9]*" | cut -d' ' -f2 | cut -d'.' -f1 || echo "0")
+    zsh_major=$(echo "${zsh_version}" | grep -o "zsh [0-9]*\.[0-9]*" | cut -d' ' -f2 | cut -d'.' -f1 || echo "0")
 
-    if [[ $zsh_major -ge 5 ]]; then
-      log_success "Zsh version compatible: $zsh_version"
+    if [[ ${zsh_major} -ge 5 ]]; then
+      log_success "Zsh version compatible: ${zsh_version}"
     else
-      log_warning "Zsh version may be too old: $zsh_version (recommend 5.0+)"
+      log_warning "Zsh version may be too old: ${zsh_version} (recommend 5.0+)"
     fi
   fi
 
   # Check if shells are available in /etc/shells
   local shells_file="/etc/shells"
-  if [[ -f "$shells_file" ]]; then
-    if grep -q "$(command -v fish)" "$shells_file" 2>/dev/null; then
+  if [[ -f "${shells_file}" ]]; then
+    if grep -q "$(command -v fish)" "${shells_file}" 2>/dev/null; then
       log_success "Fish is registered in /etc/shells"
     else
       log_warning "Fish not found in /etc/shells - may need to add it"
     fi
 
-    if grep -q "$(command -v zsh)" "$shells_file" 2>/dev/null; then
+    if grep -q "$(command -v zsh)" "${shells_file}" 2>/dev/null; then
       log_success "Zsh is registered in /etc/shells"
     else
       log_warning "Zsh not found in /etc/shells - may need to add it"
@@ -318,32 +318,32 @@ validate_system_compatibility() {
   local platform
   platform=$(uname -s)
 
-  case "$platform" in
+  case "${platform}" in
     Darwin)
       log_success "Running on macOS (supported platform)"
 
       # Check macOS version
       local macos_version
       macos_version=$(sw_vers -productVersion 2>/dev/null || echo "unknown")
-      log_info "macOS version: $macos_version"
+      log_info "macOS version: ${macos_version}"
       ;;
     Linux)
       log_warning "Running on Linux (limited support)"
       ;;
     *)
-      log_warning "Running on unsupported platform: $platform"
+      log_warning "Running on unsupported platform: ${platform}"
       ;;
   esac
 
   # Check architecture (for Homebrew compatibility)
   local arch
   arch=$(uname -m)
-  case "$arch" in
+  case "${arch}" in
     arm64|x86_64)
-      log_success "Architecture supported: $arch"
+      log_success "Architecture supported: ${arch}"
       ;;
     *)
-      log_warning "Architecture may not be fully supported: $arch"
+      log_warning "Architecture may not be fully supported: ${arch}"
       ;;
   esac
 
@@ -355,7 +355,7 @@ main() {
   local validation_failed=0
 
   # Change to dotfiles root
-  cd "$DOTFILES_ROOT"
+  cd "${DOTFILES_ROOT}"
 
   # Run all dependency validations
   if ! validate_essential_tools; then
@@ -386,27 +386,27 @@ main() {
   fi
 
   # Summary
-  if [[ $validation_failed -eq 1 ]]; then
-    log_error "Dependencies validation failed with $VALIDATION_ERRORS error(s)"
-    if [[ $MISSING_CRITICAL -gt 0 ]]; then
-      log_error "Critical dependencies missing: $MISSING_CRITICAL"
+  if [[ ${validation_failed} -eq 1 ]]; then
+    log_error "Dependencies validation failed with ${VALIDATION_ERRORS} error(s)"
+    if [[ ${MISSING_CRITICAL} -gt 0 ]]; then
+      log_error "Critical dependencies missing: ${MISSING_CRITICAL}"
     fi
-    if [[ $MISSING_OPTIONAL -gt 0 ]]; then
-      log_warning "Optional tools missing: $MISSING_OPTIONAL"
+    if [[ ${MISSING_OPTIONAL} -gt 0 ]]; then
+      log_warning "Optional tools missing: ${MISSING_OPTIONAL}"
     fi
-    if [[ $WARNINGS -gt 0 ]]; then
-      log_warning "Total warnings: $WARNINGS"
+    if [[ ${WARNINGS} -gt 0 ]]; then
+      log_warning "Total warnings: ${WARNINGS}"
     fi
     return 1
   else
     log_success "Dependencies validation passed"
-    if [[ $MISSING_CRITICAL -eq 0 && $MISSING_OPTIONAL -eq 0 ]]; then
+    if [[ ${MISSING_CRITICAL} -eq 0 && ${MISSING_OPTIONAL} -eq 0 ]]; then
       log_success "All tools available"
-    elif [[ $MISSING_OPTIONAL -gt 0 ]]; then
-      log_success "All critical tools available, $MISSING_OPTIONAL optional tools missing"
+    elif [[ ${MISSING_OPTIONAL} -gt 0 ]]; then
+      log_success "All critical tools available, ${MISSING_OPTIONAL} optional tools missing"
     fi
-    if [[ $WARNINGS -gt 0 ]]; then
-      log_warning "Total warnings: $WARNINGS"
+    if [[ ${WARNINGS} -gt 0 ]]; then
+      log_warning "Total warnings: ${WARNINGS}"
     fi
     return 0
   fi

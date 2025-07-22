@@ -17,7 +17,6 @@ set -e # Terminate script if anything exits with a non-zero value
 
 # Global variables
 DRY_RUN=false
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 show_help() {
   cat << EOF
@@ -177,38 +176,38 @@ setup_hostname() {
   computer_name=$(scutil --get ComputerName)
   local_host_name=$(scutil --get LocalHostName)
 
-  if [[ "$DRY_RUN" == "true" ]]; then
-  dotfiles_info "[DRY RUN] Would set HostName to: %s" "$local_host_name"
+  if [[ "${DRY_RUN}" == "true" ]]; then
+  dotfiles_info "[DRY RUN] Would set HostName to: %s" "${local_host_name}"
   dotfiles_info "[DRY RUN] Would update NetBIOSName in SMB server config"
   else
-  run_command "sudo scutil --set HostName '$local_host_name'" "Set system hostname"
+  run_command "sudo scutil --set HostName '${local_host_name}'" "Set system hostname"
   host_name=$(scutil --get HostName)
-  run_command "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server.plist NetBIOSName -string '$host_name'" "Update SMB server NetBIOS name"
+  run_command "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server.plist NetBIOSName -string '${host_name}'" "Update SMB server NetBIOS name"
   fi
 
-  printf "ComputerName:  ==> [%s]\\n" "$computer_name"
-  printf "LocalHostName: ==> [%s]\\n" "$local_host_name"
-  if [[ "$DRY_RUN" == "false" ]]; then
+  printf "ComputerName:  ==> [%s]\\n" "${computer_name}"
+  printf "LocalHostName: ==> [%s]\\n" "${local_host_name}"
+  if [[ "${DRY_RUN}" == "false" ]]; then
   printf "HostName:      ==> [%s]\\n" "$(scutil --get HostName)"
   fi
 }
 
 setup_directories() {
-  if [ -z "$DOTFILES" ]; then
+  if [ -z "${DOTFILES}" ]; then
   export DOTFILES="${HOME}/dotfiles"
   fi
 
-  dotfiles_info "Using DOTFILES directory: %s" "$DOTFILES"
+  dotfiles_info "Using DOTFILES directory: %s" "${DOTFILES}"
 
-  if [[ ! -d "$DOTFILES" ]]; then
-  dotfiles_error "DOTFILES directory not found: %s" "$DOTFILES"
+  if [[ ! -d "${DOTFILES}" ]]; then
+  dotfiles_error "DOTFILES directory not found: %s" "${DOTFILES}"
   exit 1
   fi
 
-  if [ -z "$XDG_CONFIG_HOME" ]; then
+  if [ -z "${XDG_CONFIG_HOME}" ]; then
   dotfiles_echo "Setting up ~/.config directory..."
   if [ ! -d "${HOME}/.config" ]; then
-    if [[ "$DRY_RUN" == "true" ]]; then
+    if [[ "${DRY_RUN}" == "true" ]]; then
       dotfiles_info "[DRY RUN] Would create directory: %s" "${HOME}/.config"
     else
       run_command "mkdir '${HOME}/.config'" "Create XDG config directory"

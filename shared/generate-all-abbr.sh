@@ -8,9 +8,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-YAML_FILE="$SCRIPT_DIR/abbreviations.yaml"
+YAML_FILE="${SCRIPT_DIR}/abbreviations.yaml"
 
-echo "🚀 Regenerating abbreviations for all shells from $YAML_FILE..."
+echo "🚀 Regenerating abbreviations for all shells from ${YAML_FILE}..."
 echo
 
 # Check dependencies
@@ -19,8 +19,8 @@ if ! command -v yq >/dev/null 2>&1; then
     exit 1
 fi
 
-if [[ ! -f "$YAML_FILE" ]]; then
-    echo "❌ Error: YAML file not found: $YAML_FILE"
+if [[ ! -f "${YAML_FILE}" ]]; then
+    echo "❌ Error: YAML file not found: ${YAML_FILE}"
     exit 1
 fi
 
@@ -30,7 +30,7 @@ zsh_success=false
 
 # Generate Fish abbreviations
 echo "🐟 Generating Fish abbreviations..."
-if "$SCRIPT_DIR/generate-fish-abbr.sh"; then
+if "${SCRIPT_DIR}/generate-fish-abbr.sh"; then
     fish_success=true
 else
     echo "❌ Failed to generate Fish abbreviations"
@@ -40,7 +40,7 @@ echo
 
 # Generate Zsh abbreviations
 echo "⚡ Generating Zsh abbreviations..."
-if "$SCRIPT_DIR/generate-zsh-abbr.sh"; then
+if "${SCRIPT_DIR}/generate-zsh-abbr.sh"; then
     zsh_success=true
 else
     echo "❌ Failed to generate Zsh abbreviations"
@@ -49,20 +49,20 @@ fi
 echo
 echo "📋 Summary:"
 
-if $fish_success; then
+if ${fish_success}; then
     echo "  ✅ Fish abbreviations generated successfully"
 else
     echo "  ❌ Fish abbreviations failed"
 fi
 
-if $zsh_success; then
+if ${zsh_success}; then
     echo "  ✅ Zsh abbreviations generated successfully"
 else
     echo "  ❌ Zsh abbreviations failed"
 fi
 
 # Overall success check
-if $fish_success && $zsh_success; then
+if ${fish_success} && ${zsh_success}; then
     echo
     echo "🎉 All abbreviations generated successfully!"
     echo

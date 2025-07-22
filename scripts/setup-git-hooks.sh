@@ -18,7 +18,7 @@ set -euo pipefail
 
 # Script directory and dotfiles root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+DOTFILES_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Color codes for output
 if [[ -t 1 ]] && [[ "${CI:-}" != "true" ]]; then
@@ -154,9 +154,9 @@ uninstall_hooks() {
     # Remove hooks manually
     git_hooks_dir="$(git rev-parse --git-dir)/hooks"
     for hook in pre-commit pre-push; do
-      if [[ -f "$git_hooks_dir/$hook" ]]; then
-        rm "$git_hooks_dir/$hook"
-        log_success "Removed $hook hook"
+      if [[ -f "${git_hooks_dir}/${hook}" ]]; then
+        rm "${git_hooks_dir}/${hook}"
+        log_success "Removed ${hook} hook"
       fi
     done
   fi
@@ -166,19 +166,19 @@ uninstall_hooks() {
 check_hooks() {
   log_info "Checking git hooks installation..."
 
-  cd "$DOTFILES_ROOT"
+  cd "${DOTFILES_ROOT}"
 
   git_hooks_dir="$(git rev-parse --git-dir)/hooks"
 
   # Check for pre-commit hook
-  if [[ -f "$git_hooks_dir/pre-commit" ]]; then
+  if [[ -f "${git_hooks_dir}/pre-commit" ]]; then
     log_success "pre-commit hook is installed"
   else
     log_warning "pre-commit hook is NOT installed"
   fi
 
   # Check for pre-push hook
-  if [[ -f "$git_hooks_dir/pre-push" ]]; then
+  if [[ -f "${git_hooks_dir}/pre-push" ]]; then
     log_success "pre-push hook is installed"
   else
     log_warning "pre-push hook is NOT installed"
@@ -207,7 +207,7 @@ check_hooks() {
 update_hooks() {
   log_info "Updating git hooks..."
 
-  cd "$DOTFILES_ROOT"
+  cd "${DOTFILES_ROOT}"
 
   if command -v pre-commit >/dev/null 2>&1; then
     # Update hook repositories
@@ -258,7 +258,7 @@ main() {
   check_git_repo
 
   # Execute action
-  case $action in
+  case ${action} in
     install)
       install_hooks
       ;;
@@ -272,7 +272,7 @@ main() {
       update_hooks
       ;;
     *)
-      log_error "Unknown action: $action"
+      log_error "Unknown action: ${action}"
       exit 1
       ;;
   esac

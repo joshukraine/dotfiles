@@ -27,7 +27,7 @@
 
 function dnames-fn {
   for ID in $(docker ps | awk '{print $1}' | grep -v 'CONTAINER'); do
-    docker inspect "$ID" | grep Name | head -1 | awk '{print $2}' | sed 's/,//g' | sed 's%/%%g' | sed 's/"//g'
+    docker inspect "${ID}" | grep Name | head -1 | awk '{print $2}' | sed 's/,//g' | sed 's%/%%g' | sed 's/"//g'
   done
 }
 
@@ -35,10 +35,10 @@ function dip-fn {
   echo "IP addresses of all named running containers"
 
   for DOC in $(dnames-fn); do
-    IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}' "$DOC")
-    OUT+=$DOC'\t'$IP'\n'
+    IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}' "${DOC}")
+    OUT+=${DOC}'\t'${IP}'\n'
   done
-  echo -e "$OUT" | column -t
+  echo -e "${OUT}" | column -t
   unset OUT
 }
 
@@ -73,7 +73,7 @@ function drmc-fn {
 
 function drmid-fn {
   imgs=$(docker images -q -f dangling=true)
-  [ ! -z "$imgs" ] && docker rmi "$imgs" || echo "no dangling images."
+  [ -n "${imgs}" ] && docker rmi "${imgs}" || echo "no dangling images."
 }
 
 # in order to do things like dex $(dlab label) sh
@@ -87,9 +87,9 @@ function dc-fn {
 
 function d-aws-cli-fn {
   docker run \
-    -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
-    -e AWS_DEFAULT_REGION="$AWS_DEFAULT_REGION" \
-    -e AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" \
+    -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+    -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
+    -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
     amazon/aws-cli:latest "$1" "$2" "$3"
 }
 

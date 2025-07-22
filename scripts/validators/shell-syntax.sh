@@ -25,13 +25,13 @@ WARNINGS=0
 
 # Logging functions
 log_info() {
-  if [[ $VERBOSE -eq 1 && $CI_MODE -eq 0 ]]; then
+  if [[ ${VERBOSE} -eq 1 && ${CI_MODE} -eq 0 ]]; then
     echo "  ℹ $1" >&2
   fi
 }
 
 log_success() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ✓ $1" >&2
   else
     echo "SHELL_SYNTAX_SUCCESS: $1" >&2
@@ -39,7 +39,7 @@ log_success() {
 }
 
 log_warning() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ⚠ $1" >&2
   else
     echo "SHELL_SYNTAX_WARNING: $1" >&2
@@ -48,7 +48,7 @@ log_warning() {
 }
 
 log_error() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ✗ $1" >&2
   else
     echo "SHELL_SYNTAX_ERROR: $1" >&2
@@ -90,8 +90,8 @@ validate_fish_files() {
 
   local fish_files=()
   while IFS= read -r file; do
-    fish_files+=("$file")
-  done < <(find "$DOTFILES_ROOT/fish" -name "*.fish" -type f 2>/dev/null || true)
+    fish_files+=("${file}")
+  done < <(find "${DOTFILES_ROOT}/fish" -name "*.fish" -type f 2>/dev/null || true)
 
   if [[ ${#fish_files[@]} -eq 0 ]]; then
     log_warning "No Fish files found to validate"
@@ -100,26 +100,26 @@ validate_fish_files() {
 
   local fish_errors=0
   for file in "${fish_files[@]}"; do
-    local relative_file="${file#"$DOTFILES_ROOT"/}"
+    local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
     # Check Fish syntax
-    if fish -n "$file" 2>/dev/null; then
-      log_success "Fish syntax valid: $relative_file"
+    if fish -n "${file}" 2>/dev/null; then
+      log_success "Fish syntax valid: ${relative_file}"
     else
-      log_error "Fish syntax error: $relative_file"
+      log_error "Fish syntax error: ${relative_file}"
 
       # Show detailed error if verbose
-      if [[ $VERBOSE -eq 1 ]]; then
+      if [[ ${VERBOSE} -eq 1 ]]; then
         echo "    Error details:"
-        fish -n "$file" 2>&1 | sed 's/^/      /' >&2 || true
+        fish -n "${file}" 2>&1 | sed 's/^/      /' >&2 || true
       fi
 
       ((fish_errors++))
     fi
   done
 
-  if [[ $fish_errors -gt 0 ]]; then
-    log_error "Found $fish_errors Fish syntax error(s)"
+  if [[ ${fish_errors} -gt 0 ]]; then
+    log_error "Found ${fish_errors} Fish syntax error(s)"
     return 1
   fi
 
@@ -133,8 +133,8 @@ validate_zsh_files() {
 
   local zsh_files=()
   while IFS= read -r file; do
-    zsh_files+=("$file")
-  done < <(find "$DOTFILES_ROOT/zsh" -name "*.zsh" -o -name ".zshrc" -type f 2>/dev/null || true)
+    zsh_files+=("${file}")
+  done < <(find "${DOTFILES_ROOT}/zsh" -name "*.zsh" -o -name ".zshrc" -type f 2>/dev/null || true)
 
   if [[ ${#zsh_files[@]} -eq 0 ]]; then
     log_warning "No Zsh files found to validate"
@@ -143,26 +143,26 @@ validate_zsh_files() {
 
   local zsh_errors=0
   for file in "${zsh_files[@]}"; do
-    local relative_file="${file#"$DOTFILES_ROOT"/}"
+    local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
     # Check Zsh syntax using zsh -n (dry run)
-    if zsh -n "$file" 2>/dev/null; then
-      log_success "Zsh syntax valid: $relative_file"
+    if zsh -n "${file}" 2>/dev/null; then
+      log_success "Zsh syntax valid: ${relative_file}"
     else
-      log_error "Zsh syntax error: $relative_file"
+      log_error "Zsh syntax error: ${relative_file}"
 
       # Show detailed error if verbose
-      if [[ $VERBOSE -eq 1 ]]; then
+      if [[ ${VERBOSE} -eq 1 ]]; then
         echo "    Error details:"
-        zsh -n "$file" 2>&1 | sed 's/^/      /' >&2 || true
+        zsh -n "${file}" 2>&1 | sed 's/^/      /' >&2 || true
       fi
 
       ((zsh_errors++))
     fi
   done
 
-  if [[ $zsh_errors -gt 0 ]]; then
-    log_error "Found $zsh_errors Zsh syntax error(s)"
+  if [[ ${zsh_errors} -gt 0 ]]; then
+    log_error "Found ${zsh_errors} Zsh syntax error(s)"
     return 1
   fi
 
@@ -176,34 +176,43 @@ fix_shellcheck_issues() {
   local diff_output
   local temp_patch
   temp_patch=$(mktemp)
+  local original_dir
+  original_dir=$(pwd)
 
-  # Generate shellcheck auto-fix diff
-  diff_output=$(shellcheck -f diff "$file" 2>/dev/null)
+  # Generate shellcheck auto-fix diff with timeout
+  diff_output=$(timeout 30s shellcheck -f diff "${file}" 2>/dev/null || true)
 
-  if [[ -n "$diff_output" ]]; then
+  if [[ -n "${diff_output}" && "${diff_output}" != "" ]]; then
     # Save the diff to a temp file and apply it
-    echo "$diff_output" > "$temp_patch"
+    echo "${diff_output}" > "${temp_patch}"
 
-    # Apply the patch from the dotfiles root directory
-    if cd "$DOTFILES_ROOT" && patch -p1 < "$temp_patch" >/dev/null 2>&1; then
-      log_info "Applied shellcheck auto-fixes to $(basename "$file")"
-      rm -f "$temp_patch"
-      return 0
-    else
-      # Try applying without path stripping in case of relative paths
-      if patch -p0 < "$temp_patch" >/dev/null 2>&1; then
-        log_info "Applied shellcheck auto-fixes to $(basename "$file")"
-        rm -f "$temp_patch"
+    # Apply the patch from the dotfiles root directory (save/restore working dir)
+    if cd "${DOTFILES_ROOT}" 2>/dev/null; then
+      if timeout 10s patch --batch --forward -p1 < "${temp_patch}" >/dev/null 2>&1; then
+        cd "${original_dir}"
+        log_info "Applied shellcheck auto-fixes to $(basename "${file}")"
+        rm -f "${temp_patch}"
         return 0
       else
-        log_warning "Failed to apply auto-fixes to $(basename "$file")"
-        rm -f "$temp_patch"
-        return 1
+        # Try applying without path stripping in case of relative paths
+        if timeout 10s patch --batch --forward -p0 < "${temp_patch}" >/dev/null 2>&1; then
+          cd "${original_dir}"
+          log_info "Applied shellcheck auto-fixes to $(basename "${file}")"
+          rm -f "${temp_patch}"
+          return 0
+        fi
       fi
+      # Always restore working directory
+      cd "${original_dir}"
     fi
+
+    log_warning "Failed to apply auto-fixes to $(basename "${file}")"
+    rm -f "${temp_patch}"
+    return 1
   fi
 
-  # No fixes available
+  # Clean up and return
+  rm -f "${temp_patch}"
   return 1
 }
 
@@ -213,9 +222,9 @@ validate_shell_scripts() {
 
   local shell_files=()
   while IFS= read -r file; do
-    shell_files+=("$file")
+    shell_files+=("${file}")
   done < <(
-    find "$DOTFILES_ROOT" \
+    find "${DOTFILES_ROOT}" \
       -name "*.sh" -o -name "*.bash" \
       -not -path "*/.*" \
       -not -path "*/node_modules/*" \
@@ -232,65 +241,78 @@ validate_shell_scripts() {
   local shellcheck_warnings=0
 
   for file in "${shell_files[@]}"; do
-    local relative_file="${file#"$DOTFILES_ROOT"/}"
+    local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
     # Attempt auto-fixes if fix mode is enabled
-    if [[ $FIX_MODE -eq 1 ]]; then
-      if fix_shellcheck_issues "$file"; then
-        log_info "Applied auto-fixes to $relative_file"
+    if [[ ${FIX_MODE} -eq 1 ]]; then
+      # Check if file has fixable issues before attempting fixes
+      local pre_fix_output
+      pre_fix_output=$(shellcheck -f gcc "${file}" 2>&1 | head -20 || true)
+
+      if [[ -n "${pre_fix_output}" ]] && echo "${pre_fix_output}" | grep -q "SC225[0-9]\|SC2034\|SC2086\|SC2250"; then
+        if fix_shellcheck_issues "${file}"; then
+          log_info "Applied auto-fixes to ${relative_file}"
+        fi
       fi
     fi
 
-    # Run shellcheck on the file
+    # Run shellcheck on the file (with timeout to prevent hanging)
     local shellcheck_output
     local shellcheck_exit_code=0
 
-    shellcheck_output=$(shellcheck -f gcc "$file" 2>&1) || shellcheck_exit_code=$?
+    shellcheck_output=$(timeout 30s shellcheck -f gcc "${file}" 2>&1 || echo "shellcheck-timeout") || shellcheck_exit_code=$?
 
-    if [[ $shellcheck_exit_code -eq 0 ]]; then
-      log_success "Shellcheck passed: $relative_file"
+    # Handle timeout case
+    if [[ "${shellcheck_output}" == "shellcheck-timeout" ]]; then
+      log_error "Shellcheck timed out: ${relative_file}"
+      ((shellcheck_errors++))
+      continue
+    fi
+
+    if [[ ${shellcheck_exit_code} -eq 0 ]]; then
+      log_success "Shellcheck passed: ${relative_file}"
     else
       # Parse shellcheck output to distinguish errors from warnings
       local has_errors=0
       local has_warnings=0
 
       while IFS= read -r line; do
-        if [[ -n "$line" ]]; then
-          if [[ "$line" =~ error ]]; then
+        if [[ -n "${line}" ]]; then
+          if [[ "${line}" =~ error ]]; then
             has_errors=1
-          elif [[ "$line" =~ warning ]]; then
+          elif [[ "${line}" =~ warning ]]; then
             has_warnings=1
           fi
 
-          if [[ $VERBOSE -eq 1 ]]; then
-            echo "    $line" >&2
+          if [[ ${VERBOSE} -eq 1 ]]; then
+            echo "    ${line}" >&2
           fi
         fi
-      done <<< "$shellcheck_output"
+      done <<< "${shellcheck_output}"
 
-      if [[ $has_errors -eq 1 ]]; then
-        log_error "Shellcheck errors: $relative_file"
+      if [[ ${has_errors} -eq 1 ]]; then
+        log_error "Shellcheck errors: ${relative_file}"
         ((shellcheck_errors++))
-      elif [[ $has_warnings -eq 1 ]]; then
-        log_warning "Shellcheck warnings: $relative_file"
+      elif [[ ${has_warnings} -eq 1 ]]; then
+        log_warning "Shellcheck warnings: ${relative_file}"
         ((shellcheck_warnings++))
       else
         # Shellcheck failed but output doesn't contain 'error' or 'warning'
-        log_error "Shellcheck failed: $relative_file"
+        log_error "Shellcheck failed: ${relative_file}"
         ((shellcheck_errors++))
       fi
     fi
   done
 
   # Report results
-  if [[ $shellcheck_errors -gt 0 ]]; then
-    log_error "Found $shellcheck_errors shellcheck error(s)"
-    if [[ $shellcheck_warnings -gt 0 ]]; then
-      log_warning "Found $shellcheck_warnings shellcheck warning(s)"
+  if [[ ${shellcheck_errors} -gt 0 ]]; then
+    log_error "Found ${shellcheck_errors} shellcheck error(s)"
+    if [[ ${shellcheck_warnings} -gt 0 ]]; then
+      log_warning "Found ${shellcheck_warnings} shellcheck warning(s)"
     fi
     return 1
-  elif [[ $shellcheck_warnings -gt 0 ]]; then
-    log_warning "Found $shellcheck_warnings shellcheck warning(s)"
+  elif [[ ${shellcheck_warnings} -gt 0 ]]; then
+    log_warning "Found ${shellcheck_warnings} shellcheck warning(s)"
     log_success "No shellcheck errors found"
     return 0
   else
@@ -304,45 +326,45 @@ validate_critical_scripts() {
   log_info "Validating critical scripts..."
 
   local critical_scripts=(
-    "$DOTFILES_ROOT/setup.sh"
-    "$DOTFILES_ROOT/shared/generate-all-abbr.sh"
+    "${DOTFILES_ROOT}/setup.sh"
+    "${DOTFILES_ROOT}/shared/generate-all-abbr.sh"
   )
 
   local critical_errors=0
 
   for script in "${critical_scripts[@]}"; do
-    if [[ ! -f "$script" ]]; then
-      log_warning "Critical script not found: ${script#$DOTFILES_ROOT/}"
+    if [[ ! -f "${script}" ]]; then
+      log_warning "Critical script not found: ${script#"${DOTFILES_ROOT}"/}"
       continue
     fi
 
-    local relative_script="${script#"$DOTFILES_ROOT"/}"
+    local relative_script="${script#"${DOTFILES_ROOT}"/}"
 
     # Check if script is executable
-    if [[ ! -x "$script" ]]; then
-      log_error "Critical script not executable: $relative_script"
+    if [[ ! -x "${script}" ]]; then
+      log_error "Critical script not executable: ${relative_script}"
       ((critical_errors++))
 
-      if [[ $FIX_MODE -eq 1 ]]; then
-        log_info "Fixing: Making $relative_script executable"
-        chmod +x "$script"
-        log_success "Fixed: $relative_script is now executable"
+      if [[ ${FIX_MODE} -eq 1 ]]; then
+        log_info "Fixing: Making ${relative_script} executable"
+        chmod +x "${script}"
+        log_success "Fixed: ${relative_script} is now executable"
       fi
     else
-      log_success "Critical script executable: $relative_script"
+      log_success "Critical script executable: ${relative_script}"
     fi
 
     # Validate syntax (already covered by shellcheck above, but double-check)
-    if bash -n "$script" 2>/dev/null; then
-      log_success "Critical script syntax valid: $relative_script"
+    if bash -n "${script}" 2>/dev/null; then
+      log_success "Critical script syntax valid: ${relative_script}"
     else
-      log_error "Critical script syntax error: $relative_script"
+      log_error "Critical script syntax error: ${relative_script}"
       ((critical_errors++))
     fi
   done
 
-  if [[ $critical_errors -gt 0 ]]; then
-    log_error "Found $critical_errors critical script error(s)"
+  if [[ ${critical_errors} -gt 0 ]]; then
+    log_error "Found ${critical_errors} critical script error(s)"
     return 1
   fi
 
@@ -354,7 +376,7 @@ main() {
   local validation_failed=0
 
   # Change to dotfiles root
-  cd "$DOTFILES_ROOT"
+  cd "${DOTFILES_ROOT}"
 
   # Check prerequisites
   if ! check_prerequisites; then
@@ -379,16 +401,16 @@ main() {
   fi
 
   # Summary
-  if [[ $validation_failed -eq 1 ]]; then
-    log_error "Shell syntax validation failed with $VALIDATION_ERRORS error(s)"
-    if [[ $WARNINGS -gt 0 ]]; then
-      log_warning "Total warnings: $WARNINGS"
+  if [[ ${validation_failed} -eq 1 ]]; then
+    log_error "Shell syntax validation failed with ${VALIDATION_ERRORS} error(s)"
+    if [[ ${WARNINGS} -gt 0 ]]; then
+      log_warning "Total warnings: ${WARNINGS}"
     fi
     return 1
   else
     log_success "Shell syntax validation passed"
-    if [[ $WARNINGS -gt 0 ]]; then
-      log_warning "Total warnings: $WARNINGS"
+    if [[ ${WARNINGS} -gt 0 ]]; then
+      log_warning "Total warnings: ${WARNINGS}"
     fi
     return 0
   fi

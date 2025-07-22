@@ -30,17 +30,17 @@ FILES_WITH_ERRORS=0
 FILES_FIXED=0
 
 # File paths
-MARKDOWN_CONFIG="$DOTFILES_ROOT/markdown/.markdownlint.yaml"
+MARKDOWN_CONFIG="${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
 
 # Logging functions
 log_info() {
-  if [[ $VERBOSE -eq 1 && $CI_MODE -eq 0 ]]; then
+  if [[ ${VERBOSE} -eq 1 && ${CI_MODE} -eq 0 ]]; then
     echo "  ℹ $1" >&2
   fi
 }
 
 log_success() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ✓ $1" >&2
   else
     echo "MARKDOWN_SUCCESS: $1" >&2
@@ -48,7 +48,7 @@ log_success() {
 }
 
 log_warning() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ⚠ $1" >&2
   else
     echo "MARKDOWN_WARNING: $1" >&2
@@ -57,7 +57,7 @@ log_warning() {
 }
 
 log_error() {
-  if [[ $CI_MODE -eq 0 ]]; then
+  if [[ ${CI_MODE} -eq 0 ]]; then
     echo "  ✗ $1" >&2
   else
     echo "MARKDOWN_ERROR: $1" >&2
@@ -87,7 +87,7 @@ check_prerequisites() {
 check_markdown_config() {
   log_info "Checking markdown configuration..."
 
-  if [[ ! -f "$MARKDOWN_CONFIG" ]]; then
+  if [[ ! -f "${MARKDOWN_CONFIG}" ]]; then
     log_error "Markdown configuration not found: markdown/.markdownlint.yaml"
     return 1
   fi
@@ -96,7 +96,7 @@ check_markdown_config() {
 
   # Validate config file syntax (YAML)
   if command -v yq >/dev/null 2>&1; then
-    if ! yq eval '.' "$MARKDOWN_CONFIG" >/dev/null 2>&1; then
+    if ! yq eval '.' "${MARKDOWN_CONFIG}" >/dev/null 2>&1; then
       log_error "Invalid YAML syntax in markdown configuration"
       return 1
     fi
@@ -112,7 +112,7 @@ find_markdown_files() {
   # - scratchpads (temporary files)
   # - .git directory
   # - external plugins (tmux plugins, etc.)
-  find "$DOTFILES_ROOT" \
+  find "${DOTFILES_ROOT}" \
     -name "*.md" \
     -not -path "*/scratchpads/*" \
     -not -path "*/.git/*" \
@@ -125,42 +125,42 @@ find_markdown_files() {
 # Validate a single markdown file
 validate_markdown_file() {
   local file="$1"
-  local relative_file="${file#"$DOTFILES_ROOT"/}"
+  local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
   # Run markdownlint-cli2 on the file
   local lint_output
   local lint_exit_code=0
 
-  if [[ $FIX_MODE -eq 1 ]]; then
+  if [[ ${FIX_MODE} -eq 1 ]]; then
     # Run with --fix flag
-    lint_output=$(markdownlint-cli2 --config "$MARKDOWN_CONFIG" --fix "$file" 2>&1) || lint_exit_code=$?
+    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || lint_exit_code=$?
   else
     # Run validation only
-    lint_output=$(markdownlint-cli2 --config "$MARKDOWN_CONFIG" "$file" 2>&1) || lint_exit_code=$?
+    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
   fi
 
-  if [[ $lint_exit_code -eq 0 ]]; then
-    log_success "Markdown valid: $relative_file"
-    if [[ $FIX_MODE -eq 1 && -n "$lint_output" ]]; then
-      if echo "$lint_output" | grep -q "Fixed"; then
-        log_success "Fixed issues in: $relative_file"
+  if [[ ${lint_exit_code} -eq 0 ]]; then
+    log_success "Markdown valid: ${relative_file}"
+    if [[ ${FIX_MODE} -eq 1 && -n "${lint_output}" ]]; then
+      if echo "${lint_output}" | grep -q "Fixed"; then
+        log_success "Fixed issues in: ${relative_file}"
         ((FILES_FIXED++))
       fi
     fi
     return 0
   else
-    log_error "Markdown errors: $relative_file"
+    log_error "Markdown errors: ${relative_file}"
     ((FILES_WITH_ERRORS++))
 
     # Show error details if verbose
-    if [[ $VERBOSE -eq 1 ]]; then
+    if [[ ${VERBOSE} -eq 1 ]]; then
       # Extract just the error messages (skip the summary lines)
       local error_lines
-      error_lines=$(echo "$lint_output" | grep -E "^[^:]+:[0-9]+:[0-9]+" || true)
-      if [[ -n "$error_lines" ]]; then
-        echo "$error_lines" | while IFS= read -r line; do
-          if [[ -n "$line" ]]; then
-            echo "    $line" >&2
+      error_lines=$(echo "${lint_output}" | grep -E "^[^:]+:[0-9]+:[0-9]+" || true)
+      if [[ -n "${error_lines}" ]]; then
+        echo "${error_lines}" | while IFS= read -r line; do
+          if [[ -n "${line}" ]]; then
+            echo "    ${line}" >&2
           fi
         done
       fi
@@ -176,8 +176,8 @@ validate_all_markdown() {
 
   local markdown_files=()
   while IFS= read -r file; do
-    if [[ -n "$file" ]]; then
-      markdown_files+=("$file")
+    if [[ -n "${file}" ]]; then
+      markdown_files+=("${file}")
     fi
   done < <(find_markdown_files)
 
@@ -190,17 +190,17 @@ validate_all_markdown() {
 
   local validation_failed=0
   for file in "${markdown_files[@]}"; do
-    if ! validate_markdown_file "$file"; then
+    if ! validate_markdown_file "${file}"; then
       validation_failed=1
     fi
   done
 
   # Summary
-  if [[ $FIX_MODE -eq 1 && $FILES_FIXED -gt 0 ]]; then
-    log_success "Fixed issues in $FILES_FIXED file(s)"
+  if [[ ${FIX_MODE} -eq 1 && ${FILES_FIXED} -gt 0 ]]; then
+    log_success "Fixed issues in ${FILES_FIXED} file(s)"
   fi
 
-  if [[ $validation_failed -eq 1 ]]; then
+  if [[ ${validation_failed} -eq 1 ]]; then
     return 1
   fi
 
@@ -214,8 +214,8 @@ check_markdown_version() {
   local version_output
   version_output=$(markdownlint-cli2 --version 2>&1 | head -1 || echo "unknown")
 
-  if [[ "$version_output" =~ markdownlint-cli2[[:space:]]v([0-9]+\.[0-9]+) ]]; then
-    log_success "Using $version_output"
+  if [[ "${version_output}" =~ markdownlint-cli2[[:space:]]v([0-9]+\.[0-9]+) ]]; then
+    log_success "Using ${version_output}"
   else
     log_warning "Could not determine markdownlint-cli2 version"
   fi
@@ -229,8 +229,8 @@ check_performance() {
   local file_count
   file_count=$(find_markdown_files | wc -l | tr -d ' ')
 
-  if [[ $file_count -gt 50 ]]; then
-    log_warning "Validating $file_count markdown files may impact performance"
+  if [[ ${file_count} -gt 50 ]]; then
+    log_warning "Validating ${file_count} markdown files may impact performance"
   fi
 
   return 0
@@ -243,7 +243,7 @@ main() {
   start_time=$(date +%s)
 
   # Change to dotfiles root
-  cd "$DOTFILES_ROOT"
+  cd "${DOTFILES_ROOT}"
 
   # Check prerequisites
   if ! check_prerequisites; then
@@ -270,20 +270,20 @@ main() {
   local duration=$((end_time - start_time))
 
   # Summary
-  if [[ $validation_failed -eq 1 ]]; then
-    log_error "Markdown validation failed with $FILES_WITH_ERRORS file(s) having errors"
-    if [[ $WARNINGS -gt 0 ]]; then
-      log_warning "Total warnings: $WARNINGS"
+  if [[ ${validation_failed} -eq 1 ]]; then
+    log_error "Markdown validation failed with ${FILES_WITH_ERRORS} file(s) having errors"
+    if [[ ${WARNINGS} -gt 0 ]]; then
+      log_warning "Total warnings: ${WARNINGS}"
     fi
-    if [[ $FIX_MODE -eq 1 ]]; then
+    if [[ ${FIX_MODE} -eq 1 ]]; then
       log_info "Some issues may have been fixed. Run validation again to verify."
     fi
     log_info "Markdown validation completed in ${duration}s"
     return 1
   else
     log_success "Markdown validation passed (${duration}s)"
-    if [[ $WARNINGS -gt 0 ]]; then
-      log_warning "Total warnings: $WARNINGS"
+    if [[ ${WARNINGS} -gt 0 ]]; then
+      log_warning "Total warnings: ${WARNINGS}"
     fi
     return 0
   fi
