@@ -105,6 +105,7 @@ teardown() {
   [ "$status" -eq 0 ]
 
   # Test that it doesn't detect non-existent session
+  # shellcheck disable=SC2034
   session_name="non-existent-session"
   run session_exists
   [ "$status" -ne 0 ]
