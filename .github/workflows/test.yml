@@ -1,0 +1,177 @@
+name: Shell Function Tests
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    
+    strategy:
+      matrix:
+        shell: [fish, zsh]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install Homebrew dependencies
+      run: |
+        # Install bats-core for testing
+        brew install bats-core
+        
+        # Install shells if not present
+        brew install fish
+        brew install zsh
+    
+    - name: Setup test environment
+      run: |
+        # Make test helpers executable
+        chmod +x tests/helpers/*.bash
+        
+        # Make bin scripts executable
+        chmod +x bin/.local/bin/*
+        
+        # Install dotfiles bin directory to PATH for testing
+        echo "$GITHUB_WORKSPACE/bin/.local/bin" >> $GITHUB_PATH
+        
+        # Set CI environment variable for tmux mocking
+        echo "CI=true" >> $GITHUB_ENV
+    
+    - name: Verify test environment
+      run: |
+        # Verify critical components are available
+        echo "=== Environment Check ==="
+        echo "PATH: $PATH"
+        echo "Working directory: $(pwd)"
+        echo "Git status: $(git --version)"
+        echo "Fish version: $(fish --version)"
+        echo "Zsh version: $(zsh --version)"
+        echo "Tmux version: $(tmux -V)"
+        echo "Bats version: $(bats --version)"
+        
+        # Verify bin scripts are executable and accessible
+        echo "=== Bin Scripts Check ==="
+        ls -la bin/.local/bin/ | head -5
+        which g || echo "g not in PATH"
+        which tat || echo "tat not in PATH"
+        
+        echo "=== Test Structure ==="
+        find tests/ -name "*.bats" | wc -l | xargs echo "Total test files:"
+    
+    - name: Generate abbreviations
+      run: |
+        # Generate current abbreviations for testing
+        cd shared
+        ./generate-fish-abbr.sh
+        ./generate-zsh-abbr.sh
+    
+    - name: Run git function tests
+      run: |
+        # Run git function tests
+        bats tests/git_functions/
+    
+    - name: Run abbreviation tests
+      run: |
+        # Run abbreviation tests
+        bats tests/abbreviations/
+      env:
+        SHELL_TYPE: ${{ matrix.shell }}
+    
+    - name: Run environment tests
+      run: |
+        # Run any environment-specific tests
+        if [ -d "tests/environment" ] && [ -n "$(ls -A tests/environment/*.bats 2>/dev/null)" ]; then
+          bats tests/environment/
+        fi
+    
+    - name: Run utility tests
+      run: |
+        # Run utility function tests
+        if [ -d "tests/utilities" ] && [ -n "$(ls -A tests/utilities/*.bats 2>/dev/null)" ]; then
+          bats tests/utilities/
+        fi
+    
+    - name: Performance check
+      run: |
+        # Ensure test suite completes within performance target
+        start_time=$(date +%s)
+        
+        # Run all tests again for performance measurement
+        bats tests/ --recursive
+        
+        end_time=$(date +%s)
+        duration=$((end_time - start_time))
+        
+        echo "Total test execution time: ${duration}s"
+        
+        # Fail if tests take more than 120 seconds (2 minutes)
+        if [ $duration -gt 120 ]; then
+          echo "❌ Tests exceeded 2-minute performance target: ${duration}s"
+          exit 1
+        else
+          echo "✅ Tests completed within performance target: ${duration}s"
+        fi
+    
+    - name: Test report
+      if: always()
+      run: |
+        echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Count test files
+        total_test_files=$(find tests/ -name "*.bats" | wc -l)
+        echo "- **Total test files**: $total_test_files" >> $GITHUB_STEP_SUMMARY
+        
+        # Show test structure
+        echo "- **Test categories**:" >> $GITHUB_STEP_SUMMARY
+        echo "  - Git functions: $(ls tests/git_functions/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
+        echo "  - Abbreviations: $(ls tests/abbreviations/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
+        echo "  - Utilities: $(ls tests/utilities/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
+        echo "  - Environment: $(ls tests/environment/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
+        
+        echo "- **Shell compatibility**: Testing ${{ matrix.shell }}" >> $GITHUB_STEP_SUMMARY
+
+  coverage:
+    runs-on: macos-latest
+    needs: test
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        brew install bats-core fish zsh
+    
+    - name: Coverage analysis
+      run: |
+        echo "## Test Coverage Analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Count functions in codebase
+        fish_functions=$(find fish/.config/fish/functions/ -name "*.fish" 2>/dev/null | wc -l || echo "0")
+        zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" zsh/.config/zsh/functions.zsh 2>/dev/null || echo "0")
+        bin_scripts=$(find bin/.local/bin/ -type f -executable 2>/dev/null | wc -l || echo "0")
+        
+        # Count test files
+        git_tests=$(find tests/git_functions/ -name "*.bats" 2>/dev/null | wc -l || echo "0")
+        abbr_tests=$(find tests/abbreviations/ -name "*.bats" 2>/dev/null | wc -l || echo "0")
+        
+        echo "### Function Coverage" >> $GITHUB_STEP_SUMMARY
+        echo "- **Fish functions**: $fish_functions total" >> $GITHUB_STEP_SUMMARY
+        echo "- **Zsh functions**: $zsh_functions total" >> $GITHUB_STEP_SUMMARY
+        echo "- **Bin scripts**: $bin_scripts total" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Test Coverage" >> $GITHUB_STEP_SUMMARY
+        echo "- **Git function tests**: $git_tests files" >> $GITHUB_STEP_SUMMARY
+        echo "- **Abbreviation tests**: $abbr_tests files" >> $GITHUB_STEP_SUMMARY
+        
+        # Count abbreviations
+        if [ -f "shared/abbreviations.yaml" ]; then
+          abbr_count=$(grep -c "^  [a-zA-Z].*:" shared/abbreviations.yaml 2>/dev/null || echo "0")
+          echo "- **Total abbreviations**: $abbr_count defined in YAML" >> $GITHUB_STEP_SUMMARY
+        fi

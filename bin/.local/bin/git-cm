@@ -5,7 +5,7 @@
 # editor, but with args it will do a direct `commit -m`
 
 if [[ $# -gt 0 ]]; then
-  git commit -m "$@"
+  git commit -m "$*"
 else
   git commit -v
 fi

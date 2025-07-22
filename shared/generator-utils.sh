@@ -23,14 +23,16 @@ should_skip_category() {
 
   case "$shell" in
     "fish")
-      for skip_cat in "${FISH_SKIP_CATEGORIES[@]}"; do
+      # Safe array iteration that handles empty arrays
+      for skip_cat in "${FISH_SKIP_CATEGORIES[@]+"${FISH_SKIP_CATEGORIES[@]}"}"; do
         if [[ "$category" == "$skip_cat" ]]; then
           return 0 # Should skip
         fi
       done
       ;;
     "zsh")
-      for skip_cat in "${ZSH_SKIP_CATEGORIES[@]}"; do
+      # Safe array iteration that handles empty arrays
+      for skip_cat in "${ZSH_SKIP_CATEGORIES[@]+"${ZSH_SKIP_CATEGORIES[@]}"}"; do
         if [[ "$category" == "$skip_cat" ]]; then
           return 0 # Should skip
         fi
