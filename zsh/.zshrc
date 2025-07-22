@@ -47,7 +47,7 @@ fpath=(/Users/joshukraine/.docker/completions $fpath)
 # Load and initialise completion system with caching for performance
 autoload -Uz compinit
 # shellcheck disable=SC1036,SC1072,SC1073,SC1009
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C

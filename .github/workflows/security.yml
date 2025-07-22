@@ -62,11 +62,14 @@ jobs:
 
             echo "Running Homebrew formula audit for security issues..."
 
-            # Use brew audit for general security checks (doesn't require package installation)
-            if brew audit --formula --strict --online 2>&1 | tee audit_output.txt | grep -i "error\|warning\|vulnerabilit\|cve\|security"; then
-              vulnerabilities_found=true
-              echo "⚠️ Potential issues found during audit"
-            fi
+            # Use brew audit for general security checks on specific packages only
+            for package in $packages; do
+              echo "🔍 Auditing package: $package"
+              if brew audit --formula --strict --online "$package" 2>&1 | tee -a audit_output.txt | grep -i "error\|warning\|vulnerabilit\|cve\|security"; then
+                vulnerabilities_found=true
+                echo "⚠️ Potential issues found in package: $package"
+              fi
+            done
 
             # Check for deprecated or problematic formulas
             echo "Checking for deprecated formulas..."

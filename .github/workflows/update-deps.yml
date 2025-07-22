@@ -207,7 +207,7 @@ jobs:
             --title "$pr_title" \
             --body "$pr_body" \
             --head "$UPDATE_BRANCH" \
-            --base "master" \
+            --base "${{ github.event.repository.default_branch }}" \
             --label "chore,dependencies,automated"
 
           echo "✅ Pull request created successfully"
