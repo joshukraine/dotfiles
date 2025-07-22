@@ -54,11 +54,12 @@ teardown() {
   echo "Test change" >> test.txt
   git add test.txt
   
-  # This is harder to test since it opens an editor
-  # We'll test that it fails when there's no message (git's default behavior)
-  run git-cm
-  # Will likely fail due to empty commit message or editor not available
-  [ "$status" -ne 0 ]
+  # Use a non-interactive editor that will immediately exit without saving
+  # This tests that git-cm calls the editor mode without hanging
+  export GIT_EDITOR="true"
+  run timeout 5s git-cm
+  # Should fail with exit code 1 because editor didn't provide a message
+  [ "$status" -eq 1 ]
 }
 
 @test "git-cm fails when nothing to commit" {
