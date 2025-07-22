@@ -44,15 +44,28 @@ fi
 # Docker CLI completions
 fpath=(/Users/joshukraine/.docker/completions $fpath)
 
-# Load and initialise completion system
-autoload -Uz compinit && compinit
+# Load and initialise completion system with caching for performance
+autoload -Uz compinit
+# shellcheck disable=SC1036,SC1072,SC1073,SC1009
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 # De-dupe $PATH
 typeset -U path
 
-# GitHub Copilot CLI
-if command -v gh >/dev/null && gh extension list | grep -q 'copilot'; then
-  eval "$(gh copilot alias -- zsh)"
+# GitHub Copilot CLI (lazy load for performance)
+if command -v gh >/dev/null 2>&1; then
+  gh_copilot_lazy() {
+    if gh extension list 2>/dev/null | grep -q 'copilot'; then
+      eval "$(gh copilot alias -- zsh)"
+      unfunction gh_copilot_lazy
+    fi
+  }
+  alias ghcs="gh_copilot_lazy && ghcs"
+  alias ghce="gh_copilot_lazy && ghce"
 fi
 
 . "$HOME/.config/zsh/profiler.stop"
