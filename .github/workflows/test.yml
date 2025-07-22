@@ -8,24 +8,36 @@ on:
 
 jobs:
   test:
-    runs-on: macos-latest
-
     strategy:
       matrix:
+        os: [macos-latest, ubuntu-latest]
         shell: [fish, zsh]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Homebrew dependencies
+      - name: Install dependencies
         run: |
-          # Install bats-core for testing
-          brew install bats-core
-
-          # Install shells if not present
-          brew install fish
-          brew install zsh
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            echo "Installing dependencies via Homebrew..."
+            # Install bats-core for testing
+            brew install bats-core
+            # Install shells if not present
+            brew install fish
+            brew install zsh
+          else
+            echo "Installing dependencies via apt..."
+            sudo apt-get update
+            # Install bats-core for testing
+            sudo apt-get install -y bats
+            # Install shells
+            sudo apt-get install -y fish zsh
+            # Install git (should already be present but ensure it's available)
+            sudo apt-get install -y git
+          fi
 
       - name: Setup test environment
         run: |
@@ -134,9 +146,13 @@ jobs:
           echo "  - Environment: $(ls tests/environment/*.bats 2>/dev/null | wc -l) files" >> $GITHUB_STEP_SUMMARY
 
           echo "- **Shell compatibility**: Testing ${{ matrix.shell }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Platform**: ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY
 
   coverage:
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     needs: test
 
     steps:
@@ -145,7 +161,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install bats-core fish zsh
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            brew install bats-core fish zsh
+          else
+            sudo apt-get update
+            sudo apt-get install -y bats fish zsh
+          fi
 
       - name: Coverage analysis
         run: |
