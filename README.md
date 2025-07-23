@@ -33,6 +33,8 @@
 
 ## ⚡️ Quick Setup
 
+**For first-time users**: See the [complete setup documentation](docs/setup/) for detailed guidance.
+
 Make sure macOS is up to date and you have installed the [required software](#-prerequisites).
 
 Clone this repo.
@@ -59,6 +61,19 @@ Run the setup script.
 ```sh
 ~/dotfiles/setup.sh
 ```
+
+## 📚 Comprehensive Setup Documentation
+
+For detailed guidance on installation, customization, and troubleshooting:
+
+| Guide | Purpose |
+|-------|---------|
+| **[Setup Overview](docs/setup/README.md)** | Choose the right guide for your situation |
+| **[Installation Guide](docs/setup/installation-guide.md)** | Complete step-by-step setup walkthrough |
+| **[Usage Examples](docs/setup/usage-examples.md)** | Command examples and practical scenarios |
+| **[Troubleshooting](docs/setup/troubleshooting.md)** | Solutions for common setup issues |
+| **[Customization](docs/setup/customization.md)** | Personalizing your dotfiles setup |
+| **[Migration Guide](docs/setup/migration.md)** | Moving from other dotfiles or manual configs |
 
 ## ✅ Prerequisites
 
