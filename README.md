@@ -201,7 +201,7 @@ My Zsh and Fish configs have 95% functional parity via shared configuration:
 
 <details>
   <summary><strong>Zsh Setup Instructions</strong></summary>
-Zsh is now the default shell on macOS. However, it’s helpful to add an entry enabling the Homebrew version of Zsh (`$HOMEBREW_PREFIX/bin/zsh`) instead of the default (`/bin/zsh`) version.
+Zsh is now the default shell on macOS. However, it's helpful to add an entry enabling the Homebrew version of Zsh (`/opt/homebrew/bin/zsh` on Apple Silicon, `/usr/local/bin/zsh` on Intel) instead of the default (`/bin/zsh`) version.
 
 Ensure that you have Zsh from Homebrew. (`which zsh`) If not:
 
@@ -212,7 +212,14 @@ brew install zsh
 Add Zsh (Homebrew version) to `/etc/shells`:
 
 ```sh
-echo $HOMEBREW_PREFIX/bin/zsh | sudo tee -a /etc/shells
+# Apple Silicon Macs:
+echo /opt/homebrew/bin/zsh | sudo tee -a /etc/shells
+
+# Intel Macs:
+echo /usr/local/bin/zsh | sudo tee -a /etc/shells
+
+# Or use this universal command:
+echo $(which zsh) | sudo tee -a /etc/shells
 ```
 
 Set it as your default shell:
@@ -238,7 +245,14 @@ Install Fish from Homebrew:
 Add Fish to `/etc/shells`:
 
 ```sh
-echo $HOMEBREW_PREFIX/bin/fish | sudo tee -a /etc/shells
+# Apple Silicon Macs:
+echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+
+# Intel Macs:
+echo /usr/local/bin/fish | sudo tee -a /etc/shells
+
+# Or use this universal command:
+echo $(which fish) | sudo tee -a /etc/shells
 ```
 
 Set it as your default shell:
