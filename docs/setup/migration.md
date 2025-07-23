@@ -4,14 +4,14 @@ This guide helps you safely migrate from other dotfiles repositories or manual c
 
 ## 📋 Table of Contents
 
-- [Pre-Migration Preparation](#pre-migration-preparation)
-- [From Manual Configurations](#from-manual-configurations)
-- [From Other Dotfiles Repositories](#from-other-dotfiles-repositories)
-- [Common Migration Scenarios](#common-migration-scenarios)
-- [Preserving Your Customizations](#preserving-your-customizations)
-- [Testing Your Migration](#testing-your-migration)
-- [Rollback Procedures](#rollback-procedures)
-- [Post-Migration Cleanup](#post-migration-cleanup)
+- [Pre-Migration Preparation](#%EF%B8%8F-pre-migration-preparation)
+- [From Manual Configurations](#-from-manual-configurations)
+- [From Other Dotfiles Repositories](#-from-other-dotfiles-repositories)
+- [Common Migration Scenarios](#-common-migration-scenarios)
+- [Preserving Your Customizations](#-preserving-your-customizations)
+- [Testing Your Migration](#-testing-your-migration)
+- [Rollback Procedures](#%EF%B8%8F-rollback-procedures)
+- [Post-Migration Cleanup](#-post-migration-cleanup)
 
 ## 🛡️ Pre-Migration Preparation
 

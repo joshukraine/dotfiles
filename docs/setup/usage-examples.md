@@ -4,13 +4,13 @@ This guide provides practical command examples and scenarios for using the setup
 
 ## 📋 Table of Contents
 
-- [Basic Usage](#basic-usage)
-- [Installation Scenarios](#installation-scenarios)
-- [Update and Maintenance](#update-and-maintenance)
-- [Advanced Configuration](#advanced-configuration)
-- [Recovery and Troubleshooting](#recovery-and-troubleshooting)
-- [Environment Variables](#environment-variables)
-- [Verification Commands](#verification-commands)
+- [Basic Usage](#-basic-usage)
+- [Installation Scenarios](#-installation-scenarios)
+- [Update and Maintenance](#-update-and-maintenance)
+- [Advanced Configuration](#%EF%B8%8F-advanced-configuration)
+- [Recovery and Troubleshooting](#-recovery-and-troubleshooting)
+- [Environment Variables](#-environment-variables)
+- [Verification Commands](#-verification-commands)
 
 ## 🚀 Basic Usage
 

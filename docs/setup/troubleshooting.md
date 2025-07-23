@@ -4,14 +4,14 @@ This guide covers common issues you might encounter when setting up or maintaini
 
 ## 📋 Table of Contents
 
-- [Permission and Access Issues](#permission-and-access-issues)
-- [Stow and Symlink Problems](#stow-and-symlink-problems)
-- [Homebrew Issues](#homebrew-issues)
-- [Shell Configuration Problems](#shell-configuration-problems)
-- [Platform and Architecture Issues](#platform-and-architecture-issues)
-- [Git Configuration Problems](#git-configuration-problems)
-- [Application-Specific Issues](#application-specific-issues)
-- [Performance and Startup Issues](#performance-and-startup-issues)
+- [Permission and Access Issues](#-permission-and-access-issues)
+- [Stow and Symlink Problems](#-stow-and-symlink-problems)
+- [Homebrew Issues](#-homebrew-issues)
+- [Shell Configuration Problems](#-shell-configuration-problems)
+- [Platform and Architecture Issues](#%EF%B8%8F-platform-and-architecture-issues)
+- [Git Configuration Problems](#-git-configuration-problems)
+- [Application-Specific Issues](#-application-specific-issues)
+- [Performance and Startup Issues](#-performance-and-startup-issues)
 
 ## 🔐 Permission and Access Issues
 

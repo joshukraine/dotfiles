@@ -4,15 +4,15 @@ This guide shows you how to personalize the dotfiles to match your preferences a
 
 ## 📋 Table of Contents
 
-- [Local Configuration Pattern](#local-configuration-pattern)
-- [Personal Information Setup](#personal-information-setup)
-- [Shell Customization](#shell-customization)
-- [Environment Variables](#environment-variables)
-- [Selective Package Installation](#selective-package-installation)
-- [Custom Scripts and Utilities](#custom-scripts-and-utilities)
-- [Application-Specific Customization](#application-specific-customization)
-- [Theme and Appearance](#theme-and-appearance)
-- [Maintaining Your Customizations](#maintaining-your-customizations)
+- [Local Configuration Pattern](#-local-configuration-pattern)
+- [Personal Information Setup](#-personal-information-setup)
+- [Shell Customization](#-shell-customization)
+- [Environment Variables](#-environment-variables)
+- [Selective Package Installation](#-selective-package-installation)
+- [Custom Scripts and Utilities](#%EF%B8%8F-custom-scripts-and-utilities)
+- [Application-Specific Customization](#-application-specific-customization)
+- [Theme and Appearance](#-theme-and-appearance)
+- [Maintaining Your Customizations](#-maintaining-your-customizations)
 
 ## 🎨 Local Configuration Pattern
 
