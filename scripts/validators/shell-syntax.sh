@@ -61,22 +61,22 @@ check_prerequisites() {
   local missing_tools=()
 
   # Check for fish
-  if ! command -v fish > /dev/null 2>&1; then
+  if ! command -v fish >/dev/null 2>&1; then
     missing_tools+=("fish")
   fi
 
   # Check for zsh
-  if ! command -v zsh > /dev/null 2>&1; then
+  if ! command -v zsh >/dev/null 2>&1; then
     missing_tools+=("zsh")
   fi
 
   # Check for shellcheck
-  if ! command -v shellcheck > /dev/null 2>&1; then
+  if ! command -v shellcheck >/dev/null 2>&1; then
     missing_tools+=("shellcheck")
   fi
 
   # Check for shfmt (required for formatting when --fix is enabled)
-  if [[ ${FIX_MODE} -eq 1 ]] && ! command -v shfmt > /dev/null 2>&1; then
+  if [[ ${FIX_MODE} -eq 1 ]] && ! command -v shfmt >/dev/null 2>&1; then
     missing_tools+=("shfmt")
   fi
 
@@ -96,7 +96,7 @@ validate_fish_files() {
   local fish_files=()
   while IFS= read -r file; do
     fish_files+=("${file}")
-  done < <(find "${DOTFILES_ROOT}/fish" -name "*.fish" -type f 2> /dev/null || true)
+  done < <(find "${DOTFILES_ROOT}/fish" -name "*.fish" -type f 2>/dev/null || true)
 
   if [[ ${#fish_files[@]} -eq 0 ]]; then
     log_warning "No Fish files found to validate"
@@ -108,7 +108,7 @@ validate_fish_files() {
     local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
     # Check Fish syntax
-    if fish -n "${file}" 2> /dev/null; then
+    if fish -n "${file}" 2>/dev/null; then
       log_success "Fish syntax valid: ${relative_file}"
     else
       log_error "Fish syntax error: ${relative_file}"
@@ -139,7 +139,7 @@ validate_zsh_files() {
   local zsh_files=()
   while IFS= read -r file; do
     zsh_files+=("${file}")
-  done < <(find "${DOTFILES_ROOT}/zsh" -name "*.zsh" -o -name ".zshrc" -type f 2> /dev/null || true)
+  done < <(find "${DOTFILES_ROOT}/zsh" -name "*.zsh" -o -name ".zshrc" -type f 2>/dev/null || true)
 
   if [[ ${#zsh_files[@]} -eq 0 ]]; then
     log_warning "No Zsh files found to validate"
@@ -151,7 +151,7 @@ validate_zsh_files() {
     local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
     # Check Zsh syntax using zsh -n (dry run)
-    if zsh -n "${file}" 2> /dev/null; then
+    if zsh -n "${file}" 2>/dev/null; then
       log_success "Zsh syntax valid: ${relative_file}"
     else
       log_error "Zsh syntax error: ${relative_file}"
@@ -185,22 +185,22 @@ fix_shellcheck_issues() {
   original_dir=$(pwd)
 
   # Generate shellcheck auto-fix diff with timeout
-  diff_output=$(timeout 30s shellcheck -f diff "${file}" 2> /dev/null || true)
+  diff_output=$(timeout 30s shellcheck -f diff "${file}" 2>/dev/null || true)
 
   if [[ -n "${diff_output}" && "${diff_output}" != "" ]]; then
     # Save the diff to a temp file and apply it
-    echo "${diff_output}" > "${temp_patch}"
+    echo "${diff_output}" >"${temp_patch}"
 
     # Apply the patch from the dotfiles root directory (save/restore working dir)
-    if cd "${DOTFILES_ROOT}" 2> /dev/null; then
-      if timeout 10s patch --batch --forward -p1 < "${temp_patch}" > /dev/null 2>&1; then
+    if cd "${DOTFILES_ROOT}" 2>/dev/null; then
+      if timeout 10s patch --batch --forward -p1 <"${temp_patch}" >/dev/null 2>&1; then
         cd "${original_dir}"
         log_info "Applied shellcheck auto-fixes to $(basename "${file}")"
         rm -f "${temp_patch}"
         return 0
       else
         # Try applying without path stripping in case of relative paths
-        if timeout 10s patch --batch --forward -p0 < "${temp_patch}" > /dev/null 2>&1; then
+        if timeout 10s patch --batch --forward -p0 <"${temp_patch}" >/dev/null 2>&1; then
           cd "${original_dir}"
           log_info "Applied shellcheck auto-fixes to $(basename "${file}")"
           rm -f "${temp_patch}"
@@ -236,8 +236,8 @@ format_shell_script() {
   # -i 2: 2-space indentation
   # -ci: Switch cases indent
   # -bn: Binary operators at beginning of line
-  # -sr: Redirect operators followed by space
-  if timeout 30s shfmt -i 2 -ci -bn -sr "${file}" > "${temp_formatted}" 2> /dev/null; then
+  # Note: -sr flag (redirect operators followed by space) excluded due to known issues
+  if timeout 30s shfmt -i 2 -ci -bn "${file}" >"${temp_formatted}" 2>/dev/null; then
     # Get hash of formatted content
     formatted_content_hash=$(sha256sum "${temp_formatted}" | cut -d' ' -f1)
 
@@ -278,7 +278,7 @@ validate_shell_scripts() {
       -not -path "*/node_modules/*" \
       -not -path "*/vendor/*" \
       -not -path "*/plugins/*" \
-      -type f 2> /dev/null || true
+      -type f 2>/dev/null || true
   )
 
   if [[ ${#shell_files[@]} -eq 0 ]]; then
@@ -305,7 +305,7 @@ validate_shell_scripts() {
       fi
 
       # Apply shfmt formatting after shellcheck fixes
-      if command -v shfmt > /dev/null 2>&1; then
+      if command -v shfmt >/dev/null 2>&1; then
         format_shell_script "${file}"
       fi
     fi
@@ -342,7 +342,7 @@ validate_shell_scripts() {
             echo "    ${line}" >&2
           fi
         fi
-      done <<< "${shellcheck_output}"
+      done <<<"${shellcheck_output}"
 
       if [[ ${has_errors} -eq 1 ]]; then
         log_error "Shellcheck errors: ${relative_file}"
@@ -409,7 +409,7 @@ validate_critical_scripts() {
     fi
 
     # Validate syntax (already covered by shellcheck above, but double-check)
-    if bash -n "${script}" 2> /dev/null; then
+    if bash -n "${script}" 2>/dev/null; then
       log_success "Critical script syntax valid: ${relative_script}"
     else
       log_error "Critical script syntax error: ${relative_script}"
