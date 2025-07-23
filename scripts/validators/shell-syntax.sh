@@ -75,6 +75,11 @@ check_prerequisites() {
     missing_tools+=("shellcheck")
   fi
 
+  # Check for shfmt (required for formatting when --fix is enabled)
+  if [[ ${FIX_MODE} -eq 1 ]] && ! command -v shfmt >/dev/null 2>&1; then
+    missing_tools+=("shfmt")
+  fi
+
   if [[ ${#missing_tools[@]} -gt 0 ]]; then
     log_error "Missing required tools: ${missing_tools[*]}"
     log_error "Install with: brew install ${missing_tools[*]}"
@@ -216,6 +221,49 @@ fix_shellcheck_issues() {
   return 1
 }
 
+# Format shell script using shfmt
+format_shell_script() {
+  local file="$1"
+  local temp_formatted
+  temp_formatted=$(mktemp)
+  local original_content_hash
+  local formatted_content_hash
+
+  # Get hash of original file content
+  original_content_hash=$(sha256sum "${file}" | cut -d' ' -f1)
+
+  # Apply shfmt formatting with recommended options:
+  # -i 2: 2-space indentation
+  # -ci: Switch cases indent
+  # -bn: Binary operators at beginning of line
+  # -sr: Redirect operators followed by space
+  if timeout 30s shfmt -i 2 -ci -bn -sr "${file}" > "${temp_formatted}" 2>/dev/null; then
+    # Get hash of formatted content
+    formatted_content_hash=$(sha256sum "${temp_formatted}" | cut -d' ' -f1)
+
+    # Only update file if content actually changed
+    if [[ "${original_content_hash}" != "${formatted_content_hash}" ]]; then
+      if cp "${temp_formatted}" "${file}"; then
+        log_info "Applied shfmt formatting to $(basename "${file}")"
+        rm -f "${temp_formatted}"
+        return 0
+      else
+        log_warning "Failed to apply shfmt formatting to $(basename "${file}")"
+        rm -f "${temp_formatted}"
+        return 1
+      fi
+    else
+      # File was already properly formatted
+      rm -f "${temp_formatted}"
+      return 0
+    fi
+  else
+    log_warning "shfmt formatting failed for $(basename "${file}")"
+    rm -f "${temp_formatted}"
+    return 1
+  fi
+}
+
 # Validate shell scripts with shellcheck
 validate_shell_scripts() {
   log_info "Validating shell scripts with shellcheck..."
@@ -253,6 +301,11 @@ validate_shell_scripts() {
         if fix_shellcheck_issues "${file}"; then
           log_info "Applied auto-fixes to ${relative_file}"
         fi
+      fi
+
+      # Apply shfmt formatting after shellcheck fixes
+      if command -v shfmt >/dev/null 2>&1; then
+        format_shell_script "${file}"
       fi
     fi
 
