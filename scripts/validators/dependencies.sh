@@ -67,7 +67,7 @@ log_error() {
 
 # Check if a command exists
 command_exists() {
-  command -v "$1" >/dev/null 2>&1
+  command -v "$1" > /dev/null 2>&1
 }
 
 # Get version of a command (if available)
@@ -76,7 +76,7 @@ get_version() {
   local version_flag="${2:---version}"
 
   if command_exists "${cmd}"; then
-    "${cmd}" "${version_flag}" 2>/dev/null | head -1 || echo "unknown"
+    "${cmd}" "${version_flag}" 2> /dev/null | head -1 || echo "unknown"
   else
     echo "not installed"
   fi
@@ -171,7 +171,7 @@ validate_validator_dependencies() {
     if [[ ${FIX_MODE} -eq 1 ]]; then
       log_info "Fixing: Installing missing validator dependencies..."
       if [[ "$(uname -s)" == "Darwin" ]] && command_exists brew; then
-        if brew install "${missing_validator[@]}" >/dev/null 2>&1; then
+        if brew install "${missing_validator[@]}" > /dev/null 2>&1; then
           log_success "Fixed: Installed ${missing_validator[*]}"
         else
           log_error "Failed to install missing dependencies"
@@ -255,7 +255,7 @@ validate_homebrew_setup() {
 
   # Count packages in Brewfile
   local total_packages
-  total_packages=$(grep -c "^brew\|^cask" "${BREWFILE}" 2>/dev/null || echo "0")
+  total_packages=$(grep -c "^brew\|^cask" "${BREWFILE}" 2> /dev/null || echo "0")
 
   if [[ ${total_packages} -eq 0 ]]; then
     log_warning "No packages defined in Brewfile"
@@ -264,7 +264,7 @@ validate_homebrew_setup() {
   fi
 
   # Check if brew bundle is available
-  if ! brew bundle --help >/dev/null 2>&1; then
+  if ! brew bundle --help > /dev/null 2>&1; then
     log_error "brew bundle not available - install with: brew tap homebrew/bundle"
     return 1
   fi
@@ -272,7 +272,7 @@ validate_homebrew_setup() {
   log_success "Homebrew bundle available"
 
   # Quick check if Brewfile is valid
-  if ! brew bundle check --file="${BREWFILE}" >/dev/null 2>&1; then
+  if ! brew bundle check --file="${BREWFILE}" > /dev/null 2>&1; then
     log_warning "Some packages in Brewfile are not installed"
     log_info "Run 'brew bundle install' to install missing packages"
   else
@@ -318,11 +318,11 @@ validate_shell_compatibility() {
   local shells_file="/etc/shells"
   if [[ -f "${shells_file}" ]]; then
     local fish_path zsh_path
-    fish_path=$(command -v fish 2>/dev/null || echo "")
-    zsh_path=$(command -v zsh 2>/dev/null || echo "")
+    fish_path=$(command -v fish 2> /dev/null || echo "")
+    zsh_path=$(command -v zsh 2> /dev/null || echo "")
 
     if [[ -n "${fish_path}" ]]; then
-      if grep -q "${fish_path}" "${shells_file}" 2>/dev/null; then
+      if grep -q "${fish_path}" "${shells_file}" 2> /dev/null; then
         log_success "Fish is registered in /etc/shells"
       else
         log_warning "Fish not found in /etc/shells - add it only if you want to set Fish as your default shell:"
@@ -331,7 +331,7 @@ validate_shell_compatibility() {
     fi
 
     if [[ -n "${zsh_path}" ]]; then
-      if grep -q "${zsh_path}" "${shells_file}" 2>/dev/null; then
+      if grep -q "${zsh_path}" "${shells_file}" 2> /dev/null; then
         log_success "Zsh is registered in /etc/shells"
       else
         log_warning "Zsh not found in /etc/shells - add with:"
@@ -357,7 +357,7 @@ validate_system_compatibility() {
 
       # Check macOS version
       local macos_version
-      macos_version=$(sw_vers -productVersion 2>/dev/null || echo "unknown")
+      macos_version=$(sw_vers -productVersion 2> /dev/null || echo "unknown")
       log_info "macOS version: ${macos_version}"
       ;;
     Linux)
@@ -372,7 +372,7 @@ validate_system_compatibility() {
   local arch
   arch=$(uname -m)
   case "${arch}" in
-    arm64|x86_64)
+    arm64 | x86_64)
       log_success "Architecture supported: ${arch}"
       ;;
     *)

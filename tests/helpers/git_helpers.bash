@@ -22,7 +22,7 @@ init_git_repo() {
   local default_branch="${1:-main}"
 
   # Initialize repository - handle different git versions
-  if git init -b "${default_branch}" 2>/dev/null; then
+  if git init -b "${default_branch}" 2> /dev/null; then
     # Modern git supports -b flag
     :
   else
@@ -103,12 +103,12 @@ setup_non_git_dir() {
 
 # Check if current directory is a git repository
 is_git_repo() {
-  git rev-parse --is-inside-work-tree >/dev/null 2>&1
+  git rev-parse --is-inside-work-tree > /dev/null 2>&1
 }
 
 # Get current branch name
 get_current_branch() {
-  git branch --show-current 2>/dev/null
+  git branch --show-current 2> /dev/null
 }
 
 # Check if remote exists
@@ -118,5 +118,5 @@ has_origin_remote() {
 
 # Get default branch from remote
 get_remote_default_branch() {
-  git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }'
+  git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }'
 }
