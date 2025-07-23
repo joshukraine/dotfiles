@@ -76,7 +76,7 @@ All functions follow a standardized documentation format:
 | Git Functions | ✅ | ✅ | Shared logic in both shells |
 | Tmux Functions | ✅ | ✅ | Shared scripts in `bin/` |
 | Navigation | ✅ | ✅ | Abbreviations in shared YAML |
-| Command Wrappers | ✅ | ⚠️ | Primary implementation in Fish |
+| Command Wrappers | ✅ | ✅ | Enhanced commands via Homebrew (Fish has convenience wrappers) |
 | System Utilities | ✅ | ✅ | Functions in both shells |
 
 ## Detailed Documentation
