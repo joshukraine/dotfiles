@@ -1,7 +1,25 @@
+# Generate ctags for Ruby project with bundled gems
+#
+# Usage: ct
+# Arguments: None
+#
+# Examples:
+#   ct                      # Generate ctags for current Ruby project
+#
+# Returns: Creates ctags file including all Ruby files and bundled gem paths
 function ct() {
   ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
 }
 
+# Copy current working directory to clipboard with format options
+#
+# Usage: copycwd
+# Arguments: None
+#
+# Examples:
+#   copycwd                 # Interactive prompt to choose home directory format
+#
+# Returns: Copies current directory path to clipboard with chosen format (~, $HOME, or full path)
 function copycwd() {
     echo "Choose how to display the home directory:"
     echo "1) ~"
@@ -28,6 +46,15 @@ function copycwd() {
     esac
 }
 
+# Delete all .DS_Store files recursively from current directory
+#
+# Usage: dsx
+# Arguments: None
+#
+# Examples:
+#   dsx                     # Remove all .DS_Store files in current directory tree
+#
+# Returns: Deletes all .DS_Store files found, no output unless errors occur
 function dsx() {
   find . -name "*.DS_Store" -type f -delete
 }
@@ -128,8 +155,30 @@ Examples:
   fi
 }
 
+# Display PATH environment variable as numbered list
+#
+# Usage: path
+# Arguments: None
+#
+# Examples:
+#   path                    # Show all directories in PATH with line numbers
+#
+# Returns: Numbered list of all directories in the PATH environment variable
 function path() {
   echo $PATH | tr ":" "\n" | nl
+}
+
+# Reload Zsh shell configuration
+#
+# Usage: src
+# Arguments: None
+#
+# Examples:
+#   src                     # Reload Zsh configuration files
+#
+# Returns: Sources .zshrc and reloads all configuration
+function src() {
+  source ~/.zshrc
 }
 
 # Ping utility with sensible defaults (Zsh version - fixed target)

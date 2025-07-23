@@ -19,6 +19,7 @@
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
 - [Shared Configuration Framework](#shared-configuration-framework)
+- [Documentation](#-documentation)
 - [Markdown Linting](#markdown-linting)
 - [About Neovim Distributions](#about-neovim-distributions)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
@@ -307,6 +308,50 @@ The shared configuration includes intelligent git functions that automatically d
 - `gbrm` - Remove branches merged into main/master
 
 These functions work with both `main` and `master` branch names automatically.
+
+## 📚 Documentation
+
+This repository includes comprehensive documentation for all shell functions and abbreviations to improve maintainability and user experience.
+
+### Function Documentation
+
+All 35+ shell functions are thoroughly documented with standardized inline comments and external reference guides:
+
+- **[Function Overview](docs/functions/README.md)** - Complete index of all functions with descriptions and categories
+- **[Git Functions](docs/functions/git-functions.md)** - Smart git operations with automatic branch detection
+- **[Development Tools](docs/functions/development.md)** - Development utilities, navigation shortcuts, and command wrappers
+- **[Tmux Functions](docs/functions/tmux.md)** - Terminal multiplexer session management and workflows
+- **[System Functions](docs/functions/system.md)** - System utilities, process management, and command enhancements
+
+### Abbreviations Reference
+
+All 289 shell abbreviations are documented with usage examples and descriptions:
+
+- **[Complete Abbreviations Reference](docs/abbreviations.md)** - Comprehensive guide to all abbreviations across categories
+  - UNIX commands with enhanced options
+  - Git workflow shortcuts
+  - Development tool shortcuts
+  - Homebrew package management
+  - Docker, Rails, Node.js, and more
+
+### Documentation Standards
+
+- **Standardized Format**: All functions include usage, arguments, examples, and return values
+- **Cross-Shell Consistency**: Identical documentation quality in both Fish and Zsh
+- **Practical Examples**: Real-world usage scenarios and workflow integration
+- **Cross-References**: Links between related functions and abbreviations
+
+### Regenerating Documentation
+
+Function documentation is manually maintained, while abbreviation documentation can be regenerated:
+
+```bash
+# Regenerate abbreviations from shared YAML source
+reload-abbr
+
+# Or manually from the dotfiles directory
+~/dotfiles/shared/generate-all-abbr.sh
+```
 
 ## Markdown Linting
 
