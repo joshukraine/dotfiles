@@ -317,16 +317,26 @@ validate_shell_compatibility() {
   # Check if shells are available in /etc/shells
   local shells_file="/etc/shells"
   if [[ -f "${shells_file}" ]]; then
-    if grep -q "$(command -v fish)" "${shells_file}" 2>/dev/null; then
-      log_success "Fish is registered in /etc/shells"
-    else
-      log_warning "Fish not found in /etc/shells - may need to add it"
+    local fish_path zsh_path
+    fish_path=$(command -v fish 2>/dev/null || echo "")
+    zsh_path=$(command -v zsh 2>/dev/null || echo "")
+
+    if [[ -n "${fish_path}" ]]; then
+      if grep -q "${fish_path}" "${shells_file}" 2>/dev/null; then
+        log_success "Fish is registered in /etc/shells"
+      else
+        log_warning "Fish not found in /etc/shells - add with:"
+        log_info "  sudo sh -c 'echo ${fish_path} >> /etc/shells'"
+      fi
     fi
 
-    if grep -q "$(command -v zsh)" "${shells_file}" 2>/dev/null; then
-      log_success "Zsh is registered in /etc/shells"
-    else
-      log_warning "Zsh not found in /etc/shells - may need to add it"
+    if [[ -n "${zsh_path}" ]]; then
+      if grep -q "${zsh_path}" "${shells_file}" 2>/dev/null; then
+        log_success "Zsh is registered in /etc/shells"
+      else
+        log_warning "Zsh not found in /etc/shells - add with:"
+        log_info "  sudo sh -c 'echo ${zsh_path} >> /etc/shells'"
+      fi
     fi
   fi
 
