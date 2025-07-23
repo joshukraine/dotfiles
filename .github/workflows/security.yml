@@ -12,6 +12,8 @@ on:
 jobs:
   dependency-scan:
     runs-on: macos-latest
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
 
     steps:
       - name: Checkout repository
