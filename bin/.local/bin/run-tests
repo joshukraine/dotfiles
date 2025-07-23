@@ -126,8 +126,11 @@ install_dependencies() {
 setup_environment() {
   print_blue "Setting up test environment..."
 
-  # Navigate to dotfiles directory - fix the path calculation
-  cd "$(dirname "${BASH_SOURCE[0]}")/../../"
+  # Navigate to dotfiles directory - resolve symlinks to get actual location
+  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+  cd "$DOTFILES_DIR"
 
   # Make helpers executable
   if [ -d "tests/helpers" ]; then
@@ -152,8 +155,11 @@ run_tests() {
   local verbose="$2"
   local show_perf="$3"
 
-  # Navigate to dotfiles directory - fix the path calculation
-  cd "$(dirname "${BASH_SOURCE[0]}")/../../"
+  # Navigate to dotfiles directory - resolve symlinks to get actual location
+  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+  cd "$DOTFILES_DIR"
 
   local bats_args=""
   if [ "$verbose" = "true" ]; then
@@ -222,7 +228,11 @@ run_tests() {
 }
 
 show_coverage() {
-  cd "$(dirname "${BASH_SOURCE[0]}")/../../"
+  # Resolve symlinks to get actual location
+  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+  cd "$DOTFILES_DIR"
 
   print_blue "Coverage Analysis:"
 

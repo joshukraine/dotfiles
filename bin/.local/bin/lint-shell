@@ -25,9 +25,10 @@
 
 set -euo pipefail
 
-# Script directory detection
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+# Script directory detection - resolve symlinks to get actual location
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # Default options
 FIX_MODE=false
@@ -83,23 +84,22 @@ log() {
 
 # Function to find shell scripts
 find_shell_scripts() {
-  local find_args=()
+  {
+    # Find shell script files
+    find "$PROJECT_ROOT" -type f \( -name "*.sh" -o -name "*.bash" \) 2>/dev/null || true
 
-  # Base patterns for shell scripts
-  find_args+=(-type f)
-  find_args+=(\( -name "*.sh" -o -name "*.bash" \))
+    # Add test files unless excluded
+    if [[ "$EXCLUDE_TESTS" = false ]]; then
+      find "$PROJECT_ROOT" -type f -name "*.bats" 2>/dev/null || true
+    fi
 
-  # Add test files unless excluded
-  if [[ "$EXCLUDE_TESTS" = false ]]; then
-    find_args+=(-o -name "*.bats")
-  fi
-
-  # Add executable scripts in bin directories
-  find_args+=(-o \( -path "*/bin/.local/bin/*" -executable \))
-  find_args+=(\))
-
-  # Exclude .git directory
-  find "$PROJECT_ROOT" "${find_args[@]}" | grep -v "\.git/"
+    # Add executable scripts in bin directories with shell shebangs
+    find "$PROJECT_ROOT" -path "*/bin/.local/bin/*" -type f -perm +111 2>/dev/null | while read -r file; do
+      if head -1 "$file" 2>/dev/null | grep -q -E "(bash|sh)" && ! head -1 "$file" 2>/dev/null | grep -q -E "(ruby|python|perl|fish)"; then
+        echo "$file"
+      fi
+    done || true
+  } | grep -v "\.git/" || true
 }
 
 # Function to determine shell type for a file
@@ -184,7 +184,7 @@ main() {
 
   # Process each file
   for file in "${files[@]}"; do
-    ((file_count++))
+    file_count=$((file_count + 1))
 
     # Show relative path
     local rel_path="${file#$PROJECT_ROOT/}"
