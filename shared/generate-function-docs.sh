@@ -252,16 +252,14 @@ EOF
 
     # TODO: Add cross-shell compatibility analysis
 
-    cat >> "$temp_file" << 'EOF'
+    cat >> "$temp_file" << "EOF"
 
 ---
 
 *This index is auto-generated from function inline documentation. Last updated: $(date)*
 EOF
 
-    # Replace date placeholder
-    sed "s/\$(date)/$(date)/" "$temp_file" > "$output_file"
-    rm "$temp_file"
+    mv "$temp_file" "$output_file"
 
     success "Generated function index at $output_file"
 }

@@ -141,21 +141,25 @@ EOF
 ## Function Categories
 
 ### Smart Git Functions
+
 Functions that intelligently detect default branches and handle git workflows:
 
 $(grep "| \`g" "$output_file" | grep -E "(gcom|gpum|grbm|gbrm)" || echo "*No smart git functions found with documentation*")
 
 ### Development Utilities
+
 Tools for development workflow and navigation:
 
 $(grep -E "| \`(cd|reload|mm|src)" "$output_file" || echo "*No development utilities found with documentation*")
 
 ### System Functions
+
 System utilities and command wrappers:
 
 $(grep -E "| \`(cat|htop|ls|pi)" "$output_file" || echo "*No system functions found with documentation*")
 
 ### Tmux Functions
+
 Session and window management:
 
 $(grep -E "| \`t" "$output_file" || echo "*No tmux functions found with documentation*")

@@ -325,7 +325,7 @@ validate_shell_compatibility() {
       if grep -q "${fish_path}" "${shells_file}" 2>/dev/null; then
         log_success "Fish is registered in /etc/shells"
       else
-        log_warning "Fish not found in /etc/shells - add with:"
+        log_warning "Fish not found in /etc/shells - add it only if you want to set Fish as your default shell:"
         log_info "  sudo sh -c 'echo ${fish_path} >> /etc/shells'"
       fi
     fi
