@@ -1,3 +1,16 @@
+# Switch to the default Git branch (main or master) with optional pull
+#
+# Usage: gcom [OPTION]
+# Arguments:
+#   -p                      Pull latest changes after switching to default branch
+#   -h, --help              Show help message
+#
+# Examples:
+#   gcom                    # Checkout default branch only
+#   gcom -p                 # Checkout default branch and pull latest changes
+#   gcom --help             # Show help message
+#
+# Returns: 0 on success, 1 on error
 function gcom
     # Show help message
     if test (count $argv) -gt 0

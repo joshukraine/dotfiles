@@ -1,3 +1,14 @@
+# Push current branch to origin with upstream tracking to the default branch
+#
+# Usage: gpum [OPTION]
+# Arguments:
+#   -h, --help              Show help message
+#
+# Examples:
+#   gpum                    # Push current branch to origin with upstream tracking
+#   gpum --help             # Show help message
+#
+# Returns: 0 on success, 1 on error
 function gpum
     # Show help message
     if test (count $argv) -gt 0
