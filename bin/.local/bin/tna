@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 #
-# Create a new session named for current directory, or attach if exists
+# Create or attach tmux session named after current directory (simplified version)
+#
 # Usage: tna
+# Arguments: None
+#
+# Examples:
+#   tna                     # Create/attach session named after current directory
+#
+# Returns: Creates new tmux session or attaches to existing one
+# Behavior: Always uses current directory name as session name (simpler than tat)
 
 session_name=$(basename "$PWD" | tr . -)
 tmux new-session -As "$session_name"

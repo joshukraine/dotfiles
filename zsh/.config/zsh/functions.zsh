@@ -132,10 +132,29 @@ function path() {
   echo $PATH | tr ":" "\n" | nl
 }
 
+# Ping utility with sensible defaults (Zsh version - fixed target)
+#
+# Usage: pi
+# Arguments: None
+#
+# Examples:
+#   pi                      # Ping Cloudflare DNS (1.1.1.1) 5 times
+#
+# Returns: Ping results with audible alerts and count limit (5 pings)
+# Note: This Zsh version always pings 1.1.1.1 (unlike Fish version which accepts arguments)
 function pi() {
   ping -Anc 5 1.1.1.1
 }
 
+# List available Ruby versions using asdf with filtering
+#
+# Usage: rlv
+# Arguments: None
+#
+# Examples:
+#   rlv                     # Show all installable Ruby versions (numeric only)
+#
+# Returns: Filtered list of Ruby versions available for installation via asdf, excluding preview/rc versions
 function rlv() {
   asdf list all ruby | rg '^\d'
 }

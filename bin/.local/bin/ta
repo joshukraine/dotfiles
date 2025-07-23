@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 #
-# Attach to an existing tmux session with a specific name
-# Usage: ta <session-name>
+# Attach to existing tmux session by name
+#
+# Usage: ta <session_name>
+# Arguments:
+#   session_name - Name of existing tmux session to attach to (required)
+#
+# Examples:
+#   ta myproject           # Attach to session named "myproject"
+#   ta work               # Attach to session named "work"
+#
+# Returns: Attaches to specified tmux session
+# Behavior: Fails if session doesn't exist (use tat/tna to create if needed)
 
 if [[ $# -eq 0 ]]; then
   echo "Usage: ta <session-name>"
