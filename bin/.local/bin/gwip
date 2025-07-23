@@ -6,5 +6,5 @@
 set -euo pipefail
 
 git add -A
-git ls-files --deleted | xargs -r git rm 2>/dev/null || true
+git ls-files --deleted | xargs -r git rm 2> /dev/null || true
 git commit --no-verify -m "--wip--"

@@ -30,6 +30,14 @@ repos:
         files: ^shared/environment\.(sh|fish)$
         pass_filenames: false
 
+      # Critical scripts functionality test
+      - id: critical-scripts-test
+        name: Critical Scripts Test
+        entry: bash -c './bin/.local/bin/run-tests --fast shell-syntax | grep -q "All tests passed" && echo "✓ run-tests working correctly"'
+        language: system
+        files: ^bin/\.local/bin/run-tests$
+        pass_filenames: false
+
       # Markdown linting
       - id: markdown-validation
         name: Markdown Validation

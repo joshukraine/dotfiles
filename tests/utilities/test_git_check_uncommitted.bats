@@ -20,14 +20,14 @@ teardown() {
   setup_non_git_dir
 
   run git-check-uncommitted
-  [ "$status" -eq 2 ]
+  [ "${status}" -eq 2 ]
 }
 
 @test "git-check-uncommitted succeeds with clean repository" {
   setup_main_repo
 
   run git-check-uncommitted
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 }
 
 @test "git-check-uncommitted fails with uncommitted changes" {
@@ -35,7 +35,7 @@ teardown() {
   create_uncommitted_changes
 
   run git-check-uncommitted
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted fails with unstaged changes" {
@@ -43,7 +43,7 @@ teardown() {
   create_unstaged_changes
 
   run git-check-uncommitted
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted --prompt shows prompt with uncommitted changes" {
@@ -52,9 +52,9 @@ teardown() {
 
   # Simulate user choosing 'n' (no)
   run bash -c "echo 'n' | git-check-uncommitted --prompt"
-  assert_contains "$output" "uncommitted changes"
-  assert_contains "$output" "Continue anyway"
-  [ "$status" -eq 1 ]
+  assert_contains "${output}" "uncommitted changes"
+  assert_contains "${output}" "Continue anyway"
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted --prompt continues when user chooses yes" {
@@ -63,9 +63,9 @@ teardown() {
 
   # Simulate user choosing 'y' (yes)
   run bash -c "echo 'y' | git-check-uncommitted --prompt"
-  assert_contains "$output" "uncommitted changes"
-  assert_contains "$output" "Continue anyway"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "uncommitted changes"
+  assert_contains "${output}" "Continue anyway"
+  [ "${status}" -eq 0 ]
 }
 
 @test "git-check-uncommitted --prompt continues when user chooses Y" {
@@ -74,7 +74,7 @@ teardown() {
 
   # Simulate user choosing 'Y' (yes, uppercase)
   run bash -c "echo 'Y' | git-check-uncommitted --prompt"
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 }
 
 @test "git-check-uncommitted --prompt aborts on empty input" {
@@ -83,7 +83,7 @@ teardown() {
 
   # Simulate user pressing enter (empty input)
   run bash -c "echo '' | git-check-uncommitted --prompt"
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted --prompt aborts on invalid input" {
@@ -92,7 +92,7 @@ teardown() {
 
   # Simulate user choosing invalid option
   run bash -c "echo 'maybe' | git-check-uncommitted --prompt"
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted --prompt skips prompt with clean repository" {
@@ -101,9 +101,9 @@ teardown() {
 
   run git-check-uncommitted --prompt
   # Should succeed without showing prompt
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
   # Should not contain prompt text
-  [[ ! "$output" =~ "Continue anyway" ]]
+  [[ ! "${output}" =~ "Continue anyway" ]]
 }
 
 @test "git-check-uncommitted detects both staged and unstaged changes" {
@@ -115,7 +115,7 @@ teardown() {
   echo "Unstaged change" >> README.md
 
   run git-check-uncommitted
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted works in subdirectory" {
@@ -127,7 +127,7 @@ teardown() {
   echo "Change from subdir" >> ../README.md
 
   run git-check-uncommitted
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted handles newly added files" {
@@ -138,7 +138,7 @@ teardown() {
   git add newfile.txt
 
   run git-check-uncommitted
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted handles deleted files" {
@@ -148,7 +148,7 @@ teardown() {
   git rm README.md
 
   run git-check-uncommitted
-  [ "$status" -eq 1 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "git-check-uncommitted succeeds after committing changes" {
@@ -160,7 +160,7 @@ teardown() {
   git commit -m "Update README"
 
   run git-check-uncommitted
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 }
 
 @test "git-check-uncommitted handles empty repository" {
@@ -173,7 +173,7 @@ teardown() {
   run git-check-uncommitted
   # Empty repo behavior - depends on implementation
   # Should not crash at minimum
-  [ "$status" -ge 0 ]
+  [ "${status}" -ge 0 ]
 }
 
 @test "git-check-uncommitted shows help or usage info" {
@@ -182,5 +182,5 @@ teardown() {
   # Test if script provides help (if implemented)
   run git-check-uncommitted --help
   # Should either show help or fail gracefully
-  [ "$status" -ge 0 ]
+  [ "${status}" -ge 0 ]
 }
