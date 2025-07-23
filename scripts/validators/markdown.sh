@@ -70,7 +70,7 @@ check_prerequisites() {
   local missing_tools=()
 
   # Check for markdownlint-cli2
-  if ! command -v markdownlint-cli2 > /dev/null 2>&1; then
+  if ! command -v markdownlint-cli2 >/dev/null 2>&1; then
     missing_tools+=("markdownlint-cli2")
   fi
 
@@ -95,8 +95,8 @@ check_markdown_config() {
   log_success "Markdown configuration found: markdown/.markdownlint.yaml"
 
   # Validate config file syntax (YAML)
-  if command -v yq > /dev/null 2>&1; then
-    if ! yq eval '.' "${MARKDOWN_CONFIG}" > /dev/null 2>&1; then
+  if command -v yq >/dev/null 2>&1; then
+    if ! yq eval '.' "${MARKDOWN_CONFIG}" >/dev/null 2>&1; then
       log_error "Invalid YAML syntax in markdown configuration"
       return 1
     fi
@@ -119,7 +119,7 @@ find_markdown_files() {
     -not -path "*/tmux/.config/tmux/plugins/*" \
     -not -path "*/node_modules/*" \
     -not -path "*/vendor/*" \
-    -type f 2> /dev/null | sort || echo ""
+    -type f 2>/dev/null | sort || echo ""
 }
 
 # Validate a single markdown file

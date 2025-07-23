@@ -14,7 +14,7 @@ echo "🚀 Regenerating abbreviations for all shells from ${YAML_FILE}..."
 echo
 
 # Check dependencies
-if ! command -v yq > /dev/null 2>&1; then
+if ! command -v yq >/dev/null 2>&1; then
   echo "❌ Error: yq is required but not installed. Install it with: brew install yq"
   exit 1
 fi

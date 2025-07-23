@@ -121,7 +121,7 @@ show_validators() {
 
 # Show usage information
 show_usage() {
-  cat << EOF
+  cat <<EOF
 Configuration Validation Runner
 
 Validates dotfiles configurations for syntax, consistency, and integrity
@@ -143,7 +143,7 @@ EOF
 
   show_validators
 
-  cat << EOF
+  cat <<EOF
 
 EXIT CODES:
     0                       All validations passed

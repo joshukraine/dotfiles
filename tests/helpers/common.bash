@@ -97,7 +97,7 @@ assert_command_succeeds() {
   local command="$1"
   local message="${2:-Command should succeed}"
 
-  if eval "${command}" > /dev/null 2>&1; then
+  if eval "${command}" >/dev/null 2>&1; then
     return 0
   else
     echo "Assertion failed: ${message}"
@@ -110,7 +110,7 @@ assert_command_fails() {
   local command="$1"
   local message="${2:-Command should fail}"
 
-  if ! eval "${command}" > /dev/null 2>&1; then
+  if ! eval "${command}" >/dev/null 2>&1; then
     return 0
   else
     echo "Assertion failed: ${message}"
@@ -137,7 +137,7 @@ skip_test() {
 # Test prerequisites
 require_command() {
   local cmd="$1"
-  if ! command -v "${cmd}" > /dev/null 2>&1; then
+  if ! command -v "${cmd}" >/dev/null 2>&1; then
     skip_test "Required command '${cmd}' not found"
   fi
 }
@@ -168,7 +168,7 @@ mock_command() {
   local mock_script
   mock_script=$(mktemp)
 
-  cat > "${mock_script}" << EOF
+  cat >"${mock_script}" <<EOF
 #!/bin/bash
 echo "${mock_output}"
 exit ${mock_exit_code}

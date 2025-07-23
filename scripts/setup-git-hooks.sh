@@ -54,7 +54,7 @@ log_error() {
 
 # Show usage information
 show_usage() {
-  cat << EOF
+  cat <<EOF
 Git Hooks Setup Script
 
 Sets up pre-commit hooks for automated configuration validation.
@@ -77,7 +77,7 @@ EOF
 
 # Check if we're in a git repository
 check_git_repo() {
-  if ! git rev-parse --git-dir > /dev/null 2>&1; then
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
     log_error "Not in a git repository"
     exit 1
   fi
@@ -85,13 +85,13 @@ check_git_repo() {
 
 # Check if pre-commit is installed
 check_prerecommit() {
-  if ! command -v pre-commit > /dev/null 2>&1; then
+  if ! command -v pre-commit >/dev/null 2>&1; then
     log_warning "pre-commit not found. Installing via pip..."
 
     # Try to install pre-commit
-    if command -v pip3 > /dev/null 2>&1; then
+    if command -v pip3 >/dev/null 2>&1; then
       pip3 install pre-commit
-    elif command -v pip > /dev/null 2>&1; then
+    elif command -v pip >/dev/null 2>&1; then
       pip install pre-commit
     else
       log_error "Cannot install pre-commit: pip not found"
@@ -145,7 +145,7 @@ uninstall_hooks() {
 
   cd "${DOTFILES_ROOT}"
 
-  if command -v pre-commit > /dev/null 2>&1; then
+  if command -v pre-commit >/dev/null 2>&1; then
     pre-commit uninstall --hook-type pre-commit --hook-type pre-push
     log_success "Git hooks uninstalled successfully"
   else
@@ -185,7 +185,7 @@ check_hooks() {
   fi
 
   # Check pre-commit status
-  if command -v pre-commit > /dev/null 2>&1; then
+  if command -v pre-commit >/dev/null 2>&1; then
     echo
     log_info "Pre-commit configuration:"
     pre-commit --version
@@ -209,7 +209,7 @@ update_hooks() {
 
   cd "${DOTFILES_ROOT}"
 
-  if command -v pre-commit > /dev/null 2>&1; then
+  if command -v pre-commit >/dev/null 2>&1; then
     # Update hook repositories
     pre-commit autoupdate
 

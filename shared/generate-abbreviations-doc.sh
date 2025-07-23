@@ -12,7 +12,7 @@ source "${SCRIPT_DIR}/generator-utils.sh"
 YAML_FILE="${SCRIPT_DIR}/abbreviations.yaml"
 OUTPUT_FILE="${SCRIPT_DIR}/../docs/abbreviations.md"
 
-if ! command -v yq > /dev/null 2>&1; then
+if ! command -v yq >/dev/null 2>&1; then
   echo "Error: yq is required but not installed. Install it with: brew install yq"
   exit 1
 fi
@@ -33,7 +33,7 @@ zsh_count=${total_count}
 category_count=$(yq eval 'keys | length' "${YAML_FILE}")
 
 # Generate the documentation
-cat > "${OUTPUT_FILE}" << EOF
+cat >"${OUTPUT_FILE}" <<EOF
 # Shell Abbreviations Reference
 
 This document provides a comprehensive reference for all shell abbreviations available in both Fish and Zsh shells. Abbreviations are automatically generated from the single source of truth: \`shared/abbreviations.yaml\`.
@@ -143,11 +143,11 @@ yq eval 'keys | .[]' "${YAML_FILE}" | while read -r category; do
     # Generate table rows for this category
     yq eval ".${category} | to_entries | .[] | \"| \`\" + .key + \"\` | \`\" + (.value | sub(\"\\|\"; \"\\\\|\"; \"g\")) + \"\` | \" + .key + \" |\"" "${YAML_FILE}"
     echo ""
-  } >> "${OUTPUT_FILE}"
+  } >>"${OUTPUT_FILE}"
 done
 
 # Add cross-shell compatibility section
-cat >> "${OUTPUT_FILE}" << 'EOF'
+cat >>"${OUTPUT_FILE}" <<'EOF'
 ## Cross-Shell Compatibility
 
 ### Fish-Only Features
