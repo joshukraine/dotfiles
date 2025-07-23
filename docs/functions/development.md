@@ -400,7 +400,7 @@ lint-shell --help
 
 **Features:**
 
-- **Comprehensive Coverage**: Finds all shell scripts (*.sh, *.bash, *.bats, executables in bin/)
+- **Comprehensive Coverage**: Finds all shell scripts (*.sh,*.bash, *.bats, executables in bin/)
 - **Shell Type Detection**: Automatically detects bash vs sh from shebangs
 - **Smart Filtering**: Skips non-shell files (Ruby, Python, etc.)
 - **Project Aware**: Configures shellcheck for project-specific patterns

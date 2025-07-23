@@ -84,6 +84,7 @@ run-tests --setup           # Setup test environment only
 ```
 
 **Benefits of using `run-tests`:**
+
 - Automatic environment setup (permissions, abbreviations)
 - Performance monitoring with 2-minute target enforcement
 - Coverage analysis showing function vs test counts
