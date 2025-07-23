@@ -273,10 +273,11 @@ validate_shell_scripts() {
     shell_files+=("${file}")
   done < <(
     find "${DOTFILES_ROOT}" \
-      -name "*.sh" -o -name "*.bash" \
+      \( -name "*.sh" -o -name "*.bash" \) \
       -not -path "*/.*" \
       -not -path "*/node_modules/*" \
       -not -path "*/vendor/*" \
+      -not -path "*/plugins/*" \
       -type f 2> /dev/null || true
   )
 
@@ -297,7 +298,7 @@ validate_shell_scripts() {
       local pre_fix_output
       pre_fix_output=$(shellcheck -f gcc "${file}" 2>&1 | head -20 || true)
 
-      if [[ -n "${pre_fix_output}" ]] && echo "${pre_fix_output}" | grep -q "SC225[0-9]\|SC2034\|SC2086\|SC2250"; then
+      if [[ -n "${pre_fix_output}" ]] && echo "${pre_fix_output}" | grep -q "SC225[0-9]\|SC2034\|SC2086\|SC2250\|SC2155"; then
         if fix_shellcheck_issues "${file}"; then
           log_info "Applied auto-fixes to ${relative_file}"
         fi
