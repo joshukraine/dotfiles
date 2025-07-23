@@ -25,7 +25,7 @@ main() {
     local branch_name
     local current_sha
 
-    branch_name=$(git symbolic-ref HEAD 2>/dev/null | tr '/' '\n' | tail -1)
+    branch_name=$(git symbolic-ref HEAD 2> /dev/null | tr '/' '\n' | tail -1)
     current_sha=$(git rev-parse HEAD)
 
     echo "Branch ${branch_name} was ${current_sha}"

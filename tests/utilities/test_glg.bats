@@ -38,13 +38,13 @@ teardown() {
   git merge feature/branch --no-ff -m "Merge feature branch"
 
   run glg
-  assert_contains "$output" "Merge feature branch"
-  assert_contains "$output" "Add feature"
-  assert_contains "$output" "Work on main"
+  assert_contains "${output}" "Merge feature branch"
+  assert_contains "${output}" "Add feature"
+  assert_contains "${output}" "Work on main"
   # Check for graph characters
-  assert_contains "$output" "*"  # Graph node
-  assert_contains "$output" "|"  # Graph line
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "*" # Graph node
+  assert_contains "${output}" "|" # Graph line
+  [ "${status}" -eq 0 ]
 }
 
 @test "glg shows file statistics" {
@@ -62,9 +62,9 @@ teardown() {
 
   run glg
   # Should show stats like "1 file changed, 2 insertions(+)"
-  assert_contains "$output" "file changed"
-  assert_contains "$output" "insertion"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "file changed"
+  assert_contains "${output}" "insertion"
+  [ "${status}" -eq 0 ]
 }
 
 @test "glg formats dates correctly" {
@@ -72,8 +72,8 @@ teardown() {
 
   run glg
   # Check for date format like "Jan 22, 2025"
-  assert_contains "$output" ", 20"  # Year should be there
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" ", 20" # Year should be there
+  [ "${status}" -eq 0 ]
 }
 
 @test "glg uses color codes" {
@@ -83,15 +83,15 @@ teardown() {
   run bash -c "export TERM=xterm-256color; glg"
   # Check for commit hash which should be yellow
   # The format includes %C(yellow bold) for hashes
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 }
 
 @test "glg works in non-git directory" {
   setup_non_git_dir
 
   run glg
-  assert_contains "$output" "not a git repository"
-  [ "$status" -ne 0 ]
+  assert_contains "${output}" "not a git repository"
+  [ "${status}" -ne 0 ]
 }
 
 @test "glg passes through to git log with graph" {
@@ -99,18 +99,18 @@ teardown() {
 
   # Create multiple commits
   for i in {1..3}; do
-    echo "file$i" > "file$i.txt"
-    git add "file$i.txt"
-    git commit -m "Commit $i"
+    echo "file${i}" > "file${i}.txt"
+    git add "file${i}.txt"
+    git commit -m "Commit ${i}"
   done
 
   # glg is a git log wrapper with graph, should work like git log
   run glg
   # Should show all commits with graph
-  assert_contains "$output" "Commit 3"
-  assert_contains "$output" "Commit 2"
-  assert_contains "$output" "Commit 1"
-  assert_contains "$output" "Initial commit"
-  assert_contains "$output" "*"  # Graph nodes
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Commit 3"
+  assert_contains "${output}" "Commit 2"
+  assert_contains "${output}" "Commit 1"
+  assert_contains "${output}" "Initial commit"
+  assert_contains "${output}" "*" # Graph nodes
+  [ "${status}" -eq 0 ]
 }

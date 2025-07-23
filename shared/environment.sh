@@ -13,7 +13,7 @@ export GIT_EDITOR="nvim"
 export BUNDLER_EDITOR="${EDITOR}"
 
 # Manual page configuration
-export MANPAGER="less -X"  # Don't clear the screen after quitting a manual page
+export MANPAGER="less -X" # Don't clear the screen after quitting a manual page
 
 # Homebrew configuration
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"

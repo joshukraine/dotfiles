@@ -14,14 +14,14 @@ setup() {
   setup_tmux_mocking
 
   # Create a test directory with a predictable name
-  export ORIGINAL_PWD="$PWD"
+  export ORIGINAL_PWD="${PWD}"
   export TEST_TEMP_DIR
   TEST_TEMP_DIR=$(mktemp -d)
-  cd "$TEST_TEMP_DIR" || return 1
+  cd "${TEST_TEMP_DIR}" || return 1
 
   # Track potential session names for cleanup
   track_tmux_session "test-session"
-  track_tmux_session "$(basename "$TEST_TEMP_DIR")"
+  track_tmux_session "$(basename "${TEST_TEMP_DIR}")"
   track_tmux_session "custom-session"
   track_tmux_session "My_Custom-Session_Name"
   track_tmux_session "test-project-name"
@@ -43,9 +43,9 @@ teardown() {
   cleanup_all_test_tmux_sessions
 
   # Return to original directory and cleanup
-  cd "$ORIGINAL_PWD" || return 1
-  if [ -n "$TEST_TEMP_DIR" ] && [ -d "$TEST_TEMP_DIR" ]; then
-    rm -rf "$TEST_TEMP_DIR"
+  cd "${ORIGINAL_PWD}" || return 1
+  if [ -n "${TEST_TEMP_DIR}" ] && [ -d "${TEST_TEMP_DIR}" ]; then
+    rm -rf "${TEST_TEMP_DIR}"
   fi
 
   restore_path
@@ -59,9 +59,9 @@ teardown() {
 @test "tat creates session name from current directory" {
   # We're in a temp directory with a known name
   local dir_name
-  dir_name=$(basename "$PWD")
+  dir_name=$(basename "${PWD}")
   # Prevent unused variable warning by referencing it
-  [ -n "$dir_name" ]
+  [ -n "${dir_name}" ]
 
   # Test the core logic by examining the variables tat would use
   # We can't easily test tmux session creation, but we can test name derivation
@@ -132,8 +132,8 @@ teardown() {
 @test "tat handles long directory names" {
   # Create directory with very long name
   local long_name="this-is-a-very-long-directory-name-that-might-cause-issues-with-tmux-session-names"
-  mkdir "$long_name"
-  cd "$long_name"
+  mkdir "${long_name}"
+  cd "${long_name}"
 
   run tat
   # Should handle long names gracefully
@@ -141,12 +141,12 @@ teardown() {
 
 @test "tat fails gracefully when tmux is not available" {
   # This test depends on tmux being in PATH, so we'll skip it if tmux exists
-  if command -v tmux >/dev/null 2>&1; then
+  if command -v tmux > /dev/null 2>&1; then
     skip "tmux is available, cannot test unavailability"
   fi
 
   run tat
-  [ "$status" -ne 0 ]
+  [ "${status}" -ne 0 ]
 }
 
 @test "tat preserves custom session name exactly" {

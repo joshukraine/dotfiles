@@ -75,6 +75,11 @@ check_prerequisites() {
     missing_tools+=("shellcheck")
   fi
 
+  # Check for shfmt (required for formatting when --fix is enabled)
+  if [[ ${FIX_MODE} -eq 1 ]] && ! command -v shfmt >/dev/null 2>&1; then
+    missing_tools+=("shfmt")
+  fi
+
   if [[ ${#missing_tools[@]} -gt 0 ]]; then
     log_error "Missing required tools: ${missing_tools[*]}"
     log_error "Install with: brew install ${missing_tools[*]}"
@@ -184,18 +189,18 @@ fix_shellcheck_issues() {
 
   if [[ -n "${diff_output}" && "${diff_output}" != "" ]]; then
     # Save the diff to a temp file and apply it
-    echo "${diff_output}" > "${temp_patch}"
+    echo "${diff_output}" >"${temp_patch}"
 
     # Apply the patch from the dotfiles root directory (save/restore working dir)
     if cd "${DOTFILES_ROOT}" 2>/dev/null; then
-      if timeout 10s patch --batch --forward -p1 < "${temp_patch}" >/dev/null 2>&1; then
+      if timeout 10s patch --batch --forward -p1 <"${temp_patch}" >/dev/null 2>&1; then
         cd "${original_dir}"
         log_info "Applied shellcheck auto-fixes to $(basename "${file}")"
         rm -f "${temp_patch}"
         return 0
       else
         # Try applying without path stripping in case of relative paths
-        if timeout 10s patch --batch --forward -p0 < "${temp_patch}" >/dev/null 2>&1; then
+        if timeout 10s patch --batch --forward -p0 <"${temp_patch}" >/dev/null 2>&1; then
           cd "${original_dir}"
           log_info "Applied shellcheck auto-fixes to $(basename "${file}")"
           rm -f "${temp_patch}"
@@ -216,6 +221,49 @@ fix_shellcheck_issues() {
   return 1
 }
 
+# Format shell script using shfmt
+format_shell_script() {
+  local file="$1"
+  local temp_formatted
+  temp_formatted=$(mktemp)
+  local original_content_hash
+  local formatted_content_hash
+
+  # Get hash of original file content
+  original_content_hash=$(sha256sum "${file}" | cut -d' ' -f1)
+
+  # Apply shfmt formatting with recommended options:
+  # -i 2: 2-space indentation
+  # -ci: Switch cases indent
+  # -bn: Binary operators at beginning of line
+  # Note: -sr flag (redirect operators followed by space) excluded due to known issues
+  if timeout 30s shfmt -i 2 -ci -bn "${file}" >"${temp_formatted}" 2>/dev/null; then
+    # Get hash of formatted content
+    formatted_content_hash=$(sha256sum "${temp_formatted}" | cut -d' ' -f1)
+
+    # Only update file if content actually changed
+    if [[ "${original_content_hash}" != "${formatted_content_hash}" ]]; then
+      if cp "${temp_formatted}" "${file}"; then
+        log_info "Applied shfmt formatting to $(basename "${file}")"
+        rm -f "${temp_formatted}"
+        return 0
+      else
+        log_warning "Failed to apply shfmt formatting to $(basename "${file}")"
+        rm -f "${temp_formatted}"
+        return 1
+      fi
+    else
+      # File was already properly formatted
+      rm -f "${temp_formatted}"
+      return 0
+    fi
+  else
+    log_warning "shfmt formatting failed for $(basename "${file}")"
+    rm -f "${temp_formatted}"
+    return 1
+  fi
+}
+
 # Validate shell scripts with shellcheck
 validate_shell_scripts() {
   log_info "Validating shell scripts with shellcheck..."
@@ -225,10 +273,11 @@ validate_shell_scripts() {
     shell_files+=("${file}")
   done < <(
     find "${DOTFILES_ROOT}" \
-      -name "*.sh" -o -name "*.bash" \
+      \( -name "*.sh" -o -name "*.bash" \) \
       -not -path "*/.*" \
       -not -path "*/node_modules/*" \
       -not -path "*/vendor/*" \
+      -not -path "*/plugins/*" \
       -type f 2>/dev/null || true
   )
 
@@ -249,10 +298,15 @@ validate_shell_scripts() {
       local pre_fix_output
       pre_fix_output=$(shellcheck -f gcc "${file}" 2>&1 | head -20 || true)
 
-      if [[ -n "${pre_fix_output}" ]] && echo "${pre_fix_output}" | grep -q "SC225[0-9]\|SC2034\|SC2086\|SC2250"; then
+      if [[ -n "${pre_fix_output}" ]] && echo "${pre_fix_output}" | grep -q "SC225[0-9]\|SC2034\|SC2086\|SC2250\|SC2155"; then
         if fix_shellcheck_issues "${file}"; then
           log_info "Applied auto-fixes to ${relative_file}"
         fi
+      fi
+
+      # Apply shfmt formatting after shellcheck fixes
+      if command -v shfmt >/dev/null 2>&1; then
+        format_shell_script "${file}"
       fi
     fi
 
@@ -288,7 +342,7 @@ validate_shell_scripts() {
             echo "    ${line}" >&2
           fi
         fi
-      done <<< "${shellcheck_output}"
+      done <<<"${shellcheck_output}"
 
       if [[ ${has_errors} -eq 1 ]]; then
         log_error "Shellcheck errors: ${relative_file}"

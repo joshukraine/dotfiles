@@ -163,31 +163,31 @@ EOF
 parse_args() {
   while [[ $# -gt 0 ]]; do
     case $1 in
-      -h|--help)
+      -h | --help)
         show_usage
         exit 0
         ;;
-      -l|--list-validators)
+      -l | --list-validators)
         show_validators
         exit 0
         ;;
-      -f|--fix)
+      -f | --fix)
         FIX_MODE=1
         shift
         ;;
-      -r|--report)
+      -r | --report)
         REPORT_MODE=1
         shift
         ;;
-      -v|--validator)
+      -v | --validator)
         SPECIFIC_VALIDATOR="$2"
         shift 2
         ;;
-      -q|--quiet)
+      -q | --quiet)
         VERBOSE=0
         shift
         ;;
-      -c|--ci)
+      -c | --ci)
         CI_MODE=1
         VERBOSE=0
         shift

@@ -11,5 +11,5 @@
 # Returns: Creates new tmux session or attaches to existing one
 # Behavior: Always uses current directory name as session name (simpler than tat)
 
-session_name=$(basename "$PWD" | tr . -)
-tmux new-session -As "$session_name"
+session_name=$(basename "${PWD}" | tr . -)
+tmux new-session -As "${session_name}"

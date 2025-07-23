@@ -4,7 +4,7 @@
 #
 # Usage: lint-shell [options]
 # Arguments:
-#   --fix             Apply automatic fixes where possible (planned feature)
+#   --fix             Apply automatic fixes using shellcheck and shfmt
 #   --quiet           Suppress informational output, show only errors
 #   --exclude-tests   Skip test files (*.bats) during linting
 #   --help, -h        Show help message and usage information
@@ -22,19 +22,25 @@
 #   - *.bats files (test scripts, unless --exclude-tests)
 #   - Executable files in bin/.local/bin/ (filtered by shebang)
 #   - Skips Ruby, Python, and other non-shell interpreters
+#   - Excludes third-party directories (plugins/, node_modules/, vendor/, .git/)
 
 set -euo pipefail
 
 # Script directory detection - resolve symlinks to get actual location
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 # Default options
 FIX_MODE=false
 QUIET_MODE=false
 EXCLUDE_TESTS=false
 EXIT_CODE=0
+
+# Fix counters for summary reporting
+SHELLCHECK_FIXES=0
+SHFMT_FIXES=0
+SKIPPED_FILES=0
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -51,11 +57,11 @@ while [[ $# -gt 0 ]]; do
       EXCLUDE_TESTS=true
       shift
       ;;
-    --help|-h)
+    --help | -h)
       echo "Usage: lint-shell [--fix] [--quiet] [--exclude-tests]"
       echo ""
       echo "Options:"
-      echo "  --fix            Apply automatic fixes where possible"
+      echo "  --fix            Apply automatic fixes using shellcheck and shfmt"
       echo "  --quiet          Suppress informational output"
       echo "  --exclude-tests  Skip test files (*.bats)"
       echo "  --help, -h       Show this help message"
@@ -69,15 +75,22 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check if shellcheck is available
-if ! command -v shellcheck >/dev/null 2>&1; then
+if ! command -v shellcheck > /dev/null 2>&1; then
   echo "Error: shellcheck is not installed" >&2
   echo "Install with: brew install shellcheck" >&2
   exit 1
 fi
 
+# Check for shfmt (required for formatting when --fix is enabled)
+if [[ "${FIX_MODE}" = true ]] && ! command -v shfmt > /dev/null 2>&1; then
+  echo "Error: shfmt is required for --fix mode but is not installed" >&2
+  echo "Install with: brew install shfmt" >&2
+  exit 1
+fi
+
 # Function to log messages
 log() {
-  if [[ "$QUIET_MODE" = false ]]; then
+  if [[ "${QUIET_MODE}" = false ]]; then
     echo "$@"
   fi
 }
@@ -86,20 +99,21 @@ log() {
 find_shell_scripts() {
   {
     # Find shell script files
-    find "$PROJECT_ROOT" -type f \( -name "*.sh" -o -name "*.bash" \) 2>/dev/null || true
+    find "${PROJECT_ROOT}" -type f \( -name "*.sh" -o -name "*.bash" \) 2> /dev/null || true
 
     # Add test files unless excluded
-    if [[ "$EXCLUDE_TESTS" = false ]]; then
-      find "$PROJECT_ROOT" -type f -name "*.bats" 2>/dev/null || true
+    if [[ "${EXCLUDE_TESTS}" = false ]]; then
+      find "${PROJECT_ROOT}" -type f -name "*.bats" 2> /dev/null || true
     fi
 
     # Add executable scripts in bin directories with shell shebangs
-    find "$PROJECT_ROOT" -path "*/bin/.local/bin/*" -type f -perm +111 2>/dev/null | while read -r file; do
-      if head -1 "$file" 2>/dev/null | grep -q -E "(bash|sh)" && ! head -1 "$file" 2>/dev/null | grep -q -E "(ruby|python|perl|fish)"; then
-        echo "$file"
+    find "${PROJECT_ROOT}" -path "*/bin/.local/bin/*" -type f -perm +111 2> /dev/null | while read -r file; do
+      if head -1 "${file}" 2> /dev/null | grep -q -E "(bash|sh)" && ! head -1 "${file}" 2> /dev/null | grep -q -E "(ruby|python|perl|fish)"; then
+        echo "${file}"
       fi
     done || true
-  } | grep -v "\.git/" || true
+    # Exclude third-party directories: git repos, plugins, package managers
+  } | grep -v -E "(\.git/|/plugins/|node_modules/|vendor/)" || true
 }
 
 # Function to determine shell type for a file
@@ -108,21 +122,21 @@ get_shell_type() {
 
   # Check shebang
   local shebang
-  shebang=$(head -1 "$file" 2>/dev/null || echo "")
+  shebang=$(head -1 "${file}" 2> /dev/null || echo "")
 
-  if [[ "$shebang" == *"bash"* ]]; then
+  if [[ "${shebang}" == *"bash"* ]]; then
     echo "bash"
-  elif [[ "$shebang" == *"sh"* && "$shebang" != *"fish"* ]]; then
+  elif [[ "${shebang}" == *"sh"* && "${shebang}" != *"fish"* ]]; then
     echo "sh"
-  elif [[ "$file" == *.bats ]]; then
-    echo "bash"  # BATS files are bash-based
-  elif [[ "$file" == *.sh ]]; then
+  elif [[ "${file}" == *.bats ]]; then
+    echo "bash" # BATS files are bash-based
+  elif [[ "${file}" == *.sh ]]; then
     echo "sh"
-  elif [[ "$file" == *.bash ]]; then
+  elif [[ "${file}" == *.bash ]]; then
     echo "bash"
   else
     # For files without clear indicators, try to detect
-    if grep -q "bash" "$file" 2>/dev/null; then
+    if grep -q "bash" "${file}" 2> /dev/null; then
       echo "bash"
     else
       echo "sh"
@@ -130,43 +144,192 @@ get_shell_type() {
   fi
 }
 
+# Auto-fix shellcheck issues using shellcheck's built-in diff functionality
+fix_shellcheck_issues() {
+  local file="$1"
+  local diff_output
+  local temp_patch
+  temp_patch=$(mktemp)
+  local original_dir
+  original_dir=$(pwd)
+
+  # Generate shellcheck auto-fix diff with better error handling
+  diff_output=$(shellcheck -f diff "${file}" 2>&1)
+  local shellcheck_exit=$?
+
+  # Check if shellcheck failed due to syntax errors
+  if [[ ${shellcheck_exit} -ne 0 ]] && [[ -z "${diff_output}" ]]; then
+    log "Shellcheck failed to generate fixes for $(basename "${file}"): syntax errors prevent auto-fixing"
+    rm -f "${temp_patch}"
+    return 1
+  fi
+
+  if [[ -n "${diff_output}" && "${diff_output}" != "" ]]; then
+    # Show what fixes would be applied in verbose mode
+    if [[ "${QUIET_MODE}" = false ]]; then
+      log "Attempting to apply shellcheck fixes to $(basename "${file}")"
+    fi
+
+    # Save the diff to a temp file and apply it
+    echo "${diff_output}" > "${temp_patch}"
+
+    # Apply the patch from the project root directory (save/restore working dir)
+    if cd "${PROJECT_ROOT}" 2> /dev/null; then
+      local patch_output
+      patch_output=$(timeout 10s patch --batch --forward -p1 < "${temp_patch}" 2>&1)
+      local patch_exit=$?
+
+      if [[ ${patch_exit} -eq 0 ]]; then
+        cd "${original_dir}"
+        rm -f "${temp_patch}"
+        return 0
+      else
+        # Try applying without path stripping in case of relative paths
+        patch_output=$(timeout 10s patch --batch --forward -p0 < "${temp_patch}" 2>&1)
+        patch_exit=$?
+
+        if [[ ${patch_exit} -eq 0 ]]; then
+          cd "${original_dir}"
+          rm -f "${temp_patch}"
+          return 0
+        else
+          # Show specific patch failure reason
+          log "Failed to apply auto-fixes to $(basename "${file}"): patch failed"
+          if [[ "${QUIET_MODE}" = false ]]; then
+            log "  Patch error: ${patch_output}"
+          fi
+        fi
+      fi
+      # Always restore working directory
+      cd "${original_dir}"
+    else
+      log "Failed to change to project root directory for patching"
+    fi
+
+    rm -f "${temp_patch}"
+    return 1
+  else
+    log "No shellcheck fixes available for $(basename "${file}")"
+    rm -f "${temp_patch}"
+    return 1
+  fi
+}
+
+# Format shell script using shfmt
+format_shell_script() {
+  local file="$1"
+  local temp_formatted
+  temp_formatted=$(mktemp)
+  local original_content_hash
+  local formatted_content_hash
+
+  # Get hash of original file content
+  original_content_hash=$(shasum -a 256 "${file}" | cut -d' ' -f1)
+
+  # Apply shfmt formatting with recommended options:
+  # -i 2: 2-space indentation
+  # -ci: Switch cases indent
+  # -bn: Binary operators at beginning of line
+  local shfmt_output
+  shfmt_output=$(shfmt --apply-ignore -i 2 -ci -bn "${file}" 2>&1)
+  local shfmt_exit=$?
+
+  if [[ ${shfmt_exit} -eq 0 ]]; then
+    # Save formatted output to temp file
+    echo "${shfmt_output}" > "${temp_formatted}"
+
+    # Get hash of formatted content
+    formatted_content_hash=$(shasum -a 256 "${temp_formatted}" | cut -d' ' -f1)
+
+    # Only update file if content actually changed
+    if [[ "${original_content_hash}" != "${formatted_content_hash}" ]]; then
+      if cp "${temp_formatted}" "${file}"; then
+        log "Applied shfmt formatting to $(basename "${file}")"
+        rm -f "${temp_formatted}"
+        return 0
+      else
+        log "Failed to copy formatted content to $(basename "${file}")"
+        rm -f "${temp_formatted}"
+        return 1
+      fi
+    else
+      # File was already properly formatted
+      if [[ "${QUIET_MODE}" = false ]]; then
+        log "$(basename "${file}") already properly formatted"
+      fi
+      rm -f "${temp_formatted}"
+      return 0
+    fi
+  else
+    log "shfmt formatting failed for $(basename "${file}"):"
+    # Show specific syntax errors that prevented formatting
+    if [[ "${QUIET_MODE}" = false ]]; then
+      echo "${shfmt_output}" | while IFS= read -r line; do
+        log "  ${line}"
+      done
+    fi
+    rm -f "${temp_formatted}"
+    return 1
+  fi
+}
+
 # Main linting function
 lint_file() {
   local file="$1"
   local shell_type
-  shell_type=$(get_shell_type "$file")
+  shell_type=$(get_shell_type "${file}")
 
   # Skip non-shell files
-  if [[ "$shell_type" == "" ]]; then
+  if [[ "${shell_type}" == "" ]]; then
     return 0
   fi
 
   # Skip files that aren't shell scripts (like Ruby, Perl, etc.)
   local first_line
-  first_line=$(head -1 "$file" 2>/dev/null || echo "")
-  if [[ "$first_line" == *"ruby"* || "$first_line" == *"perl"* || "$first_line" == *"python"* ]]; then
+  first_line=$(head -1 "${file}" 2> /dev/null || echo "")
+  if [[ "${first_line}" == *"ruby"* || "${first_line}" == *"perl"* || "${first_line}" == *"python"* ]]; then
     return 0
   fi
 
   local shellcheck_args=()
-  shellcheck_args+=("--shell=$shell_type")
+  shellcheck_args+=("--shell=${shell_type}")
   shellcheck_args+=("--format=gcc")
 
-  # Add fix mode if requested
-  if [[ "$FIX_MODE" = true ]]; then
-    # Note: shellcheck doesn't have a --fix mode, but we could integrate with other tools
-    log "Note: --fix mode not yet implemented for shellcheck"
+  # Apply fixes if requested
+  if [[ "${FIX_MODE}" = true ]]; then
+    # Check if file has any shellcheck issues before attempting fixes
+    local pre_fix_output
+    pre_fix_output=$(shellcheck -f gcc "${file}" 2>&1 | head -20 || true)
+
+    # Attempt fixes for any file with shellcheck issues (removed restrictive filtering)
+    if [[ -n "${pre_fix_output}" ]]; then
+      if fix_shellcheck_issues "${file}"; then
+        SHELLCHECK_FIXES=$((SHELLCHECK_FIXES + 1))
+        log "Applied shellcheck auto-fixes to $(basename "${file}")"
+      else
+        SKIPPED_FILES=$((SKIPPED_FILES + 1))
+      fi
+    fi
+
+    # Apply shfmt formatting after shellcheck fixes
+    if command -v shfmt > /dev/null 2>&1; then
+      if format_shell_script "${file}"; then
+        SHFMT_FIXES=$((SHFMT_FIXES + 1))
+      else
+        SKIPPED_FILES=$((SKIPPED_FILES + 1))
+      fi
+    fi
   fi
 
   # Run shellcheck
-  if ! shellcheck "${shellcheck_args[@]}" "$file"; then
+  if ! shellcheck "${shellcheck_args[@]}" "${file}"; then
     EXIT_CODE=1
   fi
 }
 
 # Main execution
 main() {
-  log "🔍 Linting shell scripts in $PROJECT_ROOT"
+  log "🔍 Linting shell scripts in ${PROJECT_ROOT}"
   log ""
 
   local file_count=0
@@ -187,20 +350,32 @@ main() {
     file_count=$((file_count + 1))
 
     # Show relative path
-    local rel_path="${file#$PROJECT_ROOT/}"
-    log "[$file_count/${#files[@]}] Checking $rel_path"
+    local rel_path="${file#"${PROJECT_ROOT}"/}"
+    log "[${file_count}/${#files[@]}] Checking ${rel_path}"
 
-    lint_file "$file"
+    lint_file "${file}"
   done
 
   log ""
-  if [[ $EXIT_CODE -eq 0 ]]; then
+
+  # Show fix summary if in fix mode
+  if [[ "${FIX_MODE}" = true ]]; then
+    log "📊 Fix Summary:"
+    log "  Shellcheck fixes applied: ${SHELLCHECK_FIXES}"
+    log "  Files formatted with shfmt: ${SHFMT_FIXES}"
+    if [[ ${SKIPPED_FILES} -gt 0 ]]; then
+      log "  Files skipped due to errors: ${SKIPPED_FILES}"
+    fi
+    log ""
+  fi
+
+  if [[ ${EXIT_CODE} -eq 0 ]]; then
     log "✅ All shell scripts passed linting!"
   else
     log "❌ Some shell scripts have linting issues."
   fi
 
-  return $EXIT_CODE
+  return ${EXIT_CODE}
 }
 
 # Run main function

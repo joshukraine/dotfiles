@@ -20,26 +20,26 @@ teardown() {
   setup_test_git_repo
 
   run run_fish_function grbm -h
-  assert_contains "$output" "Usage: grbm"
-  assert_contains "$output" "Rebase current branch against the default branch"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Usage: grbm"
+  assert_contains "${output}" "Rebase current branch against the default branch"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm shows help message with --help flag" {
   setup_test_git_repo
 
   run run_fish_function grbm --help
-  assert_contains "$output" "Usage: grbm"
-  assert_contains "$output" "Rebase current branch against the default branch"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Usage: grbm"
+  assert_contains "${output}" "Rebase current branch against the default branch"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm fails in non-git directory" {
   setup_non_git_dir
 
   run run_fish_function grbm
-  assert_contains "$output" "Not a git repository"
-  [ "$status" -eq 1 ]
+  assert_contains "${output}" "Not a git repository"
+  [ "${status}" -eq 1 ]
 }
 
 @test "grbm fails when no origin remote exists" {
@@ -47,8 +47,8 @@ teardown() {
   create_feature_branch "test-branch"
 
   run run_fish_function grbm
-  assert_contains "$output" "No 'origin' remote found. Cannot rebase against remote branch."
-  [ "$status" -eq 1 ]
+  assert_contains "${output}" "No 'origin' remote found. Cannot rebase against remote branch."
+  [ "${status}" -eq 1 ]
 }
 
 @test "grbm fails when uncommitted changes exist" {
@@ -58,9 +58,9 @@ teardown() {
 
   # When running grbm, git-check-uncommitted --prompt will detect changes
   # and the test will provide "n" as input to abort
-  run bash -c "echo 'n' | fish --no-config -c \"source '$DOTFILES_DIR/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
-  assert_contains "$output" "Warning: You have uncommitted changes"
-  [ "$status" -eq 1 ]
+  run bash -c "echo 'n' | fish --no-config -c \"source '${DOTFILES_DIR}/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
+  assert_contains "${output}" "Warning: You have uncommitted changes"
+  [ "${status}" -eq 1 ]
 }
 
 @test "grbm fails even when user continues with uncommitted changes" {
@@ -70,9 +70,9 @@ teardown() {
 
   # When running grbm, git-check-uncommitted --prompt will detect changes
   # and the test will provide "y" as input to continue, but git rebase will still fail
-  run bash -c "echo 'y' | fish --no-config -c \"source '$DOTFILES_DIR/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '$DOTFILES_DIR/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
-  assert_contains "$output" "Rebase failed. You may need to resolve conflicts manually."
-  [ "$status" -eq 1 ]
+  run bash -c "echo 'y' | fish --no-config -c \"source '${DOTFILES_DIR}/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
+  assert_contains "${output}" "Rebase failed. You may need to resolve conflicts manually."
+  [ "${status}" -eq 1 ]
 }
 
 @test "grbm skips rebase when already on default branch (main)" {
@@ -80,8 +80,8 @@ teardown() {
   # Already on main branch
 
   run run_fish_function grbm
-  assert_contains "$output" "Already on default branch"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Already on default branch"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm skips rebase when already on default branch (master)" {
@@ -89,8 +89,8 @@ teardown() {
   # Already on master branch
 
   run run_fish_function grbm
-  assert_contains "$output" "Already on default branch"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Already on default branch"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm successfully rebases feature branch on main" {
@@ -106,9 +106,9 @@ teardown() {
   git checkout feature/awesome
 
   run run_fish_function grbm
-  assert_contains "$output" "Rebasing feature/awesome against"
-  assert_contains "$output" "origin/main"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Rebasing feature/awesome against"
+  assert_contains "${output}" "origin/main"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm successfully rebases feature branch on master" {
@@ -124,9 +124,9 @@ teardown() {
   git checkout feature/legacy
 
   run run_fish_function grbm
-  assert_contains "$output" "Rebasing feature/legacy against"
-  assert_contains "$output" "origin/master"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Rebasing feature/legacy against"
+  assert_contains "${output}" "origin/master"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm detects default branch correctly when remote has main" {
@@ -134,8 +134,8 @@ teardown() {
   create_feature_branch "test-feature"
 
   run run_fish_function grbm
-  assert_contains "$output" "origin/main"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "origin/main"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm detects default branch correctly when remote has master" {
@@ -143,8 +143,8 @@ teardown() {
   create_feature_branch "test-feature"
 
   run run_fish_function grbm
-  assert_contains "$output" "origin/master"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "origin/master"
+  [ "${status}" -eq 0 ]
 }
 
 @test "grbm handles fetch failure gracefully" {
@@ -156,8 +156,8 @@ teardown() {
   git remote add origin /nonexistent/repo
 
   run run_fish_function grbm
-  assert_contains "$output" "Failed to fetch from origin"
-  [ "$status" -eq 1 ]
+  assert_contains "${output}" "Failed to fetch from origin"
+  [ "${status}" -eq 1 ]
 }
 
 @test "grbm handles detached HEAD state" {
@@ -166,6 +166,6 @@ teardown() {
   git checkout HEAD~0
 
   run run_fish_function grbm
-  assert_contains "$output" "Could not determine current branch"
-  [ "$status" -eq 1 ]
+  assert_contains "${output}" "Could not determine current branch"
+  [ "${status}" -eq 1 ]
 }

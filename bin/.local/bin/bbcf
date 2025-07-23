@@ -5,10 +5,10 @@
 
 set -euo pipefail
 
-if [[ -e "$HOME/Brewfile" ]]; then
-  echo "-> Running bundle cleanup (force) for Brewfile located at $HOME/Brewfile"
+if [[ -e "${HOME}/Brewfile" ]]; then
+  echo "-> Running bundle cleanup (force) for Brewfile located at ${HOME}/Brewfile"
   sleep 2
-  brew bundle cleanup --force --file "$HOME/Brewfile"
+  brew bundle cleanup --force --file "${HOME}/Brewfile"
 else
   echo "Brewfile not found."
   exit 1

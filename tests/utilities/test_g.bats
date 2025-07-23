@@ -26,47 +26,47 @@ teardown() {
 
   run g
   # Check for branch name - could be main or master depending on git version/config
-  if [[ "$output" == *"## main"* ]]; then
-    assert_contains "$output" "## main"
-  elif [[ "$output" == *"## master"* ]]; then
-    assert_contains "$output" "## master"
+  if [[ "${output}" == *"## main"* ]]; then
+    assert_contains "${output}" "## main"
+  elif [[ "${output}" == *"## master"* ]]; then
+    assert_contains "${output}" "## master"
   else
-    echo "Expected branch name (main or master) not found in output: $output"
+    echo "Expected branch name (main or master) not found in output: ${output}"
     return 1
   fi
-  assert_contains "$output" "A  test.txt"  # Added file
-  assert_contains "$output" " M README.md"  # Modified file
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "A  test.txt"  # Added file
+  assert_contains "${output}" " M README.md" # Modified file
+  [ "${status}" -eq 0 ]
 }
 
 @test "g with no arguments clears terminal first" {
   # Check that the g script contains the clear command
-  run grep -q "clear" "$DOTFILES_DIR/bin/.local/bin/g"
-  [ "$status" -eq 0 ]
+  run grep -q "clear" "${DOTFILES_DIR}/bin/.local/bin/g"
+  [ "${status}" -eq 0 ]
 }
 
 @test "g with arguments passes through to git" {
   setup_main_repo
 
   run g log --oneline -n 1
-  assert_contains "$output" "Initial commit"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Initial commit"
+  [ "${status}" -eq 0 ]
 }
 
 @test "g handles git command failures" {
   setup_main_repo
 
   run g invalid-command
-  assert_contains "$output" "invalid-command"
-  [ "$status" -ne 0 ]
+  assert_contains "${output}" "invalid-command"
+  [ "${status}" -ne 0 ]
 }
 
 @test "g works in non-git directories" {
   setup_non_git_dir
 
   run g
-  assert_contains "$output" "not a git repository"
-  [ "$status" -ne 0 ]
+  assert_contains "${output}" "not a git repository"
+  [ "${status}" -ne 0 ]
 }
 
 @test "g passes multiple arguments correctly" {
@@ -78,9 +78,9 @@ teardown() {
   git commit -m "Add test file"
 
   run g show --name-only HEAD
-  assert_contains "$output" "Add test file"
-  assert_contains "$output" "file.txt"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Add test file"
+  assert_contains "${output}" "file.txt"
+  [ "${status}" -eq 0 ]
 }
 
 @test "g preserves git exit codes" {
@@ -88,5 +88,5 @@ teardown() {
 
   # Force a git error
   run g checkout non-existent-branch
-  [ "$status" -eq 1 ]  # Git returns 1 for checkout errors
+  [ "${status}" -eq 1 ] # Git returns 1 for checkout errors
 }

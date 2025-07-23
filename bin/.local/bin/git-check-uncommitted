@@ -11,13 +11,13 @@
 set -euo pipefail
 
 # Check if we're in a git repository
-if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   echo "Error: Not a git repository" >&2
   exit 2
 fi
 
 # Check for uncommitted changes
-if git diff-index --quiet HEAD -- 2>/dev/null; then
+if git diff-index --quiet HEAD -- 2> /dev/null; then
   # No uncommitted changes
   exit 0
 fi
@@ -27,7 +27,7 @@ if [[ "${1:-}" == "--prompt" ]]; then
   echo "Warning: You have uncommitted changes. Consider committing or stashing them first."
   printf "Continue anyway? (y/N): "
   read -r response
-  if [[ "$response" == "y" || "$response" == "Y" ]]; then
+  if [[ "${response}" == "y" || "${response}" == "Y" ]]; then
     exit 0
   else
     echo "Aborted."

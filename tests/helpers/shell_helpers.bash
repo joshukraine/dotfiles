@@ -48,7 +48,7 @@ load_zsh_functions() {
   if [ -f "${zsh_functions_file}" ]; then
     # Source the Zsh functions in current bash session
     # We'll need to adapt Zsh syntax to bash where needed
-    source "${zsh_functions_file}" 2>/dev/null || true
+    source "${zsh_functions_file}" 2> /dev/null || true
     return 0
   else
     return 1
@@ -63,7 +63,7 @@ run_zsh_function() {
 
   if load_zsh_functions; then
     # Execute the function if it's available
-    if command -v "${function_name}" >/dev/null 2>&1; then
+    if command -v "${function_name}" > /dev/null 2>&1; then
       "${function_name}" "$@" 2>&1
     else
       echo "Zsh function ${function_name} not found"
@@ -89,8 +89,8 @@ test_abbreviation() {
       test_zsh_abbreviation "${abbr}" "${expected}"
       ;;
     "both")
-      test_fish_abbreviation "${abbr}" "${expected}" &&
-      test_zsh_abbreviation "${abbr}" "${expected}"
+      test_fish_abbreviation "${abbr}" "${expected}" \
+        && test_zsh_abbreviation "${abbr}" "${expected}"
       ;;
     *)
       echo "Unknown shell type: ${shell_type}"
@@ -111,7 +111,7 @@ test_fish_abbreviation() {
     # Extract the abbreviation expansion from the Fish file
     # Format: abbr -a -g abbr_name 'expansion'
     local actual
-    actual=$(grep "^abbr -a -g ${abbr} " "${fish_abbr_file}" | sed "s/^abbr -a -g ${abbr} '//" | sed "s/'$//" 2>/dev/null)
+    actual=$(grep "^abbr -a -g ${abbr} " "${fish_abbr_file}" | sed "s/^abbr -a -g ${abbr} '//" | sed "s/'$//" 2> /dev/null)
 
     if [ "${actual}" = "${expected}" ]; then
       return 0
@@ -137,7 +137,7 @@ test_zsh_abbreviation() {
     # Extract the abbreviation expansion from the Zsh file
     # Format: abbr "abbr_name"="expansion"
     local actual
-    actual=$(grep "^abbr \"${abbr}\"=" "${zsh_abbr_file}" | cut -d'"' -f4 2>/dev/null)
+    actual=$(grep "^abbr \"${abbr}\"=" "${zsh_abbr_file}" | cut -d'"' -f4 2> /dev/null)
 
     if [ "${actual}" = "${expected}" ]; then
       return 0
@@ -165,7 +165,7 @@ load_environment() {
 
 # Test if command exists in PATH
 command_exists() {
-  command -v "$1" >/dev/null 2>&1
+  command -v "$1" > /dev/null 2>&1
 }
 
 # Test if function is available
@@ -202,7 +202,7 @@ track_tmux_session() {
 # Cleanup all tracked tmux sessions
 cleanup_tracked_tmux_sessions() {
   for session in "${TEST_TMUX_SESSIONS[@]}"; do
-    tmux kill-session -t "${session}" 2>/dev/null || true
+    tmux kill-session -t "${session}" 2> /dev/null || true
   done
   TEST_TMUX_SESSIONS=()
 }
@@ -210,10 +210,10 @@ cleanup_tracked_tmux_sessions() {
 # Cleanup all test-related tmux sessions
 cleanup_all_test_tmux_sessions() {
   # Kill sessions that look like test sessions
-  tmux list-sessions -F "#{session_name}" 2>/dev/null | while read -r session; do
+  tmux list-sessions -F "#{session_name}" 2> /dev/null | while read -r session; do
     case "${session}" in
-      tmp-*|test-*|*test*|custom-session|My_Custom-Session_Name)
-        tmux kill-session -t "${session}" 2>/dev/null || true
+      tmp-* | test-* | *test* | custom-session | My_Custom-Session_Name)
+        tmux kill-session -t "${session}" 2> /dev/null || true
         ;;
     esac
   done

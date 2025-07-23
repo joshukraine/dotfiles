@@ -5,7 +5,7 @@
 
 if [[ $# -eq 0 ]]; then
   # Clear terminal if possible, but don't fail in CI environments
-  if [[ -n "$TERM" ]]; then
+  if [[ -n "${TERM}" ]]; then
     clear
   fi
   git status --short --branch && echo

@@ -20,15 +20,15 @@ teardown() {
   setup_non_git_dir
 
   run gbrm
-  assert_contains "$output" "Not a git repository"
-  [ "$status" -eq 1 ]
+  assert_contains "${output}" "Not a git repository"
+  [ "${status}" -eq 1 ]
 }
 
 @test "gbrm successfully detects default branch (main)" {
   setup_main_repo
 
   run gbrm
-  assert_contains "$output" "Removing branches merged into main"
+  assert_contains "${output}" "Removing branches merged into main"
   # May succeed or fail depending on whether there are branches to remove
   # The key is that it doesn't crash and detects the right branch
 }
@@ -37,7 +37,7 @@ teardown() {
   setup_master_repo
 
   run gbrm
-  assert_contains "$output" "Removing branches merged into master"
+  assert_contains "${output}" "Removing branches merged into master"
   # May succeed or fail depending on whether there are branches to remove
   # The key is that it doesn't crash and detects the right branch
 }
@@ -72,7 +72,7 @@ teardown() {
   branch_count_before=$(git branch | wc -l)
 
   run gbrm
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 
   # Should have removed merged branches but kept main and current unmerged
   # The exact count depends on git behavior, but we can verify main still exists
@@ -95,8 +95,8 @@ teardown() {
   # Only main branch exists
 
   run gbrm
-  assert_contains "$output" "Removing branches merged into main"
-  [ "$status" -eq 0 ]
+  assert_contains "${output}" "Removing branches merged into main"
+  [ "${status}" -eq 0 ]
 }
 
 @test "gbrm doesn't remove current branch" {
@@ -107,7 +107,7 @@ teardown() {
   git checkout main
   git merge feature/current --no-ff -m "Merge feature/current"
   git push origin main
-  git checkout feature/current  # Stay on the merged branch
+  git checkout feature/current # Stay on the merged branch
 
   run gbrm
   # The xargs command might fail if trying to remove the current branch
@@ -120,7 +120,7 @@ teardown() {
   create_feature_branch "feature/test"
 
   run gbrm
-  assert_contains "$output" "Removing branches merged into main"
+  assert_contains "${output}" "Removing branches merged into main"
 
   # Main branch should still exist
   if git branch | grep -q "main"; then
@@ -140,7 +140,7 @@ teardown() {
   git push origin master
 
   run gbrm
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 
   # Master should still exist
   if git branch | grep -q "master"; then
@@ -157,7 +157,7 @@ teardown() {
   run gbrm
   # Should either succeed or fail gracefully depending on branch structure
   # At minimum, should not crash
-  [ "$status" -ge 0 ]
+  [ "${status}" -ge 0 ]
 }
 
 @test "gbrm provides feedback about removed branches" {
@@ -170,7 +170,7 @@ teardown() {
   git push origin main
 
   run gbrm
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 
   # Should provide some feedback about what was done
   # (The exact message will depend on implementation)
@@ -181,12 +181,12 @@ teardown() {
 
   # Create and merge multiple feature branches
   for i in {1..3}; do
-    git checkout -b "feature/merge-me-$i"
-    echo "Feature $i work" >> "feature$i.txt"
-    git add "feature$i.txt"
-    git commit -m "Add feature $i"
+    git checkout -b "feature/merge-me-${i}"
+    echo "Feature ${i} work" >> "feature${i}.txt"
+    git add "feature${i}.txt"
+    git commit -m "Add feature ${i}"
     git checkout main
-    git merge "feature/merge-me-$i" --no-ff -m "Merge feature/merge-me-$i"
+    git merge "feature/merge-me-${i}" --no-ff -m "Merge feature/merge-me-${i}"
     git push origin main
   done
 
@@ -196,11 +196,11 @@ teardown() {
   branch_count_before=$(git branch | grep -v main | wc -l)
 
   run gbrm
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
 
   # Should have removed the merged branches
   local branch_count_after
   # shellcheck disable=SC2126
   branch_count_after=$(git branch | grep -v main | wc -l)
-  [ "$branch_count_after" -lt "$branch_count_before" ]
+  [ "${branch_count_after}" -lt "${branch_count_before}" ]
 }
