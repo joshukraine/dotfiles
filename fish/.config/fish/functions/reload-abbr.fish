@@ -37,10 +37,19 @@ Examples:
         return 1
     end
 
+    # Check if documentation generator exists
+    set doc_generate_script "$dotfiles_dir/shared/generate-abbreviations-doc.sh"
+
     # Run the generation script
     echo "🔄 Regenerating abbreviations from any directory..."
     "$generate_script"
     set exit_code $status
+
+    # Also regenerate documentation if generator exists and abbreviations succeeded
+    if test $exit_code -eq 0 -a -f "$doc_generate_script" -a -x "$doc_generate_script"
+        echo "📝 Regenerating abbreviations documentation..."
+        "$doc_generate_script"
+    end
 
     if test $exit_code -eq 0
         echo

@@ -444,10 +444,19 @@ Examples:
     return 1
   fi
 
+  # Check if documentation generator exists
+  local doc_generate_script="$dotfiles_dir/shared/generate-abbreviations-doc.sh"
+
   # Run the generation script
   echo "🔄 Regenerating abbreviations from any directory..."
   "$generate_script"
   local exit_code=$?
+
+  # Also regenerate documentation if generator exists and abbreviations succeeded
+  if [[ $exit_code -eq 0 && -f "$doc_generate_script" && -x "$doc_generate_script" ]]; then
+    echo "📝 Regenerating abbreviations documentation..."
+    "$doc_generate_script"
+  fi
 
   if [[ $exit_code -eq 0 ]]; then
     echo

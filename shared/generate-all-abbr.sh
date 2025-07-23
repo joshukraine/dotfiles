@@ -27,6 +27,7 @@ fi
 # Track success/failure
 fish_success=false
 zsh_success=false
+doc_success=false
 
 # Generate Fish abbreviations
 echo "🐟 Generating Fish abbreviations..."
@@ -47,6 +48,18 @@ else
 fi
 
 echo
+
+# Generate documentation if both abbreviation files succeeded
+if ${fish_success} && ${zsh_success}; then
+    echo "📝 Generating abbreviations documentation..."
+    if "${SCRIPT_DIR}/generate-abbreviations-doc.sh"; then
+        doc_success=true
+    else
+        echo "❌ Failed to generate abbreviations documentation"
+    fi
+    echo
+fi
+
 echo "📋 Summary:"
 
 if ${fish_success}; then
@@ -59,6 +72,14 @@ if ${zsh_success}; then
     echo "  ✅ Zsh abbreviations generated successfully"
 else
     echo "  ❌ Zsh abbreviations failed"
+fi
+
+if ${fish_success} && ${zsh_success}; then
+    if ${doc_success}; then
+        echo "  ✅ Abbreviations documentation generated successfully"
+    else
+        echo "  ❌ Abbreviations documentation failed"
+    fi
 fi
 
 # Overall success check

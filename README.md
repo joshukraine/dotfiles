@@ -343,15 +343,30 @@ All 289 shell abbreviations are documented with usage examples and descriptions:
 
 ### Regenerating Documentation
 
-Function documentation is manually maintained, while abbreviation documentation can be regenerated:
+**Function Documentation**: Manually maintained with standardized inline comments and reference guides.
+
+**Abbreviation Documentation**: Fully automated! Generated from `shared/abbreviations.yaml`:
 
 ```bash
-# Regenerate abbreviations from shared YAML source
+# Regenerate everything (abbreviations + documentation)
 reload-abbr
 
 # Or manually from the dotfiles directory
 ~/dotfiles/shared/generate-all-abbr.sh
+
+# Individual generators (for development)
+~/dotfiles/shared/generate-fish-abbr.sh          # Fish abbreviations only
+~/dotfiles/shared/generate-zsh-abbr.sh           # Zsh abbreviations only
+~/dotfiles/shared/generate-abbreviations-doc.sh  # Documentation only
 ```
+
+**What gets regenerated automatically:**
+
+- `fish/.config/fish/abbreviations.fish` (288 abbreviations)
+- `zsh/.config/zsh-abbr/abbreviations.zsh` (289 abbreviations)
+- `docs/abbreviations.md` (complete reference documentation)
+
+**After regeneration:** Reload your shell (`exec fish` or `src`) to use new abbreviations.
 
 ## Markdown Linting
 
