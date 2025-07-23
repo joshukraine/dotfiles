@@ -32,17 +32,21 @@ end
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
 
-source ~/.asdf/asdf.fish
+# Load asdf version manager
+if test -f ~/.asdf/asdf.fish
+    source ~/.asdf/asdf.fish
+else if test -f /opt/homebrew/opt/asdf/libexec/asdf.fish
+    source /opt/homebrew/opt/asdf/libexec/asdf.fish
+end
 
 # Configure npm to use asdf's Node for global packages
 if command -v npm >/dev/null
     set -gx npm_config_prefix (dirname (dirname (which node)))
 end
 
-set OP_PLUGINS "$HOME/.config/op"
+# Load 1Password CLI plugins if available
+set OP_PLUGINS_FILE "$HOME/.config/op/plugins.sh"
 
-if test -d "$OP_PLUGINS"
-    source ~/.config/op/plugins.sh
-else
-    echo "Directory does not exist: $OP_PLUGINS. Please reference https://developer.1password.com/docs/cli for installation instructions."
+if test -f "$OP_PLUGINS_FILE"
+    source "$OP_PLUGINS_FILE"
 end

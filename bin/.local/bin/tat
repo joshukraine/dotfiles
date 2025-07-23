@@ -1,8 +1,23 @@
 #!/usr/bin/env bash
 #
-# Attach or create tmux session named the same as current directory.
+# Attach or create tmux session named after current directory
+#
+# Usage: tat [session_name]
+# Arguments:
+#   session_name - Custom session name (optional, defaults to current directory name)
+#
+# Examples:
+#   tat                     # Create/attach session named after current dir (dots become dashes)
+#   tat myproject          # Create/attach session named "myproject"
+#   tat work-stuff         # Create/attach session named "work-stuff"
+#
+# Returns: Attaches to tmux session, creating it if it doesn't exist
+# Behavior:
+#   - If not in tmux: creates new session or attaches to existing
+#   - If in tmux: switches to target session, creating if needed
+#   - Session name: current directory basename with dots converted to dashes
 
-path_name="$(basename "$PWD" | tr . -)"
+path_name="$(basename "${PWD}" | tr . -)"
 session_name=${1-$path_name}
 
 not_in_tmux() {
@@ -19,12 +34,12 @@ create_detached_session() {
 
 create_if_needed_and_attach() {
   if not_in_tmux; then
-  tmux new-session -As "$session_name"
+    tmux new-session -As "$session_name"
   else
-  if ! session_exists; then
-    create_detached_session
-  fi
-  tmux switch-client -t "$session_name"
+    if ! session_exists; then
+      create_detached_session
+    fi
+    tmux switch-client -t "$session_name"
   fi
 }
 

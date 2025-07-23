@@ -54,15 +54,25 @@ homebrew:
   bsv: "brew services"
 
 # Config directory access
+# Quick navigation to frequently used directories for development and configuration
 config_dirs:
+  # Navigate to dotfiles repository - main entry point for configuration management
   cdot: "cd $DOTFILES"
+  # Navigate to XDG config directory - central location for app configurations
   cdxc: "cd $XDG_CONFIG_HOME"
+  # Navigate to Fish shell configuration - customize Fish shell behavior
   cdfi: "cd $XDG_CONFIG_HOME/fish"
+  # Navigate to Neovim configuration - edit Neovim/LazyVim settings
   cdnv: "cd $XDG_CONFIG_HOME/nvim"
+  # Navigate to XDG data directory - application data storage
   cdxd: "cd $XDG_DATA_HOME"
+  # Navigate to XDG cache directory - temporary application cache
   cdxa: "cd $XDG_CACHE_HOME"
+  # Navigate to XDG state directory - application state files
   cdxs: "cd $XDG_STATE_HOME"
+  # Navigate to local bin directory - user-specific executables
   cdlb: "cd $HOME/.local/bin"
+  # Navigate to legacy bin directory - legacy executable location
   cdbn: "cd $HOME/.bin"
 
 # Navigation shortcuts

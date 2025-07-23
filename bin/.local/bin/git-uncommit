@@ -1,5 +1,20 @@
 #!/bin/bash
-# https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-uncommit
+#
+# Undo the last commit while preserving changes in working directory
+#
+# Usage: git-uncommit
+# Arguments: None
+#
+# Examples:
+#   git-uncommit           # Undo last commit, keep changes unstaged
+#
+# Returns: Undoes last commit, leaving changes in working directory
+# Behavior: Only works with clean working directory (no uncommitted changes)
+#
+# Safety: Aborts if there are uncommitted changes to prevent data loss
+# Output: Shows branch name and previous commit SHA for reference
+#
+# Source: https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-uncommit
 
 git_clean() {
   git diff --no-ext-diff --quiet --exit-code
@@ -7,18 +22,18 @@ git_clean() {
 
 main() {
   if git_clean; then
-  local branch_name
-  local current_sha
+    local branch_name
+    local current_sha
 
-  branch_name=$(git symbolic-ref HEAD 2>/dev/null | tr '/' '\n' | tail -1)
-  current_sha=$(git rev-parse HEAD)
+    branch_name=$(git symbolic-ref HEAD 2>/dev/null | tr '/' '\n' | tail -1)
+    current_sha=$(git rev-parse HEAD)
 
-  echo "Branch ${branch_name} was ${current_sha}"
-  git reset --soft HEAD^
-  git reset
+    echo "Branch ${branch_name} was ${current_sha}"
+    git reset --soft HEAD^
+    git reset
   else
-  >&2 echo "Aborting due to local changes"
-  exit 1
+    >&2 echo "Aborting due to local changes"
+    exit 1
   fi
 }
 

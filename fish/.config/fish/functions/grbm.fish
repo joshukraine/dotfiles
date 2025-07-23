@@ -1,3 +1,14 @@
+# Rebase current branch against the default branch (main or master)
+#
+# Usage: grbm [OPTION]
+# Arguments:
+#   -h, --help              Show help message
+#
+# Examples:
+#   grbm                    # Rebase current branch against default branch
+#   grbm --help             # Show help message
+#
+# Returns: 0 on success, 1 on error (including rebase conflicts)
 function grbm
     # Show help message
     if test (count $argv) -gt 0

@@ -1,7 +1,25 @@
+# Generate ctags for Ruby project with bundled gems
+#
+# Usage: ct
+# Arguments: None
+#
+# Examples:
+#   ct                      # Generate ctags for current Ruby project
+#
+# Returns: Creates ctags file including all Ruby files and bundled gem paths
 function ct() {
   ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
 }
 
+# Copy current working directory to clipboard with format options
+#
+# Usage: copycwd
+# Arguments: None
+#
+# Examples:
+#   copycwd                 # Interactive prompt to choose home directory format
+#
+# Returns: Copies current directory path to clipboard with chosen format (~, $HOME, or full path)
 function copycwd() {
     echo "Choose how to display the home directory:"
     echo "1) ~"
@@ -28,6 +46,15 @@ function copycwd() {
     esac
 }
 
+# Delete all .DS_Store files recursively from current directory
+#
+# Usage: dsx
+# Arguments: None
+#
+# Examples:
+#   dsx                     # Remove all .DS_Store files in current directory tree
+#
+# Returns: Deletes all .DS_Store files found, no output unless errors occur
 function dsx() {
   find . -name "*.DS_Store" -type f -delete
 }
@@ -128,14 +155,55 @@ Examples:
   fi
 }
 
+# Display PATH environment variable as numbered list
+#
+# Usage: path
+# Arguments: None
+#
+# Examples:
+#   path                    # Show all directories in PATH with line numbers
+#
+# Returns: Numbered list of all directories in the PATH environment variable
 function path() {
   echo $PATH | tr ":" "\n" | nl
 }
 
+# Reload Zsh shell configuration
+#
+# Usage: src
+# Arguments: None
+#
+# Examples:
+#   src                     # Reload Zsh configuration files
+#
+# Returns: Sources .zshrc and reloads all configuration
+function src() {
+  source ~/.zshrc
+}
+
+# Ping utility with sensible defaults (Zsh version - fixed target)
+#
+# Usage: pi
+# Arguments: None
+#
+# Examples:
+#   pi                      # Ping Cloudflare DNS (1.1.1.1) 5 times
+#
+# Returns: Ping results with audible alerts and count limit (5 pings)
+# Note: This Zsh version always pings 1.1.1.1 (unlike Fish version which accepts arguments)
 function pi() {
   ping -Anc 5 1.1.1.1
 }
 
+# List available Ruby versions using asdf with filtering
+#
+# Usage: rlv
+# Arguments: None
+#
+# Examples:
+#   rlv                     # Show all installable Ruby versions (numeric only)
+#
+# Returns: Filtered list of Ruby versions available for installation via asdf, excluding preview/rc versions
 function rlv() {
   asdf list all ruby | rg '^\d'
 }
@@ -376,10 +444,19 @@ Examples:
     return 1
   fi
 
+  # Check if documentation generator exists
+  local doc_generate_script="$dotfiles_dir/shared/generate-abbreviations-doc.sh"
+
   # Run the generation script
   echo "🔄 Regenerating abbreviations from any directory..."
   "$generate_script"
   local exit_code=$?
+
+  # Also regenerate documentation if generator exists and abbreviations succeeded
+  if [[ $exit_code -eq 0 && -f "$doc_generate_script" && -x "$doc_generate_script" ]]; then
+    echo "📝 Regenerating abbreviations documentation..."
+    "$doc_generate_script"
+  fi
 
   if [[ $exit_code -eq 0 ]]; then
     echo

@@ -19,6 +19,7 @@
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
 - [Shared Configuration Framework](#shared-configuration-framework)
+- [Documentation](#-documentation)
 - [Markdown Linting](#markdown-linting)
 - [About Neovim Distributions](#about-neovim-distributions)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
@@ -200,7 +201,7 @@ My Zsh and Fish configs have 95% functional parity via shared configuration:
 
 <details>
   <summary><strong>Zsh Setup Instructions</strong></summary>
-Zsh is now the default shell on macOS. However, it’s helpful to add an entry enabling the Homebrew version of Zsh (`$HOMEBREW_PREFIX/bin/zsh`) instead of the default (`/bin/zsh`) version.
+Zsh is now the default shell on macOS. However, it's helpful to add an entry enabling the Homebrew version of Zsh (`/opt/homebrew/bin/zsh` on Apple Silicon, `/usr/local/bin/zsh` on Intel) instead of the default (`/bin/zsh`) version.
 
 Ensure that you have Zsh from Homebrew. (`which zsh`) If not:
 
@@ -211,7 +212,14 @@ brew install zsh
 Add Zsh (Homebrew version) to `/etc/shells`:
 
 ```sh
-echo $HOMEBREW_PREFIX/bin/zsh | sudo tee -a /etc/shells
+# Apple Silicon Macs:
+echo /opt/homebrew/bin/zsh | sudo tee -a /etc/shells
+
+# Intel Macs:
+echo /usr/local/bin/zsh | sudo tee -a /etc/shells
+
+# Or use this universal command:
+echo $(which zsh) | sudo tee -a /etc/shells
 ```
 
 Set it as your default shell:
@@ -237,7 +245,14 @@ Install Fish from Homebrew:
 Add Fish to `/etc/shells`:
 
 ```sh
-echo $HOMEBREW_PREFIX/bin/fish | sudo tee -a /etc/shells
+# Apple Silicon Macs:
+echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+
+# Intel Macs:
+echo /usr/local/bin/fish | sudo tee -a /etc/shells
+
+# Or use this universal command:
+echo $(which fish) | sudo tee -a /etc/shells
 ```
 
 Set it as your default shell:
@@ -307,6 +322,65 @@ The shared configuration includes intelligent git functions that automatically d
 - `gbrm` - Remove branches merged into main/master
 
 These functions work with both `main` and `master` branch names automatically.
+
+## 📚 Documentation
+
+This repository includes comprehensive documentation for all shell functions and abbreviations to improve maintainability and user experience.
+
+### Function Documentation
+
+All 35+ shell functions are thoroughly documented with standardized inline comments and external reference guides:
+
+- **[Function Overview](docs/functions/README.md)** - Complete index of all functions with descriptions and categories
+- **[Git Functions](docs/functions/git-functions.md)** - Smart git operations with automatic branch detection
+- **[Development Tools](docs/functions/development.md)** - Development utilities, navigation shortcuts, and command wrappers
+- **[Tmux Functions](docs/functions/tmux.md)** - Terminal multiplexer session management and workflows
+- **[System Functions](docs/functions/system.md)** - System utilities, process management, and command enhancements
+
+### Abbreviations Reference
+
+All 289 shell abbreviations are documented with usage examples and descriptions:
+
+- **[Complete Abbreviations Reference](docs/abbreviations.md)** - Comprehensive guide to all abbreviations across categories
+  - UNIX commands with enhanced options
+  - Git workflow shortcuts
+  - Development tool shortcuts
+  - Homebrew package management
+  - Docker, Rails, Node.js, and more
+
+### Documentation Standards
+
+- **Standardized Format**: All functions include usage, arguments, examples, and return values
+- **Cross-Shell Consistency**: Identical documentation quality in both Fish and Zsh
+- **Practical Examples**: Real-world usage scenarios and workflow integration
+- **Cross-References**: Links between related functions and abbreviations
+
+### Regenerating Documentation
+
+**Function Documentation**: Manually maintained with standardized inline comments and reference guides.
+
+**Abbreviation Documentation**: Fully automated! Generated from `shared/abbreviations.yaml`:
+
+```bash
+# Regenerate everything (abbreviations + documentation)
+reload-abbr
+
+# Or manually from the dotfiles directory
+~/dotfiles/shared/generate-all-abbr.sh
+
+# Individual generators (for development)
+~/dotfiles/shared/generate-fish-abbr.sh          # Fish abbreviations only
+~/dotfiles/shared/generate-zsh-abbr.sh           # Zsh abbreviations only
+~/dotfiles/shared/generate-abbreviations-doc.sh  # Documentation only
+```
+
+**What gets regenerated automatically:**
+
+- `fish/.config/fish/abbreviations.fish` (288 abbreviations)
+- `zsh/.config/zsh-abbr/abbreviations.zsh` (289 abbreviations)
+- `docs/abbreviations.md` (complete reference documentation)
+
+**After regeneration:** Reload your shell (`exec fish` or `src`) to use new abbreviations.
 
 ## Markdown Linting
 

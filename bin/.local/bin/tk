@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 #
-# Kill a tmux session
-# Usage: tk <session-name>
+# Kill tmux session by name
+#
+# Usage: tk <session_name>
+# Arguments:
+#   session_name - Name of tmux session to kill (required)
+#
+# Examples:
+#   tk myproject           # Kill session named "myproject"
+#   tk old-work           # Kill session named "old-work"
+#
+# Returns: Terminates specified tmux session and all its windows
+# Behavior: Fails gracefully if session doesn't exist
 
 if [[ $# -eq 0 ]]; then
   echo "Usage: tk <session-name>"

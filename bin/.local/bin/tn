@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 #
-# Create a new tmux session with a specific name
-# Usage: tn <session-name>
+# Create new tmux session with specific name
+#
+# Usage: tn <session_name>
+# Arguments:
+#   session_name - Name for new tmux session (required)
+#
+# Examples:
+#   tn myproject           # Create new session named "myproject"
+#   tn work-session       # Create new session named "work-session"
+#
+# Returns: Creates and attaches to new tmux session
+# Behavior: Fails if session with same name already exists
 
 if [[ $# -eq 0 ]]; then
   echo "Usage: tn <session-name>"

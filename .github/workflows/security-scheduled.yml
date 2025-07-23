@@ -1,0 +1,311 @@
+name: Security Scanning (Full)
+
+on:
+  schedule:
+    # Run comprehensive security scan every Monday at 6 AM UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:  # Allow manual triggering
+    inputs:
+      verbose:
+        description: 'Enable verbose output'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  full-dependency-scan:
+    runs-on: macos-latest
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install security scanning tools
+        run: |
+          # Install Homebrew if not present
+          if ! command -v brew >/dev/null 2>&1; then
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          fi
+
+          # Update Homebrew for latest security information
+          brew update
+
+          echo "=== Security Tools Check ==="
+          echo "Homebrew version: $(brew --version | head -1)"
+
+      - name: Comprehensive Homebrew security audit
+        run: |
+          echo "🔍 Running comprehensive Homebrew security audit..."
+          echo "This is a scheduled full scan that checks all packages thoroughly."
+
+          # Check if Brewfile exists
+          if [ ! -f "brew/Brewfile" ]; then
+            echo "ℹ️ No Brewfile found, skipping Homebrew dependency scan"
+            exit 0
+          fi
+
+          cd brew
+          echo "📦 Starting comprehensive security audit..."
+
+          # Get list of packages from Brewfile
+          packages=$(grep -E "^brew " Brewfile | sed 's/brew "\([^"]*\)".*/\1/' | tr '\n' ' ')
+          total_packages=$(echo $packages | wc -w | tr -d ' ')
+
+          if [ -n "$packages" ]; then
+            echo "📊 Total packages to audit: $total_packages"
+            echo "This comprehensive scan may take 10-15 minutes..."
+            echo ""
+
+            # Initialize counters and arrays
+            vulnerabilities_found=false
+            vulnerability_count=0
+            deprecated_count=0
+            vulnerable_packages=()
+            deprecated_packages=()
+
+            # Create audit summary file
+            audit_summary="audit_summary.txt"
+            echo "=== Homebrew Security Audit Summary ===" > $audit_summary
+            echo "Scan Date: $(date -u)" >> $audit_summary
+            echo "Total Packages: $total_packages" >> $audit_summary
+            echo "" >> $audit_summary
+
+            # Audit each package with detailed output
+            package_num=0
+            for package in $packages; do
+              package_num=$((package_num + 1))
+              echo "[$package_num/$total_packages] Auditing: $package"
+
+              # Run comprehensive audit
+              if brew audit --formula --strict --online "$package" 2>&1 | tee -a audit_output.txt | grep -i "error\|warning\|vulnerabilit\|cve\|security"; then
+                vulnerabilities_found=true
+                vulnerability_count=$((vulnerability_count + 1))
+                vulnerable_packages+=("$package")
+                echo "⚠️  Issues found in: $package" | tee -a $audit_summary
+              fi
+
+              # Check for deprecated formulas
+              if brew info "$package" 2>/dev/null | grep -i "deprecated\|disable"; then
+                deprecated_count=$((deprecated_count + 1))
+                deprecated_packages+=("$package")
+                echo "⚠️  Package deprecated: $package" | tee -a $audit_summary
+              fi
+
+              # Progress indicator every 10 packages
+              if [ $((package_num % 10)) -eq 0 ]; then
+                echo "Progress: $package_num/$total_packages packages audited..."
+              fi
+            done
+
+            echo ""
+            echo "=== Audit Complete ===" | tee -a $audit_summary
+            echo "" | tee -a $audit_summary
+
+            # Generate detailed report
+            if [ "$vulnerabilities_found" = "true" ] || [ "$deprecated_count" -gt 0 ]; then
+              echo "## ⚠️ Security Issues Detected" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+
+              if [ "$vulnerability_count" -gt 0 ]; then
+                echo "### 🔒 Packages with Security Vulnerabilities ($vulnerability_count)" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+                for pkg in "${vulnerable_packages[@]}"; do
+                  echo "- \`$pkg\`" >> $GITHUB_STEP_SUMMARY
+                done
+                echo "" >> $GITHUB_STEP_SUMMARY
+              fi
+
+              if [ "$deprecated_count" -gt 0 ]; then
+                echo "### ⚠️ Deprecated Packages ($deprecated_count)" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+                for pkg in "${deprecated_packages[@]}"; do
+                  echo "- \`$pkg\`" >> $GITHUB_STEP_SUMMARY
+                done
+                echo "" >> $GITHUB_STEP_SUMMARY
+              fi
+
+              echo "### 📋 Recommendations" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "1. Review the detailed audit output above" >> $GITHUB_STEP_SUMMARY
+              echo "2. Update vulnerable packages: \`brew upgrade <package>\`" >> $GITHUB_STEP_SUMMARY
+              echo "3. Replace deprecated packages with alternatives" >> $GITHUB_STEP_SUMMARY
+              echo "4. Consider running \`brew cleanup\` to remove old versions" >> $GITHUB_STEP_SUMMARY
+
+              # Set output for notifications
+              echo "security_issues_found=true" >> $GITHUB_OUTPUT
+            else
+              echo "## ✅ Security Scan Complete" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "No security vulnerabilities or deprecated packages found in $total_packages Homebrew dependencies." >> $GITHUB_STEP_SUMMARY
+              echo "security_issues_found=false" >> $GITHUB_OUTPUT
+            fi
+
+            # Add scan statistics
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 📊 Scan Statistics" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **Total packages scanned**: $total_packages" >> $GITHUB_STEP_SUMMARY
+            echo "- **Packages with issues**: $vulnerability_count" >> $GITHUB_STEP_SUMMARY
+            echo "- **Deprecated packages**: $deprecated_count" >> $GITHUB_STEP_SUMMARY
+            echo "- **Scan completed**: $(date -u)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No packages found in Brewfile to audit"
+          fi
+
+      - name: Node.js dependency scan
+        run: |
+          echo "🔍 Checking for Node.js dependencies..."
+
+          if [ -f "package.json" ]; then
+            echo "📦 Found package.json, running comprehensive Node.js security scan..."
+
+            # Run detailed npm audit
+            npm audit --json > npm-audit.json || true
+
+            # Parse and report results
+            if [ -s npm-audit.json ]; then
+              vulnerabilities=$(jq '.metadata.vulnerabilities | to_entries | map(select(.value > 0)) | length' npm-audit.json)
+
+              if [ "$vulnerabilities" -gt 0 ]; then
+                echo "## ⚠️ Node.js Security Issues" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+
+                # Extract vulnerability counts
+                critical=$(jq '.metadata.vulnerabilities.critical // 0' npm-audit.json)
+                high=$(jq '.metadata.vulnerabilities.high // 0' npm-audit.json)
+                moderate=$(jq '.metadata.vulnerabilities.moderate // 0' npm-audit.json)
+                low=$(jq '.metadata.vulnerabilities.low // 0' npm-audit.json)
+
+                echo "### Vulnerability Summary" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+                [ "$critical" -gt 0 ] && echo "- **Critical**: $critical" >> $GITHUB_STEP_SUMMARY
+                [ "$high" -gt 0 ] && echo "- **High**: $high" >> $GITHUB_STEP_SUMMARY
+                [ "$moderate" -gt 0 ] && echo "- **Moderate**: $moderate" >> $GITHUB_STEP_SUMMARY
+                [ "$low" -gt 0 ] && echo "- **Low**: $low" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "Run \`npm audit fix\` to fix vulnerabilities automatically." >> $GITHUB_STEP_SUMMARY
+              else
+                echo "✅ No Node.js vulnerabilities found" >> $GITHUB_STEP_SUMMARY
+              fi
+            fi
+          else
+            echo "ℹ️ No package.json found, skipping Node.js security scan"
+          fi
+
+      - name: Repository security check
+        run: |
+          echo "🔒 Running comprehensive repository security checks..."
+
+          # Initialize arrays for tracking issues
+          security_issues=()
+          secrets_found=()
+
+          # Enhanced secret detection patterns
+          echo "Checking for potential secrets and sensitive data..."
+
+          # Check for various secret patterns
+          secret_patterns=(
+            "api[_-]?key.*=.*['\"][a-zA-Z0-9]{20,}['\"]"
+            "api[_-]?secret.*=.*['\"][a-zA-Z0-9]{20,}['\"]"
+            "access[_-]?token.*=.*['\"][a-zA-Z0-9]{20,}['\"]"
+            "auth[_-]?token.*=.*['\"][a-zA-Z0-9]{20,}['\"]"
+            "private[_-]?key.*=.*['\"][a-zA-Z0-9]{20,}['\"]"
+            "secret[_-]?key.*=.*['\"][a-zA-Z0-9]{20,}['\"]"
+            "password.*=.*['\"][^'\"]{8,}['\"]"
+            "aws[_-]?access[_-]?key[_-]?id.*=.*['\"][A-Z0-9]{20}['\"]"
+            "aws[_-]?secret[_-]?access[_-]?key.*=.*['\"][a-zA-Z0-9+/]{40}['\"]"
+          )
+
+          for pattern in "${secret_patterns[@]}"; do
+            if grep -r -E -i "$pattern" . \
+               --include="*.sh" --include="*.fish" --include="*.zsh" \
+               --include="*.yml" --include="*.yaml" --include="*.json" \
+               --include="*.env" --include="*.conf" --include="*.config" \
+               --exclude-dir=".git" --exclude-dir="scratchpads" \
+               --exclude-dir="node_modules" --exclude="security*.yml" 2>/dev/null | head -5; then
+              secrets_found+=("Pattern matched: $pattern")
+            fi
+          done
+
+          # Check for sensitive files
+          echo "Checking for sensitive files..."
+          sensitive_files=(
+            ".env"
+            ".env.local"
+            ".env.production"
+            "*.pem"
+            "*.key"
+            "*.p12"
+            "*.pfx"
+            "id_rsa"
+            "id_dsa"
+            "id_ecdsa"
+            "id_ed25519"
+          )
+
+          for file_pattern in "${sensitive_files[@]}"; do
+            if find . -name "$file_pattern" -not -path "./.git/*" -not -path "./scratchpads/*" | head -5 | grep -q "."; then
+              security_issues+=("Found sensitive file pattern: $file_pattern")
+            fi
+          done
+
+          # Report comprehensive findings
+          if [ ${#security_issues[@]} -gt 0 ] || [ ${#secrets_found[@]} -gt 0 ]; then
+            echo "## ⚠️ Repository Security Review Required" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The following potential security issues were detected:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ ${#secrets_found[@]} -gt 0 ]; then
+              echo "### 🔑 Potential Secrets Detected" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Review these patterns for hardcoded secrets:" >> $GITHUB_STEP_SUMMARY
+              for secret in "${secrets_found[@]}"; do
+                echo "- $secret" >> $GITHUB_STEP_SUMMARY
+              done
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            if [ ${#security_issues[@]} -gt 0 ]; then
+              echo "### 📁 Sensitive Files" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              for issue in "${security_issues[@]}"; do
+                echo "- $issue" >> $GITHUB_STEP_SUMMARY
+              done
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "**Note**: These are automated detections. Please review manually to confirm actual security risks." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ No obvious security issues detected in repository" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Generate comprehensive security report
+        if: always()
+        run: |
+          echo "📊 Generating comprehensive security scan summary..."
+
+          # Add final recommendations
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🛡️ Security Best Practices" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "1. **Keep dependencies updated**: Use the automated update workflow" >> $GITHUB_STEP_SUMMARY
+          echo "2. **Monitor vulnerabilities**: Enable GitHub Dependabot alerts" >> $GITHUB_STEP_SUMMARY
+          echo "3. **Rotate secrets regularly**: Use environment variables for sensitive data" >> $GITHUB_STEP_SUMMARY
+          echo "4. **Review audit logs**: Check this weekly scan for new issues" >> $GITHUB_STEP_SUMMARY
+          echo "5. **Manual trigger available**: Use workflow_dispatch for on-demand scans" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "*Next scheduled scan: $(date -u -d 'next monday 6:00' 2>/dev/null || date -u)*" >> $GITHUB_STEP_SUMMARY
+
+      # Optional: Add notifications for security issues
+      - name: Send notification on security issues
+        if: steps.audit.outputs.security_issues_found == 'true' && github.event_name == 'schedule'
+        run: |
+          echo "🚨 Security issues detected - notification would be sent here"
+          # Add Slack, email, or other notification integration

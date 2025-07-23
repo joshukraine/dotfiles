@@ -1,0 +1,207 @@
+#!/usr/bin/env bash
+#
+# Comprehensive shell script linter using shellcheck with project-specific logic
+#
+# Usage: lint-shell [options]
+# Arguments:
+#   --fix             Apply automatic fixes where possible (planned feature)
+#   --quiet           Suppress informational output, show only errors
+#   --exclude-tests   Skip test files (*.bats) during linting
+#   --help, -h        Show help message and usage information
+#
+# Examples:
+#   lint-shell                    # Lint all shell scripts with verbose output
+#   lint-shell --quiet            # Lint all scripts, minimal output
+#   lint-shell --exclude-tests    # Skip test files, focus on production code
+#
+# Returns: 0 if all scripts pass linting, 1 if any issues found
+# Behavior: Automatically detects shell type (bash/sh), filters non-shell files
+#
+# File Detection:
+#   - *.sh, *.bash files (shell scripts)
+#   - *.bats files (test scripts, unless --exclude-tests)
+#   - Executable files in bin/.local/bin/ (filtered by shebang)
+#   - Skips Ruby, Python, and other non-shell interpreters
+
+set -euo pipefail
+
+# Script directory detection - resolve symlinks to get actual location
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
+# Default options
+FIX_MODE=false
+QUIET_MODE=false
+EXCLUDE_TESTS=false
+EXIT_CODE=0
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --fix)
+      FIX_MODE=true
+      shift
+      ;;
+    --quiet)
+      QUIET_MODE=true
+      shift
+      ;;
+    --exclude-tests)
+      EXCLUDE_TESTS=true
+      shift
+      ;;
+    --help|-h)
+      echo "Usage: lint-shell [--fix] [--quiet] [--exclude-tests]"
+      echo ""
+      echo "Options:"
+      echo "  --fix            Apply automatic fixes where possible"
+      echo "  --quiet          Suppress informational output"
+      echo "  --exclude-tests  Skip test files (*.bats)"
+      echo "  --help, -h       Show this help message"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# Check if shellcheck is available
+if ! command -v shellcheck >/dev/null 2>&1; then
+  echo "Error: shellcheck is not installed" >&2
+  echo "Install with: brew install shellcheck" >&2
+  exit 1
+fi
+
+# Function to log messages
+log() {
+  if [[ "$QUIET_MODE" = false ]]; then
+    echo "$@"
+  fi
+}
+
+# Function to find shell scripts
+find_shell_scripts() {
+  {
+    # Find shell script files
+    find "$PROJECT_ROOT" -type f \( -name "*.sh" -o -name "*.bash" \) 2>/dev/null || true
+
+    # Add test files unless excluded
+    if [[ "$EXCLUDE_TESTS" = false ]]; then
+      find "$PROJECT_ROOT" -type f -name "*.bats" 2>/dev/null || true
+    fi
+
+    # Add executable scripts in bin directories with shell shebangs
+    find "$PROJECT_ROOT" -path "*/bin/.local/bin/*" -type f -perm +111 2>/dev/null | while read -r file; do
+      if head -1 "$file" 2>/dev/null | grep -q -E "(bash|sh)" && ! head -1 "$file" 2>/dev/null | grep -q -E "(ruby|python|perl|fish)"; then
+        echo "$file"
+      fi
+    done || true
+  } | grep -v "\.git/" || true
+}
+
+# Function to determine shell type for a file
+get_shell_type() {
+  local file="$1"
+
+  # Check shebang
+  local shebang
+  shebang=$(head -1 "$file" 2>/dev/null || echo "")
+
+  if [[ "$shebang" == *"bash"* ]]; then
+    echo "bash"
+  elif [[ "$shebang" == *"sh"* && "$shebang" != *"fish"* ]]; then
+    echo "sh"
+  elif [[ "$file" == *.bats ]]; then
+    echo "bash"  # BATS files are bash-based
+  elif [[ "$file" == *.sh ]]; then
+    echo "sh"
+  elif [[ "$file" == *.bash ]]; then
+    echo "bash"
+  else
+    # For files without clear indicators, try to detect
+    if grep -q "bash" "$file" 2>/dev/null; then
+      echo "bash"
+    else
+      echo "sh"
+    fi
+  fi
+}
+
+# Main linting function
+lint_file() {
+  local file="$1"
+  local shell_type
+  shell_type=$(get_shell_type "$file")
+
+  # Skip non-shell files
+  if [[ "$shell_type" == "" ]]; then
+    return 0
+  fi
+
+  # Skip files that aren't shell scripts (like Ruby, Perl, etc.)
+  local first_line
+  first_line=$(head -1 "$file" 2>/dev/null || echo "")
+  if [[ "$first_line" == *"ruby"* || "$first_line" == *"perl"* || "$first_line" == *"python"* ]]; then
+    return 0
+  fi
+
+  local shellcheck_args=()
+  shellcheck_args+=("--shell=$shell_type")
+  shellcheck_args+=("--format=gcc")
+
+  # Add fix mode if requested
+  if [[ "$FIX_MODE" = true ]]; then
+    # Note: shellcheck doesn't have a --fix mode, but we could integrate with other tools
+    log "Note: --fix mode not yet implemented for shellcheck"
+  fi
+
+  # Run shellcheck
+  if ! shellcheck "${shellcheck_args[@]}" "$file"; then
+    EXIT_CODE=1
+  fi
+}
+
+# Main execution
+main() {
+  log "🔍 Linting shell scripts in $PROJECT_ROOT"
+  log ""
+
+  local file_count=0
+  local files
+
+  # Get list of files to process
+  mapfile -t files < <(find_shell_scripts)
+
+  if [[ ${#files[@]} -eq 0 ]]; then
+    log "No shell scripts found to lint."
+    return 0
+  fi
+
+  log "Found ${#files[@]} shell script(s) to lint:"
+
+  # Process each file
+  for file in "${files[@]}"; do
+    file_count=$((file_count + 1))
+
+    # Show relative path
+    local rel_path="${file#$PROJECT_ROOT/}"
+    log "[$file_count/${#files[@]}] Checking $rel_path"
+
+    lint_file "$file"
+  done
+
+  log ""
+  if [[ $EXIT_CODE -eq 0 ]]; then
+    log "✅ All shell scripts passed linting!"
+  else
+    log "❌ Some shell scripts have linting issues."
+  fi
+
+  return $EXIT_CODE
+}
+
+# Run main function
+main "$@"

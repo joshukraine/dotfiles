@@ -4,14 +4,20 @@ function reload-abbr
         switch $argv[1]
             case -h --help
                 printf "%s\n" "Usage: reload-abbr [OPTION]
-Regenerate abbreviations for all shells from shared YAML source.
+Regenerate abbreviations and function documentation from source files.
 This command can be run from any directory.
+
+What gets regenerated:
+  - Fish abbreviations (fish/.config/fish/abbreviations.fish)
+  - Zsh abbreviations (zsh/.config/zsh-abbr/abbreviations.zsh)
+  - Abbreviations documentation (docs/abbreviations.md)
+  - Function documentation index (docs/functions/function-index.md)
 
 Options:
   -h, --help  Show this help message
 
 Examples:
-  reload-abbr  # Regenerate all abbreviations from shared/abbreviations.yaml"
+  reload-abbr  # Regenerate all abbreviations and function docs"
                 return 0
         end
     end
@@ -37,10 +43,27 @@ Examples:
         return 1
     end
 
+    # Check if documentation generators exist
+    set doc_generate_script "$dotfiles_dir/shared/generate-abbreviations-doc.sh"
+    set func_doc_script "$dotfiles_dir/shared/generate-function-docs-simple.sh"
+
     # Run the generation script
-    echo "🔄 Regenerating abbreviations from any directory..."
+    echo "🔄 Regenerating abbreviations and documentation from any directory..."
     "$generate_script"
     set exit_code $status
+
+    # Also regenerate documentation if generators exist and abbreviations succeeded
+    if test $exit_code -eq 0
+        if test -f "$doc_generate_script" -a -x "$doc_generate_script"
+            echo "📝 Regenerating abbreviations documentation..."
+            "$doc_generate_script"
+        end
+
+        if test -f "$func_doc_script" -a -x "$func_doc_script"
+            echo "📋 Regenerating function documentation index..."
+            "$func_doc_script"
+        end
+    end
 
     if test $exit_code -eq 0
         echo

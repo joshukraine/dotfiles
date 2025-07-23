@@ -58,45 +58,58 @@ brew install fish zsh
 
 ## Running Tests
 
-### Run all tests
+### Using the Test Runner (Recommended)
+
+The `run-tests` utility provides a convenient wrapper around bats with additional features:
 
 ```bash
-# From dotfiles root directory
-bats tests/ --recursive
+# Run all tests with full setup
+run-tests
+
+# Run specific test categories
+run-tests git               # Git function tests only
+run-tests abbr              # Abbreviation tests only
+run-tests utils             # Utility tests only
+run-tests env               # Environment tests only
+
+# Advanced options
+run-tests --verbose         # Enable verbose output
+run-tests --fast            # Skip setup, run tests immediately
+run-tests --perf            # Show performance timing
+run-tests --coverage        # Show coverage analysis
+
+# Setup and installation
+run-tests --install         # Install bats-core and dependencies
+run-tests --setup           # Setup test environment only
 ```
 
-### Run specific test categories
+**Benefits of using `run-tests`:**
+
+- Automatic environment setup (permissions, abbreviations)
+- Performance monitoring with 2-minute target enforcement
+- Coverage analysis showing function vs test counts
+- Dependency management (installs bats-core, fish, zsh)
+- Test categorization with meaningful names
+
+### Direct bats Commands
+
+You can also run bats directly for more control:
 
 ```bash
-# Git functions only
-bats tests/git_functions/
+# Run all tests
+bats tests/ --recursive
 
-# Abbreviations only
-bats tests/abbreviations/
+# Run specific test categories
+bats tests/git_functions/      # Git functions only
+bats tests/abbreviations/      # Abbreviations only
+bats tests/utilities/          # Utilities only
 
-# Utilities only
-bats tests/utilities/
-
-# Specific function tests
+# Run individual test files
 bats tests/git_functions/test_gpum.bats      # Just gpum tests
 bats tests/git_functions/test_grbm.bats     # Just grbm tests
 bats tests/git_functions/test_gcom.bats     # Just gcom tests
-```
 
-### Run individual test files
-
-```bash
-# Test specific function
-bats tests/git_functions/test_gpum.bats
-
-# Test core abbreviations
-bats tests/abbreviations/test_core_abbr.bats
-```
-
-### Verbose output
-
-```bash
-# Show detailed output for debugging
+# Verbose output
 bats tests/ --recursive --verbose-run
 ```
 
@@ -341,7 +354,53 @@ Create new test categories by:
 3. Updating CI workflow if needed
 4. Documenting in this README
 
+## Development Quality Tools
+
+### Shell Script Linting
+
+The `lint-shell` utility complements the testing framework by providing static analysis:
+
+```bash
+# Lint all shell scripts
+lint-shell
+
+# Advanced options
+lint-shell --quiet            # Minimal output
+lint-shell --exclude-tests    # Skip test files (*.bats)
+lint-shell --help            # Show usage information
+```
+
+**Integration with Testing Workflow:**
+
+```bash
+# Pre-commit quality check
+lint-shell              # Check for shell script issues
+run-tests --fast git    # Quick test relevant functions
+git add .               # Stage changes
+git commit              # Commit (triggers pre-commit hooks)
+
+# Full quality assurance
+lint-shell              # Lint all scripts
+run-tests --perf        # Run all tests with timing
+run-tests --coverage    # Check test coverage
+```
+
+**Relationship to Validation Framework:**
+
+| Tool | Purpose | Speed | Scope |
+|------|---------|-------|-------|
+| `lint-shell` | Shell script linting with shellcheck | ~30s | All shell scripts |
+| `run-tests` | Functional behavior testing | ~2min | Function behavior |
+| `scripts/validate-config.sh` | Configuration integrity | ~9s | Static analysis |
+
+### Documentation
+
+- **Testing**: This README and `docs/functions/development.md`
+- **Validation**: `scripts/README.md` and individual validator docs
+- **Functions**: `docs/functions/` directory with comprehensive guides
+
 ## Related Issues
 
 - [Issue #71](https://github.com/joshukraine/dotfiles/issues/71) - Original testing framework request
+- [Issue #74](https://github.com/joshukraine/dotfiles/issues/74) - Function documentation (includes quality tools)
 - Phase 3 of dotfiles improvement plan - Long-term automation goals
