@@ -1,8 +1,20 @@
 #!/bin/bash
 #
-# https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-cm
-# Small wrapper around git commit. Bare 'cm' will enter normal git commit
-# editor, but with args it will do a direct `commit -m`
+# Smart git commit wrapper - quick commits with message or interactive without
+#
+# Usage: git-cm [message...]
+# Arguments:
+#   message... - Commit message words (optional, combined into single message)
+#
+# Examples:
+#   git-cm                 # Open commit editor with verbose diff
+#   git-cm Fix bug        # Quick commit with message "Fix bug"
+#   git-cm Add new feature # Quick commit with message "Add new feature"
+#
+# Returns: Creates git commit with specified message or opens editor
+# Behavior: With args, commits immediately; without args, opens editor with diff
+#
+# Source: https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-cm
 
 if [[ $# -gt 0 ]]; then
   git commit -m "$*"

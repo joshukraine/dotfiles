@@ -4,7 +4,9 @@ Comprehensive guide to smart Git operations and utilities in this dotfiles confi
 
 ## Overview
 
-The Git functions provide intelligent branch detection, automated workflows, and enhanced Git commands that simplify common development tasks. All functions support both `main` and `master` as default branches.
+The Git functions provide intelligent branch detection, automated workflows, and
+enhanced Git commands that simplify common development tasks. All functions
+support both `main` and `master` as default branches.
 
 ## Smart Git Functions
 
@@ -12,7 +14,8 @@ The Git functions provide intelligent branch detection, automated workflows, and
 
 #### `gcom` - Switch to Default Branch
 
-Intelligently switches to the repository's default branch (`main` or `master`) with optional pull.
+Intelligently switches to the repository's default branch (`main` or `master`)
+with optional pull.
 
 ```bash
 # Switch to default branch
@@ -208,6 +211,67 @@ fi
 - Prompts user to continue if uncommitted changes found
 - Returns appropriate exit code based on user choice
 
+### `git-brst` - Branch Status Overview
+
+Display ahead/behind status for all branches compared to origin/master.
+
+```bash
+# Show all branches with their status
+git-brst
+```
+
+**Output Example:**
+
+```text
+dns_check (ahead 1) | (behind 112) origin/master
+feature-branch (ahead 3) | (behind 0) origin/master
+master (ahead 0) | (behind 0) origin/master
+```
+
+**Use Cases:**
+
+- Review branch status before rebasing
+- Identify stale branches
+- Check deployment readiness
+
+### `git-publish` - Push Branch to Origin
+
+Push current branch to origin and set up tracking relationship.
+
+```bash
+# Push current branch to origin
+git-publish
+```
+
+**Features:**
+
+- Creates upstream tracking branch
+- Uses same name as local branch
+- Refuses to publish master branch for safety
+- Ruby implementation for cross-platform compatibility
+
+### `git-uncommit` - Undo Last Commit
+
+Undo the last commit while preserving changes in the working directory.
+
+```bash
+# Undo last commit, keep changes unstaged
+git-uncommit
+```
+
+**Safety Features:**
+
+- Only works with clean working directory
+- Shows branch name and previous commit SHA
+- Aborts if uncommitted changes exist
+- Leaves changes unstaged for review
+
+**Example Output:**
+
+```text
+Branch feature-xyz was abc123def
+```
+
 ## Integration Examples
 
 ### Typical Workflow
@@ -266,10 +330,14 @@ echo "Ready for deployment"
 | `glg` | ✅ | ✅ | `bin/.local/bin/glg` (shared script) |
 | `git-cm` | ✅ | ✅ | `bin/.local/bin/git-cm` (shared script) |
 | `git-check-uncommitted` | ✅ | ✅ | `bin/.local/bin/git-check-uncommitted` (shared script) |
+| `git-brst` | ✅ | ✅ | `bin/.local/bin/git-brst` (shared script) |
+| `git-publish` | ✅ | ✅ | `bin/.local/bin/git-publish` (shared script) |
+| `git-uncommit` | ✅ | ✅ | `bin/.local/bin/git-uncommit` (shared script) |
 
 ### Shared Logic
 
-The smart git functions (`gcom`, `gpum`, `grbm`) share identical logic between Fish and Zsh implementations:
+The smart git functions (`gcom`, `gpum`, `grbm`) share identical logic between
+Fish and Zsh implementations:
 
 1. **Default Branch Detection**: Both shells use the same branch detection algorithm
 2. **Error Handling**: Consistent error messages and exit codes
@@ -346,6 +414,7 @@ The following abbreviations complement the git functions:
 | `gst` | `git status` | Repository status |
 | `gp` | `git push` | Push changes |
 | `gpl` | `git pull` | Pull changes |
+| `gpub` | `git publish` | Push branch to origin |
 
 See [abbreviations reference](../abbreviations.md) for complete list.
 

@@ -1,5 +1,20 @@
 #!/bin/bash
-# https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-uncommit
+#
+# Undo the last commit while preserving changes in working directory
+#
+# Usage: git-uncommit
+# Arguments: None
+#
+# Examples:
+#   git-uncommit           # Undo last commit, keep changes unstaged
+#
+# Returns: Undoes last commit, leaving changes in working directory
+# Behavior: Only works with clean working directory (no uncommitted changes)
+#
+# Safety: Aborts if there are uncommitted changes to prevent data loss
+# Output: Shows branch name and previous commit SHA for reference
+#
+# Source: https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-uncommit
 
 git_clean() {
   git diff --no-ext-diff --quiet --exit-code

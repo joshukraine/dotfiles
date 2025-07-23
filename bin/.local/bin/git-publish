@@ -1,12 +1,20 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-
 #
-# https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-publish
-# Usage: git publish <remote-branch-name>
-# Open the pull request page for <branch>, or the current branch if not
-# specified. Lands on the new pull request page when no PR exists yet.
-# The local branch must be tracking the remote branch.
+# Push current branch to origin and set up tracking
+#
+# Usage: git-publish
+# Arguments: None
+#
+# Examples:
+#   git-publish            # Push current branch to origin with same name
+#
+# Returns: Pushes current branch to origin and sets up tracking
+# Behavior: Refuses to publish master branch for safety
+#
+# Note: Originally designed to open PR page, but simplified to just push
+#
+# Source: https://github.com/christoomey/dotfiles/blob/77fb4084bd3f207aace80aa93a49769a6a298ddb/bin/git-publish
 
 def read_current_branch
   `git rev-parse --abbrev-ref HEAD`.chomp
