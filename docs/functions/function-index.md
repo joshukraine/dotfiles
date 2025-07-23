@@ -80,7 +80,7 @@ tn                  # Shows usage
 
 ## Related Documentation
 
-- [Complete Function Documentation](README.md) - Detailed documentation for all functions
+- [Complete Function Documentation](./README.md) - Detailed documentation for all functions
 - [Abbreviations Reference](../abbreviations.md) - Shell abbreviation reference
 - [Main README](../../README.md) - Repository overview and setup
 

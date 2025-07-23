@@ -90,7 +90,6 @@ All functions follow a standardized documentation format:
 
 - **[Abbreviations Reference](../abbreviations.md)**: Complete list of shell abbreviations
 - **[Setup Guide](../../README.md#setup)**: Installation and configuration instructions
-- **[Contributing](../../CONTRIBUTING.md)**: Guidelines for adding new functions
 
 ## Getting Help
 
