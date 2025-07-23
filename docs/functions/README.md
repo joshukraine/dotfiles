@@ -4,7 +4,7 @@ Comprehensive documentation for all custom shell functions available in this dot
 
 ## Overview
 
-This dotfiles configuration provides **35 custom functions** across Fish and Zsh shells, organized into the following categories:
+This dotfiles configuration provides **37 custom functions** across Fish and Zsh shells, organized into the following categories:
 
 - **[Git Functions](#git-functions)**: Smart Git operations with branch detection
 - **[Development Utilities](#development-utilities)**: Navigation, clipboard, and package management
@@ -37,6 +37,7 @@ This dotfiles configuration provides **35 custom functions** across Fish and Zsh
 - **Clipboard**: `copy`, `copycwd`
 - **Package Management**: `bubo`, `reload-abbr`
 - **Path Utilities**: `path`
+- **Testing & QA**: `run-tests`, `lint-shell`
 
 #### Tmux Functions
 
@@ -139,6 +140,7 @@ sha256              # Shows usage when called without arguments
 - `haf` - Hide all files in Finder
 - `htop` - sudo htop wrapper
 - `l`, `ll`, `la` - Enhanced ls with exa/eza
+- `lint-shell` - Comprehensive shell script linter
 
 ### P
 
@@ -149,6 +151,7 @@ sha256              # Shows usage when called without arguments
 
 - `reload-abbr` - Regenerate abbreviations from shared YAML source
 - `rlv` - List Ruby versions
+- `run-tests` - Test runner for dotfiles testing framework
 
 ### S
 

@@ -13,6 +13,11 @@ tmux/.config/tmux/plugins
 vim/.netrwhist
 vim/bundle
 
+# Allow bin/.local/bin directory despite global *.local ignore pattern
+!bin/.local/
+!bin/.local/bin/
+!bin/.local/bin/*
+
 # Scratchpads for temporary files, notes, and debugging
 scratchpads/
 *.rej

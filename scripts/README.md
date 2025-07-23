@@ -28,6 +28,23 @@ The validation framework ensures configuration integrity across both Fish and Zs
 ./scripts/validate-config.sh --validator markdown
 ```
 
+### Shell Script Linting
+
+For comprehensive shell script linting beyond the validation framework:
+
+```bash
+# Comprehensive shell script linting (all files)
+lint-shell
+
+# Focused on production code (skip tests)
+lint-shell --exclude-tests
+
+# Minimal output for CI/scripts
+lint-shell --quiet
+```
+
+**Note**: The `lint-shell` utility provides more comprehensive shellcheck integration than the built-in shell-syntax validator, with additional features like smart file detection and detailed reporting.
+
 ### Setup Local Git Hooks
 
 ```bash
@@ -305,17 +322,25 @@ CI_MODE=1 ./scripts/validate-config.sh
 
 ## Integration with Existing Tools
 
-### Relationship to Test Suite
+### Relationship to Test Suite and Quality Tools
 
-The validation framework complements but does not duplicate the existing test suite:
+The validation framework complements the broader quality assurance ecosystem:
 
-| Aspect | Validation Framework | Test Suite |
-|--------|---------------------|------------|
-| **Purpose** | Static analysis, configuration integrity | Runtime behavior, functional testing |
-| **Speed** | ~9 seconds | ~2 minutes |
-| **Scope** | Syntax, consistency, structure | Function behavior, integration |
-| **When** | Pre-commit, every change | CI after validation passes |
-| **Tools** | shellcheck, yq, markdownlint | bats, fish, zsh |
+| Tool | Purpose | Speed | Scope | When |
+|------|---------|-------|-------|------|
+| **Validation Framework** | Static analysis, config integrity | ~9s | Syntax, consistency | Pre-commit, every change |
+| **Test Suite** (`run-tests`) | Runtime behavior, functional testing | ~2min | Function behavior | CI after validation |
+| **Shell Linter** (`lint-shell`) | Comprehensive shell script analysis | ~30s | All shell scripts | Development, debugging |
+
+**Integration Workflow:**
+
+```bash
+# Local development quality check
+./scripts/validate-config.sh --fix    # Fix configuration issues
+lint-shell --exclude-tests            # Lint production shell scripts
+run-tests --fast git                  # Quick functional test
+git commit                           # Triggers pre-commit validation
+```
 
 ### Integration Points
 
@@ -324,9 +349,32 @@ The validation framework complements but does not duplicate the existing test su
 - **Fix Mode**: Automatic correction reduces manual intervention
 - **Reporting**: Both provide GitHub Actions summaries
 
+## Development Tools Reference
+
+### Quality Assurance Utilities
+
+Beyond the validation framework, these tools provide comprehensive quality assurance:
+
+- **`lint-shell`**: Comprehensive shell script linter using shellcheck
+  - Location: `bin/.local/bin/lint-shell`
+  - Usage: `lint-shell [--quiet] [--exclude-tests] [--help]`
+  - Documentation: `docs/functions/development.md#testing-and-quality-assurance`
+
+- **`run-tests`**: Test runner for bats-core testing framework
+  - Location: `bin/.local/bin/run-tests`
+  - Usage: `run-tests [category] [--verbose] [--perf] [--coverage]`
+  - Documentation: `tests/README.md` and `docs/functions/development.md`
+
+### Documentation Cross-References
+
+- **Testing Framework**: `tests/README.md` - Functional testing with bats-core
+- **Function Documentation**: `docs/functions/development.md` - Quality tools and workflows
+- **CI/CD Workflows**: `.github/workflows/` - Automated quality gates
+
 ## Related Issues
 
 - **Issue #72**: Original configuration validation implementation
+- **Issue #74**: Function documentation (includes quality tools integration)
 - **Issue #81**: Shellcheck integration (implemented in shell-syntax validator)
 - **Issue #82**: Markdown linting integration (implemented in markdown validator)
 - **PR #83**: Complete validation framework implementation
