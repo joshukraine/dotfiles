@@ -106,8 +106,8 @@ setup() {
 @test "abbreviation count matches between shells" {
   local fish_count
   local zsh_count
-  fish_count=$(grep -c "^abbr -a" "${DOTFILES_DIR}/fish/.config/fish/abbreviations.fish" 2> /dev/null || echo "0")
-  zsh_count=$(grep -c "^abbr " "${DOTFILES_DIR}/zsh/.config/zsh-abbr/abbreviations.zsh" 2> /dev/null || echo "0")
+  fish_count=$(grep -c "^abbr -a" "${DOTFILES_DIR}/fish/.config/fish/abbreviations.fish" 2>/dev/null || echo "0")
+  zsh_count=$(grep -c "^abbr " "${DOTFILES_DIR}/zsh/.config/zsh-abbr/abbreviations.zsh" 2>/dev/null || echo "0")
 
   # Allow for small differences due to shell-specific abbreviations
   local diff=$((fish_count - zsh_count))

@@ -27,7 +27,8 @@
 set -euo pipefail
 
 # Script directory detection - resolve symlinks to get actual location
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+# IMPORTANT: Do not use readlink -f here as it's not available on macOS
+SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
@@ -75,14 +76,14 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check if shellcheck is available
-if ! command -v shellcheck > /dev/null 2>&1; then
+if ! command -v shellcheck >/dev/null 2>&1; then
   echo "Error: shellcheck is not installed" >&2
   echo "Install with: brew install shellcheck" >&2
   exit 1
 fi
 
 # Check for shfmt (required for formatting when --fix is enabled)
-if [[ "${FIX_MODE}" = true ]] && ! command -v shfmt > /dev/null 2>&1; then
+if [[ "${FIX_MODE}" = true ]] && ! command -v shfmt >/dev/null 2>&1; then
   echo "Error: shfmt is required for --fix mode but is not installed" >&2
   echo "Install with: brew install shfmt" >&2
   exit 1
@@ -99,16 +100,16 @@ log() {
 find_shell_scripts() {
   {
     # Find shell script files
-    find "${PROJECT_ROOT}" -type f \( -name "*.sh" -o -name "*.bash" \) 2> /dev/null || true
+    find "${PROJECT_ROOT}" -type f \( -name "*.sh" -o -name "*.bash" \) 2>/dev/null || true
 
     # Add test files unless excluded
     if [[ "${EXCLUDE_TESTS}" = false ]]; then
-      find "${PROJECT_ROOT}" -type f -name "*.bats" 2> /dev/null || true
+      find "${PROJECT_ROOT}" -type f -name "*.bats" 2>/dev/null || true
     fi
 
     # Add executable scripts in bin directories with shell shebangs
-    find "${PROJECT_ROOT}" -path "*/bin/.local/bin/*" -type f -perm +111 2> /dev/null | while read -r file; do
-      if head -1 "${file}" 2> /dev/null | grep -q -E "(bash|sh)" && ! head -1 "${file}" 2> /dev/null | grep -q -E "(ruby|python|perl|fish)"; then
+    find "${PROJECT_ROOT}" -path "*/bin/.local/bin/*" -type f -perm +111 2>/dev/null | while read -r file; do
+      if head -1 "${file}" 2>/dev/null | grep -q -E "(bash|sh)" && ! head -1 "${file}" 2>/dev/null | grep -q -E "(ruby|python|perl|fish)"; then
         echo "${file}"
       fi
     done || true
@@ -122,7 +123,7 @@ get_shell_type() {
 
   # Check shebang
   local shebang
-  shebang=$(head -1 "${file}" 2> /dev/null || echo "")
+  shebang=$(head -1 "${file}" 2>/dev/null || echo "")
 
   if [[ "${shebang}" == *"bash"* ]]; then
     echo "bash"
@@ -136,7 +137,7 @@ get_shell_type() {
     echo "bash"
   else
     # For files without clear indicators, try to detect
-    if grep -q "bash" "${file}" 2> /dev/null; then
+    if grep -q "bash" "${file}" 2>/dev/null; then
       echo "bash"
     else
       echo "sh"
@@ -171,12 +172,12 @@ fix_shellcheck_issues() {
     fi
 
     # Save the diff to a temp file and apply it
-    echo "${diff_output}" > "${temp_patch}"
+    echo "${diff_output}" >"${temp_patch}"
 
     # Apply the patch from the project root directory (save/restore working dir)
-    if cd "${PROJECT_ROOT}" 2> /dev/null; then
+    if cd "${PROJECT_ROOT}" 2>/dev/null; then
       local patch_output
-      patch_output=$(timeout 10s patch --batch --forward -p1 < "${temp_patch}" 2>&1)
+      patch_output=$(timeout 10s patch --batch --forward -p1 <"${temp_patch}" 2>&1)
       local patch_exit=$?
 
       if [[ ${patch_exit} -eq 0 ]]; then
@@ -185,7 +186,7 @@ fix_shellcheck_issues() {
         return 0
       else
         # Try applying without path stripping in case of relative paths
-        patch_output=$(timeout 10s patch --batch --forward -p0 < "${temp_patch}" 2>&1)
+        patch_output=$(timeout 10s patch --batch --forward -p0 <"${temp_patch}" 2>&1)
         patch_exit=$?
 
         if [[ ${patch_exit} -eq 0 ]]; then
@@ -234,9 +235,9 @@ format_shell_script() {
   shfmt_output=$(shfmt --apply-ignore -i 2 -ci -bn "${file}" 2>&1)
   local shfmt_exit=$?
 
-  if [[ ${shfmt_exit} -eq 0 ]]; then
+  if [[ ${shfmt_exit} -eq 0 && -n "${shfmt_output}" ]]; then
     # Save formatted output to temp file
-    echo "${shfmt_output}" > "${temp_formatted}"
+    echo "${shfmt_output}" >"${temp_formatted}"
 
     # Get hash of formatted content
     formatted_content_hash=$(shasum -a 256 "${temp_formatted}" | cut -d' ' -f1)
@@ -286,9 +287,16 @@ lint_file() {
 
   # Skip files that aren't shell scripts (like Ruby, Perl, etc.)
   local first_line
-  first_line=$(head -1 "${file}" 2> /dev/null || echo "")
+  first_line=$(head -1 "${file}" 2>/dev/null || echo "")
   if [[ "${first_line}" == *"ruby"* || "${first_line}" == *"perl"* || "${first_line}" == *"python"* ]]; then
     return 0
+  fi
+
+  # Check for macOS-incompatible patterns (exclude comments and strings)
+  if grep -E '^\s*[^#]*readlink\s+-f' "${file}" 2>/dev/null | grep -v "grep.*readlink" | grep -v "contains.*readlink" >/dev/null; then
+    echo "❌ ERROR: ${file} contains 'readlink -f' which is not compatible with macOS!" >&2
+    echo "   Use this pattern instead: \$(cd \"\$(dirname \"\${BASH_SOURCE[0]}\")\" && pwd)/\$(basename \"\${BASH_SOURCE[0]}\")" >&2
+    EXIT_CODE=1
   fi
 
   local shellcheck_args=()
@@ -312,7 +320,7 @@ lint_file() {
     fi
 
     # Apply shfmt formatting after shellcheck fixes
-    if command -v shfmt > /dev/null 2>&1; then
+    if command -v shfmt >/dev/null 2>&1; then
       if format_shell_script "${file}"; then
         SHFMT_FIXES=$((SHFMT_FIXES + 1))
       else

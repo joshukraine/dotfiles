@@ -141,7 +141,7 @@ teardown() {
 
 @test "tat fails gracefully when tmux is not available" {
   # This test depends on tmux being in PATH, so we'll skip it if tmux exists
-  if command -v tmux > /dev/null 2>&1; then
+  if command -v tmux >/dev/null 2>&1; then
     skip "tmux is available, cannot test unavailability"
   fi
 

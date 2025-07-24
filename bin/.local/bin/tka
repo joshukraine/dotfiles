@@ -11,7 +11,7 @@
 # Returns: Terminates all tmux sessions, effectively stopping tmux server
 # Behavior: Safely handles case when no sessions exist
 
-if ! tmux list-sessions > /dev/null 2>&1; then
+if ! tmux list-sessions >/dev/null 2>&1; then
   echo "No tmux sessions to kill."
   exit 0
 fi

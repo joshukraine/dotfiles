@@ -20,18 +20,18 @@ teardown() {
   setup_main_repo
 
   # Create some commits to display
-  echo "file1" > file1.txt
+  echo "file1" >file1.txt
   git add file1.txt
   git commit -m "Add file1"
 
   # Create a branch and merge to show graph
   git checkout -b feature/branch
-  echo "feature" > feature.txt
+  echo "feature" >feature.txt
   git add feature.txt
   git commit -m "Add feature"
 
   git checkout main
-  echo "main work" > main.txt
+  echo "main work" >main.txt
   git add main.txt
   git commit -m "Work on main"
 
@@ -51,12 +51,12 @@ teardown() {
   setup_main_repo
 
   # Create commit with file changes
-  echo "line1" > test.txt
+  echo "line1" >test.txt
   git add test.txt
   git commit -m "Add test file"
 
-  echo "line2" >> test.txt
-  echo "line3" >> test.txt
+  echo "line2" >>test.txt
+  echo "line3" >>test.txt
   git add test.txt
   git commit -m "Update test file"
 
@@ -99,7 +99,7 @@ teardown() {
 
   # Create multiple commits
   for i in {1..3}; do
-    echo "file${i}" > "file${i}.txt"
+    echo "file${i}" >"file${i}.txt"
     git add "file${i}.txt"
     git commit -m "Commit ${i}"
   done

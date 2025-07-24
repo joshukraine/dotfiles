@@ -11,13 +11,13 @@
 set -euo pipefail
 
 # Check if we're in a git repository
-if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Error: Not a git repository" >&2
   exit 2
 fi
 
 # Check for uncommitted changes
-if git diff-index --quiet HEAD -- 2> /dev/null; then
+if git diff-index --quiet HEAD -- 2>/dev/null; then
   # No uncommitted changes
   exit 0
 fi

@@ -110,9 +110,9 @@ teardown() {
   setup_main_repo
 
   # Create both staged and unstaged changes
-  echo "Staged change" >> staged.txt
+  echo "Staged change" >>staged.txt
   git add staged.txt
-  echo "Unstaged change" >> README.md
+  echo "Unstaged change" >>README.md
 
   run git-check-uncommitted
   [ "${status}" -eq 1 ]
@@ -124,7 +124,7 @@ teardown() {
   # Create subdirectory and work from there
   mkdir subdir
   cd subdir
-  echo "Change from subdir" >> ../README.md
+  echo "Change from subdir" >>../README.md
 
   run git-check-uncommitted
   [ "${status}" -eq 1 ]
@@ -134,7 +134,7 @@ teardown() {
   setup_main_repo
 
   # Add new file
-  echo "New file content" > newfile.txt
+  echo "New file content" >newfile.txt
   git add newfile.txt
 
   run git-check-uncommitted
@@ -155,7 +155,7 @@ teardown() {
   setup_main_repo
 
   # Make and commit changes
-  echo "New content" >> README.md
+  echo "New content" >>README.md
   git add README.md
   git commit -m "Update README"
 

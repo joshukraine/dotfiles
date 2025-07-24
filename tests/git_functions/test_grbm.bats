@@ -99,7 +99,7 @@ teardown() {
 
   # Add a commit to main to create something to rebase against
   git checkout main
-  echo "New main content" >> main-file.txt
+  echo "New main content" >>main-file.txt
   git add main-file.txt
   git commit -m "Update main"
   git push origin main
@@ -117,7 +117,7 @@ teardown() {
 
   # Add a commit to master to create something to rebase against
   git checkout master
-  echo "New master content" >> master-file.txt
+  echo "New master content" >>master-file.txt
   git add master-file.txt
   git commit -m "Update master"
   git push origin master

@@ -122,7 +122,7 @@ teardown() {
 
   # Add a commit to remote main to have something to pull
   git checkout main
-  echo "Remote change" >> remote-file.txt
+  echo "Remote change" >>remote-file.txt
   git add remote-file.txt
   git commit -m "Remote change"
   git push origin main
@@ -190,7 +190,7 @@ teardown() {
 
   # Add a remote change to pull
   git checkout main
-  echo "Remote change" >> remote-file.txt
+  echo "Remote change" >>remote-file.txt
   git add remote-file.txt
   git commit -m "Remote change"
   git push origin main

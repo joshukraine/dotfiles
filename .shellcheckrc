@@ -1,5 +1,9 @@
 # ShellCheck configuration for dotfiles project
 # https://www.shellcheck.net/wiki/Ignore
+#
+# IMPORTANT: This project targets macOS
+# - Avoid Linux-specific commands (e.g., readlink -f)
+# - Use POSIX-compatible alternatives where possible
 
 # Set shell for shell-specific checks (default to bash)
 shell=bash

@@ -53,7 +53,7 @@ teardown() {
 
   # Create another feature branch that's merged
   git checkout -b feature/also-done
-  echo "More work" >> done.txt
+  echo "More work" >>done.txt
   git add done.txt
   git commit -m "More completed work"
   git checkout main
@@ -62,7 +62,7 @@ teardown() {
 
   # Create an unmerged branch
   git checkout -b feature/unmerged
-  echo "Unmerged work" >> unmerged.txt
+  echo "Unmerged work" >>unmerged.txt
   git add unmerged.txt
   git commit -m "Unmerged work"
   git checkout main
@@ -182,7 +182,7 @@ teardown() {
   # Create and merge multiple feature branches
   for i in {1..3}; do
     git checkout -b "feature/merge-me-${i}"
-    echo "Feature ${i} work" >> "feature${i}.txt"
+    echo "Feature ${i} work" >>"feature${i}.txt"
     git add "feature${i}.txt"
     git commit -m "Add feature ${i}"
     git checkout main

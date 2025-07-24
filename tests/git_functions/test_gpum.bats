@@ -128,6 +128,6 @@ teardown() {
 
   # Verify upstream is set
   local upstream
-  upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2> /dev/null)
+  upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null)
   assert_equals "origin/tracking-test" "${upstream}"
 }
