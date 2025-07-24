@@ -2,7 +2,7 @@
 
 Auto-generated comprehensive index of all documented functions in the dotfiles configuration.
 
-*Last updated: Wed Jul 23 16:10:45 EEST 2025*
+*Last updated: Thu Jul 24 10:46:23 EEST 2025*
 
 ## Quick Reference
 
