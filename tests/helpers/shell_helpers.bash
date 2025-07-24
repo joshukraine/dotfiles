@@ -10,7 +10,13 @@ load_dotfiles_variable() {
     return 0
   fi
 
-  # Method 2: Source bash environment file
+  # Method 2: CI environment detection - use GITHUB_WORKSPACE
+  if [ -n "${GITHUB_WORKSPACE}" ] && [ -d "${GITHUB_WORKSPACE}" ] && [ -f "${GITHUB_WORKSPACE}/setup.sh" ]; then
+    export DOTFILES="${GITHUB_WORKSPACE}"
+    return 0
+  fi
+
+  # Method 3: Source bash environment file
   if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
     source "${HOME}/dotfiles/shared/environment.sh"
     if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
@@ -18,9 +24,16 @@ load_dotfiles_variable() {
     fi
   fi
 
-  # Method 3: Fallback to conventional location
+  # Method 4: Fallback to conventional location
   if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
     export DOTFILES="${HOME}/dotfiles"
+    return 0
+  fi
+
+  # Method 5: Check current working directory (for tests run from dotfiles root)
+  if [ -f "./setup.sh" ] && [ -d "./shared" ]; then
+    DOTFILES="$(pwd)"
+    export DOTFILES
     return 0
   fi
 
