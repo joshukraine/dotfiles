@@ -126,12 +126,19 @@ install_dependencies() {
 setup_environment() {
   print_blue "Setting up test environment..."
 
-  # Navigate to dotfiles directory - resolve symlinks to get actual location
-  # IMPORTANT: Do not use readlink -f here as it's not available on macOS
-  # shellcheck disable=SC2001 # Intentional: macOS-compatible path resolution
-  SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
-  DOTFILES_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+  # Find dotfiles directory - use git root if in git repo, otherwise use ~/dotfiles
+  if git rev-parse --show-toplevel >/dev/null 2>&1; then
+    DOTFILES_DIR="$(git rev-parse --show-toplevel)"
+  else
+    DOTFILES_DIR="${HOME}/dotfiles"
+  fi
+
+  # Verify we found the dotfiles project
+  if [[ ! -f "${DOTFILES_DIR}/setup.sh" ]]; then
+    echo "Error: Cannot find dotfiles project root. Expected to find setup.sh in: ${DOTFILES_DIR}" >&2
+    exit 1
+  fi
+
   cd "${DOTFILES_DIR}"
 
   # Make helpers executable
@@ -157,12 +164,19 @@ run_tests() {
   local verbose="$2"
   local show_perf="$3"
 
-  # Navigate to dotfiles directory - resolve symlinks to get actual location
-  # IMPORTANT: Do not use readlink -f here as it's not available on macOS
-  # shellcheck disable=SC2001 # Intentional: macOS-compatible path resolution
-  SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
-  DOTFILES_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+  # Find dotfiles directory - use git root if in git repo, otherwise use ~/dotfiles
+  if git rev-parse --show-toplevel >/dev/null 2>&1; then
+    DOTFILES_DIR="$(git rev-parse --show-toplevel)"
+  else
+    DOTFILES_DIR="${HOME}/dotfiles"
+  fi
+
+  # Verify we found the dotfiles project
+  if [[ ! -f "${DOTFILES_DIR}/setup.sh" ]]; then
+    echo "Error: Cannot find dotfiles project root. Expected to find setup.sh in: ${DOTFILES_DIR}" >&2
+    exit 1
+  fi
+
   cd "${DOTFILES_DIR}"
 
   local bats_args=""
@@ -233,10 +247,19 @@ run_tests() {
 }
 
 show_coverage() {
-  # Resolve symlinks to get actual location
-  SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
-  DOTFILES_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+  # Find dotfiles directory - use git root if in git repo, otherwise use ~/dotfiles
+  if git rev-parse --show-toplevel >/dev/null 2>&1; then
+    DOTFILES_DIR="$(git rev-parse --show-toplevel)"
+  else
+    DOTFILES_DIR="${HOME}/dotfiles"
+  fi
+
+  # Verify we found the dotfiles project
+  if [[ ! -f "${DOTFILES_DIR}/setup.sh" ]]; then
+    echo "Error: Cannot find dotfiles project root. Expected to find setup.sh in: ${DOTFILES_DIR}" >&2
+    exit 1
+  fi
+
   cd "${DOTFILES_DIR}"
 
   print_blue "Coverage Analysis:"
