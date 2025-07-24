@@ -41,7 +41,7 @@ teardown() {
 
 @test "g with no arguments clears terminal first" {
   # Check that the g script contains the clear command
-  run grep -q "clear" "${DOTFILES_DIR}/bin/.local/bin/g"
+  run grep -q "clear" "${DOTFILES}/bin/.local/bin/g"
   [ "${status}" -eq 0 ]
 }
 

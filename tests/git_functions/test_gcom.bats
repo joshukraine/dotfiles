@@ -67,7 +67,7 @@ teardown() {
 
   # When running gcom, git-check-uncommitted --prompt will detect changes
   # and the test will provide "n" as input to abort
-  run bash -c "echo 'n' | fish --no-config -c \"source '${DOTFILES_DIR}/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
+  run bash -c "echo 'n' | fish --no-config -c \"source '${DOTFILES}/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '${DOTFILES}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
   assert_contains "${output}" "Warning: You have uncommitted changes"
   [ "${status}" -eq 1 ]
 }
@@ -79,7 +79,7 @@ teardown() {
 
   # When running gcom, git-check-uncommitted --prompt will detect changes
   # and the test will provide "y" as input to continue
-  run bash -c "echo 'y' | fish --no-config -c \"source '${DOTFILES_DIR}/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
+  run bash -c "echo 'y' | fish --no-config -c \"source '${DOTFILES}/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '${DOTFILES}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
   assert_contains "${output}" "Switching to"
   [ "${status}" -eq 0 ]
 }
