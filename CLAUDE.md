@@ -73,6 +73,28 @@ brew bundle install
 ./scripts/setup-git-hooks.sh
 ```
 
+### Testing and Linting
+
+```bash
+# Run comprehensive test suite (must be run from dotfiles root)
+./scripts/run-tests
+
+# Run specific test categories
+./scripts/run-tests git         # Git function tests
+./scripts/run-tests abbr        # Abbreviation tests
+./scripts/run-tests --verbose   # Verbose output
+./scripts/run-tests --perf      # Performance timing
+
+# Lint shell scripts (must be run from dotfiles root)
+./scripts/lint-shell
+
+# Lint with minimal output
+./scripts/lint-shell --quiet
+
+# Skip test files during linting
+./scripts/lint-shell --exclude-tests
+```
+
 ### Development Workflow
 
 ```bash

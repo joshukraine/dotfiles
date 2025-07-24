@@ -25,18 +25,14 @@
 
 set -euo pipefail
 
-# Find project root - use git root if in git repo, otherwise use ~/dotfiles
-if git rev-parse --show-toplevel >/dev/null 2>&1; then
-  PROJECT_ROOT="$(git rev-parse --show-toplevel)"
-else
-  PROJECT_ROOT="${HOME}/dotfiles"
-fi
-
-# Verify we found the dotfiles project
-if [[ ! -f "${PROJECT_ROOT}/setup.sh" ]]; then
-  echo "Error: Cannot find dotfiles project root. Expected to find setup.sh in: ${PROJECT_ROOT}" >&2
+# Script should be run from dotfiles directory root
+if [[ ! -f "setup.sh" ]]; then
+  echo "Error: lint-shell must be run from dotfiles directory root" >&2
+  echo "Usage: cd ~/dotfiles && ./scripts/lint-shell" >&2
   exit 1
 fi
+
+PROJECT_ROOT="$(pwd)"
 
 # Default options
 QUIET_MODE=false

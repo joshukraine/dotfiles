@@ -126,11 +126,13 @@ install_dependencies() {
 setup_environment() {
   print_blue "Setting up test environment..."
 
-  # Navigate to dotfiles directory - resolve symlinks to get actual location
-  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-  cd "$DOTFILES_DIR"
+  # Navigate to dotfiles directory - script should be run from dotfiles root
+  if [[ ! -f "setup.sh" ]]; then
+    echo "Error: run-tests must be run from dotfiles directory root" >&2
+    echo "Usage: cd ~/dotfiles && ./scripts/run-tests" >&2
+    exit 1
+  fi
+  # Working in dotfiles directory
 
   # Make helpers executable
   if [ -d "tests/helpers" ]; then
@@ -155,40 +157,42 @@ run_tests() {
   local verbose="$2"
   local show_perf="$3"
 
-  # Navigate to dotfiles directory - resolve symlinks to get actual location
-  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-  cd "$DOTFILES_DIR"
+  # Navigate to dotfiles directory - script should be run from dotfiles root
+  if [[ ! -f "setup.sh" ]]; then
+    echo "Error: run-tests must be run from dotfiles directory root" >&2
+    echo "Usage: cd ~/dotfiles && ./scripts/run-tests" >&2
+    exit 1
+  fi
+  # Working in dotfiles directory
 
   local bats_args=""
-  if [ "$verbose" = "true" ]; then
-    bats_args="$bats_args --verbose-run"
+  if [ "${verbose}" = "true" ]; then
+    bats_args="${bats_args} --verbose-run"
   fi
 
   local start_time=""
-  if [ "$show_perf" = "true" ]; then
+  if [ "${show_perf}" = "true" ]; then
     start_time=$(date +%s)
     print_blue "Starting performance measurement..."
   fi
 
-  case "$category" in
+  case "${category}" in
     "all")
       print_blue "Running all tests..."
-      bats tests/ --recursive $bats_args
+      bats tests/ --recursive "${bats_args}"
       ;;
     "git")
       print_blue "Running git function tests..."
-      bats tests/git_functions/ $bats_args
+      bats tests/git_functions/ "${bats_args}"
       ;;
     "abbr")
       print_blue "Running abbreviation tests..."
-      bats tests/abbreviations/ $bats_args
+      bats tests/abbreviations/ "${bats_args}"
       ;;
     "utils")
       print_blue "Running utility tests..."
       if [ -d "tests/utilities" ] && [ -n "$(ls -A tests/utilities/*.bats 2>/dev/null)" ]; then
-        bats tests/utilities/ $bats_args
+        bats tests/utilities/ "${bats_args}"
       else
         print_yellow "No utility tests found"
       fi
@@ -196,13 +200,13 @@ run_tests() {
     "env")
       print_blue "Running environment tests..."
       if [ -d "tests/environment" ] && [ -n "$(ls -A tests/environment/*.bats 2>/dev/null)" ]; then
-        bats tests/environment/ $bats_args
+        bats tests/environment/ "${bats_args}"
       else
         print_yellow "No environment tests found"
       fi
       ;;
     *)
-      print_red "Unknown test category: $category"
+      print_red "Unknown test category: ${category}"
       print_yellow "Available categories: all, git, abbr, utils, env"
       exit 1
       ;;
@@ -210,51 +214,59 @@ run_tests() {
 
   local exit_code=$?
 
-  if [ "$show_perf" = "true" ] && [ -n "$start_time" ]; then
-    local end_time=$(date +%s)
+  if [ "${show_perf}" = "true" ] && [ -n "${start_time}" ]; then
+    local end_time
+    end_time=$(date +%s)
     local duration=$((end_time - start_time))
 
     print_blue "Performance Results:"
     echo "  Total execution time: ${duration}s"
 
-    if [ $duration -gt 120 ]; then
+    if [ ${duration} -gt 120 ]; then
       print_red "  ❌ Tests exceeded 2-minute target"
     else
       print_green "  ✅ Tests completed within 2-minute target"
     fi
   fi
 
-  return $exit_code
+  return ${exit_code}
 }
 
 show_coverage() {
-  # Resolve symlinks to get actual location
-  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-  cd "$DOTFILES_DIR"
+  # Navigate to dotfiles directory - script should be run from dotfiles root
+  if [[ ! -f "setup.sh" ]]; then
+    echo "Error: run-tests must be run from dotfiles directory root" >&2
+    echo "Usage: cd ~/dotfiles && ./scripts/run-tests" >&2
+    exit 1
+  fi
+  # Working in dotfiles directory
 
   print_blue "Coverage Analysis:"
 
   # Count functions and tests
-  local fish_functions=$(find fish/.config/fish/functions/ -name "*.fish" 2>/dev/null | wc -l)
-  local zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" zsh/.config/zsh/functions.zsh 2>/dev/null || echo "0")
-  local bin_scripts=$(find bin/.local/bin/ -type f -executable 2>/dev/null | wc -l)
-  local test_files=$(find tests/ -name "*.bats" 2>/dev/null | wc -l)
+  local fish_functions
+  fish_functions=$(find fish/.config/fish/functions/ -name "*.fish" 2>/dev/null | wc -l)
+  local zsh_functions
+  zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" zsh/.config/zsh/functions.zsh 2>/dev/null || echo "0")
+  local bin_scripts
+  bin_scripts=$(find bin/.local/bin/ -type f -executable 2>/dev/null | wc -l)
+  local test_files
+  test_files=$(find tests/ -name "*.bats" 2>/dev/null | wc -l)
 
   echo "  Functions:"
-  echo "    Fish functions: $fish_functions"
-  echo "    Zsh functions:  $zsh_functions"
-  echo "    Bin scripts:    $bin_scripts"
+  echo "    Fish functions: ${fish_functions}"
+  echo "    Zsh functions:  ${zsh_functions}"
+  echo "    Bin scripts:    ${bin_scripts}"
   echo ""
   echo "  Tests:"
-  echo "    Test files:     $test_files"
+  echo "    Test files:     ${test_files}"
   echo "    Git tests:      $(find tests/git_functions/ -name "*.bats" 2>/dev/null | wc -l)"
   echo "    Abbr tests:     $(find tests/abbreviations/ -name "*.bats" 2>/dev/null | wc -l)"
 
   if [ -f "shared/abbreviations.yaml" ]; then
-    local abbr_count=$(grep -c "^  [a-zA-Z].*:" shared/abbreviations.yaml 2>/dev/null || echo "0")
-    echo "    Abbreviations:  $abbr_count total defined"
+    local abbr_count
+    abbr_count=$(grep -c "^  [a-zA-Z].*:" shared/abbreviations.yaml 2>/dev/null || echo "0")
+    echo "    Abbreviations:  ${abbr_count} total defined"
   fi
 }
 
@@ -315,18 +327,18 @@ main() {
   fi
 
   # Setup environment unless --fast
-  if [ "$fast" != "true" ]; then
+  if [ "${fast}" != "true" ]; then
     setup_environment
   fi
 
   # Show coverage if requested
-  if [ "$show_coverage" = "true" ]; then
+  if [ "${show_coverage}" = "true" ]; then
     show_coverage
     echo ""
   fi
 
   # Run tests
-  if run_tests "$category" "$verbose" "$show_perf"; then
+  if run_tests "${category}" "${verbose}" "${show_perf}"; then
     print_green "✅ All tests passed!"
     exit 0
   else
