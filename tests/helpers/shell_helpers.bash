@@ -2,13 +2,42 @@
 
 # Shell environment test helpers for dotfiles testing framework
 
-# Source dotfiles directory
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+# Load DOTFILES variable with shell-agnostic fallback logic
+load_dotfiles_variable() {
+
+  # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
+  if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+    return 0
+  fi
+
+  # Method 2: Source bash environment file
+  if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
+    source "${HOME}/dotfiles/shared/environment.sh"
+    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+      return 0
+    fi
+  fi
+
+  # Method 3: Fallback to conventional location
+  if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
+    export DOTFILES="${HOME}/dotfiles"
+    return 0
+  fi
+
+  echo "Error: Cannot determine DOTFILES location" >&2
+  return 1
+}
+
+# Load the DOTFILES variable
+if ! load_dotfiles_variable; then
+  echo "Failed to load DOTFILES environment variable" >&2
+  exit 1
+fi
 
 # Load Fish functions for testing
 load_fish_function() {
   local function_name="$1"
-  local fish_function_file="${DOTFILES_DIR}/fish/.config/fish/functions/${function_name}.fish"
+  local fish_function_file="${DOTFILES}/fish/.config/fish/functions/${function_name}.fish"
 
   if [ -f "${fish_function_file}" ]; then
     # Convert Fish function syntax to bash-compatible for testing
@@ -29,7 +58,7 @@ run_fish_function() {
   if load_fish_function "${function_name}"; then
     # Source the fish function and execute it, with minimal config to avoid errors
     # Pass PATH so mocked commands work, and source git-check-uncommitted if it exists
-    local git_check_file="${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted"
+    local git_check_file="${DOTFILES}/bin/.local/bin/git-check-uncommitted"
     if [ -f "${git_check_file}" ]; then
       env PATH="${PATH}" fish --no-config -c "set -x PATH '${PATH}'; function git-check-uncommitted; '${git_check_file}' \$argv; end; source '${FISH_FUNCTION_FILE}'; ${function_name} ${args}" 2>&1
     else
@@ -43,7 +72,7 @@ run_fish_function() {
 
 # Load Zsh functions for testing
 load_zsh_functions() {
-  local zsh_functions_file="${DOTFILES_DIR}/zsh/.config/zsh/functions.zsh"
+  local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
   if [ -f "${zsh_functions_file}" ]; then
     # Source the Zsh functions in current bash session
@@ -89,8 +118,8 @@ test_abbreviation() {
       test_zsh_abbreviation "${abbr}" "${expected}"
       ;;
     "both")
-      test_fish_abbreviation "${abbr}" "${expected}" \
-        && test_zsh_abbreviation "${abbr}" "${expected}"
+      test_fish_abbreviation "${abbr}" "${expected}" &&
+        test_zsh_abbreviation "${abbr}" "${expected}"
       ;;
     *)
       echo "Unknown shell type: ${shell_type}"
@@ -105,7 +134,7 @@ test_fish_abbreviation() {
   local expected="$2"
 
   # Load Fish abbreviations file
-  local fish_abbr_file="${DOTFILES_DIR}/fish/.config/fish/abbreviations.fish"
+  local fish_abbr_file="${DOTFILES}/fish/.config/fish/abbreviations.fish"
 
   if [ -f "${fish_abbr_file}" ]; then
     # Extract the abbreviation expansion from the Fish file
@@ -131,7 +160,7 @@ test_zsh_abbreviation() {
   local expected="$2"
 
   # Load Zsh abbreviations file
-  local zsh_abbr_file="${DOTFILES_DIR}/zsh/.config/zsh-abbr/abbreviations.zsh"
+  local zsh_abbr_file="${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh"
 
   if [ -f "${zsh_abbr_file}" ]; then
     # Extract the abbreviation expansion from the Zsh file
@@ -153,7 +182,7 @@ test_zsh_abbreviation() {
 
 # Load environment variables
 load_environment() {
-  local env_file="${DOTFILES_DIR}/shared/environment.sh"
+  local env_file="${DOTFILES}/shared/environment.sh"
 
   if [ -f "${env_file}" ]; then
     source "${env_file}"
@@ -175,7 +204,7 @@ function_exists() {
 
 # Setup PATH with dotfiles bin directory
 setup_dotfiles_path() {
-  export PATH="${DOTFILES_DIR}/bin/.local/bin:${PATH}"
+  export PATH="${DOTFILES}/bin/.local/bin:${PATH}"
 }
 
 # Restore original PATH

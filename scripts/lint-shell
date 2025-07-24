@@ -25,14 +25,47 @@
 
 set -euo pipefail
 
-# Script should be run from dotfiles directory root
-if [[ ! -f "setup.sh" ]]; then
-  echo "Error: lint-shell must be run from dotfiles directory root" >&2
-  echo "Usage: cd ~/dotfiles && ./scripts/lint-shell" >&2
+# Load DOTFILES variable with shell-agnostic fallback logic
+load_dotfiles_variable() {
+    # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
+    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+        return 0
+    fi
+
+    # Method 2: Source bash environment file
+    if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
+        source "${HOME}/dotfiles/shared/environment.sh"
+        if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+            return 0
+        fi
+    fi
+
+    # Method 3: Fallback to conventional location
+    if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
+        export DOTFILES="${HOME}/dotfiles"
+        return 0
+    fi
+
+    echo "Error: Cannot determine DOTFILES location" >&2
+    return 1
+}
+
+# Load DOTFILES variable using shell-agnostic approach
+if ! load_dotfiles_variable; then
+    echo "Failed to load DOTFILES environment variable" >&2
+    exit 1
+fi
+
+# Verify we're in the correct dotfiles location
+if [[ "$(pwd)" != "${DOTFILES}" ]]; then
+  echo "Error: lint-shell must be run from the dotfiles directory" >&2
+  echo "Expected location: ${DOTFILES}" >&2
+  echo "Current location: $(pwd)" >&2
+  echo "Usage: cd \"${DOTFILES}\" && ./scripts/lint-shell" >&2
   exit 1
 fi
 
-PROJECT_ROOT="$(pwd)"
+PROJECT_ROOT="${DOTFILES}"
 
 # Default options
 QUIET_MODE=false
