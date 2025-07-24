@@ -139,7 +139,10 @@ setup_environment() {
     exit 1
   fi
 
-  cd "${DOTFILES_DIR}"
+  if ! cd "${DOTFILES_DIR}"; then
+    echo "Error: Cannot change to dotfiles directory: ${DOTFILES_DIR}" >&2
+    exit 1
+  fi
 
   # Make helpers executable
   if [ -d "tests/helpers" ]; then
@@ -177,7 +180,10 @@ run_tests() {
     exit 1
   fi
 
-  cd "${DOTFILES_DIR}"
+  if ! cd "${DOTFILES_DIR}"; then
+    echo "Error: Cannot change to dotfiles directory: ${DOTFILES_DIR}" >&2
+    exit 1
+  fi
 
   local bats_args=""
   if [ "${verbose}" = "true" ]; then
@@ -260,19 +266,22 @@ show_coverage() {
     exit 1
   fi
 
-  cd "${DOTFILES_DIR}"
+  if ! cd "${DOTFILES_DIR}"; then
+    echo "Error: Cannot change to dotfiles directory: ${DOTFILES_DIR}" >&2
+    exit 1
+  fi
 
   print_blue "Coverage Analysis:"
 
   # Count functions and tests
   local fish_functions
-  fish_functions=$(find fish/.config/fish/functions/ -name "*.fish" 2>/dev/null | wc -l)
+  fish_functions=$(find "${DOTFILES_DIR}/fish/.config/fish/functions/" -name "*.fish" 2>/dev/null | wc -l)
   local zsh_functions
-  zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" zsh/.config/zsh/functions.zsh 2>/dev/null || echo "0")
+  zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" "${DOTFILES_DIR}/zsh/.config/zsh/functions.zsh" 2>/dev/null || echo "0")
   local bin_scripts
-  bin_scripts=$(find bin/.local/bin/ -type f -executable 2>/dev/null | wc -l)
+  bin_scripts=$(find "${DOTFILES_DIR}/bin/.local/bin/" -type f -executable 2>/dev/null | wc -l)
   local test_files
-  test_files=$(find tests/ -name "*.bats" 2>/dev/null | wc -l)
+  test_files=$(find "${DOTFILES_DIR}/tests/" -name "*.bats" 2>/dev/null | wc -l)
 
   echo "  Functions:"
   echo "    Fish functions: ${fish_functions}"
@@ -281,12 +290,12 @@ show_coverage() {
   echo ""
   echo "  Tests:"
   echo "    Test files:     ${test_files}"
-  echo "    Git tests:      $(find tests/git_functions/ -name "*.bats" 2>/dev/null | wc -l)"
-  echo "    Abbr tests:     $(find tests/abbreviations/ -name "*.bats" 2>/dev/null | wc -l)"
+  echo "    Git tests:      $(find "${DOTFILES_DIR}/tests/git_functions/" -name "*.bats" 2>/dev/null | wc -l)"
+  echo "    Abbr tests:     $(find "${DOTFILES_DIR}/tests/abbreviations/" -name "*.bats" 2>/dev/null | wc -l)"
 
-  if [ -f "shared/abbreviations.yaml" ]; then
+  if [ -f "${DOTFILES_DIR}/shared/abbreviations.yaml" ]; then
     local abbr_count
-    abbr_count=$(grep -c "^  [a-zA-Z].*:" shared/abbreviations.yaml 2>/dev/null || echo "0")
+    abbr_count=$(grep -c "^  [a-zA-Z].*:" "${DOTFILES_DIR}/shared/abbreviations.yaml" 2>/dev/null || echo "0")
     echo "    Abbreviations:  ${abbr_count} total defined"
   fi
 }
