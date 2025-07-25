@@ -322,14 +322,7 @@ abbr -a -g yw 'yarn workspace'
 abbr -a -g yws 'yarn workspaces'
 
 # postgresql
-abbr -a -g startpost 'pg_ctl -D /opt/homebrew/var/postgres start'
-abbr -a -g stoppost 'pg_ctl -D /opt/homebrew/var/postgres stop'
-abbr -a -g statpost 'pg_ctl -D /opt/homebrew/var/postgres status'
 abbr -a -g psq 'psql -U postgres'
-
-# finder
-abbr -a -g haf 'defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-abbr -a -g saf 'defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
 # middleman
 abbr -a -g mm 'bundle exec middleman'

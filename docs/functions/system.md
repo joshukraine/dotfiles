@@ -156,18 +156,44 @@ sha256 expected_hash filename.zip
 Toggle visibility of hidden files in macOS Finder.
 
 ```bash
-# Show all files in Finder
+# Show all files in Finder (Show All Files)
 saf
 
-# Hide hidden files in Finder
+# Hide hidden files in Finder (Hide All Files)
 haf
 ```
 
 **Features:**
 
-- Automatically restarts Finder
-- System-wide effect
+- Automatically restarts Finder to apply changes
+- System-wide effect across all Finder windows
 - Alternative to Cmd+Shift+. keyboard shortcut
+- Uses system preferences to persist setting
+
+### Database Management
+
+#### `startpost` / `stoppost` / `statpost` - PostgreSQL Management
+
+Convenient wrappers for PostgreSQL server management via Homebrew services.
+
+```bash
+# Start PostgreSQL server
+startpost
+
+# Stop PostgreSQL server
+stoppost
+
+# Check PostgreSQL server status
+statpost
+```
+
+**Features:**
+
+- Uses Homebrew services for reliable management
+- `startpost` - Starts PostgreSQL using `brew services start postgresql`
+- `stoppost` - Stops PostgreSQL using `brew services stop postgresql`
+- `statpost` - Shows running PostgreSQL processes using `ps aux | rg postgres`
+- Works with Homebrew-installed PostgreSQL installations
 
 ## Development Tools
 
@@ -269,14 +295,21 @@ g push origin main
 | `path` | ✅ | ✅ | Both shells |
 | `g` | ✅ | ✅ | Shared script |
 | `sha256` | ✅ | ✅ | Shared script |
-| `saf`/`haf` | ✅ | ❌ | Fish functions only |
+| `saf`/`haf` | ✅ | ✅ | Both shells |
+| `startpost`/`stoppost`/`statpost` | ✅ | ✅ | Both shells |
 
 ### Shell-Specific Notes
 
-**Fish-only functions** (`cat`, `htop`, `l`/`ll`/`la`, `saf`/`haf`):
+**Fish-only functions** (`cat`, `htop`, `l`/`ll`/`la`):
 
 - Enhanced command wrappers with modern tools
 - Available when using Fish as primary shell
+
+**Cross-shell functions** (`saf`/`haf`, `startpost`/`stoppost`/`statpost`):
+
+- Available in both Fish and Zsh with identical functionality
+- Maintain shell parity for system and database management
+- Same command syntax and behavior across shells
 
 **Cross-shell differences**:
 

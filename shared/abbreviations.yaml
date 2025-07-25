@@ -912,27 +912,9 @@ yarn:
 
 # PostgreSQL
 postgresql:
-  startpost:
-    command: "pg_ctl -D /opt/homebrew/var/postgres start"
-    description: "Start PostgreSQL server"
-  stoppost:
-    command: "pg_ctl -D /opt/homebrew/var/postgres stop"
-    description: "Stop PostgreSQL server"
-  statpost:
-    command: "pg_ctl -D /opt/homebrew/var/postgres status"
-    description: "Check PostgreSQL server status"
   psq:
     command: "psql -U postgres"
     description: "Connect to PostgreSQL as postgres user"
-
-# Finder (macOS)
-finder:
-  haf:
-    command: "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-    description: "Show hidden files in Finder"
-  saf:
-    command: "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-    description: "Hide hidden files in Finder"
 
 # Middleman
 middleman:
