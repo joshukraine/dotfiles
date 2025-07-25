@@ -732,12 +732,6 @@ asdf:
   aui:
     command: "asdf install"
     description: "Install from .tool-versions"
-  agl:
-    command: "asdf global"
-    description: "Set global version"
-  all:
-    command: "asdf local"
-    description: "Set local version"
   acl:
     command: "asdf current"
     description: "Show current versions"
@@ -747,12 +741,6 @@ asdf:
   ares:
     command: "asdf reshim"
     description: "Refresh shims"
-  aup:
-    command: "asdf update"
-    description: "Update ASDF"
-  aupp:
-    command: "asdf update --all && asdf plugin update --all"
-    description: "Update ASDF and all plugins"
 
 # Tmux
 tmux:

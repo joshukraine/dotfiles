@@ -261,13 +261,9 @@ abbr "airl"="asdf install ruby latest"
 abbr "ala"="asdf list all"
 abbr "ali"="asdf list"
 abbr "aui"="asdf install"
-abbr "agl"="asdf global"
-abbr "all"="asdf local"
 abbr "acl"="asdf current"
 abbr "aun"="asdf uninstall"
 abbr "ares"="asdf reshim"
-abbr "aup"="asdf update"
-abbr "aupp"="asdf update --all && asdf plugin update --all"
 
 # tmux
 abbr "tl"="tmux ls"
