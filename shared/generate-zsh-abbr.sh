@@ -57,5 +57,8 @@ cat >>"${OUTPUT_FILE}" <<'EOF'
 # - gcom: Use gcom function (smart git checkout default branch)
 EOF
 
+# Fix shellcheck warnings by adding braces around variable references
+sed -i '' 's/\$\([A-Z_][A-Z_]*\)/${\1}/g' "${OUTPUT_FILE}"
+
 echo "✅ Generated Zsh abbreviations: ${OUTPUT_FILE}"
 echo "📊 Total abbreviations: $(grep -c '^abbr' "${OUTPUT_FILE}")"
