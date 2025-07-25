@@ -15,7 +15,7 @@ abbr "mkdir"="mkdir -pv"
 abbr "mv"="mv -iv"
 
 # shell
-abbr "src"="source $HOME/.zshrc"
+abbr "src"="source ${HOME}/.zshrc"
 
 # system
 abbr "fast"="fastfetch"
@@ -51,15 +51,15 @@ abbr "bsr"="brew services restart"
 abbr "bsv"="brew services"
 
 # config dirs
-abbr "cdot"="cd $DOTFILES"
-abbr "cdxc"="cd $XDG_CONFIG_HOME"
-abbr "cdfi"="cd $XDG_CONFIG_HOME/fish"
-abbr "cdnv"="cd $XDG_CONFIG_HOME/nvim"
-abbr "cdxd"="cd $XDG_DATA_HOME"
-abbr "cdxa"="cd $XDG_CACHE_HOME"
-abbr "cdxs"="cd $XDG_STATE_HOME"
-abbr "cdlb"="cd $HOME/.local/bin"
-abbr "cdbn"="cd $HOME/.bin"
+abbr "cdot"="cd ${DOTFILES}"
+abbr "cdxc"="cd ${XDG_CONFIG_HOME}"
+abbr "cdfi"="cd ${XDG_CONFIG_HOME}/fish"
+abbr "cdnv"="cd ${XDG_CONFIG_HOME}/nvim"
+abbr "cdxd"="cd ${XDG_DATA_HOME}"
+abbr "cdxa"="cd ${XDG_CACHE_HOME}"
+abbr "cdxs"="cd ${XDG_STATE_HOME}"
+abbr "cdlb"="cd ${HOME}/.local/bin"
+abbr "cdbn"="cd ${HOME}/.bin"
 
 # navigation
 abbr ".."="cd .."
