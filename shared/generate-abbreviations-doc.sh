@@ -32,8 +32,9 @@ zsh_count=${total_count}
 # Get category count
 category_count=$(yq eval 'keys | length' "${YAML_FILE}")
 
-# Generate the documentation
-cat >"${OUTPUT_FILE}" <<EOF
+# Generate the documentation to a temporary file first
+TEMP_FILE="${OUTPUT_FILE}.tmp"
+cat >"${TEMP_FILE}" <<EOF
 # Shell Abbreviations Reference
 
 This document provides a comprehensive reference for all shell abbreviations available in both Fish and Zsh shells. Abbreviations are automatically generated from the single source of truth: \`shared/abbreviations.yaml\`.
@@ -143,11 +144,11 @@ yq eval 'keys | .[]' "${YAML_FILE}" | while read -r category; do
     # Generate table rows for this category
     yq eval ".${category} | to_entries | .[] | \"| \`\" + .key + \"\` | \`\" + (.value | sub(\"\\|\"; \"\\\\|\"; \"g\")) + \"\` | \" + .key + \" |\"" "${YAML_FILE}"
     echo ""
-  } >>"${OUTPUT_FILE}"
+  } >>"${TEMP_FILE}"
 done
 
 # Add cross-shell compatibility section
-cat >>"${OUTPUT_FILE}" <<'EOF'
+cat >>"${TEMP_FILE}" <<'EOF'
 ## Cross-Shell Compatibility
 
 ### Fish-Only Features
@@ -204,35 +205,29 @@ git:
 *Last generated: $(date)*
 EOF
 
-# Generate to a temporary file first
-TEMP_FILE="${OUTPUT_FILE}.tmp"
+# Replace the placeholder with the evaluated date in the temporary file
+sed -i '' "s/\$(date)/$(date)/" "${TEMP_FILE}"
 
-# Preserve the original file if it exists
+# If original file exists, compare content (excluding the timestamp line)
 if [[ -f "${OUTPUT_FILE}" ]]; then
-  cp "${OUTPUT_FILE}" "${OUTPUT_FILE}.bak"
-fi
-
-# Replace the placeholder with the evaluated date
-sed -i '' "s/\$(date)/$(date)/" "${OUTPUT_FILE}"
-
-# If we have a backup, compare content (excluding the timestamp line)
-if [[ -f "${OUTPUT_FILE}.bak" ]]; then
   # Extract content without timestamp for comparison
-  grep -v "Last generated:" "${OUTPUT_FILE}" > "${TEMP_FILE}.new" || true
-  grep -v "Last generated:" "${OUTPUT_FILE}.bak" > "${TEMP_FILE}.old" || true
+  grep -v "Last generated:" "${TEMP_FILE}" > "${TEMP_FILE}.new" 2>/dev/null || true
+  grep -v "Last generated:" "${OUTPUT_FILE}" > "${TEMP_FILE}.old" 2>/dev/null || true
 
-  if cmp -s "${TEMP_FILE}.new" "${TEMP_FILE}.old"; then
-    # Content is identical, restore original file to preserve timestamp
-    mv "${OUTPUT_FILE}.bak" "${OUTPUT_FILE}"
-    rm -f "${TEMP_FILE}.new" "${TEMP_FILE}.old"
+  if cmp -s "${TEMP_FILE}.new" "${TEMP_FILE}.old" 2>/dev/null; then
+    # Content is identical, keep original file to preserve timestamp
+    rm -f "${TEMP_FILE}" "${TEMP_FILE}.new" "${TEMP_FILE}.old"
     echo "✅ Abbreviations documentation unchanged: ${OUTPUT_FILE}"
     echo "📊 Total abbreviations: ${zsh_count} (${category_count} categories)"
     exit 0
   fi
 
-  # Clean up
-  rm -f "${TEMP_FILE}.new" "${TEMP_FILE}.old" "${OUTPUT_FILE}.bak"
+  # Clean up comparison files
+  rm -f "${TEMP_FILE}.new" "${TEMP_FILE}.old"
 fi
+
+# Content has changed or file doesn't exist, use the new version
+mv "${TEMP_FILE}" "${OUTPUT_FILE}"
 
 echo "✅ Generated abbreviations documentation: ${OUTPUT_FILE}"
 echo "📊 Total abbreviations documented: ${zsh_count} (${category_count} categories)"
