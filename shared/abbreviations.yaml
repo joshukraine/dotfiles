@@ -326,9 +326,6 @@ git:
   glg:
     command: "git lg"
     description: "Show graph log (custom alias)"
-  gll:
-    command: "git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit"
-    description: "Show detailed graph log with formatting"
   gp:
     command: "git push"
     description: "Upload changes to remote"

@@ -156,6 +156,53 @@ glg -5
 - Color-coded output
 - Commit relationships
 
+### `gll` - Detailed Graph Git Log
+
+Comprehensive git log with detailed graph formatting, color highlighting, and rich commit information.
+
+```bash
+# Show detailed formatted git log
+gll
+
+# Show last 10 commits with detailed formatting
+gll -10
+
+# Show commits since a specific date
+gll --since="1 week ago"
+
+# Show commits by specific author
+gll --author="John Doe"
+
+# Get help
+gll --help
+```
+
+**Features:**
+
+- Detailed graph visualization with branch structure
+- Color-coded commit hashes (bold blue)
+- Relative dates in parentheses (bold green)
+- Author names with em dash separator (bold white)
+- Branch decorations in yellow
+- Abbreviated commit hashes for cleaner display
+- Support for all standard git log options
+- Built-in help documentation
+
+**Output Format:**
+
+```text
+* a1b2c3d - (2 hours ago) Add new feature — John Doe (HEAD -> feature/branch)
+* e4f5g6h - (1 day ago) Fix bug in user authentication — Jane Smith
+* i7j8k9l - (3 days ago) Update documentation — Bob Johnson (origin/main, main)
+```
+
+**Use Cases:**
+
+- Detailed commit history review
+- Branch relationship analysis
+- Code review preparation
+- Release planning and commit tracking
+
 ### `git-cm` - Commit Wrapper
 
 Intelligent commit wrapper that handles messages and editor scenarios.
@@ -328,6 +375,7 @@ echo "Ready for deployment"
 | `g` | ✅ | ✅ | `bin/.local/bin/g` (shared script) |
 | `gl` | ✅ | ✅ | `bin/.local/bin/gl` (shared script) |
 | `glg` | ✅ | ✅ | `bin/.local/bin/glg` (shared script) |
+| `gll` | ✅ | ✅ | `fish/functions/gll.fish`, `zsh/functions.zsh` |
 | `git-cm` | ✅ | ✅ | `bin/.local/bin/git-cm` (shared script) |
 | `git-check-uncommitted` | ✅ | ✅ | `bin/.local/bin/git-check-uncommitted` (shared script) |
 | `git-brst` | ✅ | ✅ | `bin/.local/bin/git-brst` (shared script) |
