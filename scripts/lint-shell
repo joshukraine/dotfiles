@@ -6,12 +6,16 @@
 # Arguments:
 #   --quiet           Suppress informational output, show only errors
 #   --exclude-tests   Skip test files (*.bats) during linting
+#   --check           Check formatting with shfmt but don't modify (default)
+#   --fix             Auto-format shell scripts with shfmt
 #   --help, -h        Show help message and usage information
 #
 # Examples:
 #   lint-shell                    # Lint all shell scripts with verbose output
 #   lint-shell --quiet            # Lint all scripts, minimal output
 #   lint-shell --exclude-tests    # Skip test files, focus on production code
+#   lint-shell --check            # Check formatting without modifying files
+#   lint-shell --fix              # Auto-format and lint shell scripts
 #
 # Returns: 0 if all scripts pass linting, 1 if any issues found
 # Behavior: Automatically detects shell type (bash/sh), filters non-shell files
@@ -70,6 +74,8 @@ PROJECT_ROOT="${DOTFILES}"
 # Default options
 QUIET_MODE=false
 EXCLUDE_TESTS=false
+FIX_MODE=false
+CHECK_MODE=true
 EXIT_CODE=0
 
 # Parse arguments
@@ -83,13 +89,30 @@ while [[ $# -gt 0 ]]; do
       EXCLUDE_TESTS=true
       shift
       ;;
+    --check)
+      CHECK_MODE=true
+      FIX_MODE=false
+      shift
+      ;;
+    --fix)
+      FIX_MODE=true
+      CHECK_MODE=false
+      shift
+      ;;
     --help | -h)
-      echo "Usage: lint-shell [--quiet] [--exclude-tests]"
+      echo "Usage: lint-shell [options]"
       echo ""
       echo "Options:"
       echo "  --quiet          Suppress informational output"
       echo "  --exclude-tests  Skip test files (*.bats)"
+      echo "  --check          Check formatting with shfmt but don't modify (default)"
+      echo "  --fix            Auto-format shell scripts with shfmt"
       echo "  --help, -h       Show this help message"
+      echo ""
+      echo "Examples:"
+      echo "  lint-shell                    # Lint and check formatting"
+      echo "  lint-shell --fix              # Auto-format and lint"
+      echo "  lint-shell --quiet --check    # Check formatting, minimal output"
       exit 0
       ;;
     *)
@@ -104,6 +127,15 @@ if ! command -v shellcheck >/dev/null 2>&1; then
   echo "Error: shellcheck is not installed" >&2
   echo "Install with: brew install shellcheck" >&2
   exit 1
+fi
+
+# Check if shfmt is available when using format options
+if [[ "${CHECK_MODE}" == "true" ]] || [[ "${FIX_MODE}" == "true" ]]; then
+  if ! command -v shfmt >/dev/null 2>&1; then
+    echo "Error: shfmt is not installed" >&2
+    echo "Install with: brew install shfmt" >&2
+    exit 1
+  fi
 fi
 
 
@@ -187,6 +219,31 @@ lint_file() {
     echo "❌ ERROR: ${file} contains 'readlink -f' which is not compatible with macOS!" >&2
     echo "   Use this pattern instead: \$(cd \"\$(dirname \"\${BASH_SOURCE[0]}\")\" && pwd)/\$(basename \"\${BASH_SOURCE[0]}\")" >&2
     EXIT_CODE=1
+  fi
+
+  # Run shfmt if requested
+  if [[ "${CHECK_MODE}" == "true" ]] || [[ "${FIX_MODE}" == "true" ]]; then
+    local shfmt_args=()
+    shfmt_args+=("-ln" "${shell_type}")  # Language variant
+    shfmt_args+=("-i" "2")                # Indent with 2 spaces
+    shfmt_args+=("-ci")                   # Indent switch cases
+    shfmt_args+=("-bn")                   # Binary ops like && and | may start a line
+
+    if [[ "${CHECK_MODE}" == "true" ]]; then
+      # Check mode - only verify formatting
+      if ! shfmt -d "${shfmt_args[@]}" "${file}" 2>&1; then
+        echo "❌ Formatting issue in ${file} (run with --fix to auto-format)"
+        EXIT_CODE=1
+      fi
+    elif [[ "${FIX_MODE}" == "true" ]]; then
+      # Fix mode - write formatted output
+      if ! shfmt -w "${shfmt_args[@]}" "${file}" 2>&1; then
+        echo "❌ Failed to format ${file}"
+        EXIT_CODE=1
+      else
+        log "✅ Formatted ${file}"
+      fi
+    fi
   fi
 
   local shellcheck_args=()
