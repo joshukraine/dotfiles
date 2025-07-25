@@ -204,8 +204,35 @@ git:
 *Last generated: $(date)*
 EOF
 
+# Generate to a temporary file first
+TEMP_FILE="${OUTPUT_FILE}.tmp"
+
+# Preserve the original file if it exists
+if [[ -f "${OUTPUT_FILE}" ]]; then
+  cp "${OUTPUT_FILE}" "${OUTPUT_FILE}.bak"
+fi
+
 # Replace the placeholder with the evaluated date
 sed -i '' "s/\$(date)/$(date)/" "${OUTPUT_FILE}"
+
+# If we have a backup, compare content (excluding the timestamp line)
+if [[ -f "${OUTPUT_FILE}.bak" ]]; then
+  # Extract content without timestamp for comparison
+  grep -v "Last generated:" "${OUTPUT_FILE}" > "${TEMP_FILE}.new" || true
+  grep -v "Last generated:" "${OUTPUT_FILE}.bak" > "${TEMP_FILE}.old" || true
+
+  if cmp -s "${TEMP_FILE}.new" "${TEMP_FILE}.old"; then
+    # Content is identical, restore original file to preserve timestamp
+    mv "${OUTPUT_FILE}.bak" "${OUTPUT_FILE}"
+    rm -f "${TEMP_FILE}.new" "${TEMP_FILE}.old"
+    echo "✅ Abbreviations documentation unchanged: ${OUTPUT_FILE}"
+    echo "📊 Total abbreviations: ${zsh_count} (${category_count} categories)"
+    exit 0
+  fi
+
+  # Clean up
+  rm -f "${TEMP_FILE}.new" "${TEMP_FILE}.old" "${OUTPUT_FILE}.bak"
+fi
 
 echo "✅ Generated abbreviations documentation: ${OUTPUT_FILE}"
 echo "📊 Total abbreviations documented: ${zsh_count} (${category_count} categories)"
