@@ -131,8 +131,11 @@ test_abbreviation() {
       test_zsh_abbreviation "${abbr}" "${expected}"
       ;;
     "both")
-      test_fish_abbreviation "${abbr}" "${expected}" &&
+      if test_fish_abbreviation "${abbr}" "${expected}"; then
         test_zsh_abbreviation "${abbr}" "${expected}"
+      else
+        return 1
+      fi
       ;;
     *)
       echo "Unknown shell type: ${shell_type}"
