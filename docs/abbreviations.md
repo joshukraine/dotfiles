@@ -45,459 +45,459 @@ reload-abbr
 
 Basic system utilities with enhanced options:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `c` | `clear` | c |
-| `cv` | `command -v` | cv |
-| `df` | `df -h` | df |
-| `du` | `du -h` | du |
-| `dud` | `du -d 1 -h` | dud |
-| `duf` | `du -sh *` | duf |
-| `mkdir` | `mkdir -pv` | mkdir |
-| `mv` | `mv -iv` | mv |
+| Abbr    | Command      | Description                                        |
+| ------- | ------------ | -------------------------------------------------- |
+| `c`     | `clear`      | Clear terminal screen                              |
+| `cv`    | `command -v` | Check if command exists and show its path          |
+| `df`    | `df -h`      | Show disk space usage in human-readable format     |
+| `du`    | `du -h`      | Show directory sizes in human-readable format      |
+| `dud`   | `du -d 1 -h` | Show directory sizes one level deep                |
+| `duf`   | `du -sh *`   | Show file/folder sizes in current directory        |
+| `mkdir` | `mkdir -pv`  | Create directories recursively with verbose output |
+| `mv`    | `mv -iv`     | Move files interactively with confirmation         |
 
 ### shell
 
 Shell-specific operations:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `src` | `source $HOME/.zshrc` | src |
+| Abbr  | Command               | Description              |
+| ----- | --------------------- | ------------------------ |
+| `src` | `source $HOME/.zshrc` | Reload Zsh configuration |
 
 ### system
 
 System information and management:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `fast` | `fastfetch` | fast |
+| Abbr   | Command     | Description                          |
+| ------ | ----------- | ------------------------------------ |
+| `fast` | `fastfetch` | Display system information with logo |
 
 ### claude code
 
 AI assistant shortcuts:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `cl` | `claude` | cl |
-| `clsp` | `claude --dangerously-skip-permissions` | clsp |
-| `clh` | `claude --help` | clh |
-| `clv` | `claude --version` | clv |
-| `clr` | `claude --resume` | clr |
-| `clc` | `claude --continue` | clc |
-| `clp` | `claude --print` | clp |
-| `clcp` | `claude --continue --print` | clcp |
-| `clup` | `claude update` | clup |
-| `clmcp` | `claude mcp` | clmcp |
+| Abbr    | Command                                 | Description                             |
+| ------- | --------------------------------------- | --------------------------------------- |
+| `cl`    | `claude`                                | Start Claude AI assistant               |
+| `clsp`  | `claude --dangerously-skip-permissions` | Start Claude without permission checks  |
+| `clh`   | `claude --help`                         | Show Claude help information            |
+| `clv`   | `claude --version`                      | Show Claude version                     |
+| `clr`   | `claude --resume`                       | Resume previous Claude session          |
+| `clc`   | `claude --continue`                     | Continue current conversation           |
+| `clp`   | `claude --print`                        | Print conversation history              |
+| `clcp`  | `claude --continue --print`             | Continue conversation and print history |
+| `clup`  | `claude update`                         | Update Claude to latest version         |
+| `clmcp` | `claude mcp`                            | Use Claude with MCP protocol            |
 
 ### homebrew
 
 Homebrew shortcuts with common options:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `brc` | `brew cleanup` | brc |
-| `brb` | `brew bundle` | brb |
-| `brd` | `brew doctor` | brd |
-| `brg` | `brew upgrade` | brg |
-| `bri` | `brew info` | bri |
-| `brl` | `brew list -1` | brl |
-| `brlf` | `brew list  fzf` | brlf |
-| `bro` | `brew outdated` | bro |
-| `brs` | `brew search` | brs |
-| `bru` | `brew update` | bru |
-| `bs0` | `brew services stop` | bs0 |
-| `bs1` | `brew services start` | bs1 |
-| `bsc` | `brew services cleanup` | bsc |
-| `bsl` | `brew services list` | bsl |
-| `bsr` | `brew services restart` | bsr |
-| `bsv` | `brew services` | bsv |
+| Abbr   | Command                 | Description                                 |
+| ------ | ----------------------- | ------------------------------------------- |
+| `brc`  | `brew cleanup`          | Remove outdated downloads and clear cache   |
+| `brb`  | `brew bundle`           | Install packages from Brewfile              |
+| `brd`  | `brew doctor`           | Check system for potential problems         |
+| `brg`  | `brew upgrade`          | Upgrade all installed packages              |
+| `bri`  | `brew info`             | Show package information                    |
+| `brl`  | `brew list -1`          | List installed packages (one per line)      |
+| `brlf` | `brew list  fzf`        | Search installed packages with fuzzy finder |
+| `bro`  | `brew outdated`         | Show packages with updates available        |
+| `brs`  | `brew search`           | Search for packages                         |
+| `bru`  | `brew update`           | Update Homebrew and package lists           |
+| `bs0`  | `brew services stop`    | Stop Homebrew service                       |
+| `bs1`  | `brew services start`   | Start Homebrew service                      |
+| `bsc`  | `brew services cleanup` | Remove unused service files                 |
+| `bsl`  | `brew services list`    | List all Homebrew services                  |
+| `bsr`  | `brew services restart` | Restart Homebrew service                    |
+| `bsv`  | `brew services`         | Manage Homebrew services                    |
 
 ### config dirs
 
 Quick access to common directories:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `cdot` | `cd $DOTFILES` | cdot |
-| `cdxc` | `cd $XDG_CONFIG_HOME` | cdxc |
-| `cdfi` | `cd $XDG_CONFIG_HOME/fish` | cdfi |
-| `cdnv` | `cd $XDG_CONFIG_HOME/nvim` | cdnv |
-| `cdxd` | `cd $XDG_DATA_HOME` | cdxd |
-| `cdxa` | `cd $XDG_CACHE_HOME` | cdxa |
-| `cdxs` | `cd $XDG_STATE_HOME` | cdxs |
-| `cdlb` | `cd $HOME/.local/bin` | cdlb |
-| `cdbn` | `cd $HOME/.bin` | cdbn |
+| Abbr   | Command                    | Description                          |
+| ------ | -------------------------- | ------------------------------------ |
+| `cdot` | `cd $DOTFILES`             | Navigate to dotfiles repository      |
+| `cdxc` | `cd $XDG_CONFIG_HOME`      | Navigate to XDG config directory     |
+| `cdfi` | `cd $XDG_CONFIG_HOME/fish` | Navigate to Fish shell configuration |
+| `cdnv` | `cd $XDG_CONFIG_HOME/nvim` | Navigate to Neovim configuration     |
+| `cdxd` | `cd $XDG_DATA_HOME`        | Navigate to XDG data directory       |
+| `cdxa` | `cd $XDG_CACHE_HOME`       | Navigate to XDG cache directory      |
+| `cdxs` | `cd $XDG_STATE_HOME`       | Navigate to XDG state directory      |
+| `cdlb` | `cd $HOME/.local/bin`      | Navigate to local bin directory      |
+| `cdbn` | `cd $HOME/.bin`            | Navigate to legacy bin directory     |
 
 ### navigation
 
 Enhanced directory navigation:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `..` | `cd ..` | .. |
-| `...` | `cd ../../` | ... |
-| `....` | `cd ../../../` | .... |
-| `.....` | `cd ../../../../` | ..... |
-| `-` | `cd -` | - |
+| Abbr    | Command           | Description                  |
+| ------- | ----------------- | ---------------------------- |
+| `..`    | `cd ..`           | Go up one directory level    |
+| `...`   | `cd ../../`       | Go up two directory levels   |
+| `....`  | `cd ../../../`    | Go up three directory levels |
+| `.....` | `cd ../../../../` | Go up four directory levels  |
+| `-`     | `cd -`            | Go to previous directory     |
 
 ### tree
 
 Enhanced directory listing with `eza`:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `tree` | `ll --tree --level=2` | tree |
-| `t2` | `ll --tree --level=2` | t2 |
-| `t2a` | `ll --tree --level=2 -a` | t2a |
-| `t3` | `ll --tree --level=3` | t3 |
-| `t3a` | `ll --tree --level=3 -a` | t3a |
-| `t4` | `ll --tree --level=4` | t4 |
-| `t4a` | `ll --tree --level=4 -a` | t4a |
+| Abbr   | Command                  | Description                                      |
+| ------ | ------------------------ | ------------------------------------------------ |
+| `tree` | `ll --tree --level=2`    | Show directory tree (2 levels deep)              |
+| `t2`   | `ll --tree --level=2`    | Show directory tree (2 levels deep)              |
+| `t2a`  | `ll --tree --level=2 -a` | Show directory tree with hidden files (2 levels) |
+| `t3`   | `ll --tree --level=3`    | Show directory tree (3 levels deep)              |
+| `t3a`  | `ll --tree --level=3 -a` | Show directory tree with hidden files (3 levels) |
+| `t4`   | `ll --tree --level=4`    | Show directory tree (4 levels deep)              |
+| `t4a`  | `ll --tree --level=4 -a` | Show directory tree with hidden files (4 levels) |
 
 ### dev tools
 
 Programming and development utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `gg` | `lazygit` | gg |
-| `hm` | `hivemind` | hm |
+| Abbr | Command    | Description                        |
+| ---- | ---------- | ---------------------------------- |
+| `gg` | `lazygit`  | Launch interactive git interface   |
+| `hm` | `hivemind` | Run Procfile-based process manager |
 
 ### markdown
 
 markdown utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `mdl` | `markdownlint-cli2 --config ~/.markdownlint.yaml` | mdl |
-| `mdlf` | `markdownlint-cli2 --config ~/.markdownlint.yaml --fix` | mdlf |
-| `mdla` | `markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'` | mdla |
-| `mdlaf` | `markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'` | mdlaf |
+| Abbr    | Command                                                           | Description                                     |
+| ------- | ----------------------------------------------------------------- | ----------------------------------------------- |
+| `mdl`   | `markdownlint-cli2 --config ~/.markdownlint.yaml`                 | Lint markdown files with custom config          |
+| `mdlf`  | `markdownlint-cli2 --config ~/.markdownlint.yaml --fix`           | Lint and auto-fix markdown files                |
+| `mdla`  | `markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'`       | Lint all markdown files in project              |
+| `mdlaf` | `markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'` | Lint and auto-fix all markdown files in project |
 
 ### local servers
 
 local servers utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `hts` | `http-server` | hts |
-| `lvs` | `live-server` | lvs |
+| Abbr  | Command       | Description                               |
+| ----- | ------------- | ----------------------------------------- |
+| `hts` | `http-server` | Start simple HTTP server for static files |
+| `lvs` | `live-server` | Start development server with live reload |
 
 ### neovim
 
 neovim utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `nv` | `nvim` | nv |
-| `vi` | `nvim` | vi |
-| `vi0` | `nvim -u NONE` | vi0 |
-| `vir` | `nvim -R` | vir |
-| `vv` | `nvim --version  less` | vv |
+| Abbr  | Command                | Description                           |
+| ----- | ---------------------- | ------------------------------------- |
+| `nv`  | `nvim`                 | Open Neovim editor                    |
+| `vi`  | `nvim`                 | Open Neovim editor (vi alias)         |
+| `vi0` | `nvim -u NONE`         | Open Neovim without any configuration |
+| `vir` | `nvim -R`              | Open Neovim in read-only mode         |
+| `vv`  | `nvim --version  less` | Show Neovim version information       |
 
 ### git
 
 Comprehensive git workflow shortcuts:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `ga` | `git add` | ga |
-| `gaa` | `git add --all` | gaa |
-| `gap` | `git add --patch` | gap |
-| `gb` | `git branch` | gb |
-| `gba` | `git branch --all` | gba |
-| `gbm` | `git branch -m` | gbm |
-| `gbr` | `git branch --remote` | gbr |
-| `gca` | `git commit --amend` | gca |
-| `gcl` | `git clone` | gcl |
-| `gcm` | `git cm` | gcm |
-| `gco` | `git checkout` | gco |
-| `gcob` | `git checkout -b` | gcob |
-| `gcp` | `git cherry-pick` | gcp |
-| `gd` | `git diff` | gd |
-| `gdc` | `git diff --cached` | gdc |
-| `gdt` | `git difftool` | gdt |
-| `gf` | `git fetch` | gf |
-| `gfa` | `git fetch --all` | gfa |
-| `gfp` | `git fetch --prune` | gfp |
-| `gfu` | `git fetch upstream` | gfu |
-| `gl` | `git l` | gl |
-| `glg` | `git lg` | glg |
-| `gll` | `git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit` | gll |
-| `gp` | `git push` | gp |
-| `gpl` | `git pull` | gpl |
-| `gps` | `git push` | gps |
-| `gpsf` | `git push --force-with-lease` | gpsf |
-| `gpst` | `git push --tags` | gpst |
-| `gpub` | `git publish` | gpub |
-| `gpuo` | `git push -u origin` | gpuo |
-| `gra` | `git remote add` | gra |
-| `grb` | `git rebase` | grb |
-| `grba` | `git rebase --abort` | grba |
-| `grbc` | `git rebase --continue` | grbc |
-| `grbi` | `git rebase -i` | grbi |
-| `gre` | `git reset` | gre |
-| `grso` | `git remote set-url origin` | grso |
-| `grsu` | `git remote set-url` | grsu |
-| `grup` | `git remote add upstream` | grup |
-| `grv` | `git remote -v` | grv |
-| `gs` | `git status` | gs |
-| `gsh` | `git show` | gsh |
-| `gss` | `git stash` | gss |
-| `gssa` | `git stash apply` | gssa |
-| `gssd` | `git stash drop` | gssd |
-| `gssl` | `git stash list` | gssl |
-| `gssp` | `git stash pop` | gssp |
-| `gsss` | `git stash save` | gsss |
-| `gst` | `git status` | gst |
-| `gsts` | `git status --short` | gsts |
-| `gt` | `git tag` | gt |
+| Abbr   | Command                                                                                                                                                                                 | Description                               |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `ga`   | `git add`                                                                                                                                                                               | Stage files for commit                    |
+| `gaa`  | `git add --all`                                                                                                                                                                         | Stage all changes for commit              |
+| `gap`  | `git add --patch`                                                                                                                                                                       | Interactively stage changes               |
+| `gb`   | `git branch`                                                                                                                                                                            | List or manage branches                   |
+| `gba`  | `git branch --all`                                                                                                                                                                      | List all branches (local and remote)      |
+| `gbm`  | `git branch -m`                                                                                                                                                                         | Rename current branch                     |
+| `gbr`  | `git branch --remote`                                                                                                                                                                   | List remote branches                      |
+| `gca`  | `git commit --amend`                                                                                                                                                                    | Amend the last commit                     |
+| `gcl`  | `git clone`                                                                                                                                                                             | Clone a repository                        |
+| `gcm`  | `git cm`                                                                                                                                                                                | Commit with custom template               |
+| `gco`  | `git checkout`                                                                                                                                                                          | Switch branches or restore files          |
+| `gcob` | `git checkout -b`                                                                                                                                                                       | Create and switch to new branch           |
+| `gcp`  | `git cherry-pick`                                                                                                                                                                       | Apply commit from another branch          |
+| `gd`   | `git diff`                                                                                                                                                                              | Show changes between commits              |
+| `gdc`  | `git diff --cached`                                                                                                                                                                     | Show staged changes                       |
+| `gdt`  | `git difftool`                                                                                                                                                                          | Show changes using external diff tool     |
+| `gf`   | `git fetch`                                                                                                                                                                             | Download changes from remote              |
+| `gfa`  | `git fetch --all`                                                                                                                                                                       | Fetch from all remotes                    |
+| `gfp`  | `git fetch --prune`                                                                                                                                                                     | Fetch and remove deleted remote branches  |
+| `gfu`  | `git fetch upstream`                                                                                                                                                                    | Fetch from upstream remote                |
+| `gl`   | `git l`                                                                                                                                                                                 | Show compact log (custom alias)           |
+| `glg`  | `git lg`                                                                                                                                                                                | Show graph log (custom alias)             |
+| `gll`  | `git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit` | Show detailed graph log with formatting   |
+| `gp`   | `git push`                                                                                                                                                                              | Upload changes to remote                  |
+| `gpl`  | `git pull`                                                                                                                                                                              | Download and merge changes from remote    |
+| `gps`  | `git push`                                                                                                                                                                              | Upload changes to remote                  |
+| `gpsf` | `git push --force-with-lease`                                                                                                                                                           | Force push with safety checks             |
+| `gpst` | `git push --tags`                                                                                                                                                                       | Push tags to remote                       |
+| `gpub` | `git publish`                                                                                                                                                                           | Publish branch (custom command)           |
+| `gpuo` | `git push -u origin`                                                                                                                                                                    | Push and set upstream to origin           |
+| `gra`  | `git remote add`                                                                                                                                                                        | Add a remote repository                   |
+| `grb`  | `git rebase`                                                                                                                                                                            | Reapply commits on top of another base    |
+| `grba` | `git rebase --abort`                                                                                                                                                                    | Cancel current rebase operation           |
+| `grbc` | `git rebase --continue`                                                                                                                                                                 | Continue rebase after resolving conflicts |
+| `grbi` | `git rebase -i`                                                                                                                                                                         | Interactive rebase                        |
+| `gre`  | `git reset`                                                                                                                                                                             | Reset current HEAD to specified state     |
+| `grso` | `git remote set-url origin`                                                                                                                                                             | Change origin remote URL                  |
+| `grsu` | `git remote set-url`                                                                                                                                                                    | Change remote URL                         |
+| `grup` | `git remote add upstream`                                                                                                                                                               | Add upstream remote                       |
+| `grv`  | `git remote -v`                                                                                                                                                                         | Show remote repositories with URLs        |
+| `gs`   | `git status`                                                                                                                                                                            | Show working tree status                  |
+| `gsh`  | `git show`                                                                                                                                                                              | Show various types of objects             |
+| `gss`  | `git stash`                                                                                                                                                                             | Temporarily save changes                  |
+| `gssa` | `git stash apply`                                                                                                                                                                       | Apply stashed changes                     |
+| `gssd` | `git stash drop`                                                                                                                                                                        | Delete a stash                            |
+| `gssl` | `git stash list`                                                                                                                                                                        | List all stashes                          |
+| `gssp` | `git stash pop`                                                                                                                                                                         | Apply and remove stash                    |
+| `gsss` | `git stash save`                                                                                                                                                                        | Save changes to stash with message        |
+| `gst`  | `git status`                                                                                                                                                                            | Show working tree status                  |
+| `gsts` | `git status --short`                                                                                                                                                                    | Show status in short format               |
+| `gt`   | `git tag`                                                                                                                                                                               | Create, list, or verify tags              |
 
 ### docker
 
 Container management shortcuts:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `dc` | `docker compose` | dc |
-| `dcu` | `docker compose up` | dcu |
-| `dcud` | `docker compose up -d` | dcud |
-| `dcb` | `docker compose up --build` | dcb |
-| `dcbd` | `docker compose up --build -d` | dcbd |
-| `dcd` | `docker compose down` | dcd |
-| `dcdv` | `docker compose down -v` | dcdv |
-| `dce` | `docker compose exec` | dce |
-| `dcr` | `docker compose restart` | dcr |
-| `dl` | `docker logs` | dl |
-| `dim` | `docker images` | dim |
-| `dnet` | `docker network` | dnet |
-| `dps` | `docker ps` | dps |
-| `dpsa` | `docker ps -a` | dpsa |
-| `dsp` | `docker system prune --all` | dsp |
-| `d` | `docker` | d |
-| `db` | `docker build` | db |
-| `dcl` | `docker compose logs` | dcl |
-| `dclf` | `docker compose logs -f` | dclf |
-| `dcps` | `docker compose ps` | dcps |
-| `dcpull` | `docker compose pull` | dcpull |
-| `dcrm` | `docker compose rm` | dcrm |
-| `dcstart` | `docker compose start` | dcstart |
-| `dcstop` | `docker compose stop` | dcstop |
-| `de` | `docker exec` | de |
-| `dei` | `docker exec -i` | dei |
-| `deit` | `docker exec -it` | deit |
-| `dexec` | `docker exec` | dexec |
-| `dpu` | `docker pull` | dpu |
-| `drm` | `docker rm` | drm |
-| `drmi` | `docker rmi` | drmi |
-| `drun` | `docker run` | drun |
-| `dst` | `docker start` | dst |
-| `dstp` | `docker stop` | dstp |
+| Abbr      | Command                        | Description                            |
+| --------- | ------------------------------ | -------------------------------------- |
+| `dc`      | `docker compose`               | Manage multi-container applications    |
+| `dcu`     | `docker compose up`            | Start Docker Compose services          |
+| `dcud`    | `docker compose up -d`         | Start services in background           |
+| `dcb`     | `docker compose up --build`    | Build and start services               |
+| `dcbd`    | `docker compose up --build -d` | Build and start services in background |
+| `dcd`     | `docker compose down`          | Stop and remove containers             |
+| `dcdv`    | `docker compose down -v`       | Stop containers and remove volumes     |
+| `dce`     | `docker compose exec`          | Execute command in running container   |
+| `dcr`     | `docker compose restart`       | Restart Docker Compose services        |
+| `dl`      | `docker logs`                  | Show container logs                    |
+| `dim`     | `docker images`                | List Docker images                     |
+| `dnet`    | `docker network`               | Manage Docker networks                 |
+| `dps`     | `docker ps`                    | List running containers                |
+| `dpsa`    | `docker ps -a`                 | List all containers                    |
+| `dsp`     | `docker system prune --all`    | Remove all unused Docker objects       |
+| `d`       | `docker`                       | Docker container management            |
+| `db`      | `docker build`                 | Build Docker image                     |
+| `dcl`     | `docker compose logs`          | Show logs for services                 |
+| `dclf`    | `docker compose logs -f`       | Follow logs for services               |
+| `dcps`    | `docker compose ps`            | List containers for project            |
+| `dcpull`  | `docker compose pull`          | Pull latest images                     |
+| `dcrm`    | `docker compose rm`            | Remove stopped containers              |
+| `dcstart` | `docker compose start`         | Start existing containers              |
+| `dcstop`  | `docker compose stop`          | Stop running containers                |
+| `de`      | `docker exec`                  | Execute command in container           |
+| `dei`     | `docker exec -i`               | Execute interactive command            |
+| `deit`    | `docker exec -it`              | Execute interactive terminal session   |
+| `dexec`   | `docker exec`                  | Execute command in container           |
+| `dpu`     | `docker pull`                  | Download Docker image                  |
+| `drm`     | `docker rm`                    | Remove containers                      |
+| `drmi`    | `docker rmi`                   | Remove Docker images                   |
+| `drun`    | `docker run`                   | Create and start new container         |
+| `dst`     | `docker start`                 | Start stopped containers               |
+| `dstp`    | `docker stop`                  | Stop running containers                |
 
 ### rails
 
 Ruby on Rails shortcuts:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `RED` | `RAILS_ENV=development` | RED |
-| `REP` | `RAILS_ENV=production` | REP |
-| `RET` | `RAILS_ENV=test` | RET |
-| `bbi` | `bin/bundle install` | bbi |
-| `bbo` | `bin/bundle outdated` | bbo |
-| `bbu` | `bin/bundle update` | bbu |
-| `bd` | `bin/dev` | bd |
-| `cred` | `bin/rails credentials:edit --environment` | cred |
-| `crsp` | `env COVERAGE=true bin/rspec .` | crsp |
-| `ocr` | `overmind connect rails` | ocr |
-| `om` | `overmind start` | om |
-| `psp` | `bin/rake parallel:spec` | psp |
-| `r` | `bin/rails` | r |
-| `rc` | `bin/rails console` | rc |
-| `rcop` | `rubocop` | rcop |
-| `rdb` | `bin/rails dbconsole` | rdb |
-| `rdbc` | `bin/rails db:create` | rdbc |
-| `rdbd` | `bin/rails db:drop` | rdbd |
-| `rdm` | `bin/rails db:migrate` | rdm |
-| `rdms` | `bin/rails db:migrate:status` | rdms |
-| `rdr` | `bin/rails db:rollback` | rdr |
-| `rdr2` | `bin/rails db:rollback STEP=2` | rdr2 |
-| `rdr3` | `bin/rails db:rollback STEP=3` | rdr3 |
-| `rdbs` | `bin/rails db:seed` | rdbs |
-| `rg` | `bin/rails generate` | rg |
-| `rgc` | `bin/rails generate controller` | rgc |
-| `rgm` | `bin/rails generate migration` | rgm |
-| `rgs` | `bin/rails generate stimulus` | rgs |
-| `rr` | `bin/rails routes` | rr |
-| `rrc` | `bin/rails routes controller` | rrc |
-| `rrg` | `bin/rails routes  grep` | rrg |
-| `rs` | `bin/rails server` | rs |
-| `rsp` | `bin/rspec .` | rsp |
-| `rtp` | `bin/rails db:test:prepare` | rtp |
+| Abbr   | Command                                    | Description                          |
+| ------ | ------------------------------------------ | ------------------------------------ |
+| `RED`  | `RAILS_ENV=development`                    | Set Rails environment to development |
+| `REP`  | `RAILS_ENV=production`                     | Set Rails environment to production  |
+| `RET`  | `RAILS_ENV=test`                           | Set Rails environment to test        |
+| `bbi`  | `bin/bundle install`                       | Install Ruby gems                    |
+| `bbo`  | `bin/bundle outdated`                      | Show outdated gems                   |
+| `bbu`  | `bin/bundle update`                        | Update Ruby gems                     |
+| `bd`   | `bin/dev`                                  | Start development server             |
+| `cred` | `bin/rails credentials:edit --environment` | Edit Rails credentials               |
+| `crsp` | `env COVERAGE=true bin/rspec .`            | Run RSpec with coverage              |
+| `ocr`  | `overmind connect rails`                   | Connect to Rails process in Overmind |
+| `om`   | `overmind start`                           | Start Overmind process manager       |
+| `psp`  | `bin/rake parallel:spec`                   | Run parallel specs                   |
+| `r`    | `bin/rails`                                | Rails command runner                 |
+| `rc`   | `bin/rails console`                        | Start Rails console                  |
+| `rcop` | `rubocop`                                  | Run Ruby code linter                 |
+| `rdb`  | `bin/rails dbconsole`                      | Start database console               |
+| `rdbc` | `bin/rails db:create`                      | Create database                      |
+| `rdbd` | `bin/rails db:drop`                        | Drop database                        |
+| `rdm`  | `bin/rails db:migrate`                     | Run database migrations              |
+| `rdms` | `bin/rails db:migrate:status`              | Show migration status                |
+| `rdr`  | `bin/rails db:rollback`                    | Rollback last migration              |
+| `rdr2` | `bin/rails db:rollback STEP=2`             | Rollback 2 migrations                |
+| `rdr3` | `bin/rails db:rollback STEP=3`             | Rollback 3 migrations                |
+| `rdbs` | `bin/rails db:seed`                        | Seed database with data              |
+| `rg`   | `bin/rails generate`                       | Generate Rails code                  |
+| `rgc`  | `bin/rails generate controller`            | Generate controller                  |
+| `rgm`  | `bin/rails generate migration`             | Generate database migration          |
+| `rgs`  | `bin/rails generate stimulus`              | Generate Stimulus controller         |
+| `rr`   | `bin/rails routes`                         | Show application routes              |
+| `rrc`  | `bin/rails routes controller`              | Show routes for controller           |
+| `rrg`  | `bin/rails routes  grep`                   | Search routes                        |
+| `rs`   | `bin/rails server`                         | Start Rails server                   |
+| `rsp`  | `bin/rspec .`                              | Run RSpec tests                      |
+| `rtp`  | `bin/rails db:test:prepare`                | Prepare test database                |
 
 ### ruby
 
 ruby utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `b` | `bundle` | b |
-| `be` | `bundle exec` | be |
-| `ber` | `bundle exec rspec` | ber |
-| `beri` | `bundle exec rspec --init` | beri |
-| `bes` | `bundle exec standardrb` | bes |
-| `besf` | `bundle exec standardrb --fix` | besf |
-| `gel` | `gem cleanup` | gel |
-| `gemv` | `gem environment` | gemv |
-| `gins` | `gem install` | gins |
-| `gli` | `gem list` | gli |
-| `gout` | `gem outdated` | gout |
-| `guns` | `gem uninstall` | guns |
-| `gup` | `gem update` | gup |
-| `gus` | `gem update --system` | gus |
+| Abbr   | Command                        | Description                  |
+| ------ | ------------------------------ | ---------------------------- |
+| `b`    | `bundle`                       | Bundler gem manager          |
+| `be`   | `bundle exec`                  | Execute command with Bundler |
+| `ber`  | `bundle exec rspec`            | Run RSpec with Bundler       |
+| `beri` | `bundle exec rspec --init`     | Initialize RSpec             |
+| `bes`  | `bundle exec standardrb`       | Run StandardRB linter        |
+| `besf` | `bundle exec standardrb --fix` | Fix StandardRB issues        |
+| `gel`  | `gem cleanup`                  | Remove old gem versions      |
+| `gemv` | `gem environment`              | Show gem environment info    |
+| `gins` | `gem install`                  | Install gem                  |
+| `gli`  | `gem list`                     | List installed gems          |
+| `gout` | `gem outdated`                 | Show outdated gems           |
+| `guns` | `gem uninstall`                | Uninstall gem                |
+| `gup`  | `gem update`                   | Update gems                  |
+| `gus`  | `gem update --system`          | Update RubyGems system       |
 
 ### npm
 
 JavaScript development tools:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `nb` | `npm build` | nb |
-| `ncl` | `npm clean` | ncl |
-| `nd` | `npm run dev` | nd |
-| `ndv` | `npm develop` | ndv |
-| `ni` | `npm install` | ni |
-| `nid` | `npm install -D` | nid |
-| `nig` | `npm install -g` | nig |
-| `nit` | `npm init` | nit |
-| `ns` | `npm serve` | ns |
-| `nst` | `npm start` | nst |
-| `nt` | `npm test` | nt |
+| Abbr  | Command          | Description              |
+| ----- | ---------------- | ------------------------ |
+| `nb`  | `npm build`      | Build npm project        |
+| `ncl` | `npm clean`      | Clean npm cache          |
+| `nd`  | `npm run dev`    | Run development server   |
+| `ndv` | `npm develop`    | Run development mode     |
+| `ni`  | `npm install`    | Install npm dependencies |
+| `nid` | `npm install -D` | Install dev dependencies |
+| `nig` | `npm install -g` | Install global package   |
+| `nit` | `npm init`       | Initialize npm project   |
+| `ns`  | `npm serve`      | Serve npm project        |
+| `nst` | `npm start`      | Start npm project        |
+| `nt`  | `npm test`       | Run npm tests            |
 
 ### asdf
 
 asdf utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `ail` | `asdf install lua` | ail |
-| `ain` | `asdf install nodejs` | ain |
-| `ainl` | `asdf install nodejs latest` | ainl |
-| `aip` | `asdf install python` | aip |
-| `air` | `asdf install ruby` | air |
-| `airl` | `asdf install ruby latest` | airl |
-| `ala` | `asdf list all` | ala |
-| `ali` | `asdf list` | ali |
-| `aui` | `asdf install` | aui |
-| `agl` | `asdf global` | agl |
-| `all` | `asdf local` | all |
-| `acl` | `asdf current` | acl |
-| `aun` | `asdf uninstall` | aun |
-| `ares` | `asdf reshim` | ares |
-| `aup` | `asdf update` | aup |
-| `aupp` | `asdf update --all && asdf plugin update --all` | aupp |
+| Abbr   | Command                                         | Description                 |
+| ------ | ----------------------------------------------- | --------------------------- |
+| `ail`  | `asdf install lua`                              | Install Lua with ASDF       |
+| `ain`  | `asdf install nodejs`                           | Install Node.js with ASDF   |
+| `ainl` | `asdf install nodejs latest`                    | Install latest Node.js      |
+| `aip`  | `asdf install python`                           | Install Python with ASDF    |
+| `air`  | `asdf install ruby`                             | Install Ruby with ASDF      |
+| `airl` | `asdf install ruby latest`                      | Install latest Ruby         |
+| `ala`  | `asdf list all`                                 | List all available versions |
+| `ali`  | `asdf list`                                     | List installed versions     |
+| `aui`  | `asdf install`                                  | Install from .tool-versions |
+| `agl`  | `asdf global`                                   | Set global version          |
+| `all`  | `asdf local`                                    | Set local version           |
+| `acl`  | `asdf current`                                  | Show current versions       |
+| `aun`  | `asdf uninstall`                                | Uninstall version           |
+| `ares` | `asdf reshim`                                   | Refresh shims               |
+| `aup`  | `asdf update`                                   | Update ASDF                 |
+| `aupp` | `asdf update --all && asdf plugin update --all` | Update ASDF and all plugins |
 
 ### tmux
 
 Terminal multiplexer shortcuts:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `tl` | `tmux ls` | tl |
-| `tlw` | `tmux list-windows` | tlw |
+| Abbr  | Command             | Description        |
+| ----- | ------------------- | ------------------ |
+| `tl`  | `tmux ls`           | List tmux sessions |
+| `tlw` | `tmux list-windows` | List tmux windows  |
 
 ### tmuxinator
 
 tmuxinator utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `mux` | `tmuxinator` | mux |
-| `ms` | `tmuxinator start` | ms |
-| `msb1` | `tmuxinator start bfo1` | msb1 |
-| `msb2` | `tmuxinator start bfo2` | msb2 |
-| `msbc` | `tmuxinator start bf_curriculum` | msbc |
-| `msc` | `tmuxinator start comix_distro` | msc |
-| `msd` | `tmuxinator start dot` | msd |
-| `mse` | `tmuxinator start euroteamoutreach` | mse |
-| `msl` | `tmuxinator start laptop` | msl |
-| `msm` | `tmuxinator start mux` | msm |
-| `mso` | `tmuxinator start ofreport` | mso |
+| Abbr   | Command                             | Description                            |
+| ------ | ----------------------------------- | -------------------------------------- |
+| `mux`  | `tmuxinator`                        | Tmux session manager                   |
+| `ms`   | `tmuxinator start`                  | Start tmuxinator session               |
+| `msb1` | `tmuxinator start bfo1`             | TODO: Add project-specific description |
+| `msb2` | `tmuxinator start bfo2`             | TODO: Add project-specific description |
+| `msbc` | `tmuxinator start bf_curriculum`    | TODO: Add project-specific description |
+| `msc`  | `tmuxinator start comix_distro`     | TODO: Add project-specific description |
+| `msd`  | `tmuxinator start dot`              | Start dotfiles tmux session            |
+| `mse`  | `tmuxinator start euroteamoutreach` | TODO: Add project-specific description |
+| `msl`  | `tmuxinator start laptop`           | Start laptop setup session             |
+| `msm`  | `tmuxinator start mux`              | Start mux session                      |
+| `mso`  | `tmuxinator start ofreport`         | TODO: Add project-specific description |
 
 ### yarn
 
 yarn utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `y` | `yarn` | y |
-| `ya` | `yarn add` | ya |
-| `yad` | `yarn add --dev` | yad |
-| `yag` | `yarn add --global` | yag |
-| `yap` | `yarn add --peer` | yap |
-| `yarn-upgrade` | `yarn upgrade-interactive --latest` | yarn-upgrade |
-| `yb` | `yarn build` | yb |
-| `ycc` | `yarn cache clean` | ycc |
-| `yd` | `yarn dev` | yd |
-| `yga` | `yarn global add` | yga |
-| `ygl` | `yarn global list` | ygl |
-| `ygr` | `yarn global remove` | ygr |
-| `ygu` | `yarn global upgrade` | ygu |
-| `yh` | `yarn help` | yh |
-| `yi` | `yarn install` | yi |
-| `yic` | `yarn install --check-files` | yic |
-| `yif` | `yarn install --frozen-lockfile` | yif |
-| `yin` | `yarn init` | yin |
-| `yln` | `yarn link` | yln |
-| `yls` | `yarn list` | yls |
-| `yout` | `yarn outdated` | yout |
-| `yp` | `yarn pack` | yp |
-| `ypub` | `yarn publish` | ypub |
-| `yr` | `yarn run` | yr |
-| `yre` | `yarn remove` | yre |
-| `ys` | `yarn serve` | ys |
-| `yst` | `yarn start` | yst |
-| `yt` | `yarn test` | yt |
-| `ytc` | `yarn test --coverage` | ytc |
-| `yuc` | `yarn global upgrade && yarn cache clean` | yuc |
-| `yui` | `yarn upgrade-interactive` | yui |
-| `yuil` | `yarn upgrade-interactive --latest` | yuil |
-| `yup` | `yarn upgrade` | yup |
-| `yv` | `yarn version` | yv |
-| `yw` | `yarn workspace` | yw |
-| `yws` | `yarn workspaces` | yws |
+| Abbr           | Command                                   | Description                   |
+| -------------- | ----------------------------------------- | ----------------------------- |
+| `y`            | `yarn`                                    | Yarn package manager          |
+| `ya`           | `yarn add`                                | Add package                   |
+| `yad`          | `yarn add --dev`                          | Add dev dependency            |
+| `yag`          | `yarn add --global`                       | Add global package            |
+| `yap`          | `yarn add --peer`                         | Add peer dependency           |
+| `yarn-upgrade` | `yarn upgrade-interactive --latest`       | Interactive upgrade to latest |
+| `yb`           | `yarn build`                              | Build project                 |
+| `ycc`          | `yarn cache clean`                        | Clean yarn cache              |
+| `yd`           | `yarn dev`                                | Start development server      |
+| `yga`          | `yarn global add`                         | Add global package            |
+| `ygl`          | `yarn global list`                        | List global packages          |
+| `ygr`          | `yarn global remove`                      | Remove global package         |
+| `ygu`          | `yarn global upgrade`                     | Upgrade global packages       |
+| `yh`           | `yarn help`                               | Show yarn help                |
+| `yi`           | `yarn install`                            | Install dependencies          |
+| `yic`          | `yarn install --check-files`              | Install with file check       |
+| `yif`          | `yarn install --frozen-lockfile`          | Install from lockfile         |
+| `yin`          | `yarn init`                               | Initialize yarn project       |
+| `yln`          | `yarn link`                               | Link package                  |
+| `yls`          | `yarn list`                               | List dependencies             |
+| `yout`         | `yarn outdated`                           | Show outdated packages        |
+| `yp`           | `yarn pack`                               | Create package archive        |
+| `ypub`         | `yarn publish`                            | Publish package               |
+| `yr`           | `yarn run`                                | Run script                    |
+| `yre`          | `yarn remove`                             | Remove package                |
+| `ys`           | `yarn serve`                              | Serve project                 |
+| `yst`          | `yarn start`                              | Start project                 |
+| `yt`           | `yarn test`                               | Run tests                     |
+| `ytc`          | `yarn test --coverage`                    | Run tests with coverage       |
+| `yuc`          | `yarn global upgrade && yarn cache clean` | Upgrade and clean cache       |
+| `yui`          | `yarn upgrade-interactive`                | Interactive upgrade           |
+| `yuil`         | `yarn upgrade-interactive --latest`       | Interactive upgrade to latest |
+| `yup`          | `yarn upgrade`                            | Upgrade packages              |
+| `yv`           | `yarn version`                            | Manage package version        |
+| `yw`           | `yarn workspace`                          | Workspace command             |
+| `yws`          | `yarn workspaces`                         | Manage workspaces             |
 
 ### postgresql
 
 postgresql utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `startpost` | `pg_ctl -D /opt/homebrew/var/postgres start` | startpost |
-| `stoppost` | `pg_ctl -D /opt/homebrew/var/postgres stop` | stoppost |
-| `statpost` | `pg_ctl -D /opt/homebrew/var/postgres status` | statpost |
-| `psq` | `psql -U postgres` | psq |
+| Abbr        | Command                                       | Description                            |
+| ----------- | --------------------------------------------- | -------------------------------------- |
+| `startpost` | `pg_ctl -D /opt/homebrew/var/postgres start`  | Start PostgreSQL server                |
+| `stoppost`  | `pg_ctl -D /opt/homebrew/var/postgres stop`   | Stop PostgreSQL server                 |
+| `statpost`  | `pg_ctl -D /opt/homebrew/var/postgres status` | Check PostgreSQL server status         |
+| `psq`       | `psql -U postgres`                            | Connect to PostgreSQL as postgres user |
 
 ### finder
 
 finder utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `haf` | `defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder` | haf |
-| `saf` | `defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder` | saf |
+| Abbr  | Command                                                                           | Description                 |
+| ----- | --------------------------------------------------------------------------------- | --------------------------- |
+| `haf` | `defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder`  | Show hidden files in Finder |
+| `saf` | `defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder` | Hide hidden files in Finder |
 
 ### middleman
 
 middleman utilities:
 
-| Abbr | Command | Description |
-|------|---------|-------------|
-| `mm` | `bundle exec middleman` | mm |
-| `mmb` | `bundle exec middleman build` | mmb |
-| `mmbc` | `bundle exec middleman build --clean` | mmbc |
-| `mmc` | `bundle exec middleman console` | mmc |
-| `mms` | `bundle exec middleman server` | mms |
+| Abbr   | Command                               | Description                         |
+| ------ | ------------------------------------- | ----------------------------------- |
+| `mm`   | `bundle exec middleman`               | Run Middleman static site generator |
+| `mmb`  | `bundle exec middleman build`         | Build Middleman site                |
+| `mmbc` | `bundle exec middleman build --clean` | Clean build Middleman site          |
+| `mmc`  | `bundle exec middleman console`       | Start Middleman console             |
+| `mms`  | `bundle exec middleman server`        | Start Middleman development server  |
 
 ## Cross-Shell Compatibility
 
@@ -531,7 +531,7 @@ middleman utilities:
 ```yaml
 # In shared/abbreviations.yaml
 git:
-  gnew: "git checkout -b"  # New branch shortcut
+  gnew: "git checkout -b" # New branch shortcut
 ```
 
 ### Category Guidelines
@@ -551,5 +551,5 @@ git:
 
 ---
 
-*This file is automatically generated from `shared/abbreviations.yaml`. Do not edit directly.*
-*Last generated: Fri Jul 25 10:42:42 EEST 2025*
+_This file is automatically generated from `shared/abbreviations.yaml`. Do not edit directly._
+_Last generated: Fri Jul 25 13:12:58 EEST 2025_

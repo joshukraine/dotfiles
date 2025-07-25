@@ -4,373 +4,953 @@
 
 # General UNIX commands
 unix:
-  c: "clear"
-  cv: "command -v"
-  df: "df -h"
-  du: "du -h"
-  dud: "du -d 1 -h"
-  duf: "du -sh *"
-  mkdir: "mkdir -pv"
-  mv: "mv -iv"
+  c:
+    command: "clear"
+    description: "Clear terminal screen"
+  cv:
+    command: "command -v"
+    description: "Check if command exists and show its path"
+  df:
+    command: "df -h"
+    description: "Show disk space usage in human-readable format"
+  du:
+    command: "du -h"
+    description: "Show directory sizes in human-readable format"
+  dud:
+    command: "du -d 1 -h"
+    description: "Show directory sizes one level deep"
+  duf:
+    command: "du -sh *"
+    description: "Show file/folder sizes in current directory"
+  mkdir:
+    command: "mkdir -pv"
+    description: "Create directories recursively with verbose output"
+  mv:
+    command: "mv -iv"
+    description: "Move files interactively with confirmation"
 
 # Shell-specific (handled conditionally by generators)
 shell:
-  src: "source $HOME/.zshrc" # Zsh only
+  src:
+    command: "source $HOME/.zshrc" # Zsh only
+    description: "Reload Zsh configuration"
 
 # System tools
 system:
-  fast: "fastfetch"
+  fast:
+    command: "fastfetch"
+    description: "Display system information with logo"
 
 # Claude Code
 claude_code:
-  cl: "claude"
-  clsp: "claude --dangerously-skip-permissions"
-  clh: "claude --help"
-  clv: "claude --version"
-  clr: "claude --resume"
-  clc: "claude --continue"
-  clp: "claude --print"
-  clcp: "claude --continue --print"
-  clup: "claude update"
-  clmcp: "claude mcp"
+  cl:
+    command: "claude"
+    description: "Start Claude AI assistant"
+  clsp:
+    command: "claude --dangerously-skip-permissions"
+    description: "Start Claude without permission checks"
+  clh:
+    command: "claude --help"
+    description: "Show Claude help information"
+  clv:
+    command: "claude --version"
+    description: "Show Claude version"
+  clr:
+    command: "claude --resume"
+    description: "Resume previous Claude session"
+  clc:
+    command: "claude --continue"
+    description: "Continue current conversation"
+  clp:
+    command: "claude --print"
+    description: "Print conversation history"
+  clcp:
+    command: "claude --continue --print"
+    description: "Continue conversation and print history"
+  clup:
+    command: "claude update"
+    description: "Update Claude to latest version"
+  clmcp:
+    command: "claude mcp"
+    description: "Use Claude with MCP protocol"
 
 # Homebrew
 homebrew:
-  brc: "brew cleanup"
-  brb: "brew bundle"
-  brd: "brew doctor"
-  brg: "brew upgrade"
-  bri: "brew info"
-  brl: "brew list -1"
-  brlf: "brew list | fzf"
-  bro: "brew outdated"
-  brs: "brew search"
-  bru: "brew update"
-  bs0: "brew services stop"
-  bs1: "brew services start"
-  bsc: "brew services cleanup"
-  bsl: "brew services list"
-  bsr: "brew services restart"
-  bsv: "brew services"
+  brc:
+    command: "brew cleanup"
+    description: "Remove outdated downloads and clear cache"
+  brb:
+    command: "brew bundle"
+    description: "Install packages from Brewfile"
+  brd:
+    command: "brew doctor"
+    description: "Check system for potential problems"
+  brg:
+    command: "brew upgrade"
+    description: "Upgrade all installed packages"
+  bri:
+    command: "brew info"
+    description: "Show package information"
+  brl:
+    command: "brew list -1"
+    description: "List installed packages (one per line)"
+  brlf:
+    command: "brew list | fzf"
+    description: "Search installed packages with fuzzy finder"
+  bro:
+    command: "brew outdated"
+    description: "Show packages with updates available"
+  brs:
+    command: "brew search"
+    description: "Search for packages"
+  bru:
+    command: "brew update"
+    description: "Update Homebrew and package lists"
+  bs0:
+    command: "brew services stop"
+    description: "Stop Homebrew service"
+  bs1:
+    command: "brew services start"
+    description: "Start Homebrew service"
+  bsc:
+    command: "brew services cleanup"
+    description: "Remove unused service files"
+  bsl:
+    command: "brew services list"
+    description: "List all Homebrew services"
+  bsr:
+    command: "brew services restart"
+    description: "Restart Homebrew service"
+  bsv:
+    command: "brew services"
+    description: "Manage Homebrew services"
 
 # Config directory access
 # Quick navigation to frequently used directories for development and configuration
 config_dirs:
   # Navigate to dotfiles repository - main entry point for configuration management
-  cdot: "cd $DOTFILES"
+  cdot:
+    command: "cd $DOTFILES"
+    description: "Navigate to dotfiles repository"
   # Navigate to XDG config directory - central location for app configurations
-  cdxc: "cd $XDG_CONFIG_HOME"
+  cdxc:
+    command: "cd $XDG_CONFIG_HOME"
+    description: "Navigate to XDG config directory"
   # Navigate to Fish shell configuration - customize Fish shell behavior
-  cdfi: "cd $XDG_CONFIG_HOME/fish"
+  cdfi:
+    command: "cd $XDG_CONFIG_HOME/fish"
+    description: "Navigate to Fish shell configuration"
   # Navigate to Neovim configuration - edit Neovim/LazyVim settings
-  cdnv: "cd $XDG_CONFIG_HOME/nvim"
+  cdnv:
+    command: "cd $XDG_CONFIG_HOME/nvim"
+    description: "Navigate to Neovim configuration"
   # Navigate to XDG data directory - application data storage
-  cdxd: "cd $XDG_DATA_HOME"
+  cdxd:
+    command: "cd $XDG_DATA_HOME"
+    description: "Navigate to XDG data directory"
   # Navigate to XDG cache directory - temporary application cache
-  cdxa: "cd $XDG_CACHE_HOME"
+  cdxa:
+    command: "cd $XDG_CACHE_HOME"
+    description: "Navigate to XDG cache directory"
   # Navigate to XDG state directory - application state files
-  cdxs: "cd $XDG_STATE_HOME"
+  cdxs:
+    command: "cd $XDG_STATE_HOME"
+    description: "Navigate to XDG state directory"
   # Navigate to local bin directory - user-specific executables
-  cdlb: "cd $HOME/.local/bin"
+  cdlb:
+    command: "cd $HOME/.local/bin"
+    description: "Navigate to local bin directory"
   # Navigate to legacy bin directory - legacy executable location
-  cdbn: "cd $HOME/.bin"
+  cdbn:
+    command: "cd $HOME/.bin"
+    description: "Navigate to legacy bin directory"
 
 # Navigation shortcuts
 navigation:
-  "..": "cd .."
-  "...": "cd ../../"
-  "....": "cd ../../../"
-  ".....": "cd ../../../../"
-  "-": "cd -"
+  "..":
+    command: "cd .."
+    description: "Go up one directory level"
+  "...":
+    command: "cd ../../"
+    description: "Go up two directory levels"
+  "....":
+    command: "cd ../../../"
+    description: "Go up three directory levels"
+  ".....":
+    command: "cd ../../../../"
+    description: "Go up four directory levels"
+  "-":
+    command: "cd -"
+    description: "Go to previous directory"
 
 # Tree commands (requires eza)
 tree:
-  tree: "ll --tree --level=2"
-  t2: "ll --tree --level=2"
-  t2a: "ll --tree --level=2 -a"
-  t3: "ll --tree --level=3"
-  t3a: "ll --tree --level=3 -a"
-  t4: "ll --tree --level=4"
-  t4a: "ll --tree --level=4 -a"
+  tree:
+    command: "ll --tree --level=2"
+    description: "Show directory tree (2 levels deep)"
+  t2:
+    command: "ll --tree --level=2"
+    description: "Show directory tree (2 levels deep)"
+  t2a:
+    command: "ll --tree --level=2 -a"
+    description: "Show directory tree with hidden files (2 levels)"
+  t3:
+    command: "ll --tree --level=3"
+    description: "Show directory tree (3 levels deep)"
+  t3a:
+    command: "ll --tree --level=3 -a"
+    description: "Show directory tree with hidden files (3 levels)"
+  t4:
+    command: "ll --tree --level=4"
+    description: "Show directory tree (4 levels deep)"
+  t4a:
+    command: "ll --tree --level=4 -a"
+    description: "Show directory tree with hidden files (4 levels)"
 
 # Development tools
 dev_tools:
-  gg: "lazygit"
-  hm: "hivemind"
+  gg:
+    command: "lazygit"
+    description: "Launch interactive git interface"
+  hm:
+    command: "hivemind"
+    description: "Run Procfile-based process manager"
 
 # Markdown
 markdown:
-  mdl: "markdownlint-cli2 --config ~/.markdownlint.yaml"
-  mdlf: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix"
-  mdla: "markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'"
-  mdlaf: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
+  mdl:
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml"
+    description: "Lint markdown files with custom config"
+  mdlf:
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix"
+    description: "Lint and auto-fix markdown files"
+  mdla:
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'"
+    description: "Lint all markdown files in project"
+  mdlaf:
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
+    description: "Lint and auto-fix all markdown files in project"
 
 # Local servers
 local_servers:
-  hts: "http-server"
-  lvs: "live-server"
+  hts:
+    command: "http-server"
+    description: "Start simple HTTP server for static files"
+  lvs:
+    command: "live-server"
+    description: "Start development server with live reload"
 
 # Neovim
 neovim:
-  nv: "nvim"
-  vi: "nvim"
-  vi0: "nvim -u NONE"
-  vir: "nvim -R"
-  vv: "nvim --version | less"
+  nv:
+    command: "nvim"
+    description: "Open Neovim editor"
+  vi:
+    command: "nvim"
+    description: "Open Neovim editor (vi alias)"
+  vi0:
+    command: "nvim -u NONE"
+    description: "Open Neovim without any configuration"
+  vir:
+    command: "nvim -R"
+    description: "Open Neovim in read-only mode"
+  vv:
+    command: "nvim --version | less"
+    description: "Show Neovim version information"
 
 # Git commands
 git:
-  ga: "git add"
-  gaa: "git add --all"
-  gap: "git add --patch"
-  gb: "git branch"
-  gba: "git branch --all"
-  gbm: "git branch -m"
-  gbr: "git branch --remote"
-  gca: "git commit --amend"
-  gcl: "git clone"
-  gcm: "git cm"
-  gco: "git checkout"
-  gcob: "git checkout -b"
-  gcp: "git cherry-pick"
-  gd: "git diff"
-  gdc: "git diff --cached"
-  gdt: "git difftool"
-  gf: "git fetch"
-  gfa: "git fetch --all"
-  gfp: "git fetch --prune"
-  gfu: "git fetch upstream"
-  gl: "git l"
-  glg: "git lg"
-  gll: "git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit"
-  gp: "git push"
-  gpl: "git pull"
-  gps: "git push"
-  gpsf: "git push --force-with-lease"
-  gpst: "git push --tags"
-  gpub: "git publish"
-  gpuo: "git push -u origin"
-  gra: "git remote add"
-  grb: "git rebase"
-  grba: "git rebase --abort"
-  grbc: "git rebase --continue"
-  grbi: "git rebase -i"
-  gre: "git reset"
-  grso: "git remote set-url origin"
-  grsu: "git remote set-url"
-  grup: "git remote add upstream"
-  grv: "git remote -v"
-  gs: "git status"
-  gsh: "git show"
-  gss: "git stash"
-  gssa: "git stash apply"
-  gssd: "git stash drop"
-  gssl: "git stash list"
-  gssp: "git stash pop"
-  gsss: "git stash save"
-  gst: "git status"
-  gsts: "git status --short"
-  gt: "git tag"
+  ga:
+    command: "git add"
+    description: "Stage files for commit"
+  gaa:
+    command: "git add --all"
+    description: "Stage all changes for commit"
+  gap:
+    command: "git add --patch"
+    description: "Interactively stage changes"
+  gb:
+    command: "git branch"
+    description: "List or manage branches"
+  gba:
+    command: "git branch --all"
+    description: "List all branches (local and remote)"
+  gbm:
+    command: "git branch -m"
+    description: "Rename current branch"
+  gbr:
+    command: "git branch --remote"
+    description: "List remote branches"
+  gca:
+    command: "git commit --amend"
+    description: "Amend the last commit"
+  gcl:
+    command: "git clone"
+    description: "Clone a repository"
+  gcm:
+    command: "git cm"
+    description: "Commit with custom template"
+  gco:
+    command: "git checkout"
+    description: "Switch branches or restore files"
+  gcob:
+    command: "git checkout -b"
+    description: "Create and switch to new branch"
+  gcp:
+    command: "git cherry-pick"
+    description: "Apply commit from another branch"
+  gd:
+    command: "git diff"
+    description: "Show changes between commits"
+  gdc:
+    command: "git diff --cached"
+    description: "Show staged changes"
+  gdt:
+    command: "git difftool"
+    description: "Show changes using external diff tool"
+  gf:
+    command: "git fetch"
+    description: "Download changes from remote"
+  gfa:
+    command: "git fetch --all"
+    description: "Fetch from all remotes"
+  gfp:
+    command: "git fetch --prune"
+    description: "Fetch and remove deleted remote branches"
+  gfu:
+    command: "git fetch upstream"
+    description: "Fetch from upstream remote"
+  gl:
+    command: "git l"
+    description: "Show compact log (custom alias)"
+  glg:
+    command: "git lg"
+    description: "Show graph log (custom alias)"
+  gll:
+    command: "git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit"
+    description: "Show detailed graph log with formatting"
+  gp:
+    command: "git push"
+    description: "Upload changes to remote"
+  gpl:
+    command: "git pull"
+    description: "Download and merge changes from remote"
+  gps:
+    command: "git push"
+    description: "Upload changes to remote"
+  gpsf:
+    command: "git push --force-with-lease"
+    description: "Force push with safety checks"
+  gpst:
+    command: "git push --tags"
+    description: "Push tags to remote"
+  gpub:
+    command: "git publish"
+    description: "Publish branch (custom command)"
+  gpuo:
+    command: "git push -u origin"
+    description: "Push and set upstream to origin"
+  gra:
+    command: "git remote add"
+    description: "Add a remote repository"
+  grb:
+    command: "git rebase"
+    description: "Reapply commits on top of another base"
+  grba:
+    command: "git rebase --abort"
+    description: "Cancel current rebase operation"
+  grbc:
+    command: "git rebase --continue"
+    description: "Continue rebase after resolving conflicts"
+  grbi:
+    command: "git rebase -i"
+    description: "Interactive rebase"
+  gre:
+    command: "git reset"
+    description: "Reset current HEAD to specified state"
+  grso:
+    command: "git remote set-url origin"
+    description: "Change origin remote URL"
+  grsu:
+    command: "git remote set-url"
+    description: "Change remote URL"
+  grup:
+    command: "git remote add upstream"
+    description: "Add upstream remote"
+  grv:
+    command: "git remote -v"
+    description: "Show remote repositories with URLs"
+  gs:
+    command: "git status"
+    description: "Show working tree status"
+  gsh:
+    command: "git show"
+    description: "Show various types of objects"
+  gss:
+    command: "git stash"
+    description: "Temporarily save changes"
+  gssa:
+    command: "git stash apply"
+    description: "Apply stashed changes"
+  gssd:
+    command: "git stash drop"
+    description: "Delete a stash"
+  gssl:
+    command: "git stash list"
+    description: "List all stashes"
+  gssp:
+    command: "git stash pop"
+    description: "Apply and remove stash"
+  gsss:
+    command: "git stash save"
+    description: "Save changes to stash with message"
+  gst:
+    command: "git status"
+    description: "Show working tree status"
+  gsts:
+    command: "git status --short"
+    description: "Show status in short format"
+  gt:
+    command: "git tag"
+    description: "Create, list, or verify tags"
 
 # Docker
 docker:
-  dc: "docker compose"
-  dcu: "docker compose up"
-  dcud: "docker compose up -d"
-  dcb: "docker compose up --build"
-  dcbd: "docker compose up --build -d"
-  dcd: "docker compose down"
-  dcdv: "docker compose down -v"
-  dce: "docker compose exec"
-  dcr: "docker compose restart"
-  dl: "docker logs"
-  dim: "docker images"
-  dnet: "docker network"
-  dps: "docker ps"
-  dpsa: "docker ps -a"
-  dsp: "docker system prune --all"
+  dc:
+    command: "docker compose"
+    description: "Manage multi-container applications"
+  dcu:
+    command: "docker compose up"
+    description: "Start Docker Compose services"
+  dcud:
+    command: "docker compose up -d"
+    description: "Start services in background"
+  dcb:
+    command: "docker compose up --build"
+    description: "Build and start services"
+  dcbd:
+    command: "docker compose up --build -d"
+    description: "Build and start services in background"
+  dcd:
+    command: "docker compose down"
+    description: "Stop and remove containers"
+  dcdv:
+    command: "docker compose down -v"
+    description: "Stop containers and remove volumes"
+  dce:
+    command: "docker compose exec"
+    description: "Execute command in running container"
+  dcr:
+    command: "docker compose restart"
+    description: "Restart Docker Compose services"
+  dl:
+    command: "docker logs"
+    description: "Show container logs"
+  dim:
+    command: "docker images"
+    description: "List Docker images"
+  dnet:
+    command: "docker network"
+    description: "Manage Docker networks"
+  dps:
+    command: "docker ps"
+    description: "List running containers"
+  dpsa:
+    command: "docker ps -a"
+    description: "List all containers"
+  dsp:
+    command: "docker system prune --all"
+    description: "Remove all unused Docker objects"
   # Additional Docker abbreviations (kept for compatibility)
-  d: "docker"
-  db: "docker build"
-  dcl: "docker compose logs"
-  dclf: "docker compose logs -f"
-  dcps: "docker compose ps"
-  dcpull: "docker compose pull"
-  dcrm: "docker compose rm"
-  dcstart: "docker compose start"
-  dcstop: "docker compose stop"
-  de: "docker exec"
-  dei: "docker exec -i"
-  deit: "docker exec -it"
-  dexec: "docker exec"
-  dpu: "docker pull"
-  drm: "docker rm"
-  drmi: "docker rmi"
-  drun: "docker run"
-  dst: "docker start"
-  dstp: "docker stop"
+  d:
+    command: "docker"
+    description: "Docker container management"
+  db:
+    command: "docker build"
+    description: "Build Docker image"
+  dcl:
+    command: "docker compose logs"
+    description: "Show logs for services"
+  dclf:
+    command: "docker compose logs -f"
+    description: "Follow logs for services"
+  dcps:
+    command: "docker compose ps"
+    description: "List containers for project"
+  dcpull:
+    command: "docker compose pull"
+    description: "Pull latest images"
+  dcrm:
+    command: "docker compose rm"
+    description: "Remove stopped containers"
+  dcstart:
+    command: "docker compose start"
+    description: "Start existing containers"
+  dcstop:
+    command: "docker compose stop"
+    description: "Stop running containers"
+  de:
+    command: "docker exec"
+    description: "Execute command in container"
+  dei:
+    command: "docker exec -i"
+    description: "Execute interactive command"
+  deit:
+    command: "docker exec -it"
+    description: "Execute interactive terminal session"
+  dexec:
+    command: "docker exec"
+    description: "Execute command in container"
+  dpu:
+    command: "docker pull"
+    description: "Download Docker image"
+  drm:
+    command: "docker rm"
+    description: "Remove containers"
+  drmi:
+    command: "docker rmi"
+    description: "Remove Docker images"
+  drun:
+    command: "docker run"
+    description: "Create and start new container"
+  dst:
+    command: "docker start"
+    description: "Start stopped containers"
+  dstp:
+    command: "docker stop"
+    description: "Stop running containers"
 
 # Rails
 rails:
-  RED: "RAILS_ENV=development"
-  REP: "RAILS_ENV=production"
-  RET: "RAILS_ENV=test"
-  bbi: "bin/bundle install"
-  bbo: "bin/bundle outdated"
-  bbu: "bin/bundle update"
-  bd: "bin/dev"
-  cred: "bin/rails credentials:edit --environment"
-  crsp: "env COVERAGE=true bin/rspec ."
-  ocr: "overmind connect rails"
-  om: "overmind start"
-  psp: "bin/rake parallel:spec"
-  r: "bin/rails"
-  rc: "bin/rails console"
-  rcop: "rubocop"
-  rdb: "bin/rails dbconsole"
-  rdbc: "bin/rails db:create"
-  rdbd: "bin/rails db:drop"
-  rdm: "bin/rails db:migrate"
-  rdms: "bin/rails db:migrate:status"
-  rdr: "bin/rails db:rollback"
-  rdr2: "bin/rails db:rollback STEP=2"
-  rdr3: "bin/rails db:rollback STEP=3"
-  rdbs: "bin/rails db:seed"
-  rg: "bin/rails generate"
-  rgc: "bin/rails generate controller"
-  rgm: "bin/rails generate migration"
-  rgs: "bin/rails generate stimulus"
-  rr: "bin/rails routes"
-  rrc: "bin/rails routes controller"
-  rrg: "bin/rails routes | grep"
-  rs: "bin/rails server"
-  rsp: "bin/rspec ."
-  rtp: "bin/rails db:test:prepare"
+  RED:
+    command: "RAILS_ENV=development"
+    description: "Set Rails environment to development"
+  REP:
+    command: "RAILS_ENV=production"
+    description: "Set Rails environment to production"
+  RET:
+    command: "RAILS_ENV=test"
+    description: "Set Rails environment to test"
+  bbi:
+    command: "bin/bundle install"
+    description: "Install Ruby gems"
+  bbo:
+    command: "bin/bundle outdated"
+    description: "Show outdated gems"
+  bbu:
+    command: "bin/bundle update"
+    description: "Update Ruby gems"
+  bd:
+    command: "bin/dev"
+    description: "Start development server"
+  cred:
+    command: "bin/rails credentials:edit --environment"
+    description: "Edit Rails credentials"
+  crsp:
+    command: "env COVERAGE=true bin/rspec ."
+    description: "Run RSpec with coverage"
+  ocr:
+    command: "overmind connect rails"
+    description: "Connect to Rails process in Overmind"
+  om:
+    command: "overmind start"
+    description: "Start Overmind process manager"
+  psp:
+    command: "bin/rake parallel:spec"
+    description: "Run parallel specs"
+  r:
+    command: "bin/rails"
+    description: "Rails command runner"
+  rc:
+    command: "bin/rails console"
+    description: "Start Rails console"
+  rcop:
+    command: "rubocop"
+    description: "Run Ruby code linter"
+  rdb:
+    command: "bin/rails dbconsole"
+    description: "Start database console"
+  rdbc:
+    command: "bin/rails db:create"
+    description: "Create database"
+  rdbd:
+    command: "bin/rails db:drop"
+    description: "Drop database"
+  rdm:
+    command: "bin/rails db:migrate"
+    description: "Run database migrations"
+  rdms:
+    command: "bin/rails db:migrate:status"
+    description: "Show migration status"
+  rdr:
+    command: "bin/rails db:rollback"
+    description: "Rollback last migration"
+  rdr2:
+    command: "bin/rails db:rollback STEP=2"
+    description: "Rollback 2 migrations"
+  rdr3:
+    command: "bin/rails db:rollback STEP=3"
+    description: "Rollback 3 migrations"
+  rdbs:
+    command: "bin/rails db:seed"
+    description: "Seed database with data"
+  rg:
+    command: "bin/rails generate"
+    description: "Generate Rails code"
+  rgc:
+    command: "bin/rails generate controller"
+    description: "Generate controller"
+  rgm:
+    command: "bin/rails generate migration"
+    description: "Generate database migration"
+  rgs:
+    command: "bin/rails generate stimulus"
+    description: "Generate Stimulus controller"
+  rr:
+    command: "bin/rails routes"
+    description: "Show application routes"
+  rrc:
+    command: "bin/rails routes controller"
+    description: "Show routes for controller"
+  rrg:
+    command: "bin/rails routes | grep"
+    description: "Search routes"
+  rs:
+    command: "bin/rails server"
+    description: "Start Rails server"
+  rsp:
+    command: "bin/rspec ."
+    description: "Run RSpec tests"
+  rtp:
+    command: "bin/rails db:test:prepare"
+    description: "Prepare test database"
 
 # Ruby/Bundle
 ruby:
-  b: "bundle"
-  be: "bundle exec"
-  ber: "bundle exec rspec"
-  beri: "bundle exec rspec --init"
-  bes: "bundle exec standardrb"
-  besf: "bundle exec standardrb --fix"
-  gel: "gem cleanup"
-  gemv: "gem environment"
-  gins: "gem install"
-  gli: "gem list"
-  gout: "gem outdated"
-  guns: "gem uninstall"
-  gup: "gem update"
-  gus: "gem update --system"
+  b:
+    command: "bundle"
+    description: "Bundler gem manager"
+  be:
+    command: "bundle exec"
+    description: "Execute command with Bundler"
+  ber:
+    command: "bundle exec rspec"
+    description: "Run RSpec with Bundler"
+  beri:
+    command: "bundle exec rspec --init"
+    description: "Initialize RSpec"
+  bes:
+    command: "bundle exec standardrb"
+    description: "Run StandardRB linter"
+  besf:
+    command: "bundle exec standardrb --fix"
+    description: "Fix StandardRB issues"
+  gel:
+    command: "gem cleanup"
+    description: "Remove old gem versions"
+  gemv:
+    command: "gem environment"
+    description: "Show gem environment info"
+  gins:
+    command: "gem install"
+    description: "Install gem"
+  gli:
+    command: "gem list"
+    description: "List installed gems"
+  gout:
+    command: "gem outdated"
+    description: "Show outdated gems"
+  guns:
+    command: "gem uninstall"
+    description: "Uninstall gem"
+  gup:
+    command: "gem update"
+    description: "Update gems"
+  gus:
+    command: "gem update --system"
+    description: "Update RubyGems system"
 
 # NPM
 npm:
-  nb: "npm build"
-  ncl: "npm clean"
-  nd: "npm run dev"
-  ndv: "npm develop"
-  ni: "npm install"
-  nid: "npm install -D"
-  nig: "npm install -g"
-  nit: "npm init"
-  ns: "npm serve"
-  nst: "npm start"
-  nt: "npm test"
+  nb:
+    command: "npm build"
+    description: "Build npm project"
+  ncl:
+    command: "npm clean"
+    description: "Clean npm cache"
+  nd:
+    command: "npm run dev"
+    description: "Run development server"
+  ndv:
+    command: "npm develop"
+    description: "Run development mode"
+  ni:
+    command: "npm install"
+    description: "Install npm dependencies"
+  nid:
+    command: "npm install -D"
+    description: "Install dev dependencies"
+  nig:
+    command: "npm install -g"
+    description: "Install global package"
+  nit:
+    command: "npm init"
+    description: "Initialize npm project"
+  ns:
+    command: "npm serve"
+    description: "Serve npm project"
+  nst:
+    command: "npm start"
+    description: "Start npm project"
+  nt:
+    command: "npm test"
+    description: "Run npm tests"
 
 # ASDF
 asdf:
-  ail: "asdf install lua"
-  ain: "asdf install nodejs"
-  ainl: "asdf install nodejs latest"
-  aip: "asdf install python"
-  air: "asdf install ruby"
-  airl: "asdf install ruby latest"
-  ala: "asdf list all"
-  ali: "asdf list"
-  aui: "asdf install"
-  agl: "asdf global"
-  all: "asdf local"
-  acl: "asdf current"
-  aun: "asdf uninstall"
-  ares: "asdf reshim"
-  aup: "asdf update"
-  aupp: "asdf update --all && asdf plugin update --all"
+  ail:
+    command: "asdf install lua"
+    description: "Install Lua with ASDF"
+  ain:
+    command: "asdf install nodejs"
+    description: "Install Node.js with ASDF"
+  ainl:
+    command: "asdf install nodejs latest"
+    description: "Install latest Node.js"
+  aip:
+    command: "asdf install python"
+    description: "Install Python with ASDF"
+  air:
+    command: "asdf install ruby"
+    description: "Install Ruby with ASDF"
+  airl:
+    command: "asdf install ruby latest"
+    description: "Install latest Ruby"
+  ala:
+    command: "asdf list all"
+    description: "List all available versions"
+  ali:
+    command: "asdf list"
+    description: "List installed versions"
+  aui:
+    command: "asdf install"
+    description: "Install from .tool-versions"
+  agl:
+    command: "asdf global"
+    description: "Set global version"
+  all:
+    command: "asdf local"
+    description: "Set local version"
+  acl:
+    command: "asdf current"
+    description: "Show current versions"
+  aun:
+    command: "asdf uninstall"
+    description: "Uninstall version"
+  ares:
+    command: "asdf reshim"
+    description: "Refresh shims"
+  aup:
+    command: "asdf update"
+    description: "Update ASDF"
+  aupp:
+    command: "asdf update --all && asdf plugin update --all"
+    description: "Update ASDF and all plugins"
 
 # Tmux
 tmux:
-  tl: "tmux ls"
-  tlw: "tmux list-windows"
+  tl:
+    command: "tmux ls"
+    description: "List tmux sessions"
+  tlw:
+    command: "tmux list-windows"
+    description: "List tmux windows"
 
 # Tmuxinator
 tmuxinator:
-  mux: "tmuxinator"
-  ms: "tmuxinator start"
-  msb1: "tmuxinator start bfo1"
-  msb2: "tmuxinator start bfo2"
-  msbc: "tmuxinator start bf_curriculum"
-  msc: "tmuxinator start comix_distro"
-  msd: "tmuxinator start dot"
-  mse: "tmuxinator start euroteamoutreach"
-  msl: "tmuxinator start laptop"
-  msm: "tmuxinator start mux"
-  mso: "tmuxinator start ofreport"
+  mux:
+    command: "tmuxinator"
+    description: "Tmux session manager"
+  ms:
+    command: "tmuxinator start"
+    description: "Start tmuxinator session"
+  msb1:
+    command: "tmuxinator start bfo1"
+    description: "TODO: Add project-specific description"
+  msb2:
+    command: "tmuxinator start bfo2"
+    description: "TODO: Add project-specific description"
+  msbc:
+    command: "tmuxinator start bf_curriculum"
+    description: "TODO: Add project-specific description"
+  msc:
+    command: "tmuxinator start comix_distro"
+    description: "TODO: Add project-specific description"
+  msd:
+    command: "tmuxinator start dot"
+    description: "Start dotfiles tmux session"
+  mse:
+    command: "tmuxinator start euroteamoutreach"
+    description: "TODO: Add project-specific description"
+  msl:
+    command: "tmuxinator start laptop"
+    description: "Start laptop setup session"
+  msm:
+    command: "tmuxinator start mux"
+    description: "Start mux session"
+  mso:
+    command: "tmuxinator start ofreport"
+    description: "TODO: Add project-specific description"
 
 # Yarn
 yarn:
-  y: "yarn"
-  ya: "yarn add"
-  yad: "yarn add --dev"
-  yag: "yarn add --global"
-  yap: "yarn add --peer"
-  yarn-upgrade: "yarn upgrade-interactive --latest"
-  yb: "yarn build"
-  ycc: "yarn cache clean"
-  yd: "yarn dev"
-  yga: "yarn global add"
-  ygl: "yarn global list"
-  ygr: "yarn global remove"
-  ygu: "yarn global upgrade"
-  yh: "yarn help"
-  yi: "yarn install"
-  yic: "yarn install --check-files"
-  yif: "yarn install --frozen-lockfile"
-  yin: "yarn init"
-  yln: "yarn link"
-  yls: "yarn list"
-  yout: "yarn outdated"
-  yp: "yarn pack"
-  ypub: "yarn publish"
-  yr: "yarn run"
-  yre: "yarn remove"
-  ys: "yarn serve"
-  yst: "yarn start"
-  yt: "yarn test"
-  ytc: "yarn test --coverage"
-  yuc: "yarn global upgrade && yarn cache clean"
-  yui: "yarn upgrade-interactive"
-  yuil: "yarn upgrade-interactive --latest"
-  yup: "yarn upgrade"
-  yv: "yarn version"
-  yw: "yarn workspace"
-  yws: "yarn workspaces"
+  y:
+    command: "yarn"
+    description: "Yarn package manager"
+  ya:
+    command: "yarn add"
+    description: "Add package"
+  yad:
+    command: "yarn add --dev"
+    description: "Add dev dependency"
+  yag:
+    command: "yarn add --global"
+    description: "Add global package"
+  yap:
+    command: "yarn add --peer"
+    description: "Add peer dependency"
+  yarn-upgrade:
+    command: "yarn upgrade-interactive --latest"
+    description: "Interactive upgrade to latest"
+  yb:
+    command: "yarn build"
+    description: "Build project"
+  ycc:
+    command: "yarn cache clean"
+    description: "Clean yarn cache"
+  yd:
+    command: "yarn dev"
+    description: "Start development server"
+  yga:
+    command: "yarn global add"
+    description: "Add global package"
+  ygl:
+    command: "yarn global list"
+    description: "List global packages"
+  ygr:
+    command: "yarn global remove"
+    description: "Remove global package"
+  ygu:
+    command: "yarn global upgrade"
+    description: "Upgrade global packages"
+  yh:
+    command: "yarn help"
+    description: "Show yarn help"
+  yi:
+    command: "yarn install"
+    description: "Install dependencies"
+  yic:
+    command: "yarn install --check-files"
+    description: "Install with file check"
+  yif:
+    command: "yarn install --frozen-lockfile"
+    description: "Install from lockfile"
+  yin:
+    command: "yarn init"
+    description: "Initialize yarn project"
+  yln:
+    command: "yarn link"
+    description: "Link package"
+  yls:
+    command: "yarn list"
+    description: "List dependencies"
+  yout:
+    command: "yarn outdated"
+    description: "Show outdated packages"
+  yp:
+    command: "yarn pack"
+    description: "Create package archive"
+  ypub:
+    command: "yarn publish"
+    description: "Publish package"
+  yr:
+    command: "yarn run"
+    description: "Run script"
+  yre:
+    command: "yarn remove"
+    description: "Remove package"
+  ys:
+    command: "yarn serve"
+    description: "Serve project"
+  yst:
+    command: "yarn start"
+    description: "Start project"
+  yt:
+    command: "yarn test"
+    description: "Run tests"
+  ytc:
+    command: "yarn test --coverage"
+    description: "Run tests with coverage"
+  yuc:
+    command: "yarn global upgrade && yarn cache clean"
+    description: "Upgrade and clean cache"
+  yui:
+    command: "yarn upgrade-interactive"
+    description: "Interactive upgrade"
+  yuil:
+    command: "yarn upgrade-interactive --latest"
+    description: "Interactive upgrade to latest"
+  yup:
+    command: "yarn upgrade"
+    description: "Upgrade packages"
+  yv:
+    command: "yarn version"
+    description: "Manage package version"
+  yw:
+    command: "yarn workspace"
+    description: "Workspace command"
+  yws:
+    command: "yarn workspaces"
+    description: "Manage workspaces"
 
 # PostgreSQL
 postgresql:
-  startpost: "pg_ctl -D /opt/homebrew/var/postgres start"
-  stoppost: "pg_ctl -D /opt/homebrew/var/postgres stop"
-  statpost: "pg_ctl -D /opt/homebrew/var/postgres status"
-  psq: "psql -U postgres"
+  startpost:
+    command: "pg_ctl -D /opt/homebrew/var/postgres start"
+    description: "Start PostgreSQL server"
+  stoppost:
+    command: "pg_ctl -D /opt/homebrew/var/postgres stop"
+    description: "Stop PostgreSQL server"
+  statpost:
+    command: "pg_ctl -D /opt/homebrew/var/postgres status"
+    description: "Check PostgreSQL server status"
+  psq:
+    command: "psql -U postgres"
+    description: "Connect to PostgreSQL as postgres user"
 
 # Finder (macOS)
 finder:
-  haf: "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-  saf: "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+  haf:
+    command: "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+    description: "Show hidden files in Finder"
+  saf:
+    command: "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+    description: "Hide hidden files in Finder"
 
 # Middleman
 middleman:
-  mm: "bundle exec middleman"
-  mmb: "bundle exec middleman build"
-  mmbc: "bundle exec middleman build --clean"
-  mmc: "bundle exec middleman console"
-  mms: "bundle exec middleman server"
+  mm:
+    command: "bundle exec middleman"
+    description: "Run Middleman static site generator"
+  mmb:
+    command: "bundle exec middleman build"
+    description: "Build Middleman site"
+  mmbc:
+    command: "bundle exec middleman build --clean"
+    description: "Clean build Middleman site"
+  mmc:
+    command: "bundle exec middleman console"
+    description: "Start Middleman console"
+  mms:
+    command: "bundle exec middleman server"
+    description: "Start Middleman development server"

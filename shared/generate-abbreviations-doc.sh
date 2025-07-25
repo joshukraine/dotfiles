@@ -142,7 +142,7 @@ yq eval 'keys | .[]' "${YAML_FILE}" | while read -r category; do
     echo "|------|---------|-------------|"
 
     # Generate table rows for this category
-    yq eval ".${category} | to_entries | .[] | \"| \`\" + .key + \"\` | \`\" + (.value | sub(\"\\|\"; \"\\\\|\"; \"g\")) + \"\` | \" + .key + \" |\"" "${YAML_FILE}"
+    yq eval ".${category} | to_entries | .[] | \"| \`\" + .key + \"\` | \`\" + ((.value.command // .value) | sub(\"\\|\"; \"\\\\|\"; \"g\")) + \"\` | \" + (.value.description // .key) + \" |\"" "${YAML_FILE}"
     echo ""
   } >>"${TEMP_FILE}"
 done

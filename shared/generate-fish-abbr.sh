@@ -43,7 +43,7 @@ yq eval ". as \$root | keys | .[]" "${YAML_FILE}" | while read -r category; do
 
   {
     echo "# $(to_title_case "${category}")"
-    yq eval ".${category} | to_entries | .[] | \"abbr -a -g \" + .key + \" '\" + .value + \"'\"" "${YAML_FILE}"
+    yq eval ".${category} | to_entries | .[] | \"abbr -a -g \" + .key + \" '\" + (.value.command // .value) + \"'\"" "${YAML_FILE}"
     echo ""
   } >>"${OUTPUT_FILE}"
 done
