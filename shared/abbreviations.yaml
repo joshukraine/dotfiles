@@ -741,6 +741,12 @@ asdf:
   ares:
     command: "asdf reshim"
     description: "Refresh shims"
+  asu:
+    command: "asdf set -u"
+    description: "Set global default version for user"
+  ast:
+    command: "asdf set"
+    description: "Set tool version for current directory"
 
 # Tmux
 tmux:

@@ -261,6 +261,8 @@ abbr -a -g aui 'asdf install'
 abbr -a -g acl 'asdf current'
 abbr -a -g aun 'asdf uninstall'
 abbr -a -g ares 'asdf reshim'
+abbr -a -g asu 'asdf set -u'
+abbr -a -g ast 'asdf set'
 
 # tmux
 abbr -a -g tl 'tmux ls'

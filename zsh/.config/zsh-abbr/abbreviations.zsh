@@ -264,6 +264,8 @@ abbr "aui"="asdf install"
 abbr "acl"="asdf current"
 abbr "aun"="asdf uninstall"
 abbr "ares"="asdf reshim"
+abbr "asu"="asdf set -u"
+abbr "ast"="asdf set"
 
 # tmux
 abbr "tl"="tmux ls"
