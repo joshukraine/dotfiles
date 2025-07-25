@@ -7,7 +7,7 @@ load '../helpers/shell_helpers.bash'
 
 setup() {
   # Ensure abbreviation files exist
-  require_file "${DOTFILES_DIR}/shared/abbreviations.yaml"
+  require_file "${DOTFILES}/shared/abbreviations.yaml"
 }
 
 @test "core unix abbreviations are defined correctly" {
@@ -78,7 +78,7 @@ setup() {
 
 @test "abbreviations file structure is valid" {
   # Check that abbreviations.yaml file exists and has basic YAML structure
-  local yaml_file="${DOTFILES_DIR}/shared/abbreviations.yaml"
+  local yaml_file="${DOTFILES}/shared/abbreviations.yaml"
   assert_file_exists "${yaml_file}"
 
   # Basic YAML validation - check for common YAML patterns
@@ -92,8 +92,8 @@ setup() {
 }
 
 @test "generated abbreviation files exist and are not empty" {
-  local fish_abbr_file="${DOTFILES_DIR}/fish/.config/fish/abbreviations.fish"
-  local zsh_abbr_file="${DOTFILES_DIR}/zsh/.config/zsh-abbr/abbreviations.zsh"
+  local fish_abbr_file="${DOTFILES}/fish/.config/fish/abbreviations.fish"
+  local zsh_abbr_file="${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh"
 
   assert_file_exists "${fish_abbr_file}"
   assert_file_exists "${zsh_abbr_file}"
@@ -106,8 +106,8 @@ setup() {
 @test "abbreviation count matches between shells" {
   local fish_count
   local zsh_count
-  fish_count=$(grep -c "^abbr -a" "${DOTFILES_DIR}/fish/.config/fish/abbreviations.fish" 2> /dev/null || echo "0")
-  zsh_count=$(grep -c "^abbr " "${DOTFILES_DIR}/zsh/.config/zsh-abbr/abbreviations.zsh" 2> /dev/null || echo "0")
+  fish_count=$(grep -c "^abbr -a" "${DOTFILES}/fish/.config/fish/abbreviations.fish" 2>/dev/null || echo "0")
+  zsh_count=$(grep -c "^abbr " "${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh" 2>/dev/null || echo "0")
 
   # Allow for small differences due to shell-specific abbreviations
   local diff=$((fish_count - zsh_count))

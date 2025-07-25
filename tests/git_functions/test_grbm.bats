@@ -58,7 +58,7 @@ teardown() {
 
   # When running grbm, git-check-uncommitted --prompt will detect changes
   # and the test will provide "n" as input to abort
-  run bash -c "echo 'n' | fish --no-config -c \"source '${DOTFILES_DIR}/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
+  run bash -c "echo 'n' | fish --no-config -c \"source '${DOTFILES}/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '${DOTFILES}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
   assert_contains "${output}" "Warning: You have uncommitted changes"
   [ "${status}" -eq 1 ]
 }
@@ -70,7 +70,7 @@ teardown() {
 
   # When running grbm, git-check-uncommitted --prompt will detect changes
   # and the test will provide "y" as input to continue, but git rebase will still fail
-  run bash -c "echo 'y' | fish --no-config -c \"source '${DOTFILES_DIR}/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
+  run bash -c "echo 'y' | fish --no-config -c \"source '${DOTFILES}/fish/.config/fish/functions/grbm.fish'; function git-check-uncommitted; '${DOTFILES}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; grbm\""
   assert_contains "${output}" "Rebase failed. You may need to resolve conflicts manually."
   [ "${status}" -eq 1 ]
 }
@@ -99,7 +99,7 @@ teardown() {
 
   # Add a commit to main to create something to rebase against
   git checkout main
-  echo "New main content" >> main-file.txt
+  echo "New main content" >>main-file.txt
   git add main-file.txt
   git commit -m "Update main"
   git push origin main
@@ -117,7 +117,7 @@ teardown() {
 
   # Add a commit to master to create something to rebase against
   git checkout master
-  echo "New master content" >> master-file.txt
+  echo "New master content" >>master-file.txt
   git add master-file.txt
   git commit -m "Update master"
   git push origin master

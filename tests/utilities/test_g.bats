@@ -20,9 +20,9 @@ teardown() {
   setup_main_repo
 
   # Make some changes to have status output
-  echo "test file" > test.txt
+  echo "test file" >test.txt
   git add test.txt
-  echo "modified" >> README.md
+  echo "modified" >>README.md
 
   run g
   # Check for branch name - could be main or master depending on git version/config
@@ -41,7 +41,7 @@ teardown() {
 
 @test "g with no arguments clears terminal first" {
   # Check that the g script contains the clear command
-  run grep -q "clear" "${DOTFILES_DIR}/bin/.local/bin/g"
+  run grep -q "clear" "${DOTFILES}/bin/.local/bin/g"
   [ "${status}" -eq 0 ]
 }
 
@@ -73,7 +73,7 @@ teardown() {
   setup_main_repo
 
   # Create a commit to test against
-  echo "test" > file.txt
+  echo "test" >file.txt
   git add file.txt
   git commit -m "Add test file"
 

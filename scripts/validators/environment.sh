@@ -94,7 +94,7 @@ validate_bash_environment_syntax() {
   log_info "Validating bash environment syntax..."
 
   # Check bash syntax
-  if bash -n "${BASH_ENV_FILE}" 2> /dev/null; then
+  if bash -n "${BASH_ENV_FILE}" 2>/dev/null; then
     log_success "Bash environment syntax valid"
   else
     log_error "Bash environment syntax error: shared/environment.sh"
@@ -119,7 +119,7 @@ validate_fish_environment_syntax() {
   log_info "Validating fish environment syntax..."
 
   # Check fish syntax
-  if fish -n "${FISH_ENV_FILE}" 2> /dev/null; then
+  if fish -n "${FISH_ENV_FILE}" 2>/dev/null; then
     log_success "Fish environment syntax valid"
   else
     log_error "Fish environment syntax error: shared/environment.fish"
@@ -136,14 +136,14 @@ validate_fish_environment_syntax() {
 
 # Extract environment variables from bash file
 extract_bash_variables() {
-  grep -E "^export [A-Z_]+=" "${BASH_ENV_FILE}" 2> /dev/null \
+  grep -E "^export [A-Z_]+=" "${BASH_ENV_FILE}" 2>/dev/null \
     | sed 's/^export //; s/=.*//' \
     | sort || echo ""
 }
 
 # Extract environment variables from fish file
 extract_fish_variables() {
-  grep -E "^set -gx [A-Z_]+" "${FISH_ENV_FILE}" 2> /dev/null \
+  grep -E "^set -gx [A-Z_]+" "${FISH_ENV_FILE}" 2>/dev/null \
     | sed 's/^set -gx //; s/ .*//' \
     | sort || echo ""
 }
@@ -228,7 +228,7 @@ validate_required_variables() {
   local missing_required=()
 
   for var in "${required_vars[@]}"; do
-    if ! grep -q "export ${var}=" "${BASH_ENV_FILE}" 2> /dev/null; then
+    if ! grep -q "export ${var}=" "${BASH_ENV_FILE}" 2>/dev/null; then
       missing_required+=("${var}")
     fi
   done
@@ -252,12 +252,12 @@ validate_variable_values() {
   local validation_errors=0
 
   # Check EDITOR value
-  if grep -q 'export EDITOR=' "${BASH_ENV_FILE}" 2> /dev/null; then
+  if grep -q 'export EDITOR=' "${BASH_ENV_FILE}" 2>/dev/null; then
     local editor_value
     editor_value=$(grep 'export EDITOR=' "${BASH_ENV_FILE}" | sed 's/.*export EDITOR="//; s/".*//' || echo "")
 
     if [[ -n "${editor_value}" ]]; then
-      if ! command -v "${editor_value}" > /dev/null 2>&1; then
+      if ! command -v "${editor_value}" >/dev/null 2>&1; then
         log_warning "EDITOR '${editor_value}' not found in PATH"
       else
         log_success "EDITOR '${editor_value}' is available"
@@ -268,7 +268,7 @@ validate_variable_values() {
   # Check XDG directory structure
   local xdg_vars=("XDG_CONFIG_HOME" "XDG_DATA_HOME" "XDG_CACHE_HOME" "XDG_STATE_HOME")
   for xdg_var in "${xdg_vars[@]}"; do
-    if grep -q "export ${xdg_var}=" "${BASH_ENV_FILE}" 2> /dev/null; then
+    if grep -q "export ${xdg_var}=" "${BASH_ENV_FILE}" 2>/dev/null; then
       local xdg_value
       xdg_value=$(grep "export ${xdg_var}=" "${BASH_ENV_FILE}" | sed 's/.*export [^=]*="//; s/".*//' || echo "")
 
@@ -297,7 +297,7 @@ validate_variable_values() {
           ;;
       esac
     fi
-  done < <(grep "^export" "${BASH_ENV_FILE}" 2> /dev/null || echo "")
+  done < <(grep "^export" "${BASH_ENV_FILE}" 2>/dev/null || echo "")
 
   if [[ ${validation_errors} -eq 0 ]]; then
     log_success "Environment variable values validated"
@@ -326,15 +326,15 @@ validate_environment_health() {
   # Check for variables that might conflict with system defaults
   local potentially_problematic=("PATH" "HOME" "USER" "SHELL")
   for var in "${potentially_problematic[@]}"; do
-    if grep -q "export ${var}=" "${BASH_ENV_FILE}" 2> /dev/null; then
+    if grep -q "export ${var}=" "${BASH_ENV_FILE}" 2>/dev/null; then
       log_warning "Modifying system variable '${var}' - ensure this is intentional"
     fi
   done
 
   # Check file permissions
   local bash_perms fish_perms
-  bash_perms=$(stat -f "%A" "${BASH_ENV_FILE}" 2> /dev/null || echo "unknown")
-  fish_perms=$(stat -f "%A" "${FISH_ENV_FILE}" 2> /dev/null || echo "unknown")
+  bash_perms=$(stat -f "%A" "${BASH_ENV_FILE}" 2>/dev/null || echo "unknown")
+  fish_perms=$(stat -f "%A" "${FISH_ENV_FILE}" 2>/dev/null || echo "unknown")
 
   if [[ "${bash_perms}" == "644" && "${fish_perms}" == "644" ]]; then
     log_success "Environment files have correct permissions (644)"

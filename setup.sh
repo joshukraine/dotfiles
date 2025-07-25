@@ -19,7 +19,7 @@ set -e # Terminate script if anything exits with a non-zero value
 DRY_RUN=false
 
 show_help() {
-  cat << EOF
+  cat <<EOF
 Usage: $0 [OPTIONS]
 
 This script sets up dotfiles using GNU Stow for symlink management.
@@ -153,7 +153,7 @@ check_prerequisites() {
     exit 1
   fi
 
-  if ! command -v stow > /dev/null; then
+  if ! command -v stow >/dev/null; then
     dotfiles_error "GNU Stow is required but was not found. Try: brew install stow"
     exit 1
   fi
@@ -346,7 +346,7 @@ setup_symlinks() {
 }
 
 setup_shell_integration() {
-  if command -v fish &> /dev/null; then
+  if command -v fish &>/dev/null; then
     dotfiles_echo "Initializing fish_user_paths..."
     local fish_cmd="set -U fish_user_paths ${HOME}/.asdf/shims ${HOME}/.local/bin ${HOME}/.bin ${HOME}/.yarn/bin ${HOMEBREW_PREFIX}/bin"
     if [[ "${DRY_RUN}" == "true" ]]; then
@@ -360,7 +360,7 @@ setup_shell_integration() {
 }
 
 setup_tmux() {
-  if command -v tmux &> /dev/null; then
+  if command -v tmux &>/dev/null; then
     if [ ! -d "${HOME}/.terminfo" ]; then
       dotfiles_echo "Installing custom terminfo entries..."
       if [[ "${DRY_RUN}" == "true" ]]; then
@@ -394,7 +394,7 @@ show_next_steps() {
   echo "Possible next steps:"
   echo "-> Install Zap (https://www.zapzsh.com)"
   echo "-> Install Homebrew packages (brew bundle install)"
-  if command -v tmux &> /dev/null; then
+  if command -v tmux &>/dev/null; then
     echo "-> Install Tmux plugins with <prefix> + I (https://github.com/tmux-plugins/tpm)"
   fi
   echo "-> Set up 1Password CLI (https://developer.1password.com/docs/cli)"

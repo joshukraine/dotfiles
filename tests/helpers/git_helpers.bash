@@ -22,7 +22,7 @@ init_git_repo() {
   local default_branch="${1:-main}"
 
   # Initialize repository - handle different git versions
-  if git init -b "${default_branch}" 2> /dev/null; then
+  if git init -b "${default_branch}" 2>/dev/null; then
     # Modern git supports -b flag
     :
   else
@@ -33,7 +33,7 @@ init_git_repo() {
 
   git config user.name "Test User"
   git config user.email "test@example.com"
-  echo "# Test Repository" > README.md
+  echo "# Test Repository" >README.md
   git add README.md
   git commit -m "Initial commit"
 }
@@ -57,20 +57,20 @@ add_mock_origin() {
 create_feature_branch() {
   local branch_name="${1:-feature/test-branch}"
   git checkout -b "${branch_name}"
-  echo "Feature work" >> feature.txt
+  echo "Feature work" >>feature.txt
   git add feature.txt
   git commit -m "Add feature work"
 }
 
 # Create uncommitted changes
 create_uncommitted_changes() {
-  echo "Uncommitted changes" >> uncommitted.txt
+  echo "Uncommitted changes" >>uncommitted.txt
   git add uncommitted.txt
 }
 
 # Create unstaged changes
 create_unstaged_changes() {
-  echo "Unstaged changes" >> README.md
+  echo "Unstaged changes" >>README.md
 }
 
 # Simulate a repository with master as default branch (legacy)
@@ -98,17 +98,17 @@ setup_non_git_dir() {
   export TEST_TEMP_DIR
   TEST_TEMP_DIR=$(mktemp -d)
   cd "${TEST_TEMP_DIR}" || exit
-  echo "Not a git repository" > file.txt
+  echo "Not a git repository" >file.txt
 }
 
 # Check if current directory is a git repository
 is_git_repo() {
-  git rev-parse --is-inside-work-tree > /dev/null 2>&1
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1
 }
 
 # Get current branch name
 get_current_branch() {
-  git branch --show-current 2> /dev/null
+  git branch --show-current 2>/dev/null
 }
 
 # Check if remote exists
@@ -118,5 +118,5 @@ has_origin_remote() {
 
 # Get default branch from remote
 get_remote_default_branch() {
-  git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }'
+  git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }'
 }

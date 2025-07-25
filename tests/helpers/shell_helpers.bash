@@ -2,13 +2,55 @@
 
 # Shell environment test helpers for dotfiles testing framework
 
-# Source dotfiles directory
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+# Load DOTFILES variable with shell-agnostic fallback logic
+load_dotfiles_variable() {
+
+  # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
+  if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+    return 0
+  fi
+
+  # Method 2: CI environment detection - use GITHUB_WORKSPACE
+  if [ -n "${GITHUB_WORKSPACE}" ] && [ -d "${GITHUB_WORKSPACE}" ] && [ -f "${GITHUB_WORKSPACE}/setup.sh" ]; then
+    export DOTFILES="${GITHUB_WORKSPACE}"
+    return 0
+  fi
+
+  # Method 3: Source bash environment file
+  if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
+    source "${HOME}/dotfiles/shared/environment.sh"
+    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+      return 0
+    fi
+  fi
+
+  # Method 4: Fallback to conventional location
+  if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
+    export DOTFILES="${HOME}/dotfiles"
+    return 0
+  fi
+
+  # Method 5: Check current working directory (for tests run from dotfiles root)
+  if [ -f "./setup.sh" ] && [ -d "./shared" ]; then
+    DOTFILES="$(pwd)"
+    export DOTFILES
+    return 0
+  fi
+
+  echo "Error: Cannot determine DOTFILES location" >&2
+  return 1
+}
+
+# Load the DOTFILES variable
+if ! load_dotfiles_variable; then
+  echo "Failed to load DOTFILES environment variable" >&2
+  exit 1
+fi
 
 # Load Fish functions for testing
 load_fish_function() {
   local function_name="$1"
-  local fish_function_file="${DOTFILES_DIR}/fish/.config/fish/functions/${function_name}.fish"
+  local fish_function_file="${DOTFILES}/fish/.config/fish/functions/${function_name}.fish"
 
   if [ -f "${fish_function_file}" ]; then
     # Convert Fish function syntax to bash-compatible for testing
@@ -29,7 +71,7 @@ run_fish_function() {
   if load_fish_function "${function_name}"; then
     # Source the fish function and execute it, with minimal config to avoid errors
     # Pass PATH so mocked commands work, and source git-check-uncommitted if it exists
-    local git_check_file="${DOTFILES_DIR}/bin/.local/bin/git-check-uncommitted"
+    local git_check_file="${DOTFILES}/bin/.local/bin/git-check-uncommitted"
     if [ -f "${git_check_file}" ]; then
       env PATH="${PATH}" fish --no-config -c "set -x PATH '${PATH}'; function git-check-uncommitted; '${git_check_file}' \$argv; end; source '${FISH_FUNCTION_FILE}'; ${function_name} ${args}" 2>&1
     else
@@ -43,12 +85,12 @@ run_fish_function() {
 
 # Load Zsh functions for testing
 load_zsh_functions() {
-  local zsh_functions_file="${DOTFILES_DIR}/zsh/.config/zsh/functions.zsh"
+  local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
   if [ -f "${zsh_functions_file}" ]; then
     # Source the Zsh functions in current bash session
     # We'll need to adapt Zsh syntax to bash where needed
-    source "${zsh_functions_file}" 2> /dev/null || true
+    source "${zsh_functions_file}" 2>/dev/null || true
     return 0
   else
     return 1
@@ -63,7 +105,7 @@ run_zsh_function() {
 
   if load_zsh_functions; then
     # Execute the function if it's available
-    if command -v "${function_name}" > /dev/null 2>&1; then
+    if command -v "${function_name}" >/dev/null 2>&1; then
       "${function_name}" "$@" 2>&1
     else
       echo "Zsh function ${function_name} not found"
@@ -89,8 +131,11 @@ test_abbreviation() {
       test_zsh_abbreviation "${abbr}" "${expected}"
       ;;
     "both")
-      test_fish_abbreviation "${abbr}" "${expected}" \
-        && test_zsh_abbreviation "${abbr}" "${expected}"
+      if test_fish_abbreviation "${abbr}" "${expected}"; then
+        test_zsh_abbreviation "${abbr}" "${expected}"
+      else
+        return 1
+      fi
       ;;
     *)
       echo "Unknown shell type: ${shell_type}"
@@ -105,13 +150,13 @@ test_fish_abbreviation() {
   local expected="$2"
 
   # Load Fish abbreviations file
-  local fish_abbr_file="${DOTFILES_DIR}/fish/.config/fish/abbreviations.fish"
+  local fish_abbr_file="${DOTFILES}/fish/.config/fish/abbreviations.fish"
 
   if [ -f "${fish_abbr_file}" ]; then
     # Extract the abbreviation expansion from the Fish file
     # Format: abbr -a -g abbr_name 'expansion'
     local actual
-    actual=$(grep "^abbr -a -g ${abbr} " "${fish_abbr_file}" | sed "s/^abbr -a -g ${abbr} '//" | sed "s/'$//" 2> /dev/null)
+    actual=$(grep "^abbr -a -g ${abbr} " "${fish_abbr_file}" | sed "s/^abbr -a -g ${abbr} '//" | sed "s/'$//" 2>/dev/null)
 
     if [ "${actual}" = "${expected}" ]; then
       return 0
@@ -131,13 +176,13 @@ test_zsh_abbreviation() {
   local expected="$2"
 
   # Load Zsh abbreviations file
-  local zsh_abbr_file="${DOTFILES_DIR}/zsh/.config/zsh-abbr/abbreviations.zsh"
+  local zsh_abbr_file="${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh"
 
   if [ -f "${zsh_abbr_file}" ]; then
     # Extract the abbreviation expansion from the Zsh file
     # Format: abbr "abbr_name"="expansion"
     local actual
-    actual=$(grep "^abbr \"${abbr}\"=" "${zsh_abbr_file}" | cut -d'"' -f4 2> /dev/null)
+    actual=$(grep "^abbr \"${abbr}\"=" "${zsh_abbr_file}" | cut -d'"' -f4 2>/dev/null)
 
     if [ "${actual}" = "${expected}" ]; then
       return 0
@@ -153,7 +198,7 @@ test_zsh_abbreviation() {
 
 # Load environment variables
 load_environment() {
-  local env_file="${DOTFILES_DIR}/shared/environment.sh"
+  local env_file="${DOTFILES}/shared/environment.sh"
 
   if [ -f "${env_file}" ]; then
     source "${env_file}"
@@ -165,7 +210,7 @@ load_environment() {
 
 # Test if command exists in PATH
 command_exists() {
-  command -v "$1" > /dev/null 2>&1
+  command -v "$1" >/dev/null 2>&1
 }
 
 # Test if function is available
@@ -175,7 +220,7 @@ function_exists() {
 
 # Setup PATH with dotfiles bin directory
 setup_dotfiles_path() {
-  export PATH="${DOTFILES_DIR}/bin/.local/bin:${PATH}"
+  export PATH="${DOTFILES}/bin/.local/bin:${PATH}"
 }
 
 # Restore original PATH
@@ -202,7 +247,7 @@ track_tmux_session() {
 # Cleanup all tracked tmux sessions
 cleanup_tracked_tmux_sessions() {
   for session in "${TEST_TMUX_SESSIONS[@]}"; do
-    tmux kill-session -t "${session}" 2> /dev/null || true
+    tmux kill-session -t "${session}" 2>/dev/null || true
   done
   TEST_TMUX_SESSIONS=()
 }
@@ -210,10 +255,10 @@ cleanup_tracked_tmux_sessions() {
 # Cleanup all test-related tmux sessions
 cleanup_all_test_tmux_sessions() {
   # Kill sessions that look like test sessions
-  tmux list-sessions -F "#{session_name}" 2> /dev/null | while read -r session; do
+  tmux list-sessions -F "#{session_name}" 2>/dev/null | while read -r session; do
     case "${session}" in
       tmp-* | test-* | *test* | custom-session | My_Custom-Session_Name)
-        tmux kill-session -t "${session}" 2> /dev/null || true
+        tmux kill-session -t "${session}" 2>/dev/null || true
         ;;
     esac
   done
@@ -231,7 +276,7 @@ setup_tmux_mocking() {
   export MOCK_TMUX_PATH="${MOCK_TMUX_DIR}/tmux"
 
   # Create the mock tmux script
-  cat > "${MOCK_TMUX_PATH}" << 'EOF'
+  cat >"${MOCK_TMUX_PATH}" <<'EOF'
 #!/usr/bin/env bash
 
 case "$1" in

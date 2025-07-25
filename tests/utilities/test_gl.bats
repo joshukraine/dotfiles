@@ -20,11 +20,11 @@ teardown() {
   setup_main_repo
 
   # Create some commits to display
-  echo "file1" > file1.txt
+  echo "file1" >file1.txt
   git add file1.txt
   git commit -m "Add file1"
 
-  echo "file2" > file2.txt
+  echo "file2" >file2.txt
   git add file2.txt
   git commit -m "Add file2 with longer message to test formatting"
 
@@ -79,7 +79,7 @@ teardown() {
 
   # Create multiple commits
   for i in {1..3}; do
-    echo "file${i}" > "file${i}.txt"
+    echo "file${i}" >"file${i}.txt"
     git add "file${i}.txt"
     git commit -m "Commit ${i}"
   done

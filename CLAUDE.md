@@ -37,6 +37,8 @@ The repository is organized with each top-level directory representing a tool or
 
 ### Setup and Installation
 
+**📚 For comprehensive setup guidance, see [docs/setup/](docs/setup/README.md)**
+
 ```bash
 # Initial setup (idempotent)
 bash ~/dotfiles/setup.sh
@@ -47,6 +49,13 @@ brew bundle install
 # Install Zap (Zsh plugin manager)
 # Follow instructions at https://www.zapzsh.com with --keep flag
 ```
+
+**Quick references:**
+
+- **New users**: [Installation Guide](docs/setup/installation-guide.md)
+- **Command examples**: [Usage Examples](docs/setup/usage-examples.md)
+- **Issues**: [Troubleshooting](docs/setup/troubleshooting.md)
+- **Customization**: [Customization Guide](docs/setup/customization.md)
 
 ### Configuration Validation
 
@@ -62,6 +71,28 @@ brew bundle install
 
 # Setup git hooks for automatic validation
 ./scripts/setup-git-hooks.sh
+```
+
+### Testing and Linting
+
+```bash
+# Run comprehensive test suite (must be run from dotfiles root)
+./scripts/run-tests
+
+# Run specific test categories
+./scripts/run-tests git         # Git function tests
+./scripts/run-tests abbr        # Abbreviation tests
+./scripts/run-tests --verbose   # Verbose output
+./scripts/run-tests --perf      # Performance timing
+
+# Lint shell scripts (must be run from dotfiles root)
+./scripts/lint-shell
+
+# Lint with minimal output
+./scripts/lint-shell --quiet
+
+# Skip test files during linting
+./scripts/lint-shell --exclude-tests
 ```
 
 ### Development Workflow

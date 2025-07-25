@@ -159,6 +159,7 @@ git:
   grso: "git remote set-url origin"
   grsu: "git remote set-url"
   grup: "git remote add upstream"
+  grv: "git remote -v"
   gs: "git status"
   gsh: "git show"
   gss: "git stash"

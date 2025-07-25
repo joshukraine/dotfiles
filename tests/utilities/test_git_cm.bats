@@ -20,7 +20,7 @@ teardown() {
   setup_main_repo
 
   # Make a change to commit
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   run git-cm "Test commit message"
@@ -37,7 +37,7 @@ teardown() {
   setup_main_repo
 
   # Make a change to commit
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   run git-cm "Multi word" "commit message"
@@ -53,7 +53,7 @@ teardown() {
   setup_main_repo
 
   # Make a change to commit
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   # Use a non-interactive editor that will immediately exit without saving
@@ -84,7 +84,7 @@ teardown() {
   setup_main_repo
 
   # Make a change to commit
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   run git-cm "Fix: handle special chars like @#$% and quotes"
@@ -100,7 +100,7 @@ teardown() {
   setup_main_repo
 
   # Make a change to commit
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   run git-cm $'First line\n\nSecond paragraph'
@@ -116,7 +116,7 @@ teardown() {
   setup_main_repo
 
   # Make a change to commit
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   # This might fail depending on git configuration
@@ -133,7 +133,7 @@ teardown() {
   [ "${status}" -ne 0 ]
 
   # Now stage and commit successfully
-  echo "Test change" >> test.txt
+  echo "Test change" >>test.txt
   git add test.txt
 
   run git-cm "This should succeed"

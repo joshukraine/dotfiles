@@ -6,12 +6,41 @@
 
 set -euo pipefail
 
+# Load DOTFILES variable with shell-agnostic fallback logic
+load_dotfiles_variable() {
+    # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
+    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+        return 0
+    fi
+
+    # Method 2: Source bash environment file
+    if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
+        source "${HOME}/dotfiles/shared/environment.sh"
+        if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+            return 0
+        fi
+    fi
+
+    # Method 3: Fallback to conventional location
+    if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
+        export DOTFILES="${HOME}/dotfiles"
+        return 0
+    fi
+
+    echo "Error: Cannot determine DOTFILES location" >&2
+    return 1
+}
+
+# Load DOTFILES variable
+if ! load_dotfiles_variable; then
+    echo "Failed to load DOTFILES environment variable" >&2
+    exit 1
+fi
+
 # Configuration
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(dirname "${SCRIPT_DIR}")"
-DOCS_DIR="${DOTFILES_DIR}/docs/functions"
-FISH_FUNCTIONS_DIR="${DOTFILES_DIR}/fish/.config/fish/functions"
-ZSH_FUNCTIONS_FILE="${DOTFILES_DIR}/zsh/.config/zsh/functions.zsh"
+DOCS_DIR="${DOTFILES}/docs/functions"
+FISH_FUNCTIONS_DIR="${DOTFILES}/fish/.config/fish/functions"
+ZSH_FUNCTIONS_FILE="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -47,7 +76,7 @@ extract_fish_brief() {
       # Reached function definition without finding comment
       break
     fi
-  done < "${file}"
+  done <"${file}"
 
   if [[ -n "${brief}" ]]; then
     echo "${func_name}|${brief}"
@@ -83,7 +112,7 @@ extract_zsh_briefs() {
       current_func=""
       brief=""
     fi
-  done < "${file}"
+  done <"${file}"
 }
 
 # Generate comprehensive function index
@@ -92,7 +121,7 @@ generate_function_index() {
 
   info "Generating function index..."
 
-  cat > "${output_file}" << EOF
+  cat >"${output_file}" <<EOF
 # Function Index
 
 Auto-generated comprehensive index of all documented functions in the dotfiles configuration.
@@ -114,8 +143,8 @@ EOF
         if [[ -n "${func_data}" ]]; then
           local func_name="${func_data%%|*}"
           local brief="${func_data#*|}"
-          local rel_path="${file#"${DOTFILES_DIR}"/}"
-          echo "| \`${func_name}\` | ${brief} | Fish | \`${rel_path}\` |" >> "${output_file}"
+          local rel_path="${file#"${DOTFILES}"/}"
+          echo "| \`${func_name}\` | ${brief} | Fish | \`${rel_path}\` |" >>"${output_file}"
         fi
       fi
     done
@@ -125,15 +154,15 @@ EOF
   if [[ -f "${ZSH_FUNCTIONS_FILE}" ]]; then
     local zsh_briefs
     zsh_briefs=$(extract_zsh_briefs "${ZSH_FUNCTIONS_FILE}")
-    local rel_path="${ZSH_FUNCTIONS_FILE#"${DOTFILES_DIR}"/}"
+    local rel_path="${ZSH_FUNCTIONS_FILE#"${DOTFILES}"/}"
 
     while IFS= read -r func_data; do
       if [[ -n "${func_data}" ]]; then
         local func_name="${func_data%%|*}"
         local brief="${func_data#*|}"
-        echo "| \`${func_name}\` | ${brief} | Zsh | \`${rel_path}\` |" >> "${output_file}"
+        echo "| \`${func_name}\` | ${brief} | Zsh | \`${rel_path}\` |" >>"${output_file}"
       fi
-    done <<< "${zsh_briefs}"
+    done <<<"${zsh_briefs}"
   fi
 
   # Prepare category sections
@@ -147,7 +176,7 @@ EOF
   system_functions=$(grep -E "| \`(cat|htop|ls|pi)" "${output_file}" || echo "*No system functions found with documentation*")
   tmux_functions=$(grep -E "| \`t" "${output_file}" || echo "*No tmux functions found with documentation*")
 
-  cat >> "${output_file}" << EOF
+  cat >>"${output_file}" <<EOF
 
 ## Function Categories
 

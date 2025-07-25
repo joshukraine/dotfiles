@@ -9,10 +9,10 @@ set -euo pipefail
 
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
-DOCS_DIR="$DOTFILES_DIR/docs/functions"
-FISH_FUNCTIONS_DIR="$DOTFILES_DIR/fish/.config/fish/functions"
-ZSH_FUNCTIONS_FILE="$DOTFILES_DIR/zsh/.config/zsh/functions.zsh"
+DOTFILES="$(dirname "$SCRIPT_DIR")"
+DOCS_DIR="$DOTFILES/docs/functions"
+FISH_FUNCTIONS_DIR="$DOTFILES/fish/.config/fish/functions"
+ZSH_FUNCTIONS_FILE="$DOTFILES/zsh/.config/zsh/functions.zsh"
 
 # Colors for output
 RED='\033[0;31m'

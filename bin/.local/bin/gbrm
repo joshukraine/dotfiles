@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Check if we're in a Git repository
-if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Not a git repository."
   exit 1
 fi
@@ -16,7 +16,7 @@ default_branch=""
 
 # Try to get default branch from remote
 if git remote | grep -q "^origin$"; then
-  default_branch=$(git remote show origin 2> /dev/null | awk '/HEAD branch/ { print $NF }')
+  default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
 fi
 
 # Fallback if needed

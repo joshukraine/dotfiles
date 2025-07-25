@@ -32,6 +32,31 @@
 #   env    - Environment tests (tests/environment/)
 set -e
 
+# Load DOTFILES variable with shell-agnostic fallback logic
+load_dotfiles_variable() {
+  # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
+  if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+    return 0
+  fi
+
+  # Method 2: Source bash environment file
+  if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
+    source "${HOME}/dotfiles/shared/environment.sh"
+    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
+      return 0
+    fi
+  fi
+
+  # Method 3: Fallback to conventional location
+  if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
+    export DOTFILES="${HOME}/dotfiles"
+    return 0
+  fi
+
+  echo "Error: Cannot determine DOTFILES location" >&2
+  return 1
+}
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -57,7 +82,7 @@ print_blue() {
 }
 
 show_help() {
-  cat << EOF
+  cat <<EOF
 Usage: run-tests [OPTIONS] [CATEGORY]
 
 Run dotfiles testing framework with various options.
@@ -126,24 +151,33 @@ install_dependencies() {
 setup_environment() {
   print_blue "Setting up test environment..."
 
-  # Navigate to dotfiles directory - resolve symlinks to get actual location
-  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-  cd "$DOTFILES_DIR"
+  # Load DOTFILES variable using shell-agnostic approach
+  if ! load_dotfiles_variable; then
+    echo "Failed to load DOTFILES environment variable" >&2
+    exit 1
+  fi
+
+  # Verify we're in the correct dotfiles location
+  if [[ "$(pwd)" != "${DOTFILES}" ]]; then
+    echo "Error: run-tests must be run from the dotfiles directory" >&2
+    echo "Expected location: ${DOTFILES}" >&2
+    echo "Current location: $(pwd)" >&2
+    echo "Usage: cd \"${DOTFILES}\" && ./scripts/run-tests" >&2
+    exit 1
+  fi
 
   # Make helpers executable
-  if [ -d "tests/helpers" ]; then
-    chmod +x tests/helpers/*.bash
+  if [ -d "${DOTFILES}/tests/helpers" ]; then
+    chmod +x "${DOTFILES}/tests/helpers/"*.bash
     print_green "Made test helpers executable"
   fi
 
   # Generate abbreviations if needed
-  if [ -f "shared/generate-all-abbr.sh" ]; then
+  if [ -f "${DOTFILES}/shared/generate-all-abbr.sh" ]; then
     print_yellow "Regenerating abbreviations..."
-    cd shared
+    cd "${DOTFILES}/shared"
     ./generate-all-abbr.sh
-    cd ..
+    cd "${DOTFILES}"
     print_green "Abbreviations regenerated"
   fi
 
@@ -155,40 +189,49 @@ run_tests() {
   local verbose="$2"
   local show_perf="$3"
 
-  # Navigate to dotfiles directory - resolve symlinks to get actual location
-  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-  cd "$DOTFILES_DIR"
+  # Load DOTFILES variable using shell-agnostic approach
+  if ! load_dotfiles_variable; then
+    echo "Failed to load DOTFILES environment variable" >&2
+    exit 1
+  fi
 
-  local bats_args=""
-  if [ "$verbose" = "true" ]; then
-    bats_args="$bats_args --verbose-run"
+  # Verify we're in the correct dotfiles location
+  if [[ "$(pwd)" != "${DOTFILES}" ]]; then
+    echo "Error: run-tests must be run from the dotfiles directory" >&2
+    echo "Expected location: ${DOTFILES}" >&2
+    echo "Current location: $(pwd)" >&2
+    echo "Usage: cd \"${DOTFILES}\" && ./scripts/run-tests" >&2
+    exit 1
+  fi
+
+  local bats_args=()
+  if [ "${verbose}" = "true" ]; then
+    bats_args+=("--verbose-run")
   fi
 
   local start_time=""
-  if [ "$show_perf" = "true" ]; then
+  if [ "${show_perf}" = "true" ]; then
     start_time=$(date +%s)
     print_blue "Starting performance measurement..."
   fi
 
-  case "$category" in
+  case "${category}" in
     "all")
       print_blue "Running all tests..."
-      bats tests/ --recursive $bats_args
+      bats tests/ --recursive "${bats_args[@]}"
       ;;
     "git")
       print_blue "Running git function tests..."
-      bats tests/git_functions/ $bats_args
+      bats tests/git_functions/ "${bats_args[@]}"
       ;;
     "abbr")
       print_blue "Running abbreviation tests..."
-      bats tests/abbreviations/ $bats_args
+      bats tests/abbreviations/ "${bats_args[@]}"
       ;;
     "utils")
       print_blue "Running utility tests..."
       if [ -d "tests/utilities" ] && [ -n "$(ls -A tests/utilities/*.bats 2>/dev/null)" ]; then
-        bats tests/utilities/ $bats_args
+        bats tests/utilities/ "${bats_args[@]}"
       else
         print_yellow "No utility tests found"
       fi
@@ -196,13 +239,13 @@ run_tests() {
     "env")
       print_blue "Running environment tests..."
       if [ -d "tests/environment" ] && [ -n "$(ls -A tests/environment/*.bats 2>/dev/null)" ]; then
-        bats tests/environment/ $bats_args
+        bats tests/environment/ "${bats_args[@]}"
       else
         print_yellow "No environment tests found"
       fi
       ;;
     *)
-      print_red "Unknown test category: $category"
+      print_red "Unknown test category: ${category}"
       print_yellow "Available categories: all, git, abbr, utils, env"
       exit 1
       ;;
@@ -210,51 +253,66 @@ run_tests() {
 
   local exit_code=$?
 
-  if [ "$show_perf" = "true" ] && [ -n "$start_time" ]; then
-    local end_time=$(date +%s)
+  if [ "${show_perf}" = "true" ] && [ -n "${start_time}" ]; then
+    local end_time
+    end_time=$(date +%s)
     local duration=$((end_time - start_time))
 
     print_blue "Performance Results:"
     echo "  Total execution time: ${duration}s"
 
-    if [ $duration -gt 120 ]; then
+    if [ ${duration} -gt 120 ]; then
       print_red "  ❌ Tests exceeded 2-minute target"
     else
       print_green "  ✅ Tests completed within 2-minute target"
     fi
   fi
 
-  return $exit_code
+  return ${exit_code}
 }
 
 show_coverage() {
-  # Resolve symlinks to get actual location
-  SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-  SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-  DOTFILES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-  cd "$DOTFILES_DIR"
+  # Load DOTFILES variable using shell-agnostic approach
+  if ! load_dotfiles_variable; then
+    echo "Failed to load DOTFILES environment variable" >&2
+    exit 1
+  fi
+
+  # Verify we're in the correct dotfiles location
+  if [[ "$(pwd)" != "${DOTFILES}" ]]; then
+    echo "Error: run-tests must be run from the dotfiles directory" >&2
+    echo "Expected location: ${DOTFILES}" >&2
+    echo "Current location: $(pwd)" >&2
+    echo "Usage: cd \"${DOTFILES}\" && ./scripts/run-tests" >&2
+    exit 1
+  fi
 
   print_blue "Coverage Analysis:"
 
-  # Count functions and tests
-  local fish_functions=$(find fish/.config/fish/functions/ -name "*.fish" 2>/dev/null | wc -l)
-  local zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" zsh/.config/zsh/functions.zsh 2>/dev/null || echo "0")
-  local bin_scripts=$(find bin/.local/bin/ -type f -executable 2>/dev/null | wc -l)
-  local test_files=$(find tests/ -name "*.bats" 2>/dev/null | wc -l)
+  # Count functions and tests using absolute paths
+  local fish_functions
+  fish_functions=$(find "${DOTFILES}/fish/.config/fish/functions/" -name "*.fish" 2>/dev/null | wc -l)
+  local zsh_functions
+  zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" "${DOTFILES}/zsh/.config/zsh/functions.zsh" 2>/dev/null || echo "0")
+  local bin_scripts
+  bin_scripts=$(find "${DOTFILES}/bin/.local/bin/" -type f -executable 2>/dev/null | wc -l)
+  local test_files
+  test_files=$(find "${DOTFILES}/tests/" -name "*.bats" 2>/dev/null | wc -l)
 
   echo "  Functions:"
-  echo "    Fish functions: $fish_functions"
-  echo "    Zsh functions:  $zsh_functions"
-  echo "    Bin scripts:    $bin_scripts"
+  echo "    Fish functions: ${fish_functions}"
+  echo "    Zsh functions:  ${zsh_functions}"
+  echo "    Bin scripts:    ${bin_scripts}"
   echo ""
   echo "  Tests:"
-  echo "    Test files:     $test_files"
-  echo "    Git tests:      $(find tests/git_functions/ -name "*.bats" 2>/dev/null | wc -l)"
-  echo "    Abbr tests:     $(find tests/abbreviations/ -name "*.bats" 2>/dev/null | wc -l)"
+  echo "    Test files:     ${test_files}"
+  echo "    Git tests:      $(find "${DOTFILES}/tests/git_functions/" -name "*.bats" 2>/dev/null | wc -l)"
+  echo "    Abbr tests:     $(find "${DOTFILES}/tests/abbreviations/" -name "*.bats" 2>/dev/null | wc -l)"
 
   if [ -f "shared/abbreviations.yaml" ]; then
-    local abbr_count=$(grep -c "^  [a-zA-Z].*:" shared/abbreviations.yaml 2>/dev/null || echo "0")
-    echo "    Abbreviations:  $abbr_count total defined"
+    local abbr_count
+    abbr_count=$(grep -c "^  [a-zA-Z].*:" "${DOTFILES}/shared/abbreviations.yaml" 2>/dev/null || echo "0")
+    echo "    Abbreviations:  ${abbr_count} total defined"
   fi
 }
 
@@ -268,23 +326,23 @@ main() {
   # Parse arguments
   while [[ $# -gt 0 ]]; do
     case $1 in
-      -h|--help)
+      -h | --help)
         show_help
         exit 0
         ;;
-      -v|--verbose)
+      -v | --verbose)
         verbose="true"
         shift
         ;;
-      -f|--fast)
+      -f | --fast)
         fast="true"
         shift
         ;;
-      -p|--perf)
+      -p | --perf)
         show_perf="true"
         shift
         ;;
-      -c|--coverage)
+      -c | --coverage)
         show_coverage="true"
         shift
         ;;
@@ -296,7 +354,7 @@ main() {
         setup_environment
         exit 0
         ;;
-      all|git|abbr|utils|env)
+      all | git | abbr | utils | env)
         category="$1"
         shift
         ;;
@@ -315,18 +373,18 @@ main() {
   fi
 
   # Setup environment unless --fast
-  if [ "$fast" != "true" ]; then
+  if [ "${fast}" != "true" ]; then
     setup_environment
   fi
 
   # Show coverage if requested
-  if [ "$show_coverage" = "true" ]; then
+  if [ "${show_coverage}" = "true" ]; then
     show_coverage
     echo ""
   fi
 
   # Run tests
-  if run_tests "$category" "$verbose" "$show_perf"; then
+  if run_tests "${category}" "${verbose}" "${show_perf}"; then
     print_green "✅ All tests passed!"
     exit 0
   else

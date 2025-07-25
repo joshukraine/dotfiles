@@ -12,7 +12,7 @@ source "${SCRIPT_DIR}/generator-utils.sh"
 YAML_FILE="${SCRIPT_DIR}/abbreviations.yaml"
 OUTPUT_FILE="${SCRIPT_DIR}/../docs/abbreviations.md"
 
-if ! command -v yq > /dev/null 2>&1; then
+if ! command -v yq >/dev/null 2>&1; then
   echo "Error: yq is required but not installed. Install it with: brew install yq"
   exit 1
 fi
@@ -32,8 +32,9 @@ zsh_count=${total_count}
 # Get category count
 category_count=$(yq eval 'keys | length' "${YAML_FILE}")
 
-# Generate the documentation
-cat > "${OUTPUT_FILE}" << EOF
+# Generate the documentation to a temporary file first
+TEMP_FILE="${OUTPUT_FILE}.tmp"
+cat >"${TEMP_FILE}" <<EOF
 # Shell Abbreviations Reference
 
 This document provides a comprehensive reference for all shell abbreviations available in both Fish and Zsh shells. Abbreviations are automatically generated from the single source of truth: \`shared/abbreviations.yaml\`.
@@ -143,11 +144,11 @@ yq eval 'keys | .[]' "${YAML_FILE}" | while read -r category; do
     # Generate table rows for this category
     yq eval ".${category} | to_entries | .[] | \"| \`\" + .key + \"\` | \`\" + (.value | sub(\"\\|\"; \"\\\\|\"; \"g\")) + \"\` | \" + .key + \" |\"" "${YAML_FILE}"
     echo ""
-  } >> "${OUTPUT_FILE}"
+  } >>"${TEMP_FILE}"
 done
 
 # Add cross-shell compatibility section
-cat >> "${OUTPUT_FILE}" << 'EOF'
+cat >>"${TEMP_FILE}" <<'EOF'
 ## Cross-Shell Compatibility
 
 ### Fish-Only Features
@@ -204,8 +205,29 @@ git:
 *Last generated: $(date)*
 EOF
 
-# Replace the placeholder with the evaluated date
-sed -i '' "s/\$(date)/$(date)/" "${OUTPUT_FILE}"
+# Replace the placeholder with the evaluated date in the temporary file
+sed -i '' "s/\$(date)/$(date)/" "${TEMP_FILE}"
+
+# If original file exists, compare content (excluding the timestamp line)
+if [[ -f "${OUTPUT_FILE}" ]]; then
+  # Extract content without timestamp for comparison
+  grep -v "Last generated:" "${TEMP_FILE}" > "${TEMP_FILE}.new" 2>/dev/null || true
+  grep -v "Last generated:" "${OUTPUT_FILE}" > "${TEMP_FILE}.old" 2>/dev/null || true
+
+  if cmp -s "${TEMP_FILE}.new" "${TEMP_FILE}.old" 2>/dev/null; then
+    # Content is identical, keep original file to preserve timestamp
+    rm -f "${TEMP_FILE}" "${TEMP_FILE}.new" "${TEMP_FILE}.old"
+    echo "✅ Abbreviations documentation unchanged: ${OUTPUT_FILE}"
+    echo "📊 Total abbreviations: ${zsh_count} (${category_count} categories)"
+    exit 0
+  fi
+
+  # Clean up comparison files
+  rm -f "${TEMP_FILE}.new" "${TEMP_FILE}.old"
+fi
+
+# Content has changed or file doesn't exist, use the new version
+mv "${TEMP_FILE}" "${OUTPUT_FILE}"
 
 echo "✅ Generated abbreviations documentation: ${OUTPUT_FILE}"
 echo "📊 Total abbreviations documented: ${zsh_count} (${category_count} categories)"
