@@ -1,9 +1,9 @@
 # ShellCheck configuration for dotfiles project
 # https://www.shellcheck.net/wiki/Ignore
 #
-# IMPORTANT: This project targets macOS
-# - Avoid Linux-specific commands (e.g., readlink -f)
-# - Use POSIX-compatible alternatives where possible
+# IMPORTANT: This project targets macOS (12.3+)
+# - readlink -f is supported on macOS 12.3 Monterey and later
+# - Use POSIX-compatible alternatives for broader compatibility when needed
 
 # Set shell for shell-specific checks (default to bash)
 shell=bash
