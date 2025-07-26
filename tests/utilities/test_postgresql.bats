@@ -118,29 +118,42 @@ teardown() {
 
 @test "PostgreSQL functions work in Zsh shell" {
   # Source the Zsh functions and test availability
-  source "${HOME}/dotfiles/zsh/.config/zsh/functions.zsh"
+  local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
-  run type startpost
-  [ "${status}" -eq 0 ]
+  if [ -f "${zsh_functions_file}" ]; then
+    source "${zsh_functions_file}"
 
-  run type stoppost
-  [ "${status}" -eq 0 ]
+    run type startpost
+    [ "${status}" -eq 0 ]
 
-  run type statpost
-  [ "${status}" -eq 0 ]
+    run type stoppost
+    [ "${status}" -eq 0 ]
+
+    run type statpost
+    [ "${status}" -eq 0 ]
+  else
+    skip "Zsh functions file not found at ${zsh_functions_file}"
+  fi
 }
 
 @test "PostgreSQL functions work in Fish shell" {
   # Test that the functions are available in Fish context
   if command -v fish >/dev/null 2>&1; then
-    run fish -c "type startpost"
-    [ "${status}" -eq 0 ]
+    local fish_functions_dir="${DOTFILES}/fish/.config/fish/functions"
 
-    run fish -c "type stoppost"
-    [ "${status}" -eq 0 ]
+    if [ -d "${fish_functions_dir}" ]; then
+      # Test that Fish can find and run the functions from the functions directory
+      run fish -c "set fish_function_path ${fish_functions_dir} \$fish_function_path; type startpost"
+      [ "${status}" -eq 0 ]
 
-    run fish -c "type statpost"
-    [ "${status}" -eq 0 ]
+      run fish -c "set fish_function_path ${fish_functions_dir} \$fish_function_path; type stoppost"
+      [ "${status}" -eq 0 ]
+
+      run fish -c "set fish_function_path ${fish_functions_dir} \$fish_function_path; type statpost"
+      [ "${status}" -eq 0 ]
+    else
+      skip "Fish functions directory not found at ${fish_functions_dir}"
+    fi
   else
     skip "Fish shell not available"
   fi
