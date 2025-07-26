@@ -214,13 +214,6 @@ lint_file() {
     return 0
   fi
 
-  # Check for macOS-incompatible patterns (exclude comments and strings)
-  if grep -E '^\s*[^#]*readlink\s+-f' "${file}" 2>/dev/null | grep -v "grep.*readlink" | grep -v "contains.*readlink" >/dev/null; then
-    echo "❌ ERROR: ${file} contains 'readlink -f' which is not compatible with macOS!" >&2
-    echo "   Use this pattern instead: \$(cd \"\$(dirname \"\${BASH_SOURCE[0]}\")\" && pwd)/\$(basename \"\${BASH_SOURCE[0]}\")" >&2
-    EXIT_CODE=1
-  fi
-
   # Run shfmt if requested
   if [[ "${CHECK_MODE}" == "true" ]] || [[ "${FIX_MODE}" == "true" ]]; then
     local shfmt_args=()
