@@ -261,13 +261,13 @@ mkdir -p "$BACKUP_DIR/preserve"/{essential,nice-to-have,obsolete}
 
 ### Mapping Old Settings to New Structure
 
-| Old Configuration | New Location | Notes |
-|------------------|--------------|-------|
-| `~/.bashrc` aliases | `~/.zshrc.local` | Convert to zsh format |
-| `~/.vimrc` | `~/.config/nvim/lua/config/local.lua` | Convert to LazyVim |
-| `~/.gitconfig` user info | `~/.gitconfig.local` | Keep user identity |
-| Custom functions | `~/dotfiles/local/config.fish.local` | Choose shell |
-| Environment variables | `~/.environment.local` | Global variables |
+| Old Configuration        | New Location                          | Notes                 |
+| ------------------------ | ------------------------------------- | --------------------- |
+| `~/.bashrc` aliases      | `~/.zshrc.local`                      | Convert to zsh format |
+| `~/.vimrc`               | `~/.config/nvim/lua/config/local.lua` | Convert to LazyVim    |
+| `~/.gitconfig` user info | `~/.gitconfig.local`                  | Keep user identity    |
+| Custom functions         | `~/dotfiles/local/config.fish.local`  | Choose shell          |
+| Environment variables    | `~/.environment.local`                | Global variables      |
 
 ### Gradual Migration Strategy
 

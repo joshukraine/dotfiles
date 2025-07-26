@@ -366,21 +366,21 @@ echo "Ready for deployment"
 
 ### Function Availability
 
-| Function | Fish | Zsh | Implementation Location |
-|----------|------|-----|------------------------|
-| `gcom` | ✅ | ✅ | `fish/functions/gcom.fish`, `zsh/functions.zsh` |
-| `gpum` | ✅ | ✅ | `fish/functions/gpum.fish`, `zsh/functions.zsh` |
-| `grbm` | ✅ | ✅ | `fish/functions/grbm.fish`, `zsh/functions.zsh` |
-| `gbrm` | ✅ | ✅ | `bin/.local/bin/gbrm` (shared script) |
-| `g` | ✅ | ✅ | `bin/.local/bin/g` (shared script) |
-| `gl` | ✅ | ✅ | `bin/.local/bin/gl` (shared script) |
-| `glg` | ✅ | ✅ | `bin/.local/bin/glg` (shared script) |
-| `gll` | ✅ | ✅ | `fish/functions/gll.fish`, `zsh/functions.zsh` |
-| `git-cm` | ✅ | ✅ | `bin/.local/bin/git-cm` (shared script) |
-| `git-check-uncommitted` | ✅ | ✅ | `bin/.local/bin/git-check-uncommitted` (shared script) |
-| `git-brst` | ✅ | ✅ | `bin/.local/bin/git-brst` (shared script) |
-| `git-publish` | ✅ | ✅ | `bin/.local/bin/git-publish` (shared script) |
-| `git-uncommit` | ✅ | ✅ | `bin/.local/bin/git-uncommit` (shared script) |
+| Function                | Fish | Zsh | Implementation Location                                |
+| ----------------------- | ---- | --- | ------------------------------------------------------ |
+| `gcom`                  | ✅   | ✅  | `fish/functions/gcom.fish`, `zsh/functions.zsh`        |
+| `gpum`                  | ✅   | ✅  | `fish/functions/gpum.fish`, `zsh/functions.zsh`        |
+| `grbm`                  | ✅   | ✅  | `fish/functions/grbm.fish`, `zsh/functions.zsh`        |
+| `gbrm`                  | ✅   | ✅  | `bin/.local/bin/gbrm` (shared script)                  |
+| `g`                     | ✅   | ✅  | `bin/.local/bin/g` (shared script)                     |
+| `gl`                    | ✅   | ✅  | `bin/.local/bin/gl` (shared script)                    |
+| `glg`                   | ✅   | ✅  | `bin/.local/bin/glg` (shared script)                   |
+| `gll`                   | ✅   | ✅  | `fish/functions/gll.fish`, `zsh/functions.zsh`         |
+| `git-cm`                | ✅   | ✅  | `bin/.local/bin/git-cm` (shared script)                |
+| `git-check-uncommitted` | ✅   | ✅  | `bin/.local/bin/git-check-uncommitted` (shared script) |
+| `git-brst`              | ✅   | ✅  | `bin/.local/bin/git-brst` (shared script)              |
+| `git-publish`           | ✅   | ✅  | `bin/.local/bin/git-publish` (shared script)           |
+| `git-uncommit`          | ✅   | ✅  | `bin/.local/bin/git-uncommit` (shared script)          |
 
 ### Shared Logic
 
@@ -454,18 +454,18 @@ bats tests/git_functions/test_gcom.bats
 
 The following abbreviations complement the git functions:
 
-| Abbreviation | Expansion | Description |
-|--------------|-----------|-------------|
-| `ga` | `git add` | Stage files |
-| `gaa` | `git add --all` | Stage all files |
-| `gcm` | `git-cm` | Commit with message |
-| `gst` | `git status` | Repository status |
-| `gp` | `git push` | Push changes |
-| `gpl` | `git pull` | Pull changes |
-| `gpub` | `git publish` | Push branch to origin |
+| Abbreviation | Expansion       | Description           |
+| ------------ | --------------- | --------------------- |
+| `ga`         | `git add`       | Stage files           |
+| `gaa`        | `git add --all` | Stage all files       |
+| `gcm`        | `git-cm`        | Commit with message   |
+| `gst`        | `git status`    | Repository status     |
+| `gp`         | `git push`      | Push changes          |
+| `gpl`        | `git pull`      | Pull changes          |
+| `gpub`       | `git publish`   | Push branch to origin |
 
 See [abbreviations reference](../abbreviations.md) for complete list.
 
 ---
 
-*For issues or contributions related to git functions, see the main repository issues.*
+_For issues or contributions related to git functions, see the main repository issues._

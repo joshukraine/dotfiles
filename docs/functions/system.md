@@ -282,21 +282,21 @@ g push origin main
 
 ### Implementation Details
 
-| Function | Fish | Zsh | Implementation |
-|----------|------|-----|----------------|
-| `cat` | ✅ | ❌ | Fish function only |
-| `htop` | ✅ | ❌ | Fish function only |
-| `l`, `ll`, `la` | ✅ | ❌ | Fish functions only |
-| `src` | ✅ | ✅ | Different implementations |
-| `pi` | ✅ | ✅ | Different argument handling |
-| `rlv` | ✅ | ✅ | Slightly different asdf syntax |
-| `fs` | ✅ | ✅ | Both shells, different logic |
-| `dsx` | ✅ | ✅ | Both shells |
-| `path` | ✅ | ✅ | Both shells |
-| `g` | ✅ | ✅ | Shared script |
-| `sha256` | ✅ | ✅ | Shared script |
-| `saf`/`haf` | ✅ | ✅ | Both shells |
-| `startpost`/`stoppost`/`statpost` | ✅ | ✅ | Both shells |
+| Function                          | Fish | Zsh | Implementation                 |
+| --------------------------------- | ---- | --- | ------------------------------ |
+| `cat`                             | ✅   | ❌  | Fish function only             |
+| `htop`                            | ✅   | ❌  | Fish function only             |
+| `l`, `ll`, `la`                   | ✅   | ❌  | Fish functions only            |
+| `src`                             | ✅   | ✅  | Different implementations      |
+| `pi`                              | ✅   | ✅  | Different argument handling    |
+| `rlv`                             | ✅   | ✅  | Slightly different asdf syntax |
+| `fs`                              | ✅   | ✅  | Both shells, different logic   |
+| `dsx`                             | ✅   | ✅  | Both shells                    |
+| `path`                            | ✅   | ✅  | Both shells                    |
+| `g`                               | ✅   | ✅  | Shared script                  |
+| `sha256`                          | ✅   | ✅  | Shared script                  |
+| `saf`/`haf`                       | ✅   | ✅  | Both shells                    |
+| `startpost`/`stoppost`/`statpost` | ✅   | ✅  | Both shells                    |
 
 ### Shell-Specific Notes
 
@@ -408,15 +408,15 @@ g commit -m "update"
 System functions work with these abbreviations:
 
 | Abbreviation | Expansion | Category |
-|--------------|-----------|----------|
-| `pi` | `pi` | Network |
-| `path` | `path` | System |
-| `src` | `src` | Shell |
+| ------------ | --------- | -------- |
+| `pi`         | `pi`      | Network  |
+| `path`       | `path`    | System   |
+| `src`        | `src`     | Shell    |
 
 See [abbreviations reference](../abbreviations.md) for complete list.
 
 ---
 
-*System functions enhance everyday terminal operations with modern tools and
+_System functions enhance everyday terminal operations with modern tools and
 sensible defaults. They maintain familiar command patterns while providing
-improved functionality.*
+improved functionality._

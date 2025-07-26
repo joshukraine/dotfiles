@@ -227,16 +227,16 @@ path | sort | uniq -d
 
 ### Implementation Details
 
-| Function | Fish | Zsh | Implementation |
-|----------|------|-----|----------------|
-| Navigation Shortcuts | ✅ | ✅ | `shared/abbreviations.yaml` |
-| `copy` | ✅ | ✅ | `bin/.local/bin/copy` |
-| `copycwd` | ✅ | ✅ | Functions in both shells |
-| `bubo` | ✅ | ✅ | `bin/.local/bin/bubo` |
-| `reload-abbr` | ✅ | ✅ | Functions in both shells |
-| `path` | ✅ | ✅ | Functions in both shells |
-| `run-tests` | ✅ | ✅ | `bin/.local/bin/run-tests` |
-| `lint-shell` | ✅ | ✅ | `bin/.local/bin/lint-shell` |
+| Function             | Fish | Zsh | Implementation              |
+| -------------------- | ---- | --- | --------------------------- |
+| Navigation Shortcuts | ✅   | ✅  | `shared/abbreviations.yaml` |
+| `copy`               | ✅   | ✅  | `bin/.local/bin/copy`       |
+| `copycwd`            | ✅   | ✅  | Functions in both shells    |
+| `bubo`               | ✅   | ✅  | `bin/.local/bin/bubo`       |
+| `reload-abbr`        | ✅   | ✅  | Functions in both shells    |
+| `path`               | ✅   | ✅  | Functions in both shells    |
+| `run-tests`          | ✅   | ✅  | `bin/.local/bin/run-tests`  |
+| `lint-shell`         | ✅   | ✅  | `bin/.local/bin/lint-shell` |
 
 ### Shared Configuration
 
@@ -308,12 +308,12 @@ path                    # Verify changes
 
 These functions rely on the following environment variables:
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `$DOTFILES` | Path to dotfiles directory | `~/dotfiles` |
-| `$XDG_CONFIG_HOME` | XDG config directory | `~/.config` |
-| `$HOME` | User home directory | System default |
-| `$PATH` | System PATH variable | System configured |
+| Variable           | Description                | Default           |
+| ------------------ | -------------------------- | ----------------- |
+| `$DOTFILES`        | Path to dotfiles directory | `~/dotfiles`      |
+| `$XDG_CONFIG_HOME` | XDG config directory       | `~/.config`       |
+| `$HOME`            | User home directory        | System default    |
+| `$PATH`            | System PATH variable       | System configured |
 
 Set in `shared/environment.sh` and `shared/environment.fish`.
 
@@ -400,7 +400,7 @@ lint-shell --help
 
 **Features:**
 
-- **Comprehensive Coverage**: Finds all shell scripts (*.sh,*.bash, *.bats, executables in bin/)
+- **Comprehensive Coverage**: Finds all shell scripts (_.sh,_.bash, \*.bats, executables in bin/)
 - **Shell Type Detection**: Automatically detects bash vs sh from shebangs
 - **Smart Filtering**: Skips non-shell files (Ruby, Python, etc.)
 - **Project Aware**: Configures shellcheck for project-specific patterns
@@ -468,11 +468,11 @@ run-tests --coverage    # Check test coverage
 
 Development utilities work with these abbreviations:
 
-| Abbreviation | Expansion | Category |
-|--------------|-----------|----------|
-| `reload` | `reload-abbr` | Package Management |
-| `path` | `path` | System Utilities |
-| `copy` | `copy` | Clipboard |
+| Abbreviation | Expansion     | Category           |
+| ------------ | ------------- | ------------------ |
+| `reload`     | `reload-abbr` | Package Management |
+| `path`       | `path`        | System Utilities   |
+| `copy`       | `copy`        | Clipboard          |
 
 See [abbreviations reference](../abbreviations.md) for complete list.
 
@@ -518,4 +518,4 @@ See [abbreviations reference](../abbreviations.md) for complete list.
 
 ---
 
-*Development utilities are designed to streamline common development workflows. For issues or feature requests, see the main repository.*
+_Development utilities are designed to streamline common development workflows. For issues or feature requests, see the main repository._

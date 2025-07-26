@@ -4,9 +4,9 @@
 
 This dotfiles repository provides security updates for the current release branch only:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| Current | ✅                |
+| Version | Supported |
+| ------- | --------- |
+| Current | ✅        |
 
 ## Security Overview
 
@@ -131,4 +131,4 @@ This security policy may be updated periodically. Major changes will be communic
 
 **Note**: This repository is personal dotfiles for development environment setup. While security is taken seriously, this is not a production application or service. Use at your own discretion and customize for your security requirements.
 
-*Last updated: 2025-07-22*
+_Last updated: 2025-07-22_

@@ -32,6 +32,9 @@ teardown() {
 }
 
 @test "startpost uses brew services" {
+  # Load Zsh functions to make startpost available
+  load_zsh_functions
+
   # Mock brew to test the command structure
   function brew() {
     echo "brew called with: $*"
@@ -47,6 +50,9 @@ teardown() {
 }
 
 @test "stoppost uses brew services" {
+  # Load Zsh functions to make stoppost available
+  load_zsh_functions
+
   # Mock brew to test the command structure
   function brew() {
     echo "brew called with: $*"
@@ -62,6 +68,9 @@ teardown() {
 }
 
 @test "statpost shows postgres processes" {
+  # Load Zsh functions to make statpost available
+  load_zsh_functions
+
   # Mock ps and rg to test the command structure
   function ps() {
     echo "postgres  1234  0.0  0.1  12345  6789 ??  S   12:00PM   0:01.23 postgres: server process"
@@ -80,7 +89,7 @@ teardown() {
 
 @test "PostgreSQL functions work in Zsh shell" {
   # Source the Zsh functions and test availability
-  source "$HOME/dotfiles/zsh/.config/zsh/functions.zsh"
+  source "${HOME}/dotfiles/zsh/.config/zsh/functions.zsh"
 
   run type startpost
   [ "${status}" -eq 0 ]
@@ -109,6 +118,9 @@ teardown() {
 }
 
 @test "PostgreSQL functions have consistent naming" {
+  # Load Zsh functions to make PostgreSQL functions available
+  load_zsh_functions
+
   # All three functions should exist
   run type startpost
   [ "${status}" -eq 0 ]
@@ -121,8 +133,11 @@ teardown() {
 }
 
 @test "PostgreSQL functions are properly scoped" {
+  # Load Zsh functions to make PostgreSQL functions available
+  load_zsh_functions
+
   # Functions should be available as functions, not aliases or commands
-  run bash -c "type -t startpost"
+  run type -t startpost
   assert_contains "${output}" "function"
   [ "${status}" -eq 0 ]
 }

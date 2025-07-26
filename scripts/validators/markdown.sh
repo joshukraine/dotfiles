@@ -74,6 +74,11 @@ check_prerequisites() {
     missing_tools+=("markdownlint-cli2")
   fi
 
+  # Check for prettier if fix mode is enabled
+  if [[ ${FIX_MODE} -eq 1 ]] && ! command -v prettier >/dev/null 2>&1; then
+    missing_tools+=("prettier")
+  fi
+
   if [[ ${#missing_tools[@]} -gt 0 ]]; then
     log_error "Missing required tools: ${missing_tools[*]}"
     log_error "Install with: brew install ${missing_tools[*]}"
@@ -127,26 +132,30 @@ validate_markdown_file() {
   local file="$1"
   local relative_file="${file#"${DOTFILES_ROOT}"/}"
 
-  # Run markdownlint-cli2 on the file
+  # In fix mode, run prettier first for formatting, then markdownlint for remaining issues
+  # This matches LazyVim's formatting chain: prettier → markdownlint-cli2
+  if [[ ${FIX_MODE} -eq 1 ]]; then
+    # Format with prettier using default settings (same as LazyVim)
+    if prettier --parser=markdown --write "${file}" >/dev/null 2>&1; then
+      log_success "Formatted with Prettier (defaults): ${relative_file}"
+      ((FILES_FIXED++))
+    fi
+
+    # Then run markdownlint to fix any remaining linting issues
+    local lint_output
+    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || true
+    if [[ -n "${lint_output}" ]] && echo "${lint_output}" | grep -q "Fixed"; then
+      log_success "Fixed linting issues in: ${relative_file}"
+    fi
+  fi
+
+  # Always run linting validation (even after fixes)
   local lint_output
   local lint_exit_code=0
-
-  if [[ ${FIX_MODE} -eq 1 ]]; then
-    # Run with --fix flag
-    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || lint_exit_code=$?
-  else
-    # Run validation only
-    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
-  fi
+  lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
 
   if [[ ${lint_exit_code} -eq 0 ]]; then
     log_success "Markdown valid: ${relative_file}"
-    if [[ ${FIX_MODE} -eq 1 && -n "${lint_output}" ]]; then
-      if echo "${lint_output}" | grep -q "Fixed"; then
-        log_success "Fixed issues in: ${relative_file}"
-        ((FILES_FIXED++))
-      fi
-    fi
     return 0
   else
     log_error "Markdown errors: ${relative_file}"

@@ -12,8 +12,14 @@ source "${SCRIPT_DIR}/generator-utils.sh"
 YAML_FILE="${SCRIPT_DIR}/abbreviations.yaml"
 OUTPUT_FILE="${SCRIPT_DIR}/../docs/abbreviations.md"
 
+# Check for required tools
 if ! command -v yq >/dev/null 2>&1; then
   echo "Error: yq is required but not installed. Install it with: brew install yq"
+  exit 1
+fi
+
+if ! command -v prettier >/dev/null 2>&1; then
+  echo "Error: prettier is required but not installed. Install it with: npm install -g prettier"
   exit 1
 fi
 
@@ -53,7 +59,7 @@ This document provides a comprehensive reference for all shell abbreviations ava
 Abbreviations expand automatically when you press space or enter. For example:
 
 - Type \`gst\` + space → expands to \`git status\`
-- Type \`ll\` + space → expands to \`eza -la\`
+- Type \`dcu\` + space → expands to \`docker compose up\`
 
 ## Managing Abbreviations
 
@@ -159,7 +165,7 @@ cat >>"${TEMP_FILE}" <<'EOF'
 ### Zsh-Only Features
 
 - `src` abbreviation for reloading configuration
-- Integration with Oh My Zsh plugins
+- Integration with Zap plugin manager
 
 ### Shared Features
 
@@ -181,7 +187,9 @@ cat >>"${TEMP_FILE}" <<'EOF'
 ```yaml
 # In shared/abbreviations.yaml
 git:
-  gnew: "git checkout -b"  # New branch shortcut
+  gnew:
+    command: "git checkout -b"
+    description: "Create and checkout new branch"
 ```
 
 ### Category Guidelines
@@ -208,11 +216,32 @@ EOF
 # Replace the placeholder with the evaluated date in the temporary file
 sed -i '' "s/\$(date)/$(date)/" "${TEMP_FILE}"
 
-# If original file exists, compare content (excluding the timestamp line)
+# Apply markdown formatting pipeline to temp file (matches LazyVim behavior from commit a53f0bd)
+echo "🎨 Applying markdown formatting pipeline..."
+
+# Format with prettier using default settings (same as LazyVim)
+if prettier --parser=markdown --write "${TEMP_FILE}" >/dev/null 2>&1; then
+  echo "✅ Formatted with Prettier (defaults): ${TEMP_FILE}"
+else
+  echo "⚠️  Warning: Prettier formatting failed, continuing without formatting"
+fi
+
+# Then run markdownlint to fix any remaining linting issues
+if command -v markdownlint-cli2 >/dev/null 2>&1; then
+  if markdownlint-cli2 --config ~/.markdownlint.yaml --fix "${TEMP_FILE}" >/dev/null 2>&1; then
+    echo "✅ Applied markdownlint fixes: ${TEMP_FILE}"
+  else
+    echo "⚠️  Warning: markdownlint fixes failed, but continuing"
+  fi
+else
+  echo "⚠️  Warning: markdownlint-cli2 not found, skipping linting step"
+fi
+
+# Now compare the formatted content (excluding timestamp) to see if we need to update
 if [[ -f "${OUTPUT_FILE}" ]]; then
   # Extract content without timestamp for comparison
-  grep -v "Last generated:" "${TEMP_FILE}" > "${TEMP_FILE}.new" 2>/dev/null || true
-  grep -v "Last generated:" "${OUTPUT_FILE}" > "${TEMP_FILE}.old" 2>/dev/null || true
+  grep -v "Last generated:" "${TEMP_FILE}" >"${TEMP_FILE}.new" 2>/dev/null || true
+  grep -v "Last generated:" "${OUTPUT_FILE}" >"${TEMP_FILE}.old" 2>/dev/null || true
 
   if cmp -s "${TEMP_FILE}.new" "${TEMP_FILE}.old" 2>/dev/null; then
     # Content is identical, keep original file to preserve timestamp

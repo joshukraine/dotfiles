@@ -4,13 +4,13 @@ Welcome to the comprehensive setup script documentation for the dotfiles reposit
 
 ## 📋 Quick Reference
 
-| Scenario | Guide | Description |
-|----------|-------|-------------|
-| **New Installation** | [Installation Guide](installation-guide.md) | Complete walkthrough for fresh macOS setup |
-| **Command Examples** | [Usage Examples](usage-examples.md) | All setup script options with practical examples |
-| **Issues & Fixes** | [Troubleshooting](troubleshooting.md) | Common problems and their solutions |
-| **Personal Setup** | [Customization](customization.md) | Local configuration and personal overrides |
-| **From Other Dotfiles** | [Migration Guide](migration.md) | Moving from other dotfiles repositories |
+| Scenario                | Guide                                       | Description                                      |
+| ----------------------- | ------------------------------------------- | ------------------------------------------------ |
+| **New Installation**    | [Installation Guide](installation-guide.md) | Complete walkthrough for fresh macOS setup       |
+| **Command Examples**    | [Usage Examples](usage-examples.md)         | All setup script options with practical examples |
+| **Issues & Fixes**      | [Troubleshooting](troubleshooting.md)       | Common problems and their solutions              |
+| **Personal Setup**      | [Customization](customization.md)           | Local configuration and personal overrides       |
+| **From Other Dotfiles** | [Migration Guide](migration.md)             | Moving from other dotfiles repositories          |
 
 ## 🚀 Quick Start
 

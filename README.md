@@ -66,14 +66,14 @@ Run the setup script.
 
 For detailed guidance on installation, customization, and troubleshooting:
 
-| Guide | Purpose |
-|-------|---------|
-| **[Setup Overview](docs/setup/README.md)** | Choose the right guide for your situation |
-| **[Installation Guide](docs/setup/installation-guide.md)** | Complete step-by-step setup walkthrough |
-| **[Usage Examples](docs/setup/usage-examples.md)** | Command examples and practical scenarios |
-| **[Troubleshooting](docs/setup/troubleshooting.md)** | Solutions for common setup issues |
-| **[Customization](docs/setup/customization.md)** | Personalizing your dotfiles setup |
-| **[Migration Guide](docs/setup/migration.md)** | Moving from other dotfiles or manual configs |
+| Guide                                                      | Purpose                                      |
+| ---------------------------------------------------------- | -------------------------------------------- |
+| **[Setup Overview](docs/setup/README.md)**                 | Choose the right guide for your situation    |
+| **[Installation Guide](docs/setup/installation-guide.md)** | Complete step-by-step setup walkthrough      |
+| **[Usage Examples](docs/setup/usage-examples.md)**         | Command examples and practical scenarios     |
+| **[Troubleshooting](docs/setup/troubleshooting.md)**       | Solutions for common setup issues            |
+| **[Customization](docs/setup/customization.md)**           | Personalizing your dotfiles setup            |
+| **[Migration Guide](docs/setup/migration.md)**             | Moving from other dotfiles or manual configs |
 
 ## ✅ Prerequisites
 

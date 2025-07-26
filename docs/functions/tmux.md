@@ -164,24 +164,24 @@ tsrc
 
 ## Function Comparison
 
-| Function | Purpose | Arguments | Creates Session | Inside Tmux Behavior |
-|----------|---------|-----------|-----------------|---------------------|
-| `tat` | Smart attach/create | Optional name | Yes | Switches to session |
-| `tna` | Simple attach/create | None | Yes | Attaches to session |
-| `ta` | Attach only | Required name | No | Attaches to session |
-| `tn` | Create only | Required name | Yes | Creates and attaches |
-| `tk` | Kill session | Required name | No | N/A |
-| `tka` | Kill all sessions | None | No | N/A |
-| `tsrc` | Reload config | None | No | Reloads configuration |
+| Function | Purpose              | Arguments     | Creates Session | Inside Tmux Behavior  |
+| -------- | -------------------- | ------------- | --------------- | --------------------- |
+| `tat`    | Smart attach/create  | Optional name | Yes             | Switches to session   |
+| `tna`    | Simple attach/create | None          | Yes             | Attaches to session   |
+| `ta`     | Attach only          | Required name | No              | Attaches to session   |
+| `tn`     | Create only          | Required name | Yes             | Creates and attaches  |
+| `tk`     | Kill session         | Required name | No              | N/A                   |
+| `tka`    | Kill all sessions    | None          | No              | N/A                   |
+| `tsrc`   | Reload config        | None          | No              | Reloads configuration |
 
 ## Related Abbreviations
 
 The following abbreviations complement tmux functions:
 
-| Abbreviation | Expansion | Description |
-|--------------|-----------|-------------|
-| `tl` | `tmux ls` | List sessions |
-| `tlw` | `tmux list-windows` | List windows |
+| Abbreviation | Expansion           | Description   |
+| ------------ | ------------------- | ------------- |
+| `tl`         | `tmux ls`           | List sessions |
+| `tlw`        | `tmux list-windows` | List windows  |
 
 See [abbreviations reference](../abbreviations.md) for complete list.
 
@@ -269,4 +269,4 @@ ta main-project
 
 ---
 
-*Tmux functions provide a complete session management workflow. For tmux configuration and advanced features, see the main tmux documentation.*
+_Tmux functions provide a complete session management workflow. For tmux configuration and advanced features, see the main tmux documentation._

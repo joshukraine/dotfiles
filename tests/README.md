@@ -387,11 +387,11 @@ run-tests --coverage    # Check test coverage
 
 **Relationship to Validation Framework:**
 
-| Tool | Purpose | Speed | Scope |
-|------|---------|-------|-------|
-| `lint-shell` | Shell script linting with shellcheck | ~30s | All shell scripts |
-| `run-tests` | Functional behavior testing | ~2min | Function behavior |
-| `scripts/validate-config.sh` | Configuration integrity | ~9s | Static analysis |
+| Tool                         | Purpose                              | Speed | Scope             |
+| ---------------------------- | ------------------------------------ | ----- | ----------------- |
+| `lint-shell`                 | Shell script linting with shellcheck | ~30s  | All shell scripts |
+| `run-tests`                  | Functional behavior testing          | ~2min | Function behavior |
+| `scripts/validate-config.sh` | Configuration integrity              | ~9s   | Static analysis   |
 
 ### Documentation
 

@@ -326,11 +326,11 @@ CI_MODE=1 ./scripts/validate-config.sh
 
 The validation framework complements the broader quality assurance ecosystem:
 
-| Tool | Purpose | Speed | Scope | When |
-|------|---------|-------|-------|------|
-| **Validation Framework** | Static analysis, config integrity | ~9s | Syntax, consistency | Pre-commit, every change |
-| **Test Suite** (`run-tests`) | Runtime behavior, functional testing | ~2min | Function behavior | CI after validation |
-| **Shell Linter** (`lint-shell`) | Comprehensive shell script analysis | ~30s | All shell scripts | Development, debugging |
+| Tool                            | Purpose                              | Speed | Scope               | When                     |
+| ------------------------------- | ------------------------------------ | ----- | ------------------- | ------------------------ |
+| **Validation Framework**        | Static analysis, config integrity    | ~9s   | Syntax, consistency | Pre-commit, every change |
+| **Test Suite** (`run-tests`)    | Runtime behavior, functional testing | ~2min | Function behavior   | CI after validation      |
+| **Shell Linter** (`lint-shell`) | Comprehensive shell script analysis  | ~30s  | All shell scripts   | Development, debugging   |
 
 **Integration Workflow:**
 

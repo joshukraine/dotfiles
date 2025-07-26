@@ -1,4 +1,5 @@
 #!/usr/bin/env bats
+bats_require_minimum_version 1.5.0
 
 # Tests for gll (detailed graph git log) utility
 
@@ -28,6 +29,9 @@ teardown() {
   git add file2.txt
   git commit -m "Add file2 with longer message to test formatting"
 
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   run gll
   assert_contains "${output}" "Add file2 with longer message"
   assert_contains "${output}" "Add file1"
@@ -40,6 +44,9 @@ teardown() {
 
 @test "gll shows relative dates" {
   setup_main_repo
+
+  # Load Zsh functions to make gll available
+  load_zsh_functions
 
   run gll
   # Check for relative date format like "(2 hours ago)"
@@ -55,6 +62,9 @@ teardown() {
   git add test.txt
   git commit -m "Test commit"
 
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   run gll
   # Should show abbreviated hash (7 chars by default)
   # We can't test exact hash but can check format
@@ -65,14 +75,21 @@ teardown() {
 @test "gll uses color codes in output" {
   setup_main_repo
 
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   # Force color output even in non-tty
-  run bash -c "export TERM=xterm-256color; gll"
+  export TERM=xterm-256color
+  run gll
   # The function uses color codes like %C(bold blue) for hashes
   [ "${status}" -eq 0 ]
 }
 
 @test "gll works in non-git directory" {
   setup_non_git_dir
+
+  # Load Zsh functions to make gll available
+  load_zsh_functions
 
   run gll
   assert_contains "${output}" "not a git repository"
@@ -82,6 +99,9 @@ teardown() {
 @test "gll shows branch decorations" {
   setup_main_repo
   create_feature_branch "feature/test"
+
+  # Load Zsh functions to make gll available
+  load_zsh_functions
 
   run gll
   # Should show HEAD -> feature/test decoration in yellow
@@ -100,14 +120,17 @@ teardown() {
     git commit -m "Commit ${i}"
   done
 
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   # Test limiting output with -3
   run gll -3
   assert_contains "${output}" "Commit 5"
   assert_contains "${output}" "Commit 4"
   assert_contains "${output}" "Commit 3"
   # Should NOT contain earlier commits
-  refute_contains "${output}" "Commit 2"
-  refute_contains "${output}" "Commit 1"
+  assert_not_contains "${output}" "Commit 2"
+  assert_not_contains "${output}" "Commit 1"
   [ "${status}" -eq 0 ]
 }
 
@@ -118,6 +141,9 @@ teardown() {
   echo "recent" >recent.txt
   git add recent.txt
   git commit -m "Recent commit"
+
+  # Load Zsh functions to make gll available
+  load_zsh_functions
 
   # Test with --since option (should work but may not find anything due to timing)
   run gll --since="1 hour ago"
@@ -132,6 +158,9 @@ teardown() {
   git add authored.txt
   git commit -m "Authored commit"
 
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   run gll --author="Test User"
   assert_contains "${output}" "Authored commit"
   assert_contains "${output}" "Test User"
@@ -139,6 +168,9 @@ teardown() {
 }
 
 @test "gll shows help message" {
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   run gll --help
   assert_contains "${output}" "Usage: gll"
   assert_contains "${output}" "Git log with detailed graph formatting"
@@ -149,6 +181,9 @@ teardown() {
 }
 
 @test "gll shows help with -h flag" {
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   run gll -h
   assert_contains "${output}" "Usage: gll"
   assert_contains "${output}" "Git log with detailed graph formatting"
@@ -171,6 +206,9 @@ teardown() {
 
   git merge feature/branch --no-ff -m "Merge feature branch"
 
+  # Load Zsh functions to make gll available
+  load_zsh_functions
+
   run gll
   assert_contains "${output}" "Merge feature branch"
   assert_contains "${output}" "Add feature"
@@ -188,6 +226,9 @@ teardown() {
   echo "format test" >format.txt
   git add format.txt
   git commit -m "Format test commit"
+
+  # Load Zsh functions to make gll available
+  load_zsh_functions
 
   run gll -1
   # The format should include:

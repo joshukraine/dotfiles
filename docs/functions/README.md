@@ -15,14 +15,14 @@ This dotfiles configuration provides **37 custom functions** across Fish and Zsh
 
 ### Most Frequently Used Functions
 
-| Function | Description | Category |
-|----------|-------------|----------|
-| `cdot` | Navigate to dotfiles directory | Navigation |
-| `cdxc` | Navigate to XDG config directory | Navigation |
-| `gcom` | Switch to default Git branch | Git |
-| `gpum` | Push current branch with upstream | Git |
-| `tat` | Attach/create tmux session for current dir | Tmux |
-| `src` | Reload shell configuration | System |
+| Function | Description                                | Category   |
+| -------- | ------------------------------------------ | ---------- |
+| `cdot`   | Navigate to dotfiles directory             | Navigation |
+| `cdxc`   | Navigate to XDG config directory           | Navigation |
+| `gcom`   | Switch to default Git branch               | Git        |
+| `gpum`   | Push current branch with upstream          | Git        |
+| `tat`    | Attach/create tmux session for current dir | Tmux       |
+| `src`    | Reload shell configuration                 | System     |
 
 ### Function Categories
 
@@ -71,13 +71,13 @@ All functions follow a standardized documentation format:
 
 ## Cross-Shell Compatibility
 
-| Function Type | Fish Support | Zsh Support | Implementation |
-|---------------|--------------|-------------|----------------|
-| Git Functions | ✅ | ✅ | Shared logic in both shells |
-| Tmux Functions | ✅ | ✅ | Shared scripts in `bin/` |
-| Navigation | ✅ | ✅ | Abbreviations in shared YAML |
-| Command Wrappers | ✅ | ✅ | Enhanced commands via Homebrew (Fish has convenience wrappers) |
-| System Utilities | ✅ | ✅ | Functions in both shells |
+| Function Type    | Fish Support | Zsh Support | Implementation                                                 |
+| ---------------- | ------------ | ----------- | -------------------------------------------------------------- |
+| Git Functions    | ✅           | ✅          | Shared logic in both shells                                    |
+| Tmux Functions   | ✅           | ✅          | Shared scripts in `bin/`                                       |
+| Navigation       | ✅           | ✅          | Abbreviations in shared YAML                                   |
+| Command Wrappers | ✅           | ✅          | Enhanced commands via Homebrew (Fish has convenience wrappers) |
+| System Utilities | ✅           | ✅          | Functions in both shells                                       |
 
 ## Detailed Documentation
 
@@ -177,4 +177,4 @@ sha256              # Shows usage when called without arguments
 
 ---
 
-*This documentation is part of the comprehensive dotfiles improvement plan. For issues or contributions, see the main repository.*
+_This documentation is part of the comprehensive dotfiles improvement plan. For issues or contributions, see the main repository._
