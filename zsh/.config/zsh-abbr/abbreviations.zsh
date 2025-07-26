@@ -11,6 +11,9 @@ abbr "df"="df -h"
 abbr "du"="du -h"
 abbr "dud"="du -d 1 -h"
 abbr "duf"="du -sh *"
+abbr "cat"="bat"
+abbr "cp"="gcp -iv"
+abbr "l"="ls -lhF --git"
 abbr "mkdir"="mkdir -pv"
 abbr "mv"="mv -iv"
 
@@ -323,7 +326,7 @@ abbr "yw"="yarn workspace"
 abbr "yws"="yarn workspaces"
 
 # postgresql
-abbr "psq"="psql -U postgres"
+abbr "psq"="pgcli -d postgres"
 
 # middleman
 abbr "mm"="bundle exec middleman"

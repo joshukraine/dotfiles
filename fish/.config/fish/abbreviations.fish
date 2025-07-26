@@ -11,6 +11,9 @@ abbr -a -g df 'df -h'
 abbr -a -g du 'du -h'
 abbr -a -g dud 'du -d 1 -h'
 abbr -a -g duf 'du -sh *'
+abbr -a -g cat 'bat'
+abbr -a -g cp 'gcp -iv'
+abbr -a -g l 'ls -lhF --git'
 abbr -a -g mkdir 'mkdir -pv'
 abbr -a -g mv 'mv -iv'
 
@@ -320,7 +323,7 @@ abbr -a -g yw 'yarn workspace'
 abbr -a -g yws 'yarn workspaces'
 
 # postgresql
-abbr -a -g psq 'psql -U postgres'
+abbr -a -g psq 'pgcli -d postgres'
 
 # middleman
 abbr -a -g mm 'bundle exec middleman'

@@ -22,6 +22,16 @@ unix:
   duf:
     command: "du -sh *"
     description: "Show file/folder sizes in current directory"
+  # Enhanced system commands
+  cat:
+    command: "bat"
+    description: "Enhanced cat with syntax highlighting using bat"
+  cp:
+    command: "gcp -iv"
+    description: "Enhanced copy with progress and interactive prompts"
+  l:
+    command: "ls -lhF --git"
+    description: "Long listing format with human-readable sizes and git status"
   mkdir:
     command: "mkdir -pv"
     description: "Create directories recursively with verbose output"
@@ -907,8 +917,8 @@ yarn:
 # PostgreSQL
 postgresql:
   psq:
-    command: "psql -U postgres"
-    description: "Connect to PostgreSQL as postgres user"
+    command: "pgcli -d postgres"
+    description: "Connect to PostgreSQL using pgcli with postgres database"
 
 # Middleman
 middleman:
