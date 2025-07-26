@@ -16,17 +16,26 @@ teardown() {
 }
 
 @test "startpost function exists and is callable" {
+  # Load Zsh functions to make startpost available
+  load_zsh_functions
+
   run startpost --help 2>/dev/null || run startpost -h 2>/dev/null || true
   # Function should exist (either help works or command fails appropriately)
   # We can't test actual PostgreSQL start without having it installed
 }
 
 @test "stoppost function exists and is callable" {
+  # Load Zsh functions to make stoppost available
+  load_zsh_functions
+
   run stoppost --help 2>/dev/null || run stoppost -h 2>/dev/null || true
   # Function should exist (either help works or command fails appropriately)
 }
 
 @test "statpost function exists and is callable" {
+  # Load Zsh functions to make statpost available
+  load_zsh_functions
+
   run statpost --help 2>/dev/null || run statpost -h 2>/dev/null || true
   # Function should exist (either help works or command fails appropriately)
 }
