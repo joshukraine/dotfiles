@@ -220,10 +220,11 @@ sed -i '' "s/\$(date)/$(date)/" "${TEMP_FILE}"
 echo "🎨 Applying markdown formatting pipeline..."
 
 # Format with prettier using default settings (same as LazyVim)
-if prettier --parser=markdown --write "${TEMP_FILE}" >/dev/null 2>&1; then
+if prettier_error=$(prettier --parser=markdown --write "${TEMP_FILE}" 2>&1); then
   echo "✅ Formatted with Prettier (defaults): ${TEMP_FILE}"
 else
   echo "⚠️  Warning: Prettier formatting failed, continuing without formatting"
+  echo "   Error: ${prettier_error}"
 fi
 
 # Then run markdownlint to fix any remaining linting issues
