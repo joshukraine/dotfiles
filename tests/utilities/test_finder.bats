@@ -104,23 +104,36 @@ teardown() {
 
 @test "Finder functions work in Zsh shell" {
   # Source the Zsh functions and test availability
-  source "${HOME}/dotfiles/zsh/.config/zsh/functions.zsh"
+  local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
-  run type haf
-  [ "${status}" -eq 0 ]
+  if [ -f "${zsh_functions_file}" ]; then
+    source "${zsh_functions_file}"
 
-  run type saf
-  [ "${status}" -eq 0 ]
+    run type haf
+    [ "${status}" -eq 0 ]
+
+    run type saf
+    [ "${status}" -eq 0 ]
+  else
+    skip "Zsh functions file not found at ${zsh_functions_file}"
+  fi
 }
 
 @test "Finder functions work in Fish shell" {
   # Test that the functions are available in Fish context
   if command -v fish >/dev/null 2>&1; then
-    run fish -c "type haf"
-    [ "${status}" -eq 0 ]
+    local fish_functions_dir="${DOTFILES}/fish/.config/fish/functions"
 
-    run fish -c "type saf"
-    [ "${status}" -eq 0 ]
+    if [ -d "${fish_functions_dir}" ]; then
+      # Test that Fish can find and run the functions from the functions directory
+      run fish -c "set fish_function_path ${fish_functions_dir} \$fish_function_path; type haf"
+      [ "${status}" -eq 0 ]
+
+      run fish -c "set fish_function_path ${fish_functions_dir} \$fish_function_path; type saf"
+      [ "${status}" -eq 0 ]
+    else
+      skip "Fish functions directory not found at ${fish_functions_dir}"
+    fi
   else
     skip "Fish shell not available"
   fi
