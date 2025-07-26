@@ -97,6 +97,7 @@ load_zsh_functions() {
   fi
 }
 
+
 # Execute Zsh function
 run_zsh_function() {
   local function_name="$1"

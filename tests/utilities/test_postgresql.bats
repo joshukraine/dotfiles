@@ -16,28 +16,48 @@ teardown() {
 }
 
 @test "startpost function exists and is callable" {
-  # Load Zsh functions to make startpost available
-  load_zsh_functions
+  # Test that the function is defined in the appropriate shell config
+  local fish_func="${DOTFILES}/fish/.config/fish/functions/startpost.fish"
+  local zsh_funcs="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
-  run startpost --help 2>/dev/null || run startpost -h 2>/dev/null || true
-  # Function should exist (either help works or command fails appropriately)
-  # We can't test actual PostgreSQL start without having it installed
+  # Function should exist in at least one shell configuration
+  if [ -f "${fish_func}" ]; then
+    assert_contains "$(cat "${fish_func}")" "function startpost"
+  elif [ -f "${zsh_funcs}" ] && grep -q "startpost" "${zsh_funcs}"; then
+    assert_contains "$(grep -A5 -B5 startpost "${zsh_funcs}")" "startpost"
+  else
+    fail "startpost function not found in Fish or Zsh configurations"
+  fi
 }
 
 @test "stoppost function exists and is callable" {
-  # Load Zsh functions to make stoppost available
-  load_zsh_functions
+  # Test that the function is defined in the appropriate shell config
+  local fish_func="${DOTFILES}/fish/.config/fish/functions/stoppost.fish"
+  local zsh_funcs="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
-  run stoppost --help 2>/dev/null || run stoppost -h 2>/dev/null || true
-  # Function should exist (either help works or command fails appropriately)
+  # Function should exist in at least one shell configuration
+  if [ -f "${fish_func}" ]; then
+    assert_contains "$(cat "${fish_func}")" "function stoppost"
+  elif [ -f "${zsh_funcs}" ] && grep -q "stoppost" "${zsh_funcs}"; then
+    assert_contains "$(grep -A5 -B5 stoppost "${zsh_funcs}")" "stoppost"
+  else
+    fail "stoppost function not found in Fish or Zsh configurations"
+  fi
 }
 
 @test "statpost function exists and is callable" {
-  # Load Zsh functions to make statpost available
-  load_zsh_functions
+  # Test that the function is defined in the appropriate shell config
+  local fish_func="${DOTFILES}/fish/.config/fish/functions/statpost.fish"
+  local zsh_funcs="${DOTFILES}/zsh/.config/zsh/functions.zsh"
 
-  run statpost --help 2>/dev/null || run statpost -h 2>/dev/null || true
-  # Function should exist (either help works or command fails appropriately)
+  # Function should exist in at least one shell configuration
+  if [ -f "${fish_func}" ]; then
+    assert_contains "$(cat "${fish_func}")" "function statpost"
+  elif [ -f "${zsh_funcs}" ] && grep -q "statpost" "${zsh_funcs}"; then
+    assert_contains "$(grep -A5 -B5 statpost "${zsh_funcs}")" "statpost"
+  else
+    fail "statpost function not found in Fish or Zsh configurations"
+  fi
 }
 
 @test "startpost uses brew services" {
