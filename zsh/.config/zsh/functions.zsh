@@ -514,7 +514,8 @@ Examples:
   fi
 
   # Execute git log with custom formatting
-  git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit "$@"
+  local git_log_format='%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)'
+  git log --graph --format=format:"${git_log_format}" --abbrev-commit "$@"
 }
 
 # Start PostgreSQL server using Homebrew services

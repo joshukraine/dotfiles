@@ -284,9 +284,10 @@ g push origin main
 
 | Function                          | Fish | Zsh | Implementation                 |
 | --------------------------------- | ---- | --- | ------------------------------ |
-| `cat`                             | ✅   | ❌  | Fish function only             |
+| `cat`                             | ❌   | ✅  | Zsh abbreviation only          |
 | `htop`                            | ✅   | ❌  | Fish function only             |
-| `l`, `ll`, `la`                   | ✅   | ❌  | Fish functions only            |
+| `l`                               | ❌   | ✅  | Zsh abbreviation only          |
+| `ll`, `la`                        | ✅   | ❌  | Fish functions only            |
 | `src`                             | ✅   | ✅  | Different implementations      |
 | `pi`                              | ✅   | ✅  | Different argument handling    |
 | `rlv`                             | ✅   | ✅  | Slightly different asdf syntax |
@@ -300,10 +301,15 @@ g push origin main
 
 ### Shell-Specific Notes
 
-**Fish-only functions** (`cat`, `htop`, `l`/`ll`/`la`):
+**Fish-only functions** (`htop`, `ll`/`la`):
 
 - Enhanced command wrappers with modern tools
 - Available when using Fish as primary shell
+
+**Zsh-only functions** (`cat`, `l`):
+
+- Command aliases via abbreviation system
+- Available when using Zsh as primary shell
 
 **Cross-shell functions** (`saf`/`haf`, `startpost`/`stoppost`/`statpost`):
 
@@ -389,12 +395,23 @@ g commit -m "update"
    ```bash
    # Switch to Fish shell or use alternatives
    fish
-   # Or use standard commands
-   /bin/cat file.txt    # Use system cat
-   sudo /usr/bin/htop   # Use system htop
+   # Or use standard commands for Fish-only functions
+   sudo /usr/bin/htop   # Use system htop (Fish function: sudo htop)
+   ls -lhF --git        # Manual ll command (Fish function)
+   ls -lahF --git       # Manual la command (Fish function)
    ```
 
-3. **Permission issues with system functions**
+3. **Zsh-only functions in Fish**
+
+   ```bash
+   # Switch to Zsh shell or use alternatives
+   zsh
+   # Or use manual commands for Zsh-only abbreviations
+   bat file.txt         # Manual cat command (Zsh abbreviation: cat=bat)
+   ls -lhF --git        # Manual l command (Zsh abbreviation)
+   ```
+
+4. **Permission issues with system functions**
 
    ```bash
    # htop automatically uses sudo
