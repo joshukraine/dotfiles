@@ -195,9 +195,6 @@ navigation:
 
 # Tree commands (requires eza)
 tree:
-  tree:
-    command: "ll --tree --level=2"
-    description: "Show directory tree (2 levels deep)"
   t2:
     command: "ll --tree --level=2"
     description: "Show directory tree (2 levels deep)"
@@ -342,9 +339,6 @@ git:
   gpl:
     command: "git pull"
     description: "Download and merge changes from remote"
-  gps:
-    command: "git push"
-    description: "Upload changes to remote"
   gpsf:
     command: "git push --force-with-lease"
     description: "Force push with safety checks"
@@ -387,9 +381,6 @@ git:
   grv:
     command: "git remote -v"
     description: "Show remote repositories with URLs"
-  gs:
-    command: "git status"
-    description: "Show working tree status"
   gsh:
     command: "git show"
     description: "Show various types of objects"
@@ -505,9 +496,6 @@ docker:
   deit:
     command: "docker exec -it"
     description: "Execute interactive terminal session"
-  dexec:
-    command: "docker exec"
-    description: "Execute command in container"
   dpu:
     command: "docker pull"
     description: "Download Docker image"
