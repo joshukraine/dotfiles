@@ -166,6 +166,26 @@ The repository maintains parallel configurations for both Zsh and Fish shells:
 - Each subdirectory represents a "package" that can be stowed independently
 - Script is idempotent and can be run multiple times safely
 
+#### Ignoring Directories from Stow
+
+Some directories contain repository infrastructure and should not be symlinked to `$HOME`. The `setup.sh` script loops through all directories and runs `stow package/` on each one individually.
+
+**To ignore a directory from stow operations:**
+
+1. Create a `.stow-local-ignore` file in the root of the directory
+2. Add the pattern `.+ # Ignore everything` to ignore all contents
+
+**Example directories using this pattern:**
+
+- `agents/` - Claude Code sub-agents documentation
+- `docs/` - Repository documentation
+- `scripts/` - Build and utility scripts
+- `tests/` - Test files and fixtures
+- `shared/` - Shared configuration generators
+- `scratchpads/` - Temporary development files
+
+**Important:** Do not add directory names to the root `.stow-local-ignore` file - this has no effect since stow runs on individual packages, not the entire repository.
+
 ### Neovim Configuration
 
 - Uses LazyVim distribution as base configuration
