@@ -85,6 +85,8 @@ mkdir: /Users/username/.config: Permission denied
 
 ## 🔗 Stow and Symlink Problems
 
+> 💡 **Agent Assistance**: For complex Stow and symlink issues, consider using the **[Config Manager Agent](../../agents/config-manager.md)** for specialized help with dotfiles structure and Stow package management.
+
 ### Stow Command Not Found
 
 **Problem**: `stow: command not found`
@@ -257,6 +259,8 @@ ls -la ~/.zshrc
    ```
 
 ## 🐚 Shell Configuration Problems
+
+> 💡 **Agent Assistance**: For abbreviation and shell configuration issues, the **[Abbreviation Manager Agent](../../agents/abbreviation-manager.md)** can help with YAML-based abbreviation system troubleshooting.
 
 ### New Terminal Doesn't Load Dotfiles Configuration
 
@@ -620,6 +624,19 @@ ls -la ~/.zshrc
    ```
 
 ## 🆘 Getting Additional Help
+
+### Specialized Agent Assistance
+
+For targeted help with specific aspects of the dotfiles, use the appropriate specialized agent:
+
+| Issue Type | Recommended Agent | What They Help With |
+|------------|-------------------|-------------------|
+| **Stow conflicts, package management** | **[🔧 Config Manager](../../agents/config-manager.md)** | Dotfiles structure, Stow operations, symlink troubleshooting |
+| **Abbreviations not working, shell setup** | **[⚡ Abbreviation Manager](../../agents/abbreviation-manager.md)** | YAML abbreviation system, Fish/Zsh sync issues |
+| **Test failures, validation errors** | **[✅ Test Validator](../../agents/test-validator.md)** | Running tests, linting, pre-commit hook setup |
+| **Documentation outdated or unclear** | **[📚 Documentation Helper](../../agents/docs-helper.md)** | Updating guides, fixing examples, troubleshooting docs |
+
+### General Troubleshooting Steps
 
 If your issue isn't covered here:
 
