@@ -12,7 +12,7 @@ Review GitHub pull requests with configurable depth and focus.
 ## Your task
 
 1. **Get PR details**:
-   - Use `gh pr view $ARGUMENTS --json number,title,body,headRepository,baseRepository`
+   - Use `gh pr view $ARGUMENTS --json number,title,body,headRepository,baseRefName`
    - Use `gh pr view $ARGUMENTS` to display PR overview
    - Extract PR context, linked issues, and purpose
 
