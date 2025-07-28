@@ -1,164 +1,185 @@
-Please review the GitHub pull request: $ARGUMENTS
+# Review Pull Request Command
 
-# Review Depth Options
+Review GitHub pull requests with configurable depth and focus.
 
-Optional flags for different review depths:
+## Command Options
 
-- `--quick`: Skip architecture and test coverage analysis for simple PRs
-- `--thorough`: Include all quality checks (default)
-- `--security`: Add security-focused review steps
+- `--quick`: Fast review focusing on blocking issues only
+- `--thorough`: Comprehensive review with architecture and test analysis
+- `--security`: Security-focused review for sensitive changes
+- `--auto-detect`: Automatically choose review depth based on PR characteristics
 
-# Automated Review Depth Detection
+## Your task
 
-First, analyze the PR to determine appropriate review depth:
+1. **Get PR details**:
+   - Use `gh pr view $ARGUMENTS --json number,title,body,headRepository,baseRepository`
+   - Use `gh pr view $ARGUMENTS` to display PR overview
+   - Extract PR context, linked issues, and purpose
 
-1. Fetch PR diff stats: `gh pr view $ARGUMENTS --json additions,deletions,changedFiles`
-2. Check changed files: `gh pr diff $ARGUMENTS --name-only`
-3. Determine review depth based on:
-   - **Quick Review** if:
-     - Total changes < 50 lines (additions + deletions)
-     - No architectural files changed (e.g., package.json, config files, schemas)
-     - No security-sensitive files (auth, crypto, permissions)
-   - **Security Review** if changes touch:
-     - Authentication/authorization files
-     - Cryptographic implementations
-     - Environment variable handling
-     - API endpoints with data access
-   - **Thorough Review** (default) for everything else
+2. **Choose review approach**:
+   - **Default (no flags)**: Standard review covering common issues
+   - **`--auto-detect`**: Analyze PR size and files to determine depth automatically
+   - **Explicit flags**: Use specified review type
 
-Follow these steps:
+3. **Create working notes**:
+   - Create scratchpad: `scratchpads/pr-reviews/pr-{number}-$(date +%Y%m%d-%H%M%S).md`
+   - Document PR purpose, scope, and initial observations
 
-# RESEARCH
-
-1. Use `gh pr view $ARGUMENTS --json number,title,body,headRepository,baseRepository` to get basic PR details
-2. Use `gh pr view $ARGUMENTS` to display the PR overview
-3. Understand the context of this PR
-   - Search scratchpads for previous thoughts related to this PR or related issues
-   - Check if this PR addresses a specific GitHub issue
-   - Review the PR description and linked issues for background
-4. Create a scratchpad file: `pr-review-{number}-{timestamp}.md`
-   - Include PR title, number, and link
-   - Document the PR's purpose and scope
-
-# COLLECT
-
-1. Gather all feedback and status information:
-   - Fetch PR-level comments: `gh api /repos/{owner}/{repo}/issues/{number}/comments`
+4. **Collect feedback and status**:
+   - Fetch existing comments: `gh api /repos/{owner}/{repo}/issues/{number}/comments`
    - Fetch code review comments: `gh api /repos/{owner}/{repo}/pulls/{number}/comments`
-   - Fetch review summaries: `gh api /repos/{owner}/{repo}/pulls/{number}/reviews`
    - Check CI/CD status: `gh pr checks $ARGUMENTS`
-   - Fetch status checks: `gh api /repos/{owner}/{repo}/commits/{sha}/status`
-   - Fetch check runs: `gh api /repos/{owner}/{repo}/commits/{sha}/check-runs`
+   - Filter for actionable feedback (skip resolved threads, appreciation comments)
 
-2. Analyze code quality and architecture (skip for --quick reviews):
-   - Review code changes for refactoring opportunities (large files, duplicate code, complex functions)
-   - Check for consistent coding patterns and style adherence
-   - Identify potential performance or maintainability issues
-   - Assess architectural decisions and suggest improvements
+5. **Analyze based on review type**:
 
-3. Assess test coverage and quality (skip for --quick reviews):
-   - Review existing test coverage for new/modified code
-   - Identify gaps in test coverage that should be addressed
-   - Check test quality and effectiveness
-   - Suggest additional test scenarios if needed
+   **Standard Review** (default):
+   - Focus on blocking issues from comments and failed checks
+   - Basic code quality and logic review
+   - Verify issue integration and PR metadata
 
-4. Security-focused analysis (only for --security reviews):
-   - Review authentication/authorization logic for vulnerabilities
+   **Quick Review** (`--quick`):
+   - Only blocking issues and critical failures
+   - Skip architecture and test coverage analysis
+
+   **Thorough Review** (`--thorough`):
+   - Include architecture and refactoring opportunities
+   - Assess test coverage and quality
+   - Comprehensive code quality analysis
+
+   **Security Review** (`--security`):
+   - Focus on authentication/authorization logic
    - Check for hardcoded secrets or credentials
    - Analyze input validation and sanitization
-   - Review API endpoint security and access controls
-   - Check for SQL injection, XSS, or other common vulnerabilities
-   - Verify proper error handling doesn't expose sensitive information
+   - Review API security and access controls
 
-5. Verify issue integration and PR metadata:
-   - Check what GitHub issues this PR addresses or closes
-   - Verify PR body contains proper "Closes #N" references for all related issues
-   - Review linked issues for integrated/dependent issues that should also be closed
-   - Assess if PR description accurately reflects the current scope of work
+6. **Plan and prioritize**:
+   - Break down issues into manageable tasks
+   - Prioritize by severity: critical bugs → security → quality improvements
+   - Note dependencies between issues
+   - Update scratchpad with detailed plan
 
-6. Filter and categorize all blocking issues:
-   - Skip outdated comments (where referenced code has changed)
-   - Skip resolved comments or threads marked as resolved
-   - Skip simple appreciation comments
-   - Focus on actionable feedback: code changes, bug reports, security concerns, performance issues
-   - Include all failed automated checks: tests, linting, security scans, build failures
-
-7. Document all identified issues in the scratchpad:
-   - Create a checklist format for tracking progress
-   - Think harder about the severity and impact of each issue
-   - Prioritize issues based on this analysis
-   - Group related issues together
-
-# PLAN
-
-Note: Adjust plan based on review depth:
-
-- **--quick**: Focus only on blocking issues from comments and CI/CD
-- **--thorough**: Include all quality improvements and refactoring
-- **--security**: Prioritize security issues above all else
-
-1. Break down the review work into small, manageable tasks
-2. Think harder about how to prioritize and sequence the issues for maximum efficiency
-3. For each blocking issue, determine:
-   - What specific action is needed
-   - Estimated complexity and time required
-   - Dependencies between issues
-   - Testing requirements after changes
-4. Prioritize quality improvements:
-   - Address critical refactoring opportunities that improve maintainability
-   - Plan test coverage improvements for new/modified functionality
-   - Ensure proper issue closing references are added to PR body
-   - Verify PR description accurately reflects final scope
-5. Update scratchpad with the detailed plan
-6. Present the plan and ask for confirmation before proceeding
-
-# EXECUTE
-
-1. Work through each issue systematically:
-   - Present the issue context and analysis
-   - Show file, line, diff hunk for comments; error details for failed checks
+7. **Execute systematically**:
+   - Work through each issue with context
    - Ask: "Would you like to address this issue? (y/n/skip)"
-   - If yes: Help implement the fix or change
-   - If no: Document the decision rationale
-   - Update scratchpad with action taken
+   - Implement fixes with appropriate testing
+   - Commit changes with descriptive messages
+   - Update scratchpad with progress
 
-2. After each change:
-   - Test the changes appropriately
-   - Use puppeteer via MCP for UI changes if applicable
-   - Run relevant test suites
-   - Commit changes with descriptive messages referencing the PR
-   - Reply to comments indicating what was done
-   - Update scratchpad with commit hash and completion status
+8. **Verify and finalize**:
+   - Run full test suite to ensure no regressions
+   - Verify all CI/CD checks pass
+   - Mark resolved issues complete in scratchpad
+   - Reply to comments with explanations
+   - Note final PR status and next steps
 
-# TEST
+## Auto-Detection Logic (--auto-detect only)
 
-- Run the full test suite to ensure nothing is broken
-- Verify all automated checks now pass
-- If any tests are failing, fix them before proceeding
-- Ensure all CI/CD checks are green
-- Test manually if automated coverage is insufficient
+Analyze PR characteristics to choose review depth:
 
-# FINALIZE
+```bash
+# Get PR stats
+gh pr view $ARGUMENTS --json additions,deletions,changedFiles
+gh pr diff $ARGUMENTS --name-only
+```
 
-- Mark all resolved issues as complete in scratchpad
-- Reply to any remaining comments with explanations for declined suggestions
+**Quick Review** if:
 
-- Verify quality improvements completed:
-  - Confirm critical refactoring opportunities have been addressed
-  - Validate test coverage is adequate for new/modified functionality
-  - Ensure all related GitHub issues have proper "Closes #N" references in PR body
-  - Verify PR description accurately reflects final scope and changes
-- Summarize the review session in the scratchpad
-- Note final PR status: ready to merge, needs more work, blocked by external factors
-- If PR is ready, suggest next steps (merge, request final review, etc.)
+- Total changes < 50 lines
+- No architectural files (package.json, configs, schemas)
+- No security-sensitive files
 
-Remember to use the GitHub CLI (`gh`) for all GitHub-related tasks.
+**Security Review** if changes touch:
 
-# Review Depth Usage
+- Authentication/authorization files
+- Cryptographic implementations
+- Environment variable handling
+- API endpoints with data access
 
-When invoking this command:
+**Thorough Review** for everything else
 
-- `/review-pr 123` - Uses automated detection to choose review depth
-- `/review-pr 123 --quick` - Quick review only
-- `/review-pr 123 --thorough` - Full review (default if auto-detection unclear)
-- `/review-pr 123 --security` - Security-focused review
+## Scratchpad Template
+
+```markdown
+# PR Review #$ARGUMENTS: [PR Title]
+
+**Link**: https://github.com/{owner}/{repo}/pull/$ARGUMENTS
+**Type**: [Quick/Standard/Thorough/Security] Review
+
+## PR Summary
+
+- Purpose: Brief description
+- Related issues: #123, #456
+- Key changes: Major modifications
+
+## Issues Found
+
+### Critical (Must Fix)
+
+- [ ] Issue 1 with context
+- [ ] Issue 2 with context
+
+### Quality Improvements (Optional)
+
+- [ ] Refactoring opportunity 1
+- [ ] Test coverage gap 2
+
+## Progress
+
+- [x] Initial analysis complete
+- [ ] Issue 1 addressed
+- [ ] Issue 2 addressed
+- [ ] Final verification
+
+## Notes
+
+- Implementation decisions
+- Review feedback given
+```
+
+## Review Focus by Type
+
+### Standard Review
+
+- Blocking issues from comments and CI failures
+- Basic logic and error handling
+- Issue linking and PR metadata
+- Essential test coverage
+
+### Quick Review
+
+- Only critical and blocking issues
+- Failed automated checks
+- Basic functionality verification
+
+### Thorough Review
+
+- All standard review items
+- Architecture and design patterns
+- Comprehensive test coverage analysis
+- Performance and maintainability
+- Refactoring opportunities
+
+### Security Review
+
+- Authentication/authorization vulnerabilities
+- Input validation and sanitization
+- Secret management and exposure
+- API security and access controls
+- Error handling that could leak information
+
+## Error Handling
+
+- **PR not found**: "PR #$ARGUMENTS not found or not accessible"
+- **Already merged**: "PR #$ARGUMENTS is already merged"
+- **No repository context**: "Run from within a git repository"
+- **API rate limits**: "GitHub API rate limit reached, wait and retry"
+
+## Integration with Global Standards
+
+Follow PR review best practices from global CLAUDE.md:
+
+- Focus on actionable feedback
+- Reference security principles
+- Maintain code quality standards
+- Ensure proper testing practices
