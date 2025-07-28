@@ -7,6 +7,7 @@
 theme = tokyonight_moon
 
 # Font settings
+# List available fonts: ghostty +list-fonts
 font-family = Cascadia Code
 font-size = 17
 adjust-cell-height = 6
