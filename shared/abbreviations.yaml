@@ -333,7 +333,7 @@ git:
   glg:
     command: "git lg"
     description: "Show graph log (custom alias)"
-  gp:
+  gps:
     command: "git push"
     description: "Upload changes to remote"
   gpl:
