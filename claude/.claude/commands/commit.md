@@ -22,33 +22,19 @@ Create a git commit with a meaningful message based on the current changes.
 6. **Handle staging and commits**:
    - If multiple commits are recommended: Help stage and commit changes separately, one logical group at a time
    - If single commit is appropriate: Stage remaining files (if none were already staged) and proceed
-7. **Generate commit message**: Based on the specific changes being committed, create a clear, concise commit message following the best practices below
+7. **Generate commit message**: Create a commit message following the Conventional Commits format from global CLAUDE.md
 8. **Create commit**: Execute the git commit with the generated message (including `--no-verify` flag if specified)
 9. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
 10. **Confirm**: Show the commit hash and ask if I want to push to remote (only after all commits are complete)
 
-## Best Practices for Commits
+## Commit Standards
 
-- **Verify before committing**: Ensure code is linted, builds correctly, and documentation is updated
-- **Atomic commits**: Each commit should contain related changes that serve a single purpose
-- **Split large changes**: If changes touch multiple concerns, split them into separate commits
-- **Conventional commit format**: Use the format `<type>: <description>` where type is one of:
-  - `feat`: A new feature
-  - `fix`: A bug fix
-  - `docs`: Documentation changes
-  - `style`: Code style changes (formatting, etc)
-  - `refactor`: Code changes that neither fix bugs nor add features
-  - `perf`: Performance improvements
-  - `test`: Adding or fixing tests
-  - `chore`: Changes to the build process, tools, etc.
-- **Subject line formatting**:
-  - Keep under 50 characters
-  - Use present tense, imperative mood (e.g., "add feature" not "added feature" or "fixes bug")
-  - Capitalize first letter of description
-  - No period at end of subject line
-- **Message structure**:
-  - Include body when change needs explanation
-  - Reference issues/PRs in footer when applicable (e.g., "Fixes #123", "Closes #456")
+Follow the Conventional Commits format and best practices defined in the global CLAUDE.md:
+
+- Use appropriate commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`)
+- Keep subject line under 50 characters
+- Use present tense, imperative mood
+- Reference issues/PRs in footer when applicable
 
 ## Guidelines for Splitting Commits
 

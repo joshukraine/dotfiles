@@ -1,130 +1,73 @@
 # Global CLAUDE.md
 
-This file provides project-agnostic guidance to Claude Code (claude.ai/code) across all repositories.
+This file provides project-agnostic principles and standards for Claude Code (claude.ai/code) across all repositories.
 
-## Git Commit Guidelines
+## Core Principles
 
-### Conventional Commits
-
-Always use [Conventional Commits](https://www.conventionalcommits.org/) format:
-
-```text
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-**Types:**
-
-- `feat` - New feature
-- `fix` - Bug fix
-- `docs` - Documentation changes
-- `style` - Code style changes (formatting, no logic changes)
-- `refactor` - Code refactoring (no feature changes or bug fixes)
-- `test` - Adding or updating tests
-- `chore` - Maintenance tasks, dependency updates
-- `perf` - Performance improvements
-- `ci` - CI/CD configuration changes
-- `build` - Build system or external dependencies changes
-- `revert` - Reverting previous commits
-
-**Examples:**
-
-```text
-feat(auth): add OAuth login support
-fix: resolve memory leak in user service
-docs: update API documentation
-chore: update dependencies to latest versions
-```
-
-### Commit Best Practices
-
-- Keep subject line under 50 characters
-- Use present tense: "add feature" not "added feature"
-- Use imperative mood: "fix bug" not "fixes bug"
-- Capitalize first letter of description
-- No period at end of subject line
-- Include body when change needs explanation
-- Reference issues/PRs in footer when applicable
-
-## Code Quality Standards
-
-### Security
+### Security First
 
 - Never commit secrets, API keys, or sensitive data
 - Use environment variables or secure vaults for secrets
 - Follow principle of least privilege
 - Validate all inputs and sanitize outputs
-- Keep dependencies updated and scan for vulnerabilities
+
+### Clean Code
+
+- Write self-documenting code with clear naming
+- Follow established patterns in the codebase
+- Prefer readability over cleverness
+- Remove dead code and unused imports
 
 ### Documentation
 
-- Write clear, concise comments for complex logic
-- Update README files when adding features
-- Document API changes and breaking changes
-- Include examples in documentation
+- Update documentation when changing functionality
+- Include examples for complex features
+- Document breaking changes clearly
 
-### Testing
+## Standards & Conventions
 
-- Write tests for new features and bug fixes
-- Maintain good test coverage
-- Use descriptive test names that explain the behavior
-- Follow AAA pattern: Arrange, Act, Assert
+### Git Workflow
 
-## Development Workflow
+- **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) format
+  - Use the `/commit` command for guided commit workflow
+- **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
+- **Pull Requests**: Clear titles, reference issues, atomic changes
+  - Use the `/create-pr` command for creating PRs (coming soon)
+  - Use the `/review-pr` command for reviewing PRs
 
-### Branch Naming
+### Code Quality
 
-Use descriptive branch names:
+- **Testing**: Write tests for new features and bug fixes
+- **Error Handling**: Fail fast, provide context, use specific exceptions
+- **Dependencies**: Pin versions, use lock files, document requirements
+  - Use the `/update-deps` command for updates (coming soon)
 
-- `feat/feature-name` - New features
-- `fix/bug-description` - Bug fixes
-- `docs/update-readme` - Documentation updates
-- `chore/dependency-update` - Maintenance tasks
+## Available Commands
 
-### Pull Requests
+### Git & GitHub
 
-- Write clear PR titles using Conventional Commits format
-- Include description of changes and why they're needed
-- Reference related issues
-- Ensure CI passes before requesting review
-- Keep PRs focused and atomic when possible
+- `/commit` - Create well-formatted commits
+- `/fix-github-issue` - Fix GitHub issues systematically
+- `/review-pr` - Review pull requests thoroughly
+- `/create-pr` - Create pull requests (coming soon)
 
-## Code Style
+### Project Management
 
-### General Principles
+- `/setup-scratchpads` - Initialize temporary workspace
+- `/init-project` - Set up new projects (coming soon)
+- `/update-deps` - Update dependencies safely (coming soon)
 
-- Write self-documenting code with clear variable and function names
-- Follow established patterns and conventions in the codebase
-- Prefer readability over cleverness
-- Remove dead code and unused imports
-- Use consistent formatting (leverage auto-formatters when available)
+### Development Tools
 
-### Error Handling
+- `/debug-tests` - Debug failing tests (coming soon)
 
-- Handle errors gracefully with appropriate error messages
-- Use specific exception types rather than generic ones
-- Log errors with sufficient context for debugging
-- Fail fast when encountering unrecoverable errors
+## Default Behaviors
 
-## Project Setup
+- Use consistent formatting (leverage auto-formatters)
+- Follow AAA pattern for tests: Arrange, Act, Assert
+- Keep PRs focused and reviewable
+- Maintain backward compatibility when possible
 
-### Dependencies
+---
 
-- Pin dependency versions in production
-- Regularly update dependencies and test for breaking changes
-- Use lock files to ensure consistent environments
-- Document system requirements and installation steps
-
-### Configuration
-
-- Use configuration files for environment-specific settings
-- Provide sensible defaults
-- Document all configuration options
-- Separate configuration from code
-
-## Scratchpad Management
-
-Use `/setup-scratchpads` in any project to create standardized organization for temporary files, notes, and debugging materials. This sets up git-ignored directories with consistent structure across all projects.
+For detailed implementation guidance, use the appropriate slash command.
