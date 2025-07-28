@@ -54,7 +54,7 @@ Analyze and fix GitHub issues systematically with optional complexity modes.
 For simple bug fixes and minor changes:
 
 ```bash
-/fix-github-issue 123 --quick
+/fix-gh-issue 123 --quick
 ```
 
 1. Get issue details
@@ -68,7 +68,7 @@ For simple bug fixes and minor changes:
 For complex issues requiring research:
 
 ```bash
-/fix-github-issue 123
+/fix-gh-issue 123
 ```
 
 1. Full research phase
@@ -133,6 +133,6 @@ Follow global CLAUDE.md standards:
 ## Integration with Other Commands
 
 - Uses `/create-pr` for PR creation
-- References `/setup-scratchpads` for workspace organization
+- References `/setup-scratch` for workspace organization
 - Follows commit standards from global CLAUDE.md
 - Integrates with `/review-pr` for PR review workflow

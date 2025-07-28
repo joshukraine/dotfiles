@@ -47,13 +47,13 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 ### Git & GitHub
 
 - `/commit` - Create well-formatted commits
-- `/fix-github-issue` - Fix GitHub issues systematically
+- `/fix-gh-issue` - Fix GitHub issues systematically
 - `/review-pr` - Review pull requests thoroughly
 - `/create-pr` - Create pull requests with smart titles
 
 ### Project Management
 
-- `/setup-scratchpads` - Initialize temporary workspace
+- `/setup-scratch` - Initialize temporary workspace
 - `/init-project` - Set up new projects with standards
 - `/update-deps` - Update dependencies safely
 

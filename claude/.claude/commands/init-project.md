@@ -22,7 +22,7 @@ Set up new projects with consistent standards and tooling.
    - Make initial commit: "chore: initialize project"
 
 3. **Set up scratchpads** (unless `--no-scratchpads`):
-   - Use `/setup-scratchpads` command
+   - Use `/setup-scratch` command
    - Ensure scratchpads/ added to .gitignore
 
 4. **Create README.md**:
@@ -210,6 +210,6 @@ Next steps:
 3. Run initial tests: <test command>
 4. Set up CI/CD if using GitHub
 
-Use '/setup-scratchpads' if you need temporary workspace.
+Use '/setup-scratch' if you need temporary workspace.
 Use '/commit' to make your first meaningful commit.
 ```

@@ -28,13 +28,13 @@ Display available Claude Code commands and their usage.
 
 - `/commit` (`/c`) - Create well-formatted commits with guided workflow
 - `/create-pr` (`/pr`) - Create pull requests with smart titles and issue linking
-- `/fix-github-issue` (`/fix`) - Fix GitHub issues systematically
+- `/fix-gh-issue` (`/fix`) - Fix GitHub issues systematically
 - `/review-pr` - Review pull requests with configurable depth
 
 ### Project Management
 
-- `/setup-scratchpads` - Initialize temporary workspace for notes and debugging
-- `/init-project` (`/init`) - Set up new projects with standards (coming soon)
+- `/setup-scratch` - Initialize temporary workspace for notes and debugging
+- `/init-project` (`/init`) - Set up new projects with standards
 - `/update-deps` (`/deps`) - Update dependencies safely across package managers
 
 ### Development Tools
@@ -52,12 +52,13 @@ Claude Code Commands
 Git & GitHub:
   /commit (/c)         - Create well-formatted commits
   /create-pr (/pr)     - Create pull requests with smart titles
-  /fix-github-issue    - Fix GitHub issues systematically
+  /fix-gh-issue (/fix) - Fix GitHub issues systematically
   /review-pr           - Review pull requests thoroughly
 
 Project Management:
-  /setup-scratchpads   - Initialize temporary workspace
-  /update-deps         - Update dependencies safely
+  /setup-scratch       - Initialize temporary workspace
+  /init-project (/init) - Set up new projects with standards
+  /update-deps (/deps) - Update dependencies safely
 
 Use '/help <command>' for detailed information about a specific command.
 ```
@@ -97,7 +98,7 @@ Git & GitHub Commands
   Create pull requests with smart titles and issue linking
   Options: --draft, --no-issue-link
 
-/fix-github-issue
+/fix-gh-issue (/fix)
   Fix GitHub issues systematically with optional complexity modes
   Options: --quick, --no-scratchpad, --draft-pr
 
@@ -127,7 +128,7 @@ When showing specific command help, read the command's markdown file and extract
 - Reference global CLAUDE.md for overarching principles
 - Note command aliases where available
 - Indicate which commands are coming soon
-- Link related commands (e.g., fix-github-issue uses create-pr)
+- Link related commands (e.g., fix-gh-issue uses create-pr)
 
 ## Future Enhancement
 
