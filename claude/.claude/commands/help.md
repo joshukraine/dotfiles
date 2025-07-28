@@ -34,7 +34,7 @@ Display available Claude Code commands and their usage.
 ### Project Management
 
 - `/setup-scratch` - Initialize temporary workspace for notes and debugging
-- `/init-project` (`/init`) - Set up new projects with standards
+- `/new-project` (`/new`) - Comprehensive project setup (use after Claude Code's `/init`)
 - `/update-deps` (`/deps`) - Update dependencies safely across package managers
 
 ### Development Tools
@@ -57,7 +57,7 @@ Git & GitHub:
 
 Project Management:
   /setup-scratch       - Initialize temporary workspace
-  /init-project (/init) - Set up new projects with standards
+  /new-project (/new)  - Comprehensive project setup (use after /init)
   /update-deps (/deps) - Update dependencies safely
 
 Use '/help <command>' for detailed information about a specific command.

@@ -54,7 +54,7 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 ### Project Management
 
 - `/setup-scratch` - Initialize temporary workspace
-- `/init-project` - Set up new projects with standards
+- `/new-project` - Comprehensive project setup (use after Claude Code's `/init`)
 - `/update-deps` - Update dependencies safely
 
 ### Development Tools

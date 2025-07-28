@@ -1,6 +1,15 @@
-# Initialize Project Command
+# New Project Command
 
-Set up new projects with consistent standards and tooling.
+Set up new projects with comprehensive tooling and standards.
+
+## Prerequisites
+
+This command is designed to work **in conjunction** with Claude Code's native `/init` command:
+
+1. **First**: Run Claude Code's `/init` to create CLAUDE.md with project context
+2. **Then**: Run `/new-project` for comprehensive project setup
+
+> **Note**: While not strictly required, having a CLAUDE.md file helps this command provide better project-specific setup.
 
 ## Command Options
 
@@ -11,21 +20,26 @@ Set up new projects with consistent standards and tooling.
 
 ## Your task
 
-1. **Detect or ask for project type**:
+1. **Check prerequisites**:
+   - Look for existing CLAUDE.md file
+   - If missing, suggest running Claude Code's `/init` first (but continue anyway)
+   - Inform user about the complementary workflow
+
+2. **Detect or ask for project type**:
    - Check for existing indicators (package.json, Gemfile, etc.)
    - If new project, ask for type or use `--type` flag
    - Default to generic setup if type unclear
 
-2. **Initialize git repository** (unless `--no-git`):
+3. **Initialize git repository** (unless `--no-git`):
    - Run `git init` if not already initialized
    - Create appropriate `.gitignore` for project type
    - Make initial commit: "chore: initialize project"
 
-3. **Set up scratchpads** (unless `--no-scratchpads`):
+4. **Set up scratchpads** (unless `--no-scratchpads`):
    - Use `/setup-scratch` command
    - Ensure scratchpads/ added to .gitignore
 
-4. **Create README.md**:
+5. **Create README.md**:
    - Project name as title
    - Description placeholder
    - Installation section
@@ -33,7 +47,7 @@ Set up new projects with consistent standards and tooling.
    - Contributing section
    - License section
 
-5. **Set up project-specific files**:
+6. **Set up project-specific files**:
 
    **Node.js projects**:
    - Initialize package.json: `npm init -y`
@@ -61,18 +75,18 @@ Set up new projects with consistent standards and tooling.
    - Run `cargo init` if Cargo not detected
    - Set up workspace if needed
 
-6. **Configure development tools** (unless `--minimal`):
+7. **Configure development tools** (unless `--minimal`):
    - Add appropriate linter config (.eslintrc, .rubocop.yml, etc.)
    - Set up formatter config (.prettierrc, .rustfmt.toml, etc.)
    - Add editor config (.editorconfig)
    - Configure pre-commit hooks if requested
 
-7. **Create GitHub Actions workflow** (if .git exists):
+8. **Create GitHub Actions workflow** (if .git exists):
    - Basic CI workflow for the project type
    - Test runner configuration
    - Linting checks
 
-8. **Final steps**:
+9. **Final steps**:
    - Display summary of created files
    - Suggest next steps based on project type
    - Remind about updating README.md
@@ -179,6 +193,7 @@ Check for these files to auto-detect project type:
 
 ## Error Handling
 
+- **No CLAUDE.md found**: "No CLAUDE.md found. Consider running Claude Code's `/init` command first for better project context. Continue anyway? (y/n)"
 - **Directory not empty**: "Directory contains files. Continue anyway? (y/n)"
 - **Git already initialized**: "Git repository already exists, skipping init"
 - **Unknown project type**: "Unknown project type. Using generic setup."
@@ -196,7 +211,7 @@ Check for these files to auto-detect project type:
 After initialization, display:
 
 ```text
-Project initialized successfully!
+Project setup completed successfully!
 
 Created files:
 - README.md
@@ -204,11 +219,12 @@ Created files:
 - .editorconfig
 - [project-specific files]
 
-Next steps:
-1. Update README.md with project details
-2. Configure your development environment
-3. Run initial tests: <test command>
-4. Set up CI/CD if using GitHub
+Recommended workflow:
+1. Run Claude Code's `/init` first (if not already done) for project context
+2. Update README.md with project details
+3. Configure your development environment
+4. Run initial tests: <test command>
+5. Set up CI/CD if using GitHub
 
 Use '/setup-scratch' if you need temporary workspace.
 Use '/commit' to make your first meaningful commit.
