@@ -19,7 +19,7 @@ if ! command -v yq >/dev/null 2>&1; then
 fi
 
 if ! command -v prettier >/dev/null 2>&1; then
-  echo "Error: prettier is required but not installed. Install it with: npm install -g prettier"
+  echo "Error: prettier is required but not installed. Install it with: brew install prettier"
   exit 1
 fi
 
