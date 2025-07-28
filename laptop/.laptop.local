@@ -18,7 +18,6 @@ brew "eza"
 brew "fd"
 brew "fish"
 brew "fzf"
-brew "gh"
 brew "lazygit"
 brew "neovim"
 brew "python"
@@ -33,6 +32,8 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "yamllint"
+brew "yq"
+brew "zoxide"
 brew "zsh-abbr"
 
 cask "font-cascadia-code-nf"
@@ -48,8 +49,15 @@ add_or_update_asdf_plugin "lua" "https://github.com/Stratus3D/asdf-lua.git"
 install_asdf_language "lua"
 
 fancy_echo "Installing basic gems..."
+gem install amazing_print
 gem install bundler
+gem install foreman
+gem install irb-theme-tokyonight
 gem install neovim
+gem install overcommit
+gem install rubocop
+gem install ruby-lsp
+gem install standard
 gem install tmuxinator
 
 fancy_echo "Installing basic npm packages..."
