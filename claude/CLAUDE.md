@@ -32,7 +32,7 @@ This file provides project-agnostic principles and standards for Claude Code (cl
   - Use the `/commit` command for guided commit workflow
 - **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
 - **Pull Requests**: Clear titles, reference issues, atomic changes
-  - Use the `/create-pr` command for creating PRs (coming soon)
+  - Use the `/create-pr` command for creating PRs
   - Use the `/review-pr` command for reviewing PRs
 
 ### Code Quality
@@ -40,7 +40,7 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 - **Testing**: Write tests for new features and bug fixes
 - **Error Handling**: Fail fast, provide context, use specific exceptions
 - **Dependencies**: Pin versions, use lock files, document requirements
-  - Use the `/update-deps` command for updates (coming soon)
+  - Use the `/update-deps` command for updates
 
 ## Available Commands
 
@@ -49,16 +49,17 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 - `/commit` - Create well-formatted commits
 - `/fix-github-issue` - Fix GitHub issues systematically
 - `/review-pr` - Review pull requests thoroughly
-- `/create-pr` - Create pull requests (coming soon)
+- `/create-pr` - Create pull requests with smart titles
 
 ### Project Management
 
 - `/setup-scratchpads` - Initialize temporary workspace
-- `/init-project` - Set up new projects (coming soon)
-- `/update-deps` - Update dependencies safely (coming soon)
+- `/init-project` - Set up new projects with standards
+- `/update-deps` - Update dependencies safely
 
 ### Development Tools
 
+- `/help` - Show available commands and usage
 - `/debug-tests` - Debug failing tests (coming soon)
 
 ## Default Behaviors
