@@ -68,12 +68,14 @@ Abbreviations expand automatically when you press space or enter. For example:
 To update abbreviations after modifying \`shared/abbreviations.yaml\`:
 
 \`\`\`bash
-# Regenerate all abbreviation files and documentation
-~/dotfiles/shared/generate-all-abbr.sh
-
-# Or use the function (available in both shells)
 reload-abbr
 \`\`\`
+
+The \`reload-abbr\` function provides:
+- Comprehensive error checking and validation
+- Regenerates both abbreviations and function documentation
+- Built-in help with \`reload-abbr --help\`
+- User-friendly output and guidance
 
 ### Shell Differences
 
