@@ -26,16 +26,16 @@ Display available Claude Code commands and their usage.
 
 ### Git & GitHub Workflows
 
-- `/commit` (`/c`) - Create well-formatted commits with guided workflow
-- `/create-pr` (`/pr`) - Create pull requests with smart titles and issue linking
-- `/fix-gh-issue` (`/fix`) - Fix GitHub issues systematically
+- `/commit` - Create well-formatted commits with guided workflow
+- `/create-pr` - Create pull requests with smart titles and issue linking
+- `/fix-gh-issue` - Fix GitHub issues systematically
 - `/review-pr` - Review pull requests with configurable depth
 
 ### Project Management
 
 - `/setup-scratch` - Initialize temporary workspace for notes and debugging
-- `/new-project` (`/new`) - Comprehensive project setup (use after Claude Code's `/init`)
-- `/update-deps` (`/deps`) - Update dependencies safely across package managers
+- `/new-project` - Comprehensive project setup (use after Claude Code's `/init`)
+- `/update-deps` - Update dependencies safely across package managers
 
 ### Development Tools
 
@@ -50,15 +50,15 @@ Display available Claude Code commands and their usage.
 Claude Code Commands
 
 Git & GitHub:
-  /commit (/c)         - Create well-formatted commits
-  /create-pr (/pr)     - Create pull requests with smart titles
-  /fix-gh-issue (/fix) - Fix GitHub issues systematically
+  /commit              - Create well-formatted commits
+  /create-pr           - Create pull requests with smart titles
+  /fix-gh-issue        - Fix GitHub issues systematically
   /review-pr           - Review pull requests thoroughly
 
 Project Management:
   /setup-scratch       - Initialize temporary workspace
-  /new-project (/new)  - Comprehensive project setup (use after /init)
-  /update-deps (/deps) - Update dependencies safely
+  /new-project         - Comprehensive project setup (use after /init)
+  /update-deps         - Update dependencies safely
 
 Use '/help <command>' for detailed information about a specific command.
 ```
@@ -80,7 +80,6 @@ Examples:
   /commit                 - Standard commit workflow
   /commit --no-verify     - Skip pre-commit hooks
 
-Aliases: /c
 
 See global CLAUDE.md for commit standards and best practices.
 ```
@@ -90,15 +89,15 @@ See global CLAUDE.md for commit standards and best practices.
 ```text
 Git & GitHub Commands
 
-/commit (/c)
+/commit
   Create well-formatted commits with guided workflow
   Options: --no-verify
 
-/create-pr (/pr)
+/create-pr
   Create pull requests with smart titles and issue linking
   Options: --draft, --no-issue-link
 
-/fix-gh-issue (/fix)
+/fix-gh-issue
   Fix GitHub issues systematically with optional complexity modes
   Options: --quick, --no-scratchpad, --draft-pr
 
