@@ -32,10 +32,14 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
    - Break down into small, manageable tasks
    - Identify files that need changes
    - Consider edge cases and testing requirements
-   - Create scratchpad documentation: `scratchpads/debugging/issue-$ARGUMENTS-$(date +%Y%m%d).md`
+   - **Create scratchpad documentation** in appropriate subfolder:
+     - `scratchpads/debugging/` for bugs, fixes, errors
+     - `scratchpads/planning/` for features, enhancements, new functionality
+     - `scratchpads/notes/` for documentation, research, general issues
+   - Filename: `issue-$ARGUMENTS-$(date +%Y%m%d-%H%M%S).md`
 
 4. **Create branch and implement**:
-   - Create feature branch: `git checkout -b fix/issue-$ARGUMENTS` or `git checkout -b feat/issue-$ARGUMENTS`
+   - Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
    - Implement changes in small, logical commits
    - Follow commit standards from global CLAUDE.md
    - Test changes after each commit
@@ -48,8 +52,9 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 
 6. **Create pull request**:
    - Use `/create-pr` command for comprehensive PR creation
-   - Link to original issue: "Fixes #$ARGUMENTS"
+   - **CRITICAL**: Ensure PR description includes "Closes #$ARGUMENTS" to link the issue
    - Add `--draft` flag if `--draft-pr` specified
+   - **Verify**: Confirm the PR description contains the issue reference before completing
    - Request appropriate reviewers
 
 ## Workflow Examples
@@ -115,9 +120,9 @@ When scratchpad is created, use this structure:
 
 Follow global CLAUDE.md standards:
 
-- `fix/issue-123-short-description` for bug fixes
-- `feat/issue-123-short-description` for new features
-- `docs/issue-123-short-description` for documentation
+- `fix/gh-123-short-description` for bug fixes
+- `feat/gh-123-short-description` for new features
+- `docs/gh-123-short-description` for documentation
 
 ## Error Handling
 

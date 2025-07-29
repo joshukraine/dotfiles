@@ -32,12 +32,17 @@ Create a pull request from the current branch with proper formatting and issue l
    - **Notes section**: Any implementation details or decisions
 
 5. **Identify and link related issues**:
+   - **PRIORITY**: Extract issue number from branch name patterns:
+     - `fix/gh-123` or `feat/gh-123` → Issue #123 (preferred format)
+     - `fix/issue-123` or `feat/issue-123` → Issue #123 (legacy format)
+     - `docs/gh-456` → Issue #456
    - Scan commit messages for issue references (#123, fixes #456)
-   - Look for branch name patterns (fix/issue-123, feat/gh-456)
    - Search recent issues for related keywords from commits
-   - Use "Closes #123" for issues this PR fully resolves
-   - Use "Related to #123" for partial fixes or enhancements
-   - Use "Addresses #123" for issues that need more work after this PR
+   - **CRITICAL**: Include issue reference in PR description:
+     - Use "Closes #123" for issues this PR fully resolves
+     - Use "Related to #123" for partial fixes or enhancements
+     - Use "Addresses #123" for issues that need more work after this PR
+   - **VALIDATE**: Confirm issue reference is added to description
    - **If `--skip-issue-link` provided**: Skip automatic issue detection and linking
 
 6. **Create the PR**:
@@ -48,7 +53,8 @@ Create a pull request from the current branch with proper formatting and issue l
 7. **Confirm and display**:
    - Show PR URL
    - Display title and description used
-   - List any issues that were linked
+   - **IMPORTANT**: Explicitly confirm which issues were linked (e.g., "✅ Linked to issue #123")
+   - If no issues were detected, clearly state "⚠️ No issues were linked to this PR"
 
 ## PR Description Template
 
@@ -88,13 +94,18 @@ Create a pull request from the current branch with proper formatting and issue l
 - Any implementation decisions
 - Breaking changes (if any)
 - Dependencies or follow-up work needed
+
+## Related Issues
+
+Closes #123
 ```
 
 ## Example Workflow
 
 ```bash
-# Current branch: feat/user-authentication
+# Current branch: feat/gh-123-user-authentication
 # Commits ahead: 3 commits about login, session management, tests
+# → Detected issue #123 from branch name
 
 Title: "feat: add user authentication system"
 
