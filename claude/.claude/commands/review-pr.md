@@ -36,7 +36,7 @@ Review GitHub pull requests with configurable depth and focus.
    **Standard Review** (default):
    - Focus on blocking issues from comments and failed checks
    - Basic code quality and logic review
-   - **Verify issue reference**: Check PR description contains proper issue link (use "Closes #123" as standard)
+   - **Verify issue reference**: Refer to the [CLAUDE.md](../../CLAUDE.md) file for the standard format and guidelines.
    - Verify other PR metadata (title format, description completeness)
 
    **Quick Review** (`--quick`):

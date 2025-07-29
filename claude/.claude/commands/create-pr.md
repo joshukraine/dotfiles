@@ -41,9 +41,9 @@ Create a pull request from the current branch with proper formatting and issue l
    - **PRIORITY 3**: Scan commit messages for issue references (#123, Closes #456)
    - **PRIORITY 4**: Search recent issues for related keywords from commits
    - **CRITICAL**: Include issue reference in PR description:
-     - **ALWAYS use "Closes #123"** for issues this PR fully resolves (preferred standard)
-     - Use "Related to #123" for partial fixes or enhancements
-     - Use "Addresses #123" for issues that need more work after this PR
+     - Use "Closes #123" for issues this PR fully resolves (preferred standard).
+     - Use "Related to #123" for partial fixes or enhancements that do not fully resolve the issue.
+     - Use "Addresses #123" for issues that require additional work beyond this PR to be fully resolved.
    - **MANDATORY VALIDATION**: Before creating PR, confirm issue reference will be included
    - **If `--skip-issue-link` provided**: Skip automatic issue detection and linking
 

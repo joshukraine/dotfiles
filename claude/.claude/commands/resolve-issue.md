@@ -121,8 +121,8 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
    - **Final verification**: `git log --oneline` should show appropriate commit count for scope
 
 6. **Create pull request**:
-   - Use `/create-pr --issue $ARGUMENTS` command for comprehensive PR creation
-   - **CRITICAL**: The --issue flag ensures automatic "Closes #$ARGUMENTS" linking IN THE PR DESCRIPTION ONLY
+   - Use `/create-pr --issue ISSUE_NUMBER` command for comprehensive PR creation
+   - **CRITICAL**: The --issue flag ensures automatic "Closes #ISSUE_NUMBER" linking IN THE PR DESCRIPTION ONLY
    - Add `--draft` flag if `--draft-pr` specified
    - **Verify**: Confirm the PR description contains the issue reference before completing
    - Request appropriate reviewers

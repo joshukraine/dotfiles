@@ -222,7 +222,7 @@ Created files:
 - [project-specific files]
 
 Recommended workflow:
-1. Run Claude Code's `/init` first (if not already done) for project context
+1. Run `/init` (a built-in command of Claude Code) first (if not already done) for project context
 2. Update README.md with project details
 3. Configure your development environment
 4. Run initial tests: <test command>
