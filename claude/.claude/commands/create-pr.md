@@ -38,10 +38,10 @@ Create a pull request from the current branch with proper formatting and issue l
      - `fix/gh-123` or `feat/gh-123` → Issue #123 (preferred format)
      - `fix/issue-123` or `feat/issue-123` → Issue #123 (legacy format)
      - `docs/gh-456` → Issue #456
-   - **PRIORITY 3**: Scan commit messages for issue references (#123, fixes #456)
+   - **PRIORITY 3**: Scan commit messages for issue references (#123, Closes #456)
    - **PRIORITY 4**: Search recent issues for related keywords from commits
    - **CRITICAL**: Include issue reference in PR description:
-     - Use "Closes #123" for issues this PR fully resolves
+     - **ALWAYS use "Closes #123"** for issues this PR fully resolves (preferred standard)
      - Use "Related to #123" for partial fixes or enhancements
      - Use "Addresses #123" for issues that need more work after this PR
    - **MANDATORY VALIDATION**: Before creating PR, confirm issue reference will be included

@@ -30,9 +30,11 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 
 - **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) format
   - Use the `/commit` command for guided commit workflow
+  - Do NOT include issue closing references in individual commit messages
 - **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
-- **Pull Requests**: Clear titles, reference issues, atomic changes
+- **Pull Requests**: Clear titles, reference issues in PR description, atomic changes
   - Use the `/create-pr` command for creating PRs
+  - Issue references like "Closes #123" belong in PR descriptions only
   - Use the `/review-pr` command for reviewing PRs
 
 ### Code Quality

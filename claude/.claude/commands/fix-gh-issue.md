@@ -42,6 +42,7 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
    - Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
    - Implement changes in small, logical commits
    - Follow commit standards from global CLAUDE.md
+   - **IMPORTANT**: Do NOT include issue references (like "Closes #$ARGUMENTS") in commit messages
    - Test changes after each commit
 
 5. **Verify solution**:
@@ -52,10 +53,16 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 
 6. **Create pull request**:
    - Use `/create-pr --issue $ARGUMENTS` command for comprehensive PR creation
-   - **CRITICAL**: The --issue flag ensures automatic "Closes #$ARGUMENTS" linking
+   - **CRITICAL**: The --issue flag ensures automatic "Closes #$ARGUMENTS" linking IN THE PR DESCRIPTION ONLY
    - Add `--draft` flag if `--draft-pr` specified
    - **Verify**: Confirm the PR description contains the issue reference before completing
    - Request appropriate reviewers
+
+## Important: Issue References vs Commit Messages
+
+- **Commit messages**: Describe what the commit does, NO issue references
+- **PR description**: Contains "Closes #$ARGUMENTS" to link the entire PR to the issue
+- **Why**: Issues should close when PRs merge, not when individual commits are made
 
 ## Workflow Examples
 

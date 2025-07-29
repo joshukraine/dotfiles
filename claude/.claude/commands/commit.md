@@ -34,7 +34,8 @@ Follow the Conventional Commits format and best practices defined in the global 
 - Use appropriate commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`)
 - Keep subject line under 50 characters
 - Use present tense, imperative mood
-- Reference issues/PRs in footer when applicable
+- **DO NOT** include issue closing references like "Closes #123" in commit messages
+- Issue references belong in PR descriptions, not individual commits
 
 ## Guidelines for Splitting Commits
 

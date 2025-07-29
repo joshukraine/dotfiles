@@ -36,7 +36,7 @@ Review GitHub pull requests with configurable depth and focus.
    **Standard Review** (default):
    - Focus on blocking issues from comments and failed checks
    - Basic code quality and logic review
-   - **Verify issue reference**: Check PR description contains proper issue link (e.g., "Closes #123")
+   - **Verify issue reference**: Check PR description contains proper issue link (use "Closes #123" as standard)
    - Verify other PR metadata (title format, description completeness)
 
    **Quick Review** (`--quick`):
@@ -145,7 +145,7 @@ gh pr diff $ARGUMENTS --name-only
 
 - Blocking issues from comments and CI failures
 - Basic logic and error handling
-- **Issue reference validation**: Ensure PR description includes proper issue link ("Closes #123", "Fixes #456", etc.)
+- **Issue reference validation**: Ensure PR description includes proper issue link ("Closes #123" is the standard)
 - Other PR metadata (title format, description completeness)
 - Essential test coverage
 
