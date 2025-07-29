@@ -1,6 +1,54 @@
 # Global CLAUDE.md
 
-This file provides project-agnostic principles and standards for Claude Code (claude.ai/code) across all repositories.
+This file provides project-agnostic principles and standards for Claude Code
+(claude.ai/code) across all repositories.
+
+## Scratchpad Management
+
+For every project, use standardized scratchpad organization for temporary files,
+notes, and debugging:
+
+### Setup (run on project initialization)
+
+```bash
+mkdir -p scratchpads/{pr-reviews,planning,debugging,notes}
+echo "# Scratchpads for temporary files, notes, and debugging" >> .gitignore
+echo "scratchpads/" >> .gitignore
+```
+
+### Directory Structure
+
+```text
+scratchpads/
+├── pr-reviews/     # Pull request reviews and analysis
+├── planning/       # Project planning and roadmaps
+├── debugging/      # Debug sessions and troubleshooting
+└── notes/         # General development notes and research
+```
+
+### Naming Convention
+
+- Include timestamps: `pr-review-123-20250721-211241.md`
+- Use descriptive names: `phase-3-planning-20250721.md`
+- Keep organized by date and purpose
+
+### Benefits
+
+- **Safe**: Never accidentally committed (ignored by git)
+- **Organized**: Consistent structure across all projects
+- **Discoverable**: Easy to find previous work and context
+- **Collaborative**: Clear convention when working with others
+
+### Integration with /init
+
+When initializing new projects:
+
+1. **Always offer to set up scratchpads** after basic project initialization
+2. **Run the setup script**: `bash ~/.claude/setup-scratchpads.sh`
+3. **Verify structure created** and .gitignore updated properly
+4. **Reference in project docs** if project has its own CLAUDE.md
+
+This ensures consistent scratchpad management across all projects from day one.
 
 ## Core Principles
 
@@ -28,7 +76,8 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 
 ### Git Workflow
 
-- **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) format
+- **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/)
+  format
   - Use the `/commit` command for guided commit workflow
   - Do NOT include issue closing references in individual commit messages
 - **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
