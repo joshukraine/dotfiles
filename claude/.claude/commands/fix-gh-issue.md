@@ -29,7 +29,7 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
    - Review similar issues: `gh issue list --label <relevant-labels>`
 
 3. **Plan and document solution**:
-   - Break down into small, manageable tasks
+   - Think harder about how to break the issue down into a series of small, manageable tasks.
    - Identify files that need changes
    - Consider edge cases and testing requirements
    - **Create scratchpad documentation** in appropriate subfolder:
