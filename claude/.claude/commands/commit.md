@@ -56,8 +56,6 @@ When analyzing the diff, consider splitting commits based on these criteria:
 📝 Commit message: "feat: add user authentication system"
 
 🎯 Commit created: abc1234
-
-❓ Push to remote? (y/n)
 ```
 
 When displaying the summary, ensure each line is output independently with proper spacing to prevent concatenation in the terminal.
