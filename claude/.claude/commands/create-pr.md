@@ -5,6 +5,7 @@ Create a pull request from the current branch with proper formatting and issue l
 ## Command Options
 
 - `--draft`: Create as draft PR
+- `--issue N`: Explicitly link to issue #N (recommended for reliability)
 - `--skip-issue-link`: Skip automatic issue linking
 
 ## Your task
@@ -32,20 +33,22 @@ Create a pull request from the current branch with proper formatting and issue l
    - **Notes section**: Any implementation details or decisions
 
 5. **Identify and link related issues**:
-   - **PRIORITY**: Extract issue number from branch name patterns:
+   - **PRIORITY 1**: If `--issue N` flag provided, use issue #N (most reliable)
+   - **PRIORITY 2**: Extract issue number from branch name patterns:
      - `fix/gh-123` or `feat/gh-123` → Issue #123 (preferred format)
      - `fix/issue-123` or `feat/issue-123` → Issue #123 (legacy format)
      - `docs/gh-456` → Issue #456
-   - Scan commit messages for issue references (#123, fixes #456)
-   - Search recent issues for related keywords from commits
+   - **PRIORITY 3**: Scan commit messages for issue references (#123, fixes #456)
+   - **PRIORITY 4**: Search recent issues for related keywords from commits
    - **CRITICAL**: Include issue reference in PR description:
      - Use "Closes #123" for issues this PR fully resolves
      - Use "Related to #123" for partial fixes or enhancements
      - Use "Addresses #123" for issues that need more work after this PR
-   - **VALIDATE**: Confirm issue reference is added to description
+   - **MANDATORY VALIDATION**: Before creating PR, confirm issue reference will be included
    - **If `--skip-issue-link` provided**: Skip automatic issue detection and linking
 
 6. **Create the PR**:
+   - **PRE-CREATION CHECK**: Verify issue reference is included in description (unless --skip-issue-link)
    - Use `gh pr create` with generated title and description
    - Add `--draft` flag if specified
    - Set base branch (usually main/master)
@@ -100,7 +103,9 @@ Create a pull request from the current branch with proper formatting and issue l
 Closes #123
 ```
 
-## Example Workflow
+## Example Workflows
+
+### Automatic Detection (Legacy)
 
 ```bash
 # Current branch: feat/gh-123-user-authentication
@@ -108,24 +113,42 @@ Closes #123
 # → Detected issue #123 from branch name
 
 Title: "feat: add user authentication system"
+```
 
-Description:
+### Explicit Issue Linking (Recommended)
+
+```bash
+/create-pr --issue 123
+# → Guaranteed linking to issue #123, regardless of branch name
+# → More reliable, prevents missed references
+
+Title: "feat: add user authentication system"
+```
+
+Description example:
+
+```markdown
 ## Summary
+
 - Add complete user authentication system with login/logout
 - Implement secure session management
 - Add comprehensive test coverage
 
 ## Changes
+
 ### ✨ Features
+
 - User login with email/password validation
 - Secure session management with JWT tokens
 - Password reset functionality
 
 ### 🧪 Testing
+
 - Unit tests for authentication logic
 - Integration tests for login flow
 
 ## Testing
+
 - [x] Manual testing performed
 - [x] All existing tests pass
 - [x] New tests added for auth flows

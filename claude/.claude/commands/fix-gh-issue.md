@@ -51,8 +51,8 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
    - Update documentation if needed
 
 6. **Create pull request**:
-   - Use `/create-pr` command for comprehensive PR creation
-   - **CRITICAL**: Ensure PR description includes "Closes #$ARGUMENTS" to link the issue
+   - Use `/create-pr --issue $ARGUMENTS` command for comprehensive PR creation
+   - **CRITICAL**: The --issue flag ensures automatic "Closes #$ARGUMENTS" linking
    - Add `--draft` flag if `--draft-pr` specified
    - **Verify**: Confirm the PR description contains the issue reference before completing
    - Request appropriate reviewers
