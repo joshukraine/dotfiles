@@ -7,7 +7,7 @@ Update project dependencies safely with testing between updates and documentatio
 - `--dry-run`: Show what would be updated without making changes
 - `--major`: Include major version updates (default: minor/patch only)
 - `--package <name>`: Update specific package only
-- `--no-test`: Skip running tests between updates
+- `--skip-tests`: Skip running tests between updates
 
 ## Your task
 
@@ -31,7 +31,8 @@ Update project dependencies safely with testing between updates and documentatio
 
 4. **Execute updates incrementally**:
    - Update one category at a time
-   - Run tests after each category (unless `--no-test`)
+   - Run tests after each category
+   - **If `--skip-tests` provided**: Skip test execution
    - Create separate commits for each category
    - Stop and report if tests fail
 

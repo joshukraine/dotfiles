@@ -14,8 +14,8 @@ This command is designed to work **in conjunction** with Claude Code's native `/
 ## Command Options
 
 - `--type <type>`: Project type (node, python, ruby, go, rust)
-- `--no-git`: Skip git initialization
-- `--no-scratchpads`: Skip scratchpad setup
+- `--skip-git`: Skip git initialization
+- `--skip-scratchpads`: Skip scratchpad setup
 - `--minimal`: Minimal setup without linting/formatting tools
 
 ## Your task
@@ -30,14 +30,16 @@ This command is designed to work **in conjunction** with Claude Code's native `/
    - If new project, ask for type or use `--type` flag
    - Default to generic setup if type unclear
 
-3. **Initialize git repository** (unless `--no-git`):
+3. **Initialize git repository**:
    - Run `git init` if not already initialized
    - Create appropriate `.gitignore` for project type
    - Make initial commit: "chore: initialize project"
+   - **If `--skip-git` provided**: Skip git initialization
 
-4. **Set up scratchpads** (unless `--no-scratchpads`):
+4. **Set up scratchpads**:
    - Use `/setup-scratch` command
    - Ensure scratchpads/ added to .gitignore
+   - **If `--skip-scratchpads` provided**: Skip scratchpad setup
 
 5. **Create README.md**:
    - Project name as title

@@ -1,82 +1,78 @@
 # Fix GitHub Issue Command
 
-Analyze and fix GitHub issues systematically with optional complexity modes.
+Analyze and fix GitHub issues systematically with a comprehensive default workflow.
 
 ## Command Options
 
-- `--quick`: Quick fix mode for simple issues (skip scratchpad, minimal research)
-- `--no-scratchpad`: Skip creating scratchpad documentation
+- `--quick`: Skip research and scratchpad phases for simple fixes
 - `--draft-pr`: Create PR as draft
 
 ## Your task
 
+**Default workflow (comprehensive approach):**
+
+Follow steps 1-6 below for thorough issue resolution.
+
+**Quick workflow (`--quick` flag):**
+
+Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
+
 1. **Get issue details**:
    - Use `gh issue view $ARGUMENTS` to get issue details
    - Extract issue title, description, labels, and comments
-   - Identify issue complexity (simple bug fix vs complex feature)
+   - Identify issue complexity and scope
 
-2. **Choose workflow based on complexity**:
-   - **Quick mode** (`--quick` or simple issues): Skip to step 4
-   - **Standard mode**: Continue with research phase
-
-3. **Research and understand** (Skip for quick mode):
-   - Search scratchpads for previous thoughts: `grep -r "issue-$ARGUMENTS" scratchpads/`
+2. **Research and understand**:
+   - Search scratchpads for previous work: `grep -r "issue-$ARGUMENTS" scratchpads/`
    - Search related PRs: `gh pr list --search "fix issue $ARGUMENTS"`
    - Search codebase for relevant files and patterns
    - Review similar issues: `gh issue list --label <relevant-labels>`
 
-4. **Plan the solution**:
+3. **Plan and document solution**:
    - Break down into small, manageable tasks
    - Identify files that need changes
    - Consider edge cases and testing requirements
-   - **If not `--no-scratchpad`**: Document plan in `scratchpads/debugging/issue-$ARGUMENTS-$(date +%Y%m%d).md`
+   - Create scratchpad documentation: `scratchpads/debugging/issue-$ARGUMENTS-$(date +%Y%m%d).md`
 
-5. **Create branch and implement**:
+4. **Create branch and implement**:
    - Create feature branch: `git checkout -b fix/issue-$ARGUMENTS` or `git checkout -b feat/issue-$ARGUMENTS`
    - Implement changes in small, logical commits
    - Follow commit standards from global CLAUDE.md
    - Test changes after each commit
 
-6. **Verify solution**:
+5. **Verify solution**:
    - Run relevant tests
    - Verify the original issue is resolved
    - Check for regressions
    - Update documentation if needed
 
-7. **Create pull request**:
+6. **Create pull request**:
    - Use `/create-pr` command for comprehensive PR creation
    - Link to original issue: "Fixes #$ARGUMENTS"
    - Add `--draft` flag if `--draft-pr` specified
    - Request appropriate reviewers
 
-## Quick Mode Workflow
+## Workflow Examples
 
-For simple bug fixes and minor changes:
-
-```bash
-/fix-gh-issue 123 --quick
-```
-
-1. Get issue details
-2. Create branch immediately
-3. Make focused changes
-4. Test and commit
-5. Create PR with issue link
-
-## Standard Mode Workflow
-
-For complex issues requiring research:
+**Standard comprehensive workflow:**
 
 ```bash
 /fix-gh-issue 123
 ```
 
-1. Full research phase
-2. Scratchpad documentation
-3. Comprehensive planning
-4. Systematic implementation
-5. Thorough testing
-6. Detailed PR creation
+- Full research and scratchpad documentation
+- Systematic planning and implementation
+- Thorough testing and detailed PR
+
+**Quick workflow for simple fixes:**
+
+```bash
+/fix-gh-issue 123 --quick
+```
+
+- Skip research and scratchpad phases
+- Direct implementation and testing
+- Streamlined PR creation
 
 ## Scratchpad Template
 

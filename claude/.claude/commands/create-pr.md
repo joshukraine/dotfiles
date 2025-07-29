@@ -5,7 +5,7 @@ Create a pull request from the current branch with proper formatting and issue l
 ## Command Options
 
 - `--draft`: Create as draft PR
-- `--no-issue-link`: Skip automatic issue linking
+- `--skip-issue-link`: Skip automatic issue linking
 
 ## Your task
 
@@ -31,22 +31,21 @@ Create a pull request from the current branch with proper formatting and issue l
    - **Testing section**: How the changes should be tested
    - **Notes section**: Any implementation details or decisions
 
-5. **Identify related issues**:
+5. **Identify and link related issues**:
    - Scan commit messages for issue references (#123, fixes #456)
    - Look for branch name patterns (fix/issue-123, feat/gh-456)
    - Search recent issues for related keywords from commits
-
-6. **Link issues properly**:
    - Use "Closes #123" for issues this PR fully resolves
    - Use "Related to #123" for partial fixes or enhancements
    - Use "Addresses #123" for issues that need more work after this PR
+   - **If `--skip-issue-link` provided**: Skip automatic issue detection and linking
 
-7. **Create the PR**:
+6. **Create the PR**:
    - Use `gh pr create` with generated title and description
    - Add `--draft` flag if specified
    - Set base branch (usually main/master)
 
-8. **Confirm and display**:
+7. **Confirm and display**:
    - Show PR URL
    - Display title and description used
    - List any issues that were linked

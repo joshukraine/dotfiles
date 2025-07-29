@@ -95,11 +95,11 @@ Git & GitHub Commands
 
 /create-pr
   Create pull requests with smart titles and issue linking
-  Options: --draft, --no-issue-link
+  Options: --draft, --skip-issue-link
 
 /fix-gh-issue
   Fix GitHub issues systematically with optional complexity modes
-  Options: --quick, --no-scratchpad, --draft-pr
+  Options: --quick, --draft-pr
 
 /review-pr
   Review pull requests with configurable depth and focus
