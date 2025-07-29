@@ -49,7 +49,7 @@ This file provides project-agnostic principles and standards for Claude Code (cl
 ### Git & GitHub
 
 - `/commit` - Create well-formatted commits
-- `/fix-gh-issue` - Fix GitHub issues systematically
+- `/resolve-issue` - Resolve GitHub issues systematically
 - `/review-pr` - Review pull requests thoroughly
 - `/create-pr` - Create pull requests with smart titles
 

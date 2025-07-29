@@ -357,7 +357,7 @@ This project includes comprehensive [Claude Code][claude-code] integration for A
 | ---------------- | ------------------------------------------------------------- |
 | `/commit`        | Create well-formatted commits with validation                 |
 | `/create-pr`     | Generate comprehensive pull requests with smart issue linking |
-| `/fix-gh-issue`  | Systematic GitHub issue resolution workflow                   |
+| `/resolve-issue` | Systematic GitHub issue resolution workflow                   |
 | `/review-pr`     | Thorough pull request reviews with configurable depth         |
 | `/setup-scratch` | Initialize temporary workspace for development notes          |
 | `/new-project`   | Comprehensive project setup (use after Claude Code's `/init`) |

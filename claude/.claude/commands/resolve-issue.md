@@ -1,6 +1,6 @@
-# Fix GitHub Issue Command
+# Resolve GitHub Issue Command
 
-Analyze and fix GitHub issues systematically with a comprehensive default workflow.
+Systematically resolve GitHub issues with a comprehensive workflow that handles features, bug fixes, enhancements, and other development tasks.
 
 ## Command Options
 
@@ -138,7 +138,7 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 **Standard comprehensive workflow:**
 
 ```bash
-/fix-gh-issue 123
+/resolve-issue 123
 ```
 
 - Full research and scratchpad documentation
@@ -149,7 +149,7 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 **Quick workflow for simple fixes:**
 
 ```bash
-/fix-gh-issue 123 --quick
+/resolve-issue 123 --quick
 ```
 
 - Skip research and scratchpad phases

@@ -28,7 +28,7 @@ Display available Claude Code commands and their usage.
 
 - `/commit` - Create well-formatted commits with guided workflow
 - `/create-pr` - Create pull requests with smart titles and issue linking
-- `/fix-gh-issue` - Fix GitHub issues systematically
+- `/resolve-issue` - Resolve GitHub issues systematically
 - `/review-pr` - Review pull requests with configurable depth
 
 ### Project Management
@@ -52,7 +52,7 @@ Claude Code Commands
 Git & GitHub:
   /commit              - Create well-formatted commits
   /create-pr           - Create pull requests with smart titles
-  /fix-gh-issue        - Fix GitHub issues systematically
+  /resolve-issue       - Resolve GitHub issues systematically
   /review-pr           - Review pull requests thoroughly
 
 Project Management:
@@ -97,8 +97,8 @@ Git & GitHub Commands
   Create pull requests with smart titles and issue linking
   Options: --draft, --skip-issue-link
 
-/fix-gh-issue
-  Fix GitHub issues systematically with optional complexity modes
+/resolve-issue
+  Resolve GitHub issues systematically with optional complexity modes
   Options: --quick, --draft-pr
 
 /review-pr
@@ -127,7 +127,7 @@ When showing specific command help, read the command's markdown file and extract
 - Reference global CLAUDE.md for overarching principles
 - Note command aliases where available
 - Indicate which commands are coming soon
-- Link related commands (e.g., fix-gh-issue uses create-pr)
+- Link related commands (e.g., resolve-issue uses create-pr)
 
 ## Future Enhancement
 
