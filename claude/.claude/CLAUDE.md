@@ -43,6 +43,13 @@ This file provides project-agnostic principles and standards for Claude Code
 - **Error Handling**: Fail fast, provide context, use specific exceptions
 - **Dependencies**: Pin versions, use lock files, document requirements
 
+### Markdown
+
+- **Code Fences**: Always label code blocks with language identifier to avoid linting errors
+  - Use ` ```bash ` instead of ` ``` ` for shell commands
+  - Use ` ```yaml `, ` ```json `, ` ```javascript `, etc. for respective languages
+  - Use ` ```text ` or ` ```plaintext ` for generic content without syntax highlighting
+
 ## Default Behaviors
 
 - Use consistent formatting (leverage auto-formatters)
