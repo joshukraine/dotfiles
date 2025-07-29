@@ -49,7 +49,7 @@ Review GitHub pull requests with configurable depth and focus.
 
    **Security Review** (`--security`):
    - Focus on authentication/authorization logic
-   - Check for hardcoded secrets or credentials
+   - Check for hard-coded secrets or credentials
    - Analyze input validation and sanitization
    - Review API security and access controls
 
