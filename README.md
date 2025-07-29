@@ -11,15 +11,18 @@
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot’s [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
+- AI-assisted development with [Claude Code][claude-code] (optional)
 
 ## 🗂️ Table of Contents
 
 - [Quick Setup](#%EF%B8%8F-quick-setup)
+- [Comprehensive Setup Documentation](#-comprehensive-setup-documentation)
 - [Prerequisites](#-prerequisites)
 - [New Mac Bootstrap](#-new-mac-bootstrap)
 - [Zsh or Fish?](#zsh-or-fish)
 - [Shared Configuration Framework](#shared-configuration-framework)
-- [Documentation](#-documentation)
+- [Claude Code Integration (Optional)](#-claude-code-integration-optional)
+- [Functions and Abbreviations](#-functions-and-abbreviations)
 - [Markdown Linting](#markdown-linting)
 - [About Neovim Distributions](#about-neovim-distributions)
 - [My Favorite Programming Fonts](#my-favorite-programming-fonts)
@@ -338,7 +341,44 @@ The shared configuration includes intelligent git functions that automatically d
 
 These functions work with both `main` and `master` branch names automatically.
 
-## 📚 Documentation
+## 🤖 Claude Code Integration (Optional)
+
+This project includes comprehensive [Claude Code][claude-code] integration for AI-assisted development workflows. **Using Claude Code is completely optional** - all dotfiles functionality works independently.
+
+### What's Included
+
+- **Global CLAUDE.md** - Project context and coding standards for AI assistance
+- **Custom slash commands** - User-level commands for common development tasks
+- **Workflow automation** - GitHub issue fixes, PR creation, code reviews, and more
+
+### Available Commands
+
+| Command          | Description                                                   |
+| ---------------- | ------------------------------------------------------------- |
+| `/commit`        | Create well-formatted commits with validation                 |
+| `/create-pr`     | Generate comprehensive pull requests with smart issue linking |
+| `/fix-gh-issue`  | Systematic GitHub issue resolution workflow                   |
+| `/review-pr`     | Thorough pull request reviews with configurable depth         |
+| `/setup-scratch` | Initialize temporary workspace for development notes          |
+| `/new-project`   | Comprehensive project setup (use after Claude Code's `/init`) |
+| `/update-deps`   | Safe dependency updates with testing                          |
+
+### Getting Started with Claude Code
+
+1. **Install Claude Code**: Follow the [official quickstart guide](https://docs.anthropic.com/en/docs/claude-code/quickstart)
+2. **Explore commands**: Run `/help` in any terminal to see available commands
+3. **Learn more**: Check the `claude/` directory for detailed command documentation
+
+### Key Features
+
+- **Issue-to-PR workflows** with automatic linking and proper GitHub integration
+- **Commit message standards** following Conventional Commits format
+- **Scratchpad management** for organized development notes and planning
+- **Cross-project consistency** via global configuration and reusable commands
+
+The Claude Code setup enhances but doesn't replace the core dotfiles functionality. Whether you use AI assistance or not, you'll have a fully functional development environment.
+
+## 🔧 Functions and Abbreviations
 
 This repository includes comprehensive documentation for all shell functions and abbreviations to improve maintainability and user experience.
 
@@ -612,6 +652,7 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [asdf]: https://asdf-vm.com/
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
+[claude-code]: https://claude.ai/code
 [comic-code]: https://tosche.net/fonts/comic-code
 [coreutils]: https://formulae.brew.sh/formula/coreutils
 [devicons]: https://github.com/ryanoasis/vim-devicons
