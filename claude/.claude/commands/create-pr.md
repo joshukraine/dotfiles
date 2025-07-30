@@ -6,6 +6,7 @@ Create a pull request from the current branch with proper formatting and issue l
 
 - `--issue N`: Explicitly link to issue #N (recommended for reliability)
 - `--skip-issue-link`: Skip automatic issue linking
+- `--draft-pr`: Create draft PR
 
 ## Your task
 
