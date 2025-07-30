@@ -24,6 +24,7 @@ This file provides project-agnostic principles and standards for Claude Code
 - Update documentation when changing functionality
 - Include examples for complex features
 - Document breaking changes clearly
+- **Use Context7 (MCP)** for latest documentation when working with external technologies, frameworks, and APIs
 
 ## Standards & Conventions
 
