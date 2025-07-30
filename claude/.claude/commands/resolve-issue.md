@@ -39,23 +39,24 @@ Follow steps 1-6 below for thorough issue resolution.
 4. **Create branch and implement with commit checkpoints**:
    - **CHECKPOINT 1**: Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
    - **CHECKPOINT 2**: Verify you are on the new branch with `git branch --show-current`
-   - **CHECKPOINT 3**: Implement using commit checkpoint workflow (see below)
-   - **CHECKPOINT 4**: After implementation, run `git log --oneline` to verify commits exist
+   - **CHECKPOINT 3**: Implement using multiple commits (see rules below)
+   - **CHECKPOINT 4**: After implementation, run `git log --oneline` to verify multiple commits exist
    - Follow commit standards from global CLAUDE.md
    - **IMPORTANT**: Do NOT include issue references (like "Closes #$ARGUMENTS") in commit messages
-   - Test changes after each commit
 
-   **Commit Checkpoint Workflow:**
+   **MANDATORY: Multiple Commit Strategy**
 
-   **Commit Strategy Decision Tree:**
-   - **Simple fix** (< 20 lines, 1-2 files)? → **Single commit**
-   - **Everything else**? → **Multiple commits (2-8 typical)**
+   GitHub issues require multiple commits. Commit frequently using these rules:
+   1. **Commit every major component** - Don't wait until everything is done
+   2. **Commit when you reach 30-50 lines** of changes across files
+   3. **Each commit must be working code** - no broken states
+   4. **Typical range: 3-8 commits** for most GitHub issues
 
-   **For multi-commit work:**
-   - Break work into logical components (models → logic → UI → tests)
-   - Commit after each working component
-   - Each commit should be testable and working
-   - If you've written 50+ lines without committing, commit now
+   **When to commit:**
+   - Added new files or major functionality ✅ COMMIT
+   - Modified configuration or setup ✅ COMMIT
+   - Completed a logical piece (model, controller, view, test) ✅ COMMIT
+   - Written 30+ lines of code ✅ COMMIT NOW
 
 5. **Verify solution after final checkpoint**:
    - **CHECKPOINT 1**: Run `git log --oneline` and confirm commits exist
