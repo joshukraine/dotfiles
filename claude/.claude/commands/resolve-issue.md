@@ -155,7 +155,10 @@ Follow global CLAUDE.md standards:
 
 ## Integration with Other Commands
 
-- Uses `/create-pr` for PR creation
-- References `/setup-scratch` for workspace organization
-- Follows commit standards from global CLAUDE.md
-- Integrates with `/review-pr` for PR review workflow
+- **TodoWrite tool**: Required for tracking all 6 workflow steps with progress visibility
+- **`/create-pr`**: Recommended for PR creation with `--issue $ARGUMENTS` flag for automatic linking
+- **`/setup-scratch`**: Referenced for workspace organization and scratchpad management
+- **`/review-pr`**: Integrates with PR review workflow after implementation
+- **Global CLAUDE.md**: Follows commit standards and branch naming conventions
+- **Git workflow**: Enhanced checkpoint system ensures reliable branch management and multi-commit strategy
+- **Scratchpad system**: Structured documentation in `scratchpads/` with categorized subfolders for debugging, planning, and notes
