@@ -159,6 +159,6 @@ Follow global CLAUDE.md standards:
 - **`/create-pr`**: Recommended for PR creation with `--issue $ARGUMENTS` flag for automatic linking
 - **`/setup-scratch`**: Referenced for workspace organization and scratchpad management
 - **`/review-pr`**: Integrates with PR review workflow after implementation
-- **Global CLAUDE.md**: Follows commit standards and branch naming conventions
+- **`claude/.claude/CLAUDE.md`**: Follows commit standards and branch naming conventions
 - **Git workflow**: Enhanced checkpoint system ensures reliable branch management and multi-commit strategy
 - **Scratchpad system**: Structured documentation in `scratchpads/` with categorized subfolders for debugging, planning, and notes

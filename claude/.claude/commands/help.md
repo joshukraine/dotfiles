@@ -81,7 +81,7 @@ Examples:
   /commit --no-verify     - Skip pre-commit hooks
 
 
-See global CLAUDE.md for commit standards and best practices.
+See `claude/.claude/CLAUDE.md` for commit standards and best practices.
 ```
 
 ### Category view
