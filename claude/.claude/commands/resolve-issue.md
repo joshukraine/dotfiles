@@ -5,8 +5,11 @@ Systematically resolve GitHub issues with a comprehensive workflow that handles 
 ## Your task
 
 **CRITICAL: Use TodoWrite tool to track all 6 steps before beginning**
-Create todo items for: Get issue details → Research → Plan → Implement → Verify → Create PR
+Create todo items for: Get issue details → Research → Plan → Implement → Verify → Report Back
 Mark each as completed only when fully finished.
+
+**IMPORTANT: Progress Reporting**
+After completing each major step, provide a brief summary of what was accomplished before moving to the next step.
 
 Follow steps 1-6 below for thorough issue resolution.
 
@@ -30,6 +33,8 @@ Follow steps 1-6 below for thorough issue resolution.
      - `scratchpads/planning/` for features, enhancements, new functionality
      - `scratchpads/notes/` for documentation, research, general issues
    - Filename: `issue-$ARGUMENTS-$(date +%Y%m%d-%H%M%S).md`
+
+   **CHECKPOINT**: Present implementation plan to user and ask for approval before proceeding to implementation
 
 4. **Create branch and implement with commit checkpoints**:
    - **CHECKPOINT 1**: Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
@@ -59,11 +64,15 @@ Follow steps 1-6 below for thorough issue resolution.
    - Check for regressions and update documentation if needed
    - **STOP**: Do not proceed to step 6 until all checkpoints pass
 
-6. **Create pull request**:
-   - Use `/create-pr --issue ISSUE_NUMBER` command for comprehensive PR creation
-   - **CRITICAL**: The --issue flag ensures automatic "Closes #ISSUE_NUMBER" linking IN THE PR DESCRIPTION ONLY
-   - **Verify**: Confirm the PR description contains the issue reference before completing
-   - Request appropriate reviewers
+6. **Implementation Complete - Report Back**:
+   - **CHECKPOINT**: Summarize all completed work:
+     - Files modified/created
+     - Commits made (`git log --oneline` summary)
+     - Tests status
+     - Issue resolution confirmation
+   - **STOP**: Ask user if they want to create PR now
+   - **Recommendation**: Run `/create-pr --issue $ARGUMENTS` when ready
+   - **DO NOT** automatically create PR - wait for user approval
 
 ## If You Get Lost During Implementation
 
