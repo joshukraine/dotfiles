@@ -4,7 +4,6 @@ Create a pull request from the current branch with proper formatting and issue l
 
 ## Command Options
 
-- `--draft`: Create as draft PR
 - `--issue N`: Explicitly link to issue #N (recommended for reliability)
 - `--skip-issue-link`: Skip automatic issue linking
 
@@ -50,7 +49,6 @@ Create a pull request from the current branch with proper formatting and issue l
 6. **Create the PR**:
    - **PRE-CREATION CHECK**: Verify issue reference is included in description (unless --skip-issue-link)
    - Use `gh pr create` with generated title and description
-   - Add `--draft` flag if specified
    - Set base branch (usually main/master)
 
 7. **Confirm and display**:

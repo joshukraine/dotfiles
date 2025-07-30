@@ -2,20 +2,13 @@
 
 Systematically resolve GitHub issues with a comprehensive workflow that handles features, bug fixes, enhancements, and other development tasks.
 
-## Command Options
-
-- `--quick`: Skip research and scratchpad phases for simple fixes
-- `--draft-pr`: Create PR as draft
-
 ## Your task
 
-**Default workflow (comprehensive approach):**
+**CRITICAL: Use TodoWrite tool to track all 6 steps before beginning**
+Create todo items for: Get issue details → Research → Plan → Implement → Verify → Create PR
+Mark each as completed only when fully finished.
 
 Follow steps 1-6 below for thorough issue resolution.
-
-**Quick workflow (`--quick` flag):**
-
-Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 
 1. **Get issue details**:
    - Use `gh issue view $ARGUMENTS` to get issue details
@@ -39,93 +32,47 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
    - Filename: `issue-$ARGUMENTS-$(date +%Y%m%d-%H%M%S).md`
 
 4. **Create branch and implement with commit checkpoints**:
-   - Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
-   - **CRITICAL**: Implement using commit checkpoint workflow (see below)
+   - **CHECKPOINT 1**: Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
+   - **CHECKPOINT 2**: Verify you are on the new branch with `git branch --show-current`
+   - **CHECKPOINT 3**: Implement using commit checkpoint workflow (see below)
+   - **CHECKPOINT 4**: After implementation, run `git log --oneline` to verify commits exist
    - Follow commit standards from global CLAUDE.md
    - **IMPORTANT**: Do NOT include issue references (like "Closes #$ARGUMENTS") in commit messages
    - Test changes after each commit
 
    **Commit Checkpoint Workflow:**
 
-   **First, assess the scope of changes needed:**
+   **Commit Strategy Decision Tree:**
+   - **Simple fix** (< 20 lines, 1-2 files)? → **Single commit**
+   - **Everything else**? → **Multiple commits (2-8 typical)**
 
-   **✅ Single commit appropriate for:**
-   - Simple bug fixes affecting 1-2 files with minimal changes (< 20 lines total)
-   - Configuration updates, typo fixes, small documentation changes
-   - Single-line logic fixes or minor validation additions
-   - Issues that can be completely resolved in one logical step
-
-   **🚫 Multiple commits required for:**
-   - New features or substantial enhancements
-   - Changes affecting multiple files or components
-   - Issues requiring both implementation AND tests
-   - Any work involving database changes, UI updates, AND business logic
-   - Changes totaling more than 20-30 lines across multiple concerns
-
-   **For multi-commit work, commit after each logical component** using these guidelines:
-
-   **For features/enhancements:**
-   1. 🔧 **Infrastructure**: Models, migrations, database changes → commit
-   2. 🎮 **Core logic**: Controllers, services, business logic → commit
-   3. 🎨 **User interface**: Views, templates, basic styling → commit
-   4. ✨ **Enhancements**: Advanced styling, JavaScript, polish → commit
-   5. 🧪 **Testing**: Test files and coverage → commit
-
-   **For bug fixes:**
-   1. 🔍 **Reproduce**: Add failing test that reproduces the bug → commit
-   2. 🔧 **Fix**: Implement the minimal fix → commit
-   3. ✅ **Verify**: Additional tests and edge cases → commit
-
-   **For each checkpoint:**
-   - Stop implementation work
-   - Run relevant tests to ensure nothing is broken
-   - Create descriptive commit explaining what was accomplished
-   - Continue to next checkpoint
-
-   **Commit Quality Standards:**
-   - Each commit should be a working, testable state
-   - Commit messages describe what was built, not what issue is being fixed
-   - Aim for 3-6 commits for medium tasks, 6-12 for large tasks
-   - If you've written 50+ lines without committing, you've waited too long
-
-   **Example 1: Small Issue - Single Commit (Issue #42)**
-
-   ```bash
-   # ✅ CORRECT: Single commit for small scope
-   git commit -m "fix: add missing email validation to User model"
-   # Only touches 1 file, adds 1 line of validation - appropriate for single commit
-   ```
-
-   **Example 2: Large Issue - Multiple Commits (Issue #25)**
-
-   ```bash
-   # ❌ WRONG: One big commit for substantial work
-   git commit -m "feat: implement complete Post resource with CRUD operations"
-
-   # ✅ CORRECT: Checkpoint commits for substantial work
-   git commit -m "feat: add Post model with validations and migration"
-   git commit -m "feat: add PostsController with CRUD actions"
-   git commit -m "feat: add Post views for index, show, and form pages"
-   git commit -m "style: add Tailwind CSS styling to Post views"
-   git commit -m "test: add comprehensive Post resource test coverage"
-   ```
+   **For multi-commit work:**
+   - Break work into logical components (models → logic → UI → tests)
+   - Commit after each working component
+   - Each commit should be testable and working
+   - If you've written 50+ lines without committing, commit now
 
 5. **Verify solution after final checkpoint**:
-   - **Ensure you followed commit checkpoint workflow appropriately**:
-     - Small issues (< 20 lines, single concern): 1 descriptive commit is acceptable
-     - Medium-large issues: Multiple commits should exist (2-12 commits typical)
-   - Run comprehensive tests across all changes
-   - Verify the original issue is resolved completely
-   - Check for regressions
-   - Update documentation if needed
-   - **Final verification**: `git log --oneline` should show appropriate commit count for scope
+   - **CHECKPOINT 1**: Run `git log --oneline` and confirm commits exist
+   - **CHECKPOINT 2**: Run comprehensive tests across all changes
+   - **CHECKPOINT 3**: Verify the original issue is resolved completely
+   - Check for regressions and update documentation if needed
+   - **STOP**: Do not proceed to step 6 until all checkpoints pass
 
 6. **Create pull request**:
    - Use `/create-pr --issue ISSUE_NUMBER` command for comprehensive PR creation
    - **CRITICAL**: The --issue flag ensures automatic "Closes #ISSUE_NUMBER" linking IN THE PR DESCRIPTION ONLY
-   - Add `--draft` flag if `--draft-pr` specified
    - **Verify**: Confirm the PR description contains the issue reference before completing
    - Request appropriate reviewers
+
+## If You Get Lost During Implementation
+
+1. **Check your todo list** - What step are you currently on?
+2. **Verify current state**:
+   - Run `git status` - Are you on a feature branch?
+   - Run `git log --oneline` - Do commits exist?
+3. **If missing branch/commits**: Restart from step 4 (Create branch and implement)
+4. **If implementation is done**: Continue to step 5 (Verify solution)
 
 ## Important: Issue References vs Commit Messages
 
@@ -133,9 +80,7 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 - **PR description**: Contains "Closes #$ARGUMENTS" to link the entire PR to the issue
 - **Why**: Issues should close when PRs merge, not when individual commits are made
 
-## Workflow Examples
-
-**Standard comprehensive workflow:**
+## Workflow Example
 
 ```bash
 /resolve-issue 123
@@ -145,16 +90,6 @@ Execute steps 1, 4, 5, 6 only - skip research and documentation phases.
 - Systematic planning and implementation with commit checkpoints
 - Appropriate commit count: 1 commit for small issues, 3-12 for substantial work
 - Thorough testing and detailed PR
-
-**Quick workflow for simple fixes:**
-
-```bash
-/resolve-issue 123 --quick
-```
-
-- Skip research and scratchpad phases
-- Direct implementation with appropriate commit strategy (1 commit for tiny fixes, 2-4 for moderate scope)
-- Streamlined testing and PR creation
 
 ## Scratchpad Template
 
