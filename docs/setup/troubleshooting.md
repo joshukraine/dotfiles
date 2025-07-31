@@ -85,8 +85,6 @@ mkdir: /Users/username/.config: Permission denied
 
 ## 🔗 Stow and Symlink Problems
 
-> 💡 **Agent Assistance**: For complex Stow and symlink issues, consider using the **[Config Manager Agent](../../agents/config-manager.md)** for specialized help with dotfiles structure and Stow package management.
-
 ### Stow Command Not Found
 
 **Problem**: `stow: command not found`
@@ -259,8 +257,6 @@ ls -la ~/.zshrc
    ```
 
 ## 🐚 Shell Configuration Problems
-
-> 💡 **Agent Assistance**: For abbreviation and shell configuration issues, the **[Abbreviation Manager Agent](../../agents/abbreviation-manager.md)** can help with YAML-based abbreviation system troubleshooting.
 
 ### New Terminal Doesn't Load Dotfiles Configuration
 
