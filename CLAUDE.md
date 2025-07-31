@@ -177,7 +177,6 @@ Some directories contain repository infrastructure and should not be symlinked t
 
 **Example directories using this pattern:**
 
-- `agents/` - Claude Code sub-agents documentation
 - `docs/` - Repository documentation
 - `scripts/` - Build and utility scripts
 - `tests/` - Test files and fixtures
