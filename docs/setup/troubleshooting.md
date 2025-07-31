@@ -621,17 +621,6 @@ ls -la ~/.zshrc
 
 ## 🆘 Getting Additional Help
 
-### Specialized Agent Assistance
-
-For targeted help with specific aspects of the dotfiles, use the appropriate specialized agent:
-
-| Issue Type                                 | Recommended Agent                                                   | What They Help With                                          |
-| ------------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Stow conflicts, package management**     | **[🔧 Config Manager](../../agents/config-manager.md)**             | Dotfiles structure, Stow operations, symlink troubleshooting |
-| **Abbreviations not working, shell setup** | **[⚡ Abbreviation Manager](../../agents/abbreviation-manager.md)** | YAML abbreviation system, Fish/Zsh sync issues               |
-| **Test failures, validation errors**       | **[✅ Test Validator](../../agents/test-validator.md)**             | Running tests, linting, pre-commit hook setup                |
-| **Documentation outdated or unclear**      | **[📚 Documentation Helper](../../agents/docs-helper.md)**          | Updating guides, fixing examples, troubleshooting docs       |
-
 ### General Troubleshooting Steps
 
 If your issue isn't covered here:
