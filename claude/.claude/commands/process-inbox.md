@@ -39,7 +39,8 @@ categorized topics.
    - Move files to appropriate `topics/{category}/` directory
    - Rename with consistent naming pattern: `descriptive-name-YYYY-MM-DD.md`
    - Preserve original source metadata and attribution
-   - Add proper frontmatter if missing
+   - Add YAML frontmatter with auto-generated metadata
+   - Auto-generate tags based on content analysis
 
 5. **Update knowledge base index**:
    - Add new entries to "Recent Additions" section
@@ -87,6 +88,24 @@ Examples:
 - kubernetes-troubleshooting-guide-2025-08-01.md
 ```
 
+## YAML Frontmatter Template
+
+Processed files should use this structured metadata:
+
+```yaml
+---
+title: "Descriptive Title"
+created: YYYY-MM-DD
+source: "Original URL or source"
+category: insights # or development, commands, tools, troubleshooting
+tags: [auto-generated, based-on-content, technology-keywords]
+difficulty: beginner # or intermediate, advanced
+content_type: "article-summary" # or video-notes, document-summary
+author: "Original Author"
+processed: YYYY-MM-DD
+---
+```
+
 ## Metadata Preservation
 
 Ensure processed files maintain:
@@ -94,7 +113,7 @@ Ensure processed files maintain:
 - **Source attribution**: Original URL, author, publication
 - **Processing date**: When content was captured and processed
 - **Content type**: Article summary, video notes, etc.
-- **Tags**: Searchable keywords and themes
+- **Auto-generated tags**: Technology keywords and problem types
 
 ## Quality Standards
 
@@ -105,9 +124,42 @@ Only process content that:
 - Includes proper source attribution
 - Contains actionable insights or knowledge
 
+## Automated Tag Generation
+
+The command will automatically generate tags by analyzing:
+
+- **Technology keywords**: Extract from content (git, docker, npm, python, etc.)
+- **Command patterns**: Detect tools used in code blocks
+- **Problem types**: Identify common patterns (insights, research, tutorial, guide)
+- **Content type**: Include the content type as a base tag (article, video, document)
+- **Source information**: Extract domain or platform tags (github, youtube, medium)
+
+### Technology Keywords
+
+```text
+git, docker, kubernetes, npm, yarn, python, node, ruby, bash, zsh, fish, vim, neovim,
+tmux, postgres, mysql, redis, nginx, apache, linux, macos, ubuntu, debian, aws,
+github, gitlab, ssh, ssl, dns, api, rest, graphql, json, yaml, markdown, html, css,
+javascript, typescript, react, vue, angular, rails, django, flask, express
+```
+
+### Content Type Patterns
+
+```text
+article-summary, video-notes, document-summary, tutorial, guide, research, interview,
+conference-talk, blog-post, documentation, white-paper, case-study, review
+```
+
+### Difficulty Assessment
+
+- **Beginner**: Basic concepts, introductory content, simple tutorials
+- **Intermediate**: In-depth analysis, moderate complexity, tool comparisons
+- **Advanced**: Complex architecture, research papers, expert insights
+
 ## Integration Notes
 
 - Works with existing `/save-knowledge` command workflow
 - Supports batch processing of multiple inbox items
 - Maintains knowledge base consistency and structure
 - Provides clear audit trail of processing decisions
+- Uses same YAML frontmatter and tagging system as `/save-knowledge`
