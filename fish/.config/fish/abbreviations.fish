@@ -60,6 +60,7 @@ abbr -a -g cdxa 'cd $XDG_CACHE_HOME'
 abbr -a -g cdxs 'cd $XDG_STATE_HOME'
 abbr -a -g cdlb 'cd $HOME/.local/bin'
 abbr -a -g cdbn 'cd $HOME/.bin'
+abbr -a -g cdkb 'cdkb'
 
 # navigation
 abbr -a -g .. 'cd ..'
