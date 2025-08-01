@@ -82,13 +82,13 @@ abbr -a -g gg 'lazygit'
 abbr -a -g hm 'hivemind'
 
 # markdown
-abbr -a -g mdl 'markdownlint-cli2 --config ~/.markdownlint.yaml'
-abbr -a -g mdlf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix'
-abbr -a -g mdla 'markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md''
-abbr -a -g mdlaf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md''
-abbr -a -g mdv './scripts/validate-config.sh -v markdown'
-abbr -a -g mdvf './scripts/validate-config.sh -v markdown --fix'
-abbr -a -g mdvq './scripts/validate-config.sh -v markdown --fix --quiet'
+abbr -a -g mdl 'markdownlint-cli2 --config ~/.markdownlint.yaml "*.md"'
+abbr -a -g mdlf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix "*.md"'
+abbr -a -g mdla 'markdownlint-cli2 --config ~/.markdownlint.yaml "**/*.md"'
+abbr -a -g mdlaf 'markdownlint-cli2 --config ~/.markdownlint.yaml --fix "**/*.md"'
+abbr -a -g mdv 'markdown-validate'
+abbr -a -g mdvf 'markdown-validate --fix'
+abbr -a -g mdvq 'markdown-validate --fix --quiet'
 
 # local servers
 abbr -a -g hts 'http-server'
