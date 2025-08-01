@@ -158,17 +158,27 @@ validate_markdown_file() {
   # In fix mode, run prettier first for formatting, then markdownlint for remaining issues
   # This matches LazyVim's formatting chain: prettier → markdownlint-cli2
   if [[ ${FIX_MODE} -eq 1 ]]; then
+    local prettier_changed=0
+    local markdownlint_changed=0
+
     # Format with prettier using default settings (same as LazyVim)
     if prettier --parser=markdown --write "${file}" >/dev/null 2>&1; then
       log_success "Formatted with Prettier (defaults): ${relative_file}"
+      prettier_changed=1
       ((FILES_FIXED++))
     fi
 
     # Then run markdownlint to fix any remaining linting issues
-    local lint_output
-    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || true
-    if [[ -n "${lint_output}" ]] && echo "${lint_output}" | grep -q "Fixed"; then
+    local fix_output
+    fix_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || true
+    if [[ -n "${fix_output}" ]] && echo "${fix_output}" | grep -q "Fixed"; then
       log_success "Fixed linting issues in: ${relative_file}"
+      markdownlint_changed=1
+    fi
+
+    # If fixes were applied, brief pause to ensure file system consistency
+    if [[ ${prettier_changed} -eq 1 || ${markdownlint_changed} -eq 1 ]]; then
+      sleep 0.1
     fi
   fi
 
