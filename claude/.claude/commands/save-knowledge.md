@@ -34,7 +34,11 @@ sessions to a personal knowledge base.
 1. **Determine save location**:
    - Check if `$CLAUDE_KB_PATH` environment variable is set
    - Default to `~/claude-knowledge-base/` if not set
-   - Create directory structure if it doesn't exist
+   - Create directory structure if it doesn't exist using:
+
+   ```bash
+   mkdir -p "$CLAUDE_KB_PATH"/{.config,inbox/{web-articles,videos,documents},topics/{development,troubleshooting,commands,tools,insights},sessions}
+   ```
 
 2. **Analyze recent conversation**:
    - Look at the last 3-5 exchanges to identify key insights
@@ -64,16 +68,24 @@ sessions to a personal knowledge base.
 
 ```text
 $CLAUDE_KB_PATH/
-├── README.md
-├── topics/
-│   ├── development/
-│   ├── troubleshooting/
-│   ├── commands/
-│   ├── tools/
-│   └── insights/
-├── sessions/
+├── .config/
+│   └── tagging.yaml          # Tag configuration
+├── README.md                 # Knowledge base overview
+├── CLAUDE.md                 # Claude Code instructions
+├── SETUP.md                  # Setup and configuration guide
+├── inbox/                    # Unprocessed content
+│   ├── web-articles/         # Article summaries to process
+│   ├── videos/               # Video notes to process
+│   └── documents/            # Document summaries to process
+├── topics/                   # Categorized knowledge
+│   ├── development/          # Programming and dev topics
+│   ├── troubleshooting/      # Problem-solving entries
+│   ├── commands/             # Command references
+│   ├── tools/                # Tool guides and reviews
+│   └── insights/             # General insights
+├── sessions/                 # Session-based notes
 │   └── YYYY-MM-DD-description.md
-└── index.md (auto-generated)
+└── index.md                  # Auto-generated content index
 ```
 
 ## Template for Knowledge Entries
@@ -107,13 +119,14 @@ The key information, commands, or insights.
 
 ## Automated Tag Generation
 
-The command will automatically generate tags by analyzing:
+The command will automatically generate tags by loading configuration from `$CLAUDE_KB_PATH/.config/tagging.yaml` and analyzing:
 
-- **Technology keywords**: Extract from content (git, docker, npm, python, etc.)
+- **Technology keywords**: Extract from configured technology and tools lists
 - **Command patterns**: Detect tools used in code blocks
-- **Problem types**: Identify common patterns (error, setup, configuration, debug)
+- **Problem types**: Identify patterns from relevant domain categories
+- **Content types**: Classify using configured content_types
 - **Topic category**: Include the chosen topic as a base tag
-- **Difficulty level**: Infer from complexity of solution
+- **Difficulty level**: Infer from complexity using configured difficulty levels
 
 ### Example Auto-Generated Tags
 
@@ -128,35 +141,54 @@ tags: [git, development, workflow, branching, collaboration]
 tags: [vim, configuration, plugins, productivity, editor]
 ```
 
-## Tag Generation Implementation
+## Tag Generation Configuration
 
-When creating entries, analyze the content and auto-generate tags from these categories:
+Tags are loaded from `$CLAUDE_KB_PATH/.config/tagging.yaml` which should contain:
 
-### **Technology Keywords**
+### Configuration Structure
 
-```text
-git, docker, kubernetes, npm, yarn, python, node, ruby, bash, zsh, fish, vim, neovim,
-tmux, postgres, mysql, redis, nginx, apache, linux, macos, ubuntu, debian, aws,
-github, gitlab, ssh, ssl, dns, api, rest, graphql, json, yaml, markdown, html, css,
-javascript, typescript, react, vue, angular, rails, django, flask, express
+```yaml
+# Knowledge Base Tagging Configuration
+version: "1.0"
+
+# Technology & Tools
+technology:
+  languages: [python, javascript, typescript, ruby, bash, zsh, fish]
+  tools: [git, docker, kubernetes, vim, neovim, tmux]
+  platforms: [linux, macos, aws, github, gitlab]
+
+# Content Classification
+content_types: [tutorial, guide, research, troubleshooting, reference]
+
+# Problem/Activity Types
+problem_types:
+  technical: [debugging, configuration, deployment, performance]
+  personal: [bible-study, fitness-research, life-organization]
+
+# Difficulty Levels
+difficulty: [beginner, intermediate, advanced]
+
+# Domain-specific Collections
+domains:
+  technical:
+    primary_tags: [development, programming, devops]
+  personal:
+    primary_tags: [personal-growth, research, study]
+  biblical:
+    primary_tags: [scripture, theology, devotional]
 ```
 
-### **Command Patterns**
+### Tag Generation Process
 
-Detect tools from code blocks: `git`, `docker`, `npm`, `curl`, `ssh`, etc.
+1. **Load configuration**: Read `tagging.yaml` from knowledge base `.config/` directory
+2. **Content analysis**: Scan content for technology keywords and patterns
+3. **Domain matching**: Identify relevant domain based on content themes
+4. **Tag selection**: Combine relevant tags from multiple configuration sections
+5. **Difficulty assessment**: Classify complexity using configured levels
 
-### **Problem Types**
+### Configuration Setup
 
-```text
-troubleshooting, debugging, error, setup, configuration, installation, deployment,
-performance, security, backup, migration, optimization, automation, workflow, tips
-```
-
-### **Difficulty Assessment**
-
-- **Beginner**: Basic commands, simple setup, common solutions
-- **Intermediate**: Multi-step processes, configuration changes, tool integration
-- **Advanced**: Complex debugging, system administration, custom solutions
+If `tagging.yaml` doesn't exist, create it with default technical tags. Users can extend with personal domains (fitness, biblical study, etc.) as needed.
 
 ## Related
 
@@ -166,8 +198,9 @@ performance, security, backup, migration, optimization, automation, workflow, ti
 ## Setup Requirements
 
 1. **Environment variable**: Set `$CLAUDE_KB_PATH` in shell configuration
-2. **Directory structure**: Auto-created on first use
-3. **Git repository**: Initialize knowledge base as private GitHub repo for backup
+2. **Directory structure**: Auto-created on first use including `.config/` directory
+3. **Tagging configuration**: Create `$CLAUDE_KB_PATH/.config/tagging.yaml` with desired tag vocabulary
+4. **Git repository**: Initialize knowledge base as private GitHub repo for backup
 
 ## Integration Notes
 

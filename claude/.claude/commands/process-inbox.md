@@ -126,35 +126,73 @@ Only process content that:
 
 ## Automated Tag Generation
 
-The command will automatically generate tags by analyzing:
+The command will automatically generate tags by loading configuration from `$CLAUDE_KB_PATH/.config/tagging.yaml` and analyzing:
 
-- **Technology keywords**: Extract from content (git, docker, npm, python, etc.)
+- **Technology keywords**: Extract from configured technology and tools lists
 - **Command patterns**: Detect tools used in code blocks
-- **Problem types**: Identify common patterns (insights, research, tutorial, guide)
-- **Content type**: Include the content type as a base tag (article, video, document)
+- **Problem types**: Identify patterns from relevant domain categories
+- **Content types**: Classify using configured content_types
 - **Source information**: Extract domain or platform tags (github, youtube, medium)
+- **Domain matching**: Apply appropriate domain-specific tag collections
 
-### Technology Keywords
+### Tag Configuration Reference
 
-```text
-git, docker, kubernetes, npm, yarn, python, node, ruby, bash, zsh, fish, vim, neovim,
-tmux, postgres, mysql, redis, nginx, apache, linux, macos, ubuntu, debian, aws,
-github, gitlab, ssh, ssl, dns, api, rest, graphql, json, yaml, markdown, html, css,
-javascript, typescript, react, vue, angular, rails, django, flask, express
+Tags are dynamically loaded from `$CLAUDE_KB_PATH/.config/tagging.yaml`. The configuration supports:
+
+#### **Multi-Domain Support**
+
+```yaml
+domains:
+  technical:
+    primary_tags: [development, programming, devops]
+  personal:
+    primary_tags: [personal-growth, research, study]
+  fitness:
+    primary_tags: [health, exercise, nutrition, recovery]
+  biblical:
+    primary_tags: [scripture, theology, devotional, study]
 ```
 
-### Content Type Patterns
+#### **Flexible Content Types**
 
-```text
-article-summary, video-notes, document-summary, tutorial, guide, research, interview,
-conference-talk, blog-post, documentation, white-paper, case-study, review
+```yaml
+content_types:
+  [
+    article-summary,
+    video-notes,
+    document-summary,
+    tutorial,
+    guide,
+    research,
+    interview,
+    conference-talk,
+    blog-post,
+  ]
 ```
 
-### Difficulty Assessment
+#### **Extensible Technology Lists**
 
-- **Beginner**: Basic concepts, introductory content, simple tutorials
-- **Intermediate**: In-depth analysis, moderate complexity, tool comparisons
-- **Advanced**: Complex architecture, research papers, expert insights
+```yaml
+technology:
+  languages: [python, javascript, ruby, bash]
+  tools: [git, docker, vim, tmux]
+  platforms: [linux, macos, aws, github]
+```
+
+### Processing Benefits
+
+- **Domain-aware tagging**: Automatically applies relevant tag collections
+- **User customization**: Each KB can define its own tag vocabulary
+- **Consistent classification**: Same tagging system as `/save-knowledge`
+- **Easy maintenance**: Add new domains/tags without updating commands
+
+## Configuration Setup
+
+On first use, if `$CLAUDE_KB_PATH/.config/tagging.yaml` doesn't exist:
+
+1. **Create default configuration** with basic technical tags
+2. **Prompt user** to customize for their domains (fitness, biblical study, etc.)
+3. **Provide examples** of domain-specific configurations
 
 ## Integration Notes
 
@@ -163,3 +201,4 @@ conference-talk, blog-post, documentation, white-paper, case-study, review
 - Maintains knowledge base consistency and structure
 - Provides clear audit trail of processing decisions
 - Uses same YAML frontmatter and tagging system as `/save-knowledge`
+- **Shared configuration**: Both commands reference same `tagging.yaml` file
