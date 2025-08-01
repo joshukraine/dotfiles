@@ -230,17 +230,26 @@ dev_tools:
 # Markdown
 markdown:
   mdl:
-    command: "markdownlint-cli2 --config ~/.markdownlint.yaml"
-    description: "Lint markdown files with custom config"
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml \"*.md\""
+    description: "Lint markdown files in current directory"
   mdlf:
-    command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix"
-    description: "Lint and auto-fix markdown files"
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix \"*.md\""
+    description: "Lint and auto-fix markdown files in current directory"
   mdla:
-    command: "markdownlint-cli2 --config ~/.markdownlint.yaml '**/*.md'"
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml \"**/*.md\""
     description: "Lint all markdown files in project"
   mdlaf:
-    command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
+    command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix \"**/*.md\""
     description: "Lint and auto-fix all markdown files in project"
+  mdv:
+    command: "markdown-validate"
+    description: "Validate markdown with dotfiles config (detailed)"
+  mdvf:
+    command: "markdown-validate --fix"
+    description: "Validate and auto-fix markdown with dotfiles config"
+  mdvq:
+    command: "markdown-validate --fix --quiet"
+    description: "Quick markdown validation and fix (minimal output)"
 
 # Local servers
 local_servers:

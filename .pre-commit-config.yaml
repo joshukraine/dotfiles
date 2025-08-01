@@ -38,14 +38,10 @@ repos:
         files: ^bin/\.local/bin/run-tests$
         pass_filenames: false
 
-      # Markdown linting
-      - id: markdown-validation
-        name: Markdown Validation
-        entry: ./scripts/validate-config.sh --validator markdown --fix --ci
-        language: system
-        files: \.md$
-        exclude: ^scratchpads/
-        pass_filenames: false
+      # Markdown linting - disabled for commit speed
+      # Use: ./scripts/validate-config.sh -v markdown --fix for manual validation
+      # LazyVim provides real-time markdown linting and formatting
+      # CI runs markdown validation as safety net
 
   # External validation tools
   - repo: https://github.com/pre-commit/pre-commit-hooks

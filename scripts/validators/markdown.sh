@@ -88,16 +88,39 @@ check_prerequisites() {
   return 0
 }
 
+# Find markdown configuration file with fallback
+find_markdown_config() {
+  local config_candidates=(
+    "${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
+    "${PWD}/markdown/.markdownlint.yaml"
+    "${PWD}/.markdownlint.yaml"
+  )
+
+  for config in "${config_candidates[@]}"; do
+    if [[ -f "${config}" ]]; then
+      echo "${config}"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
 # Check markdown configuration file
 check_markdown_config() {
   log_info "Checking markdown configuration..."
 
-  if [[ ! -f "${MARKDOWN_CONFIG}" ]]; then
-    log_error "Markdown configuration not found: markdown/.markdownlint.yaml"
+  # Try to find config file with fallback
+  local found_config
+  if found_config=$(find_markdown_config); then
+    MARKDOWN_CONFIG="${found_config}"
+    local relative_config="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    log_success "Markdown configuration found: ${relative_config}"
+  else
+    log_error "Markdown configuration not found in any expected location"
+    log_error "Searched: markdown/.markdownlint.yaml, .markdownlint.yaml"
     return 1
   fi
-
-  log_success "Markdown configuration found: markdown/.markdownlint.yaml"
 
   # Validate config file syntax (YAML)
   if command -v yq >/dev/null 2>&1; then
@@ -135,23 +158,36 @@ validate_markdown_file() {
   # In fix mode, run prettier first for formatting, then markdownlint for remaining issues
   # This matches LazyVim's formatting chain: prettier → markdownlint-cli2
   if [[ ${FIX_MODE} -eq 1 ]]; then
+    local prettier_changed=0
+    local markdownlint_changed=0
+
     # Format with prettier using default settings (same as LazyVim)
     if prettier --parser=markdown --write "${file}" >/dev/null 2>&1; then
       log_success "Formatted with Prettier (defaults): ${relative_file}"
+      prettier_changed=1
       ((FILES_FIXED++))
     fi
 
     # Then run markdownlint to fix any remaining linting issues
-    local lint_output
-    lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || true
-    if [[ -n "${lint_output}" ]] && echo "${lint_output}" | grep -q "Fixed"; then
+    local fix_output
+    fix_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" --fix "${file}" 2>&1) || true
+    if [[ -n "${fix_output}" ]] && echo "${fix_output}" | grep -q "Fixed"; then
       log_success "Fixed linting issues in: ${relative_file}"
+      markdownlint_changed=1
+    fi
+
+    # If fixes were applied, brief pause to ensure file system consistency
+    if [[ ${prettier_changed} -eq 1 || ${markdownlint_changed} -eq 1 ]]; then
+      sleep 0.1
     fi
   fi
 
   # Always run linting validation (even after fixes)
   local lint_output
   local lint_exit_code=0
+  if [[ ${VERBOSE} -eq 1 ]]; then
+    log_info "Using config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+  fi
   lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
 
   if [[ ${lint_exit_code} -eq 0 ]]; then
@@ -170,6 +206,10 @@ validate_markdown_file() {
         echo "${error_lines}" | while IFS= read -r line; do
           if [[ -n "${line}" ]]; then
             echo "    ${line}" >&2
+            # Show specific guidance for MD040 violations
+            if [[ "${line}" =~ MD040 ]]; then
+              echo "    💡 Add language specifier: \`\`\`bash, \`\`\`yaml, \`\`\`json, or \`\`\`text" >&2
+            fi
           fi
         done
       fi
@@ -285,15 +325,25 @@ main() {
       log_warning "Total warnings: ${WARNINGS}"
     fi
     if [[ ${FIX_MODE} -eq 1 ]]; then
-      log_info "Some issues may have been fixed. Run validation again to verify."
+      if [[ ${FILES_FIXED} -gt 0 ]]; then
+        log_info "Fixed issues in ${FILES_FIXED} file(s), but ${FILES_WITH_ERRORS} still have errors"
+        log_info "💡 Run without --fix to see remaining issues: ./scripts/validate-config.sh --validator markdown"
+      else
+        log_info "No auto-fixable issues found. Manual intervention required."
+      fi
     fi
+    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
     log_info "Markdown validation completed in ${duration}s"
     return 1
   else
     log_success "Markdown validation passed (${duration}s)"
+    if [[ ${FIX_MODE} -eq 1 && ${FILES_FIXED} -gt 0 ]]; then
+      log_success "Auto-fixed issues in ${FILES_FIXED} file(s)"
+    fi
     if [[ ${WARNINGS} -gt 0 ]]; then
       log_warning "Total warnings: ${WARNINGS}"
     fi
+    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
     return 0
   fi
 }
