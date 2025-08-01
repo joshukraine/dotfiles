@@ -4,9 +4,12 @@ A personal knowledge management system for capturing valuable insights from Clau
 
 ## 🎯 **System Overview**
 
-**The Problem**: You discover useful information during Claude Code sessions, but it's hard to save and reference later, especially in tmux environments where copy/paste is cumbersome.
+**The Problem**: You discover useful information during Claude Code sessions,
+but it's hard to save and reference later, especially in tmux environments where
+copy/paste is cumbersome.
 
-**The Solution**: A `/save-knowledge` slash command that automatically captures insights into a structured, searchable knowledge base.
+**The Solution**: A `/save-knowledge` slash command that automatically captures
+insights into a structured, searchable knowledge base.
 
 ## 🚀 **Quick Setup**
 
