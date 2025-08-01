@@ -1,0 +1,82 @@
+#!/bin/bash
+#
+# Global Markdown Validation Wrapper
+#
+# Provides access to dotfiles markdown validation from anywhere
+# Uses the enhanced markdown validator with dotfiles configuration
+#
+# Usage:
+#   markdown-validate [OPTIONS]
+#
+# Options:
+#   --fix, -f     Auto-fix issues
+#   --quiet, -q   Minimal output
+#   --help, -h    Show help
+#
+# Examples:
+#   markdown-validate           # Detailed validation
+#   markdown-validate --fix     # Validation with auto-fix
+#   markdown-validate -f -q     # Quick fix with minimal output
+
+set -euo pipefail
+
+# Dotfiles path
+DOTFILES_PATH="${HOME}/dotfiles"
+
+# Check if dotfiles directory exists
+if [[ ! -d "${DOTFILES_PATH}" ]]; then
+    echo "Error: Dotfiles directory not found at ${DOTFILES_PATH}" >&2
+    echo "This script requires the dotfiles repository to be installed at ~/dotfiles" >&2
+    exit 1
+fi
+
+# Check if validation script exists
+VALIDATOR_SCRIPT="${DOTFILES_PATH}/scripts/validate-config.sh"
+if [[ ! -x "${VALIDATOR_SCRIPT}" ]]; then
+    echo "Error: Markdown validator not found or not executable: ${VALIDATOR_SCRIPT}" >&2
+    exit 1
+fi
+
+# Parse arguments and build command
+VALIDATOR_ARGS=("-v" "markdown")
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --fix|-f)
+            VALIDATOR_ARGS+=(--fix)
+            shift
+            ;;
+        --quiet|-q)
+            VALIDATOR_ARGS+=(--quiet)
+            shift
+            ;;
+        --help|-h)
+            echo "Global Markdown Validation Wrapper"
+            echo
+            echo "Validates markdown files using dotfiles configuration from any directory."
+            echo
+            echo "Usage: markdown-validate [OPTIONS]"
+            echo
+            echo "Options:"
+            echo "  --fix, -f     Auto-fix issues"
+            echo "  --quiet, -q   Minimal output"
+            echo "  --help, -h    Show this help"
+            echo
+            echo "Examples:"
+            echo "  markdown-validate           # Detailed validation"
+            echo "  markdown-validate --fix     # Validation with auto-fix"
+            echo "  markdown-validate -f -q     # Quick fix with minimal output"
+            echo
+            echo "This script uses the markdown configuration from ~/dotfiles/markdown/.markdownlint.yaml"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            echo "Use --help for usage information" >&2
+            exit 1
+            ;;
+    esac
+done
+
+# Execute the validator from anywhere
+exec "${VALIDATOR_SCRIPT}" "${VALIDATOR_ARGS[@]}"
