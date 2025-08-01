@@ -589,43 +589,33 @@ function saf() {
 
 # Quick navigation to Claude Code Knowledge Base
 #
-# Usage: cdkb [subdirectory]
-# Arguments:
-#   subdirectory  Optional subdirectory within knowledge base
+# Usage: cdkb
+# Arguments: None
 #
 # Examples:
-#   cdkb                    # Navigate to knowledge base root
-#   cdkb topics             # Navigate to topics directory
-#   cdkb sessions           # Navigate to sessions directory
+#   cdkb                    # Navigate to knowledge base root and show recent files
 #
-# Returns: Changes to knowledge base directory and shows recent files if in root
+# Returns: Changes to knowledge base directory and shows search tip plus recent files
 function cdkb() {
     local kb_path="${CLAUDE_KB_PATH:-${HOME}/claude-knowledge-base}"
-    local target_dir="${kb_path}"
 
-    if [[ $# -gt 0 ]]; then
-        target_dir="${kb_path}/${1}"
-    fi
-
-    if [[ ! -d "${target_dir}" ]]; then
-        echo "Knowledge base not found at: ${target_dir}"
+    if [[ ! -d "${kb_path}" ]]; then
+        echo "Knowledge base not found at: ${kb_path}"
         echo "Ensure CLAUDE_KB_PATH is set and directory exists"
         echo "Create with: mkdir -p ~/claude-knowledge-base"
         return 1
     fi
 
-    cd "${target_dir}" || return 1
+    cd "${kb_path}" || return 1
     echo "📚 Knowledge Base: $(pwd)"
-
-    # Show recent files if in root
-    if [[ "${target_dir}" == "${kb_path}" ]]; then
-        echo ""
-        echo "Recent additions:"
-        find . -name "*.md" -not -path "./.*" -type f -print0 | \
-            xargs -0 ls -t | head -5 | \
-            sed 's|^\./||' | \
-            while read -r file; do
-                echo "  ${file}"
-            done
-    fi
+    echo ""
+    echo "💡 Search: rg 'search term' --type md"
+    echo ""
+    echo "Recent additions:"
+    find . -name "*.md" -not -path "./.*" -type f -print0 | \
+        xargs -0 ls -t | head -5 | \
+        sed 's|^\./||' | \
+        while read -r file; do
+            echo "  ${file}"
+        done
 }
