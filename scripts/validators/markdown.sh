@@ -88,16 +88,39 @@ check_prerequisites() {
   return 0
 }
 
+# Find markdown configuration file with fallback
+find_markdown_config() {
+  local config_candidates=(
+    "${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
+    "${PWD}/markdown/.markdownlint.yaml"
+    "${PWD}/.markdownlint.yaml"
+  )
+
+  for config in "${config_candidates[@]}"; do
+    if [[ -f "${config}" ]]; then
+      echo "${config}"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
 # Check markdown configuration file
 check_markdown_config() {
   log_info "Checking markdown configuration..."
 
-  if [[ ! -f "${MARKDOWN_CONFIG}" ]]; then
-    log_error "Markdown configuration not found: markdown/.markdownlint.yaml"
+  # Try to find config file with fallback
+  local found_config
+  if found_config=$(find_markdown_config); then
+    MARKDOWN_CONFIG="${found_config}"
+    local relative_config="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    log_success "Markdown configuration found: ${relative_config}"
+  else
+    log_error "Markdown configuration not found in any expected location"
+    log_error "Searched: markdown/.markdownlint.yaml, .markdownlint.yaml"
     return 1
   fi
-
-  log_success "Markdown configuration found: markdown/.markdownlint.yaml"
 
   # Validate config file syntax (YAML)
   if command -v yq >/dev/null 2>&1; then
@@ -152,6 +175,9 @@ validate_markdown_file() {
   # Always run linting validation (even after fixes)
   local lint_output
   local lint_exit_code=0
+  if [[ ${VERBOSE} -eq 1 ]]; then
+    log_info "Using config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+  fi
   lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
 
   if [[ ${lint_exit_code} -eq 0 ]]; then
@@ -170,6 +196,10 @@ validate_markdown_file() {
         echo "${error_lines}" | while IFS= read -r line; do
           if [[ -n "${line}" ]]; then
             echo "    ${line}" >&2
+            # Show specific guidance for MD040 violations
+            if [[ "${line}" =~ MD040 ]]; then
+              echo "    💡 Add language specifier: \`\`\`bash, \`\`\`yaml, \`\`\`json, or \`\`\`text" >&2
+            fi
           fi
         done
       fi
