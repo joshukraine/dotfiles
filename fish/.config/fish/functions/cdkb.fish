@@ -8,7 +8,8 @@ function cdkb --description "Quick navigation to Claude Code Knowledge Base"
 
     if not test -d $target_dir
         echo "Knowledge base not found at: $target_dir"
-        echo "Run 'setup-knowledge-base' to initialize"
+        echo "Ensure CLAUDE_KB_PATH is set and directory exists"
+        echo "Create with: mkdir -p ~/claude-knowledge-base"
         return 1
     end
 
