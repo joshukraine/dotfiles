@@ -103,8 +103,6 @@ The key information, commands, or insights.
 - Links to related knowledge base entries
 - External resources
 
-```text
-
 ## Setup Requirements
 
 1. **Environment variable**: Set `$CLAUDE_KB_PATH` in shell configuration
@@ -117,4 +115,3 @@ The key information, commands, or insights.
 - Automatically creates knowledge base structure on first use
 - Suggests topics based on content analysis
 - Maintains searchable index of all saved knowledge
-```
