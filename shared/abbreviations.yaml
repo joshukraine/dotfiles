@@ -241,6 +241,15 @@ markdown:
   mdlaf:
     command: "markdownlint-cli2 --config ~/.markdownlint.yaml --fix '**/*.md'"
     description: "Lint and auto-fix all markdown files in project"
+  mdv:
+    command: "./scripts/validate-config.sh -v markdown"
+    description: "Validate markdown with dotfiles config (detailed)"
+  mdvf:
+    command: "./scripts/validate-config.sh -v markdown --fix"
+    description: "Validate and auto-fix markdown with dotfiles config"
+  mdvq:
+    command: "./scripts/validate-config.sh -v markdown --fix --quiet"
+    description: "Quick markdown validation and fix (minimal output)"
 
 # Local servers
 local_servers:
