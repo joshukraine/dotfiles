@@ -1,6 +1,7 @@
 # Process Inbox Command
 
-Process unorganized content from the knowledge base inbox into properly categorized topics.
+Process unorganized content from the knowledge base inbox into properly
+categorized topics.
 
 ## Command Usage
 
@@ -10,7 +11,8 @@ Process unorganized content from the knowledge base inbox into properly categori
 
 ## Arguments
 
-- `--auto-approve` (optional): Automatically approve suggested categorizations without prompting
+- `--auto-approve` (optional): Automatically approve suggested
+  categorizations without prompting
 
 ## Your Task
 
@@ -22,7 +24,8 @@ Process unorganized content from the knowledge base inbox into properly categori
 
 2. **Analyze each unprocessed item**:
    - **Content type**: Article summary, video notes, technical document, etc.
-   - **Topic classification**: Determine best topic category (development, troubleshooting, tools, insights, commands)
+   - **Topic classification**: Determine best topic category (development,
+     troubleshooting, tools, insights, commands)
    - **Metadata extraction**: Source URL, author, date, key themes
    - **Quality assessment**: Ensure content is well-structured and valuable
 
@@ -75,7 +78,7 @@ Process unorganized content from the knowledge base inbox into properly categori
 
 ## File Naming Convention
 
-```
+```text
 {descriptive-topic}-{source-type}-YYYY-MM-DD.md
 
 Examples:

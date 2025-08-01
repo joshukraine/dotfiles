@@ -1,6 +1,7 @@
 # Save Knowledge Command
 
-Save valuable insights, commands, or information discovered during Claude Code sessions to a personal knowledge base.
+Save valuable insights, commands, or information discovered during Claude Code
+sessions to a personal knowledge base.
 
 ## Command Usage
 
@@ -10,8 +11,10 @@ Save valuable insights, commands, or information discovered during Claude Code s
 
 ## Arguments
 
-- `topic` (optional): Category for the knowledge (e.g., "troubleshooting", "development", "commands")
-- `--session-note` (optional): Save as a session note with timestamp instead of categorized knowledge
+- `topic` (optional): Category for the knowledge (e.g., "troubleshooting",
+  "development", "commands")
+- `--session-note` (optional): Save as a session note with timestamp instead
+  of categorized knowledge
 
 ## Examples
 
@@ -57,7 +60,7 @@ Save valuable insights, commands, or information discovered during Claude Code s
 
 ## Knowledge Base Structure
 
-```
+```text
 $CLAUDE_KB_PATH/
 ├── README.md
 ├── topics/
@@ -100,7 +103,7 @@ The key information, commands, or insights.
 - Links to related knowledge base entries
 - External resources
 
-```
+```text
 
 ## Setup Requirements
 
