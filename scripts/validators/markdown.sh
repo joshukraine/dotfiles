@@ -325,15 +325,25 @@ main() {
       log_warning "Total warnings: ${WARNINGS}"
     fi
     if [[ ${FIX_MODE} -eq 1 ]]; then
-      log_info "Some issues may have been fixed. Run validation again to verify."
+      if [[ ${FILES_FIXED} -gt 0 ]]; then
+        log_info "Fixed issues in ${FILES_FIXED} file(s), but ${FILES_WITH_ERRORS} still have errors"
+        log_info "💡 Run without --fix to see remaining issues: ./scripts/validate-config.sh --validator markdown"
+      else
+        log_info "No auto-fixable issues found. Manual intervention required."
+      fi
     fi
+    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
     log_info "Markdown validation completed in ${duration}s"
     return 1
   else
     log_success "Markdown validation passed (${duration}s)"
+    if [[ ${FIX_MODE} -eq 1 && ${FILES_FIXED} -gt 0 ]]; then
+      log_success "Auto-fixed issues in ${FILES_FIXED} file(s)"
+    fi
     if [[ ${WARNINGS} -gt 0 ]]; then
       log_warning "Total warnings: ${WARNINGS}"
     fi
+    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
     return 0
   fi
 }
