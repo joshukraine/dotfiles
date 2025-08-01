@@ -353,18 +353,15 @@ This project includes comprehensive [Claude Code][claude-code] integration for A
 
 ### Available Commands
 
-| Command           | Description                                                   |
-| ----------------- | ------------------------------------------------------------- |
-| `/commit`         | Create commits with clipboard workflow (no attribution)       |
-| `/commit-auto`    | Create commits with full automation (includes attribution)    |
-| `/create-pr`      | Generate comprehensive pull requests with smart issue linking |
-| `/resolve-issue`  | Systematic GitHub issue resolution workflow                   |
-| `/review-pr`      | Thorough pull request reviews with configurable depth         |
-| `/setup-scratch`  | Initialize temporary workspace for development notes          |
-| `/new-project`    | Comprehensive project setup (use after Claude Code's `/init`) |
-| `/update-deps`    | Safe dependency updates with testing                          |
-| `/save-knowledge` | Capture session insights into structured knowledge base       |
-| `/process-inbox`  | Process web content into organized knowledge base entries     |
+| Command          | Description                                                   |
+| ---------------- | ------------------------------------------------------------- |
+| `/commit`        | Create well-formatted commits with validation                 |
+| `/create-pr`     | Generate comprehensive pull requests with smart issue linking |
+| `/resolve-issue` | Systematic GitHub issue resolution workflow                   |
+| `/review-pr`     | Thorough pull request reviews with configurable depth         |
+| `/setup-scratch` | Initialize temporary workspace for development notes          |
+| `/new-project`   | Comprehensive project setup (use after Claude Code's `/init`) |
+| `/update-deps`   | Safe dependency updates with testing                          |
 
 ### Getting Started with Claude Code
 
