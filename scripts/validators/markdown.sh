@@ -97,6 +97,20 @@ log_error() {
   ((VALIDATION_ERRORS++))
 }
 
+# Display config path with ~ notation for home directory
+display_config_path() {
+  local config_path="$1"
+  local config_display="${config_path#"${HOME}"/}"
+
+  # If the path doesn't start with home, show the full path
+  if [[ "${config_display}" == "${config_path}" ]]; then
+    echo "${config_path}"
+  else
+    # shellcheck disable=SC2088
+    echo "~/${config_display}"
+  fi
+}
+
 # Check if required tools are available
 check_prerequisites() {
   local missing_tools=()
@@ -224,16 +238,7 @@ validate_markdown_file() {
   local lint_output
   local lint_exit_code=0
   if [[ ${VERBOSE} -eq 1 ]]; then
-    # Show config path relative to home directory for clarity
-    local config_display="${MARKDOWN_CONFIG#"${HOME}"/}"
-    # If the path doesn't start with home, show the full path
-    if [[ "${config_display}" == "${MARKDOWN_CONFIG}" ]]; then
-      config_display="${MARKDOWN_CONFIG}"
-    else
-      # shellcheck disable=SC2088
-      config_display="~/${config_display}"
-    fi
-    log_info "Using config: ${config_display}"
+    log_info "Using config: $(display_config_path "${MARKDOWN_CONFIG}")"
   fi
   lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
 
@@ -399,16 +404,7 @@ main() {
         log_info "No auto-fixable issues found. Manual intervention required."
       fi
     fi
-    # Show config path relative to home directory for clarity
-    local config_display="${MARKDOWN_CONFIG#"${HOME}"/}"
-    # If the path doesn't start with home, show the full path
-    if [[ "${config_display}" == "${MARKDOWN_CONFIG}" ]]; then
-      config_display="${MARKDOWN_CONFIG}"
-    else
-      # shellcheck disable=SC2088
-      config_display="~/${config_display}"
-    fi
-    log_info "Config: ${config_display}"
+    log_info "Config: $(display_config_path "${MARKDOWN_CONFIG}")"
     log_info "Markdown validation completed in ${duration}s"
     return 1
   else
@@ -419,16 +415,7 @@ main() {
     if [[ ${WARNINGS} -gt 0 ]]; then
       log_warning "Total warnings: ${WARNINGS}"
     fi
-    # Show config path relative to home directory for clarity
-    local config_display="${MARKDOWN_CONFIG#"${HOME}"/}"
-    # If the path doesn't start with home, show the full path
-    if [[ "${config_display}" == "${MARKDOWN_CONFIG}" ]]; then
-      config_display="${MARKDOWN_CONFIG}"
-    else
-      # shellcheck disable=SC2088
-      config_display="~/${config_display}"
-    fi
-    log_info "Config: ${config_display}"
+    log_info "Config: $(display_config_path "${MARKDOWN_CONFIG}")"
     return 0
   fi
 }
