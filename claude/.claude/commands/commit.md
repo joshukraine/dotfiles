@@ -23,9 +23,9 @@ Create git commits with intelligent message generation - Claude Code handles ana
    - If multiple commits are recommended: Help stage and commit changes separately, one logical group at a time
    - If single commit is appropriate: Stage remaining files (if none were already staged) and proceed
 7. **Generate commit message**: Create a commit message following the Conventional Commits format from global CLAUDE.md
-8. **Prepare commit**: Generate the commit message and copy the full git command to clipboard using pbcopy
-9. **Display for review**: Show the command was copied and display it for confirmation
-10. **User executes**: User pastes (Cmd+V) and runs the git command to maintain collaborative workflow
+8. **Prepare commit**: Generate the commit message and copy just the message content to clipboard using pbcopy
+9. **Display for review**: Show the message was copied and display it for confirmation
+10. **User executes**: User pastes (Cmd+V) the message into their git tool (Lazygit, command line, etc.)
 11. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
 12. **Confirm completion**: After user executes commit(s), offer to help with next steps like pushing to remote
 
@@ -58,14 +58,14 @@ When analyzing the diff, consider splitting commits based on these criteria:
 
 📝 Commit message: "feat: add user authentication system"
 
-📋 Command copied to clipboard! Just paste and run:
-git commit -m "feat: add user authentication system
+📋 Message copied to clipboard! Just paste into your git tool:
+feat: add user authentication system
 
-Add JWT-based authentication with secure session management..."
+Add JWT-based authentication with secure session management...
 
-🎯 Ready to paste and execute
+🎯 Ready to paste into Lazygit or git command line
 ```
 
 When displaying the summary, ensure each line is output independently with proper spacing to prevent concatenation in the terminal.
 
-**Note**: The collaborative approach (user executes the git command) prevents Claude Code attribution from being automatically added to commits.
+**Note**: The collaborative approach (user executes via their preferred git tool) prevents Claude Code attribution from being automatically added to commits. Works seamlessly with Lazygit, command line, or any git interface.
