@@ -445,14 +445,14 @@ This repository includes a complete markdownlint setup for consistent markdown f
 
 ### Features
 
-- **Global Configuration**: Uses `~/.markdownlint.yaml` with sensible defaults:
-  - Disabled line length rule (MD013) for better readability
-  - Allows common inline HTML elements (`details`, `summary`, `strong`)
-  - Supports trailing punctuation including CJK characters
-  - Allows bare URLs (MD034 disabled)
-- **Shell Abbreviations**: Quick access via `mdl` commands
+- **Fallback Configuration Discovery**: Automatically finds markdown config in multiple locations:
+  - `~/dotfiles/markdown/.markdownlint.yaml` (primary)
+  - `PWD/markdown/.markdownlint.yaml` (project-specific)
+  - `PWD/.markdownlint.yaml` (project root)
+- **Global Wrapper Script**: `markdown-validate` command available system-wide
+- **Shell Abbreviations**: Quick access via `mdl`/`mdv` commands
 - **Editor Integration**: Works seamlessly with Neovim/LazyVim
-- **CI/CD Support**: Includes sample GitHub Actions workflow
+- **Auto-fix Coordination**: Prettier → markdownlint-cli2 tool chain
 
 ### Usage
 
@@ -461,30 +461,35 @@ This repository includes a complete markdownlint setup for consistent markdown f
 brew bundle install
 
 # Lint files using abbreviations
-mdl README.md              # Lint single file
-mdlf README.md             # Auto-fix single file
-mdla                       # Lint all .md files recursively
-mdlaf                      # Fix all .md files recursively
+mdl                        # Lint *.md files in current directory
+mdlf                       # Auto-fix *.md files in current directory
+mdla                       # Lint **/*.md files recursively
+mdlaf                      # Fix **/*.md files recursively
 
-# Or use the global helper script
-mdl-global README.md       # Always uses ~/.markdownlint.yaml
+# Global validation with dotfiles config
+mdv                        # Detailed validation (markdown-validate)
+mdvf                       # Validation with auto-fix
+mdvq                       # Quick fix with minimal output
 ```
 
 ### CI Integration
 
-Copy the example workflow to any project:
+Markdown validation is integrated into the main validation workflow. For manual validation:
 
 ```bash
-cp ~/dotfiles/.github/workflows/markdownlint.yml.example .github/workflows/markdownlint.yml
-```
+# Validate markdown files
+./scripts/validate-config.sh --validator markdown --fix
 
-This will run markdownlint on all markdown files in pull requests and pushes.
+# Use the global wrapper from any directory
+markdown-validate --fix
+```
 
 ### Customization
 
-- **Global config**: Edit `~/dotfiles/markdown/.markdownlint.yaml`
-- **Project-specific**: Create `.markdownlint.yaml` in your project root
+- **Dotfiles config**: Edit `~/dotfiles/markdown/.markdownlint.yaml`
+- **Project-specific**: Create `markdown/.markdownlint.yaml` or `.markdownlint.yaml` in project
 - **Add abbreviations**: Edit `~/dotfiles/shared/abbreviations.yaml` and run `reload-abbr`
+- **Global access**: Use `markdown-validate` wrapper from any directory
 
 ## About Neovim Distributions
 

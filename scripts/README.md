@@ -125,12 +125,12 @@ Individual validation modules for specific configuration types:
 #### 5. Markdown Validator (`markdown.sh`)
 
 - **Purpose**: Validates markdown formatting and style consistency
-- **Tools**: `markdownlint-cli2`
+- **Tools**: `markdownlint-cli2`, `prettier`
 - **Coverage**: All .md files (excluding scratchpads)
 - **Features**:
-  - Comprehensive markdown linting
-  - Auto-fix for formatting issues
-  - Configuration via `.markdownlint.yaml`
+  - Fallback configuration discovery (dotfiles/markdown/, PWD/markdown/, PWD/)
+  - Auto-fix coordination: prettier → markdownlint-cli2
+  - Enhanced error reporting with specific guidance (MD040 violations)
   - Fast execution (~1.2 seconds)
 
 ## Usage Guide
@@ -200,7 +200,7 @@ Local validation via `.pre-commit-config.yaml`:
 - Shell syntax validation on shell file changes
 - Abbreviation consistency on YAML/abbreviation file changes
 - Environment validation on environment file changes
-- Markdown linting with auto-fix on markdown changes
+- ~~Markdown linting~~ (disabled for commit speed - use manual validation)
 
 **Setup:**
 
@@ -301,9 +301,10 @@ time ./scripts/validate-config.sh --quiet
 
 **Markdown linting errors:**
 
-- Review `.markdownlint.yaml` configuration
+- Configuration discovered automatically in multiple locations
 - Auto-fix: `./scripts/validate-config.sh --fix --validator markdown`
-- Manual fix: `markdownlint-cli2 --fix *.md`
+- Global wrapper: `markdown-validate --fix`
+- Manual: `markdownlint-cli2 --config path/to/.markdownlint.yaml --fix "*.md"`
 
 ### Debug Mode
 
