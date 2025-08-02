@@ -18,6 +18,7 @@ set -euo pipefail
 
 # Inherit configuration from main validator
 DOTFILES_ROOT="${DOTFILES_ROOT:-$(pwd)}"
+TARGET_DIR="${MARKDOWN_TARGET_DIR:-${DOTFILES_ROOT}}"
 FIX_MODE="${FIX_MODE:-0}"
 REPORT_MODE="${REPORT_MODE:-0}"
 CI_MODE="${CI_MODE:-0}"
@@ -92,8 +93,8 @@ check_prerequisites() {
 find_markdown_config() {
   local config_candidates=(
     "${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
-    "${PWD}/markdown/.markdownlint.yaml"
-    "${PWD}/.markdownlint.yaml"
+    "${TARGET_DIR}/markdown/.markdownlint.yaml"
+    "${TARGET_DIR}/.markdownlint.yaml"
   )
 
   for config in "${config_candidates[@]}"; do
@@ -114,7 +115,13 @@ check_markdown_config() {
   local found_config
   if found_config=$(find_markdown_config); then
     MARKDOWN_CONFIG="${found_config}"
-    local relative_config="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    # Show relative to dotfiles if it's the dotfiles config, otherwise relative to target
+    local relative_config
+    if [[ "${MARKDOWN_CONFIG}" == "${DOTFILES_ROOT}"* ]]; then
+      relative_config="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    else
+      relative_config="${MARKDOWN_CONFIG#"${TARGET_DIR}"/}"
+    fi
     log_success "Markdown configuration found: ${relative_config}"
   else
     log_error "Markdown configuration not found in any expected location"
@@ -140,7 +147,7 @@ find_markdown_files() {
   # - scratchpads (temporary files)
   # - .git directory
   # - external plugins (tmux plugins, etc.)
-  find "${DOTFILES_ROOT}" \
+  find "${TARGET_DIR}" \
     -name "*.md" \
     -not -path "*/scratchpads/*" \
     -not -path "*/.git/*" \
@@ -153,7 +160,7 @@ find_markdown_files() {
 # Validate a single markdown file
 validate_markdown_file() {
   local file="$1"
-  local relative_file="${file#"${DOTFILES_ROOT}"/}"
+  local relative_file="${file#"${TARGET_DIR}"/}"
 
   # In fix mode, run prettier first for formatting, then markdownlint for remaining issues
   # This matches LazyVim's formatting chain: prettier → markdownlint-cli2
@@ -186,7 +193,14 @@ validate_markdown_file() {
   local lint_output
   local lint_exit_code=0
   if [[ ${VERBOSE} -eq 1 ]]; then
-    log_info "Using config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    # Show config path relative to appropriate base
+    local config_display
+    if [[ "${MARKDOWN_CONFIG}" == "${DOTFILES_ROOT}"* ]]; then
+      config_display="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    else
+      config_display="${MARKDOWN_CONFIG#"${TARGET_DIR}"/}"
+    fi
+    log_info "Using config: ${config_display}"
   fi
   lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
 
@@ -291,8 +305,8 @@ main() {
   local start_time
   start_time=$(date +%s)
 
-  # Change to dotfiles root
-  cd "${DOTFILES_ROOT}"
+  # Change to target directory
+  cd "${TARGET_DIR}"
 
   # Check prerequisites
   if ! check_prerequisites; then
@@ -332,7 +346,14 @@ main() {
         log_info "No auto-fixable issues found. Manual intervention required."
       fi
     fi
-    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    # Show config path relative to appropriate base
+    local config_display
+    if [[ "${MARKDOWN_CONFIG}" == "${DOTFILES_ROOT}"* ]]; then
+      config_display="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    else
+      config_display="${MARKDOWN_CONFIG#"${TARGET_DIR}"/}"
+    fi
+    log_info "Config: ${config_display}"
     log_info "Markdown validation completed in ${duration}s"
     return 1
   else
@@ -343,7 +364,14 @@ main() {
     if [[ ${WARNINGS} -gt 0 ]]; then
       log_warning "Total warnings: ${WARNINGS}"
     fi
-    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    # Show config path relative to appropriate base
+    local config_display
+    if [[ "${MARKDOWN_CONFIG}" == "${DOTFILES_ROOT}"* ]]; then
+      config_display="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    else
+      config_display="${MARKDOWN_CONFIG#"${TARGET_DIR}"/}"
+    fi
+    log_info "Config: ${config_display}"
     return 0
   fi
 }
