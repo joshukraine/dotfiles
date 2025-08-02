@@ -602,7 +602,7 @@ rails:
   rdbs:
     command: "bin/rails db:seed"
     description: "Seed database with data"
-  rg:
+  rgen:
     command: "bin/rails generate"
     description: "Generate Rails code"
   rgc:
