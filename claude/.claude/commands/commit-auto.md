@@ -1,6 +1,6 @@
 # Automated Commit Command
 
-Create and execute git commits with full automation including Claude Code attribution.
+Create and execute git commits with full automation.
 
 ## Command Options
 
@@ -23,7 +23,7 @@ Create and execute git commits with full automation including Claude Code attrib
    - If multiple commits are recommended: Help stage and commit changes separately, one logical group at a time
    - If single commit is appropriate: Stage remaining files (if none were already staged) and proceed
 7. **Generate commit message**: Create a commit message following the Conventional Commits format from global CLAUDE.md
-8. **Execute commit**: Run the git commit command directly with the generated message and Claude Code attribution (including `--no-verify` flag if specified)
+8. **Execute commit**: Run the git commit command directly with the generated message (including `--no-verify` flag if specified)
 9. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
 10. **Confirm**: Show the commit hash and ask if I want to push to remote (only after all commits are complete)
 
@@ -36,19 +36,6 @@ Follow the Conventional Commits format and best practices defined in the global 
 - Use present tense, imperative mood
 - **DO NOT** include issue closing references like "Closes #123" in commit messages
 - Issue references belong in PR descriptions, not individual commits
-- **Include Claude Code attribution** in the commit message footer
-
-## Commit Attribution Format
-
-All automated commits include proper attribution:
-
-```text
-<commit-message>
-
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
 
 ## Guidelines for Splitting Commits
 
@@ -69,7 +56,7 @@ When analyzing the diff, consider splitting commits based on these criteria:
 
 📝 Commit message: "feat: add user authentication system"
 
-🎯 Executing commit with attribution...
+🎯 Executing commit...
 
 🤖 Commit created: abc1234
 ```
@@ -79,6 +66,6 @@ When displaying the summary, ensure each line is output independently with prope
 ## Key Differences from `/commit`
 
 - **Execution**: Commands are run automatically by Claude Code
-- **Attribution**: Includes Claude Code attribution in commit messages
+- **Attribution**: Includes automatic attribution (built-in Claude Code behavior)
 - **Workflow**: Fully automated - no clipboard interaction required
 - **Traceability**: Clear indication of AI-assisted commit creation
