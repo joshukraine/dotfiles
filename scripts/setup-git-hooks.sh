@@ -140,7 +140,7 @@ else
   NC=''
 fi
 
-# Check if working tree is dirty (has unstaged changes)
+# Check if working tree is dirty (has staged or unstaged changes)
 if ! git diff-index --quiet HEAD --; then
   echo
   echo -e "${YELLOW}⚠️  WARNING: Working tree is dirty after commit${NC}" >&2
