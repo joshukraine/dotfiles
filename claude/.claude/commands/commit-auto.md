@@ -1,6 +1,6 @@
-# Collaborative Commit Command
+# Automated Commit Command
 
-Create git commits with intelligent message generation - Claude Code handles analysis and staging, you execute the commits for clean attribution.
+Create and execute git commits with full automation.
 
 ## Command Options
 
@@ -23,11 +23,9 @@ Create git commits with intelligent message generation - Claude Code handles ana
    - If multiple commits are recommended: Help stage and commit changes separately, one logical group at a time
    - If single commit is appropriate: Stage remaining files (if none were already staged) and proceed
 7. **Generate commit message**: Create a commit message following the Conventional Commits format from global CLAUDE.md
-8. **Prepare commit**: Generate the commit message and copy just the message content to clipboard using pbcopy
-9. **Display for review**: Show the message was copied and display it for confirmation
-10. **User executes**: User pastes (Cmd+V) the message into their git tool (Lazygit, command line, etc.)
-11. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
-12. **Confirm completion**: After user executes commit(s), offer to help with next steps like pushing to remote
+8. **Execute commit**: Run the git commit command directly with the generated message (including `--no-verify` flag if specified)
+9. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
+10. **Confirm**: Show the commit hash and ask if I want to push to remote (only after all commits are complete)
 
 ## Commit Standards
 
@@ -58,14 +56,16 @@ When analyzing the diff, consider splitting commits based on these criteria:
 
 📝 Commit message: "feat: add user authentication system"
 
-📋 Message copied to clipboard! Just paste into your git tool:
-feat: add user authentication system
+🎯 Executing commit...
 
-Add JWT-based authentication with secure session management...
-
-🎯 Ready to paste into Lazygit or git command line
+🤖 Commit created: abc1234
 ```
 
 When displaying the summary, ensure each line is output independently with proper spacing to prevent concatenation in the terminal.
 
-**Note**: The collaborative approach (user executes via their preferred git tool) prevents Claude Code attribution from being automatically added to commits. Works seamlessly with Lazygit, command line, or any git interface.
+## Key Differences from `/commit`
+
+- **Execution**: Commands are run automatically by Claude Code
+- **Attribution**: Includes automatic attribution (built-in Claude Code behavior)
+- **Workflow**: Fully automated - no clipboard interaction required
+- **Traceability**: Clear indication of AI-assisted commit creation
