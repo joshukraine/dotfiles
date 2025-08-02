@@ -39,6 +39,7 @@ fi
 
 # Parse arguments and build command
 VALIDATOR_ARGS=("-v" "markdown")
+TARGET_DIR="${PWD}"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -68,6 +69,7 @@ while [[ $# -gt 0 ]]; do
             echo "  markdown-validate -f -q     # Quick fix with minimal output"
             echo
             echo "This script uses the markdown configuration from ~/dotfiles/markdown/.markdownlint.yaml"
+            echo "but validates files in the current working directory: ${PWD}"
             exit 0
             ;;
         *)
@@ -78,5 +80,5 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Execute the validator from anywhere
-exec "${VALIDATOR_SCRIPT}" "${VALIDATOR_ARGS[@]}"
+# Execute the validator with target directory
+env MARKDOWN_TARGET_DIR="${TARGET_DIR}" "${VALIDATOR_SCRIPT}" "${VALIDATOR_ARGS[@]}"

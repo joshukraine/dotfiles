@@ -2,8 +2,10 @@
 #
 # Git Hooks Setup Script
 #
-# Sets up pre-commit hooks for automated configuration validation
-# during the development workflow.
+# Sets up git hooks for automated configuration validation and workflow enhancement:
+# - Pre-commit hooks for linting and validation (via pre-commit framework)
+# - Pre-push hooks for additional checks
+# - Post-commit hook to detect dirty working tree after commits
 #
 # Usage:
 #   ./scripts/setup-git-hooks.sh [options]
@@ -57,7 +59,9 @@ show_usage() {
   cat <<EOF
 Git Hooks Setup Script
 
-Sets up pre-commit hooks for automated configuration validation.
+Sets up git hooks for automated configuration validation and workflow enhancement:
+- Pre-commit and pre-push hooks (via pre-commit framework)
+- Post-commit hook to detect dirty working tree after commits
 
 USAGE:
     ./scripts/setup-git-hooks.sh [OPTIONS]
@@ -104,6 +108,59 @@ check_prerecommit() {
   return 0
 }
 
+# Install post-commit hook for dirty working tree detection
+install_postcommit_hook() {
+  local git_hooks_dir
+  git_hooks_dir="$(git rev-parse --git-dir)/hooks"
+  local hook_file="${git_hooks_dir}/post-commit"
+
+  log_info "Installing post-commit hook..."
+
+  # Create post-commit hook
+  cat > "${hook_file}" << 'EOF'
+#!/bin/bash
+#
+# Post-commit hook to detect when pre-commit hooks have left the working tree dirty
+#
+# This happens when pre-commit hooks (like trailing-whitespace, end-of-file-fixer)
+# automatically modify files after they've been staged but before the commit is created.
+
+set -euo pipefail
+
+# Colors for output
+if [[ -t 1 ]]; then
+  YELLOW='\033[1;33m'
+  RED='\033[0;31m'
+  BLUE='\033[0;34m'
+  NC='\033[0m' # No Color
+else
+  YELLOW=''
+  RED=''
+  BLUE=''
+  NC=''
+fi
+
+# Check if working tree is dirty (has staged or unstaged changes)
+if ! git diff-index --quiet HEAD --; then
+  echo
+  echo -e "${YELLOW}⚠️  WARNING: Working tree is dirty after commit${NC}" >&2
+  echo -e "${BLUE}ℹ️  This usually happens when pre-commit hooks auto-fix files after staging.${NC}" >&2
+  echo
+  echo -e "${RED}Unstaged changes detected:${NC}" >&2
+  git diff --name-only HEAD
+  echo
+  echo -e "${BLUE}💡 To fix this, run one of:${NC}" >&2
+  echo -e "   ${BLUE}git add . && git commit --amend --no-edit${NC}  # Include fixes in last commit" >&2
+  echo -e "   ${BLUE}git add . && git commit -m \"style: auto-fix by pre-commit hooks\"${NC}  # Separate commit" >&2
+  echo
+fi
+EOF
+
+  # Make executable
+  chmod +x "${hook_file}"
+  log_success "Post-commit hook installed"
+}
+
 # Install git hooks
 install_hooks() {
   log_info "Installing git hooks..."
@@ -118,7 +175,10 @@ install_hooks() {
 
   # Install pre-commit hooks
   if pre-commit install --hook-type pre-commit --hook-type pre-push; then
-    log_success "Git hooks installed successfully"
+    log_success "Pre-commit framework hooks installed"
+
+    # Install custom post-commit hook
+    install_postcommit_hook
 
     # Show hook status
     log_info "Installed hooks:"
@@ -147,7 +207,7 @@ uninstall_hooks() {
 
   if command -v pre-commit >/dev/null 2>&1; then
     pre-commit uninstall --hook-type pre-commit --hook-type pre-push
-    log_success "Git hooks uninstalled successfully"
+    log_success "Pre-commit framework hooks uninstalled"
   else
     log_warning "pre-commit not found, removing hooks manually..."
 
@@ -159,6 +219,13 @@ uninstall_hooks() {
         log_success "Removed ${hook} hook"
       fi
     done
+  fi
+
+  # Remove custom post-commit hook
+  git_hooks_dir="$(git rev-parse --git-dir)/hooks"
+  if [[ -f "${git_hooks_dir}/post-commit" ]]; then
+    rm "${git_hooks_dir}/post-commit"
+    log_success "Removed post-commit hook"
   fi
 }
 
@@ -184,6 +251,13 @@ check_hooks() {
     log_warning "pre-push hook is NOT installed"
   fi
 
+  # Check for post-commit hook
+  if [[ -f "${git_hooks_dir}/post-commit" ]]; then
+    log_success "post-commit hook is installed"
+  else
+    log_warning "post-commit hook is NOT installed"
+  fi
+
   # Check pre-commit status
   if command -v pre-commit >/dev/null 2>&1; then
     echo
@@ -192,9 +266,6 @@ check_hooks() {
 
     if [[ -f ".pre-commit-config.yaml" ]]; then
       log_success "Pre-commit config file exists"
-      echo
-      echo "Configured hooks:"
-      pre-commit --list
     else
       log_warning "Pre-commit config file missing"
     fi

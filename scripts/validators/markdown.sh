@@ -18,6 +18,7 @@ set -euo pipefail
 
 # Inherit configuration from main validator
 DOTFILES_ROOT="${DOTFILES_ROOT:-$(pwd)}"
+TARGET_DIR="${MARKDOWN_TARGET_DIR:-${DOTFILES_ROOT}}"
 FIX_MODE="${FIX_MODE:-0}"
 REPORT_MODE="${REPORT_MODE:-0}"
 CI_MODE="${CI_MODE:-0}"
@@ -28,6 +29,24 @@ VALIDATION_ERRORS=0
 WARNINGS=0
 FILES_WITH_ERRORS=0
 FILES_FIXED=0
+FAILED_FILES=()
+
+# Color codes for output
+if [[ -t 2 ]] && [[ "${CI:-}" != "true" ]] && [[ ${CI_MODE} -eq 0 ]]; then
+  RED='\033[0;31m'
+  GREEN='\033[0;32m'
+  YELLOW='\033[1;33m'
+  BLUE='\033[0;34m'
+  BOLD='\033[1m'
+  NC='\033[0m' # No Color
+else
+  RED=''
+  GREEN=''
+  YELLOW=''
+  BLUE=''
+  BOLD=''
+  NC=''
+fi
 
 # File paths
 MARKDOWN_CONFIG="${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
@@ -35,13 +54,26 @@ MARKDOWN_CONFIG="${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
 # Logging functions
 log_info() {
   if [[ ${VERBOSE} -eq 1 && ${CI_MODE} -eq 0 ]]; then
-    echo "  ℹ $1" >&2
+    echo -e "  ${BLUE}ℹ${NC} $1" >&2
+  fi
+}
+
+log_target() {
+  if [[ ${CI_MODE} -eq 0 ]]; then
+    # Show target directory with ~ notation for home directory
+    local target_display="$1"
+    if [[ "$1" == "${HOME}"* ]]; then
+      target_display="~${1#"${HOME}"}"
+    fi
+    echo >&2
+    echo -e "  ${BOLD}${BLUE}📁 Target Directory: ${YELLOW}${target_display}${NC}" >&2
+    echo >&2
   fi
 }
 
 log_success() {
   if [[ ${CI_MODE} -eq 0 ]]; then
-    echo "  ✓ $1" >&2
+    echo -e "  ${GREEN}✓${NC} $1" >&2
   else
     echo "MARKDOWN_SUCCESS: $1" >&2
   fi
@@ -49,7 +81,7 @@ log_success() {
 
 log_warning() {
   if [[ ${CI_MODE} -eq 0 ]]; then
-    echo "  ⚠ $1" >&2
+    echo -e "  ${YELLOW}⚠${NC} $1" >&2
   else
     echo "MARKDOWN_WARNING: $1" >&2
   fi
@@ -58,11 +90,25 @@ log_warning() {
 
 log_error() {
   if [[ ${CI_MODE} -eq 0 ]]; then
-    echo "  ✗ $1" >&2
+    echo -e "  ${RED}✗${NC} $1" >&2
   else
     echo "MARKDOWN_ERROR: $1" >&2
   fi
   ((VALIDATION_ERRORS++))
+}
+
+# Display config path with ~ notation for home directory
+display_config_path() {
+  local config_path="$1"
+  local config_display="${config_path#"${HOME}"/}"
+
+  # If the path doesn't start with home, show the full path
+  if [[ "${config_display}" == "${config_path}" ]]; then
+    echo "${config_path}"
+  else
+    # shellcheck disable=SC2088
+    echo "~/${config_display}"
+  fi
 }
 
 # Check if required tools are available
@@ -92,8 +138,8 @@ check_prerequisites() {
 find_markdown_config() {
   local config_candidates=(
     "${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
-    "${PWD}/markdown/.markdownlint.yaml"
-    "${PWD}/.markdownlint.yaml"
+    "${TARGET_DIR}/markdown/.markdownlint.yaml"
+    "${TARGET_DIR}/.markdownlint.yaml"
   )
 
   for config in "${config_candidates[@]}"; do
@@ -114,7 +160,13 @@ check_markdown_config() {
   local found_config
   if found_config=$(find_markdown_config); then
     MARKDOWN_CONFIG="${found_config}"
-    local relative_config="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    # Show relative to dotfiles if it's the dotfiles config, otherwise relative to target
+    local relative_config
+    if [[ "${MARKDOWN_CONFIG}" == "${DOTFILES_ROOT}"* ]]; then
+      relative_config="${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    else
+      relative_config="${MARKDOWN_CONFIG#"${TARGET_DIR}"/}"
+    fi
     log_success "Markdown configuration found: ${relative_config}"
   else
     log_error "Markdown configuration not found in any expected location"
@@ -140,7 +192,7 @@ find_markdown_files() {
   # - scratchpads (temporary files)
   # - .git directory
   # - external plugins (tmux plugins, etc.)
-  find "${DOTFILES_ROOT}" \
+  find "${TARGET_DIR}" \
     -name "*.md" \
     -not -path "*/scratchpads/*" \
     -not -path "*/.git/*" \
@@ -153,7 +205,7 @@ find_markdown_files() {
 # Validate a single markdown file
 validate_markdown_file() {
   local file="$1"
-  local relative_file="${file#"${DOTFILES_ROOT}"/}"
+  local relative_file="${file#"${TARGET_DIR}"/}"
 
   # In fix mode, run prettier first for formatting, then markdownlint for remaining issues
   # This matches LazyVim's formatting chain: prettier → markdownlint-cli2
@@ -186,7 +238,7 @@ validate_markdown_file() {
   local lint_output
   local lint_exit_code=0
   if [[ ${VERBOSE} -eq 1 ]]; then
-    log_info "Using config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    log_info "Using config: $(display_config_path "${MARKDOWN_CONFIG}")"
   fi
   lint_output=$(markdownlint-cli2 --config "${MARKDOWN_CONFIG}" "${file}" 2>&1) || lint_exit_code=$?
 
@@ -196,6 +248,7 @@ validate_markdown_file() {
   else
     log_error "Markdown errors: ${relative_file}"
     ((FILES_WITH_ERRORS++))
+    FAILED_FILES+=("${relative_file}")
 
     # Show error details if verbose
     if [[ ${VERBOSE} -eq 1 ]]; then
@@ -291,8 +344,11 @@ main() {
   local start_time
   start_time=$(date +%s)
 
-  # Change to dotfiles root
-  cd "${DOTFILES_ROOT}"
+  # Change to target directory
+  cd "${TARGET_DIR}"
+
+  # Show target directory being validated
+  log_target "${TARGET_DIR}"
 
   # Check prerequisites
   if ! check_prerequisites; then
@@ -324,6 +380,22 @@ main() {
     if [[ ${WARNINGS} -gt 0 ]]; then
       log_warning "Total warnings: ${WARNINGS}"
     fi
+    # Show list of failed files
+    if [[ ${#FAILED_FILES[@]} -gt 0 ]]; then
+      echo >&2
+      if [[ ${CI_MODE} -eq 0 ]]; then
+        echo -e "  ${BOLD}${RED}📋 Files with errors:${NC}" >&2
+        for file in "${FAILED_FILES[@]}"; do
+          echo -e "    ${RED}•${NC} ${file}" >&2
+        done
+      else
+        echo "MARKDOWN_FAILED_FILES: $(
+          IFS=', '
+          echo "${FAILED_FILES[*]}"
+        )" >&2
+      fi
+      echo >&2
+    fi
     if [[ ${FIX_MODE} -eq 1 ]]; then
       if [[ ${FILES_FIXED} -gt 0 ]]; then
         log_info "Fixed issues in ${FILES_FIXED} file(s), but ${FILES_WITH_ERRORS} still have errors"
@@ -332,7 +404,7 @@ main() {
         log_info "No auto-fixable issues found. Manual intervention required."
       fi
     fi
-    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    log_info "Config: $(display_config_path "${MARKDOWN_CONFIG}")"
     log_info "Markdown validation completed in ${duration}s"
     return 1
   else
@@ -343,7 +415,7 @@ main() {
     if [[ ${WARNINGS} -gt 0 ]]; then
       log_warning "Total warnings: ${WARNINGS}"
     fi
-    log_info "Config: ${MARKDOWN_CONFIG#"${DOTFILES_ROOT}"/}"
+    log_info "Config: $(display_config_path "${MARKDOWN_CONFIG}")"
     return 0
   fi
 }

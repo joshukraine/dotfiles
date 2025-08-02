@@ -45,7 +45,7 @@ repos:
 
   # External validation tools
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
       # Basic file checks
       - id: check-yaml
@@ -65,14 +65,14 @@ repos:
 
   # Shellcheck integration
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.6
+    rev: v0.10.0.1
     hooks:
       - id: shellcheck
         exclude: ^(scratchpads/|\.github/|.*plugins/)
 
   # YAML validation
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.32.0
+    rev: v1.37.1
     hooks:
       - id: yamllint
         args: [--config-file=yamllint/.yamllint]
