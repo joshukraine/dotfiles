@@ -1,6 +1,6 @@
-# Collaborative Commit Command
+# Automated Commit Command
 
-Create git commits with intelligent message generation - Claude Code handles analysis and staging, you execute the commits for clean attribution.
+Create and execute git commits with full automation including Claude Code attribution.
 
 ## Command Options
 
@@ -23,11 +23,9 @@ Create git commits with intelligent message generation - Claude Code handles ana
    - If multiple commits are recommended: Help stage and commit changes separately, one logical group at a time
    - If single commit is appropriate: Stage remaining files (if none were already staged) and proceed
 7. **Generate commit message**: Create a commit message following the Conventional Commits format from global CLAUDE.md
-8. **Prepare commit**: Generate the commit message and copy the full git command to clipboard using pbcopy
-9. **Display for review**: Show the command was copied and display it for confirmation
-10. **User executes**: User pastes (Cmd+V) and runs the git command to maintain collaborative workflow
-11. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
-12. **Confirm completion**: After user executes commit(s), offer to help with next steps like pushing to remote
+8. **Execute commit**: Run the git commit command directly with the generated message and Claude Code attribution (including `--no-verify` flag if specified)
+9. **Repeat if needed**: If this was part of a multi-commit process, return to step 5 for remaining changes
+10. **Confirm**: Show the commit hash and ask if I want to push to remote (only after all commits are complete)
 
 ## Commit Standards
 
@@ -38,6 +36,19 @@ Follow the Conventional Commits format and best practices defined in the global 
 - Use present tense, imperative mood
 - **DO NOT** include issue closing references like "Closes #123" in commit messages
 - Issue references belong in PR descriptions, not individual commits
+- **Include Claude Code attribution** in the commit message footer
+
+## Commit Attribution Format
+
+All automated commits include proper attribution:
+
+```text
+<commit-message>
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
 
 ## Guidelines for Splitting Commits
 
@@ -58,14 +69,16 @@ When analyzing the diff, consider splitting commits based on these criteria:
 
 📝 Commit message: "feat: add user authentication system"
 
-📋 Command copied to clipboard! Just paste and run:
-git commit -m "feat: add user authentication system
+🎯 Executing commit with attribution...
 
-Add JWT-based authentication with secure session management..."
-
-🎯 Ready to paste and execute
+🤖 Commit created: abc1234
 ```
 
 When displaying the summary, ensure each line is output independently with proper spacing to prevent concatenation in the terminal.
 
-**Note**: The collaborative approach (user executes the git command) prevents Claude Code attribution from being automatically added to commits.
+## Key Differences from `/commit`
+
+- **Execution**: Commands are run automatically by Claude Code
+- **Attribution**: Includes Claude Code attribution in commit messages
+- **Workflow**: Fully automated - no clipboard interaction required
+- **Traceability**: Clear indication of AI-assisted commit creation
