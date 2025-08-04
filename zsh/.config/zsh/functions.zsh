@@ -25,7 +25,7 @@ function ct() {
 # Returns: Command history with formatted timestamps (YYYY-MM-DD HH:MM:SS)
 function hist() {
     local count=${1:-20}
-    fc -l -t "%Y-%m-%d %H:%M:%S" -"${count}"
+    fc -li -"${count}"
 }
 
 # Copy current working directory to clipboard with format options
