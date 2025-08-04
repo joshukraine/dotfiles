@@ -789,7 +789,7 @@ tmuxinator:
     command: "tmuxinator start bfo2"
     description: "TODO: Add project-specific description"
   msbc:
-    command: "tmuxinator start bf_curriculum"
+    command: "tmuxinator start bfc"
     description: "TODO: Add project-specific description"
   msc:
     command: "tmuxinator start comix_distro"
