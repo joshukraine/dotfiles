@@ -34,7 +34,7 @@ sessions to a personal knowledge base.
 1. **Determine save location**:
    - Check if `$CLAUDE_KB_PATH` environment variable is set
    - Default to `~/claude-knowledge-base/` if not set
-   - Create directory structure if it doesn't exist using:
+   - ONLY IF the basic directory structure doesn't exist, create it using this command:
 
    ```bash
    mkdir -p "$CLAUDE_KB_PATH"/{.config,inbox/{web-articles,videos,documents},topics/{development,troubleshooting,commands,tools,insights},sessions}
