@@ -56,7 +56,7 @@ This file provides project-agnostic principles and standards for Claude Code
 - Use consistent formatting (leverage auto-formatters)
 - Follow AAA pattern for tests: Arrange, Act, Assert
 - Keep PRs focused and reviewable
-- Maintain backward compatibility when possible
+- Prioritize simplicity over backward compatibility unless explicitly requested
 
 ---
 
