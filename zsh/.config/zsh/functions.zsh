@@ -11,6 +11,23 @@ function ct() {
   ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
 }
 
+# Display command history with custom timestamp formatting
+#
+# Usage: hist [number]
+# Arguments:
+#   number - Optional number of recent commands to display (defaults to 20)
+#
+# Examples:
+#   hist                    # Show last 20 commands with timestamps
+#   hist 10                 # Show last 10 commands with timestamps
+#   hist 50                 # Show last 50 commands with timestamps
+#
+# Returns: Command history with formatted timestamps (YYYY-MM-DD HH:MM:SS)
+function hist() {
+    local count=${1:-20}
+    fc -l -t "%Y-%m-%d %H:%M:%S" -"${count}"
+}
+
 # Copy current working directory to clipboard with format options
 #
 # Usage: copycwd

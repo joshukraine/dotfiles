@@ -28,10 +28,19 @@ if command -v npm >/dev/null; then
     export npm_config_prefix=$(dirname $(dirname $(which node)))
 fi
 
+# History configuration
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 export HISTFILE=~/.zsh_history
-export HIST_STAMPS="yyyy-mm-dd"
+
+# History options for timestamps and better behavior
+setopt EXTENDED_HISTORY          # Record timestamp of command in history file
+setopt HIST_EXPIRE_DUPS_FIRST    # Delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt HIST_IGNORE_DUPS          # Ignore duplicated commands history list
+setopt HIST_IGNORE_SPACE         # Ignore commands that start with space
+setopt HIST_VERIFY               # Show command with history expansion to user before running it
+setopt INC_APPEND_HISTORY        # Add commands to HISTFILE in order of execution
+setopt SHARE_HISTORY             # Share command history data
 
 
 # homebrew completions

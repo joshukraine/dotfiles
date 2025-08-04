@@ -4,6 +4,11 @@
 # Alwyas use Neovim as EDITOR
 alias vim='nvim'
 
+# History with timestamps
+# Override default history command to show timestamps using fc (fix command)
+# -l: list format, -i: ISO timestamp format
+alias history='fc -li 1'
+
 # ls > eza
 # Other aliases handled by exa plugin (uses eza under the hood)
 # https://github.com/zap-zsh/exa

@@ -13,10 +13,8 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(starship init zsh)"
 fi
 
-
 # https://asdf-vm.com
 fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-
 
 # https://zsh-abbr.olets.dev
 . $HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh
