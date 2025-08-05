@@ -1,10 +1,10 @@
-function cdkb --description "Quick navigation to Claude Code Knowledge Base"
-    set -l kb_path (test -n "$CLAUDE_KB_PATH"; and echo $CLAUDE_KB_PATH; or echo "$HOME/claude-knowledge-base")
+function cdkb --description "Quick navigation to Personal Knowledge Base"
+    set -l kb_path (test -n "$PKB_PATH"; and echo $PKB_PATH; or echo "$HOME/personal-knowledge-base")
 
     if not test -d $kb_path
         echo "Knowledge base not found at: $kb_path"
-        echo "Ensure CLAUDE_KB_PATH is set and directory exists"
-        echo "Create with: mkdir -p ~/claude-knowledge-base"
+        echo "Ensure PKB_PATH is set and directory exists"
+        echo "Create with: mkdir -p ~/personal-knowledge-base"
         return 1
     end
 

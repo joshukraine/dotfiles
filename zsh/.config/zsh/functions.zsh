@@ -614,12 +614,12 @@ function saf() {
 #
 # Returns: Changes to knowledge base directory and shows search tip plus recent files
 function cdkb() {
-    local kb_path="${CLAUDE_KB_PATH:-${HOME}/claude-knowledge-base}"
+    local kb_path="${PKB_PATH:-${HOME}/personal-knowledge-base}"
 
     if [[ ! -d "${kb_path}" ]]; then
         echo "Knowledge base not found at: ${kb_path}"
-        echo "Ensure CLAUDE_KB_PATH is set and directory exists"
-        echo "Create with: mkdir -p ~/claude-knowledge-base"
+        echo "Ensure PKB_PATH is set and directory exists"
+        echo "Create with: mkdir -p ~/personal-knowledge-base"
         return 1
     fi
 
