@@ -1,4 +1,4 @@
--- LazyVim Knowledge Base Search Plugin
+-- LazyVim Personal Knowledge Base Search Plugin
 -- Copy this file to ~/.config/nvim/lua/plugins/knowledge-base.lua
 
 -- Cache for Marked 2 availability to avoid repeated system calls
@@ -22,8 +22,8 @@ return {
           name = "Knowledge Base",
           finder = function()
             local files = {}
-            -- Use configurable path with fallback to default
-            local kb_path = vim.g.knowledge_base_path or "~/personal-knowledge-base"
+            -- Use environment variable with fallback to default
+            local kb_path = vim.env.PKB_PATH or "~/personal-knowledge-base"
             kb_path = vim.fn.expand(kb_path)
             local md_files = {}
             if vim.fs and vim.fs.find then
