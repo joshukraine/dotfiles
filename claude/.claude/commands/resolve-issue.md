@@ -34,7 +34,9 @@ Follow steps 1-6 below for thorough issue resolution.
      - `scratchpads/notes/` for documentation, research, general issues
    - Filename: `issue-$ARGUMENTS-$(date +%Y%m%d-%H%M%S).md`
 
-   **CHECKPOINT**: Present implementation plan to user and ask for approval before proceeding to implementation
+   **CHECKPOINT**:
+   - Present implementation plan to user and ask for approval before proceeding to implementation
+   - Offer to copy scratchpad path to clipboard (`pbcopy`) for easy access
 
 4. **Create branch and implement with commit checkpoints**:
    - **CHECKPOINT 1**: Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `git checkout -b feat/gh-$ARGUMENTS`
