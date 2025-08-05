@@ -604,7 +604,7 @@ function saf() {
   killall Finder
 }
 
-# Quick navigation to Claude Code Knowledge Base
+# Quick navigation to Personal Knowledge Base
 #
 # Usage: cdkb
 # Arguments: None
