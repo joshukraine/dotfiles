@@ -10,13 +10,13 @@ fi
 
 # Use the global config if no local config exists
 CONFIG_FILE=""
-if [[ -f ".markdownlint.yaml" ]] || [[ -f ".markdownlint.yml" ]] || [[ -f ".markdownlint.json" ]] || [[ -f ".markdownlintrc" ]]; then
+if [[ -f ".markdownlint-cli2.yaml" ]] || [[ -f ".markdownlint.yaml" ]] || [[ -f ".markdownlint.yml" ]] || [[ -f ".markdownlint.json" ]] || [[ -f ".markdownlintrc" ]]; then
     # Local config exists, let markdownlint-cli2 find it
     CONFIG_FILE=""
 else
     # No local config, use global
-    CONFIG_FILE="--config $HOME/.markdownlint.yaml"
+    CONFIG_FILE="--config ${HOME}/.markdownlint-cli2.yaml"
 fi
 
 # Run markdownlint-cli2 with all arguments passed through
-markdownlint-cli2 $CONFIG_FILE "$@"
+markdownlint-cli2 "${CONFIG_FILE}" "$@"

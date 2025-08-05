@@ -235,7 +235,7 @@ pre-commit run --all-files
 ### Validator Configuration
 
 - **`.shellcheckrc`**: Shellcheck configuration and rule exclusions
-- **`markdown/.markdownlint.yaml`**: Markdown linting rules
+- **`markdown/.markdownlint-cli2.yaml`**: Markdown linting rules with ignore patterns
 - **`shared/abbreviations.yaml`**: Single source of truth for abbreviations
 - **`shared/environment.sh|fish`**: Shared environment variables
 
@@ -304,7 +304,7 @@ time ./scripts/validate-config.sh --quiet
 - Configuration discovered automatically in multiple locations
 - Auto-fix: `./scripts/validate-config.sh --fix --validator markdown`
 - Global wrapper: `markdown-validate --fix`
-- Manual: `markdownlint-cli2 --config path/to/.markdownlint.yaml --fix "*.md"`
+- Manual: `markdownlint-cli2 --config path/to/.markdownlint-cli2.yaml --fix "*.md"`
 
 ### Debug Mode
 
