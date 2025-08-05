@@ -17,9 +17,9 @@ categorized topics.
 ## Your Task
 
 1. **Scan inbox directories**:
-   - Check `$CLAUDE_KB_PATH/inbox/web-articles/` for article summaries
-   - Check `$CLAUDE_KB_PATH/inbox/videos/` for video summaries
-   - Check `$CLAUDE_KB_PATH/inbox/documents/` for document summaries
+   - Check `$PKB_PATH/inbox/web-articles/` for article summaries
+   - Check `$PKB_PATH/inbox/videos/` for video summaries
+   - Check `$PKB_PATH/inbox/documents/` for document summaries
    - Check root of knowledge base for any uncategorized `.md` files
 
 2. **Analyze each unprocessed item**:
@@ -126,7 +126,7 @@ Only process content that:
 
 ## Automated Tag Generation
 
-The command will automatically generate tags by loading configuration from `$CLAUDE_KB_PATH/.config/tagging.yaml` and analyzing:
+The command will automatically generate tags by loading configuration from `$PKB_PATH/.config/tagging.yaml` and analyzing:
 
 - **Technology keywords**: Extract from configured technology and tools lists
 - **Command patterns**: Detect tools used in code blocks
@@ -137,7 +137,7 @@ The command will automatically generate tags by loading configuration from `$CLA
 
 ### Tag Configuration Reference
 
-Tags are dynamically loaded from `$CLAUDE_KB_PATH/.config/tagging.yaml`. The configuration supports:
+Tags are dynamically loaded from `$PKB_PATH/.config/tagging.yaml`. The configuration supports:
 
 #### **Multi-Domain Support**
 
@@ -188,7 +188,7 @@ technology:
 
 ## Configuration Setup
 
-On first use, if `$CLAUDE_KB_PATH/.config/tagging.yaml` doesn't exist:
+On first use, if `$PKB_PATH/.config/tagging.yaml` doesn't exist:
 
 1. **Create default configuration** with basic technical tags
 2. **Prompt user** to customize for their domains (fitness, biblical study, etc.)
