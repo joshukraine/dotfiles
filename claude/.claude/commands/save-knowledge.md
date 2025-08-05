@@ -32,12 +32,12 @@ sessions to a personal knowledge base.
 ## Your Task
 
 1. **Determine save location**:
-   - Check if `$CLAUDE_KB_PATH` environment variable is set
-   - Default to `~/claude-knowledge-base/` if not set
+   - Check if `$PKB_PATH` environment variable is set
+   - Default to `~/personal-knowledge-base/` if not set
    - ONLY IF the basic directory structure doesn't exist, create it using this command:
 
    ```bash
-   mkdir -p "$CLAUDE_KB_PATH"/{.config,inbox/{web-articles,videos,documents},topics/{development,troubleshooting,commands,tools,insights},sessions}
+   mkdir -p "$PKB_PATH"/{.config,inbox/{web-articles,videos,documents},topics/{development,troubleshooting,commands,tools,insights},sessions}
    ```
 
 2. **Analyze recent conversation**:
@@ -67,7 +67,7 @@ sessions to a personal knowledge base.
 ## Knowledge Base Structure
 
 ```text
-$CLAUDE_KB_PATH/
+$PKB_PATH/
 ├── .config/
 │   └── tagging.yaml          # Tag configuration
 ├── README.md                 # Knowledge base overview
@@ -119,7 +119,7 @@ The key information, commands, or insights.
 
 ## Automated Tag Generation
 
-The command will automatically generate tags by loading configuration from `$CLAUDE_KB_PATH/.config/tagging.yaml` and analyzing:
+The command will automatically generate tags by loading configuration from `$PKB_PATH/.config/tagging.yaml` and analyzing:
 
 - **Technology keywords**: Extract from configured technology and tools lists
 - **Command patterns**: Detect tools used in code blocks
@@ -143,7 +143,7 @@ tags: [vim, configuration, plugins, productivity, editor]
 
 ## Tag Generation Configuration
 
-Tags are loaded from `$CLAUDE_KB_PATH/.config/tagging.yaml` which should contain:
+Tags are loaded from `$PKB_PATH/.config/tagging.yaml` which should contain:
 
 ### Configuration Structure
 
@@ -197,9 +197,9 @@ If `tagging.yaml` doesn't exist, create it with default technical tags. Users ca
 
 ## Setup Requirements
 
-1. **Environment variable**: Set `$CLAUDE_KB_PATH` in shell configuration
+1. **Environment variable**: Set `$PKB_PATH` in shell configuration
 2. **Directory structure**: Auto-created on first use including `.config/` directory
-3. **Tagging configuration**: Create `$CLAUDE_KB_PATH/.config/tagging.yaml` with desired tag vocabulary
+3. **Tagging configuration**: Create `$PKB_PATH/.config/tagging.yaml` with desired tag vocabulary
 4. **Git repository**: Initialize knowledge base as private GitHub repo for backup
 
 ## Integration Notes
