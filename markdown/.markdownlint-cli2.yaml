@@ -14,33 +14,33 @@ ignores:
 
 # markdownlint rule configuration
 # https://github.com/DavidAnson/markdownlint/blob/v0.38.0/schema/.markdownlint.yaml
+config:
+  # MD013/line-length : Line length : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md013.md
+  MD013: false
 
-# MD013/line-length : Line length : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md013.md
-MD013: false
+  # MD025/single-title/single-h1 : Multiple top-level headings in the same document : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md025.md
+  MD025: false
 
-# MD025/single-title/single-h1 : Multiple top-level headings in the same document : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md025.md
-MD025: false
+  # MD026/no-trailing-punctuation : Trailing punctuation in heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md026.md
+  MD026:
+    # Punctuation characters
+    punctuation: ",;:。，；：！"
 
-# MD026/no-trailing-punctuation : Trailing punctuation in heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md026.md
-MD026:
-  # Punctuation characters
-  punctuation: ",;:。，；：！"
+  # MD029/ol-prefix : Ordered list item prefix : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md029.md
+  MD029:
+    # List style (one, ordered, zero)
+    style: "ordered"
 
-# MD029/ol-prefix : Ordered list item prefix : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md029.md
-MD029:
-  # List style (one, ordered, zero)
-  style: "ordered"
+  # MD033/no-inline-html : Inline HTML : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md033.md
+  MD033:
+    # Allowed elements
+    allowed_elements: [details, summary, strong]
 
-# MD033/no-inline-html : Inline HTML : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md033.md
-MD033:
-  # Allowed elements
-  allowed_elements: [details, summary, strong]
+  # MD034/no-bare-urls : Bare URL used : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md034.md
+  MD034: false
 
-# MD034/no-bare-urls : Bare URL used : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md034.md
-MD034: false
+  # MD036/no-emphasis-as-heading : Emphasis used instead of a heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md036.md
+  MD036: false
 
-# MD036/no-emphasis-as-heading : Emphasis used instead of a heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md036.md
-MD036: false
-
-# MD041/first-line-heading/first-line-h1 : First line in a file should be a top-level heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md041.md
-MD041: false
+  # MD041/first-line-heading/first-line-h1 : First line in a file should be a top-level heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md041.md
+  MD041: false
