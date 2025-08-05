@@ -23,7 +23,7 @@ _Last updated: Thu Jul 24 10:46:23 EEST 2025_
 | `ct`          | Returns: Creates ctags file including all Ruby files and bundled gem paths                                 | Zsh   | `zsh/.config/zsh/functions.zsh`         |
 | `copycwd`     | Returns: Copies current directory path to clipboard with chosen format (~, $HOME, or full path)            | Zsh   | `zsh/.config/zsh/functions.zsh`         |
 | `dsx`         | Returns: Deletes all .DS_Store files found, no output unless errors occur                                  | Zsh   | `zsh/.config/zsh/functions.zsh`         |
-| `fs`          | Thank you, Mathias! https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.functions             | Zsh   | `zsh/.config/zsh/functions.zsh`         |
+| `fs`          | Thank you, Mathias! <https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.functions>           | Zsh   | `zsh/.config/zsh/functions.zsh`         |
 | `path`        | Returns: Numbered list of all directories in the PATH environment variable                                 | Zsh   | `zsh/.config/zsh/functions.zsh`         |
 | `src`         | Returns: Sources .zshrc and reloads all configuration                                                      | Zsh   | `zsh/.config/zsh/functions.zsh`         |
 | `pi`          | Note: This Zsh version always pings 1.1.1.1 (unlike Fish version which accepts arguments)                  | Zsh   | `zsh/.config/zsh/functions.zsh`         |

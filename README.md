@@ -447,9 +447,10 @@ This repository includes a complete markdownlint setup for consistent markdown f
 ### Features
 
 - **Fallback Configuration Discovery**: Automatically finds markdown config in multiple locations:
-  - `~/dotfiles/markdown/.markdownlint.yaml` (primary)
-  - `PWD/markdown/.markdownlint.yaml` (project-specific)
-  - `PWD/.markdownlint.yaml` (project root)
+  - `~/dotfiles/markdown/.markdownlint-cli2.yaml` (primary)
+  - `PWD/markdown/.markdownlint-cli2.yaml` (project-specific)
+  - `PWD/.markdownlint-cli2.yaml` (project root)
+  - Falls back to legacy `.markdownlint.yaml` files for compatibility
 - **Global Wrapper Script**: `markdown-validate` command available system-wide
 - **Shell Abbreviations**: Quick access via `mdl`/`mdv` commands
 - **Editor Integration**: Works seamlessly with Neovim/LazyVim
@@ -487,8 +488,8 @@ markdown-validate --fix
 
 ### Customization
 
-- **Dotfiles config**: Edit `~/dotfiles/markdown/.markdownlint.yaml`
-- **Project-specific**: Create `markdown/.markdownlint.yaml` or `.markdownlint.yaml` in project
+- **Dotfiles config**: Edit `~/dotfiles/markdown/.markdownlint-cli2.yaml`
+- **Project-specific**: Create `markdown/.markdownlint-cli2.yaml` or `.markdownlint-cli2.yaml` in project
 - **Add abbreviations**: Edit `~/dotfiles/shared/abbreviations.yaml` and run `reload-abbr`
 - **Global access**: Use `markdown-validate` wrapper from any directory
 

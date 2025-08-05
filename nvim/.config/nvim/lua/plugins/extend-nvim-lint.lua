@@ -6,7 +6,7 @@ return {
   opts = {
     linters = {
       ["markdownlint-cli2"] = {
-        args = { "--config", os.getenv("HOME") .. "/.markdownlint.yaml", "--" },
+        args = { "--config", os.getenv("HOME") .. "/.markdownlint-cli2.yaml", "--" },
       },
     },
   },

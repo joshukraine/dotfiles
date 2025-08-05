@@ -231,7 +231,7 @@ fi
 
 # Then run markdownlint to fix any remaining linting issues
 if command -v markdownlint-cli2 >/dev/null 2>&1; then
-  if markdownlint-cli2 --config ~/.markdownlint.yaml --fix "${TEMP_FILE}" >/dev/null 2>&1; then
+  if markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "${TEMP_FILE}" >/dev/null 2>&1; then
     echo "✅ Applied markdownlint fixes: ${TEMP_FILE}"
   else
     echo "⚠️  Warning: markdownlint fixes failed, but continuing"

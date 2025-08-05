@@ -68,7 +68,7 @@ while [[ $# -gt 0 ]]; do
             echo "  markdown-validate --fix     # Validation with auto-fix"
             echo "  markdown-validate -f -q     # Quick fix with minimal output"
             echo
-            echo "This script uses the markdown configuration from ~/dotfiles/markdown/.markdownlint.yaml"
+            echo "This script uses the markdown configuration from ~/dotfiles/markdown/.markdownlint-cli2.yaml"
             echo "but validates files in the current working directory: ${PWD}"
             exit 0
             ;;

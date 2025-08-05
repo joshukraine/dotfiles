@@ -4,7 +4,7 @@
 #
 # Validates markdown file formatting and style consistency:
 # - Markdown syntax and formatting rules
-# - Configuration from markdown/.markdownlint.yaml
+# - Configuration from markdown/.markdownlint-cli2.yaml
 # - Excludes scratchpads and external dependencies
 # - Supports fix mode for auto-repairable issues
 # - Integrates with existing validation framework
@@ -49,7 +49,7 @@ else
 fi
 
 # File paths
-MARKDOWN_CONFIG="${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
+MARKDOWN_CONFIG="${DOTFILES_ROOT}/markdown/.markdownlint-cli2.yaml"
 
 # Logging functions
 log_info() {
@@ -137,6 +137,9 @@ check_prerequisites() {
 # Find markdown configuration file with fallback
 find_markdown_config() {
   local config_candidates=(
+    "${DOTFILES_ROOT}/markdown/.markdownlint-cli2.yaml"
+    "${TARGET_DIR}/markdown/.markdownlint-cli2.yaml"
+    "${TARGET_DIR}/.markdownlint-cli2.yaml"
     "${DOTFILES_ROOT}/markdown/.markdownlint.yaml"
     "${TARGET_DIR}/markdown/.markdownlint.yaml"
     "${TARGET_DIR}/.markdownlint.yaml"
@@ -170,7 +173,7 @@ check_markdown_config() {
     log_success "Markdown configuration found: ${relative_config}"
   else
     log_error "Markdown configuration not found in any expected location"
-    log_error "Searched: markdown/.markdownlint.yaml, .markdownlint.yaml"
+    log_error "Searched: markdown/.markdownlint-cli2.yaml, .markdownlint-cli2.yaml, markdown/.markdownlint.yaml, .markdownlint.yaml"
     return 1
   fi
 
