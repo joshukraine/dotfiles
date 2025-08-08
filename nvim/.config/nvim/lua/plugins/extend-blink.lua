@@ -57,17 +57,15 @@ return {
       sorts = { "score", "sort_text" }, -- Optimize completion ranking
     })
 
-    -- 6. Disable cmdline ghost text and auto-show to prevent command interference
-    opts.cmdline = vim.tbl_deep_extend("force", opts.cmdline or {}, {
+    -- 6. Enable cmdline completion with ghost text disabled
+    opts.cmdline = {
+      enabled = true,
       completion = {
-        menu = {
-          auto_show = false,
-        },
         ghost_text = {
-          enabled = false,
+          enabled = false, -- Disable ghost text to prevent command interference
         },
       },
-    })
+    }
 
     -- 7. Signature help window styling
     opts.signature = vim.tbl_deep_extend("force", opts.signature or {}, {
