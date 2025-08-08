@@ -1,240 +1,106 @@
--- Uncomment the conditional to disable this config.
--- stylua: ignore
--- if true then return {} end
-
--- Adpated from: https://github.com/linkarzu/dotfiles-latest/blob/main/neovim/neobean/lua/plugins/blink-cmp.lua
-
--- https://www.lazyvim.org/extras/coding/blink
--- https://github.com/saghen/blink.cmp
--- Documentation site: https://cmp.saghen.dev/
-
--- https://www.lazyvim.org/extras/coding/blink
--- https://github.com/saghen/blink.cmp
--- Documentation site: https://cmp.saghen.dev/
-
--- NOTE: Specify the trigger character(s) used for luasnip
-local trigger_text = ";"
+-- Enhanced blink.cmp configuration that extends LazyVim defaults
+-- Adds fuzzy matching optimizations, buffer performance tuning, and emoji completions
 
 return {
   "saghen/blink.cmp",
-  enabled = true,
-  -- In case there are breaking changes and you want to go back to the last
-  -- working release
-  -- https://github.com/Saghen/blink.cmp/releases
-  -- version = "v0.13.1",
   dependencies = {
+    -- Emoji completions for markdown and documentation
     "moyiz/blink-emoji.nvim",
-    -- "Kaiser-Yang/blink-cmp-dictionary",
   },
   opts = function(_, opts)
-    -- I noticed that telescope was extremeley slow and taking too long to open,
-    -- assumed related to blink, so disabled blink and in fact it was related
-    -- :lua print(vim.bo[0].filetype)
-    -- So I'm disabling blink.cmp for Telescope
+    -- 1. Performance optimization - disable in file pickers and prompts
     opts.enabled = function()
-      -- Get the current buffer's filetype
-      local filetype = vim.bo[0].filetype
-      -- Disable for Telescope buffers
-      if filetype == "TelescopePrompt" or filetype == "minifiles" or filetype == "snacks_picker_input" then
-        return false
-      end
-      return true
+      local disabled_filetypes = {
+        "snacks_picker_input", -- Snacks.nvim input prompt
+        "TelescopePrompt", -- Telescope prompt (future-proofing)
+        "minifiles", -- MiniFiles picker
+      }
+      return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
     end
 
-    -- NOTE: The new way to enable LuaSnip
-    -- Merge custom sources with the existing ones from lazyvim
-    -- NOTE: by default lazyvim already includes the lazydev source, so not adding it here again
-    opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
-      default = { "lsp", "path", "snippets", "buffer", "copilot", "dadbod", "emoji" },
-      providers = {
-        lsp = {
-          name = "lsp",
-          enabled = true,
-          module = "blink.cmp.sources.lsp",
-          kind = "LSP",
-          min_keyword_length = 2,
-          -- When linking markdown notes, I would get snippets and text in the
-          -- suggestions, I want those to show only if there are no LSP
-          -- suggestions
-          --
-          -- Enabled fallbacks as this seems to be working now
-          -- Disabling fallbacks as my snippets wouldn't show up when editing
-          -- lua files
-          -- fallbacks = { "snippets", "buffer" },
-          score_offset = 90, -- the higher the number, the higher the priority
-        },
-        path = {
-          name = "Path",
-          module = "blink.cmp.sources.path",
-          score_offset = 25,
-          -- When typing a path, I would get snippets and text in the
-          -- suggestions, I want those to show only if there are no path
-          -- suggestions
-          fallbacks = { "snippets", "buffer" },
-          -- min_keyword_length = 2,
-          opts = {
-            trailing_slash = false,
-            label_trailing_slash = true,
-            get_cwd = function(context)
-              return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
-            end,
-            show_hidden_files_by_default = true,
-          },
-        },
-        buffer = {
-          name = "Buffer",
-          enabled = true,
-          max_items = 3,
-          module = "blink.cmp.sources.buffer",
-          min_keyword_length = 2,
-          score_offset = 15, -- the higher the number, the higher the priority
-        },
-        snippets = {
-          name = "snippets",
-          enabled = true,
-          max_items = 15,
-          min_keyword_length = 2,
-          module = "blink.cmp.sources.snippets",
-          score_offset = 85, -- the higher the number, the higher the priority
-          -- Only show snippets if I type the trigger_text characters, so
-          -- to expand the "bash" snippet, if the trigger_text is ";" I have to
-          should_show_items = function()
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-            -- NOTE: remember that `trigger_text` is modified at the top of the file
-            return before_cursor:match(trigger_text .. "%w*$") ~= nil
-          end,
-          -- After accepting the completion, delete the trigger_text characters
-          -- from the final inserted text
-          -- Modified transform_items function based on suggestion by `synic` so
-          -- that the luasnip source is not reloaded after each transformation
-          -- https://github.com/linkarzu/dotfiles-latest/discussions/7#discussion-7849902
-          -- NOTE: I also tried to add the ";" prefix to all of the snippets loaded from
-          -- friendly-snippets in the luasnip.lua file, but I was unable to do
-          -- so, so I still have to use the transform_items here
-          -- This removes the ";" only for the friendly-snippets snippets
-          transform_items = function(_, items)
-            local line = vim.api.nvim_get_current_line()
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            local before_cursor = line:sub(1, col)
-            local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-            if start_pos then
-              for _, item in ipairs(items) do
-                if not item.trigger_text_modified then
-                  ---@diagnostic disable-next-line: inject-field
-                  item.trigger_text_modified = true
-                  item.textEdit = {
-                    newText = item.insertText or item.label,
-                    range = {
-                      start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
-                      ["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
-                    },
-                  }
-                end
-              end
-            end
-            return items
-          end,
-        },
-        -- Example on how to configure dadbod found in the main repo
-        -- https://github.com/kristijanhusak/vim-dadbod-completion
-        dadbod = {
-          name = "Dadbod",
-          module = "vim_dadbod_completion.blink",
-          min_keyword_length = 2,
-          score_offset = 85, -- the higher the number, the higher the priority
-        },
-        -- https://github.com/moyiz/blink-emoji.nvim
-        emoji = {
-          module = "blink-emoji",
-          name = "Emoji",
-          score_offset = 93, -- the higher the number, the higher the priority
-          min_keyword_length = 2,
-          opts = { insert = true }, -- Insert emoji (default) or complete its name
-        },
-        copilot = {
-          name = "copilot",
-          enabled = true,
-          module = "blink-cmp-copilot",
-          kind = "Copilot",
-          min_keyword_length = 2,
-          score_offset = 100, -- the higher the number, the higher the priority
-          async = true,
+    -- 2. LazyVim's keymap configuration is comprehensive (no overrides needed)
+    -- Uses "enter" preset with additional LazyVim customizations
+    -- Reference: https://www.lazyvim.org/extras/coding/blink
+
+    -- 3. Visual customizations for a cleaner UI
+    opts.appearance = vim.tbl_deep_extend("force", opts.appearance or {}, {
+      -- Use 'mono' for Nerd Font Mono (ensures proper icon alignment)
+      nerd_font_variant = "mono",
+    })
+
+    -- 4. Completion menu visual settings
+    opts.completion = vim.tbl_deep_extend("force", opts.completion or {}, {
+      menu = {
+        -- Rounded borders for a modern look
+        border = "rounded",
+        winblend = 0,
+        winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+
+        -- Menu dimensions
+        min_width = 15,
+        max_height = 10,
+      },
+
+      -- Documentation window
+      documentation = {
+        window = {
+          border = "rounded",
+          max_width = 80,
+          max_height = 20,
+          winblend = 0,
         },
       },
     })
 
-    opts.cmdline = {
-      enabled = true,
-    }
+    -- 5. Enhanced fuzzy matching configuration
+    opts.fuzzy = vim.tbl_deep_extend("force", opts.fuzzy or {}, {
+      sorts = { "score", "sort_text" }, -- Optimize completion ranking
+    })
 
-    opts.completion = {
-      -- accept = {
-      --   auto_brackets = {
-      --     enabled = true,
-      --     default_brackets = { ";", "" },
-      --     override_brackets_for_filetypes = {
-      --       markdown = { ";", "" },
-      --     },
-      --   },
-      -- },
-      --   keyword = {
-      --     -- 'prefix' will fuzzy match on the text before the cursor
-      --     -- 'full' will fuzzy match on the text before *and* after the cursor
-      --     -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
-      --     range = "full",
-      --   },
-      menu = {
-        border = "single",
-      },
-      documentation = {
-        auto_show = true,
-        window = {
-          border = "single",
+    -- 6. Disable cmdline ghost text and auto-show to prevent command interference
+    opts.cmdline = vim.tbl_deep_extend("force", opts.cmdline or {}, {
+      completion = {
+        menu = {
+          auto_show = false,
+        },
+        ghost_text = {
+          enabled = false,
         },
       },
-    }
+    })
 
-    -- opts.fuzzy = {
-    --   -- Disabling this matches the behavior of fzf
-    --   use_typo_resistance = false,
-    --   -- Frecency tracks the most recently/frequently used items and boosts the score of the item
-    --   use_frecency = true,
-    --   -- Proximity bonus boosts the score of items matching nearby words
-    --   use_proximity = false,
-    -- }
+    -- 7. Signature help window styling
+    opts.signature = vim.tbl_deep_extend("force", opts.signature or {}, {
+      window = {
+        border = "rounded",
+        max_height = 10,
+        winblend = 0,
+        winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
+      },
+    })
 
-    opts.snippets = {
-      preset = "luasnip", -- Choose LuaSnip as the snippet engine
-    }
+    -- 8. Enhanced completion sources with Copilot and emoji support
+    opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
+      default = { "lsp", "path", "snippets", "buffer", "copilot", "emoji" },
+      providers = {
+        -- Buffer completions with performance optimizations only
+        buffer = {
+          min_keyword_length = 2, -- Avoid single-character noise
+          max_items = 8, -- Limit buffer results to avoid overwhelming menu
+        },
 
-    -- -- To specify the options for snippets
-    -- opts.sources.providers.snippets.opts = {
-    --   use_show_condition = true, -- Enable filtering of snippets dynamically
-    --   show_autosnippets = true, -- Display autosnippets in the completion menu
-    -- }
-
-    -- The default preset used by lazyvim accepts completions with enter
-    -- I don't like using enter because if on markdown and typing
-    -- something, but you want to go to the line below, if you press enter,
-    -- the completion will be accepted
-    -- https://cmp.saghen.dev/configuration/keymap.html#default
-    opts.keymap = {
-      preset = "default",
-      ["<Tab>"] = { "snippet_forward", "fallback" },
-      ["<S-Tab>"] = { "snippet_backward", "fallback" },
-
-      ["<Up>"] = { "select_prev", "fallback" },
-      ["<Down>"] = { "select_next", "fallback" },
-      ["<C-p>"] = { "select_prev", "fallback" },
-      ["<C-n>"] = { "select_next", "fallback" },
-
-      ["<S-k>"] = { "scroll_documentation_up", "fallback" },
-      ["<S-j>"] = { "scroll_documentation_down", "fallback" },
-
-      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-      ["<C-e>"] = { "hide", "fallback" },
-    }
+        -- Emoji completions for markdown and documentation
+        emoji = {
+          module = "blink-emoji",
+          name = "Emoji",
+          score_offset = 15, -- Lower priority than code completions
+          min_keyword_length = 2, -- Start after typing ":s" for ":smile:"
+          opts = {
+            insert = true, -- Insert emoji character vs completing the name
+          },
+        },
+      },
+    })
 
     return opts
   end,
