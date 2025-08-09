@@ -27,6 +27,8 @@ Display available Claude Code commands and their usage.
 ### Git & GitHub Workflows
 
 - `/commit` - Create well-formatted commits with guided workflow
+- `/commit-auto` - Create commits with full automation (includes attribution)
+- `/commit-msg` - Generate commit messages from staged changes
 - `/create-pr` - Create pull requests with smart titles and issue linking
 - `/resolve-issue` - Resolve GitHub issues systematically
 - `/review-pr` - Review pull requests with configurable depth
@@ -36,6 +38,12 @@ Display available Claude Code commands and their usage.
 - `/setup-scratch` - Initialize temporary workspace for notes and debugging
 - `/new-project` - Comprehensive project setup (use after Claude Code's `/init`)
 - `/update-deps` - Update dependencies safely across package managers
+- `/context-bridge` - Create session continuity documents for Claude Code
+
+### Knowledge Management
+
+- `/save-knowledge` - Capture session insights into structured knowledge base
+- `/process-inbox` - Process web content into organized knowledge base entries
 
 ### Development Tools
 
@@ -51,6 +59,8 @@ Claude Code Commands
 
 Git & GitHub:
   /commit              - Create well-formatted commits
+  /commit-auto         - Create commits with full automation
+  /commit-msg          - Generate commit messages from staged changes
   /create-pr           - Create pull requests with smart titles
   /resolve-issue       - Resolve GitHub issues systematically
   /review-pr           - Review pull requests thoroughly
@@ -59,6 +69,11 @@ Project Management:
   /setup-scratch       - Initialize temporary workspace
   /new-project         - Comprehensive project setup (use after /init)
   /update-deps         - Update dependencies safely
+  /context-bridge      - Create session continuity documents
+
+Knowledge Management:
+  /save-knowledge      - Capture session insights
+  /process-inbox       - Process web content into knowledge base
 
 Use '/help <command>' for detailed information about a specific command.
 ```
@@ -92,6 +107,12 @@ Git & GitHub Commands
 /commit
   Create well-formatted commits with guided workflow
   Options: --no-verify
+
+/commit-auto
+  Create commits with full automation (includes attribution)
+
+/commit-msg
+  Generate commit messages from staged changes
 
 /create-pr
   Create pull requests with smart titles and issue linking

@@ -353,18 +353,21 @@ This project includes comprehensive [Claude Code][claude-code] integration for A
 
 ### Available Commands
 
-| Command           | Description                                                   |
-| ----------------- | ------------------------------------------------------------- |
-| `/commit`         | Create commits with clipboard workflow (no attribution)       |
-| `/commit-auto`    | Create commits with full automation (includes attribution)    |
-| `/create-pr`      | Generate comprehensive pull requests with smart issue linking |
-| `/resolve-issue`  | Systematic GitHub issue resolution workflow                   |
-| `/review-pr`      | Thorough pull request reviews with configurable depth         |
-| `/setup-scratch`  | Initialize temporary workspace for development notes          |
-| `/new-project`    | Comprehensive project setup (use after Claude Code's `/init`) |
-| `/update-deps`    | Safe dependency updates with testing                          |
-| `/save-knowledge` | Capture session insights into structured knowledge base       |
-| `/process-inbox`  | Process web content into organized knowledge base entries     |
+| Command            | Description                                                   |
+| ------------------ | ------------------------------------------------------------- |
+| `/commit`          | Create commits with clipboard workflow (no attribution)       |
+| `/commit-auto`     | Create commits with full automation (includes attribution)    |
+| `/commit-msg`      | Generate commit messages from staged changes                  |
+| `/context-bridge`  | Create session continuity documents for Claude Code           |
+| `/create-pr`       | Generate comprehensive pull requests with smart issue linking |
+| `/resolve-issue`   | Systematic GitHub issue resolution workflow                   |
+| `/review-pr`       | Thorough pull request reviews with configurable depth         |
+| `/setup-scratch`   | Initialize temporary workspace for development notes          |
+| `/new-project`     | Comprehensive project setup (use after Claude Code's `/init`) |
+| `/update-deps`     | Safe dependency updates with testing                          |
+| `/save-knowledge`  | Capture session insights into structured knowledge base       |
+| `/process-inbox`   | Process web content into organized knowledge base entries     |
+| `/help`            | Display available commands with usage examples                |
 
 ### Getting Started with Claude Code
 
