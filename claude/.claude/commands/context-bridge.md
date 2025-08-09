@@ -5,13 +5,16 @@ Create a session bridge document to continue work in a new Claude Code session.
 ## Usage
 
 ```bash
-/context-bridge [description]
+/context-bridge              # Auto-generated filename with timestamp only
+/context-bridge description  # Custom description added to filename
 ```
 
 ## Your Task
 
 1. **Analyze recent conversation** to understand project context and progress
-2. **Create bridge document** at `scratchpads/context-bridge-YYYY-MM-DD-HHMMSS-[description].md`
+2. **Create bridge document** at:
+   - With description: `scratchpads/context-bridge-YYYY-MM-DD-HHMMSS-description.md`
+   - Without description: `scratchpads/context-bridge-YYYY-MM-DD-HHMMSS.md`
 3. **Copy continuation prompt** to clipboard with `pbcopy`
 4. **Display confirmation** with file location and copied prompt
 
