@@ -107,6 +107,8 @@ git checkout [branch_name]
 
 [One paragraph with essential context for resuming work]
 
+**IMPORTANT**: This is a context bridge only. Wait for explicit user confirmation before starting any implementation or making changes.
+
 ### Testing/Verification
 
 - [Key test command or verification step]
@@ -135,7 +137,7 @@ Key points for continuation:
 - [Active focus area]
 - [Next immediate task]
 
-Please review the bridge document and confirm you understand the current state, then help me continue with [SPECIFIC_NEXT_ACTION].
+Please review the bridge document and confirm you understand the current state. Once you've reviewed it, wait for my confirmation before taking any action. Do not start implementing or making changes until I explicitly ask you to proceed.
 
 Working directory: [CURRENT_DIRECTORY]
 ```
