@@ -1,4 +1,17 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 
-gui:
-  nerdFontsVersion: "3"
+# This is only meant as a reference for what config options exist, and what
+# their default values are. It is not meant to be copied and pasted into your
+# config file as a whole; that's not a good idea for several reasons. It is
+# recommended to include only those settings in your config file that you
+# actually want to change.
+
+# Config relating to the Lazygit UI
+# gui:
+#   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#custom-author-color
+#   authorColors: {}
+#
+#   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#custom-branch-color
+#   branchColorPatterns: {}
+#
+#   [...]
