@@ -4,7 +4,7 @@
 
 local util = require("config.util")
 
-util.cowboy()
+-- util.cowboy()
 
 -- Remove key mappings that conflict with macOS
 vim.keymap.del("n", "<C-Up>")
