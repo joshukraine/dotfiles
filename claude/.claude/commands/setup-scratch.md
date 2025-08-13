@@ -20,50 +20,48 @@ debugging across all projects.
 
 3. **Create CLAUDE.md for AI agent context**:
 
-   ```bash
-   cat > scratchpads/CLAUDE.md << 'EOF'
-# Scratchpads Directory Guide
+   Create a file named `scratchpads/CLAUDE.md` with the following content:
 
-This directory contains temporary files that are git-ignored and never committed.
+   ```markdown
+   # Scratchpads Directory Guide
 
-## Directory Purpose
+   This directory contains temporary files that are git-ignored and never committed.
 
-- **pr-reviews/**: Pull request reviews and analysis
-- **planning/**: Brainstorming, rough ideas, and meeting notes
-- **debugging/**: Debug sessions and troubleshooting
-- **notes/**: General development notes and research
+   ## Directory Purpose
 
-## When Agent OS is Present
+   - **pr-reviews/**: Pull request reviews and analysis
+   - **planning/**: Brainstorming, rough ideas, and meeting notes
+   - **debugging/**: Debug sessions and troubleshooting
+   - **notes/**: General development notes and research
 
-If this project also has a `.agent-os/` directory:
+   ## When Agent OS is Present
 
-- **Use scratchpads/planning/** for:
-  - Initial brainstorming and ideation
-  - Rough drafts and exploration
-  - Meeting notes and discussions
-  - Ideas that may not become formal specs
+   If this project also has a `.agent-os/` directory:
 
-- **Use .agent-os/specs/** for:
-  - Formal feature specifications
-  - Structured development plans
-  - Committed, trackable documentation
-  - Specs ready for execution
+   - **Use scratchpads/planning/** for:
+     - Initial brainstorming and ideation
+     - Rough drafts and exploration
+     - Meeting notes and discussions
+     - Ideas that may not become formal specs
 
-## Workflow
+   - **Use .agent-os/specs/** for:
+     - Formal feature specifications
+     - Structured development plans
+     - Committed, trackable documentation
+     - Specs ready for execution
 
-```text
-scratchpads/planning/ → .agent-os/specs/ → implementation
-    (temporary)           (permanent)         (code)
-```
+   ## Workflow
 
-## File Naming
+   scratchpads/planning/ → .agent-os/specs/ → implementation
+       (temporary)           (permanent)         (code)
 
-Always use descriptive, timestamped filenames:
+   ## File Naming
 
-- `auth-system-brainstorm-20250809.md`
-- `meeting-notes-api-design-20250809.md`
-- `pr-review-123-20250809-142300.md`
-EOF
+   Always use descriptive, timestamped filenames:
+
+   - `auth-system-brainstorm-20250809.md`
+   - `meeting-notes-api-design-20250809.md`
+   - `pr-review-123-20250809-142300.md`
    ```
 
 4. **Verify setup**:
