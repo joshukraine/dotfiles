@@ -18,14 +18,63 @@ debugging across all projects.
    echo "scratchpads/" >> .gitignore
    ```
 
-3. **Verify setup**:
+3. **Create CLAUDE.md for AI agent context**:
+
+   Create a file named `scratchpads/CLAUDE.md` with the following content:
+
+   ```markdown
+   # Scratchpads Directory Guide
+
+   This directory contains temporary files that are git-ignored and never committed.
+
+   ## Directory Purpose
+
+   - **pr-reviews/**: Pull request reviews and analysis
+   - **planning/**: Brainstorming, rough ideas, and meeting notes
+   - **debugging/**: Debug sessions and troubleshooting
+   - **notes/**: General development notes and research
+
+   ## When Agent OS is Present
+
+   If this project also has a `.agent-os/` directory:
+
+   - **Use scratchpads/planning/** for:
+     - Initial brainstorming and ideation
+     - Rough drafts and exploration
+     - Meeting notes and discussions
+     - Ideas that may not become formal specs
+
+   - **Use .agent-os/specs/** for:
+     - Formal feature specifications
+     - Structured development plans
+     - Committed, trackable documentation
+     - Specs ready for execution
+
+   ## Workflow
+
+   | Temporary             | →   | Permanent        | →   | Code           |
+   | --------------------- | --- | ---------------- | --- | -------------- |
+   | scratchpads/planning/ | →   | .agent-os/specs/ | →   | implementation |
+
+   ## File Naming
+
+   Always use descriptive, timestamped filenames:
+
+   - `auth-system-brainstorm-20250809.md`
+   - `meeting-notes-api-design-20250809.md`
+   - `pr-review-123-20250809-142300.md`
+   ```
+
+4. **Verify setup**:
    - Run `ls -la scratchpads/` to confirm structure
+   - Confirm CLAUDE.md was created in scratchpads/
    - Run `git status` to confirm scratchpads are ignored
 
-4. **Explain the structure** to the user:
+5. **Explain the structure** to the user:
 
    ```text
    scratchpads/
+   ├── CLAUDE.md       # AI agent context and guidelines
    ├── pr-reviews/     # Pull request reviews and analysis
    ├── planning/       # Project planning and roadmaps
    ├── debugging/      # Debug sessions and troubleshooting
@@ -64,6 +113,8 @@ Show the user what was created:
    - scratchpads/planning/
    - scratchpads/debugging/
    - scratchpads/notes/
+
+✅ CLAUDE.md created with AI agent guidelines
 
 ✅ Added to .gitignore (will not be committed)
 
