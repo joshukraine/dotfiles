@@ -52,8 +52,9 @@ debugging across all projects.
 
    ## Workflow
 
-   scratchpads/planning/ → .agent-os/specs/ → implementation
-       (temporary)           (permanent)         (code)
+   | Temporary             | →   | Permanent        | →   | Code           |
+   | --------------------- | --- | ---------------- | --- | -------------- |
+   | scratchpads/planning/ | →   | .agent-os/specs/ | →   | implementation |
 
    ## File Naming
 
