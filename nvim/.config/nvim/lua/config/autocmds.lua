@@ -28,9 +28,9 @@ create_autocmd("FileType", {
   command = [[set filetype=yaml]],
 })
 
-create_autocmd({ "VimEnter" }, {
-  desc = "Go straight to INSERT mode in commit message",
-  group = "file_types",
-  pattern = { "COMMIT_EDITMSG" },
-  command = [[ exec 'norm gg' | startinsert! ]],
-})
+-- create_autocmd({ "VimEnter" }, {
+--   desc = "Go straight to INSERT mode in commit message",
+--   group = "file_types",
+--   pattern = { "COMMIT_EDITMSG" },
+--   command = [[ exec 'norm gg' | startinsert! ]],
+-- })
