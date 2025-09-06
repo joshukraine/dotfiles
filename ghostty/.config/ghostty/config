@@ -8,8 +8,10 @@ theme = tokyonight_moon
 
 # Font settings
 # List available fonts: ghostty +list-fonts
-font-family = Cascadia Code
-font-size = 17
+# font-family = Cascadia Code
+font-family = Comic Code Ligatures
+font-size = 16
+# font-thicken = true
 adjust-cell-height = 6
 
 # Cursor settings
