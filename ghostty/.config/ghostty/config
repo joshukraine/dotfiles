@@ -1,5 +1,5 @@
 # To generate a new list of the default values:
-# ghostty +show-config --default --docs > ~/dotfiles/ghostty/config-default
+# ghostty +show-config --default --docs > ~/dotfiles/ghostty/.config/ghostty/config-default
 #
 # Online documentation:
 # https://ghostty.org/docs/config/reference
