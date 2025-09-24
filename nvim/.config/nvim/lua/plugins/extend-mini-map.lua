@@ -1,8 +1,8 @@
--- Blazing fast minimap/scrollbar in Lua | https://github.com/echasnovski/mini.map/
+-- Blazing fast minimap/scrollbar in Lua | https://github.com/nvim-mini/mini.map/
 
 return {
   {
-    "echasnovski/mini.map",
+    "nvim-mini/mini.map",
     branch = "stable",
     config = function()
       require("mini.map").setup()
