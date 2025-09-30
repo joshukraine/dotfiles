@@ -92,3 +92,8 @@ if command -v gh >/dev/null 2>&1; then
 fi
 
 . "$HOME/.config/zsh/profiler.stop"
+
+# Initialize zoxide at the very end of shell configuration
+# https://github.com/ajeetdsouza/zoxide
+export _ZO_DOCTOR=0  # Disable zoxide doctor warnings
+eval "$(zoxide init zsh)"
