@@ -25,8 +25,7 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init zsh)"
+# zoxide initialization moved to end of .zshrc for proper configuration
 
 # https://github.com/zsh-users/zsh-history-substring-search
 HISTORY_SUBSTRING_SEARCH_PREFIXED=1
