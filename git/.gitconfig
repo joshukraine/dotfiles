@@ -123,3 +123,6 @@
 
 [url "https://"]
   insteadOf = git://
+[user]
+	name = Peter Yeh
+	email = peter.yeh@gmail.com

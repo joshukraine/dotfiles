@@ -23,6 +23,14 @@ if status is-interactive
     # https://github.com/ajeetdsouza/zoxide
     zoxide init fish | source
 
+    # fzf integration
+    # https://github.com/junegunn/fzf#using-homebrew-or-linuxbrew
+    if command -v fzf >/dev/null
+        if test -f (brew --prefix)/opt/fzf/shell/key-bindings.fish
+            source (brew --prefix)/opt/fzf/shell/key-bindings.fish
+        end
+    end
+
     if test -e $HOME/.secrets/config.fish.local
         source $HOME/.secrets/config.fish.local
     end
