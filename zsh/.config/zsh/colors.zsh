@@ -14,5 +14,10 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main regexp)
 # ZSH_HIGHLIGHT_STYLES[default]='fg=#7EBDB3'
 # ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#F0776D'
 
-ZSH_HIGHLIGHT_REGEXP=('^[[:blank:][:space:]]*('${(j:|:)${(Qk)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
-ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(Qk)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=magenta)
+# Only set regexp highlighting if abbreviation variables are available
+if [[ -n "${ABBR_REGULAR_USER_ABBREVIATIONS:-}" ]]; then
+    ZSH_HIGHLIGHT_REGEXP=('^[[:blank:][:space:]]*('${(j:|:)${(Qk)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
+fi
+if [[ -n "${ABBR_GLOBAL_USER_ABBREVIATIONS:-}" ]]; then
+    ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(Qk)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=magenta)
+fi
