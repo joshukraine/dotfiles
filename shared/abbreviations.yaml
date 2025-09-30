@@ -421,6 +421,9 @@ git:
   gsss:
     command: "git stash save"
     description: "Save changes to stash with message"
+  gs:
+    command: "git status"
+    description: "Show working tree status"
   gst:
     command: "git status"
     description: "Show working tree status"
