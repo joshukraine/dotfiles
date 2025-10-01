@@ -2,11 +2,14 @@
 
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-plug "zsh-users/zsh-autosuggestions"
-plug "zap-zsh/supercharge"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zap-zsh/exa"
-plug "zsh-users/zsh-history-substring-search"
+# Only use plug function if it's available (Zap is loaded)
+if command -v plug >/dev/null 2>&1; then
+    plug "zsh-users/zsh-autosuggestions"
+    plug "zap-zsh/supercharge"
+    plug "zsh-users/zsh-syntax-highlighting"
+    plug "zap-zsh/exa"
+    plug "zsh-users/zsh-history-substring-search"
+fi
 
 # https://starship.rs
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
@@ -22,8 +25,7 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init zsh)"
+# zoxide initialization moved to end of .zshrc for proper configuration
 
 # https://github.com/zsh-users/zsh-history-substring-search
 HISTORY_SUBSTRING_SEARCH_PREFIXED=1

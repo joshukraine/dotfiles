@@ -27,6 +27,13 @@ if status is-interactive
     # Load fzf-git.sh for enhanced git operations with fuzzy finding
     if test -f $DOTFILES/bin/fzf-git.sh
         source $DOTFILES/bin/fzf-git.sh
+        
+    # fzf integration
+    # https://github.com/junegunn/fzf#using-homebrew-or-linuxbrew
+    if command -v fzf >/dev/null
+        if test -f (brew --prefix)/opt/fzf/shell/key-bindings.fish
+            source (brew --prefix)/opt/fzf/shell/key-bindings.fish
+        end
     end
 
     if test -e $HOME/.secrets/config.fish.local

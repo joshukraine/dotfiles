@@ -28,7 +28,9 @@ if [[ -f "$DOTFILES/bin/fzf-git.sh" ]]; then
   source "$DOTFILES/bin/fzf-git.sh"
 fi
 
-. "$HOME/.zshrc.local"
+if [[ -f "$HOME/.zshrc.local" ]]; then
+    . "$HOME/.zshrc.local"
+fi
 
 # Configure npm to use asdf's Node for global packages
 if command -v npm >/dev/null; then
@@ -55,6 +57,18 @@ setopt SHARE_HISTORY             # Share command history data
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+# fzf integration
+# https://github.com/junegunn/fzf#using-homebrew-or-linuxbrew
+if type fzf &>/dev/null; then
+  # Setup fzf key bindings and fuzzy completion
+  if [[ -f "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh" ]]; then
+    source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  fi
+  if [[ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]]; then
+    source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+  fi
 fi
 
 # Docker CLI completions
@@ -85,3 +99,8 @@ if command -v gh >/dev/null 2>&1; then
 fi
 
 . "$HOME/.config/zsh/profiler.stop"
+
+# Initialize zoxide at the very end of shell configuration
+# https://github.com/ajeetdsouza/zoxide
+export _ZO_DOCTOR=0  # Disable zoxide doctor warnings
+eval "$(zoxide init zsh)"
