@@ -21,6 +21,13 @@ export GPG_TTY=$(tty)
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
 . "$XDG_CONFIG_HOME/zsh/docker.sh"
+
+# https://github.com/junegunn/fzf-git.sh
+# Load fzf-git.sh for enhanced git operations with fuzzy finding
+if [[ -f "$DOTFILES/bin/fzf-git.sh" ]]; then
+  source "$DOTFILES/bin/fzf-git.sh"
+fi
+
 if [[ -f "$HOME/.zshrc.local" ]]; then
     . "$HOME/.zshrc.local"
 fi

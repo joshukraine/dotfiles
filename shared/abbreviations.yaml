@@ -433,6 +433,37 @@ git:
   gt:
     command: "git tag"
     description: "Create, list, or verify tags"
+  # FZF Git integration
+  gfzf:
+    command: "source $DOTFILES/bin/fzf-git.sh"
+    description: "Load fzf-git.sh key bindings (Ctrl-G + key)"
+  gfzff:
+    command: "fzf-git.sh --run files"
+    description: "Fuzzy find git files"
+  gfzfb:
+    command: "fzf-git.sh --run branches"
+    description: "Fuzzy find git branches"
+  gfzft:
+    command: "fzf-git.sh --run tags"
+    description: "Fuzzy find git tags"
+  gfzfr:
+    command: "fzf-git.sh --run remotes"
+    description: "Fuzzy find git remotes"
+  gfzfh:
+    command: "fzf-git.sh --run hashes"
+    description: "Fuzzy find git commit hashes"
+  gfzfs:
+    command: "fzf-git.sh --run stashes"
+    description: "Fuzzy find git stashes"
+  gfzfl:
+    command: "fzf-git.sh --run lreflogs"
+    description: "Fuzzy find git reflogs"
+  gfzfe:
+    command: "fzf-git.sh --run each_ref"
+    description: "Fuzzy find git refs"
+  gfzfw:
+    command: "fzf-git.sh --run worktrees"
+    description: "Fuzzy find git worktrees"
 
 # Docker
 docker:
