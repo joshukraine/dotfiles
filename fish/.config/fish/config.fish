@@ -23,6 +23,12 @@ if status is-interactive
     # https://github.com/ajeetdsouza/zoxide
     zoxide init fish | source
 
+    # https://github.com/junegunn/fzf-git.sh
+    # Load fzf-git.sh for enhanced git operations with fuzzy finding
+    if test -f $DOTFILES/bin/fzf-git.sh
+        source $DOTFILES/bin/fzf-git.sh
+    end
+
     if test -e $HOME/.secrets/config.fish.local
         source $HOME/.secrets/config.fish.local
     end
