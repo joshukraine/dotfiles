@@ -368,18 +368,23 @@ elif [[ -n "${ZSH_VERSION:-}" ]]; then
     local m o
     for o in "$@"; do
       if [[ ${o[1]} == "?" ]];then
-        eval "fzf-git-$o-widget() { zle -M '$(_fzf_git_list_bindings)' }"
+        eval "fzf-git-help-widget() { zle -M '$(_fzf_git_list_bindings)' }"
+        eval "zle -N fzf-git-help-widget"
+        for m in emacs vicmd viins; do
+          eval "bindkey -M $m '^g^?' fzf-git-help-widget"
+          eval "bindkey -M $m '^g?' fzf-git-help-widget"
+        done
       else
         eval "fzf-git-$o-widget() { local result=\$(_fzf_git_$o | __fzf_git_join); zle reset-prompt; LBUFFER+=\$result }"
+        eval "zle -N fzf-git-$o-widget"
+        for m in emacs vicmd viins; do
+          eval "bindkey -M $m '^g^${o[1]}' fzf-git-$o-widget"
+          eval "bindkey -M $m '^g${o[1]}' fzf-git-$o-widget"
+        done
       fi
-      eval "zle -N fzf-git-$o-widget"
-      for m in emacs vicmd viins; do
-        eval "bindkey -M $m '^g^${o[1]}' fzf-git-$o-widget"
-        eval "bindkey -M $m '^g${o[1]}' fzf-git-$o-widget"
-      done
     done
   }
 fi
-__fzf_git_init files branches tags remotes hashes stashes lreflogs each_ref worktrees '?list_bindings'
+__fzf_git_init files branches tags remotes hashes stashes lreflogs each_ref worktrees '?'
 
 fi # --------------------------------------------------------------------------
