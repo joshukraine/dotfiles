@@ -73,4 +73,10 @@ eval "$(starship init bash)"
 # shellcheck disable=SC1090
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# https://github.com/junegunn/fzf-git.sh
+# Load fzf-git.sh for enhanced git operations with fuzzy finding
+if [[ -f "$DOTFILES/bin/fzf-git.sh" ]]; then
+  source "$DOTFILES/bin/fzf-git.sh"
+fi
+
 # vim: set filetype=bash:
