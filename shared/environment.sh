@@ -39,7 +39,7 @@ export SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/
 export PKB_PATH="${HOME}/personal-knowledge-base"
 
 # FZF configuration
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--height 75% --layout=reverse --border"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_ALT_C_COMMAND="fd --type d . --color=never"
