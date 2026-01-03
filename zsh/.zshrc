@@ -72,7 +72,9 @@ if type fzf &>/dev/null; then
 fi
 
 # Docker CLI completions
-fpath=(/Users/joshukraine/.docker/completions $fpath)
+if [[ -d "${HOME}/.docker/completions" ]]; then
+  fpath=("${HOME}/.docker/completions" $fpath)
+fi
 
 # Load and initialise completion system with caching for performance
 autoload -Uz compinit
@@ -104,3 +106,6 @@ fi
 # https://github.com/ajeetdsouza/zoxide
 export _ZO_DOCTOR=0  # Disable zoxide doctor warnings
 eval "$(zoxide init zsh)"
+
+# Added by Antigravity
+export PATH="/Users/pyeh/.antigravity/antigravity/bin:$PATH"
