@@ -15,7 +15,6 @@ This command is designed to work **in conjunction** with Claude Code's native `/
 
 - `--type <type>`: Project type (node, python, ruby, go, rust)
 - `--skip-git`: Skip git initialization
-- `--skip-scratchpads`: Skip scratchpad setup
 - `--minimal`: Minimal setup without linting/formatting tools
 
 ## Your task
@@ -36,12 +35,7 @@ This command is designed to work **in conjunction** with Claude Code's native `/
    - Make initial commit: "chore: initialize project"
    - **If `--skip-git` provided**: Skip git initialization
 
-4. **Set up scratchpads**:
-   - Use `/setup-scratch` command
-   - Ensure scratchpads/ added to .gitignore
-   - **If `--skip-scratchpads` provided**: Skip scratchpad setup
-
-5. **Create README.md**:
+4. **Create README.md**:
    - Project name as title
    - Description placeholder
    - Installation section
@@ -49,7 +43,7 @@ This command is designed to work **in conjunction** with Claude Code's native `/
    - Contributing section
    - License section
 
-6. **Set up project-specific files**:
+5. **Set up project-specific files**:
 
    **Node.js projects**:
    - Initialize package.json: `npm init -y`
@@ -77,18 +71,18 @@ This command is designed to work **in conjunction** with Claude Code's native `/
    - Run `cargo init` if Cargo not detected
    - Set up workspace if needed
 
-7. **Configure development tools** (unless `--minimal`):
+6. **Configure development tools** (unless `--minimal`):
    - Add appropriate linter config (.eslintrc, .rubocop.yml, etc.)
    - Set up formatter config (.prettierrc, .rustfmt.toml, etc.)
    - Add editor config (.editorconfig)
    - Configure pre-commit hooks if requested
 
-8. **Create GitHub Actions workflow** (if .git exists):
+7. **Create GitHub Actions workflow** (if .git exists):
    - Basic CI workflow for the project type
    - Test runner configuration
    - Linting checks
 
-9. **Final steps**:
+8. **Final steps**:
    - Display summary of created files
    - Suggest next steps based on project type
    - Remind about updating README.md
@@ -123,9 +117,6 @@ build/
 # OS
 .DS_Store
 Thumbs.db
-
-# Scratchpads
-scratchpads/
 ```
 
 ### Basic README.md
@@ -228,6 +219,5 @@ Recommended workflow:
 4. Run initial tests: <test command>
 5. Set up CI/CD if using GitHub
 
-Use '/setup-scratch' if you need temporary workspace.
 Use '/commit' to make your first meaningful commit.
 ```

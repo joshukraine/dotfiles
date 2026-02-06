@@ -21,17 +21,13 @@ Review GitHub pull requests with configurable depth and focus.
    - **`--auto-detect`**: Analyze PR size and files to determine depth automatically
    - **Explicit flags**: Use specified review type
 
-3. **Create working notes**:
-   - Create scratchpad: `scratchpads/pr-reviews/pr-{number}-$(date +%Y%m%d-%H%M%S).md`
-   - Document PR purpose, scope, and initial observations
-
-4. **Collect feedback and status**:
+3. **Collect feedback and status**:
    - Fetch existing comments: `gh api /repos/{owner}/{repo}/issues/{number}/comments`
    - Fetch code review comments: `gh api /repos/{owner}/{repo}/pulls/{number}/comments`
    - Check CI/CD status: `gh pr checks $ARGUMENTS`
    - Filter for actionable feedback (skip resolved threads, appreciation comments)
 
-5. **Analyze based on review type**:
+4. **Analyze based on review type**:
 
    **Standard Review** (default):
    - Focus on blocking issues from comments and failed checks
@@ -54,23 +50,20 @@ Review GitHub pull requests with configurable depth and focus.
    - Analyze input validation and sanitization
    - Review API security and access controls
 
-6. **Plan and prioritize**:
+5. **Plan and prioritize**:
    - Break down issues into manageable tasks
    - Prioritize by severity: critical bugs → security → quality improvements
    - Note dependencies between issues
-   - Update scratchpad with detailed plan
 
-7. **Execute systematically**:
+6. **Execute systematically**:
    - Work through each issue with context
    - Ask: "Would you like to address this issue? (y/n/skip)"
    - Implement fixes with appropriate testing
    - Commit changes with descriptive messages
-   - Update scratchpad with progress
 
-8. **Verify and finalize**:
+7. **Verify and finalize**:
    - Run full test suite to ensure no regressions
    - Verify all CI/CD checks pass
-   - Mark resolved issues complete in scratchpad
    - Reply to comments with explanations
    - Note final PR status and next steps
 
@@ -98,46 +91,6 @@ gh pr diff $ARGUMENTS --name-only
 - API endpoints with data access
 
 **Thorough Review** for everything else
-
-## Scratchpad Template
-
-```markdown
-# PR Review #$ARGUMENTS: [PR Title]
-
-**Link**: https://github.com/{owner}/{repo}/pull/$ARGUMENTS
-**Type**: [Quick/Standard/Thorough/Security] Review
-
-## PR Summary
-
-- Purpose: Brief description
-- Related issues: #123, #456
-- Key changes: Major modifications
-
-## Issues Found
-
-### Critical (Must Fix)
-
-- [ ] Missing issue reference in PR description (add "Closes #123" if applicable)
-- [ ] Issue 1 with context
-- [ ] Issue 2 with context
-
-### Quality Improvements (Optional)
-
-- [ ] Refactoring opportunity 1
-- [ ] Test coverage gap 2
-
-## Progress
-
-- [x] Initial analysis complete
-- [ ] Issue 1 addressed
-- [ ] Issue 2 addressed
-- [ ] Final verification
-
-## Notes
-
-- Implementation decisions
-- Review feedback given
-```
 
 ## Review Focus by Type
 
