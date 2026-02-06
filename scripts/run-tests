@@ -1,396 +1,44 @@
 #!/usr/bin/env bash
 #
-# Comprehensive test runner for dotfiles testing framework using bats-core
+# Run dotfiles test suite using bats-core
 #
-# Usage: run-tests [options] [category]
-# Arguments:
-#   category          Test category to run: all, git, abbr, utils, env (default: all)
-#   -h, --help        Show help message with usage examples
-#   -v, --verbose     Enable verbose output for test execution
-#   -f, --fast        Skip setup phase, run tests immediately
-#   -p, --perf        Show performance timing and 2-minute target check
-#   -c, --coverage    Display coverage analysis (function vs test counts)
-#   --install         Install test dependencies (bats-core, fish, zsh)
-#   --setup           Setup test environment only (permissions, abbreviations)
-#
-# Examples:
-#   run-tests                     # Run all tests with full setup
-#   run-tests git                 # Run git function tests only
-#   run-tests --verbose abbr      # Run abbreviation tests with verbose output
-#   run-tests --fast --perf       # Quick test run with performance timing
-#   run-tests --install           # Install bats-core and shell dependencies
-#   run-tests --coverage          # Show test coverage analysis
-#
-# Returns: 0 if all tests pass, 1 if any tests fail
-# Behavior: Automatically sets up test environment, installs dependencies
-#
-# Test Categories:
-#   all    - Complete test suite (git + abbr + utils + env)
-#   git    - Git function tests (tests/git_functions/)
-#   abbr   - Abbreviation tests (tests/abbreviations/)
-#   utils  - Utility function tests (tests/utilities/)
-#   env    - Environment tests (tests/environment/)
+# Usage: run-tests [category]
+#   category: all (default), git, abbr
+
 set -e
 
-# Load DOTFILES variable with shell-agnostic fallback logic
-load_dotfiles_variable() {
-  # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
-  if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
-    return 0
-  fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "${SCRIPT_DIR}")"
 
-  # Method 2: Source bash environment file
-  if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
-    source "${HOME}/dotfiles/shared/environment.sh"
-    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
-      return 0
-    fi
-  fi
+if [[ "$(pwd)" != "${PROJECT_ROOT}" ]]; then
+  echo "Error: run-tests must be run from the dotfiles directory" >&2
+  echo "Usage: cd ${PROJECT_ROOT} && ./scripts/run-tests" >&2
+  exit 1
+fi
 
-  # Method 3: Fallback to conventional location
-  if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
-    export DOTFILES="${HOME}/dotfiles"
-    return 0
-  fi
+if ! command -v bats >/dev/null 2>&1; then
+  echo "Error: bats-core not found. Run: brew install bats-core" >&2
+  exit 1
+fi
 
-  echo "Error: Cannot determine DOTFILES location" >&2
-  return 1
-}
+category="${1:-all}"
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[1;34m'
-NC='\033[0m' # No Color
-
-# Print colored output
-print_red() {
-  echo -e "${RED}$1${NC}"
-}
-
-print_green() {
-  echo -e "${GREEN}$1${NC}"
-}
-
-print_yellow() {
-  echo -e "${YELLOW}$1${NC}"
-}
-
-print_blue() {
-  echo -e "${BLUE}$1${NC}"
-}
-
-show_help() {
-  cat <<EOF
-Usage: run-tests [OPTIONS] [CATEGORY]
-
-Run dotfiles testing framework with various options.
-
-CATEGORIES:
-  all           Run all tests (default)
-  git           Run git function tests only
-  abbr          Run abbreviation tests only
-  utils         Run utility tests only
-  env           Run environment tests only
-
-OPTIONS:
-  -h, --help    Show this help message
-  -v, --verbose Enable verbose output
-  -f, --fast    Skip setup and run tests immediately
-  -p, --perf    Show performance timing
-  -c, --coverage Show coverage analysis
-  --install     Install test dependencies
-  --setup       Setup test environment only
-
-EXAMPLES:
-  run-tests                    # Run all tests
-  run-tests git               # Run git function tests only
-  run-tests --verbose abbr    # Run abbreviation tests with verbose output
-  run-tests --perf            # Run all tests with performance timing
-  run-tests --install         # Install bats-core and dependencies
-
-EOF
-}
-
-install_dependencies() {
-  print_blue "Installing test dependencies..."
-
-  # Check if Homebrew is available
-  if ! command -v brew >/dev/null 2>&1; then
-    print_red "Error: Homebrew not found. Please install Homebrew first."
+case "${category}" in
+  all)
+    echo "Running all tests..."
+    bats tests/ --recursive
+    ;;
+  git)
+    echo "Running git function tests..."
+    bats tests/git_functions/
+    ;;
+  abbr)
+    echo "Running abbreviation tests..."
+    bats tests/abbreviations/
+    ;;
+  *)
+    echo "Unknown category: ${category}" >&2
+    echo "Available: all, git, abbr" >&2
     exit 1
-  fi
-
-  # Install bats-core if not present
-  if ! command -v bats >/dev/null 2>&1; then
-    print_yellow "Installing bats-core..."
-    brew install bats-core
-  else
-    print_green "bats-core already installed"
-  fi
-
-  # Check for Fish and Zsh
-  if ! command -v fish >/dev/null 2>&1; then
-    print_yellow "Installing Fish shell..."
-    brew install fish
-  else
-    print_green "Fish shell already available"
-  fi
-
-  if ! command -v zsh >/dev/null 2>&1; then
-    print_yellow "Installing Zsh shell..."
-    brew install zsh
-  else
-    print_green "Zsh shell already available"
-  fi
-
-  print_green "Dependencies installed successfully!"
-}
-
-setup_environment() {
-  print_blue "Setting up test environment..."
-
-  # Load DOTFILES variable using shell-agnostic approach
-  if ! load_dotfiles_variable; then
-    echo "Failed to load DOTFILES environment variable" >&2
-    exit 1
-  fi
-
-  # Verify we're in the correct dotfiles location
-  if [[ "$(pwd)" != "${DOTFILES}" ]]; then
-    echo "Error: run-tests must be run from the dotfiles directory" >&2
-    echo "Expected location: ${DOTFILES}" >&2
-    echo "Current location: $(pwd)" >&2
-    echo "Usage: cd \"${DOTFILES}\" && ./scripts/run-tests" >&2
-    exit 1
-  fi
-
-  # Make helpers executable
-  if [ -d "${DOTFILES}/tests/helpers" ]; then
-    chmod +x "${DOTFILES}/tests/helpers/"*.bash
-    print_green "Made test helpers executable"
-  fi
-
-  # Generate abbreviations if needed
-  if [ -f "${DOTFILES}/shared/generate-all-abbr.sh" ]; then
-    print_yellow "Regenerating abbreviations..."
-    cd "${DOTFILES}/shared"
-    ./generate-all-abbr.sh
-    cd "${DOTFILES}"
-    print_green "Abbreviations regenerated"
-  fi
-
-  print_green "Test environment ready!"
-}
-
-run_tests() {
-  local category="$1"
-  local verbose="$2"
-  local show_perf="$3"
-
-  # Load DOTFILES variable using shell-agnostic approach
-  if ! load_dotfiles_variable; then
-    echo "Failed to load DOTFILES environment variable" >&2
-    exit 1
-  fi
-
-  # Verify we're in the correct dotfiles location
-  if [[ "$(pwd)" != "${DOTFILES}" ]]; then
-    echo "Error: run-tests must be run from the dotfiles directory" >&2
-    echo "Expected location: ${DOTFILES}" >&2
-    echo "Current location: $(pwd)" >&2
-    echo "Usage: cd \"${DOTFILES}\" && ./scripts/run-tests" >&2
-    exit 1
-  fi
-
-  local bats_args=()
-  if [ "${verbose}" = "true" ]; then
-    bats_args+=("--verbose-run")
-  fi
-
-  local start_time=""
-  if [ "${show_perf}" = "true" ]; then
-    start_time=$(date +%s)
-    print_blue "Starting performance measurement..."
-  fi
-
-  case "${category}" in
-    "all")
-      print_blue "Running all tests..."
-      bats tests/ --recursive "${bats_args[@]}"
-      ;;
-    "git")
-      print_blue "Running git function tests..."
-      bats tests/git_functions/ "${bats_args[@]}"
-      ;;
-    "abbr")
-      print_blue "Running abbreviation tests..."
-      bats tests/abbreviations/ "${bats_args[@]}"
-      ;;
-    "utils")
-      print_blue "Running utility tests..."
-      if [ -d "tests/utilities" ] && [ -n "$(ls -A tests/utilities/*.bats 2>/dev/null)" ]; then
-        bats tests/utilities/ "${bats_args[@]}"
-      else
-        print_yellow "No utility tests found"
-      fi
-      ;;
-    "env")
-      print_blue "Running environment tests..."
-      if [ -d "tests/environment" ] && [ -n "$(ls -A tests/environment/*.bats 2>/dev/null)" ]; then
-        bats tests/environment/ "${bats_args[@]}"
-      else
-        print_yellow "No environment tests found"
-      fi
-      ;;
-    *)
-      print_red "Unknown test category: ${category}"
-      print_yellow "Available categories: all, git, abbr, utils, env"
-      exit 1
-      ;;
-  esac
-
-  local exit_code=$?
-
-  if [ "${show_perf}" = "true" ] && [ -n "${start_time}" ]; then
-    local end_time
-    end_time=$(date +%s)
-    local duration=$((end_time - start_time))
-
-    print_blue "Performance Results:"
-    echo "  Total execution time: ${duration}s"
-
-    if [ ${duration} -gt 120 ]; then
-      print_red "  ❌ Tests exceeded 2-minute target"
-    else
-      print_green "  ✅ Tests completed within 2-minute target"
-    fi
-  fi
-
-  return ${exit_code}
-}
-
-show_coverage() {
-  # Load DOTFILES variable using shell-agnostic approach
-  if ! load_dotfiles_variable; then
-    echo "Failed to load DOTFILES environment variable" >&2
-    exit 1
-  fi
-
-  # Verify we're in the correct dotfiles location
-  if [[ "$(pwd)" != "${DOTFILES}" ]]; then
-    echo "Error: run-tests must be run from the dotfiles directory" >&2
-    echo "Expected location: ${DOTFILES}" >&2
-    echo "Current location: $(pwd)" >&2
-    echo "Usage: cd \"${DOTFILES}\" && ./scripts/run-tests" >&2
-    exit 1
-  fi
-
-  print_blue "Coverage Analysis:"
-
-  # Count functions and tests using absolute paths
-  local fish_functions
-  fish_functions=$(find "${DOTFILES}/fish/.config/fish/functions/" -name "*.fish" 2>/dev/null | wc -l)
-  local zsh_functions
-  zsh_functions=$(grep -c "^function\|^[a-zA-Z_][a-zA-Z0-9_]*() {" "${DOTFILES}/zsh/.config/zsh/functions.zsh" 2>/dev/null || echo "0")
-  local bin_scripts
-  bin_scripts=$(find "${DOTFILES}/bin/.local/bin/" -type f -executable 2>/dev/null | wc -l)
-  local test_files
-  test_files=$(find "${DOTFILES}/tests/" -name "*.bats" 2>/dev/null | wc -l)
-
-  echo "  Functions:"
-  echo "    Fish functions: ${fish_functions}"
-  echo "    Zsh functions:  ${zsh_functions}"
-  echo "    Bin scripts:    ${bin_scripts}"
-  echo ""
-  echo "  Tests:"
-  echo "    Test files:     ${test_files}"
-  echo "    Git tests:      $(find "${DOTFILES}/tests/git_functions/" -name "*.bats" 2>/dev/null | wc -l)"
-  echo "    Abbr tests:     $(find "${DOTFILES}/tests/abbreviations/" -name "*.bats" 2>/dev/null | wc -l)"
-
-  if [ -f "shared/abbreviations.yaml" ]; then
-    local abbr_count
-    abbr_count=$(grep -c "^  [a-zA-Z].*:" "${DOTFILES}/shared/abbreviations.yaml" 2>/dev/null || echo "0")
-    echo "    Abbreviations:  ${abbr_count} total defined"
-  fi
-}
-
-main() {
-  local category="all"
-  local verbose="false"
-  local fast="false"
-  local show_perf="false"
-  local show_coverage="false"
-
-  # Parse arguments
-  while [[ $# -gt 0 ]]; do
-    case $1 in
-      -h | --help)
-        show_help
-        exit 0
-        ;;
-      -v | --verbose)
-        verbose="true"
-        shift
-        ;;
-      -f | --fast)
-        fast="true"
-        shift
-        ;;
-      -p | --perf)
-        show_perf="true"
-        shift
-        ;;
-      -c | --coverage)
-        show_coverage="true"
-        shift
-        ;;
-      --install)
-        install_dependencies
-        exit 0
-        ;;
-      --setup)
-        setup_environment
-        exit 0
-        ;;
-      all | git | abbr | utils | env)
-        category="$1"
-        shift
-        ;;
-      *)
-        print_red "Unknown option: $1"
-        show_help
-        exit 1
-        ;;
-    esac
-  done
-
-  # Check prerequisites
-  if ! command -v bats >/dev/null 2>&1; then
-    print_red "Error: bats-core not found. Run 'run-tests --install' first."
-    exit 1
-  fi
-
-  # Setup environment unless --fast
-  if [ "${fast}" != "true" ]; then
-    setup_environment
-  fi
-
-  # Show coverage if requested
-  if [ "${show_coverage}" = "true" ]; then
-    show_coverage
-    echo ""
-  fi
-
-  # Run tests
-  if run_tests "${category}" "${verbose}" "${show_perf}"; then
-    print_green "✅ All tests passed!"
-    exit 0
-  else
-    print_red "❌ Some tests failed!"
-    exit 1
-  fi
-}
-
-main "$@"
+    ;;
+esac
