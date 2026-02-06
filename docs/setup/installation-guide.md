@@ -13,22 +13,41 @@ This guide provides a complete, step-by-step walkthrough for installing the dotf
 
 ## 🛡️ Pre-Installation Checklist
 
-Before running the setup script, complete these essential steps:
+Before running the bootstrap script, complete these essential steps:
 
 ### ✅ 1. System Preparation
 
 - [ ] **Update macOS** - Ensure you're running the latest version
-- [ ] **Install Xcode Command Line Tools**:
-
-  ```bash
-  xcode-select --install
-  ```
-
 - [ ] **Complete initial macOS setup** (Apple ID, user account, etc.)
+- [ ] **Log in to iCloud**
 
-### ✅ 2. Required Software Installation
+### 🚀 2. Run the Bootstrap Script
 
-The setup script requires these components to be installed first:
+The bootstrap script handles everything automatically — Xcode CLI tools,
+Homebrew, dotfiles, language runtimes, and shell setup:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/pyeh/dotfiles/master/scripts/bootstrap.sh)
+```
+
+Preview what the script will do first:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/pyeh/dotfiles/master/scripts/bootstrap.sh) --dry-run
+```
+
+The bootstrap script is idempotent and can be run multiple times safely. See the
+[README](../../README.md#-new-mac-bootstrap) for the full list of phases and options.
+
+### Alternative: Manual Setup
+
+If you prefer manual control, you can install prerequisites individually:
+
+#### Install Xcode Command Line Tools
+
+```bash
+xcode-select --install
+```
 
 #### Install Homebrew
 
@@ -42,23 +61,6 @@ Follow the post-installation instructions to add Homebrew to your PATH.
 
 ```bash
 brew install stow
-```
-
-#### Optional: Run the Laptop Script
-
-For a complete development environment, consider running the [laptop script](https://github.com/joshukraine/laptop) first:
-
-```bash
-# Download and review the script
-curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/main/mac
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/laptop/.laptop.local
-
-# Review both scripts
-less mac
-less .laptop.local
-
-# Execute (this installs many development tools)
-sh mac 2>&1 | tee ~/laptop.log
 ```
 
 ## 🖥️ System Requirements

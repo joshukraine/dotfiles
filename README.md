@@ -96,109 +96,52 @@ All of the above and more are installed with my fork of [Laptop][joshuas-laptop]
 
 ## 🌟 New Mac Bootstrap
 
-This is what I would do if I bought a new Mac computer today. The steps below assume you have already completed the basics:
+This is what I would do if I bought a new Mac computer today. A single bootstrap script handles everything — from Xcode CLI tools and Homebrew to language runtimes and shell setup.
+
+### Prerequisites
 
 - Log in to iCloud
 - Check for software updates
-- [Install Xcode Command Line Tools][install-clt]
 
-### 💻 1. Run my fork of thoughtbot’s Laptop
-
-&#9657; **[github.com/joshukraine/laptop][joshuas-laptop]**
-
-Download the `mac` script:
+### 🚀 One-liner
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/laptop/main/mac
+bash <(curl -fsSL https://raw.githubusercontent.com/pyeh/dotfiles/master/scripts/bootstrap.sh)
 ```
 
-Download `.local.laptop` for additional customizations:
+The bootstrap script runs the following phases automatically:
+
+1. Install Xcode Command Line Tools
+2. Install Rosetta 2 (Apple Silicon only)
+3. Install Homebrew + minimal formulae (git, stow, coreutils, etc.)
+4. Clone the dotfiles repo to `~/dotfiles`
+5. Run `setup.sh` (stow symlinks, hostname, directories, tmux)
+6. Install asdf + language runtimes (Ruby, Node.js, Python, Lua)
+7. Install gems and npm packages from `~/.default-gems` / `~/.default-npm-packages`
+8. Configure Zsh as default shell + install Zap plugin manager
+9. Run `brew bundle install` (full Brewfile — this takes a while)
+
+### Options
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/laptop/.laptop.local
+# Preview all phases without making changes
+./scripts/bootstrap.sh --dry-run
+
+# Skip the lengthy Brewfile install for faster re-runs
+./scripts/bootstrap.sh --skip-brew-bundle
+
+# Show usage
+./scripts/bootstrap.sh --help
 ```
 
-Review both scripts before proceeding:
+> [!NOTE]
+> The script is idempotent — safe to run multiple times. Each phase checks
+> whether its work has already been done and skips accordingly.
 
-```sh
-less mac
-```
-
-```sh
-less .laptop.local
-```
-
-Execute the `mac` script:
-
-```sh
-sh mac 2>&1 | tee ~/laptop.log
-```
-
-I’ve made the following changes to my fork of Laptop:
-
-- Install asdf via git instead of Homebrew
-- Comment out Heroku-related code
-- Comment out unused Homebrew taps and formulae
-
-It is worth noting that the Laptop script (`mac`) is idempotent and can be safely run multiple times to ensure a consistent baseline configuration.
-
-### ⚠️ 2. Check for Stow conflicts
-
-The dotfiles `setup.sh` script uses [GNU Stow][gnu-stow] to symlink all the config files to your `$HOME` directory. If you already have an identically-named file/directory in `$HOME` (e.g. `~/.zshrc` leftover from installing Laptop), this will cause a conflict, and Stow will (rightly) abort with an error.
-
-The setup script will try to detect and backup these files ahead of Stow, but it’s still a good idea to check your `$HOME` directory as well as `$HOME/.config` and `$HOME/.local/bin`.
-
-### 📍 3. Clone and setup the dotfiles
-
-Clone
-
-```sh
-git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
-```
-
-Read and preview
-
-```sh
-less ~/dotfiles/setup.sh
-~/dotfiles/setup.sh --help
-~/dotfiles/setup.sh --dry-run  # Preview changes without applying them
-```
-
-Setup
-
-```sh
-~/dotfiles/setup.sh
-```
-
-If you do encounter Stow conflicts, resolve these and run setup again. The script is idempotent, so you can run it multiple times safely.
-
-### ⚡️ 4. Install Zap
-
-[Zap][zap] describes itself as a _“minimal zsh plugin manager that does what you expect.”_
-
-&#9657; **[zapzsh.com][zap]**
-
-> [!IMPORTANT]
-> After copying/pasting the install command for Zap, be sure to add the `--keep` flag to prevent Zap from replacing you existing `.zshrc` file.
-
-### 🍺 5. Install remaining Homebrew packages
-
-Review the included `Brewfile` and make desired adjustments.
-
-```sh
-less ~/Brewfile
-```
-
-Install the bundle.
-
-```sh
-brew bundle install
-```
-
-### 🛠️ 6. Complete post-install tasks
+### 🛠️ Post-install tasks
 
 - [ ] Launch LazyVim (`nvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings. Plugins should install automatically on first launch.
-- [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`, `~/dotfiles/local/config.fish.local`.
+- [ ] Create `~/.gitconfig.local` with your name and email
 - [ ] (Optional) Set up [1Password CLI][1p-cli-start] for managing secrets.
 - [ ] (Optional) Set up [1Password SSH key management][1p-cli-ssh].
 - [ ] If using Fish, customize your setup by running the `fish_config` command.

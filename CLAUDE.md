@@ -40,14 +40,18 @@ The repository is organized with each top-level directory representing a tool or
 **📚 For comprehensive setup guidance, see [docs/setup/](docs/setup/README.md)**
 
 ```bash
-# Initial setup (idempotent)
+# Bootstrap a fresh Mac from zero (single command)
+bash <(curl -fsSL https://raw.githubusercontent.com/pyeh/dotfiles/master/scripts/bootstrap.sh)
+
+# Bootstrap with options
+./scripts/bootstrap.sh --dry-run          # Preview all phases
+./scripts/bootstrap.sh --skip-brew-bundle # Skip lengthy Brewfile install
+
+# Run setup.sh only (symlinks, hostname, directories)
 bash ~/dotfiles/setup.sh
 
 # Install Homebrew packages
 brew bundle install
-
-# Install Zap (Zsh plugin manager)
-# Follow instructions at https://www.zapzsh.com with --keep flag
 ```
 
 **Quick references:**
