@@ -30,9 +30,6 @@ set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
 # 1Password SSH agent
 set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
-# Personal Knowledge Base
-set -gx PKB_PATH "$HOME/personal-knowledge-base"
-
 # FZF configuration
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore-vcs'
 set -gx FZF_DEFAULT_OPTS '--height 75% --layout=reverse --border'
