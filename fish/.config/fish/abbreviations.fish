@@ -85,11 +85,6 @@ abbr -a -g mdl 'markdownlint-cli2 --config ~/.markdownlint-cli2.yaml "**/*.md"'
 abbr -a -g mdlf 'markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "**/*.md"'
 abbr -a -g mdlc 'markdownlint-cli2 --config ~/.markdownlint-cli2.yaml "*.md"'
 abbr -a -g mdlcf 'markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "*.md"'
-abbr -a -g mdla 'markdownlint-cli2 --config ~/.markdownlint-cli2.yaml "**/*.md"'
-abbr -a -g mdlaf 'markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "**/*.md"'
-abbr -a -g mdv 'markdown-validate'
-abbr -a -g mdvf 'markdown-validate --fix'
-abbr -a -g mdvq 'markdown-validate --fix --quiet'
 
 # local servers
 abbr -a -g hts 'http-server'
