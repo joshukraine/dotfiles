@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034,SC2190,SC2206,SC2296
 typeset -A ZSH_HIGHLIGHT_REGEXP
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main regexp)
 
