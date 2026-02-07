@@ -35,6 +35,7 @@ Mark each task as completed when finished. Report progress after each major step
 - **Do NOT include issue references** in commit messages
 
 **Commit Strategy:**
+
 - Commit every major component — don't wait until everything is done
 - Each commit must be working code
 - Typical range: 3-8 commits for most issues
