@@ -174,10 +174,6 @@ config_dirs:
   cdbn:
     command: "cd $HOME/.bin"
     description: "Navigate to legacy bin directory"
-  # Personal Knowledge Base - quick access to saved insights
-  cdkb:
-    command: "cdkb"
-    description: "Navigate to Personal Knowledge Base"
 
 # Navigation shortcuts
 navigation:

@@ -603,36 +603,3 @@ function saf() {
   defaults write com.apple.finder AppleShowAllFiles TRUE
   killall Finder
 }
-
-# Quick navigation to Personal Knowledge Base
-#
-# Usage: cdkb
-# Arguments: None
-#
-# Examples:
-#   cdkb                    # Navigate to knowledge base root and show recent files
-#
-# Returns: Changes to knowledge base directory and shows search tip plus recent files
-function cdkb() {
-    local kb_path="${PKB_PATH:-${HOME}/personal-knowledge-base}"
-
-    if [[ ! -d "${kb_path}" ]]; then
-        echo "Knowledge base not found at: ${kb_path}"
-        echo "Ensure PKB_PATH is set and directory exists"
-        echo "Create with: mkdir -p ~/personal-knowledge-base"
-        return 1
-    fi
-
-    cd "${kb_path}" || return 1
-    echo "📚 Knowledge Base: $(pwd)"
-    echo ""
-    echo "💡 Search: rg 'search term' --type md"
-    echo ""
-    echo "Recent additions:"
-    find . -name "*.md" -not -path "./.*" -type f -print0 | \
-        xargs -0 ls -t | head -5 | \
-        sed 's|^\./||' | \
-        while read -r file; do
-            echo "  ${file}"
-        done
-}

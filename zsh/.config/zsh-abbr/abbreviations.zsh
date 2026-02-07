@@ -63,7 +63,6 @@ abbr "cdxa"="cd ${XDG_CACHE_HOME}"
 abbr "cdxs"="cd ${XDG_STATE_HOME}"
 abbr "cdlb"="cd ${HOME}/.local/bin"
 abbr "cdbn"="cd ${HOME}/.bin"
-abbr "cdkb"="cdkb"
 
 # navigation
 abbr ".."="cd .."
