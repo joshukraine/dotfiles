@@ -473,7 +473,7 @@ Local customizations should be placed in `*.local` files:
 
 ## License
 
-Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
+Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 
 [^2]: <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.symbol_map>
 

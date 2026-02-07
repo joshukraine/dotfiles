@@ -11,7 +11,6 @@ What gets regenerated:
   - Fish abbreviations (fish/.config/fish/abbreviations.fish)
   - Zsh abbreviations (zsh/.config/zsh-abbr/abbreviations.zsh)
   - Abbreviations documentation (docs/abbreviations.md)
-  - Function documentation index (docs/functions/function-index.md)
 
 Options:
   -h, --help  Show this help message
@@ -45,8 +44,6 @@ Examples:
 
     # Check if documentation generators exist
     set doc_generate_script "$dotfiles_dir/shared/generate-abbreviations-doc.sh"
-    set func_doc_script "$dotfiles_dir/shared/generate-function-docs-simple.sh"
-
     # Run the generation script
     echo "🔄 Regenerating abbreviations and documentation from any directory..."
     "$generate_script"
@@ -57,11 +54,6 @@ Examples:
         if test -f "$doc_generate_script" -a -x "$doc_generate_script"
             echo "📝 Regenerating abbreviations documentation..."
             "$doc_generate_script"
-        end
-
-        if test -f "$func_doc_script" -a -x "$func_doc_script"
-            echo "📋 Regenerating function documentation index..."
-            "$func_doc_script"
         end
     end
 
