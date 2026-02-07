@@ -37,7 +37,6 @@ This file provides project-agnostic principles and standards for Claude Code
   changes
 - **Issue References**: Use "Closes #123" in PR descriptions only, never in
   individual commit messages
-- Never commit scratchpads to Git
 
 ### Code Quality
 
@@ -61,5 +60,4 @@ This file provides project-agnostic principles and standards for Claude Code
 
 ---
 
-For detailed implementation guidance, use slash commands (run `/help` for
-available commands).
+Type `/` to see available slash commands for common workflows.

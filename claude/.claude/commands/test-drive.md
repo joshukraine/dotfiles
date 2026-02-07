@@ -24,7 +24,7 @@ Create a test drive guide for newly implemented features, showing what's new and
 
 ## Your Task
 
-Create a comprehensive test drive markdown file in the appropriate scratchpads directory that includes:
+Create a comprehensive test drive markdown file that includes:
 
 ### 1. **High-Level Feature Overview**
 
@@ -52,6 +52,6 @@ Create a comprehensive test drive markdown file in the appropriate scratchpads d
 
 Follow this structure and format, using the existing test-drive.md as a reference for style and comprehensiveness.
 
-**File Location**: Create the test drive file in `scratchpads/notes/test-drive-[feature-name]-[timestamp].md`
+**File Location**: Output the test drive guide directly to the conversation, or save to a file if the user requests it.
 
 **Important**: Make the guide immediately actionable - someone should be able to follow it step-by-step to fully experience the new feature.
