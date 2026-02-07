@@ -30,6 +30,14 @@ repos:
       - id: shellcheck
         exclude: ^(scratchpads/|\.github/|.*plugins/)
 
+  # Markdown linting
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.20.0
+    hooks:
+      - id: markdownlint-cli2
+        args: ['--config', 'markdown/.markdownlint-cli2.yaml']
+        exclude: ^scratchpads/
+
   # YAML validation
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
