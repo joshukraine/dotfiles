@@ -37,8 +37,6 @@ The repository is organized with each top-level directory representing a tool or
 
 ### Setup and Installation
 
-**📚 For comprehensive setup guidance, see [docs/setup/](docs/setup/README.md)**
-
 ```bash
 # Initial setup (idempotent)
 bash ~/dotfiles/setup.sh
@@ -50,99 +48,18 @@ brew bundle install
 # Follow instructions at https://www.zapzsh.com with --keep flag
 ```
 
-**Quick references:**
-
-- **New users**: [Installation Guide](docs/setup/installation-guide.md)
-- **Command examples**: [Usage Examples](docs/setup/usage-examples.md)
-- **Issues**: [Troubleshooting](docs/setup/troubleshooting.md)
-- **Customization**: [Customization Guide](docs/setup/customization.md)
-
-### Configuration Validation
-
-```bash
-# Validate all configurations
-./scripts/validate-config.sh
-
-# Run with auto-fix for common issues
-./scripts/validate-config.sh --fix
-
-# Run specific validator (shell-syntax, abbreviations, environment, dependencies, markdown)
-./scripts/validate-config.sh --validator markdown
-
-# Setup git hooks for automatic validation
-./scripts/setup-git-hooks.sh
-```
-
 ### Testing and Linting
 
 ```bash
-# Run comprehensive test suite (must be run from dotfiles root)
+# Lint shell scripts (must be run from dotfiles root)
+./scripts/lint-shell
+
+# Run test suite (must be run from dotfiles root)
 ./scripts/run-tests
 
 # Run specific test categories
 ./scripts/run-tests git         # Git function tests
 ./scripts/run-tests abbr        # Abbreviation tests
-./scripts/run-tests --verbose   # Verbose output
-./scripts/run-tests --perf      # Performance timing
-
-# Lint shell scripts (must be run from dotfiles root)
-./scripts/lint-shell
-
-# Lint with minimal output
-./scripts/lint-shell --quiet
-
-# Skip test files during linting
-./scripts/lint-shell --exclude-tests
-```
-
-### Development Workflow
-
-```bash
-# Navigate to dotfiles
-cdot
-
-# Navigate to config directories
-cdxc    # ~/.config
-cdnv    # ~/.config/nvim
-cdfi    # ~/.config/fish
-
-# Git operations (using custom abbreviations)
-ga      # git add
-gaa     # git add --all
-gcm     # git cm (custom commit script)
-gst     # git status
-```
-
-### Shell Management
-
-Both Fish and Zsh configurations provide 90% functional parity with the same abbreviations and functions.
-
-**Zsh-specific:**
-
-```bash
-src     # source ~/.zshrc
-```
-
-**Fish-specific:**
-
-```bash
-fish_config  # Open Fish configuration UI
-```
-
-### Tmux Management
-
-Common tmux commands and abbreviations available:
-
-```bash
-tl      # tmux ls (list sessions)
-tlw     # tmux list-windows
-tn      # Create new tmux session with name
-tna     # Create/attach to session named after current directory
-ta      # Attach to existing tmux session
-tk      # Kill tmux session
-tka     # Kill all tmux sessions
-tsrc    # Source tmux configuration
-mux     # tmuxinator (session management)
 ```
 
 ## Architecture Notes
@@ -153,7 +70,7 @@ The repository maintains parallel configurations for both Zsh and Fish shells:
 
 - **Shared configuration framework** eliminates duplication:
   - `shared/environment.sh` and `shared/environment.fish` - Common environment variables
-  - `shared/abbreviations.yaml` - Single source for all 196+ abbreviations
+  - `shared/abbreviations.yaml` - Single source for all abbreviations
   - Shell-specific files generated via `shared/generate-*-abbr.sh` scripts
 - Both use Starship for consistent prompting
 - Fish uses native abbreviations, Zsh uses zsh-abbr plugin for Fish-like behavior
@@ -175,15 +92,7 @@ Some directories contain repository infrastructure and should not be symlinked t
 1. Create a `.stow-local-ignore` file in the root of the directory
 2. Add the pattern `.+ # Ignore everything` to ignore all contents
 
-**Example directories using this pattern:**
-
-- `docs/` - Repository documentation
-- `scripts/` - Build and utility scripts
-- `tests/` - Test files and fixtures
-- `shared/` - Shared configuration generators
-- `scratchpads/` - Temporary development files
-
-**Important:** Do not add directory names to the root `.stow-local-ignore` file - this has no effect since stow runs on individual packages, not the entire repository.
+**Important:** Do not add directory names to the root `.stow-local-ignore` file — this has no effect since stow runs on individual packages, not the entire repository.
 
 ### Neovim Configuration
 
@@ -198,12 +107,6 @@ Some directories contain repository infrastructure and should not be symlinked t
 - Font setup includes Nerd Font symbols for icons without patched fonts
 - Tmux installed and configured by default for terminal multiplexing
 
-### Package Management
-
-- Homebrew via `brew/Brewfile` for system packages and applications
-- asdf for runtime version management (Node.js, Ruby, etc.)
-- Fonts installed via Homebrew Cask Fonts
-
 ## Important Files
 
 - `setup.sh` - Main installation script
@@ -217,8 +120,6 @@ Some directories contain repository infrastructure and should not be symlinked t
 - `local/` - Contains example local configuration files for customization
 
 ## Shared Configuration System
-
-The dotfiles use a shared configuration framework to eliminate duplication between Fish and Zsh:
 
 ### Adding/Modifying Abbreviations
 
@@ -236,7 +137,7 @@ The dotfiles use a shared configuration framework to eliminate duplication betwe
 - **Shared**: Edit `shared/environment.sh` and `shared/environment.fish`
 - **Shell-specific**: Edit in respective shell configs (`fish/config.fish` or `zsh/.zshrc`)
 
-**⚠️ Important**: Never edit generated abbreviation files directly - changes will be overwritten!
+**Important**: Never edit generated abbreviation files directly — changes will be overwritten!
 
 ## Customization
 
@@ -245,27 +146,6 @@ Local customizations should be placed in `*.local` files:
 - `~/.gitconfig.local` - Personal git configuration
 - `~/.laptop.local` - Additional laptop setup customizations
 - `~/dotfiles/local/config.fish.local` - Fish-specific local configuration
-
-## Scratchpads
-
-For temporary files, notes, and debugging during development work with Claude Code:
-
-- **Location**: Use `scratchpads/` directory (ignored by git)
-- **Organization**: Subdirectories by type (`pr-reviews/`, `planning/`, `debugging/`, `notes/`)
-- **Naming**: Include timestamps for organization (e.g., `pr-review-70-20250721-211241.md`)
-- **Purpose**: Working files that should not be committed to repository
-
-Example structure:
-
-```text
-scratchpads/
-├── pr-reviews/
-│   └── pr-review-70-20250721-211241.md
-├── planning/
-│   └── phase-3-roadmap-20250721.md
-└── debugging/
-    └── shell-function-debug-20250721.md
-```
 
 ## Platform Support
 

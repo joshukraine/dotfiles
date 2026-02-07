@@ -9,34 +9,10 @@
 - Shell support for both [Zsh][zsh] and [Fish][fish] with 95% functional parity via shared configuration
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
-- New Mac bootstrap based on thoughtbot’s [Laptop][laptop]
+- New Mac bootstrap based on thoughtbot's [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
-- AI-assisted development with [Claude Code][claude-code] (optional)
-
-## 🗂️ Table of Contents
-
-- [Quick Setup](#%EF%B8%8F-quick-setup)
-- [Comprehensive Setup Documentation](#-comprehensive-setup-documentation)
-- [Prerequisites](#-prerequisites)
-- [New Mac Bootstrap](#-new-mac-bootstrap)
-- [Zsh or Fish?](#zsh-or-fish)
-- [Shared Configuration Framework](#shared-configuration-framework)
-- [Claude Code Integration (Optional)](#-claude-code-integration-optional)
-- [Functions and Abbreviations](#-functions-and-abbreviations)
-- [Markdown Linting](#markdown-linting)
-- [About Neovim Distributions](#about-neovim-distributions)
-- [My Favorite Programming Fonts](#my-favorite-programming-fonts)
-- [Nerd Fonts and Icons](#nerd-fonts-and-icons)
-- [A Note about Vim performance and Ruby files](#a-note-about-vim-performance-and-ruby-files)
-- [Identifying Sources of Slow Startup Times (Zsh)](#identifying-sources-of-slow-startup-times-zsh)
-- [Awesome Neovim Dotfiles, Distros, and Starters](#awesome-neovim-dotfiles-distros-and-starters)
-- [Some of my favorite dotfile repos](#some-of-my-favorite-dotfile-repos)
-- [Helpful web resources on dotfiles, et al.](#helpful-web-resources-on-dotfiles-et-al)
-- [License](#license)
 
 ## ⚡️ Quick Setup
-
-**For first-time users**: See the [complete setup documentation](docs/setup/) for detailed guidance.
 
 Make sure macOS is up to date and you have installed the [required software](#-prerequisites).
 
@@ -65,19 +41,6 @@ Run the setup script.
 ~/dotfiles/setup.sh
 ```
 
-## 📚 Comprehensive Setup Documentation
-
-For detailed guidance on installation, customization, and troubleshooting:
-
-| Guide                                                      | Purpose                                      |
-| ---------------------------------------------------------- | -------------------------------------------- |
-| **[Setup Overview](docs/setup/README.md)**                 | Choose the right guide for your situation    |
-| **[Installation Guide](docs/setup/installation-guide.md)** | Complete step-by-step setup walkthrough      |
-| **[Usage Examples](docs/setup/usage-examples.md)**         | Command examples and practical scenarios     |
-| **[Troubleshooting](docs/setup/troubleshooting.md)**       | Solutions for common setup issues            |
-| **[Customization](docs/setup/customization.md)**           | Personalizing your dotfiles setup            |
-| **[Migration Guide](docs/setup/migration.md)**             | Moving from other dotfiles or manual configs |
-
 ## ✅ Prerequisites
 
 The dotfiles assume you are running macOS with (at minimum) the following software pre-installed:
@@ -102,7 +65,7 @@ This is what I would do if I bought a new Mac computer today. The steps below as
 - Check for software updates
 - [Install Xcode Command Line Tools][install-clt]
 
-### 💻 1. Run my fork of thoughtbot’s Laptop
+### 💻 1. Run my fork of thoughtbot's Laptop
 
 &#9657; **[github.com/joshukraine/laptop][joshuas-laptop]**
 
@@ -134,7 +97,7 @@ Execute the `mac` script:
 sh mac 2>&1 | tee ~/laptop.log
 ```
 
-I’ve made the following changes to my fork of Laptop:
+I've made the following changes to my fork of Laptop:
 
 - Install asdf via git instead of Homebrew
 - Comment out Heroku-related code
@@ -146,7 +109,7 @@ It is worth noting that the Laptop script (`mac`) is idempotent and can be safel
 
 The dotfiles `setup.sh` script uses [GNU Stow][gnu-stow] to symlink all the config files to your `$HOME` directory. If you already have an identically-named file/directory in `$HOME` (e.g. `~/.zshrc` leftover from installing Laptop), this will cause a conflict, and Stow will (rightly) abort with an error.
 
-The setup script will try to detect and backup these files ahead of Stow, but it’s still a good idea to check your `$HOME` directory as well as `$HOME/.config` and `$HOME/.local/bin`.
+The setup script will try to detect and backup these files ahead of Stow, but it's still a good idea to check your `$HOME` directory as well as `$HOME/.config` and `$HOME/.local/bin`.
 
 ### 📍 3. Clone and setup the dotfiles
 
@@ -174,7 +137,7 @@ If you do encounter Stow conflicts, resolve these and run setup again. The scrip
 
 ### ⚡️ 4. Install Zap
 
-[Zap][zap] describes itself as a _“minimal zsh plugin manager that does what you expect.”_
+[Zap][zap] describes itself as a _"minimal zsh plugin manager that does what you expect."_
 
 &#9657; **[zapzsh.com][zap]**
 
@@ -206,7 +169,7 @@ brew bundle install
 
 ## Zsh or Fish?
 
-Having used both Zsh and Fish for several years, I’ve decided to keep my configs for both. One thing I particularly love about Fish is the concept of [abbreviations over aliases](https://www.sean.sh/log/when-an-alias-should-actually-be-an-abbr/). Happily, there is now [zsh-abbr][zsh-abbr] which brings this functionality to Zsh.
+Having used both Zsh and Fish for several years, I've decided to keep my configs for both. One thing I particularly love about Fish is the concept of [abbreviations over aliases](https://www.sean.sh/log/when-an-alias-should-actually-be-an-abbr/). Happily, there is now [zsh-abbr][zsh-abbr] which brings this functionality to Zsh.
 
 &#9657; **[Fish abbr docs](https://fishshell.com/docs/current/cmds/abbr.html)**
 
@@ -279,7 +242,7 @@ Set it as your default shell:
 chsh -s $(which fish)
 ```
 
-Restart your terminal. This will create the `~/.config` and `~/.local` directories if they don’t already exist.
+Restart your terminal. This will create the `~/.config` and `~/.local` directories if they don't already exist.
 
 </details>
 
@@ -341,160 +304,7 @@ The shared configuration includes intelligent git functions that automatically d
 
 These functions work with both `main` and `master` branch names automatically.
 
-## 🤖 Claude Code Integration (Optional)
-
-This project includes comprehensive [Claude Code][claude-code] integration for AI-assisted development workflows. **Using Claude Code is completely optional** - all dotfiles functionality works independently.
-
-### What's Included
-
-- **Global CLAUDE.md** - Project context and coding standards for AI assistance
-- **Custom slash commands** - User-level commands for common development tasks
-- **Workflow automation** - GitHub issue fixes, PR creation, code reviews, and more
-
-### Available Commands
-
-| Command            | Description                                                   |
-| ------------------ | ------------------------------------------------------------- |
-| `/commit`          | Create commits with clipboard workflow (no attribution)       |
-| `/commit-auto`     | Create commits with full automation (includes attribution)    |
-| `/commit-msg`      | Generate commit messages from staged changes                  |
-| `/context-bridge`  | Create session continuity documents for Claude Code           |
-| `/create-pr`       | Generate comprehensive pull requests with smart issue linking |
-| `/resolve-issue`   | Systematic GitHub issue resolution workflow                   |
-| `/review-pr`       | Thorough pull request reviews with configurable depth         |
-| `/setup-scratch`   | Initialize temporary workspace for development notes          |
-| `/new-project`     | Comprehensive project setup (use after Claude Code's `/init`) |
-| `/update-deps`     | Safe dependency updates with testing                          |
-| `/save-knowledge`  | Capture session insights into structured knowledge base       |
-| `/process-inbox`   | Process web content into organized knowledge base entries     |
-| `/help`            | Display available commands with usage examples                |
-
-### Getting Started with Claude Code
-
-1. **Install Claude Code**: Follow the [official quickstart guide](https://docs.anthropic.com/en/docs/claude-code/quickstart)
-2. **Explore commands**: Run `/help` in any terminal to see available commands
-3. **Learn more**: Check the `claude/` directory for detailed command documentation
-
-### Key Features
-
-- **Issue-to-PR workflows** with automatic linking and proper GitHub integration
-- **Commit message standards** following Conventional Commits format
-- **Scratchpad management** for organized development notes and planning
-- **Cross-project consistency** via global configuration and reusable commands
-
-The Claude Code setup enhances but doesn't replace the core dotfiles functionality. Whether you use AI assistance or not, you'll have a fully functional development environment.
-
-## 🔧 Functions and Abbreviations
-
-This repository includes comprehensive documentation for all shell functions and abbreviations to improve maintainability and user experience.
-
-### Function Documentation
-
-All 35+ shell functions are thoroughly documented with standardized inline comments and external reference guides:
-
-- **[Function Overview](docs/functions/README.md)** - Complete index of all functions with descriptions and categories
-- **[Git Functions](docs/functions/git-functions.md)** - Smart git operations with automatic branch detection
-- **[Development Tools](docs/functions/development.md)** - Development utilities, navigation shortcuts, and command wrappers
-- **[Tmux Functions](docs/functions/tmux.md)** - Terminal multiplexer session management and workflows
-- **[System Functions](docs/functions/system.md)** - System utilities, process management, and command enhancements
-
-### Abbreviations Reference
-
-All 289 shell abbreviations are documented with usage examples and descriptions:
-
-- **[Complete Abbreviations Reference](docs/abbreviations.md)** - Comprehensive guide to all abbreviations across categories
-  - UNIX commands with enhanced options
-  - Git workflow shortcuts
-  - Development tool shortcuts
-  - Homebrew package management
-  - Docker, Rails, Node.js, and more
-
-### Documentation Standards
-
-- **Standardized Format**: All functions include usage, arguments, examples, and return values
-- **Cross-Shell Consistency**: Identical documentation quality in both Fish and Zsh
-- **Practical Examples**: Real-world usage scenarios and workflow integration
-- **Cross-References**: Links between related functions and abbreviations
-
-### Regenerating Documentation
-
-**Function Documentation**: Manually maintained with standardized inline comments and reference guides.
-
-**Abbreviation Documentation**: Fully automated! Generated from `shared/abbreviations.yaml`:
-
-```bash
-# Regenerate everything (abbreviations + documentation)
-reload-abbr
-
-# Or manually from the dotfiles directory
-~/dotfiles/shared/generate-all-abbr.sh
-
-# Individual generators (for development)
-~/dotfiles/shared/generate-fish-abbr.sh          # Fish abbreviations only
-~/dotfiles/shared/generate-zsh-abbr.sh           # Zsh abbreviations only
-~/dotfiles/shared/generate-abbreviations-doc.sh  # Documentation only
-```
-
-**What gets regenerated automatically:**
-
-- `fish/.config/fish/abbreviations.fish` (288 abbreviations)
-- `zsh/.config/zsh-abbr/abbreviations.zsh` (289 abbreviations)
-- `docs/abbreviations.md` (complete reference documentation)
-
-**After regeneration:** Reload your shell (`exec fish` or `src`) to use new abbreviations.
-
-## Markdown Linting
-
-This repository includes a complete markdownlint setup for consistent markdown formatting across all projects.
-
-### Features
-
-- **Fallback Configuration Discovery**: Automatically finds markdown config in multiple locations:
-  - `~/dotfiles/markdown/.markdownlint-cli2.yaml` (primary)
-  - `PWD/markdown/.markdownlint-cli2.yaml` (project-specific)
-  - `PWD/.markdownlint-cli2.yaml` (project root)
-  - Falls back to legacy `.markdownlint.yaml` files for compatibility
-- **Global Wrapper Script**: `markdown-validate` command available system-wide
-- **Shell Abbreviations**: Quick access via `mdl`/`mdv` commands
-- **Editor Integration**: Works seamlessly with Neovim/LazyVim
-- **Auto-fix Coordination**: Prettier → markdownlint-cli2 tool chain
-
-### Usage
-
-```bash
-# Install markdownlint-cli2 (if not already installed)
-brew bundle install
-
-# Lint files using abbreviations
-mdl                        # Lint *.md files in current directory
-mdlf                       # Auto-fix *.md files in current directory
-mdla                       # Lint **/*.md files recursively
-mdlaf                      # Fix **/*.md files recursively
-
-# Global validation with dotfiles config
-mdv                        # Detailed validation (markdown-validate)
-mdvf                       # Validation with auto-fix
-mdvq                       # Quick fix with minimal output
-```
-
-### CI Integration
-
-Markdown validation is integrated into the main validation workflow. For manual validation:
-
-```bash
-# Validate markdown files
-./scripts/validate-config.sh --validator markdown --fix
-
-# Use the global wrapper from any directory
-markdown-validate --fix
-```
-
-### Customization
-
-- **Dotfiles config**: Edit `~/dotfiles/markdown/.markdownlint-cli2.yaml`
-- **Project-specific**: Create `markdown/.markdownlint-cli2.yaml` or `.markdownlint-cli2.yaml` in project
-- **Add abbreviations**: Edit `~/dotfiles/shared/abbreviations.yaml` and run `reload-abbr`
-- **Global access**: Use `markdown-validate` wrapper from any directory
+See [docs/abbreviations.md](docs/abbreviations.md) for a complete reference of all abbreviations.
 
 ## About Neovim Distributions
 
@@ -517,7 +327,7 @@ Boy, when I reminisce about the days of writing PHP for Internet Explorer in BBE
 
 ## My Favorite Programming Fonts
 
-Over the years, I’ve branched out to explore a variety of mono-spaced fonts, both free and premium. Here is a list of my favorites.
+Over the years, I've branched out to explore a variety of mono-spaced fonts, both free and premium. Here is a list of my favorites.
 
 ### Free Fonts
 
@@ -541,14 +351,14 @@ _You have to give people money if you want these._ 🤑
 
 ### Ligatures
 
-I first discovered ligatures through [Fira Code][fira-code], which IMHO is probably the king of programming fonts. After using Fira Code, it’s hard to go back to a sans-ligature typeface. Therefore all the fonts I’ve included in my fave’s list _do_ include ligatures, although some have more than others.
+I first discovered ligatures through [Fira Code][fira-code], which IMHO is probably the king of programming fonts. After using Fira Code, it's hard to go back to a sans-ligature typeface. Therefore all the fonts I've included in my fave's list _do_ include ligatures, although some have more than others.
 
 > [!NOTE]
 > Operator Mono does not include ligatures but [can be easily patched][operator-mono-lig] to add them.
 
 ## Nerd Fonts and Icons
 
-Back in the day, I started using the [VimDevicons][devicons] plugin so I could have fancy file-type icons in Vim. (Remember NERDTree?) In order for this to work, one had to install patched “Nerd-font” versions of whatever programming font one wanted to use. For example:
+Back in the day, I started using the [VimDevicons][devicons] plugin so I could have fancy file-type icons in Vim. (Remember NERDTree?) In order for this to work, one had to install patched "Nerd-font" versions of whatever programming font one wanted to use. For example:
 
 ```sh
 # Original font
@@ -560,11 +370,11 @@ $ brew install --cask font-fira-code-nerd-font
 
 Patching fonts with icons still works fine of course, and is, I think, pretty widely used. However, during my exploration of kitty, I discovered that [there is a different (better?) approach](https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font) to icon fonts. It turns out, you don't need a patched version of your chosen mono-spaced font. You can get most if not all the icons you need and use them alongside _any_ font by just installing the `Symbols Nerd Font Mono` font.
 
-Leveraging this approach depends on your terminal. In iTerm2, for example, you need to check “Use a different font for non-ASCII text” in the Preferences panel. Then select `Symbols Nerd Font Mono` font under “Non-ASCII font”. (see screenshot below)
+Leveraging this approach depends on your terminal. In iTerm2, for example, you need to check "Use a different font for non-ASCII text" in the Preferences panel. Then select `Symbols Nerd Font Mono` font under "Non-ASCII font". (see screenshot below)
 
 ![iterm2-font-settings][iterm2-font-settings]
 
-kitty does things a little differently. If you install a patched font, it will mostly work. Mostly. But the “kitty way” can be broken down in three steps:
+kitty does things a little differently. If you install a patched font, it will mostly work. Mostly. But the "kitty way" can be broken down in three steps:
 
 1. Install a normal, un-patched mono-spaced font, such as `Cascadia Code`
 2. Install a dedicated icon font, such as `Symbols Nerd Font Mono`
@@ -600,7 +410,7 @@ Again, thank you, Elijah Manor!
 
 Once upon a time, I almost left Vim due to some crippling performance issues. These issues were particularly painful when editing Ruby files. I documented what I learned here:
 
-&#9657; [What I’ve learned about slow performance in Vim](https://gist.github.com/joshukraine/3bfff4e9b553624b09789bc02cdd0ce6)
+&#9657; [What I've learned about slow performance in Vim](https://gist.github.com/joshukraine/3bfff4e9b553624b09789bc02cdd0ce6)
 
 ## Identifying Sources of Slow Startup Times (Zsh)
 
@@ -653,6 +463,14 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 - <http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/>
 - <https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell>
 
+## Customization
+
+Local customizations should be placed in `*.local` files:
+
+- `~/.gitconfig.local` - Personal git configuration
+- `~/.laptop.local` - Additional laptop setup customizations
+- `~/dotfiles/local/config.fish.local` - Fish-specific local configuration
+
 ## License
 
 Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
@@ -664,7 +482,6 @@ Copyright &copy; 2014–2025 Joshua Steele. [MIT License][license]
 [asdf]: https://asdf-vm.com/
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
-[claude-code]: https://claude.ai/code
 [comic-code]: https://tosche.net/fonts/comic-code
 [coreutils]: https://formulae.brew.sh/formula/coreutils
 [devicons]: https://github.com/ryanoasis/vim-devicons
