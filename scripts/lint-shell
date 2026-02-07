@@ -59,7 +59,10 @@ get_shell_type() {
   fi
 }
 
-mapfile -t files < <(find_shell_scripts)
+files=()
+while IFS= read -r file; do
+  files+=("${file}")
+done < <(find_shell_scripts)
 
 if [[ ${#files[@]} -eq 0 ]]; then
   echo "No shell scripts found to lint."
