@@ -94,7 +94,7 @@ function d-aws-cli-fn {
     amazon/aws-cli:latest "$1" "$2" "$3"
 }
 
-# Disabled aliases have equivalent zsh & fish abbreviations
+# Disabled aliases have equivalent zsh abbreviations
 alias daws=d-aws-cli-fn
 alias dc=dc-fn
 # alias dcu="docker compose up -d"

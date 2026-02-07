@@ -52,7 +52,6 @@ symbol = "󰌠 "
 # disabled = false
 # style = 'cyan'
 # bash_indicator = '\$'
-# fish_indicator = '󰈺'
 # zsh_indicator = '%'
 
 # [os]

@@ -208,7 +208,7 @@ function src() {
 #   pi                      # Ping Cloudflare DNS (1.1.1.1) 5 times
 #
 # Returns: Ping results with audible alerts and count limit (5 pings)
-# Note: This Zsh version always pings 1.1.1.1 (unlike Fish version which accepts arguments)
+# Note: Always pings 1.1.1.1
 function pi() {
   ping -Anc 5 1.1.1.1
 }
@@ -379,23 +379,25 @@ Examples:
     return 1
   fi
 
-  # Check if remote exists and fetch
-  if git remote | grep -q "^origin$"; then
-    echo "Fetching latest from origin..."
-    git fetch origin > /dev/null 2>&1
-    if [[ $? -ne 0 ]]; then
-      echo "Failed to fetch from origin."
-      return 1
-    fi
+  # Check if remote exists
+  if ! git remote | grep -q "^origin$"; then
+    echo "No 'origin' remote found."
+    return 1
+  fi
+
+  # Fetch latest from origin
+  echo "Fetching latest from origin..."
+  git fetch origin > /dev/null 2>&1
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to fetch from origin."
+    return 1
   fi
 
   # Determine default branch
   local default_branch=""
 
   # Try to get default branch from remote
-  if git remote | grep -q "^origin$"; then
-    default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
-  fi
+  default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
 
   # Fallback if needed
   if [[ -z "${default_branch}" ]]; then
@@ -423,67 +425,6 @@ Examples:
   fi
 
   echo "Successfully rebased ${current_branch} against ${default_branch}"
-}
-
-# Regenerate abbreviations for all shells from shared YAML source
-function reload-abbr() {
-  # Help message
-  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    printf "%s\n" "Usage: reload-abbr [OPTION]
-Regenerate abbreviations for all shells from shared YAML source.
-This command can be run from any directory.
-
-Options:
-  -h, --help  Show this help message
-
-Examples:
-  reload-abbr  # Regenerate all abbreviations from shared/abbreviations.yaml"
-    return 0
-  fi
-
-  # Find the dotfiles directory
-  local dotfiles_dir="${HOME}/dotfiles"
-  if [[ ! -d "${dotfiles_dir}" ]]; then
-    echo "❌ Error: Dotfiles directory not found at ${dotfiles_dir}"
-    return 1
-  fi
-
-  # Check if the generation script exists
-  local generate_script="${dotfiles_dir}/shared/generate-all-abbr.sh"
-  if [[ ! -f "${generate_script}" ]]; then
-    echo "❌ Error: Generation script not found at ${generate_script}"
-    return 1
-  fi
-
-  # Check if script is executable
-  if [[ ! -x "${generate_script}" ]]; then
-    echo "❌ Error: Generation script is not executable: ${generate_script}"
-    echo "Run: chmod +x ${generate_script}"
-    return 1
-  fi
-
-  # Check if documentation generator exists
-  local doc_generate_script="${dotfiles_dir}/shared/generate-abbreviations-doc.sh"
-
-  # Run the generation script
-  echo "🔄 Regenerating abbreviations from any directory..."
-  "${generate_script}"
-  local exit_code=$?
-
-  # Also regenerate documentation if generator exists and abbreviations succeeded
-  if [[ ${exit_code} -eq 0 && -f "${doc_generate_script}" && -x "${doc_generate_script}" ]]; then
-    echo "📝 Regenerating abbreviations documentation..."
-    "${doc_generate_script}"
-  fi
-
-  if [[ ${exit_code} -eq 0 ]]; then
-    echo
-    echo "💡 Don't forget to reload your shell to use the new abbreviations:"
-    echo "   Fish: exec fish"
-    echo "   Zsh:  src"
-  fi
-
-  return ${exit_code}
 }
 
 # Git log with detailed graph formatting and color highlighting

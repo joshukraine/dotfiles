@@ -137,7 +137,6 @@ main() {
   setup_directories
   handle_stow_conflicts
   setup_symlinks
-  setup_shell_integration
   setup_tmux
 
   dotfiles_echo "Dotfiles setup complete!"
@@ -225,18 +224,6 @@ setup_directories() {
     fi
   fi
 
-  dotfiles_echo "Checking your system architecture..."
-
-  local arch
-  arch="$(uname -m)"
-
-  if [ "${arch}" == "arm64" ]; then
-    dotfiles_info "Apple Silicon detected - setting HOMEBREW_PREFIX to /opt/homebrew"
-    HOMEBREW_PREFIX="/opt/homebrew"
-  else
-    dotfiles_info "Intel Mac detected - setting HOMEBREW_PREFIX to /usr/local"
-    HOMEBREW_PREFIX="/usr/local"
-  fi
 }
 
 handle_stow_conflicts() {
@@ -255,7 +242,6 @@ handle_stow_conflicts() {
     ".asdfrc"
     ".bashrc"
     "CLAUDE.md"
-    ".config/fish"
     ".config/ghostty"
     ".config/kitty"
     ".config/lazygit"
@@ -343,20 +329,6 @@ setup_symlinks() {
   done
 
   dotfiles_info "Processed %d stow packages" "${stow_packages}"
-}
-
-setup_shell_integration() {
-  if command -v fish &>/dev/null; then
-    dotfiles_echo "Initializing fish_user_paths..."
-    local fish_cmd="set -U fish_user_paths ${HOME}/.asdf/shims ${HOME}/.local/bin ${HOME}/.bin ${HOME}/.yarn/bin ${HOMEBREW_PREFIX}/bin"
-    if [[ "${DRY_RUN}" == "true" ]]; then
-      dotfiles_info "[DRY RUN] Would run: fish -c '%s'" "${fish_cmd}"
-    else
-      run_command "command fish -c '${fish_cmd}'" "Initialize Fish user paths"
-    fi
-  else
-    dotfiles_info "Fish shell not found - skipping fish_user_paths setup"
-  fi
 }
 
 setup_tmux() {

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## About This Repository
 
-This is a personal dotfiles repository for macOS using GNU Stow for symlink management. It provides a comprehensive development environment configuration including shell setups (Zsh/Fish), terminal configurations (ghostty/kitty), and Neovim with LazyVim distribution.
+This is a personal dotfiles repository for macOS using GNU Stow for symlink management. It provides a comprehensive development environment configuration including Zsh shell setup, terminal configurations (ghostty/kitty), and Neovim with LazyVim distribution.
 
 ## Repository Structure
 
@@ -15,7 +15,6 @@ The repository is organized with each top-level directory representing a tool or
 - `bin/` - Custom shell scripts and utilities
 - `brew/` - Homebrew Brewfile for package management
 - `claude/` - Claude AI assistant configuration
-- `fish/` - Fish shell configuration with abbreviations and functions
 - `ghostty/` - Ghostty terminal emulator configuration
 - `git/` - Git configuration and global gitignore
 - `kitty/` - Kitty terminal emulator configuration
@@ -64,16 +63,12 @@ brew bundle install
 
 ## Architecture Notes
 
-### Dual Shell Support
+### Shell Configuration
 
-The repository maintains parallel configurations for both Zsh and Fish shells:
-
-- **Shared configuration framework** eliminates duplication:
-  - `shared/environment.sh` and `shared/environment.fish` - Common environment variables
-  - `shared/abbreviations.yaml` - Single source for all abbreviations
-  - Shell-specific files generated via `shared/generate-*-abbr.sh` scripts
-- Both use Starship for consistent prompting
-- Fish uses native abbreviations, Zsh uses zsh-abbr plugin for Fish-like behavior
+- Zsh is the primary shell, using zsh-abbr plugin for abbreviations
+- `shared/environment.sh` provides common environment variables
+- `zsh/.config/zsh-abbr/abbreviations.zsh` contains all abbreviations, managed directly by zsh-abbr
+- Starship prompt for consistent, informative shell prompting
 - Smart git functions with automatic branch detection (gpum, grbm, gcom, gbrm)
 
 ### Stow-based Symlink Management
@@ -111,33 +106,19 @@ Some directories contain repository infrastructure and should not be symlinked t
 
 - `setup.sh` - Main installation script
 - `brew/Brewfile` - Homebrew package definitions
-- `shared/abbreviations.yaml` - **Single source of truth for all abbreviations**
-- `shared/environment.sh` and `shared/environment.fish` - Shared environment variables
-- `shared/generate-*-abbr.sh` - Scripts to generate shell-specific abbreviations
-- `fish/.config/fish/abbreviations.fish` - **Generated** Fish shell abbreviations
-- `zsh/.config/zsh-abbr/abbreviations.zsh` - **Generated** Zsh abbreviations
+- `shared/environment.sh` - Shared environment variables
+- `zsh/.config/zsh-abbr/abbreviations.zsh` - Zsh abbreviations
 - `nvim/.config/nvim/lua/config/lazy.lua` - LazyVim configuration entry point
 - `local/` - Contains example local configuration files for customization
 
-## Shared Configuration System
+## Abbreviations
 
-### Adding/Modifying Abbreviations
+Abbreviations are managed by the [zsh-abbr](https://zsh-abbr.olets.dev) plugin. Edit `zsh/.config/zsh-abbr/abbreviations.zsh` directly, or use `abbr add`/`abbr remove` commands in your shell.
 
-1. Edit `shared/abbreviations.yaml` (single source of truth)
-2. Regenerate shell-specific files:
+## Environment Variables
 
-   ```bash
-   cd ~/dotfiles/shared
-   ./generate-fish-abbr.sh    # Updates fish/.config/fish/abbreviations.fish
-   ./generate-zsh-abbr.sh     # Updates zsh/.config/zsh-abbr/abbreviations.zsh
-   ```
-
-### Environment Variables
-
-- **Shared**: Edit `shared/environment.sh` and `shared/environment.fish`
-- **Shell-specific**: Edit in respective shell configs (`fish/config.fish` or `zsh/.zshrc`)
-
-**Important**: Never edit generated abbreviation files directly — changes will be overwritten!
+- **Shared**: Edit `shared/environment.sh`
+- **Shell-specific**: Edit in `zsh/.zshrc` or files in `zsh/.config/zsh/`
 
 ## Customization
 
@@ -145,10 +126,9 @@ Local customizations should be placed in `*.local` files:
 
 - `~/.gitconfig.local` - Personal git configuration
 - `~/.laptop.local` - Additional laptop setup customizations
-- `~/dotfiles/local/config.fish.local` - Fish-specific local configuration
 
 ## Platform Support
 
 - **macOS only** - setup script checks for Darwin and exits on other platforms
-- **Apple Silicon and Intel** - automatically detects architecture and sets HOMEBREW_PREFIX accordingly
+- **Apple Silicon and Intel** - `.zshrc` uses `brew shellenv` for architecture-appropriate Homebrew setup
 - **XDG Base Directory** support with automatic directory creation

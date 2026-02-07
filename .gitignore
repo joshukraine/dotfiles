@@ -2,9 +2,6 @@
 .vimrc.local
 .zshrc.local
 brew/Brewfile.lock.json
-config.fish.local
-fish_variables
-fzf_key_bindings.fish
 kitty.conf.bak
 lazygit/.config/lazygit/state.yml
 local/*
