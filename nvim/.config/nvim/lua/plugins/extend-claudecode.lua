@@ -8,7 +8,7 @@ return {
     -- Terminal display configuration
     terminal = {
       split_side = "right",
-      split_width_percentage = 0.30,
+      split_width_percentage = 0.35,
       auto_close = false,
     },
 
@@ -22,7 +22,7 @@ return {
     -- Diff management
     vertical_split = true, -- Side-by-side diff display
     auto_close_on_accept = true, -- Close diff after accepting changes
-    open_in_current_tab = true, -- Avoid creating new tabs
+    open_in_current_tab = false, -- Avoid creating new tabs
     keep_terminal_focus = false, -- Return focus to editor after diff opens
 
     -- Context integration
