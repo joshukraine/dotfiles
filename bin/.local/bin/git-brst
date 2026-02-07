@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Show branch ahead/behind status vs origin/master for all branches
+# Show branch ahead/behind status vs the default branch on origin
 #
 # Usage: git-brst
 # Arguments: None
@@ -8,14 +8,29 @@
 # Examples:
 #   git-brst               # Show all branches with ahead/behind counts
 #
-# Returns: List of branches showing commits ahead/behind origin/master
-# Output format: branch_name (ahead X) | (behind Y) origin/master
+# Returns: List of branches showing commits ahead/behind the default branch
+# Output format: branch_name (ahead X) | (behind Y) origin/<default_branch>
 #
 # Example output:
-#   dns_check (ahead 1) | (behind 112) origin/master
-#   master (ahead 2) | (behind 0) origin/master
+#   dns_check (ahead 1) | (behind 112) origin/main
+#   feature-x (ahead 2) | (behind 0) origin/main
 #
 # Source: https://github.com/Stratus3D/dotfiles/blob/4565b251354bed240b55c83fc15d226aa8f798a5/scripts/git/git-branch-status
+
+# Determine default branch
+default_branch=""
+default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
+
+if [[ -z "${default_branch}" ]]; then
+  if git show-ref --quiet refs/heads/main; then
+    default_branch="main"
+  elif git show-ref --quiet refs/heads/master; then
+    default_branch="master"
+  else
+    echo "Could not determine default branch."
+    exit 1
+  fi
+fi
 
 TMP_FILE_NAME=/tmp/git_upstream_status_delta
 
@@ -27,10 +42,10 @@ git for-each-ref --format="%(refname:short) %(upstream:short)" refs/ \
       branches=("${local}" "${remote}")
     fi
     for branch in "${branches[@]}"; do
-      master="origin/master"
-      git rev-list --left-right "${branch}"..."${master}" -- 2>/dev/null >${TMP_FILE_NAME} || continue
+      target="origin/${default_branch}"
+      git rev-list --left-right "${branch}"..."${target}" -- 2>/dev/null >${TMP_FILE_NAME} || continue
       LEFT_AHEAD=$(grep -c '^<' ${TMP_FILE_NAME})
       RIGHT_AHEAD=$(grep -c '^>' ${TMP_FILE_NAME})
-      echo "${branch} (ahead ${LEFT_AHEAD}) | (behind ${RIGHT_AHEAD}) ${master}"
+      echo "${branch} (ahead ${LEFT_AHEAD}) | (behind ${RIGHT_AHEAD}) ${target}"
     done
-  done | grep -v "^origin/master" | sort | uniq
+  done | grep -v "^origin/${default_branch}" | sort | uniq
