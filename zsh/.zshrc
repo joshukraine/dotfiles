@@ -51,7 +51,7 @@ then
 fi
 
 # Docker CLI completions
-fpath=(/Users/joshukraine/.docker/completions $fpath)
+fpath=($HOME/.docker/completions $fpath)
 
 # Load and initialise completion system with caching for performance
 autoload -Uz compinit
