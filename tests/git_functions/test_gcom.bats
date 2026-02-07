@@ -19,7 +19,7 @@ teardown() {
 @test "gcom shows help message with -h flag" {
   setup_test_git_repo
 
-  run run_fish_function gcom -h
+  run run_zsh_function gcom -h
   assert_contains "${output}" "Usage: gcom"
   assert_contains "${output}" "Switch to the default Git branch"
   [ "${status}" -eq 0 ]
@@ -28,7 +28,7 @@ teardown() {
 @test "gcom shows help message with --help flag" {
   setup_test_git_repo
 
-  run run_fish_function gcom --help
+  run run_zsh_function gcom --help
   assert_contains "${output}" "Usage: gcom"
   assert_contains "${output}" "Switch to the default Git branch"
   [ "${status}" -eq 0 ]
@@ -37,7 +37,7 @@ teardown() {
 @test "gcom accepts -p flag for pull" {
   setup_test_git_repo
 
-  run run_fish_function gcom -h
+  run run_zsh_function gcom -h
   assert_contains "${output}" "-p"
   assert_contains "${output}" "pull"
   [ "${status}" -eq 0 ]
@@ -46,7 +46,7 @@ teardown() {
 @test "gcom fails in non-git directory" {
   setup_non_git_dir
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "Not a git repository"
   [ "${status}" -eq 1 ]
 }
@@ -55,7 +55,7 @@ teardown() {
   setup_no_remote_repo
   create_feature_branch "test-branch"
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "Switching to main"
   [ "${status}" -eq 0 ]
 }
@@ -65,9 +65,11 @@ teardown() {
   create_feature_branch "feature/test"
   create_uncommitted_changes
 
-  # When running gcom, git-check-uncommitted --prompt will detect changes
-  # and the test will provide "n" as input to abort
-  run bash -c "echo 'n' | fish --no-config -c \"source '${DOTFILES}/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '${DOTFILES}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
+  local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
+  local git_check_file="${DOTFILES}/bin/.local/bin/git-check-uncommitted"
+
+  # Provide "n" as input to abort when prompted about uncommitted changes
+  run bash -c "echo 'n' | zsh -c 'source \"${zsh_functions_file}\"; function git-check-uncommitted { \"${git_check_file}\" \"\$@\" }; gcom'"
   assert_contains "${output}" "Warning: You have uncommitted changes"
   [ "${status}" -eq 1 ]
 }
@@ -77,9 +79,11 @@ teardown() {
   create_feature_branch "feature/test"
   create_uncommitted_changes
 
-  # When running gcom, git-check-uncommitted --prompt will detect changes
-  # and the test will provide "y" as input to continue
-  run bash -c "echo 'y' | fish --no-config -c \"source '${DOTFILES}/fish/.config/fish/functions/gcom.fish'; function git-check-uncommitted; '${DOTFILES}/bin/.local/bin/git-check-uncommitted' \\\$argv; end; gcom\""
+  local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
+  local git_check_file="${DOTFILES}/bin/.local/bin/git-check-uncommitted"
+
+  # Provide "y" as input to continue when prompted about uncommitted changes
+  run bash -c "echo 'y' | zsh -c 'source \"${zsh_functions_file}\"; function git-check-uncommitted { \"${git_check_file}\" \"\$@\" }; gcom'"
   assert_contains "${output}" "Switching to"
   [ "${status}" -eq 0 ]
 }
@@ -91,7 +95,7 @@ teardown() {
   # Verify we're on feature branch
   assert_equals "feature/test" "$(get_current_branch)"
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "Switching to"
   assert_contains "${output}" "main"
   [ "${status}" -eq 0 ]
@@ -107,7 +111,7 @@ teardown() {
   # Verify we're on feature branch
   assert_equals "feature/test" "$(get_current_branch)"
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "Switching to"
   assert_contains "${output}" "master"
   [ "${status}" -eq 0 ]
@@ -128,7 +132,7 @@ teardown() {
   git push origin main
   git checkout feature/test
 
-  run run_fish_function gcom -p
+  run run_zsh_function gcom -p
   assert_contains "${output}" "Switching to"
   assert_contains "${output}" "main"
   assert_contains "${output}" "Pulling latest changes"
@@ -139,7 +143,7 @@ teardown() {
   setup_main_repo
   create_feature_branch "test-feature"
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "main"
   [ "${status}" -eq 0 ]
 }
@@ -148,7 +152,7 @@ teardown() {
   setup_master_repo
   create_feature_branch "test-feature"
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "master"
   [ "${status}" -eq 0 ]
 }
@@ -161,7 +165,7 @@ teardown() {
   git remote remove origin
   git remote add origin /nonexistent/repo
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   assert_contains "${output}" "Failed to fetch from origin"
   [ "${status}" -eq 1 ]
 }
@@ -170,7 +174,7 @@ teardown() {
   setup_main_repo
   # Already on main branch
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   # Should still succeed but mention we're already on main
   [ "${status}" -eq 0 ]
 }
@@ -179,7 +183,7 @@ teardown() {
   setup_master_repo
   # Already on master branch
 
-  run run_fish_function gcom
+  run run_zsh_function gcom
   # Should still succeed but mention we're already on master
   [ "${status}" -eq 0 ]
 }
@@ -196,7 +200,7 @@ teardown() {
   git push origin main
   git reset --hard HEAD~1 # Reset local to simulate being behind
 
-  run run_fish_function gcom -p
+  run run_zsh_function gcom -p
   assert_contains "${output}" "Pulling latest changes"
   [ "${status}" -eq 0 ]
 }
@@ -207,6 +211,6 @@ teardown() {
 
   # Create a situation where checkout might fail
   # (This is harder to simulate reliably, so we'll test the basic case)
-  run run_fish_function gcom
+  run run_zsh_function gcom
   [ "${status}" -eq 0 ]
 }

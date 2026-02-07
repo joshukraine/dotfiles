@@ -47,42 +47,6 @@ if ! load_dotfiles_variable; then
   exit 1
 fi
 
-# Load Fish functions for testing
-load_fish_function() {
-  local function_name="$1"
-  local fish_function_file="${DOTFILES}/fish/.config/fish/functions/${function_name}.fish"
-
-  if [ -f "${fish_function_file}" ]; then
-    # Convert Fish function syntax to bash-compatible for testing
-    # This is a simplified approach - we'll execute fish commands via fish shell
-    export FISH_FUNCTION_FILE="${fish_function_file}"
-    return 0
-  else
-    return 1
-  fi
-}
-
-# Execute Fish function in fish shell
-run_fish_function() {
-  local function_name="$1"
-  shift
-  local args="$*"
-
-  if load_fish_function "${function_name}"; then
-    # Source the fish function and execute it, with minimal config to avoid errors
-    # Pass PATH so mocked commands work, and source git-check-uncommitted if it exists
-    local git_check_file="${DOTFILES}/bin/.local/bin/git-check-uncommitted"
-    if [ -f "${git_check_file}" ]; then
-      env PATH="${PATH}" fish --no-config -c "set -x PATH '${PATH}'; function git-check-uncommitted; '${git_check_file}' \$argv; end; source '${FISH_FUNCTION_FILE}'; ${function_name} ${args}" 2>&1
-    else
-      env PATH="${PATH}" fish --no-config -c "set -x PATH '${PATH}'; source '${FISH_FUNCTION_FILE}'; ${function_name} ${args}" 2>&1
-    fi
-  else
-    echo "Fish function ${function_name} not found"
-    return 1
-  fi
-}
-
 # Load Zsh functions for testing
 load_zsh_functions() {
   local zsh_functions_file="${DOTFILES}/zsh/.config/zsh/functions.zsh"
@@ -102,7 +66,6 @@ load_zsh_functions() {
 run_zsh_function() {
   local function_name="$1"
   shift
-  local args="$*"
 
   if load_zsh_functions; then
     # Execute the function if it's available
@@ -122,53 +85,8 @@ run_zsh_function() {
 test_abbreviation() {
   local abbr="$1"
   local expected="$2"
-  local shell_type="${3:-both}"
 
-  case "${shell_type}" in
-    "fish")
-      test_fish_abbreviation "${abbr}" "${expected}"
-      ;;
-    "zsh")
-      test_zsh_abbreviation "${abbr}" "${expected}"
-      ;;
-    "both")
-      if test_fish_abbreviation "${abbr}" "${expected}"; then
-        test_zsh_abbreviation "${abbr}" "${expected}"
-      else
-        return 1
-      fi
-      ;;
-    *)
-      echo "Unknown shell type: ${shell_type}"
-      return 1
-      ;;
-  esac
-}
-
-# Test Fish abbreviation expansion
-test_fish_abbreviation() {
-  local abbr="$1"
-  local expected="$2"
-
-  # Load Fish abbreviations file
-  local fish_abbr_file="${DOTFILES}/fish/.config/fish/abbreviations.fish"
-
-  if [ -f "${fish_abbr_file}" ]; then
-    # Extract the abbreviation expansion from the Fish file
-    # Format: abbr -a -g abbr_name 'expansion'
-    local actual
-    actual=$(grep "^abbr -a -g ${abbr} " "${fish_abbr_file}" | sed "s/^abbr -a -g ${abbr} '//" | sed "s/'$//" 2>/dev/null)
-
-    if [ "${actual}" = "${expected}" ]; then
-      return 0
-    else
-      echo "Fish abbreviation mismatch: '${abbr}' -> '${actual}' (expected: '${expected}')"
-      return 1
-    fi
-  else
-    echo "Fish abbreviations file not found"
-    return 1
-  fi
+  test_zsh_abbreviation "${abbr}" "${expected}"
 }
 
 # Test Zsh abbreviation expansion

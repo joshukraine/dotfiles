@@ -6,7 +6,7 @@
 
 - [Neovim][neovim] editor configured with [LazyVim][lazyvim]💤
 - [Starship][starship] prompt
-- Shell support for both [Zsh][zsh] and [Fish][fish] with 95% functional parity via shared configuration
+- [Zsh][zsh] shell with [zsh-abbr][zsh-abbr] for abbreviations
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot's [Laptop][laptop]
@@ -50,10 +50,9 @@ The dotfiles assume you are running macOS with (at minimum) the following softwa
 - [asdf][asdf]
 - [Ruby][ruby]
 - [Node.js][nodejs]
-- [Zsh][zsh] and/or [Fish][fish]
+- [Zsh][zsh]
 - [Neovim][neovim]
 - [Starship][starship]
-- [`yq`][yq] (for regenerating abbreviations from shared YAML source)
 
 All of the above and more are installed with my fork of [Laptop][joshuas-laptop].
 
@@ -161,27 +160,13 @@ brew bundle install
 ### 🛠️ 6. Complete post-install tasks
 
 - [ ] Launch LazyVim (`nvim`) and run [`:checkhealth`][checkhealth]. Resolve errors and warnings. Plugins should install automatically on first launch.
-- [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`, `~/dotfiles/local/config.fish.local`.
+- [ ] Add personal data as needed to `*.local` files such as `~/.gitconfig.local`, `~/.laptop.local`.
 - [ ] (Optional) Set up [1Password CLI][1p-cli-start] for managing secrets.
 - [ ] (Optional) Set up [1Password SSH key management][1p-cli-ssh].
-- [ ] If using Fish, customize your setup by running the `fish_config` command.
 - [ ] Install Tmux plugins with `<prefix> + I` (<https://github.com/tmux-plugins/tpm>)
 
-## Zsh or Fish?
+## Zsh Setup
 
-Having used both Zsh and Fish for several years, I've decided to keep my configs for both. One thing I particularly love about Fish is the concept of [abbreviations over aliases](https://www.sean.sh/log/when-an-alias-should-actually-be-an-abbr/). Happily, there is now [zsh-abbr][zsh-abbr] which brings this functionality to Zsh.
-
-&#9657; **[Fish abbr docs](https://fishshell.com/docs/current/cmds/abbr.html)**
-
-My Zsh and Fish configs have 95% functional parity via shared configuration:
-
-- Same prompt (Starship)
-- Identical abbreviations (250+) generated from single YAML source
-- Shared environment variables
-- Smart git functions with automatic branch detection
-
-<details>
-  <summary><strong>Zsh Setup Instructions</strong></summary>
 Zsh is now the default shell on macOS. However, it's helpful to add an entry enabling the Homebrew version of Zsh (`/opt/homebrew/bin/zsh` on Apple Silicon, `/usr/local/bin/zsh` on Intel) instead of the default (`/bin/zsh`) version.
 
 Ensure that you have Zsh from Homebrew. (`which zsh`) If not:
@@ -209,102 +194,26 @@ Set it as your default shell:
 chsh -s $(which zsh)
 ```
 
-Install [Zap][zap]. (Required for functional parity with Fish)
+Install [Zap][zap].
 
 Restart your terminal.
 
-</details>
+## Abbreviations
 
-<details>
-  <summary><strong>Fish Setup Instructions</strong></summary>
-Install Fish from Homebrew:
+One of the best ideas I picked up from using Fish shell is [abbreviations over aliases](https://www.sean.sh/log/when-an-alias-should-actually-be-an-abbr/). [zsh-abbr][zsh-abbr] brings this functionality to Zsh.
 
-```sh
- brew install fish
-```
-
-Add Fish to `/etc/shells`:
-
-```sh
-# Apple Silicon Macs:
-echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
-
-# Intel Macs:
-echo /usr/local/bin/fish | sudo tee -a /etc/shells
-
-# Or use this universal command:
-echo $(which fish) | sudo tee -a /etc/shells
-```
-
-Set it as your default shell:
-
-```sh
-chsh -s $(which fish)
-```
-
-Restart your terminal. This will create the `~/.config` and `~/.local` directories if they don't already exist.
-
-</details>
-
-## Shared Configuration Framework
-
-The dotfiles use a unified configuration system that eliminates duplication between Fish and Zsh shells:
-
-### Key Components
-
-- **`shared/abbreviations.yaml`** - Single source of truth for all 250+ abbreviations
-- **`shared/environment.sh` and `shared/environment.fish`** - Common environment variables
-- **`shared/generate-all-abbr.sh`** - Unified script to regenerate abbreviations for all shells
-- **`shared/generate-fish-abbr.sh` and `shared/generate-zsh-abbr.sh`** - Individual shell-specific generation scripts
-
-### Adding or Modifying Abbreviations
-
-1. Edit `~/dotfiles/shared/abbreviations.yaml`
-2. Regenerate all abbreviations (from any directory):
-
-   ```bash
-   reload-abbr    # Available as a shell function - works from anywhere!
-   ```
-
-3. Reload your shell configuration:
-   - Fish: `exec fish` or open a new terminal
-   - Zsh: `src` or open a new terminal
-
-<details>
-  <summary><strong>Alternative methods</strong></summary>
-
-**Manual script execution:**
-
-```bash
-cd ~/dotfiles/shared
-./generate-all-abbr.sh     # Updates both Fish and Zsh abbreviation files
-```
-
-**Individual shell regeneration:**
-
-```bash
-cd ~/dotfiles/shared
-./generate-fish-abbr.sh    # Updates fish/.config/fish/abbreviations.fish
-./generate-zsh-abbr.sh     # Updates zsh/.config/zsh-abbr/abbreviations.zsh
-```
-
-</details>
-
-> [!IMPORTANT]
-> Never edit the generated abbreviation files directly - changes will be overwritten!
+Abbreviations are managed directly in `zsh/.config/zsh-abbr/abbreviations.zsh`. You can edit this file directly, or use the `abbr add`/`abbr remove` commands in your shell.
 
 ### Smart Git Functions
 
-The shared configuration includes intelligent git functions that automatically detect your main branch:
+The configuration includes intelligent git functions that automatically detect your main branch:
 
-- `gpum` - Pull from upstream main/master
+- `gpum` - Push current branch to origin with upstream tracking
 - `grbm` - Rebase on main/master
 - `gcom` - Checkout main/master
 - `gbrm` - Remove branches merged into main/master
 
 These functions work with both `main` and `master` branch names automatically.
-
-See [docs/abbreviations.md](docs/abbreviations.md) for a complete reference of all abbreviations.
 
 ## About Neovim Distributions
 
@@ -469,7 +378,6 @@ Local customizations should be placed in `*.local` files:
 
 - `~/.gitconfig.local` - Personal git configuration
 - `~/.laptop.local` - Additional laptop setup customizations
-- `~/dotfiles/local/config.fish.local` - Fish-specific local configuration
 
 ## License
 
@@ -486,7 +394,6 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [coreutils]: https://formulae.brew.sh/formula/coreutils
 [devicons]: https://github.com/ryanoasis/vim-devicons
 [fira-code]: https://github.com/tonsky/FiraCode
-[fish]: http://fishshell.com/
 [folke]: https://github.com/folke
 [ghostty]: https://ghostty.org/
 [git]: https://git-scm.com/
@@ -512,7 +419,6 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
-[yq]: https://github.com/mikefarah/yq
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png

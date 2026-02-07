@@ -34,7 +34,6 @@ alias mv='mv -iv'
 
 alias cdot='cd $DOTFILES'
 alias cdxc='cd $XDG_CONFIG_HOME'
-alias cdfi='cd $XDG_CONFIG_HOME/fish'
 alias cdnv='cd $XDG_CONFIG_HOME/nvim'
 alias cdxd='cd $XDG_DATA_HOME'
 alias cdxa='cd $XDG_CACHE_HOME'
