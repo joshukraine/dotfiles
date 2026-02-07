@@ -10,7 +10,7 @@
 #   git-publish            # Push current branch to origin with same name
 #
 # Returns: Pushes current branch to origin and sets up tracking
-# Behavior: Refuses to publish master branch for safety
+# Behavior: Refuses to publish main or master branch for safety
 #
 # Note: Originally designed to open PR page, but simplified to just push
 #
@@ -22,8 +22,8 @@ end
 
 def main
   current_branch = read_current_branch
-  if current_branch == "master"
-    warn "Currently on master, aborting."
+  if %w[main master].include?(current_branch)
+    warn "Currently on #{current_branch}, aborting."
     exit 1
   else
     system("git push -u origin #{current_branch}:#{current_branch}")
