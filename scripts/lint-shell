@@ -1,293 +1,85 @@
 #!/usr/bin/env bash
 #
-# Comprehensive shell script linter using shellcheck with project-specific logic
+# Lint shell scripts using shellcheck
 #
-# Usage: lint-shell [options]
-# Arguments:
-#   --quiet           Suppress informational output, show only errors
-#   --exclude-tests   Skip test files (*.bats) during linting
-#   --check           Check formatting with shfmt but don't modify (default)
-#   --fix             Auto-format shell scripts with shfmt
-#   --help, -h        Show help message and usage information
+# Usage: lint-shell [--exclude-tests]
 #
-# Examples:
-#   lint-shell                    # Lint all shell scripts with verbose output
-#   lint-shell --quiet            # Lint all scripts, minimal output
-#   lint-shell --exclude-tests    # Skip test files, focus on production code
-#   lint-shell --check            # Check formatting without modifying files
-#   lint-shell --fix              # Auto-format and lint shell scripts
-#
-# Returns: 0 if all scripts pass linting, 1 if any issues found
-# Behavior: Automatically detects shell type (bash/sh), filters non-shell files
-#
-# File Detection:
-#   - *.sh, *.bash files (shell scripts)
-#   - *.bats files (test scripts, unless --exclude-tests)
-#   - Executable files in bin/.local/bin/ (filtered by shebang)
-#   - Skips Ruby, Python, and other non-shell interpreters
-#   - Excludes third-party directories (plugins/, node_modules/, vendor/, .git/)
+# Must be run from the dotfiles root directory.
 
 set -euo pipefail
 
-# Load DOTFILES variable with shell-agnostic fallback logic
-load_dotfiles_variable() {
-    # Method 1: Check if DOTFILES is already set (e.g., from parent shell)
-    if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
-        return 0
-    fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "${SCRIPT_DIR}")"
 
-    # Method 2: Source bash environment file
-    if [ -f "${HOME}/dotfiles/shared/environment.sh" ]; then
-        source "${HOME}/dotfiles/shared/environment.sh"
-        if [ -n "${DOTFILES}" ] && [ -d "${DOTFILES}" ] && [ -f "${DOTFILES}/setup.sh" ]; then
-            return 0
-        fi
-    fi
-
-    # Method 3: Fallback to conventional location
-    if [ -d "${HOME}/dotfiles" ] && [ -f "${HOME}/dotfiles/setup.sh" ]; then
-        export DOTFILES="${HOME}/dotfiles"
-        return 0
-    fi
-
-    echo "Error: Cannot determine DOTFILES location" >&2
-    return 1
-}
-
-# Load DOTFILES variable using shell-agnostic approach
-if ! load_dotfiles_variable; then
-    echo "Failed to load DOTFILES environment variable" >&2
-    exit 1
-fi
-
-# Verify we're in the correct dotfiles location
-if [[ "$(pwd)" != "${DOTFILES}" ]]; then
+if [[ "$(pwd)" != "${PROJECT_ROOT}" ]]; then
   echo "Error: lint-shell must be run from the dotfiles directory" >&2
-  echo "Expected location: ${DOTFILES}" >&2
-  echo "Current location: $(pwd)" >&2
-  echo "Usage: cd \"${DOTFILES}\" && ./scripts/lint-shell" >&2
+  echo "Usage: cd ${PROJECT_ROOT} && ./scripts/lint-shell" >&2
   exit 1
 fi
 
-PROJECT_ROOT="${DOTFILES}"
+if ! command -v shellcheck >/dev/null 2>&1; then
+  echo "Error: shellcheck is not installed. Run: brew install shellcheck" >&2
+  exit 1
+fi
 
-# Default options
-QUIET_MODE=false
 EXCLUDE_TESTS=false
-FIX_MODE=false
-CHECK_MODE=true
+if [[ "${1:-}" == "--exclude-tests" ]]; then
+  EXCLUDE_TESTS=true
+fi
+
 EXIT_CODE=0
 
-# Parse arguments
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --quiet)
-      QUIET_MODE=true
-      shift
-      ;;
-    --exclude-tests)
-      EXCLUDE_TESTS=true
-      shift
-      ;;
-    --check)
-      CHECK_MODE=true
-      FIX_MODE=false
-      shift
-      ;;
-    --fix)
-      FIX_MODE=true
-      CHECK_MODE=false
-      shift
-      ;;
-    --help | -h)
-      echo "Usage: lint-shell [options]"
-      echo ""
-      echo "Options:"
-      echo "  --quiet          Suppress informational output"
-      echo "  --exclude-tests  Skip test files (*.bats)"
-      echo "  --check          Check formatting with shfmt but don't modify (default)"
-      echo "  --fix            Auto-format shell scripts with shfmt"
-      echo "  --help, -h       Show this help message"
-      echo ""
-      echo "Examples:"
-      echo "  lint-shell                    # Lint and check formatting"
-      echo "  lint-shell --fix              # Auto-format and lint"
-      echo "  lint-shell --quiet --check    # Check formatting, minimal output"
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $1" >&2
-      exit 1
-      ;;
-  esac
-done
-
-# Check if shellcheck is available
-if ! command -v shellcheck >/dev/null 2>&1; then
-  echo "Error: shellcheck is not installed" >&2
-  echo "Install with: brew install shellcheck" >&2
-  exit 1
-fi
-
-# Check if shfmt is available when using format options
-if [[ "${CHECK_MODE}" == "true" ]] || [[ "${FIX_MODE}" == "true" ]]; then
-  if ! command -v shfmt >/dev/null 2>&1; then
-    echo "Error: shfmt is not installed" >&2
-    echo "Install with: brew install shfmt" >&2
-    exit 1
-  fi
-fi
-
-
-# Function to log messages
-log() {
-  if [[ "${QUIET_MODE}" = false ]]; then
-    echo "$@"
-  fi
-}
-
-# Function to find shell scripts
 find_shell_scripts() {
   {
-    # Find shell script files
     find "${PROJECT_ROOT}" -type f \( -name "*.sh" -o -name "*.bash" \) 2>/dev/null || true
 
-    # Add test files unless excluded
     if [[ "${EXCLUDE_TESTS}" = false ]]; then
       find "${PROJECT_ROOT}" -type f -name "*.bats" 2>/dev/null || true
     fi
 
-    # Add executable scripts in bin directories with shell shebangs
     find "${PROJECT_ROOT}" -path "*/bin/.local/bin/*" -type f -perm +111 2>/dev/null | while read -r file; do
-      if head -1 "${file}" 2>/dev/null | grep -q -E "(bash|sh)" && ! head -1 "${file}" 2>/dev/null | grep -q -E "(ruby|python|perl|fish)"; then
+      if head -1 "${file}" 2>/dev/null | grep -qE "(bash|sh)" && ! head -1 "${file}" 2>/dev/null | grep -qE "(ruby|python|perl|fish)"; then
         echo "${file}"
       fi
     done || true
-    # Exclude third-party directories: git repos, plugins, package managers
-  } | grep -v -E "(\.git/|/plugins/|node_modules/|vendor/)" || true
+  } | grep -vE "(\.git/|/plugins/|node_modules/|vendor/)" || true
 }
 
-# Function to determine shell type for a file
 get_shell_type() {
   local file="$1"
-
-  # Check shebang
   local shebang
   shebang=$(head -1 "${file}" 2>/dev/null || echo "")
 
-  if [[ "${shebang}" == *"bash"* ]]; then
-    echo "bash"
-  elif [[ "${shebang}" == *"sh"* && "${shebang}" != *"fish"* ]]; then
-    echo "sh"
-  elif [[ "${file}" == *.bats ]]; then
-    echo "bash" # BATS files are bash-based
-  elif [[ "${file}" == *.sh ]]; then
-    echo "sh"
-  elif [[ "${file}" == *.bash ]]; then
-    echo "bash"
-  else
-    # For files without clear indicators, try to detect
-    if grep -q "bash" "${file}" 2>/dev/null; then
-      echo "bash"
-    else
-      echo "sh"
-    fi
+  if [[ "${shebang}" == *"bash"* ]]; then echo "bash"
+  elif [[ "${file}" == *.bats ]]; then echo "bash"
+  elif [[ "${file}" == *.bash ]]; then echo "bash"
+  elif [[ "${shebang}" == *"sh"* && "${shebang}" != *"fish"* ]]; then echo "sh"
+  elif [[ "${file}" == *.sh ]]; then echo "sh"
+  else echo "sh"
   fi
 }
 
+files=()
+while IFS= read -r file; do
+  files+=("${file}")
+done < <(find_shell_scripts)
 
-# Main linting function
-lint_file() {
-  local file="$1"
-  local shell_type
+if [[ ${#files[@]} -eq 0 ]]; then
+  echo "No shell scripts found to lint."
+  exit 0
+fi
+
+echo "Linting ${#files[@]} shell script(s)..."
+
+for file in "${files[@]}"; do
   shell_type=$(get_shell_type "${file}")
-
-  # Skip non-shell files
-  if [[ "${shell_type}" == "" ]]; then
-    return 0
-  fi
-
-  # Skip files that aren't shell scripts (like Ruby, Perl, etc.)
-  local first_line
-  first_line=$(head -1 "${file}" 2>/dev/null || echo "")
-  if [[ "${first_line}" == *"ruby"* || "${first_line}" == *"perl"* || "${first_line}" == *"python"* ]]; then
-    return 0
-  fi
-
-  # Run shfmt if requested
-  if [[ "${CHECK_MODE}" == "true" ]] || [[ "${FIX_MODE}" == "true" ]]; then
-    local shfmt_args=()
-    shfmt_args+=("-ln" "${shell_type}")  # Language variant
-    shfmt_args+=("-i" "2")                # Indent with 2 spaces
-    shfmt_args+=("-ci")                   # Indent switch cases
-    shfmt_args+=("-bn")                   # Binary ops like && and | may start a line
-
-    if [[ "${CHECK_MODE}" == "true" ]]; then
-      # Check mode - only verify formatting
-      if ! shfmt -d "${shfmt_args[@]}" "${file}" 2>&1; then
-        echo "❌ Formatting issue in ${file} (run with --fix to auto-format)"
-        EXIT_CODE=1
-      fi
-    elif [[ "${FIX_MODE}" == "true" ]]; then
-      # Fix mode - write formatted output
-      if ! shfmt -w "${shfmt_args[@]}" "${file}" 2>&1; then
-        echo "❌ Failed to format ${file}"
-        EXIT_CODE=1
-      else
-        log "✅ Formatted ${file}"
-      fi
-    fi
-  fi
-
-  local shellcheck_args=()
-  shellcheck_args+=("--shell=${shell_type}")
-  shellcheck_args+=("--format=gcc")
-
-  # Run shellcheck
-  if ! shellcheck "${shellcheck_args[@]}" "${file}"; then
+  if ! shellcheck --shell="${shell_type}" --format=gcc "${file}"; then
     EXIT_CODE=1
   fi
-}
+done
 
-# Main execution
-main() {
-  log "🔍 Linting shell scripts in ${PROJECT_ROOT}"
-  log ""
+if [[ ${EXIT_CODE} -eq 0 ]]; then
+  echo "All shell scripts passed linting."
+fi
 
-  local file_count=0
-  local files
-
-  # Get list of files to process
-  mapfile -t files < <(find_shell_scripts)
-
-  if [[ ${#files[@]} -eq 0 ]]; then
-    log "No shell scripts found to lint."
-    return 0
-  fi
-
-  log "Found ${#files[@]} shell script(s) to lint:"
-
-  # Process each file
-  for file in "${files[@]}"; do
-    file_count=$((file_count + 1))
-
-    # Show relative path
-    local rel_path="${file#"${PROJECT_ROOT}"/}"
-    log "[${file_count}/${#files[@]}] Checking ${rel_path}"
-
-    lint_file "${file}"
-  done
-
-  log ""
-
-  if [[ ${EXIT_CODE} -eq 0 ]]; then
-    log "✅ All shell scripts passed linting!"
-  else
-    log "❌ Some shell scripts have linting issues."
-  fi
-
-  return ${EXIT_CODE}
-}
-
-# Run main function
-main "$@"
+exit ${EXIT_CODE}

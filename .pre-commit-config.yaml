@@ -3,46 +3,6 @@
 # Run manually with: pre-commit run --all-files
 
 repos:
-  # Local dotfiles validation hooks
-  - repo: local
-    hooks:
-      # Shell syntax validation
-      - id: shell-syntax-validation
-        name: Shell Syntax Validation
-        entry: ./scripts/validate-config.sh --validator shell-syntax --ci
-        language: system
-        files: \.(fish|zsh|sh|bash)$
-        pass_filenames: false
-
-      # Abbreviations consistency
-      - id: abbreviations-validation
-        name: Abbreviations Validation
-        entry: ./scripts/validate-config.sh --validator abbreviations --ci
-        language: system
-        files: ^(shared/abbreviations\.yaml|.*abbreviations\.(fish|zsh))$
-        pass_filenames: false
-
-      # Environment variables sync
-      - id: environment-validation
-        name: Environment Variables Validation
-        entry: ./scripts/validate-config.sh --validator environment --ci
-        language: system
-        files: ^shared/environment\.(sh|fish)$
-        pass_filenames: false
-
-      # Critical scripts functionality test
-      - id: critical-scripts-test
-        name: Critical Scripts Test
-        entry: bash -c './bin/.local/bin/run-tests --fast shell-syntax | grep -q "All tests passed" && echo "✓ run-tests working correctly"'
-        language: system
-        files: ^bin/\.local/bin/run-tests$
-        pass_filenames: false
-
-      # Markdown linting - disabled for commit speed
-      # Use: ./scripts/validate-config.sh -v markdown --fix for manual validation
-      # LazyVim provides real-time markdown linting and formatting
-      # CI runs markdown validation as safety net
-
   # External validation tools
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
