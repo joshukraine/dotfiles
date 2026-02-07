@@ -20,10 +20,13 @@ return {
     git_repo_cwd = true, -- Use git repository root as working directory
 
     -- Diff management
-    vertical_split = true, -- Side-by-side diff display
-    auto_close_on_accept = true, -- Close diff after accepting changes
-    open_in_current_tab = false, -- Avoid creating new tabs
-    keep_terminal_focus = false, -- Return focus to editor after diff opens
+    diff_opts = {
+      layout = "vertical", -- Side-by-side diff display
+      open_in_new_tab = true, -- Isolate diffs in dedicated tabs
+      hide_terminal_in_new_tab = true, -- Full width for diff review
+      keep_terminal_focus = false, -- Focus the diff, not the terminal
+      on_new_file_reject = "close_window", -- Clean up windows on reject
+    },
 
     -- Context integration
     track_selection = true, -- Send highlighted text as context
