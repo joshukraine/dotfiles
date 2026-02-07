@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # TokyoNight colors for Tmux
 
 set -g mode-style "fg=#2e7de9,bg=#a8aecb"
