@@ -224,20 +224,6 @@ setup_directories() {
     fi
   fi
 
-  dotfiles_echo "Checking your system architecture..."
-
-  local arch
-  arch="$(uname -m)"
-
-  if [ "${arch}" == "arm64" ]; then
-    dotfiles_info "Apple Silicon detected - setting HOMEBREW_PREFIX to /opt/homebrew"
-    # shellcheck disable=SC2034
-    HOMEBREW_PREFIX="/opt/homebrew"
-  else
-    dotfiles_info "Intel Mac detected - setting HOMEBREW_PREFIX to /usr/local"
-    # shellcheck disable=SC2034
-    HOMEBREW_PREFIX="/usr/local"
-  fi
 }
 
 handle_stow_conflicts() {

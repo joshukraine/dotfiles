@@ -101,7 +101,7 @@ test_zsh_abbreviation() {
     # Extract the abbreviation expansion from the Zsh file
     # Format: abbr "abbr_name"="expansion"
     local actual
-    actual=$(grep "^abbr \"${abbr}\"=" "${zsh_abbr_file}" | cut -d'"' -f4 2>/dev/null)
+    actual=$(grep -F "abbr \"${abbr}\"=" "${zsh_abbr_file}" | cut -d'"' -f4 2>/dev/null)
 
     if [ "${actual}" = "${expected}" ]; then
       return 0

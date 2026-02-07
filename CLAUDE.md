@@ -130,5 +130,5 @@ Local customizations should be placed in `*.local` files:
 ## Platform Support
 
 - **macOS only** - setup script checks for Darwin and exits on other platforms
-- **Apple Silicon and Intel** - automatically detects architecture and sets HOMEBREW_PREFIX accordingly
+- **Apple Silicon and Intel** - `.zshrc` uses `brew shellenv` for architecture-appropriate Homebrew setup
 - **XDG Base Directory** support with automatic directory creation

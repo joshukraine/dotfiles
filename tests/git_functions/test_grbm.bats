@@ -47,7 +47,7 @@ teardown() {
   create_feature_branch "test-branch"
 
   run run_zsh_function grbm
-  assert_contains "${output}" "Rebase failed"
+  assert_contains "${output}" "No 'origin' remote found"
   [ "${status}" -eq 1 ]
 }
 
