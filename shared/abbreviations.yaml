@@ -73,10 +73,10 @@ claude_code:
     description: "Continue current conversation"
   clp:
     command: "claude --print"
-    description: "Print conversation history"
+    description: "Run Claude in non-interactive print mode"
   clcp:
     command: "claude --continue --print"
-    description: "Continue conversation and print history"
+    description: "Continue conversation in print mode"
   clup:
     command: "claude update"
     description: "Update Claude to latest version"
