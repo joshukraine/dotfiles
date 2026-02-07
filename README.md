@@ -12,6 +12,9 @@
 - New Mac bootstrap based on thoughtbot's [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
 
+> [!NOTE]
+> This project previously supported [Fish shell][fish] alongside Zsh. Fish support was removed in [PR #135][pr-135] (`f158de9`). If you were using the Fish configuration, you can reference that PR to see what changed or recover code for your own setup.
+
 ## ⚡️ Quick Setup
 
 Make sure macOS is up to date and you have installed the [required software](#-prerequisites).
@@ -394,6 +397,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [coreutils]: https://formulae.brew.sh/formula/coreutils
 [devicons]: https://github.com/ryanoasis/vim-devicons
 [fira-code]: https://github.com/tonsky/FiraCode
+[fish]: https://fishshell.com/
 [folke]: https://github.com/folke
 [ghostty]: https://ghostty.org/
 [git]: https://git-scm.com/
@@ -419,6 +423,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [nodejs]: https://nodejs.org/
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
+[pr-135]: https://github.com/joshukraine/dotfiles/pull/135
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
