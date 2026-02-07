@@ -74,7 +74,7 @@ function copycwd() {
 #
 # Returns: Deletes all .DS_Store files found, no output unless errors occur
 function dsx() {
-  find . -name "*.DS_Store" -type f -delete
+  find . -name ".DS_Store" -type f -delete
 }
 
 # Determine size of a file or total size of a directory
