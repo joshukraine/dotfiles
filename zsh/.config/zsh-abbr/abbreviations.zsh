@@ -77,8 +77,6 @@ abbr "t4a"="ll --tree --level=4 -a"
 
 # dev tools
 abbr "gg"="lazygit"
-abbr "hm"="hivemind"
-
 # markdown
 abbr "mdl"="markdownlint-cli2 --config ~/.markdownlint-cli2.yaml "**/*.md""
 abbr "mdlf"="markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "**/*.md""
