@@ -212,13 +212,12 @@ function pi() {
 function rlv() {
   asdf list all ruby | rg '^\d'
 }
-# Push current branch to origin with upstream tracking (smart default branch detection)
+# Push current branch to origin with upstream tracking
 function gpum() {
   # Help message
   if [[ "$1" == "-h" || "$1" == "--help" ]]; then
   printf "%s\n" "Usage: gpum [OPTION]
-Push current branch to origin with upstream tracking to the default branch.
-Intelligently detects whether to use 'main' or 'master' as the default branch.
+Push current branch to origin with upstream tracking.
 
 Options:
   -h, --help  Show this help message
@@ -247,24 +246,6 @@ Examples:
     return 1
   fi
 
-  # Determine default branch
-  local default_branch=""
-
-  # Try to get default branch from remote
-  default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
-
-  # Fallback if needed
-  if [[ -z "${default_branch}" ]]; then
-    if git show-ref --quiet refs/heads/main; then
-      default_branch="main"
-    elif git show-ref --quiet refs/heads/master; then
-      default_branch="master"
-    else
-      echo "Could not determine default branch."
-      return 1
-    fi
-  fi
-
   echo "Pushing ${current_branch} to origin with upstream tracking..."
   git push -u origin "${current_branch}"
   if [[ $? -ne 0 ]]; then
@@ -272,7 +253,7 @@ Examples:
     return 1
   fi
 
-  echo "Successfully pushed ${current_branch} to origin (default branch: ${default_branch})"
+  echo "Successfully pushed ${current_branch} to origin"
 }
 
 # Rebase current branch against default branch (smart branch detection)
