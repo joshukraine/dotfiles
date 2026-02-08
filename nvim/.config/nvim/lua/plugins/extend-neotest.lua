@@ -1,36 +1,51 @@
+-- Extend neotest with minitest adapter for Rails projects.
+-- LazyVim's lang.ruby extra already provides neotest-rspec.
+-- LazyVim's lang.python extra already provides neotest-python.
+
 return {
   {
     "nvim-neotest/neotest",
     dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "olimorris/neotest-rspec",
       "zidhuss/neotest-minitest",
     },
     opts = {
       adapters = {
-        ["neotest-rspec"] = {
-          -- NOTE: By default neotest-rspec uses the system wide rspec gem instead of the one through bundler
-          -- rspec_cmd = function()
-          --   return vim.tbl_flatten({
-          --     "bundle",
-          --     "exec",
-          --     "rspec",
-          --   })
-          -- end,
-        },
         ["neotest-minitest"] = {
-          -- NOTE: By default neotest-minitest uses the system wide minitest gem instead of the one through bundler
-          -- minitest_cmd = function()
-          --   return vim.tbl_flatten({
+          test_cmd = function()
+            return {
+              "bundle",
+              "exec",
+              "rails",
+              "test",
+            }
+          end,
+
+          -- Docker: Uncomment the block below (and comment out test_cmd above)
+          -- to run minitest inside a Docker container via docker compose.
+          -- Adjust the service name ("app") and working directory as needed.
+          --
+          -- test_cmd = function()
+          --   return {
+          --     "docker",
+          --     "compose",
+          --     "exec",
+          --     "-i",
+          --     "-w", "/app",
+          --     "-e", "RAILS_ENV=test",
+          --     "app",
           --     "bundle",
           --     "exec",
           --     "rails",
           --     "test",
-          --   })
+          --   }
           -- end,
+          --
+          -- transform_spec_path = function(path)
+          --   local prefix = require("neotest-minitest").root(path)
+          --   return string.sub(path, string.len(prefix) + 2, -1)
+          -- end,
+          --
+          -- results_path = "tmp/minitest.output",
         },
       },
     },
