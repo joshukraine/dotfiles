@@ -12,20 +12,20 @@ return {
       adapters = {
         ["neotest-minitest"] = {
           test_cmd = function()
-            return vim.tbl_flatten({
+            return {
               "bundle",
               "exec",
               "rails",
               "test",
-            })
+            }
           end,
 
           -- Docker: Uncomment the block below (and comment out test_cmd above)
-          -- to run minitest inside a Docker container via docker-compose.
+          -- to run minitest inside a Docker container via docker compose.
           -- Adjust the service name ("app") and working directory as needed.
           --
           -- test_cmd = function()
-          --   return vim.tbl_flatten({
+          --   return {
           --     "docker",
           --     "compose",
           --     "exec",
@@ -37,7 +37,7 @@ return {
           --     "exec",
           --     "rails",
           --     "test",
-          --   })
+          --   }
           -- end,
           --
           -- transform_spec_path = function(path)
