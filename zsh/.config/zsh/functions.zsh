@@ -186,19 +186,6 @@ function path() {
   echo "${PATH}" | tr ":" "\n" | nl
 }
 
-# Reload Zsh shell configuration
-#
-# Usage: src
-# Arguments: None
-#
-# Examples:
-#   src                     # Reload Zsh configuration files
-#
-# Returns: Sources .zshrc and reloads all configuration
-function src() {
-  source ~/.zshrc
-}
-
 # Ping utility with sensible defaults (Zsh version - fixed target)
 #
 # Usage: pi
