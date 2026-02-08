@@ -16,6 +16,13 @@ return {
       ruby_lsp = {
         mason = false,
         cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
+        init_options = {
+          addonSettings = {
+            ["Ruby LSP Rails"] = {
+              enablePendingMigrationsPrompt = false,
+            },
+          },
+        },
       },
       -- https://github.com/standardrb/standard
       standardrb = {
