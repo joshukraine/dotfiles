@@ -225,63 +225,6 @@ function pi() {
 function rlv() {
   asdf list all ruby | rg '^\d'
 }
-
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
-# function _rails_command () {
-#   if [ -e "bin/rails" ]; then
-#     bin/rails $@
-#   else
-#     command rails $@
-#   fi
-# }
-
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
-# function _rake_command () {
-#   if [ -e "bin/rake" ]; then
-#     bin/rake $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec rake $@
-#   else
-#     command rake $@
-#   fi
-# }
-
-# function _rspec_command () {
-#   if [ -e "bin/rspec" ]; then
-#     bin/rspec $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec rspec $@
-#   else
-#     command rspec $@
-#   fi
-# }
-
-# function _spring_command () {
-#   if [ -e "bin/spring" ]; then
-#     bin/spring $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec spring $@
-#   else
-#     command spring $@
-#   fi
-# }
-
-# function _mina_command () {
-#   if [ -e "bin/mina" ]; then
-#     bin/mina $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec mina $@
-#   else
-#     command mina $@
-#   fi
-# }
-
-# function n_test_runs() {
-#   for (( n=0; n<$1; n++ ));
-#   do { time bundle exec rspec ./spec; } 2>> time.txt;
-#   done
-# }
-
 # Push current branch to origin with upstream tracking (smart default branch detection)
 function gpum() {
   # Help message
