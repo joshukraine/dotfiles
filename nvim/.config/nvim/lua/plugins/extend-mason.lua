@@ -19,7 +19,6 @@ return {
         "markdownlint",
         "markdownlint-cli2",
         "marksman",
-        "phpactor",
         "prettier",
         "shellcheck",
         "shfmt",
