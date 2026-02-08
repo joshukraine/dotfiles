@@ -7,7 +7,7 @@ return {
       -- colorscheme = "gruvbox",
       -- colorscheme = "nord",
       colorscheme = "tokyonight",
-      -- colorscheme = "catppuccin-macchiato", -- catppuccin-latte, catppuccin-faappe, catppuccin-macchiato, catppuccin-mocha
+      -- colorscheme = "catppuccin-macchiato", -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
     },
   },
 }

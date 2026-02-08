@@ -8,8 +8,6 @@
 add_newline = false
 command_timeout = 2000
 
-right_format = """$time"""
-
 [package]
 disabled = true
 

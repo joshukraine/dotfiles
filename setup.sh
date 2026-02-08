@@ -241,7 +241,7 @@ handle_stow_conflicts() {
   local stow_conflicts=(
     ".asdfrc"
     ".bashrc"
-    "CLAUDE.md"
+    ".claude/CLAUDE.md"
     ".config/ghostty"
     ".config/kitty"
     ".config/lazygit"

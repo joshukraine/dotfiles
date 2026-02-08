@@ -8,7 +8,6 @@ return {
         "css",
         "diff",
         "embedded_template",
-        "fish",
         "html",
         "javascript",
         "jsdoc",

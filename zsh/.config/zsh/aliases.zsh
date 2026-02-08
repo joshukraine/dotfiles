@@ -1,7 +1,6 @@
 # General
-# Enhanced commands now handled by shared abbreviations system
 
-# Alwyas use Neovim as EDITOR
+# Always use Neovim as EDITOR
 alias vim='nvim'
 
 # History with timestamps

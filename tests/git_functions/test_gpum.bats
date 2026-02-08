@@ -58,7 +58,6 @@ teardown() {
   run run_zsh_function gpum
   assert_contains "${output}" "Pushing feature/awesome-feature to origin"
   assert_contains "${output}" "Successfully pushed"
-  assert_contains "${output}" "default branch: main"
   [ "${status}" -eq 0 ]
 }
 
@@ -69,7 +68,6 @@ teardown() {
   run run_zsh_function gpum
   assert_contains "${output}" "Pushing feature/legacy-feature to origin"
   assert_contains "${output}" "Successfully pushed"
-  assert_contains "${output}" "default branch: master"
   [ "${status}" -eq 0 ]
 }
 
@@ -101,21 +99,21 @@ teardown() {
   [ "${status}" -eq 0 ]
 }
 
-@test "gpum detects default branch correctly when remote has main" {
+@test "gpum pushes successfully in main-based repository" {
   setup_main_repo
   create_feature_branch "test-feature"
 
   run run_zsh_function gpum
-  assert_contains "${output}" "default branch: main"
+  assert_contains "${output}" "Successfully pushed"
   [ "${status}" -eq 0 ]
 }
 
-@test "gpum detects default branch correctly when remote has master" {
+@test "gpum pushes successfully in master-based repository" {
   setup_master_repo
   create_feature_branch "test-feature"
 
   run run_zsh_function gpum
-  assert_contains "${output}" "default branch: master"
+  assert_contains "${output}" "Successfully pushed"
   [ "${status}" -eq 0 ]
 }
 

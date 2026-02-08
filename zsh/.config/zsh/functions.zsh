@@ -186,19 +186,6 @@ function path() {
   echo "${PATH}" | tr ":" "\n" | nl
 }
 
-# Reload Zsh shell configuration
-#
-# Usage: src
-# Arguments: None
-#
-# Examples:
-#   src                     # Reload Zsh configuration files
-#
-# Returns: Sources .zshrc and reloads all configuration
-function src() {
-  source ~/.zshrc
-}
-
 # Ping utility with sensible defaults (Zsh version - fixed target)
 #
 # Usage: pi
@@ -225,70 +212,12 @@ function pi() {
 function rlv() {
   asdf list all ruby | rg '^\d'
 }
-
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
-# function _rails_command () {
-#   if [ -e "bin/rails" ]; then
-#     bin/rails $@
-#   else
-#     command rails $@
-#   fi
-# }
-
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rails/rails.plugin.zsh
-# function _rake_command () {
-#   if [ -e "bin/rake" ]; then
-#     bin/rake $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec rake $@
-#   else
-#     command rake $@
-#   fi
-# }
-
-# function _rspec_command () {
-#   if [ -e "bin/rspec" ]; then
-#     bin/rspec $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec rspec $@
-#   else
-#     command rspec $@
-#   fi
-# }
-
-# function _spring_command () {
-#   if [ -e "bin/spring" ]; then
-#     bin/spring $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec spring $@
-#   else
-#     command spring $@
-#   fi
-# }
-
-# function _mina_command () {
-#   if [ -e "bin/mina" ]; then
-#     bin/mina $@
-#   elif type bundle &> /dev/null && [ -e "Gemfile" ]; then
-#     bundle exec mina $@
-#   else
-#     command mina $@
-#   fi
-# }
-
-# function n_test_runs() {
-#   for (( n=0; n<$1; n++ ));
-#   do { time bundle exec rspec ./spec; } 2>> time.txt;
-#   done
-# }
-
-# Push current branch to origin with upstream tracking (smart default branch detection)
+# Push current branch to origin with upstream tracking
 function gpum() {
   # Help message
   if [[ "$1" == "-h" || "$1" == "--help" ]]; then
   printf "%s\n" "Usage: gpum [OPTION]
-Push current branch to origin with upstream tracking to the default branch.
-Intelligently detects whether to use 'main' or 'master' as the default branch.
+Push current branch to origin with upstream tracking.
 
 Options:
   -h, --help  Show this help message
@@ -317,24 +246,6 @@ Examples:
     return 1
   fi
 
-  # Determine default branch
-  local default_branch=""
-
-  # Try to get default branch from remote
-  default_branch=$(git remote show origin 2>/dev/null | awk '/HEAD branch/ { print $NF }')
-
-  # Fallback if needed
-  if [[ -z "${default_branch}" ]]; then
-    if git show-ref --quiet refs/heads/main; then
-      default_branch="main"
-    elif git show-ref --quiet refs/heads/master; then
-      default_branch="master"
-    else
-      echo "Could not determine default branch."
-      return 1
-    fi
-  fi
-
   echo "Pushing ${current_branch} to origin with upstream tracking..."
   git push -u origin "${current_branch}"
   if [[ $? -ne 0 ]]; then
@@ -342,7 +253,7 @@ Examples:
     return 1
   fi
 
-  echo "Successfully pushed ${current_branch} to origin (default branch: ${default_branch})"
+  echo "Successfully pushed ${current_branch} to origin"
 }
 
 # Rebase current branch against default branch (smart branch detection)
