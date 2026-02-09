@@ -108,6 +108,8 @@ abbr "gcl"="git clone"
 abbr "gcm"="git cm"
 abbr "gco"="git checkout"
 abbr "gcob"="git checkout -b"
+abbr "gsw"="git switch"
+abbr "gswc"="git switch -c"
 abbr "gcp"="git cherry-pick"
 abbr "gd"="git diff"
 abbr "gdc"="git diff --cached"
@@ -330,4 +332,7 @@ abbr "mms"="bundle exec middleman server"
 # Note: Some abbreviations have been replaced by smart functions:
 # - gpum: Use gpum function (smart git push with upstream tracking)
 # - grbm: Use grbm function (smart git rebase against default branch)
-# - gcom: Use gcom function (smart git checkout default branch)
+# - gcom: Use gcom function (smart git switch to default branch)
+#
+# Git switch abbreviations: gsw (git switch), gswc (git switch -c)
+# Git checkout abbreviations: gco/gcob kept for muscle memory
