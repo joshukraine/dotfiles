@@ -157,9 +157,9 @@ Examples:
   fi
 
   echo "Switching to ${default_branch}"
-  git checkout "${default_branch}"
+  git switch "${default_branch}"
   if [[ $? -ne 0 ]]; then
-    echo "Failed to checkout ${default_branch}"
+    echo "Failed to switch to ${default_branch}"
     return 1
   fi
 
