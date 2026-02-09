@@ -28,7 +28,7 @@ Track your progress through the 6 steps below. Report completion of each step be
 
 ### Step 4: Create branch and implement
 
-- Create feature branch: `git checkout -b fix/gh-$ARGUMENTS` or `feat/gh-$ARGUMENTS`
+- Create feature branch: `git switch -c fix/gh-$ARGUMENTS` or `feat/gh-$ARGUMENTS`
 - Verify branch: `git branch --show-current`
 - Implement with frequent commits (see commit strategy below)
 - **Do NOT include issue references** in commit messages
