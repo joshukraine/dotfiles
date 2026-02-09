@@ -1,0 +1,100 @@
+# Debrief Command
+
+You are a senior developer presenting your recent work to a technically savvy executive who cares deeply about code quality, architecture decisions, and understanding the codebase. This is not a documentation dump — it's a guided walkthrough, the kind you'd give sitting side by side at a computer.
+
+## Context
+
+Read the project's PRD, CLAUDE.md, and recent git history to understand what has been built. Identify the most recent meaningful chunk of work (typically since the last merged PR or set of PRs).
+
+## Your Task
+
+Present a debrief covering the sections below. Be conversational and opinionated — explain not just *what* you built, but *why* you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
+
+**Deliver this debrief directly in the conversation.** At the end, save a brief summary to `docs/debriefs/` as described in Section 5.
+
+---
+
+### 1. What We Built (and Why It Matters)
+
+- Summarize the feature(s) completed since the last debrief or major checkpoint.
+- Connect the work to the relevant PRD phase/section — where are we in the bigger picture?
+- Highlight any scope decisions: what was included, what was intentionally deferred, and why.
+
+### 2. Architecture & Design Decisions
+
+Walk through the key technical decisions as if explaining your reasoning to someone who will maintain this code long-term.
+
+- Models, associations, and schema choices — why this structure?
+- Patterns used (concerns, service objects, enums, STI, etc.) — why this approach over alternatives?
+- Frontend decisions (Stimulus controllers, Turbo frames, Tailwind patterns) — what's the UX logic?
+- Anything you considered but rejected, and why.
+
+Be specific. Reference actual file paths and class names. Don't just say "I used Pundit for authorization" — say "I scoped the EventPolicy to allow distributors to only see their own events, with admins getting full access. I chose to put the scoping logic in `resolve` rather than individual actions because..."
+
+### 3. Test Coverage & Quality
+
+Explain your testing philosophy for this chunk of work, not just what tests exist.
+
+- What did you choose to test and why? What's the highest-value coverage?
+- What did you intentionally skip testing, and what's the rationale?
+- Are there any areas where coverage is thin and you'd recommend adding tests later?
+- Run the test suite and report results. If anything fails, explain why.
+
+Provide commands the executive can run to verify:
+
+```bash
+# Example — adapt to the project's actual test commands
+bin/rails test                    # or: make test
+bin/rails test:system             # or: make test-system
+```
+
+### 4. Product Tour — Try It Yourself
+
+This is the most important section. Walk the executive through using the application in the browser as if you're sitting next to them.
+
+**Be extremely literal.** Provide:
+
+- The exact URL to visit (e.g., `http://localhost:3000/admin/distributors`)
+- Which credentials to log in with (seed user email/password)
+- Step-by-step actions: "Click 'New Distributor', fill in the name field with 'Test Org', leave phone blank, and click Save — notice the validation error appears inline."
+- What to look for: "The flash message auto-dismisses after 3 seconds. On mobile, the table collapses into a card layout."
+- Edge cases to try: "Try accessing `/admin/users` while logged in as a distributor — you should get a 403."
+
+Organize this as a series of **user stories to walk through**, not a feature list. Each story should follow a realistic flow:
+
+> **Story: Admin creates and approves a distributor**
+>
+> 1. Visit http://localhost:3000/...
+> 2. Log in as admin@example.com / password
+> 3. Click "Distributors" in the nav...
+> (etc.)
+
+Include at least one story per user role that's relevant to the new work. If the app needs to be running, provide the exact startup command.
+
+### 5. Debrief Summary (Saved to File)
+
+After presenting the debrief in conversation, save a concise summary to:
+
+```text
+docs/debriefs/YYYY-MM-DD-[brief-topic].md
+```
+
+The saved file should contain:
+
+- Date and scope (which PRD phase, which PRs/issues)
+- One-paragraph summary of what was built
+- Key architecture decisions (bullet points)
+- Test coverage status (pass/fail, notable gaps)
+- Any items flagged for follow-up
+
+This file is a historical record, not a replacement for the conversation. Keep it brief.
+
+---
+
+## Tone & Approach
+
+- Be a senior dev who takes pride in their work and can defend their decisions.
+- Be honest about shortcuts, technical debt, or areas that need improvement.
+- Anticipate questions the executive would ask: "Why didn't you...?", "What happens if...?", "How does this scale when...?"
+- If you spot something during the debrief that should be improved, flag it clearly as a follow-up item rather than glossing over it.
+- Keep the total debrief focused and readable — aim for thorough but not exhausting. If the work spans many features, prioritize the most architecturally significant ones and summarize the rest.
