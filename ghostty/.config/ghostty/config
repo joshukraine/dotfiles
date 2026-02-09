@@ -10,7 +10,7 @@ theme = TokyoNight Moon
 # List available fonts: ghostty +list-fonts
 # font-family = Cascadia Code
 font-family = Comic Code Ligatures
-font-size = 16
+font-size = 15
 # font-thicken = true
 adjust-cell-height = 6
 
