@@ -33,6 +33,8 @@ setup() {
   test_abbreviation "gaa" "git add --all"
   test_abbreviation "gcm" "git cm"
   test_abbreviation "gco" "git checkout"
+  test_abbreviation "gsw" "git switch"
+  test_abbreviation "gswc" "git switch -c"
   test_abbreviation "gbr" "git branch --remote"
 }
 
