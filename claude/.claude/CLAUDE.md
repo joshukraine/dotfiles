@@ -29,7 +29,8 @@ rejected alternatives, and anything you'd want a future maintainer to know.
   glossing over it
 - When a debrief or checkpoint would be valuable (e.g., end of a PRD phase),
   suggest it
-- Always create GitHub issues before writing implementation code. Planning and issue creation come first; code comes after issues are approved.
+- Always create GitHub issues before writing implementation code. Planning
+  and issue creation come first; code comes after issues are approved.
 
 ## Documentation Practices
 

@@ -11,6 +11,11 @@ proceed past a CHECKPOINT without explicit user approval.
 
 ---
 
+> **Tip for the user**: You can activate Claude Code's plan mode (shift+tab)
+> during Steps 1-2 for an extra guardrail against premature code changes.
+> Toggle out of plan mode before Step 3 so that Claude Code can run
+> `gh issue create` commands.
+
 ### Step 1: Orient
 
 - Read the project's PRD and CLAUDE.md
