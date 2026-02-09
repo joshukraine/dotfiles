@@ -28,7 +28,7 @@ init_git_repo() {
   else
     # Fallback for older git versions
     git init
-    git switch -c "${default_branch}"
+    git checkout -b "${default_branch}"
   fi
 
   git config user.name "Test User"
