@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-# Tests for gcom (git checkout main/master) function
+# Tests for gcom (git switch to main/master) function
 
 load '../helpers/common.bash'
 load '../helpers/git_helpers.bash'
@@ -125,12 +125,12 @@ teardown() {
   create_feature_branch "feature/test"
 
   # Add a commit to remote main to have something to pull
-  git checkout main
+  git switch main
   echo "Remote change" >>remote-file.txt
   git add remote-file.txt
   git commit -m "Remote change"
   git push origin main
-  git checkout feature/test
+  git switch feature/test
 
   run run_zsh_function gcom -p
   assert_contains "${output}" "Switching to"
@@ -193,7 +193,7 @@ teardown() {
   # Already on main, but -p should still pull
 
   # Add a remote change to pull
-  git checkout main
+  git switch main
   echo "Remote change" >>remote-file.txt
   git add remote-file.txt
   git commit -m "Remote change"

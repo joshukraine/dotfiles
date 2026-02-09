@@ -102,12 +102,12 @@ teardown() {
   create_feature_branch "feature/awesome"
 
   # Add a commit to main to create something to rebase against
-  git checkout main
+  git switch main
   echo "New main content" >>main-file.txt
   git add main-file.txt
   git commit -m "Update main"
   git push origin main
-  git checkout feature/awesome
+  git switch feature/awesome
 
   run run_zsh_function grbm
   assert_contains "${output}" "Rebasing feature/awesome against main"
@@ -119,12 +119,12 @@ teardown() {
   create_feature_branch "feature/legacy"
 
   # Add a commit to master to create something to rebase against
-  git checkout master
+  git switch master
   echo "New master content" >>master-file.txt
   git add master-file.txt
   git commit -m "Update master"
   git push origin master
-  git checkout feature/legacy
+  git switch feature/legacy
 
   run run_zsh_function grbm
   assert_contains "${output}" "Rebasing feature/legacy against master"

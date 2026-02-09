@@ -47,25 +47,25 @@ teardown() {
 
   # Create and merge a feature branch
   create_feature_branch "feature/completed"
-  git checkout main
+  git switch main
   git merge feature/completed --no-ff -m "Merge feature/completed"
   git push origin main
 
   # Create another feature branch that's merged
-  git checkout -b feature/also-done
+  git switch -c feature/also-done
   echo "More work" >>done.txt
   git add done.txt
   git commit -m "More completed work"
-  git checkout main
+  git switch main
   git merge feature/also-done --no-ff -m "Merge feature/also-done"
   git push origin main
 
   # Create an unmerged branch
-  git checkout -b feature/unmerged
+  git switch -c feature/unmerged
   echo "Unmerged work" >>unmerged.txt
   git add unmerged.txt
   git commit -m "Unmerged work"
-  git checkout main
+  git switch main
 
   # Verify branches exist
   local branch_count_before
@@ -104,10 +104,10 @@ teardown() {
 
   # Create and merge a branch, but stay on it
   create_feature_branch "feature/current"
-  git checkout main
+  git switch main
   git merge feature/current --no-ff -m "Merge feature/current"
   git push origin main
-  git checkout feature/current # Stay on the merged branch
+  git switch feature/current # Stay on the merged branch
 
   run gbrm
   # The xargs command might fail if trying to remove the current branch
@@ -135,7 +135,7 @@ teardown() {
 
   # Create and merge a feature branch
   create_feature_branch "feature/old-style"
-  git checkout master
+  git switch master
   git merge feature/old-style --no-ff -m "Merge feature/old-style"
   git push origin master
 
@@ -165,7 +165,7 @@ teardown() {
 
   # Create and merge a feature branch
   create_feature_branch "feature/to-remove"
-  git checkout main
+  git switch main
   git merge feature/to-remove --no-ff -m "Merge feature/to-remove"
   git push origin main
 
@@ -181,11 +181,11 @@ teardown() {
 
   # Create and merge multiple feature branches
   for i in {1..3}; do
-    git checkout -b "feature/merge-me-${i}"
+    git switch -c "feature/merge-me-${i}"
     echo "Feature ${i} work" >>"feature${i}.txt"
     git add "feature${i}.txt"
     git commit -m "Add feature ${i}"
-    git checkout main
+    git switch main
     git merge "feature/merge-me-${i}" --no-ff -m "Merge feature/merge-me-${i}"
     git push origin main
   done
