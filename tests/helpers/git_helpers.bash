@@ -56,7 +56,7 @@ add_mock_origin() {
 # Create a feature branch
 create_feature_branch() {
   local branch_name="${1:-feature/test-branch}"
-  git switch -c "${branch_name}"
+  git checkout -b "${branch_name}"
   echo "Feature work" >>feature.txt
   git add feature.txt
   git commit -m "Add feature work"
