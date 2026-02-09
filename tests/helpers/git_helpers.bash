@@ -28,7 +28,7 @@ init_git_repo() {
   else
     # Fallback for older git versions
     git init
-    git checkout -b "${default_branch}"
+    git switch -c "${default_branch}"
   fi
 
   git config user.name "Test User"
@@ -56,7 +56,7 @@ add_mock_origin() {
 # Create a feature branch
 create_feature_branch() {
   local branch_name="${1:-feature/test-branch}"
-  git checkout -b "${branch_name}"
+  git switch -c "${branch_name}"
   echo "Feature work" >>feature.txt
   git add feature.txt
   git commit -m "Add feature work"
