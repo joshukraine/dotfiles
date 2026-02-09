@@ -4,8 +4,7 @@ Systematically resolve GitHub issues with a structured workflow.
 
 ## Your task
 
-**Use TaskCreate to track the 6 steps below before beginning.**
-Mark each task as completed when finished. Report progress after each major step.
+Track your progress through the 6 steps below. Report completion of each step before moving to the next.
 
 ### Step 1: Get issue details
 
