@@ -18,16 +18,18 @@ proceed past a CHECKPOINT without explicit user approval.
 
 ### Step 1: Orient
 
-- Read the project's PRD and CLAUDE.md
+- Read `docs/prd/ROADMAP.md` to identify the current phase and what comes next
+- Read `docs/prd/00-overview.md` for project context
+- Read the specific PRD document(s) relevant to the upcoming phase
+- Read the project's `CLAUDE.md`
 - Review recent git history and merged PRs to understand current state
-- Identify which PRD phase or section comes next
 - Check for any open GitHub issues that may already cover upcoming work
 
 ### Step 2: Draft the plan
 
 Present a clear, concise plan for the next phase:
 
-- **Phase name and PRD reference** (e.g., "Phase 2: User Authentication — PRD section 4")
+- **Phase name and PRD reference** (e.g., "Phase 2: Auth & Onboarding — see `02-auth-and-onboarding.md`")
 - **Scope summary**: What this phase accomplishes in 2-3 sentences
 - **Proposed issues**: A numbered list of discrete, implementable issues. Each
   issue should include:
@@ -57,7 +59,7 @@ gh issue create --title "feat: [title]" --body "[description]"
 
 Each issue body should include:
 
-- **Context**: Which PRD phase/section this relates to
+- **Context**: Which PRD phase and document this relates to (e.g., "Phase 2, `02-auth-and-onboarding.md`")
 - **Requirements**: Specific acceptance criteria drawn from the PRD
 - **Technical notes**: Key implementation details, relevant files, patterns to
   follow

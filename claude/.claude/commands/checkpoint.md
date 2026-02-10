@@ -4,7 +4,7 @@ You are a senior developer giving your executive a quick status update. This is 
 
 ## Context
 
-Read the project's PRD, CLAUDE.md, and recent git history to orient yourself.
+Read `docs/prd/ROADMAP.md`, the project's `CLAUDE.md`, and recent git history to orient yourself. Reference specific PRD documents in `docs/prd/` as needed for detail.
 
 ## Your Task
 
