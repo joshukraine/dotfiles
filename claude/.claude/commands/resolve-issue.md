@@ -38,6 +38,7 @@ Track your progress through the 6 steps below. Report completion of each step be
 - Commit every major component — don't wait until everything is done
 - Each commit must be working code
 - Typical range: 3-8 commits for most issues
+- Track which acceptance criteria from the issue have been satisfied as you go
 
 ### Step 5: Verify solution
 
@@ -45,6 +46,10 @@ Track your progress through the 6 steps below. Report completion of each step be
 - Run comprehensive tests across all changes
 - Verify the original issue is resolved completely
 - Check for regressions
+- Update the issue to check off all completed acceptance criteria checkboxes:
+  fetch the current body with `gh issue view $ARGUMENTS --json body --jq '.body'`,
+  replace `- [ ]` with `- [x]` for completed items, then update with
+  `gh issue edit $ARGUMENTS --body "$updated_body"`
 - **STOP**: Do not proceed until all checks pass
 
 ### Step 6: Report back
