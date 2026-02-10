@@ -8,6 +8,8 @@ Read `docs/prd/ROADMAP.md` and the project's `CLAUDE.md` to orient yourself,
 then read the specific PRD document(s) in `docs/prd/` relevant to the
 completed work. Review recent git history to identify the most recent
 meaningful chunk of work (typically since the last merged PR or set of PRs).
+Identify the project name (from the repo name, CLAUDE.md, or ROADMAP.md) —
+this must appear at the top of every debrief file.
 
 ## Your Task
 
@@ -98,7 +100,7 @@ docs/debriefs/YYYY-MM-DD-[brief-topic].md
 
 The summary should contain:
 
-- Date and scope (which PRD phase, which PRs/issues)
+- Project name, date, and scope (which PRD phase, which PRs/issues)
 - One-paragraph summary of what was built
 - Key architecture decisions (bullet points)
 - Test coverage status (pass/fail, notable gaps)
@@ -110,6 +112,7 @@ After saving, tell the executive where the files are and suggest opening the
 working copy:
 
 ```text
+Project:      MyApp
 Full debrief: tmp/debrief-2026-02-10-user-authentication.md
 Summary:      docs/debriefs/2026-02-10-user-authentication.md
 
