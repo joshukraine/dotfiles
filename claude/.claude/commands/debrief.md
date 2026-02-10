@@ -10,7 +10,10 @@ Read the project's PRD, CLAUDE.md, and recent git history to understand what has
 
 Present a debrief covering the sections below. Be conversational and opinionated — explain not just *what* you built, but *why* you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
 
-**Deliver this debrief directly in the conversation.** At the end, save a brief summary to `docs/debriefs/` as described in Section 5.
+**Save the full debrief to a markdown file in `tmp/` at the project root** so the
+executive can open it in their editor for easy navigation, scrolling, and
+copying. After saving, also create a brief summary in `docs/debriefs/` as
+described in Section 5.
 
 ---
 
@@ -71,15 +74,26 @@ Organize this as a series of **user stories to walk through**, not a feature lis
 
 Include at least one story per user role that's relevant to the new work. If the app needs to be running, provide the exact startup command.
 
-### 5. Debrief Summary (Saved to File)
+### 5. Save Debrief Files
 
-After presenting the debrief in conversation, save a concise summary to:
+Save two files:
+
+**Full working debrief** — the complete document covering Sections 1-4:
+
+```text
+tmp/debrief-YYYY-MM-DD-[brief-topic].md
+```
+
+This is the executive's working copy. It will not be committed to version
+control and can be discarded after the debrief session.
+
+**Committed summary** — a concise historical record:
 
 ```text
 docs/debriefs/YYYY-MM-DD-[brief-topic].md
 ```
 
-The saved file should contain:
+The summary should contain:
 
 - Date and scope (which PRD phase, which PRs/issues)
 - One-paragraph summary of what was built
@@ -87,7 +101,17 @@ The saved file should contain:
 - Test coverage status (pass/fail, notable gaps)
 - Any items flagged for follow-up
 
-This file is a historical record, not a replacement for the conversation. Keep it brief.
+Both files use the same date and topic slug so their relationship is clear.
+
+After saving, tell the executive where the files are and suggest opening the
+working copy:
+
+```text
+Full debrief: tmp/debrief-2026-02-10-user-authentication.md
+Summary:      docs/debriefs/2026-02-10-user-authentication.md
+
+Open the full debrief in your editor to walk through the user stories.
+```
 
 ---
 
