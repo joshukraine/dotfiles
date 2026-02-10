@@ -215,6 +215,8 @@ abbr "rr"="bin/rails routes"
 abbr "rrc"="bin/rails routes controller"
 abbr "rrg"="bin/rails routes | grep"
 abbr "rs"="bin/rails server"
+abbr "rt"="bin/rails test"
+abbr "rts"="bin/rails test:system"
 abbr "rsp"="bin/rspec ."
 abbr "rtp"="bin/rails db:test:prepare"
 
