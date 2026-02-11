@@ -1,7 +1,8 @@
 # Sprint Issue Command
 
-Quickly resolve a housekeeping or non-critical GitHub issue with a streamlined
-workflow. Use `/resolve-issue` for critical work that needs full checkpoints.
+Quickly resolve a small, well-scoped GitHub issue with a streamlined workflow.
+Use `/resolve-issue` for larger or more complex work that needs full
+checkpoints.
 
 ## Your task
 
@@ -11,9 +12,10 @@ workflow. Use `/resolve-issue` for critical work that needs full checkpoints.
 - Briefly assess scope and identify files that need changes.
 - **If already on a feature branch** (e.g., from `/setup-sprint` worktrees): confirm the
   branch name matches the issue and proceed to Step 2.
-- **If on main/master**: create a feature branch using the project's branch
-  naming conventions (typically `chore/gh-$ARGUMENTS-short-description` or
-  `fix/gh-$ARGUMENTS-short-description`).
+- **If on main/master**: create a feature branch using the issue's type label
+  to determine the prefix (e.g., `chore/gh-$ARGUMENTS-short-description`,
+  `fix/gh-$ARGUMENTS-short-description`, `feat/gh-$ARGUMENTS-short-description`).
+  If no type label is present, infer from context (default to `chore/`).
 
 ### Step 2: Implement and verify
 
@@ -36,7 +38,7 @@ workflow. Use `/resolve-issue` for critical work that needs full checkpoints.
 
 ## Important
 
-- This command is for small, well-scoped housekeeping issues.
+- This command is for small, well-scoped issues.
 - Skip the implementation plan checkpoint — move directly to implementation.
 - Still verify tests and linting before creating the PR.
 - **Commit messages**: Describe what the commit does, NO issue references.

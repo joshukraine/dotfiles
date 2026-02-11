@@ -22,7 +22,7 @@ or begin implementation.
   ```
 
   This ensures the correct name even when running from a subdirectory.
-- Run `gh issue list --label $ARGUMENTS --state open --json number,title`
+- Run `gh issue list --label $ARGUMENTS --state open --json number,title,labels`
   to find all open issues with the specified label.
 - Present the list to the user.
 
@@ -34,11 +34,13 @@ sequentially) or adjust the batch.
 
 For each confirmed issue:
 
-- Determine the branch prefix from the issue title or label:
-  - `chore/` for housekeeping, cleanup, or refactoring
-  - `fix/` for bug fixes
-  - `feat/` for enhancements or new features
-  - `docs/` for documentation-only changes
+- Determine the branch prefix from the issue's type label:
+  - `feat/` for issues labeled `feat`
+  - `fix/` for issues labeled `fix`
+  - `chore/` for issues labeled `chore`
+  - `docs/` for issues labeled `docs`
+  - `test/` for issues labeled `test`
+  - If no type label is present, infer from context (default to `chore/`)
 - Generate a short kebab-case description from the issue title (3-5 words max).
 - Create the worktree:
 
@@ -83,3 +85,6 @@ Then in each Claude Code session:
   user confirmation.
 - If `bundle install` or similar dependency setup is needed in each worktree,
   mention it in the report but do not run it.
+- The `$ARGUMENTS` value is typically a type label (e.g., `chore`, `fix`) but
+  can be any GitHub issue label. The command filters by whatever label is
+  provided.

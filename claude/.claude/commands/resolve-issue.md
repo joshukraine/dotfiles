@@ -28,7 +28,8 @@ Track your progress through the 6 steps below. Report completion of each step be
 
 ### Step 4: Create branch and implement
 
-- Create feature branch: `git switch -c fix/gh-$ARGUMENTS` or `feat/gh-$ARGUMENTS`
+- Determine the branch prefix from the issue's type label (see Branch Naming below)
+- Create feature branch: `git switch -c <prefix>/gh-$ARGUMENTS-<short-description>`
 - Verify branch: `git branch --show-current`
 - Implement with frequent commits (see commit strategy below)
 - **Do NOT include issue references** in commit messages
@@ -61,9 +62,19 @@ Track your progress through the 6 steps below. Report completion of each step be
 
 ## Branch Naming
 
-- `fix/gh-123-short-description` for bug fixes
-- `feat/gh-123-short-description` for features
-- `docs/gh-123-short-description` for documentation
+Use the issue's type label to determine the prefix. Format:
+`<prefix>/gh-<number>-<short-description>`
+
+| Type Label | Branch Prefix | Example                    |
+|------------|---------------|----------------------------|
+| `feat`     | `feat/`       | `feat/gh-41-add-auth`      |
+| `fix`      | `fix/`        | `fix/gh-55-fix-login`      |
+| `chore`    | `chore/`      | `chore/gh-51-update-deps`  |
+| `docs`     | `docs/`       | `docs/gh-60-update-readme` |
+| `test`     | `test/`       | `test/gh-63-add-coverage`  |
+
+If the issue has no type label, infer from context: bug fixes use `fix/`,
+new functionality uses `feat/`, everything else uses `chore/`.
 
 ## Important
 
