@@ -19,6 +19,7 @@ export GPG_TTY=$(tty)
 . "$XDG_CONFIG_HOME/zsh/plugins.zsh" # Includes Zap - https://www.zapzsh.com
 . "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 . "$XDG_CONFIG_HOME/zsh/functions.zsh"
+. "$XDG_CONFIG_HOME/zsh/cc-functions.zsh"
 . "$XDG_CONFIG_HOME/zsh/colors.zsh"
 . "$XDG_CONFIG_HOME/zsh/docker.sh"
 . "$HOME/.zshrc.local"
