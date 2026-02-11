@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(stow:*)",
+      "Bash(lua:*)",
+      "Bash(bats:*)",
+      "Bash(shellcheck:*)",
+      "Bash(markdownlint-cli2:*)",
+      "Bash(pre-commit run:*)",
+
+      "Bash(brew info:*)",
+      "Bash(brew list:*)",
+      "Bash(brew search:*)",
+
+      "Bash(source:*)",
+
+      "Bash(./scripts/lint-shell:*)",
+      "Bash(./scripts/run-tests:*)",
+
+      "WebFetch(domain:cmp.saghen.dev)",
+      "WebFetch(domain:lazyvim.github.io)",
+      "WebFetch(domain:main.cmp.saghen.dev)",
+      "WebFetch(domain:neovim.io)",
+      "WebFetch(domain:www.lazyvim.org)"
+    ],
+    "deny": []
+  }
+}

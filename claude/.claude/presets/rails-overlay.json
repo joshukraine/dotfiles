@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ruby:*)",
+      "Bash(rails:*)",
+      "Bash(bundle:*)",
+      "Bash(gem:*)",
+
+      "Bash(bin/rails:*)",
+      "Bash(bin/rake:*)",
+      "Bash(bin/dev:*)",
+      "Bash(bin/ci:*)",
+      "Bash(bin/rubocop:*)",
+      "Bash(bin/standardrb:*)",
+      "Bash(bin/brakeman:*)",
+      "Bash(bin/bundler-audit:*)",
+      "Bash(bin/importmap:*)",
+
+      "Bash(standardrb:*)",
+
+      "WebFetch(domain:api.rubyonrails.org)",
+      "WebFetch(domain:guides.rubyonrails.org)",
+      "WebFetch(domain:ruby-doc.org)",
+      "WebFetch(domain:rubygems.org)",
+      "WebFetch(domain:tailwindcss.com)"
+    ],
+    "deny": [
+      "Bash(bin/rails db:drop:*)",
+      "Bash(bin/rails db:reset:*)",
+      "Bash(bundle exec rails db:drop:*)",
+      "Bash(bundle exec rails db:reset:*)",
+      "Bash(rails db:drop:*)",
+      "Bash(rails db:reset:*)"
+    ]
+  }
+}
