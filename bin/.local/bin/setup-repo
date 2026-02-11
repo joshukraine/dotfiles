@@ -18,9 +18,9 @@
 #
 # Reference repo for label colors:
 #   Labels are cloned from a reference repo to ensure consistent colors.
-#   Set SETUP_REPO_REFERENCE to override (default: joshukraine/comixdistro).
+#   Set SETUP_REPO_REFERENCE to override (default: joshukraine/comix_distro).
 #
-# Requirements: gh CLI (authenticated), jq
+# Requirements: bash 4+ (associative arrays, ${var^}), gh CLI (authenticated), jq
 
 set -euo pipefail
 
@@ -94,10 +94,16 @@ for arg in "$@"; do
   case "${arg}" in
     --dry-run) DRY_RUN=true ;;
     --help | -h)
-      sed -n '2,/^$/s/^# //p' "$0"
+      sed -n '2,/^# Requirements/s/^# \{0,1\}//p' "$0"
       exit 0
       ;;
-    *) TARGET_REPO="${arg}" ;;
+    *)
+      if [[ -n "${TARGET_REPO}" ]]; then
+        error "Multiple repositories specified: ${TARGET_REPO} and ${arg}"
+        exit 1
+      fi
+      TARGET_REPO="${arg}"
+      ;;
   esac
 done
 
@@ -282,6 +288,12 @@ else
       PROJECT_NUMBER=""
     fi
   fi
+fi
+
+# Validate PROJECT_NUMBER is numeric (guard against unexpected gh output)
+if [[ -n "${PROJECT_NUMBER}" && "${PROJECT_NUMBER}" != "DRY_RUN" && ! "${PROJECT_NUMBER}" =~ ^[0-9]+$ ]]; then
+  warn "Invalid project number: ${PROJECT_NUMBER}. Skipping project setup."
+  PROJECT_NUMBER=""
 fi
 
 # --- Step 6: Add Priority field to project -----------------------------------
