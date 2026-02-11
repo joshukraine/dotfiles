@@ -3,7 +3,7 @@
 # Run dotfiles test suite using bats-core
 #
 # Usage: run-tests [category]
-#   category: all (default), git, abbr
+#   category: all (default), git, abbr, presets
 
 set -e
 
@@ -36,9 +36,13 @@ case "${category}" in
     echo "Running abbreviation tests..."
     bats tests/abbreviations/
     ;;
+  presets)
+    echo "Running merge-presets tests..."
+    bats tests/merge_presets/
+    ;;
   *)
     echo "Unknown category: ${category}" >&2
-    echo "Available: all, git, abbr" >&2
+    echo "Available: all, git, abbr, presets" >&2
     exit 1
     ;;
 esac
