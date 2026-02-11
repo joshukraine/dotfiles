@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(hugo:*)",
+
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+
+      "Bash(curl:*)",
+      "Bash(unzip:*)",
+
+      "WebFetch(domain:developer.mozilla.org)",
+      "WebFetch(domain:gohugo.io)",
+      "WebFetch(domain:tailwindcss.com)"
+    ],
+    "deny": []
+  }
+}

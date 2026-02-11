@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+#
+# merge-presets — Merge Claude Code permission preset files
+#
+# Combines two or more JSON permission files by merging their allow and deny
+# arrays, deduplicating entries, and outputting a single valid JSON file.
+#
+# Usage:
+#   merge-presets <base.json> <overlay.json> [overlay2.json ...]
+#   merge-presets base.json rails.json > .claude/settings.local.json
+#
+# Requirements:
+#   jq (install via: brew install jq)
+#
+# The output is written to stdout so it can be redirected to any file.
+# Typical targets:
+#   .claude/settings.json       — committed project config
+#   .claude/settings.local.json — gitignored local config
+
+set -euo pipefail
+
+PRESETS_DIR="${HOME}/.claude/presets"
+
+usage() {
+  cat <<EOF
+Usage: merge-presets <file1.json> <file2.json> [file3.json ...]
+
+Merge multiple Claude Code permission preset files into one.
+
+Arguments can be:
+  - Absolute or relative paths to JSON files
+  - Bare filenames (resolved from ${PRESETS_DIR}/)
+
+Examples:
+  merge-presets default-permissions.json rails-overlay.json
+  merge-presets default-permissions.json hugo-overlay.json
+  merge-presets /path/to/base.json /path/to/overlay.json
+
+Output is written to stdout. Redirect to save:
+  merge-presets default-permissions.json rails-overlay.json > .claude/settings.local.json
+EOF
+  exit 1
+}
+
+# --- Preflight checks ---
+
+if [[ $# -lt 2 ]]; then
+  usage
+fi
+
+if ! command -v jq &>/dev/null; then
+  echo "Error: jq is required but not installed." >&2
+  echo "Install with: brew install jq" >&2
+  exit 1
+fi
+
+# --- Resolve file paths ---
+
+resolve_path() {
+  local file="$1"
+  if [[ -f "${file}" ]]; then
+    echo "${file}"
+  elif [[ -f "${PRESETS_DIR}/${file}" ]]; then
+    echo "${PRESETS_DIR}/${file}"
+  else
+    echo "Error: Cannot find '${file}' (checked cwd and ${PRESETS_DIR}/)" >&2
+    exit 1
+  fi
+}
+
+# --- Collect and validate all input files ---
+
+files=()
+for arg in "$@"; do
+  resolved=$(resolve_path "${arg}")
+  # Validate JSON structure
+  if ! jq -e '.permissions' "${resolved}" &>/dev/null; then
+    echo "Error: '${resolved}' is not a valid permissions file (missing .permissions key)" >&2
+    exit 1
+  fi
+  files+=("${resolved}")
+done
+
+# --- Merge ---
+
+# Start with the first file, then fold in each subsequent file
+result=$(cat "${files[0]}")
+
+for ((i = 1; i < ${#files[@]}; i++)); do
+  overlay=$(cat "${files[${i}]}")
+  result=$(jq -n \
+    --argjson base "${result}" \
+    --argjson overlay "${overlay}" \
+    '{
+      permissions: {
+        allow: (
+          ($base.permissions.allow // []) +
+          ($overlay.permissions.allow // [])
+          | unique
+          | sort
+        ),
+        deny: (
+          ($base.permissions.deny // []) +
+          ($overlay.permissions.deny // [])
+          | unique
+          | sort
+        )
+      }
+    }')
+done
+
+# --- Output ---
+
+echo "${result}"
