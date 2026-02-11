@@ -7,7 +7,7 @@ Reusable permission configurations for Claude Code projects.
 | File | Purpose |
 | --- | --- |
 | `default-permissions.json` | Base permissions for any project (Unix tools, git, gh, file editing) |
-| `sprint-permissions.json` | All-inclusive preset for housekeeping sprints (base + all frameworks) |
+| `sprint-permissions.json` | All-inclusive preset for housekeeping sprints (base + all overlays) |
 | `rails-overlay.json` | Ruby on Rails additive overlay (Ruby, Bundler, binstubs, Rails docs) |
 | `hugo-overlay.json` | Hugo additive overlay (Hugo CLI, Node/npm, Hugo docs) |
 | `dotfiles-overlay.json` | Dotfiles repo overlay (Stow, Lua, Bats, ShellCheck, Neovim docs) |
