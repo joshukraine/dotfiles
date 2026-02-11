@@ -15,9 +15,13 @@ or begin implementation.
 
 ### Step 2: Find issues
 
-- Determine the project name from the current directory basename (e.g., if
-  working in `/home/user/projects/comix-distro`, the project name is
-  `comix-distro`).
+- Determine the project name from the Git repository root directory name:
+
+  ```bash
+  project_name="$(basename "$(git rev-parse --show-toplevel)")"
+  ```
+
+  This ensures the correct name even when running from a subdirectory.
 - Run `gh issue list --label $ARGUMENTS --state open --json number,title`
   to find all open issues with the specified label.
 - Present the list to the user.
@@ -39,13 +43,14 @@ For each confirmed issue:
 - Create the worktree:
 
 ```bash
-git worktree add ../<project-name>-issue-<number> -b <prefix>/gh-<number>-<short-description>
+git worktree add -b <prefix>/gh-<number>-<short-description> ../<project-name>-issue-<number>
 ```
 
 ### Step 4: Apply sprint permissions
 
 - Check if `~/.claude/presets/sprint-permissions.json` exists.
-- If it exists, copy it into each worktree's `.claude/settings.local.json`.
+- If it exists, for each worktree ensure `.claude/` exists (`mkdir -p .claude`)
+  and copy the file into `.claude/settings.local.json`.
 - If it does not exist, skip this step and note that sprint permissions were
   not applied.
 
