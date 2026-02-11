@@ -1,0 +1,407 @@
+#!/usr/bin/env bash
+#
+# setup-repo — Bootstrap a new GitHub repository with the unified label
+# taxonomy and project board configuration.
+#
+# Usage:
+#   setup-repo                     # Run from inside the target repo
+#   setup-repo owner/repo          # Specify a remote repo
+#   setup-repo owner/repo --dry-run  # Preview changes without applying
+#
+# What it does:
+#   1. Removes GitHub's default labels that aren't in the taxonomy
+#   2. Creates the five work-type labels (feat, fix, chore, docs, test)
+#   3. Keeps triage labels (duplicate, invalid, question, wontfix)
+#   4. Creates a GitHub Project (Board) linked to the repo
+#   5. Adds the Priority custom field (Critical, Normal, Low)
+#   6. Prints manual steps for status columns and auto-workflows
+#
+# Reference repo for label colors:
+#   Labels are cloned from a reference repo to ensure consistent colors.
+#   Set SETUP_REPO_REFERENCE to override (default: joshukraine/comix_distro).
+#
+# Requirements: bash 4+ (associative arrays, ${var^}), gh CLI (authenticated), jq
+
+set -euo pipefail
+
+# --- Configuration -----------------------------------------------------------
+
+REFERENCE_REPO="${SETUP_REPO_REFERENCE:-joshukraine/comix_distro}"
+
+# Labels that should exist after setup (type + triage)
+# Auto-labels (dependencies, github_actions) are managed by Dependabot
+# and created automatically — we don't touch them.
+TAXONOMY_LABELS=(
+  "feat"
+  "fix"
+  "chore"
+  "docs"
+  "test"
+  "duplicate"
+  "invalid"
+  "question"
+  "wontfix"
+)
+
+# GitHub default labels to remove (not in our taxonomy)
+LABELS_TO_REMOVE=(
+  "bug"
+  "enhancement"
+  "documentation"
+  "good first issue"
+  "help wanted"
+)
+
+# Project board status columns (in order)
+STATUS_COLUMNS=("Backlog" "Up Next" "In Progress" "In Review" "Done")
+
+# Priority field options
+PRIORITY_OPTIONS=("🔴 Critical" "🟡 Normal" "🟢 Low")
+
+# --- Helpers -----------------------------------------------------------------
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+info() { echo -e "${BLUE}ℹ${NC}  $*"; }
+success() { echo -e "${GREEN}✓${NC}  $*"; }
+warn() { echo -e "${YELLOW}⚠${NC}  $*"; }
+error() { echo -e "${RED}✗${NC}  $*" >&2; }
+header() {
+  echo -e "\n${BOLD}$*${NC}"
+  printf '%.0s─' {1..60}
+  echo
+}
+
+DRY_RUN=false
+
+run_cmd() {
+  if [[ "${DRY_RUN}" == true ]]; then
+    echo -e "  ${YELLOW}[dry-run]${NC} $*"
+    return 0
+  fi
+  "$@"
+}
+
+# --- Parse arguments ---------------------------------------------------------
+
+TARGET_REPO=""
+for arg in "$@"; do
+  case "${arg}" in
+    --dry-run) DRY_RUN=true ;;
+    --help | -h)
+      sed -n '2,/^# Requirements/s/^# \{0,1\}//p' "$0"
+      exit 0
+      ;;
+    *)
+      if [[ -n "${TARGET_REPO}" ]]; then
+        error "Multiple repositories specified: ${TARGET_REPO} and ${arg}"
+        exit 1
+      fi
+      TARGET_REPO="${arg}"
+      ;;
+  esac
+done
+
+# If no repo specified, detect from current directory
+if [[ -z "${TARGET_REPO}" ]]; then
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    TARGET_REPO=$(gh repo view --json nameWithOwner -q '.nameWithOwner' 2>/dev/null || true)
+  fi
+  if [[ -z "${TARGET_REPO}" ]]; then
+    error "Could not detect repository. Run from inside a repo or pass owner/repo."
+    exit 1
+  fi
+fi
+
+REPO_FLAG=(-R "${TARGET_REPO}")
+
+echo -e "\n${BOLD}🏗️  setup-repo${NC}"
+echo -e "   Target:    ${BOLD}${TARGET_REPO}${NC}"
+echo -e "   Reference: ${REFERENCE_REPO}"
+[[ "${DRY_RUN}" == true ]] && echo -e "   Mode:      ${YELLOW}DRY RUN${NC}"
+echo ""
+
+# --- Preflight checks --------------------------------------------------------
+
+header "Preflight Checks"
+
+if ! command -v gh &>/dev/null; then
+  error "gh CLI not found. Install: https://cli.github.com"
+  exit 1
+fi
+success "gh CLI found"
+
+if ! command -v jq &>/dev/null; then
+  error "jq not found. Install: https://jqlang.github.io/jq/"
+  exit 1
+fi
+success "jq found"
+
+if ! gh auth status &>/dev/null; then
+  error "gh not authenticated. Run: gh auth login"
+  exit 1
+fi
+success "gh authenticated"
+
+# Verify target repo exists
+if ! gh repo view "${TARGET_REPO}" --json name &>/dev/null; then
+  error "Repository ${TARGET_REPO} not found or not accessible."
+  exit 1
+fi
+success "Repository ${TARGET_REPO} accessible"
+
+# --- Step 1: Fetch reference labels ------------------------------------------
+
+header "Step 1: Fetch Reference Labels"
+
+info "Reading labels from ${REFERENCE_REPO}..."
+REF_LABELS_JSON=$(gh label list -R "${REFERENCE_REPO}" --json name,description,color --limit 100)
+
+# Build a lookup of reference label colors/descriptions
+declare -A REF_COLORS REF_DESCRIPTIONS
+while IFS= read -r line; do
+  name=$(echo "${line}" | jq -r '.name')
+  color=$(echo "${line}" | jq -r '.color')
+  desc=$(echo "${line}" | jq -r '.description')
+  REF_COLORS["${name}"]="${color}"
+  REF_DESCRIPTIONS["${name}"]="${desc}"
+done < <(echo "${REF_LABELS_JSON}" | jq -c '.[]')
+
+success "Loaded ${#REF_COLORS[@]} labels from reference repo"
+
+# Verify all taxonomy labels exist in reference
+missing=()
+for label in "${TAXONOMY_LABELS[@]}"; do
+  if [[ -z "${REF_COLORS[${label}]+x}" ]]; then
+    missing+=("${label}")
+  fi
+done
+
+if [[ ${#missing[@]} -gt 0 ]]; then
+  warn "Labels not found in reference repo: ${missing[*]}"
+  warn "These will be skipped. Add them to ${REFERENCE_REPO} first."
+fi
+
+# --- Step 2: Read current labels on target -----------------------------------
+
+header "Step 2: Audit Current Labels"
+
+CURRENT_LABELS_JSON=$(gh label list "${REPO_FLAG[@]}" --json name --limit 100)
+declare -A CURRENT_LABELS
+while IFS= read -r name; do
+  CURRENT_LABELS["${name}"]=1
+done < <(echo "${CURRENT_LABELS_JSON}" | jq -r '.[].name')
+
+info "Current labels on ${TARGET_REPO}: ${!CURRENT_LABELS[*]}"
+
+# --- Step 3: Remove unwanted default labels ----------------------------------
+
+header "Step 3: Remove Unwanted Default Labels"
+
+removed=0
+for label in "${LABELS_TO_REMOVE[@]}"; do
+  if [[ -n "${CURRENT_LABELS[${label}]+x}" ]]; then
+    info "Removing: ${label}"
+    if run_cmd gh label delete "${label}" "${REPO_FLAG[@]}" --yes 2>/dev/null; then
+      ((removed++))
+    fi
+  fi
+done
+
+if [[ ${removed} -eq 0 ]]; then
+  success "No unwanted labels found — already clean"
+else
+  success "Removed ${removed} label(s)"
+fi
+
+# --- Step 4: Create/update taxonomy labels -----------------------------------
+
+header "Step 4: Create Taxonomy Labels"
+
+created=0
+updated=0
+skipped=0
+
+for label in "${TAXONOMY_LABELS[@]}"; do
+  # Skip if not in reference repo
+  if [[ -z "${REF_COLORS[${label}]+x}" ]]; then
+    warn "Skipping ${label} (not in reference repo)"
+    ((skipped++))
+    continue
+  fi
+
+  color="${REF_COLORS[${label}]}"
+  desc="${REF_DESCRIPTIONS[${label}]}"
+
+  if [[ -n "${CURRENT_LABELS[${label}]+x}" ]]; then
+    # Label exists — update color/description to match reference
+    info "Updating: ${label} → #${color}"
+    run_cmd gh label edit "${label}" "${REPO_FLAG[@]}" --color "${color}" --description "${desc}" 2>/dev/null || true
+    ((updated++))
+  else
+    # Label doesn't exist — create it
+    info "Creating: ${label} (#${color}) — ${desc}"
+    run_cmd gh label create "${label}" "${REPO_FLAG[@]}" --color "${color}" --description "${desc}" 2>/dev/null || true
+    ((created++))
+  fi
+done
+
+success "Created: ${created}, Updated: ${updated}, Skipped: ${skipped}"
+
+# --- Step 5: Create GitHub Project -------------------------------------------
+
+header "Step 5: Create GitHub Project"
+
+# Get the repo owner to create the project under the right scope
+OWNER=$(echo "${TARGET_REPO}" | cut -d'/' -f1)
+REPO_NAME=$(echo "${TARGET_REPO}" | cut -d'/' -f2)
+
+# Check for existing projects
+EXISTING_PROJECTS=$(gh project list --owner "${OWNER}" --format json 2>/dev/null | jq -r '.projects[].title' 2>/dev/null || echo "")
+
+PROJECT_TITLE="${REPO_NAME^} Development"
+
+if echo "${EXISTING_PROJECTS}" | grep -qF "${PROJECT_TITLE}"; then
+  warn "Project '${PROJECT_TITLE}' already exists. Skipping creation."
+  info "If you want to recreate it, delete the existing project first."
+  PROJECT_NUMBER=$(gh project list --owner "${OWNER}" --format json 2>/dev/null |
+    jq -r ".projects[] | select(.title == \"${PROJECT_TITLE}\") | .number" 2>/dev/null || echo "")
+else
+  if [[ "${DRY_RUN}" == true ]]; then
+    echo -e "  ${YELLOW}[dry-run]${NC} Would create project: ${PROJECT_TITLE}"
+    PROJECT_NUMBER="DRY_RUN"
+  else
+    info "Creating project: ${PROJECT_TITLE}"
+    PROJECT_NUMBER=$(gh project create --owner "${OWNER}" --title "${PROJECT_TITLE}" --format json 2>/dev/null |
+      jq -r '.number' 2>/dev/null || echo "")
+
+    if [[ -n "${PROJECT_NUMBER}" && "${PROJECT_NUMBER}" != "null" ]]; then
+      success "Created project #${PROJECT_NUMBER}: ${PROJECT_TITLE}"
+    else
+      warn "Could not create project automatically."
+      warn "Create it manually: GitHub → ${TARGET_REPO} → Projects → New project"
+      PROJECT_NUMBER=""
+    fi
+  fi
+fi
+
+# Validate PROJECT_NUMBER is numeric (guard against unexpected gh output)
+if [[ -n "${PROJECT_NUMBER}" && "${PROJECT_NUMBER}" != "DRY_RUN" && ! "${PROJECT_NUMBER}" =~ ^[0-9]+$ ]]; then
+  warn "Invalid project number: ${PROJECT_NUMBER}. Skipping project setup."
+  PROJECT_NUMBER=""
+fi
+
+# --- Step 6: Add Priority field to project -----------------------------------
+
+header "Step 6: Add Priority Field"
+
+if [[ -n "${PROJECT_NUMBER}" && "${PROJECT_NUMBER}" != "DRY_RUN" ]]; then
+  # Check if Priority field already exists
+  EXISTING_FIELDS=$(gh project field-list "${PROJECT_NUMBER}" --owner "${OWNER}" --format json 2>/dev/null |
+    jq -r '.fields[].name' 2>/dev/null || echo "")
+
+  if echo "${EXISTING_FIELDS}" | grep -qF "Priority"; then
+    warn "Priority field already exists. Skipping."
+  else
+    info "Creating Priority field with options: ${PRIORITY_OPTIONS[*]}"
+    if [[ "${DRY_RUN}" == true ]]; then
+      echo -e "  ${YELLOW}[dry-run]${NC} Would create single-select field: Priority"
+    else
+      # Build the comma-separated options string
+      OPTIONS_STR=$(
+        IFS=,
+        echo "${PRIORITY_OPTIONS[*]}"
+      )
+      if gh project field-create "${PROJECT_NUMBER}" \
+        --owner "${OWNER}" \
+        --name "Priority" \
+        --data-type "SINGLE_SELECT" \
+        --single-select-options "${OPTIONS_STR}" 2>/dev/null; then
+        success "Created Priority field"
+      else
+        warn "Could not create Priority field. Add it manually in project settings."
+      fi
+    fi
+  fi
+else
+  if [[ "${DRY_RUN}" == true ]]; then
+    echo -e "  ${YELLOW}[dry-run]${NC} Would create Priority field on project"
+  else
+    info "No project number available. Skipping Priority field setup."
+  fi
+fi
+
+# --- Step 7: Link project to repository --------------------------------------
+
+header "Step 7: Link Project to Repository"
+
+if [[ -n "${PROJECT_NUMBER}" && "${PROJECT_NUMBER}" != "DRY_RUN" ]]; then
+  info "Linking project #${PROJECT_NUMBER} to ${TARGET_REPO}..."
+  if [[ "${DRY_RUN}" == true ]]; then
+    echo -e "  ${YELLOW}[dry-run]${NC} Would link project to repository"
+  else
+    # Get the project ID for the GraphQL mutation
+    PROJECT_ID=$(gh project list --owner "${OWNER}" --format json 2>/dev/null |
+      jq -r ".projects[] | select(.number == ${PROJECT_NUMBER}) | .id" 2>/dev/null || echo "")
+    REPO_ID=$(gh repo view "${TARGET_REPO}" --json id -q '.id' 2>/dev/null || echo "")
+
+    if [[ -n "${PROJECT_ID}" && -n "${REPO_ID}" ]]; then
+      # shellcheck disable=SC2016
+      if gh api graphql -f query='
+        mutation($projectId: ID!, $repoId: ID!) {
+          linkProjectV2ToRepository(input: {projectId: $projectId, repositoryId: $repoId}) {
+            repository { nameWithOwner }
+          }
+        }
+      ' -f projectId="${PROJECT_ID}" -f repoId="${REPO_ID}" &>/dev/null; then
+        success "Linked project to repository"
+      else
+        warn "Could not link automatically. Link manually in project settings."
+      fi
+    else
+      warn "Could not resolve IDs for linking. Link manually in project settings."
+    fi
+  fi
+else
+  info "Skipping — no project to link."
+fi
+
+# --- Summary -----------------------------------------------------------------
+
+header "Summary"
+
+echo -e "\n${GREEN}${BOLD}Labels${NC}"
+echo "  Your taxonomy labels are set up on ${TARGET_REPO}."
+echo "  Dependabot auto-labels (dependencies, github_actions) will be"
+echo "  created automatically when Dependabot opens its first PR."
+
+if [[ -n "${PROJECT_NUMBER}" && "${PROJECT_NUMBER}" != "DRY_RUN" ]]; then
+  echo -e "\n${GREEN}${BOLD}Project Board${NC}"
+  echo "  Project: ${PROJECT_TITLE} (#${PROJECT_NUMBER})"
+  echo "  Priority field: 🔴 Critical / 🟡 Normal / 🟢 Low"
+fi
+
+echo -e "\n${YELLOW}${BOLD}Manual Steps Remaining${NC}"
+echo ""
+echo "  1. ${BOLD}Rename Status columns${NC} (in project → Settings → Status field):"
+echo "     Rename the defaults to match:"
+for col in "${STATUS_COLUMNS[@]}"; do
+  echo "       • ${col}"
+done
+echo ""
+echo "  2. ${BOLD}Enable auto-workflows${NC} (in project → ⋯ menu → Workflows):"
+echo "       • Item added to project  → Set status to Backlog"
+echo "       • Pull request merged    → Set status to Done"
+echo "       • Item closed            → Set status to Done"
+echo "       • Item reopened          → Set status to In Progress"
+echo ""
+echo "  3. ${BOLD}Copy CLAUDE.md and slash commands${NC} to the new repo"
+echo "     (These live in your dotfiles and are already portable.)"
+echo ""
+
+success "Done! 🚀"
