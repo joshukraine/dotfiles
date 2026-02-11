@@ -208,7 +208,7 @@ for label in "${LABELS_TO_REMOVE[@]}"; do
   if [[ -n "${CURRENT_LABELS[${label}]+x}" ]]; then
     info "Removing: ${label}"
     if run_cmd gh label delete "${label}" "${REPO_FLAG[@]}" --yes 2>/dev/null; then
-      ((removed++))
+      ((removed += 1))
     fi
   fi
 done
@@ -231,7 +231,7 @@ for label in "${TAXONOMY_LABELS[@]}"; do
   # Skip if not in reference repo
   if [[ -z "${REF_COLORS[${label}]+x}" ]]; then
     warn "Skipping ${label} (not in reference repo)"
-    ((skipped++))
+    ((skipped += 1))
     continue
   fi
 
@@ -242,12 +242,12 @@ for label in "${TAXONOMY_LABELS[@]}"; do
     # Label exists — update color/description to match reference
     info "Updating: ${label} → #${color}"
     run_cmd gh label edit "${label}" "${REPO_FLAG[@]}" --color "${color}" --description "${desc}" 2>/dev/null || true
-    ((updated++))
+    ((updated += 1))
   else
     # Label doesn't exist — create it
     info "Creating: ${label} (#${color}) — ${desc}"
     run_cmd gh label create "${label}" "${REPO_FLAG[@]}" --color "${color}" --description "${desc}" 2>/dev/null || true
-    ((created++))
+    ((created += 1))
   fi
 done
 
@@ -388,19 +388,19 @@ fi
 
 echo -e "\n${YELLOW}${BOLD}Manual Steps Remaining${NC}"
 echo ""
-echo "  1. ${BOLD}Rename Status columns${NC} (in project → Settings → Status field):"
+echo -e "  1. ${BOLD}Rename Status columns${NC} (in project → Settings → Status field):"
 echo "     Rename the defaults to match:"
 for col in "${STATUS_COLUMNS[@]}"; do
   echo "       • ${col}"
 done
 echo ""
-echo "  2. ${BOLD}Enable auto-workflows${NC} (in project → ⋯ menu → Workflows):"
+echo -e "  2. ${BOLD}Enable auto-workflows${NC} (in project → ⋯ menu → Workflows):"
 echo "       • Item added to project  → Set status to Backlog"
 echo "       • Pull request merged    → Set status to Done"
 echo "       • Item closed            → Set status to Done"
 echo "       • Item reopened          → Set status to In Progress"
 echo ""
-echo "  3. ${BOLD}Copy CLAUDE.md and slash commands${NC} to the new repo"
+echo -e "  3. ${BOLD}Copy CLAUDE.md and slash commands${NC} to the new repo"
 echo "     (These live in your dotfiles and are already portable.)"
 echo ""
 
