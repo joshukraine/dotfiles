@@ -50,5 +50,5 @@ self-contained superset that includes the base plus all framework tooling.
 It's designed to be copied directly rather than merged.
 
 **Deny rules stack.** Both base and overlay deny rules are preserved during
-merge. The base blocks `rm -rf`, force push, and hard reset. The Rails
-overlay adds `db:drop` and `db:reset` protection.
+merge. The base blocks `rm -rf`, force push, hard reset, and `git clean`.
+The Rails overlay adds `db:drop` and `db:reset` protection.
