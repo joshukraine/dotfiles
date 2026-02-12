@@ -1,6 +1,16 @@
 # Claude Code preset management
 # Sourced from .zshrc
 
+# Back up target file if it exists and differs from the new source.
+# Prevents silent data loss when a preset overwrites customized permissions.
+function _cc-backup-if-changed() {
+  local target="$1" source="$2"
+  if [[ -f "${target}" ]] && ! diff -q "${target}" "${source}" &>/dev/null; then
+    cp "${target}" "${target}.bak"
+    echo "Backed up existing ${target} → ${target}.bak"
+  fi
+}
+
 # Apply merged presets to the current project
 # Usage: cc-apply default-permissions.json rails-overlay.json
 function cc-apply() {
@@ -23,6 +33,7 @@ function cc-apply() {
       echo "Preset not found: $1" >&2
       return 1
     fi
+    _cc-backup-if-changed .claude/settings.json "${resolved}"
     cp "${resolved}" .claude/settings.json
   else
     # Multiple presets: merge via temp file to avoid truncation on failure
@@ -33,6 +44,7 @@ function cc-apply() {
     }
 
     if merge-presets "$@" > "${tmpfile}"; then
+      _cc-backup-if-changed .claude/settings.json "${tmpfile}"
       mv "${tmpfile}" .claude/settings.json
     else
       echo "Error: failed to merge presets; permissions not updated" >&2
@@ -59,12 +71,14 @@ function cc-dotfiles() {
 
 function cc-sprint() {
   mkdir -p .claude
+  _cc-backup-if-changed .claude/settings.json ~/.claude/presets/sprint-permissions.json
   cp ~/.claude/presets/sprint-permissions.json .claude/settings.json
   echo "Sprint permissions applied"
 }
 
 function cc-default() {
   mkdir -p .claude
+  _cc-backup-if-changed .claude/settings.json ~/.claude/presets/default-permissions.json
   cp ~/.claude/presets/default-permissions.json .claude/settings.json
   echo "Default permissions applied"
 }
