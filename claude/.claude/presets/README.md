@@ -26,6 +26,10 @@ cc-clean      # remove .claude/settings.json
 cc-perms      # show active permission counts
 ```
 
+**Note:** `.claude/settings.local.json` may also exist for ad-hoc permission
+grants (e.g., from "always allow" prompts in Claude Code). It is not created or
+removed by these commands and takes precedence over `.claude/settings.json`.
+
 ### Custom combinations
 
 ```bash
