@@ -7,15 +7,14 @@
 #
 # Usage:
 #   merge-presets <base.json> <overlay.json> [overlay2.json ...]
-#   merge-presets base.json rails.json > .claude/settings.local.json
+#   merge-presets base.json rails.json > .claude/settings.json
 #
 # Requirements:
 #   jq (install via: brew install jq)
 #
 # The output is written to stdout so it can be redirected to any file.
-# Typical targets:
-#   .claude/settings.json       — committed project config
-#   .claude/settings.local.json — gitignored local config
+# Typical target:
+#   .claude/settings.json — version-controlled project permissions
 
 set -euo pipefail
 
@@ -37,7 +36,7 @@ Examples:
   merge-presets /path/to/base.json /path/to/overlay.json
 
 Output is written to stdout. Redirect to save:
-  merge-presets default-permissions.json rails-overlay.json > .claude/settings.local.json
+  merge-presets default-permissions.json rails-overlay.json > .claude/settings.json
 EOF
   exit 1
 }
