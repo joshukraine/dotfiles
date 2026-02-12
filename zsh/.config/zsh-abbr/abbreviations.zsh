@@ -84,6 +84,18 @@ abbr "mdlf"="markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "**/*.md
 abbr "mdlc"="markdownlint-cli2 --config ~/.markdownlint-cli2.yaml "*.md""
 abbr "mdlcf"="markdownlint-cli2 --config ~/.markdownlint-cli2.yaml --fix "*.md""
 
+# hugo
+abbr "hu"="hugo"
+abbr "hus"="hugo server"
+abbr "husd"="hugo server -D"
+abbr "hud"="hugo -D"
+abbr "hunc"="hugo new content"
+abbr "huns"="hugo new site"
+abbr "huv"="hugo version"
+abbr "hum"="hugo mod"
+abbr "humt"="hugo mod tidy"
+abbr "humg"="hugo mod get -u"
+
 # local servers
 abbr "hts"="http-server"
 abbr "lvs"="live-server"
