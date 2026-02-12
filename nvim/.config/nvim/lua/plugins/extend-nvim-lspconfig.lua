@@ -30,6 +30,10 @@ return {
         cmd = { vim.fn.expand("~/.asdf/shims/standardrb"), "--lsp" },
         filetypes = { "ruby", "rakefile" },
       },
+      -- https://herb-tools.dev/projects/language-server
+      herb_ls = {
+        cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/herb-language-server"), "--stdio" },
+      },
     },
   },
 }
