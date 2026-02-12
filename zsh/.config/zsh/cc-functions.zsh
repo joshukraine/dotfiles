@@ -65,6 +65,10 @@ function cc-hugo() {
   cc-apply default-permissions.json hugo-overlay.json
 }
 
+function cc-js() {
+  cc-apply default-permissions.json js-overlay.json
+}
+
 function cc-dotfiles() {
   cc-apply default-permissions.json dotfiles-overlay.json
 }

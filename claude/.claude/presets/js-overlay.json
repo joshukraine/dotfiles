@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(yarn:*)",
+      "Bash(pnpm:*)",
+
+      "Bash(tsc:*)",
+      "Bash(eslint:*)",
+      "Bash(prettier:*)",
+
+      "WebFetch(domain:developer.mozilla.org)",
+      "WebFetch(domain:nodejs.org)",
+      "WebFetch(domain:nuxt.com)",
+      "WebFetch(domain:tailwindcss.com)",
+      "WebFetch(domain:typescriptlang.org)",
+      "WebFetch(domain:vitejs.dev)",
+      "WebFetch(domain:vuejs.org)"
+    ],
+    "deny": []
+  }
+}
