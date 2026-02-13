@@ -1,0 +1,12 @@
+{
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "starship-claude@starship-claude": true
+  },
+  "statusLine": {
+    "type": "command",
+    "padding": 0,
+    "command": "~/.local/bin/starship-claude"
+  }
+}
