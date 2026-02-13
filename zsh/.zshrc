@@ -6,7 +6,7 @@ else
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-export PATH="/opt/homebrew/opt/postgresql@17/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="/opt/homebrew/opt/trash/bin:/opt/homebrew/opt/postgresql@17/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # Shared environment variables
 source "$HOME/dotfiles/shared/environment.sh"
