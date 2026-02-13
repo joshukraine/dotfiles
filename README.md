@@ -283,7 +283,7 @@ See `zsh/.config/zsh-abbr/abbreviations.zsh` for the full set (`clsp`, `clh`, `c
 
 - **`CLAUDE.md`** — Global development philosophy and coding standards applied across all projects
 - **`cheatsheet.md`** — Quick reference for keyboard shortcuts, commands, and context management tips
-- **`starship.toml`** — Custom [Starship][starship] prompt showing model, context window status, and token cost
+- **`starship.toml`** — Custom [Starship prompt][starship-claude] showing model, context window status, and token cost
 - **`.mcp.json`** — [Context7][context7] MCP server for querying up-to-date library documentation
 
 ## About Neovim Distributions
@@ -496,6 +496,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
 [pr-135]: https://github.com/joshukraine/dotfiles/pull/135
 [presets-readme]: claude/.claude/presets/README.md
+[starship-claude]: https://github.com/martinemde/starship-claude
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
