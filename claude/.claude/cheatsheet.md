@@ -1,6 +1,6 @@
 # Claude Code Cheatsheet
 
-*Last updated: 2026-02-13*
+*Last updated: 2026-02-13* <!-- Update this date when editing this file -->
 
 Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
