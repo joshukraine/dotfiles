@@ -6,6 +6,14 @@
   },
   "enableAllProjectMcpServers": false,
   "alwaysThinkingEnabled": true,
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker"],
+    "network": {
+      "allowLocalBinding": true
+    }
+  },
   "cleanupPeriodDays": 365,
   "permissions": {
     "deny": [
