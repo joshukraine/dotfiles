@@ -42,6 +42,9 @@ rejected alternatives, and anything you'd want a future maintainer to know.
 
 ## Git Workflow
 
+- **Commands**: Prefer running git commands directly (e.g., `git status`,
+  `git log`) without `git -C <path>` when the working directory is the target
+  repository, as `-C` bypasses permission rules
 - **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/)
   format
 - **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
