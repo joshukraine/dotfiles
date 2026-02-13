@@ -8,6 +8,7 @@
 - [Starship][starship] prompt
 - [Zsh][zsh] shell with [zsh-abbr][zsh-abbr] for abbreviations
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
+- [Claude Code][claude-code] with custom commands, permission presets, and safety hooks
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot's [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
@@ -218,6 +219,73 @@ The configuration includes intelligent git functions that automatically detect y
 
 These functions work with both `main` and `master` branch names automatically.
 
+## Claude Code
+
+[Claude Code][claude-code] is Anthropic's CLI tool for AI-assisted development. This repo includes a full configuration under the `claude/` directory, stowed to `~/.claude/`.
+
+> [!TIP]
+> Claude Code can also run inside Neovim via the [claude-code.nvim][claude-code-nvim] plugin, which is how I use it most of the time during development.
+
+### Custom Commands
+
+Slash commands provide structured workflows for the full development lifecycle:
+
+| Command | Purpose |
+| ------- | ------- |
+| `/plan-phase` | Draft implementation plan and create GitHub issues (no code written) |
+| `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
+| `/sprint-issue` | Streamlined variant for small, well-scoped issues |
+| `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
+| `/commit` | Analyze diffs, split into logical commits, Conventional Commits format |
+| `/create-pr` | Create a PR with auto-linked issues and formatted description |
+| `/review-pr` | Read-only PR review with severity-ranked findings |
+| `/checkpoint` | Quick status update — what's done, in progress, and blocked |
+| `/debrief` | Comprehensive walkthrough of recent work with architecture rationale |
+| `/update-deps` | Safe dependency updates with testing between each category |
+
+### Permission Presets
+
+Composable permission presets control what Claude Code is allowed to do in each project. A base preset covers universal operations (git, file editing, Unix tools), and framework overlays add project-specific tooling.
+
+```bash
+cc-rails      # base + Rails overlay
+cc-hugo       # base + Hugo overlay
+cc-js         # base + JavaScript/Node overlay
+cc-dotfiles   # base + dotfiles overlay
+cc-sprint     # all-inclusive sprint preset
+cc-default    # base only
+cc-clean      # remove project settings
+cc-perms      # show active permission counts
+```
+
+Presets live in `claude/.claude/presets/` with a [README][presets-readme] explaining the design.
+
+### Safety
+
+- **Hooks** block `rm -rf` patterns and log all Bash commands
+- **Deny rules** prevent force push, hard reset, `sudo`, and credential reads
+- **Sandbox mode** enabled by default with filesystem and network restrictions
+
+### Shell Abbreviations
+
+Zsh abbreviations for quick access (via [zsh-abbr][zsh-abbr]):
+
+| Abbreviation | Expands to |
+| ------------ | ---------- |
+| `cl` | `claude` |
+| `clr` | `claude --resume` |
+| `clc` | `claude --continue` |
+| `clup` | `claude update` |
+
+See `zsh/.config/zsh-abbr/abbreviations.zsh` for the full set (`clsp`, `clh`, `clv`, `clp`, `clcp`, `clmcp`).
+
+### Other Configuration
+
+- **`CLAUDE.md`** — Global development philosophy and coding standards applied across all projects
+- **`cheatsheet.md`** — Quick reference for keyboard shortcuts, commands, and context management tips
+- **`starship.toml`** — Custom [Starship][starship] prompt showing model, context window status, and token cost
+- **`.mcp.json`** — [Context7][context7] MCP server for querying up-to-date library documentation
+
 ## About Neovim Distributions
 
 > [!TIP]
@@ -391,6 +459,9 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
 [1p-cli-start]: https://developer.1password.com/docs/cli/get-started
 [asdf]: https://asdf-vm.com/
+[claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
+[claude-code-nvim]: https://github.com/coder/claudecode.nvim
+[context7]: https://context7.com/
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [comic-code]: https://tosche.net/fonts/comic-code
@@ -424,6 +495,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
 [pr-135]: https://github.com/joshukraine/dotfiles/pull/135
+[presets-readme]: claude/.claude/presets/README.md
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
