@@ -31,6 +31,20 @@ rejected alternatives, and anything you'd want a future maintainer to know.
   suggest it
 - Always create GitHub issues before writing implementation code. Planning
   and issue creation come first; code comes after issues are approved.
+- **No speculative features** — don't add features, flags, or configuration
+  unless actively needed
+- **No premature abstraction** — don't create utilities or helpers until you've
+  written the same code three times
+- **Clarity over cleverness** — prefer explicit, readable code over dense
+  one-liners
+- **Replace, don't deprecate** — when a new implementation replaces an old one,
+  remove the old one entirely. No backward-compatible shims or dual config
+  formats.
+- **Finish the job** — handle the edge cases you can see, clean up what you
+  touched, flag broken adjacent code. But don't invent new scope.
+- **Bias toward action** — decide and move for anything easily reversed; state
+  the assumption so the reasoning is visible. Ask before committing to
+  interfaces, data models, or destructive operations.
 
 ## Documentation Practices
 
@@ -52,14 +66,24 @@ rejected alternatives, and anything you'd want a future maintainer to know.
   changes
 - **Issue References**: Use "Closes #123" in PR descriptions only, never in
   individual commit messages
+- **Before committing**: Re-read your changes for unnecessary complexity,
+  redundant code, and unclear naming
 
 ## Code Quality
 
-- **Testing**: Follow AAA pattern (Arrange, Act, Assert)
-- **Linting**: Run the project's linter before commits and fix all issues
+- **Testing**: Follow AAA pattern (Arrange, Act, Assert). Test behavior, not
+  implementation — if a refactor breaks tests but not code, the tests were
+  wrong. Test edges and errors, not just the happy path. Mock boundaries (slow,
+  non-deterministic, or external services), not internal logic.
+- **Linting**: Run the project's linter before commits and fix all issues. Zero
+  warnings policy — fix every warning. If truly unfixable, add an inline ignore
+  with a justification comment.
 - **Error Handling**: Fail fast, provide context, use specific exceptions
 - **Dependencies**: Pin versions, use lock files
 - **Security**: Never commit secrets, API keys, or sensitive data
+- **Comments**: No commented-out code — delete it. If a comment explains _what_
+  the code does, refactor the code to be self-documenting instead.
+- **Code review order**: Architecture → code quality → tests → performance
 
 ## Markdown
 

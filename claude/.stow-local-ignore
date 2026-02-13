@@ -1,0 +1,2 @@
+# Do not symlink the cheatsheet to ~/.claude/
+cheatsheet\.md
