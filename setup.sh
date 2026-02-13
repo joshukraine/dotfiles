@@ -393,6 +393,7 @@ show_next_steps() {
   if command -v tmux &>/dev/null; then
     echo "-> Install Tmux plugins with <prefix> + I (https://github.com/tmux-plugins/tpm)"
   fi
+  echo "-> Set up Claude Code (https://docs.anthropic.com/en/docs/claude-code)"
   echo "-> Set up 1Password CLI (https://developer.1password.com/docs/cli)"
   echo "-> Check out documentation for LazyVim (https://www.lazyvim.org/)"
   echo
