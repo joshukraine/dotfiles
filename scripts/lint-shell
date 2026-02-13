@@ -22,6 +22,15 @@ if ! command -v shellcheck >/dev/null 2>&1; then
   exit 1
 fi
 
+# Paths excluded from linting (regex patterns for grep -vE)
+EXCLUDE_PATTERNS=(
+  '\.git/'
+  '/plugins/'
+  'node_modules/'
+  'vendor/'
+  'bin/\.local/bin/starship-claude'
+)
+
 EXCLUDE_TESTS=false
 if [[ "${1:-}" == "--exclude-tests" ]]; then
   EXCLUDE_TESTS=true
@@ -42,7 +51,7 @@ find_shell_scripts() {
         echo "${file}"
       fi
     done || true
-  } | grep -vE "(\.git/|/plugins/|node_modules/|vendor/)" || true
+  } | grep -vE "$(IFS='|'; echo "${EXCLUDE_PATTERNS[*]}")" || true
 }
 
 get_shell_type() {
