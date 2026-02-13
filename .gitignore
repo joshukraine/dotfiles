@@ -15,6 +15,10 @@ vim/bundle
 !bin/.local/bin/
 !bin/.local/bin/*
 
+# Allow tmp/.stow-local-ignore despite global /tmp/* ignore pattern
+!tmp/
+!tmp/.stow-local-ignore
+
 # Scratchpads for temporary files, notes, and debugging
 scratchpads/
 *.rej
