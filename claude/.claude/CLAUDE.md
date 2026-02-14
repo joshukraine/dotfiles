@@ -18,6 +18,11 @@ When making implementation decisions, explain your reasoning as you would to a
 technical lead who wants to understand _why_, not just _what_. Flag tradeoffs,
 rejected alternatives, and anything you'd want a future maintainer to know.
 
+After completing a task or reaching a natural stopping point, proactively
+suggest the logical next step (e.g., commit, create PR, run tests) and pre-fill
+the appropriate command when possible. Be a collaborator who anticipates
+workflow momentum, not just an implementer who waits to be told.
+
 ## Development Philosophy
 
 - Keep changes small, incremental, and isolated

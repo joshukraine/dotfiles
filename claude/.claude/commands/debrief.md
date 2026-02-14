@@ -15,10 +15,9 @@ this must appear at the top of every debrief file.
 
 Present a debrief covering the sections below. Be conversational and opinionated — explain not just *what* you built, but *why* you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
 
-**Save the full debrief to a markdown file in `tmp/` at the project root** so the
-executive can open it in their editor for easy navigation, scrolling, and
-copying. After saving, also create a brief summary in `docs/debriefs/` as
-described in Section 5.
+**Save both files under `docs/debriefs/`** so the executive can open them in
+their editor for easy navigation, scrolling, and copying. The full debrief and
+summary go in separate subdirectories as described in Section 5.
 
 ---
 
@@ -81,21 +80,18 @@ Include at least one story per user role that's relevant to the new work. If the
 
 ### 5. Save Debrief Files
 
-Save two files:
+Save two files with identical filenames in separate subdirectories:
 
-**Full working debrief** — the complete document covering Sections 1-4:
+**Full debrief** — the complete document covering Sections 1-4:
 
 ```text
-tmp/debrief-YYYY-MM-DD-[brief-topic].md
+docs/debriefs/full/YYYY-MM-DD-[brief-topic].md
 ```
 
-This is the executive's working copy. It will not be committed to version
-control and can be discarded after the debrief session.
-
-**Committed summary** — a concise historical record:
+**Summary** — a concise historical record:
 
 ```text
-docs/debriefs/YYYY-MM-DD-[brief-topic].md
+docs/debriefs/summary/YYYY-MM-DD-[brief-topic].md
 ```
 
 The summary should contain:
@@ -109,12 +105,12 @@ The summary should contain:
 Both files use the same date and topic slug so their relationship is clear.
 
 After saving, tell the executive where the files are and suggest opening the
-working copy:
+full debrief:
 
 ```text
 Project:      MyApp
-Full debrief: tmp/debrief-2026-02-10-user-authentication.md
-Summary:      docs/debriefs/2026-02-10-user-authentication.md
+Full debrief: docs/debriefs/full/2026-02-10-user-authentication.md
+Summary:      docs/debriefs/summary/2026-02-10-user-authentication.md
 
 Open the full debrief in your editor to walk through the user stories.
 ```
