@@ -1,19 +1,4 @@
 {
-  "enabledPlugins": {
-    "lua-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "starship-claude@starship-claude": true
-  },
-  "enableAllProjectMcpServers": false,
-  "alwaysThinkingEnabled": true,
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true,
-    "excludedCommands": ["docker", "git"],
-    "network": {
-      "allowLocalBinding": true
-    }
-  },
   "cleanupPeriodDays": 365,
   "permissions": {
     "deny": [
@@ -27,11 +12,9 @@
       "Bash(git push --force*)",
       "Bash(git push *--force*)",
       "Bash(git reset --hard*)",
-
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
-
       "Read(~/.ssh/**)",
       "Read(~/.gnupg/**)",
       "Read(~/.aws/**)",
@@ -41,6 +24,7 @@
       "Read(~/Library/Keychains/**)"
     ]
   },
+  "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
       {
@@ -78,7 +62,24 @@
   },
   "statusLine": {
     "type": "command",
-    "padding": 0,
-    "command": "~/.local/bin/starship-claude"
-  }
+    "command": "~/.local/bin/starship-claude",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "starship-claude@starship-claude": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "network": {
+      "allowLocalBinding": true
+    },
+    "excludedCommands": [
+      "docker",
+      "git"
+    ]
+  },
+  "alwaysThinkingEnabled": true
 }
