@@ -8,7 +8,7 @@ return {
     -- Terminal display configuration
     terminal = {
       split_side = "right",
-      split_width_percentage = 0.30,
+      split_width_percentage = 0.35,
       auto_close = false,
     },
 
