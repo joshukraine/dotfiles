@@ -28,34 +28,21 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
 ## Context Management
 
-- **One task per session.** Each feature, bug fix, or investigation should fit
-  within a single context window. If a task is too large, break it into pieces.
-- **Prefer `/clear` over `/compact`.** `/clear` is lossless — your CLAUDE.md
-  reloads and git state is fresh. `/compact` is lossy compression. Default to
-  `/clear` between tasks.
-- **Two compactions = task was too large.** If you've compacted twice in a
-  session, the task needs to be split.
-- **Cut losses after two corrections.** If you've corrected Claude twice on the
-  same issue, use `Esc Esc` to rewind to before the first wrong attempt, or
-  `/clear` and start fresh with a better prompt.
-- **Watch the statusline.** Green = plenty of context. Yellow = start wrapping
-  up. Red = finish and start a new session.
+- **One task per session.** Each feature, bug fix, or investigation should fit within a single context window. If a task is too large, break it into pieces.
+- **Prefer `/clear` over `/compact`.** `/clear` is lossless — your CLAUDE.md reloads and git state is fresh. `/compact` is lossy compression. Default to `/clear` between tasks.
+- **Two compactions = task was too large.** If you've compacted twice in a session, the task needs to be split.
+- **Cut losses after two corrections.** If you've corrected Claude twice on the same issue, use `Esc Esc` to rewind to before the first wrong attempt, or `/clear` and start fresh with a better prompt.
+- **Watch the statusline.** Green = plenty of context. Yellow = start wrapping up. Red = finish and start a new session.
 
 ## Session Handoff
 
-- Commit your work, write a brief plan to a file, `/clear`, and point Claude at
-  the plan file in the next session.
-- `claude --continue` picks up the last session; `claude --resume` lets you
-  choose from recent sessions. But a fresh session with a written handoff is
-  usually cleaner.
+- Commit your work, write a brief plan to a file, `/clear`, and point Claude at the plan file in the next session.
+- `claude --continue` picks up the last session; `claude --resume` lets you choose from recent sessions. But a fresh session with a written handoff is usually cleaner.
 
 ## Subagents
 
-- Subagents get their own context window — the main session only sees their
-  summary. Use them deliberately for context-heavy research, documentation
-  reading, or exploration that would bloat your main session.
+- Subagents get their own context window — the main session only sees their summary. Use them deliberately for context-heavy research, documentation reading, or exploration that would bloat your main session.
 
 ## Weekly Habit
 
-Run `/insights` once a week. When it surfaces a pattern, act on it: add a rule
-to CLAUDE.md, write a hook, or extract a repeated workflow into a command.
+Run `/insights` once a week. When it surfaces a pattern, act on it: add a rule to CLAUDE.md, write a hook, or extract a repeated workflow into a command.

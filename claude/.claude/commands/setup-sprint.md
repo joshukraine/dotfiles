@@ -1,17 +1,13 @@
 # Setup Sprint Command
 
-Prepare parallel Git worktrees for a batch of issues filtered by label.
-This command sets up the workspace but does not start Claude Code instances
-or begin implementation.
+Prepare parallel Git worktrees for a batch of issues filtered by label. This command sets up the workspace but does not start Claude Code instances or begin implementation.
 
 ## Your task
 
 ### Step 1: Verify starting point
 
-- Confirm the current branch is `main` (or the repository's default branch).
-  If not, ask the user before proceeding.
-- Run `git pull` to ensure `main` is up to date. Worktrees branch from the
-  current HEAD, so starting from stale history creates merge headaches later.
+- Confirm the current branch is `main` (or the repository's default branch). If not, ask the user before proceeding.
+- Run `git pull` to ensure `main` is up to date. Worktrees branch from the current HEAD, so starting from stale history creates merge headaches later.
 
 ### Step 2: Find issues
 
@@ -22,13 +18,10 @@ or begin implementation.
   ```
 
   This ensures the correct name even when running from a subdirectory.
-- Run `gh issue list --label $ARGUMENTS --state open --json number,title,labels`
-  to find all open issues with the specified label.
+- Run `gh issue list --label $ARGUMENTS --state open --json number,title,labels` to find all open issues with the specified label.
 - Present the list to the user.
 
-**CHECKPOINT**: Confirm which issues to include and in what order. The user
-may exclude issues (e.g., if two touch the same files and should be done
-sequentially) or adjust the batch.
+**CHECKPOINT**: Confirm which issues to include and in what order. The user may exclude issues (e.g., if two touch the same files and should be done sequentially) or adjust the batch.
 
 ### Step 3: Create worktrees
 
@@ -51,10 +44,8 @@ git worktree add -b <prefix>/gh-<number>-<short-description> ../<project-name>-i
 ### Step 4: Apply sprint permissions
 
 - Check if `~/.claude/presets/sprint-permissions.json` exists.
-- If it exists, for each worktree ensure `.claude/` exists (`mkdir -p .claude`)
-  and copy the file into `.claude/settings.local.json`.
-- If it does not exist, skip this step and note that sprint permissions were
-  not applied.
+- If it exists, for each worktree ensure `.claude/` exists (`mkdir -p .claude`) and copy the file into `.claude/settings.local.json`.
+- If it does not exist, skip this step and note that sprint permissions were not applied.
 
 ### Step 5: Report
 
@@ -78,13 +69,7 @@ Then in each Claude Code session:
 
 ## Important
 
-- This command creates worktrees and copies permission files only. It does
-  not start Claude Code instances, write application code, or begin
-  implementation.
-- The checkpoint in Step 2 is a hard stop. Do not create worktrees without
-  user confirmation.
-- If `bundle install` or similar dependency setup is needed in each worktree,
-  mention it in the report but do not run it.
-- The `$ARGUMENTS` value is typically a type label (e.g., `chore`, `fix`) but
-  can be any GitHub issue label. The command filters by whatever label is
-  provided.
+- This command creates worktrees and copies permission files only. It does not start Claude Code instances, write application code, or begin implementation.
+- The checkpoint in Step 2 is a hard stop. Do not create worktrees without user confirmation.
+- If `bundle install` or similar dependency setup is needed in each worktree, mention it in the report but do not run it.
+- The `$ARGUMENTS` value is typically a type label (e.g., `chore`, `fix`) but can be any GitHub issue label. The command filters by whatever label is provided.

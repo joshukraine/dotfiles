@@ -4,20 +4,13 @@ You are a senior developer presenting your recent work to a technically savvy ex
 
 ## Context
 
-Read `docs/prd/ROADMAP.md` and the project's `CLAUDE.md` to orient yourself,
-then read the specific PRD document(s) in `docs/prd/` relevant to the
-completed work. Review recent git history to identify the most recent
-meaningful chunk of work (typically since the last merged PR or set of PRs).
-Identify the project name (from the repo name, CLAUDE.md, or ROADMAP.md) —
-this must appear at the top of every debrief file.
+Read `docs/prd/ROADMAP.md` and the project's `CLAUDE.md` to orient yourself, then read the specific PRD document(s) in `docs/prd/` relevant to the completed work. Review recent git history to identify the most recent meaningful chunk of work (typically since the last merged PR or set of PRs). Identify the project name (from the repo name, CLAUDE.md, or ROADMAP.md) — this must appear at the top of every debrief file.
 
 ## Your Task
 
 Present a debrief covering the sections below. Be conversational and opinionated — explain not just _what_ you built, but _why_ you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
 
-**Save both files under `docs/debriefs/`** so the executive can open them in
-their editor for easy navigation, scrolling, and copying. The full debrief and
-summary go in separate subdirectories as described in Section 5.
+**Save both files under `docs/debriefs/`** so the executive can open them in their editor for easy navigation, scrolling, and copying. The full debrief and summary go in separate subdirectories as described in Section 5.
 
 ---
 
@@ -40,14 +33,7 @@ Be specific. Reference actual file paths and class names. Don't just say "I used
 
 #### POODR Spotlight
 
-When the work includes design decisions that connect to Sandi Metz's POODR
-principles, highlight 1–2 of the most interesting examples in a brief callout.
-Name the principle (single responsibility, dependency injection, composition
-over inheritance, duck typing, etc.), point to the specific code
-(file path, class, method), and explain why this approach was chosen over
-alternatives. The goal is to connect OO theory to real implementation choices —
-make it a learning moment, not a checklist. Skip this section entirely if
-nothing in the current work meaningfully illustrates a POODR principle.
+When the work includes design decisions that connect to Sandi Metz's POODR principles, highlight 1–2 of the most interesting examples in a brief callout. Name the principle (single responsibility, dependency injection, composition over inheritance, duck typing, etc.), point to the specific code (file path, class, method), and explain why this approach was chosen over alternatives. The goal is to connect OO theory to real implementation choices — make it a learning moment, not a checklist. Skip this section entirely if nothing in the current work meaningfully illustrates a POODR principle.
 
 ### 3. Test Coverage & Quality
 
@@ -115,8 +101,7 @@ The summary should contain:
 
 Both files use the same date and topic slug so their relationship is clear.
 
-After saving, tell the executive where the files are and suggest opening the
-full debrief:
+After saving, tell the executive where the files are and suggest opening the full debrief:
 
 ```text
 Project:      MyApp

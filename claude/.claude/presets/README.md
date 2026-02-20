@@ -28,9 +28,7 @@ cc-clean      # remove .claude/settings.json
 cc-perms      # show active permission counts
 ```
 
-**Note:** `.claude/settings.local.json` may also exist for ad-hoc permission
-grants (e.g., from "always allow" prompts in Claude Code). It is not created or
-removed by these commands and takes precedence over `.claude/settings.json`.
+**Note:** `.claude/settings.local.json` may also exist for ad-hoc permission grants (e.g., from "always allow" prompts in Claude Code). It is not created or removed by these commands and takes precedence over `.claude/settings.json`.
 
 ### Custom combinations
 
@@ -47,14 +45,8 @@ merge-presets default-permissions.json rails-overlay.json > .claude/settings.jso
 
 ## Design
 
-**Overlays are additive.** The base preset covers universally safe operations.
-Each overlay adds framework-specific tools and documentation domains. The
-`merge-presets` script combines and deduplicates them.
+**Overlays are additive.** The base preset covers universally safe operations. Each overlay adds framework-specific tools and documentation domains. The `merge-presets` script combines and deduplicates them.
 
-**Sprint is standalone.** Unlike the overlays, `sprint-permissions.json` is a
-self-contained superset that includes the base plus all framework tooling.
-It's designed to be copied directly rather than merged.
+**Sprint is standalone.** Unlike the overlays, `sprint-permissions.json` is a self-contained superset that includes the base plus all framework tooling. It's designed to be copied directly rather than merged.
 
-**Deny rules stack.** Both base and overlay deny rules are preserved during
-merge. The base blocks `rm -rf`, force push, hard reset, and `git clean`.
-The Rails overlay adds `db:drop` and `db:reset` protection.
+**Deny rules stack.** Both base and overlay deny rules are preserved during merge. The base blocks `rm -rf`, force push, hard reset, and `git clean`. The Rails overlay adds `db:drop` and `db:reset` protection.
