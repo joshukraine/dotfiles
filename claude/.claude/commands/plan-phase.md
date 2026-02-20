@@ -13,7 +13,7 @@ Work through the steps below in order. Each step has a hard stop — do not proc
 ### Step 1: Orient
 
 - Read `docs/prd/ROADMAP.md` to identify the current phase and what comes next
-- Read `docs/prd/00-overview.md` for project context
+- Read the PRD overview file (`docs/prd/*-overview.md`) for project context
 - Read the specific PRD document(s) relevant to the upcoming phase
 - Read the project's `CLAUDE.md`
 - Review recent git history and merged PRs to understand current state
