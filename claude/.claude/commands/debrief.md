@@ -13,7 +13,7 @@ this must appear at the top of every debrief file.
 
 ## Your Task
 
-Present a debrief covering the sections below. Be conversational and opinionated — explain not just *what* you built, but *why* you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
+Present a debrief covering the sections below. Be conversational and opinionated — explain not just _what_ you built, but _why_ you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
 
 **Save both files under `docs/debriefs/`** so the executive can open them in
 their editor for easy navigation, scrolling, and copying. The full debrief and
@@ -37,6 +37,17 @@ Walk through the key technical decisions as if explaining your reasoning to some
 - Anything you considered but rejected, and why.
 
 Be specific. Reference actual file paths and class names. Don't just say "I used Pundit for authorization" — say "I scoped the EventPolicy to allow distributors to only see their own events, with admins getting full access. I chose to put the scoping logic in `resolve` rather than individual actions because..."
+
+#### POODR Spotlight
+
+When the work includes design decisions that connect to Sandi Metz's POODR
+principles, highlight 1–2 of the most interesting examples in a brief callout.
+Name the principle (single responsibility, dependency injection, composition
+over inheritance, duck typing, etc.), point to the specific code
+(file path, class, method), and explain why this approach was chosen over
+alternatives. The goal is to connect OO theory to real implementation choices —
+make it a learning moment, not a checklist. Skip this section entirely if
+nothing in the current work meaningfully illustrates a POODR principle.
 
 ### 3. Test Coverage & Quality
 
@@ -74,7 +85,7 @@ Organize this as a series of **user stories to walk through**, not a feature lis
 > 1. Visit http://localhost:3000/...
 > 2. Log in as admin@example.com / password
 > 3. Click "Distributors" in the nav...
-> (etc.)
+>    (etc.)
 
 Include at least one story per user role that's relevant to the new work. If the app needs to be running, provide the exact startup command.
 
