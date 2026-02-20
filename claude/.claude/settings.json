@@ -76,6 +76,7 @@
     },
     "excludedCommands": [
       "docker",
+      "gh",
       "git"
     ]
   },
