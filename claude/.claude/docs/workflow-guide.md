@@ -75,58 +75,49 @@ Later files override earlier ones. Project-level settings override user-level se
 
 ### The Preset System
 
-Presets use a **base + overlay** architecture:
+Preset JSON files live in `~/.claude/presets/`. They use a **base + overlay** architecture:
 
 | Layer | Purpose | Example |
 | ------- | --------- | --------- |
-| **Base** | Permissions safe for all projects | Read files, run linters, run tests |
-| **Sprint overlay** | Additional permissions for active development | Git operations, database commands, dev server |
-| **Project overlay** | Project-specific tools and commands | Framework CLI, deployment scripts |
+| **Base** (`default-permissions.json`) | Permissions safe for all projects | Unix tools, git, gh, file editing |
+| **Project overlay** | Additive, framework-specific tools | `rails-overlay.json`, `hugo-overlay.json`, `js-overlay.json`, `dotfiles-overlay.json` |
+| **Sprint** (`sprint-permissions.json`) | Standalone superset for housekeeping sprints | Base + all framework tooling |
 
-The base layer is always active. Overlays are applied on top when needed.
+Overlays are merged on top of the base using `merge-presets`. Sprint is self-contained and copied directly.
 
 ### Applying Presets
 
-Use shell functions to switch between permission sets:
+Shell functions in `zsh/.config/zsh/cc-functions.zsh` manage presets. They write to `.claude/settings.json` in the current project directory and back up any existing file before overwriting.
 
 ```bash
-# In your shell profile (~/.zshrc or ~/.bashrc)
+# Quick-apply shortcuts
+cc-rails      # default + Rails overlay
+cc-hugo       # default + Hugo overlay
+cc-js         # default + JS/Node overlay
+cc-dotfiles   # default + dotfiles overlay
+cc-sprint     # full sprint preset (standalone superset)
+cc-default    # base permissions only
 
-# Apply sprint permissions for active development
-claude-sprint() {
-  cp ~/.claude/presets/sprint.json .claude/settings.local.json
-  echo "Sprint permissions applied."
-}
+# Custom combinations
+cc-apply default-permissions.json rails-overlay.json js-overlay.json
 
-# Reset to base permissions
-claude-base() {
-  rm -f .claude/settings.local.json
-  echo "Reset to base permissions."
-}
+# Cleanup and inspection
+cc-clean      # remove .claude/settings.json
+cc-perms      # show active permission counts
 ```
 
-### What the Presets Cover
+### Deny Rules
 
-**Base permissions** (always active):
+Deny rules stack across base and overlays. These are never permitted regardless of which preset is active:
 
-- File reading and searching
-- Running linters and formatters
-- Running tests
-- Git status and log (read-only git)
-
-**Sprint overlay** (active during development):
-
-- Git add, commit, branch, checkout, merge
-- Database migration and seed commands
-- Dev server start/stop
-- Package install commands
-
-**Deny rules** (never permitted, regardless of overlay):
-
-- `git push --force` to main/master
-- Production database commands
+- `rm -rf`, `git push --force`, `git reset --hard`, `git clean`
+- Production database commands (e.g., `db:drop`, `db:reset` in Rails overlay)
 - Credential or secret file access
 - Package publishing
+
+### Ad-Hoc Grants
+
+`.claude/settings.local.json` may also exist for ad-hoc permission grants (e.g., from "always allow" prompts in Claude Code). It is not created or removed by the `cc-*` commands and takes precedence over `.claude/settings.json`.
 
 ### Combining with Auto-Accept Mode
 
@@ -275,8 +266,11 @@ Slash commands detect whether they are running in a worktree and adjust behavior
 | ------ | ----------------- |
 | Create a sprint issue | `/sprint-issue` |
 | Bulk-create sprint issues | `/setup-sprint` |
-| Apply sprint permissions | `claude-sprint` |
-| Reset to base permissions | `claude-base` |
+| Apply sprint permissions | `cc-sprint` |
+| Apply project preset | `cc-rails`, `cc-hugo`, `cc-js`, `cc-dotfiles` |
+| Reset to base permissions | `cc-default` |
+| Remove preset permissions | `cc-clean` |
+| Show active permissions | `cc-perms` |
 | Create a worktree | `git worktree add ../worktrees/<name> -b <branch>` |
 | List worktrees | `git worktree list` |
 | Remove a worktree | `git worktree remove ../worktrees/<name>` |
