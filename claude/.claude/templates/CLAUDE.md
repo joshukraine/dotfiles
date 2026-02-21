@@ -2,15 +2,11 @@
 
 [One-paragraph project description: what it is, who it serves, key technology choices.]
 
-## Primary Directive
-
-Read `docs/[project]-implementation-briefing.md` before writing any code. It defines how to navigate the PRD, handle deviations, and avoid common implementation pitfalls.
-
 ## Quick-Start Commands
 
 ```bash
+<!-- TODO: replace with actual commands -->
 bin/dev                    # Start app
-bin/rails db:prepare       # Create/migrate database(s)
 bin/rails test             # Run tests
 bin/standardrb --fix       # Lint and auto-fix
 ```
@@ -18,29 +14,34 @@ bin/standardrb --fix       # Lint and auto-fix
 ## Key Files
 
 | File | Purpose |
-| ------ | --------- |
+| --- | --- |
 | `docs/prd/README.md` | PRD index — start here for any feature question |
 | `docs/prd/ROADMAP.md` | Task list with checkboxes, one PR per item |
 | `docs/prd/CHANGELOG.md` | PRD deviation log — update before merging any deviation |
-| `~/.claude/docs/workflow-guide.md` | GitHub Projects, permission presets, worktrees, sprints |
 | `~/.claude/docs/label-taxonomy.md` | Work type labels, branch naming, board configuration |
 
 ## Architectural Guardrails
 
+<!-- TODO: add project-specific guardrails -->
+
 1. **[Guardrail 1]** — [brief explanation]
 2. **[Guardrail 2]** — [brief explanation]
 
-## Key Terminology
+## Handling Ambiguity
 
-| Term | Definition |
-| ------ | ----------- |
-| **[Term 1]** | [Definition] |
-| **[Term 2]** | [Definition] |
+| Decide and Move | Stop and Ask |
+| --- | --- |
+| View organization, helper naming | New database column not in the data model |
+| CSS/styling choices | Changing a model association |
+| Test helper structure | Altering a public-facing URL pattern |
+| Error message wording | Adding a dependency not in the tech stack |
+
+**The test:** Is the decision easily reversed (code change, no migration)? Decide and move — state the assumption. Does it create a migration or change a public interface? Ask first.
 
 ## Conventions
 
 - **Commits:** Conventional Commits with scope — `feat(model): description`
 - **Branches:** `feat/`, `fix/`, `chore/`, `docs/`, `test/` prefixes
-- **Linting:** [Linter], zero warnings, run before every commit
+- **Linting:** <!-- TODO: linter name -->, zero warnings, run before every commit
 - **PRD deviations:** Log in `docs/prd/CHANGELOG.md` before merging — never silently deviate
-- **Testing:** [Framework], AAA pattern, [test runner command]
+- **Testing:** <!-- TODO: framework -->, AAA pattern, <!-- TODO: test runner command -->
