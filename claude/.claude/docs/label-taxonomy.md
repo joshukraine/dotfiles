@@ -96,8 +96,8 @@ A unified vocabulary for classifying work across commits, branches, issues, and 
 | Priority | Emoji | When to Use |
 | --- | --- | --- |
 | Critical | :red_circle: | Blocking other work or affecting users now |
-| Normal | :white_circle: | Standard priority — most issues live here |
-| Low | :black_circle: | Nice to have, do when convenient |
+| Normal | :yellow_circle: | Standard priority — most issues live here |
+| Low | :green_circle: | Nice to have, do when convenient |
 
 **Status columns:**
 
