@@ -99,6 +99,8 @@ The summary should contain:
 - Test coverage status (pass/fail, notable gaps)
 - Any items flagged for follow-up
 
+**Metadata formatting:** Both files begin with a metadata block (date, scope, PRs, issues, PRD references, etc.) immediately after the title. Format each metadata item as a **bulleted list** so that items render vertically in HTML instead of collapsing into a single paragraph.
+
 Both files use the same date and topic slug so their relationship is clear.
 
 After saving, tell the executive where the files are and suggest opening the full debrief:
