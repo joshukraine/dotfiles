@@ -241,6 +241,7 @@ Slash commands provide structured workflows for the full development lifecycle:
 | `/review-pr` | Read-only PR review with severity-ranked findings |
 | `/checkpoint` | Quick status update — what's done, in progress, and blocked |
 | `/debrief` | Comprehensive walkthrough of recent work with architecture rationale |
+| `/qa-handoff` | Prepare a hands-on QA testing guide for a completed PRD phase |
 | `/update-deps` | Safe dependency updates with testing between each category |
 
 ### Permission Presets
