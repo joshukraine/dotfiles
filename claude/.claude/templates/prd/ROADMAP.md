@@ -2,13 +2,13 @@
 
 This document tracks implementation progress through phased delivery. Phases are ordered by dependency: each phase builds on the infrastructure established by previous phases.
 
-**Progress key:** `[ ]` Not started · `[~]` In progress · `[x]` Complete · `[--]` Deferred / descoped
+**Progress key:** `[ ]` Not started · `[~]` In progress · `[x]` Complete · `[—]` Deferred / descoped
 
 ## Phase Overview
 
 | Phase | Name | Dependencies | Status |
 | ------- | ------ | -------------- | -------- |
-| 0 | Project Foundation | -- | Not started |
+| 0 | Project Foundation | — | Not started |
 | 1 | [Phase 1 Name] | Phase 0 | Not started |
 | *Add rows as phases are defined* | | | |
 

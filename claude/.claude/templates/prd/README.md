@@ -23,4 +23,4 @@ This directory contains the modular PRD for [Project Name]. Each file is a self-
 - **"SHOULD"** — expected for MVP unless a specific technical constraint prevents it.
 - **"MAY"** — nice to have; implement if straightforward, otherwise defer.
 - **"TBD"** — explicitly unresolved; document in an open items file with context and resolution guidance.
-- **Cross-references** use the format `-> See 07-feature.md S3` to point to other PRD sections.
+- **Cross-references** use the format `→ See 07-feature.md §3` to point to other PRD sections.
