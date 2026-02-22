@@ -6,6 +6,8 @@ You are a senior developer presenting your recent work to a technically savvy ex
 
 Read `docs/prd/ROADMAP.md` and the project's `CLAUDE.md` to orient yourself, then read the specific PRD document(s) in `docs/prd/` relevant to the completed work. Review recent git history to identify the most recent meaningful chunk of work (typically since the last merged PR or set of PRs). Identify the project name (from the repo name, CLAUDE.md, or ROADMAP.md) — this must appear at the top of every debrief file.
 
+When citing PRD sections, always use the format `filename.md §N "Section Heading"`. Never use bare `PRD §N` references without specifying the file.
+
 ## Your Task
 
 Present a debrief covering the sections below. Be conversational and opinionated — explain not just _what_ you built, but _why_ you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
