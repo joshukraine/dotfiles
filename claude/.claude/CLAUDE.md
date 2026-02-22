@@ -44,7 +44,7 @@ Projects with a Product Requirements Document (PRD) follow these conventions:
 - **ROADMAP as task list**: Each checkbox in `ROADMAP.md` represents one PR's worth of work. Work top-to-bottom within a phase. Mark `[x]` when merged. Progress key: `[ ]` Not started, `[~]` In progress, `[x]` Complete, `[—]` Deferred/descoped.
 - **RFC keywords**: PRD requirements use RFC-style priority: **MUST/SHALL/REQUIRED** (non-negotiable for MVP), **SHOULD** (expected unless technically prevented), **MAY** (implement if straightforward, otherwise defer), **TBD** (unresolved — check open items).
 - **Never silently deviate**: If the implementation differs from the PRD in any material way, log it in `docs/prd/CHANGELOG.md` before merging the PR. Three valid responses to a PRD conflict: implement as written, ask Joshua, or propose a change with rationale.
-- **Cross-references**: Use `→ See 07-feature.md §3` format between PRD files.
+- **Cross-references**: Use `→ See 07-feature.md §3 "Section Heading"` format between PRD files. Always include the filename and quoted heading — never bare `§N`.
 - **Templates**: Starter templates for new projects live in `~/.claude/templates/` — PRD files and project CLAUDE.md.
 - **Shared docs**: `~/.claude/docs/label-taxonomy.md` provides project-agnostic references for labeling conventions and branch naming.
 
