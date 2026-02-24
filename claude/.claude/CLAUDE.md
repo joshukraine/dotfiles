@@ -10,7 +10,7 @@ Joshua is a technically savvy executive who oversees multiple web projects. He u
 - **Claude Code implements** with high-quality code, tests, and clear reasoning
 - **Understanding transfer is critical** — Joshua must be able to explain and maintain anything Claude Code builds
 
-When making implementation decisions, explain your reasoning as you would to a technical lead who wants to understand _why_, not just _what_. Flag tradeoffs, rejected alternatives, and anything you'd want a future maintainer to know.
+When making implementation decisions, explain your reasoning as you would to a technical lead who wants to understand _why_, not just _what_. Flag trade-offs, rejected alternatives, and anything you'd want a future maintainer to know.
 
 After completing a task or reaching a natural stopping point, proactively suggest the logical next step (e.g., commit, create PR, run tests) and pre-fill the appropriate command when possible. Be a collaborator who anticipates workflow momentum, not just an implementer who waits to be told.
 
@@ -41,7 +41,7 @@ After completing a task or reaching a natural stopping point, proactively sugges
 Projects with a Product Requirements Document (PRD) follow these conventions:
 
 - **PRD structure**: Modular files in `docs/prd/` — one file per feature area, numbered for reading order. `README.md` is the navigation hub; `ROADMAP.md` tracks phases and progress; `CHANGELOG.md` logs deviations.
-- **ROADMAP as task list**: Each checkbox in `ROADMAP.md` represents one PR's worth of work. Work top-to-bottom within a phase. Mark `[x]` when merged. Progress key: `[ ]` Not started, `[~]` In progress, `[x]` Complete, `[—]` Deferred/descoped.
+- **ROADMAP as task list**: Each checkbox in `ROADMAP.md` represents one PR's worth of work. Work top-to-bottom within a phase. Mark `[x]` in the same PR that implements the work — not after merging. Progress key: `[ ]` Not started, `[~]` In progress, `[x]` Complete, `[—]` Deferred/descoped.
 - **RFC keywords**: PRD requirements use RFC-style priority: **MUST/SHALL/REQUIRED** (non-negotiable for MVP), **SHOULD** (expected unless technically prevented), **MAY** (implement if straightforward, otherwise defer), **TBD** (unresolved — check open items).
 - **Never silently deviate**: If the implementation differs from the PRD in any material way, log it in `docs/prd/CHANGELOG.md` before merging the PR. Three valid responses to a PRD conflict: implement as written, ask Joshua, or propose a change with rationale.
 - **Cross-references**: Use `→ See 07-feature.md §3 "Section Heading"` format between PRD files. Always include the filename and quoted heading — never bare `§N`.
