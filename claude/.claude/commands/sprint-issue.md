@@ -18,8 +18,9 @@ Quickly resolve a small, well-scoped GitHub issue with a streamlined workflow. U
 - Run the project's test suite (if one exists) and ensure all tests pass. Check for `Rakefile`, `package.json`, `pytest.ini`, or CI config to discover the test command.
 - **Do NOT proceed if linting or tests fail.** If the project has no linter or test suite, skip the corresponding check and move on.
 
-### Step 3: Create PR and report
+### Step 3: Update ROADMAP and create PR
 
+- Check if the work corresponds to a checkbox item in `docs/prd/ROADMAP.md`. If a matching item exists, mark it complete (`[x]`) and commit the change to the branch before creating the PR.
 - Push the branch and create a PR using `gh pr create`.
 - PR description must include "Closes #$ARGUMENTS".
 - Report: files changed, commits made, test/lint status.
