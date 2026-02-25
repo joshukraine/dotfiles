@@ -232,16 +232,17 @@ Slash commands provide structured workflows for the full development lifecycle:
 
 | Command | Purpose |
 | ------- | ------- |
-| `/plan-phase` | Draft implementation plan and create GitHub issues (no code written) |
-| `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
-| `/sprint-issue` | Streamlined variant for small, well-scoped issues |
-| `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
+| `/bootstrap-prd` | Scaffold PRD-driven development infrastructure into a new project |
+| `/checkpoint` | Quick status update — what's done, in progress, and blocked |
 | `/commit` | Analyze diffs, split into logical commits, Conventional Commits format |
 | `/create-pr` | Create a PR with auto-linked issues and formatted description |
-| `/review-pr` | Read-only PR review with severity-ranked findings |
-| `/checkpoint` | Quick status update — what's done, in progress, and blocked |
 | `/debrief` | Comprehensive walkthrough of recent work with architecture rationale |
+| `/plan-phase` | Draft implementation plan and create GitHub issues (no code written) |
 | `/qa-handoff` | Prepare a hands-on QA testing guide for a completed PRD phase |
+| `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
+| `/review-pr` | Read-only PR review with severity-ranked findings |
+| `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
+| `/sprint-issue` | Streamlined variant for small, well-scoped issues |
 | `/update-deps` | Safe dependency updates with testing between each category |
 
 ### Permission Presets
