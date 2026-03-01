@@ -54,6 +54,7 @@ Track your progress through the 6 steps below. Report completion of each step be
 
 - Summarize: files modified, commits made, test status, resolution confirmation
 - **STOP**: Ask user if they want to create PR now
+- For non-trivial implementations, suggest running `/simplify` first to review for code reuse, quality, and efficiency improvements
 - Recommend: `/create-pr --issue $ARGUMENTS`
 - **Do NOT automatically create PR**
 
@@ -63,7 +64,7 @@ Use the issue's type label to determine the prefix. Format:
 `<prefix>/gh-<number>-<short-description>`
 
 | Type Label | Branch Prefix | Example                    |
-|------------|---------------|----------------------------|
+| ---------- | ------------- | -------------------------- |
 | `feat`     | `feat/`       | `feat/gh-41-add-auth`      |
 | `fix`      | `fix/`        | `fix/gh-55-fix-login`      |
 | `chore`    | `chore/`      | `chore/gh-51-update-deps`  |
