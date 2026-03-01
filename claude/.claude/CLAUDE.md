@@ -51,16 +51,11 @@ Projects with a Product Requirements Document (PRD) follow these conventions:
 ## Git Workflow
 
 - **Commands**: Prefer running git commands directly (e.g., `git status`, `git log`) without `git -C <path>` when the working directory is the target repository, as `-C` bypasses permission rules
-- **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) format. Always use `--no-gpg-sign` flag or run git commits with sandbox disabled, as GPG signing consistently fails in the sandbox environment.
+- **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) format
 - **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
 - **Pull Requests**: Clear titles, reference issues in PR description, atomic changes. When creating PRs that resolve GitHub issues, always check the issue description and linked issues to ensure ALL related issues are referenced with closing keywords (e.g., "Closes #X, Closes #Y"). Do not link only one issue when multiple should be closed.
 - **Issue References**: Use "Closes #123" in PR descriptions only, never in individual commit messages
 - **Before committing**: Re-read your changes for unnecessary complexity, redundant code, and unclear naming
-- **Standard issue workflow**: 1) Research issue and codebase, 2) Implement with tests, 3) Create draft PR with all closing keywords, 4) Review and fix, 5) Mark ready and merge, 6) Delete feature branch and sync main
-
-## Sandbox Workarounds
-
-When running shell commands that need access to `~/.cache`, `~/.gnupg`, or PostgreSQL sockets, proactively disable sandbox or use appropriate workarounds. Known sandbox-blocked paths: `~/.cache/pre-commit`, `~/.gnupg`, `/var/run/postgresql`.
 
 ## Code Quality
 
