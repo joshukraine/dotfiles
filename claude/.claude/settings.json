@@ -151,5 +151,9 @@
   "sandbox": {
     "enabled": false
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
 }
