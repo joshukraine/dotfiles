@@ -1,6 +1,6 @@
 # Claude Code Cheatsheet
 
-*Last updated: 2026-02-13* <!-- Update this date when editing this file -->
+*Last updated: 2026-03-01* <!-- Update this date when editing this file -->
 
 Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
@@ -25,6 +25,25 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `/output-style` | Reset to default output style |
 | `/fast` | Toggle fast mode (same model, ~2.5x faster, 6x cost) |
 | `/sandbox` | Enable OS-level filesystem and network sandboxing |
+| `/simplify` | Review changed code for reuse, quality, and efficiency |
+
+## Custom Commands
+
+| Command | When to use |
+| ------- | ----------- |
+| `/resolve-issue 123` | Full workflow for a GitHub issue — research, plan, implement, verify |
+| `/sprint-issue 123` | Fast-track a small, well-scoped issue — skips the plan checkpoint |
+| `/commit` | Stage and commit with smart splitting and Conventional Commits |
+| `/create-pr --issue 123` | Create a draft PR with auto-generated description and issue linking |
+| `/simplify` | Post-implementation code review — run before creating a PR |
+
+All custom commands live in `claude/.claude/commands/`. Type `/` to browse the full list including PRD-specific commands (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
+
+### Common Workflow
+
+```text
+/resolve-issue 123  →  /simplify  →  /create-pr --issue 123
+```
 
 ## Context Management
 
