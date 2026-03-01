@@ -29,39 +29,18 @@ function hist() {
     fc -li -"${count}"
 }
 
-# Copy current working directory to clipboard with format options
+# Copy current working directory to clipboard with ~ for home
 #
-# Usage: copycwd
+# Usage: cpwd
 # Arguments: None
 #
 # Examples:
-#   copycwd                 # Interactive prompt to choose home directory format
+#   cpwd                    # Copy "~/dotfiles" to clipboard
 #
-# Returns: Copies current directory path to clipboard with chosen format (~, $HOME, or full path)
-function copycwd() {
-    echo "Choose how to display the home directory:"
-    echo "1) ~"
-    echo "2) \$HOME"
-    echo "3) /Users/$(whoami)"
-    read -r choice
-
-    case ${choice} in
-        1)
-            pwd | sed "s|^${HOME}|~|" | tr -d '\n' | pbcopy
-            echo "Current path copied to clipboard with ~ as home directory."
-            ;;
-        2)
-            pwd | sed "s|^${HOME}|\\\$HOME|" | tr -d '\n' | pbcopy
-            echo "Current path copied to clipboard with \$HOME as home directory."
-            ;;
-        3)
-            pwd | tr -d '\n' | pbcopy
-            echo "Current path copied to clipboard with full path as home directory."
-            ;;
-        *)
-            echo "Invalid choice. Please enter 1, 2, or 3."
-            ;;
-    esac
+# Returns: Copies pwd to clipboard with $HOME replaced by ~, no trailing newline
+function cpwd() {
+  pwd | sed "s|^${HOME}|~|" | tr -d '\n' | pbcopy
+  echo "Copied: $(pbpaste)"
 }
 
 # Delete all .DS_Store files recursively from current directory
