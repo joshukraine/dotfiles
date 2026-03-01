@@ -96,9 +96,7 @@
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
       "Read(~/.ssh/**)",
-      "Read(~/.gnupg/**)",
       "Read(~/.aws/**)",
-      "Read(~/.config/gh/**)",
       "Read(~/.git-credentials)",
       "Read(~/.docker/config.json)",
       "Read(~/Library/Keychains/**)"
@@ -151,17 +149,7 @@
     "starship-claude@starship-claude": true
   },
   "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true,
-    "network": {
-      "allowLocalBinding": true
-    },
-    "excludedCommands": [
-      "docker",
-      "gh",
-      "git",
-      "pre-commit"
-    ]
+    "enabled": false
   },
   "alwaysThinkingEnabled": true
 }
