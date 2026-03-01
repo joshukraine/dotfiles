@@ -57,20 +57,23 @@ function cc-apply() {
 }
 
 # Quick preset aliases
+# Default permissions (shell tools, git, gh, Edit, WebSearch, Context7) are
+# global via ~/.claude/settings.json. These commands apply only the
+# framework-specific overlay for the current project.
 function cc-rails() {
-  cc-apply default-permissions.json rails-overlay.json
+  cc-apply rails-overlay.json
 }
 
 function cc-hugo() {
-  cc-apply default-permissions.json hugo-overlay.json
+  cc-apply hugo-overlay.json
 }
 
 function cc-js() {
-  cc-apply default-permissions.json js-overlay.json
+  cc-apply js-overlay.json
 }
 
 function cc-dotfiles() {
-  cc-apply default-permissions.json dotfiles-overlay.json
+  cc-apply dotfiles-overlay.json
 }
 
 function cc-sprint() {
@@ -81,10 +84,9 @@ function cc-sprint() {
 }
 
 function cc-default() {
-  mkdir -p .claude
-  _cc-backup-if-changed .claude/settings.json ~/.claude/presets/default-permissions.json
-  cp ~/.claude/presets/default-permissions.json .claude/settings.json
-  echo "Default permissions applied"
+  echo "Default permissions are now in global ~/.claude/settings.json."
+  echo "No project-level file needed for baseline tools (git, gh, shell, Edit, etc.)."
+  echo "Use cc-clean to remove any project-level overrides."
 }
 
 # Remove applied permissions

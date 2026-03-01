@@ -2,12 +2,16 @@
 
 Reusable permission configurations for Claude Code projects.
 
+## Architecture
+
+**Default permissions are global.** The base permissions (Unix tools, git, gh, file editing, WebSearch, Context7) live in the global `~/.claude/settings.json` and apply to every project automatically. The presets in this directory provide framework-specific overlays that add tools and domains on top of the global baseline.
+
 ## Presets
 
 | File | Purpose |
 | --- | --- |
-| `default-permissions.json` | Base permissions for any project (Unix tools, git, gh, file editing) |
-| `sprint-permissions.json` | All-inclusive preset for housekeeping sprints (base + all overlays) |
+| `default-permissions.json` | Reference copy of the global baseline (kept for `merge-presets` compatibility) |
+| `sprint-permissions.json` | All-inclusive standalone preset for housekeeping sprints (base + all overlays) |
 | `rails-overlay.json` | Ruby on Rails additive overlay (Ruby, Bundler, binstubs, Rails docs) |
 | `hugo-overlay.json` | Hugo additive overlay (Hugo CLI, Node/npm, Hugo docs) |
 | `js-overlay.json` | JavaScript/Node.js overlay (Node, npm/yarn/pnpm, TypeScript, ESLint, Vue/Nuxt docs) |
@@ -18,12 +22,12 @@ Reusable permission configurations for Claude Code projects.
 ### Quick apply (recommended)
 
 ```bash
-cc-rails      # default + Rails → .claude/settings.json
-cc-hugo       # default + Hugo → .claude/settings.json
-cc-js         # default + JS/Node → .claude/settings.json
-cc-dotfiles   # default + dotfiles → .claude/settings.json
-cc-sprint     # full sprint preset → .claude/settings.json
-cc-default    # base only → .claude/settings.json
+cc-rails      # Rails overlay → .claude/settings.json
+cc-hugo       # Hugo overlay → .claude/settings.json
+cc-js         # JS/Node overlay → .claude/settings.json
+cc-dotfiles   # dotfiles overlay → .claude/settings.json
+cc-sprint     # all overlays combined → .claude/settings.json
+cc-default    # info only (default permissions are now global)
 cc-clean      # remove .claude/settings.json
 cc-perms      # show active permission counts
 ```
@@ -45,8 +49,10 @@ merge-presets default-permissions.json rails-overlay.json > .claude/settings.jso
 
 ## Design
 
-**Overlays are additive.** The base preset covers universally safe operations. Each overlay adds framework-specific tools and documentation domains. The `merge-presets` script combines and deduplicates them.
+**Global baseline.** The global `~/.claude/settings.json` provides default allow/deny permissions for all projects. Overlays only need framework-specific additions — git, gh, shell tools, and common web domains are always available.
 
-**Sprint is standalone.** Unlike the overlays, `sprint-permissions.json` is a self-contained superset that includes the base plus all framework tooling. It's designed to be copied directly rather than merged.
+**Overlays are additive.** Each overlay adds framework-specific tools and documentation domains. The `merge-presets` script combines and deduplicates them. Duplicate entries (from overlays that include default items) are harmless.
 
-**Deny rules stack.** Both base and overlay deny rules are preserved during merge. The base blocks `rm -rf`, force push, hard reset, and `git clean`. The Rails overlay adds `db:drop` and `db:reset` protection.
+**Sprint is standalone.** `sprint-permissions.json` is the union of all overlay-specific permissions (no default entries since those are global). It's designed to be copied directly rather than merged.
+
+**Deny rules stack.** Both global and overlay deny rules are preserved during merge. The global blocks `rm -rf`, `git clean`, `git reset --hard`, and dangerous piped commands. The Rails overlay adds `db:drop` and `db:reset` protection.
