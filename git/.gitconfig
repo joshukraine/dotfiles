@@ -57,7 +57,7 @@
 
 [commit]
   template = ~/.gitmessage
-  gpgSign = true
+  gpgSign = false
 
 [core]
   autocrlf     = input
@@ -114,10 +114,4 @@
   submoduleSummary = true
 
 [tag]
-  gpgSign = true
-
-[url "https://github.com/"]
-  insteadOf = git@github.com:
-
-[url "https://"]
-  insteadOf = git://
+  gpgSign = false
