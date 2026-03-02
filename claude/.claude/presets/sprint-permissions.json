@@ -18,6 +18,7 @@
       "Bash(brew info:*)",
       "Bash(brew list:*)",
       "Bash(brew search:*)",
+      "Bash(brew uninstall:*)",
       "Bash(bundle:*)",
       "Bash(cat:*)",
       "Bash(chmod:*)",
