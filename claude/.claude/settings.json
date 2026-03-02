@@ -1,5 +1,9 @@
 {
   "cleanupPeriodDays": 365,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Edit",
@@ -70,12 +74,31 @@
       "Bash(gh run:*)",
       "Bash(gh search:*)",
 
+      "Bash(bats *)",
+      "Bash(brew info *)",
+      "Bash(brew list *)",
+      "Bash(brew search *)",
+      "Bash(brew uninstall *)",
+      "Bash(lua *)",
+      "Bash(markdownlint-cli2 *)",
+      "Bash(pre-commit run *)",
+      "Bash(shellcheck *)",
+      "Bash(source *)",
+      "Bash(stow *)",
+      "Bash(./scripts/lint-shell *)",
+      "Bash(./scripts/run-tests *)",
+
       "WebSearch",
+      "WebFetch(domain:cmp.saghen.dev)",
       "WebFetch(domain:context7.com)",
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:gist.githubusercontent.com)",
       "WebFetch(domain:github.com)",
+      "WebFetch(domain:lazyvim.github.io)",
+      "WebFetch(domain:main.cmp.saghen.dev)",
+      "WebFetch(domain:neovim.io)",
       "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.lazyvim.org)",
 
       "mcp__context7__query-docs",
       "mcp__context7__resolve-library-id",
@@ -92,6 +115,8 @@
       "Bash(git clean -fd*)",
       "Bash(git clean -fx*)",
       "Bash(git reset --hard*)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
@@ -100,7 +125,8 @@
       "Read(~/.git-credentials)",
       "Read(~/.docker/config.json)",
       "Read(~/Library/Keychains/**)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
   "enableAllProjectMcpServers": false,
   "hooks": {
@@ -151,9 +177,5 @@
   "sandbox": {
     "enabled": false
   },
-  "alwaysThinkingEnabled": true,
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+  "alwaysThinkingEnabled": true
 }
