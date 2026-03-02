@@ -1,5 +1,9 @@
 {
   "cleanupPeriodDays": 365,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Edit",
@@ -82,25 +86,28 @@
       "mcp__ide__getDiagnostics"
     ],
     "deny": [
-      "Bash(rm -rf *)",
-      "Bash(rm -fr *)",
-      "Bash(sudo *)",
-      "Bash(mkfs *)",
-      "Bash(dd *)",
       "Bash(curl *|bash*)",
+      "Bash(dd:*)",
+      "Bash(git clean -fd:*)",
+      "Bash(git clean -fx:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(mkfs:*)",
+      "Bash(rm -fr:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
       "Bash(wget *|bash*)",
-      "Bash(git clean -fd*)",
-      "Bash(git clean -fx*)",
-      "Bash(git reset --hard*)",
       "Edit(~/.bashrc)",
-      "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
-      "Read(~/.ssh/**)",
+      "Edit(~/.zshrc)",
       "Read(~/.aws/**)",
-      "Read(~/.git-credentials)",
       "Read(~/.docker/config.json)",
+      "Read(~/.git-credentials)",
+      "Read(~/.ssh/**)",
       "Read(~/Library/Keychains/**)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
   "enableAllProjectMcpServers": false,
   "hooks": {
@@ -151,9 +158,5 @@
   "sandbox": {
     "enabled": false
   },
-  "alwaysThinkingEnabled": true,
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+  "alwaysThinkingEnabled": true
 }

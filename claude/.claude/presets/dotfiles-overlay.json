@@ -11,6 +11,7 @@
       "Bash(brew info:*)",
       "Bash(brew list:*)",
       "Bash(brew search:*)",
+      "Bash(brew uninstall:*)",
 
       "Bash(source:*)",
 

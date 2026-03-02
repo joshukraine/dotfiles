@@ -81,10 +81,26 @@
       "mcp__ide__getDiagnostics"
     ],
     "deny": [
+      "Bash(curl *|bash*)",
+      "Bash(dd:*)",
       "Bash(git clean -fd:*)",
       "Bash(git clean -fx:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
       "Bash(git reset --hard:*)",
-      "Bash(rm -rf:*)"
+      "Bash(mkfs:*)",
+      "Bash(rm -fr:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Bash(wget *|bash*)",
+      "Edit(~/.bashrc)",
+      "Edit(~/.ssh/**)",
+      "Edit(~/.zshrc)",
+      "Read(~/.aws/**)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.git-credentials)",
+      "Read(~/.ssh/**)",
+      "Read(~/Library/Keychains/**)"
     ]
   }
 }
