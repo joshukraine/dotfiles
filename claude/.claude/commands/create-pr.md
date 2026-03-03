@@ -6,7 +6,7 @@ Create a pull request from the current branch with proper formatting and issue l
 
 - `--issue N`: Explicitly link to issue #N (recommended for reliability)
 - `--skip-issue-link`: Skip automatic issue linking
-- `--ready`: Create PR as ready for review (default is draft to avoid unnecessary CI runs)
+- `--draft`: Create PR as draft (default is ready-to-review)
 
 ## Your task
 
@@ -46,7 +46,7 @@ Create a pull request from the current branch with proper formatting and issue l
 7. **Create the PR**:
    - Use `gh pr create` with generated title and description
    - Set base branch (usually main/master)
-   - **Default to `--draft`** unless `--ready` flag is passed (draft PRs skip CI to conserve GitHub Actions minutes)
+   - **Default to ready** (no `--draft` flag) unless `--draft` flag is explicitly passed
 
 8. **Confirm and display**:
    - Show PR URL and title
