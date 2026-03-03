@@ -8,6 +8,7 @@ return {
         "css",
         "diff",
         "embedded_template",
+        "gotmpl",
         "html",
         "javascript",
         "jsdoc",

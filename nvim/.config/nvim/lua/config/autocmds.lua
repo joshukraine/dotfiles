@@ -5,7 +5,23 @@
 local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
 
+-- Recognize Hugo layout HTML files as Go templates
+vim.filetype.add({
+  pattern = {
+    [".*/layouts/.*%.html"] = "gotmpl",
+  },
+})
+
 create_augroup("file_types", { clear = true })
+
+create_autocmd("FileType", {
+  desc = "Disable format-on-save for Hugo/Go template files",
+  group = "file_types",
+  pattern = "gotmpl",
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
 
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   desc = "Recognize .gemrc as yaml",

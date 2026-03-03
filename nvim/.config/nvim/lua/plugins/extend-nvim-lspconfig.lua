@@ -30,10 +30,15 @@ return {
         cmd = { vim.fn.expand("~/.asdf/shims/standardrb"), "--lsp" },
         filetypes = { "ruby", "rakefile" },
       },
+      -- Extend html-lsp to also serve gotmpl files (Hugo templates)
+      html = {
+        filetypes = { "html", "gotmpl" },
+      },
       -- https://herb-tools.dev/projects/language-server
       -- Not yet in nvim-lspconfig defaults; explicit path to Mason binary required
       herb_ls = {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/herb-language-server", "--stdio" },
+        filetypes = { "eruby" },
       },
     },
   },
