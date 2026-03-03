@@ -1,10 +1,13 @@
 {
   "cleanupPeriodDays": 365,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Edit",
       "MultiEdit",
-
       "Bash(awk:*)",
       "Bash(basename:*)",
       "Bash(cat:*)",
@@ -40,7 +43,6 @@
       "Bash(wc:*)",
       "Bash(which:*)",
       "Bash(xargs:*)",
-
       "Bash(git add:*)",
       "Bash(git branch:*)",
       "Bash(git check-ignore:*)",
@@ -62,46 +64,47 @@
       "Bash(git status:*)",
       "Bash(git switch:*)",
       "Bash(git tag:*)",
-
       "Bash(gh api:*)",
       "Bash(gh issue:*)",
       "Bash(gh label:*)",
       "Bash(gh pr:*)",
       "Bash(gh run:*)",
       "Bash(gh search:*)",
-
       "WebSearch",
       "WebFetch(domain:context7.com)",
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:gist.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-
       "mcp__context7__query-docs",
       "mcp__context7__resolve-library-id",
       "mcp__ide__getDiagnostics"
     ],
     "deny": [
-      "Bash(rm -rf *)",
-      "Bash(rm -fr *)",
-      "Bash(sudo *)",
-      "Bash(mkfs *)",
-      "Bash(dd *)",
       "Bash(curl *|bash*)",
+      "Bash(dd:*)",
+      "Bash(git clean -fd:*)",
+      "Bash(git clean -fx:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(mkfs:*)",
+      "Bash(rm -fr:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
       "Bash(wget *|bash*)",
-      "Bash(git clean -fd*)",
-      "Bash(git clean -fx*)",
-      "Bash(git reset --hard*)",
       "Edit(~/.bashrc)",
-      "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
-      "Read(~/.ssh/**)",
+      "Edit(~/.zshrc)",
       "Read(~/.aws/**)",
-      "Read(~/.git-credentials)",
       "Read(~/.docker/config.json)",
+      "Read(~/.git-credentials)",
+      "Read(~/.ssh/**)",
       "Read(~/Library/Keychains/**)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
+  "model": "opus",
   "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
@@ -151,9 +154,5 @@
   "sandbox": {
     "enabled": false
   },
-  "alwaysThinkingEnabled": true,
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+  "alwaysThinkingEnabled": true
 }

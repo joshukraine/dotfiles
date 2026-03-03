@@ -57,6 +57,20 @@ Projects with a Product Requirements Document (PRD) follow these conventions:
 - **Issue References**: Use "Closes #123" in PR descriptions only, never in individual commit messages
 - **Before committing**: Re-read your changes for unnecessary complexity, redundant code, and unclear naming
 
+## Git Commit Protocol
+
+To avoid permission prompts caused by command substitution and subshells, always use the following procedure for git commits:
+
+1. Draft the Message: Prepare the commit subject and body.
+
+2. Write to Temp File: Use `cat << 'EOF' > .git_commit_msg` or a similar filesystem write to save the full message into a temporary file named `.git_commit_msg`.
+
+3. Execute Commit: Run `git commit -F .git_commit_msg`.
+
+4. Cleanup: Immediately remove the temporary file with `rm .git_commit_msg`.
+
+Constraint: Do not use `$(...)`, backticks, or complex shell nesting for commits. Rely solely on the file-based `-F` flag.
+
 ## Code Quality
 
 - **Testing**: Follow AAA pattern (Arrange, Act, Assert). Test behavior, not implementation — if a refactor breaks tests but not code, the tests were wrong. Test edges and errors, not just the happy path. Mock boundaries (slow, non-deterministic, or external services), not internal logic.
