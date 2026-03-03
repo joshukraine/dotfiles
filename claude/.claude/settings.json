@@ -8,7 +8,6 @@
     "allow": [
       "Edit",
       "MultiEdit",
-
       "Bash(awk:*)",
       "Bash(basename:*)",
       "Bash(cat:*)",
@@ -44,7 +43,6 @@
       "Bash(wc:*)",
       "Bash(which:*)",
       "Bash(xargs:*)",
-
       "Bash(git add:*)",
       "Bash(git branch:*)",
       "Bash(git check-ignore:*)",
@@ -66,21 +64,18 @@
       "Bash(git status:*)",
       "Bash(git switch:*)",
       "Bash(git tag:*)",
-
       "Bash(gh api:*)",
       "Bash(gh issue:*)",
       "Bash(gh label:*)",
       "Bash(gh pr:*)",
       "Bash(gh run:*)",
       "Bash(gh search:*)",
-
       "WebSearch",
       "WebFetch(domain:context7.com)",
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:gist.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-
       "mcp__context7__query-docs",
       "mcp__context7__resolve-library-id",
       "mcp__ide__getDiagnostics"
@@ -109,6 +104,7 @@
     ],
     "defaultMode": "acceptEdits"
   },
+  "model": "opus",
   "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
