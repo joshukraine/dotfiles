@@ -1,2 +1,3 @@
-# Do not symlink the cheatsheet to ~/.claude/
+# Do not symlink reference docs to ~/.claude/
 cheatsheet\.md
+claudecode-nvim-vs-tmux\.md
