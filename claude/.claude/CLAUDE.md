@@ -55,6 +55,7 @@ Projects with a Product Requirements Document (PRD) follow these conventions:
 - **Branches**: Use descriptive names (`feat/`, `fix/`, `docs/`, `chore/`)
 - **Pull Requests**: Clear titles, reference issues in PR description, atomic changes. When creating PRs that resolve GitHub issues, always check the issue description and linked issues to ensure ALL related issues are referenced with closing keywords (e.g., "Closes #X, Closes #Y"). Do not link only one issue when multiple should be closed.
 - **Issue References**: Use "Closes #123" in PR descriptions only, never in individual commit messages
+- **Merges**: Prefer squash merges (`gh pr merge --squash`) to keep main history clean
 - **Before committing**: Re-read your changes for unnecessary complexity, redundant code, and unclear naming
 
 ## Git Commit Protocol
