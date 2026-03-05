@@ -31,11 +31,11 @@ If the user provides a framework name, pre-fill quick-start commands from this l
 
 Read all 5 template files that will be copied into the project:
 
-- `~/.claude/templates/CLAUDE.md`
-- `~/.claude/templates/prd/README.md`
-- `~/.claude/templates/prd/ROADMAP.md`
-- `~/.claude/templates/prd/CHANGELOG.md`
-- `~/.claude/templates/prd/01-overview.md`
+- `~/.claude/docs/prd-workflow/templates/CLAUDE.md`
+- `~/.claude/docs/prd-workflow/templates/prd/README.md`
+- `~/.claude/docs/prd-workflow/templates/prd/ROADMAP.md`
+- `~/.claude/docs/prd-workflow/templates/prd/CHANGELOG.md`
+- `~/.claude/docs/prd-workflow/templates/prd/01-overview.md`
 
 ### Step 3: Check for existing files
 

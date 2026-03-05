@@ -341,7 +341,7 @@ When you suspect drift has occurred:
 
 These run infrequently but are important bookends:
 
-- **`/bootstrap-prd`** — Run once at project inception. Scaffolds the PRD directory structure from templates in `~/.claude/templates/`.
+- **`/bootstrap-prd`** — Run once at project inception. Scaffolds the PRD directory structure from templates in `~/.claude/docs/prd-workflow/templates/`.
 - **`/update-deps`** — Run periodically (monthly, or before a major phase). Updates dependencies category by category with testing between each.
 
 ### Lifecycle stage mapping
@@ -422,7 +422,7 @@ The spec is a tool for building better software. It is not the software itself.
 
 A companion document covers everything upstream of this workflow — how to write the PRD itself through structured brainstorming with an AI collaborator.
 
-→ See `~/.claude/docs/prd-authoring-guide.md`
+→ See `prd-authoring-guide.md`
 
 Topics covered: when you need a PRD, running discovery conversations, what to specify tightly vs. loosely, structuring for incremental implementation, handling unknowns (TBDs), maintaining PRD usefulness, and a library of brainstorming prompts.
 

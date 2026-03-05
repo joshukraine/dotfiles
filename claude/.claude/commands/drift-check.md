@@ -2,7 +2,7 @@
 
 Pre-PR deviation check against the project spec. Run this before `/create-pr` to verify alignment between implementation and documentation.
 
-> **Reference:** See `~/.claude/docs/spec-driven-development.md` §2–§4 for the deviation threshold, workflow, and checkpoint cadence that this command operationalizes.
+> **Reference:** See `~/.claude/docs/prd-workflow/spec-driven-development.md` §2–§4 for the deviation threshold, workflow, and checkpoint cadence that this command operationalizes.
 
 ## Your task
 

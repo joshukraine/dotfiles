@@ -126,7 +126,7 @@ A PRD that can't be built incrementally is a PRD that will be ignored. Structure
 
 ### One file per feature area
 
-This is the modular structure from the templates in `~/.claude/templates/prd/`. Each file is self-contained enough that a developer can read it in isolation and understand the feature. Cross-references connect them; duplication is avoided.
+This is the modular structure from the templates in `~/.claude/docs/prd-workflow/templates/prd/`. Each file is self-contained enough that a developer can read it in isolation and understand the feature. Cross-references connect them; duplication is avoided.
 
 Good file boundaries follow natural domain seams. On ComixDistro:
 
@@ -457,4 +457,4 @@ The brainstorming output is raw material. Translating it into PRD files is a sep
 
 Don't try to produce perfect PRD files in one pass. Write a first draft, read it as if you're the developer who will implement it, and revise for clarity. The maintainability test from §6 applies: if a detail wouldn't survive its first contact with implementation, leave it out.
 
-→ See `~/.claude/templates/prd/` for the structural templates that this process produces.
+→ See `~/.claude/docs/prd-workflow/templates/prd/` for the structural templates that this process produces.

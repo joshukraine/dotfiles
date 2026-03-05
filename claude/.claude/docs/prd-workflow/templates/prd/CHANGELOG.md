@@ -1,6 +1,6 @@
 # PRD Changelog
 
-This file tracks material deviations from the PRD discovered during implementation. It is the record of the "never silently deviate" rule. See `~/.claude/docs/spec-driven-development.md` §2–§3 for the deviation threshold and workflow.
+This file tracks material deviations from the PRD discovered during implementation. It is the record of the "never silently deviate" rule. See `~/.claude/docs/prd-workflow/spec-driven-development.md` §2–§3 for the deviation threshold and workflow.
 
 ## Format
 
