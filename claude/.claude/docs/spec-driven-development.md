@@ -8,7 +8,7 @@ Informed by lessons learned building ComixDistro (13 phases, 380+ PRs, 18 PRD fi
 
 ---
 
-## §1 PRD Structure Conventions
+## 1 PRD Structure Conventions
 
 A well-structured PRD is modular, navigable, and tightly integrated with the project's issue tracker.
 
@@ -34,7 +34,7 @@ A well-structured PRD is modular, navigable, and tightly integrated with the pro
 
 ---
 
-## §2 The Deviation Threshold
+## 2 The Deviation Threshold
 
 Not every implementation detail needs to be logged. The question is:
 
@@ -64,13 +64,13 @@ When unsure, surface it. A 30-second conversation costs less than discovering un
 
 ---
 
-## §3 The Deviation Workflow
+## 3 The Deviation Workflow
 
 Deviations from the spec are a natural, expected part of building software. The spec represents your best thinking at planning time; implementation reveals what planning couldn't anticipate. The goal isn't to prevent all deviations — it's to handle them deliberately rather than accidentally.
 
 Two workflows address this: a **proactive** path for deviations caught before implementation, and a **reactive** path for drift discovered after the fact. Both are normal. Hitting the reactive path isn't a failure — it's an expected part of the lifecycle.
 
-### §3a Proactive workflow — deviation recognized before implementation
+### 3a Proactive workflow — deviation recognized before implementation
 
 This is the discipline to aim for. When something comes up during implementation that crosses the deviation threshold:
 
@@ -86,7 +86,7 @@ This is the discipline to aim for. When something comes up during implementation
 
 The key principle: **document the change before making it.** This forces clarity. A deviation that can't be clearly articulated in a changelog entry probably isn't well enough understood to implement.
 
-### §3b Reactive workflow — drift discovered after the fact
+### 3b Reactive workflow — drift discovered after the fact
 
 Despite best intentions, drift will happen. A feature gets built in a flow state and the deviation isn't recognized until later. A series of small, below-threshold decisions compound into an above-threshold divergence. A checkpoint reveals that the implementation and the spec no longer agree.
 
@@ -107,7 +107,7 @@ When drift is discovered:
 
 ---
 
-## §4 Checkpoint Cadence
+## 4 Checkpoint Cadence
 
 The proactive workflow catches deviations one at a time. Checkpoints catch what slips through — patterns of drift, stale issues, accumulated small changes that add up to a material divergence.
 
@@ -150,7 +150,7 @@ The proactive workflow catches deviations one at a time. Checkpoints catch what 
 
 ---
 
-## §5 Document Lifecycle
+## 5 Document Lifecycle
 
 Not all documents have the same lifespan. Confusing a planning document with a living document leads to either stale specs or unnecessary churn.
 
@@ -182,7 +182,7 @@ Documents that have served their purpose but contain valuable historical context
 
 ---
 
-## §6 PRD Lifecycle — From Greenfield to Mature
+## 6 PRD Lifecycle — From Greenfield to Mature
 
 A PRD is not a permanent fixture. It has a lifecycle that mirrors the project's maturity. Understanding where you are in that lifecycle determines how tightly you lean on the PRD and what role it plays in day-to-day work.
 
@@ -249,7 +249,7 @@ The spec-driven approach isn't a phase you pass through — it's a habit you car
 
 ---
 
-## §7 Slash Commands in the Development Cycle
+## 7 Slash Commands in the Development Cycle
 
 Slash commands are the operational backbone of spec-driven development. They encapsulate consistent, repeatable behavior at each stage of the workflow — reducing cognitive load, fighting fatigue, and ensuring steps aren't skipped.
 
@@ -391,7 +391,7 @@ The per-PR deviation check from §4 is supported by the `/drift-check` command.
 
 ---
 
-## §8 Lessons from ComixDistro
+## 8 Lessons from ComixDistro
 
 These observations motivated the workflows above. They're project-specific but illustrate general patterns.
 
@@ -418,7 +418,7 @@ The spec is a tool for building better software. It is not the software itself.
 
 ---
 
-## §9 Future: PRD Authoring Guide
+## 9 Future: PRD Authoring Guide
 
 A companion document on writing effective PRDs is planned but not yet written. Topics to cover:
 
