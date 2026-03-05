@@ -418,18 +418,13 @@ The spec is a tool for building better software. It is not the software itself.
 
 ---
 
-## 9 Future: PRD Authoring Guide
+## 9 Companion: PRD Authoring Guide
 
-A companion document on writing effective PRDs is planned but not yet written. Topics to cover:
+A companion document covers everything upstream of this workflow — how to write the PRD itself through structured brainstorming with an AI collaborator.
 
-- How to run a productive brainstorming session that surfaces requirements without getting lost
-- What to specify tightly (data models, lifecycles, authorization rules) vs. what to leave flexible (UI details, helper naming, CSS choices)
-- How to handle TBDs — when to resolve them upfront vs. when to defer with enough context for future resolution
-- Structuring a PRD for incremental implementation (phases, dependencies, MVP boundaries)
-- Prompts and guidelines for developing a PRD through iterative discussion with an AI collaborator
-- Balancing thoroughness with maintainability — a spec that's too detailed becomes a burden to keep current
+→ See `~/.claude/docs/prd-authoring-guide.md`
 
-This will be a separate document at `~/.claude/docs/prd-authoring-guide.md`.
+Topics covered: when you need a PRD, running discovery conversations, what to specify tightly vs. loosely, structuring for incremental implementation, handling unknowns (TBDs), maintaining PRD usefulness, and a library of brainstorming prompts.
 
 ---
 
