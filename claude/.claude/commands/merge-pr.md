@@ -26,15 +26,15 @@ If CI has not passed, **stop and report**. Do not proceed with the merge.
 
 ### Step 3: Merge the PR
 
-- Squash merge: `gh pr merge --squash --delete-branch`
+- Squash merge: `gh pr merge --squash`
+- Do **not** pass `--delete-branch` — GitHub is configured to auto-delete remote branches on merge. Local branch cleanup is handled in Step 4.
 
 ### Step 4: Update local state
 
-- Switch to main: `git switch main`
-- Pull latest: `git pull`
-- Delete the local feature branch: `git branch -d <branch-name>`
+After `gh pr merge` completes:
 
-If the local branch delete fails (e.g., unmerged changes warning), report this but do not force-delete. The user may have local work they want to preserve.
+- Switch to the base branch (e.g., `main`, `master`, or whatever `baseRefName` was detected in Step 1) and pull: `git switch <base-branch> && git pull`
+- Delete the local feature branch with `git branch -D <branch-name>` (force-delete is required because squash merges produce a different SHA, so `-d` cannot detect the branch as merged)
 
 ### Step 5: Confirm completion
 
@@ -52,6 +52,6 @@ Report:
 ## Important
 
 - **Always squash merge.** This keeps main history clean with one commit per PR.
-- **Do not force-delete local branches.** If `git branch -d` fails, report it and let the user decide.
 - **Do not merge if CI has not passed.** This is the one hard gate.
 - **Do not amend or rewrite commits** as part of the merge process.
+- **Squash merges require force-delete.** `git branch -d` cannot detect squash-merged branches, so `-D` is the correct flag for cleanup after a confirmed merge.
