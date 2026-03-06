@@ -5,8 +5,6 @@ Merge a pull request with consistent practices: verify checks, squash merge, cle
 ## Command Options
 
 - `$ARGUMENTS`: PR number (optional — defaults to the PR for the current branch)
-- `--rebase`: Use rebase merge instead of squash merge
-- `--no-delete`: Keep the remote branch after merging
 
 ## Your task
 
@@ -15,25 +13,20 @@ Merge a pull request with consistent practices: verify checks, squash merge, cle
 - If a PR number was provided, use it
 - Otherwise, detect from the current branch: `gh pr view --json number,title,state,headRefName,baseRefName`
 - Confirm the PR exists and is open
-- Display the PR title and number for confirmation
+- Display the PR title and number before proceeding
 
 ### Step 2: Verify merge readiness
 
 Check each of the following and report status:
 
 - **CI status**: Run `gh pr checks` to verify all required checks have passed
-- **Review status**: Run `gh pr view --json reviewDecision` to check review state
 - **Merge conflicts**: Run `gh pr view --json mergeable` to verify no conflicts
 
 If CI has not passed, **stop and report**. Do not proceed with the merge.
 
-If reviews are pending or changes requested, **warn** but allow the user to decide whether to proceed (some repos don't require formal reviews).
-
 ### Step 3: Merge the PR
 
-- **Default: squash merge** — `gh pr merge --squash`
-- If `--rebase` flag is provided, use `gh pr merge --rebase` instead
-- The `--delete-branch` flag is included by default to remove the remote branch after merge. Skip if `--no-delete` is provided.
+- Squash merge: `gh pr merge --squash --delete-branch`
 
 ### Step 4: Update local state
 
@@ -51,15 +44,14 @@ Report:
 ## Merge Complete
 
 - PR: #N — [title]
-- Merge method: squash (or rebase)
-- Remote branch: deleted (or kept)
+- Remote branch: deleted
 - Local branch: deleted (or kept — reason)
 - Local main: up to date
 ```
 
 ## Important
 
-- **Squash merge is the default.** This keeps main history clean with one commit per PR. Only use rebase when explicitly requested.
+- **Always squash merge.** This keeps main history clean with one commit per PR.
 - **Do not force-delete local branches.** If `git branch -d` fails, report it and let the user decide.
 - **Do not merge if CI has not passed.** This is the one hard gate.
 - **Do not amend or rewrite commits** as part of the merge process.
