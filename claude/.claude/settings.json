@@ -104,7 +104,6 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "opus",
   "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
@@ -154,5 +153,6 @@
   "sandbox": {
     "enabled": false
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high"
 }
