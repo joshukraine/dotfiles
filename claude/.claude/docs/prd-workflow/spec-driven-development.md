@@ -274,6 +274,7 @@ This section maps every command to its place in the development cycle. Think of 
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
 | `/update-deps` | Update dependencies with testing between categories | Periodic maintenance |
+| `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
 > **Note:** `/simplify` is a built-in Claude Code skill, not a custom command in `~/.claude/commands/`. All other commands listed above are custom command definitions. When invoking `/simplify`, Claude Code loads it automatically as a skill — there is no `.md` file to maintain for it.
 
@@ -343,6 +344,7 @@ These run infrequently but are important bookends:
 
 - **`/bootstrap-prd`** — Run once at project inception. Scaffolds the PRD directory structure from templates in `~/.claude/docs/prd-workflow/templates/`.
 - **`/update-deps`** — Run periodically (monthly, or before a major phase). Updates dependencies category by category with testing between each.
+- **`/readme-refresh`** — Audit the project README against the codebase, fix outdated versions and stale references, or bootstrap a new README if none exists. Run after phase boundaries, after `/update-deps`, or whenever the README has drifted.
 
 ### Lifecycle stage mapping
 
@@ -365,6 +367,7 @@ Commands shift in importance as the project matures (see §6):
 | `/checkpoint` | Ad-hoc | **Frequent** (transition period) | Ad-hoc |
 | `/debrief` | **Phase boundary** | Milestone reviews | Rare |
 | `/update-deps` | Periodic | Periodic | **Regular cadence** |
+| `/readme-refresh` | Bootstrap | **Full refresh** | Light periodic |
 
 Note how `/drift-check` intensity tracks project maturity: critical during greenfield when the spec is the primary reference, important during MVP transition, and lighter in the mature stage when living documents replace the PRD. The command still has value in the mature stage — it just checks against living docs (domain model, integration guides) rather than PRD files.
 
