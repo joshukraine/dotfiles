@@ -45,8 +45,9 @@ Projects with a Product Requirements Document (PRD) follow these conventions:
 - **RFC keywords**: PRD requirements use RFC-style priority: **MUST/SHALL/REQUIRED** (non-negotiable for MVP), **SHOULD** (expected unless technically prevented), **MAY** (implement if straightforward, otherwise defer), **TBD** (unresolved — check open items).
 - **Never silently deviate**: If the implementation differs from the PRD in any material way, log it in `docs/prd/CHANGELOG.md` before merging the PR. Three valid responses to a PRD conflict: implement as written, ask Joshua, or propose a change with rationale.
 - **Cross-references**: Use `→ See 07-feature.md §3 "Section Heading"` format between PRD files. Always include the filename and quoted heading — never bare `§N`.
-- **Templates**: Starter templates for new projects live in `~/.claude/templates/` — PRD files and project CLAUDE.md.
+- **Templates**: Starter templates for new projects live in `~/.claude/docs/prd-workflow/templates/` — PRD files and project CLAUDE.md.
 - **Shared docs**: `~/.claude/docs/label-taxonomy.md` provides project-agnostic references for labeling conventions and branch naming.
+- **Full workflow**: See `~/.claude/docs/README.md` for the document index. The spec-driven development handbook (`~/.claude/docs/prd-workflow/spec-driven-development.md`) covers deviation thresholds, checkpoint cadence, document lifecycle, and the slash command map.
 
 ## Git Workflow
 
