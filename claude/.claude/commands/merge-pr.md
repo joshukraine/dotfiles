@@ -29,16 +29,50 @@ If CI has not passed, **stop and report**. Do not proceed with the merge.
 - Squash merge: `gh pr merge --squash`
 - Do **not** pass `--delete-branch` — GitHub is configured to auto-delete remote branches on merge. Local branch cleanup is handled in Step 4.
 
-### Step 4: Update local state
+### Step 4: Detect worktree context
+
+Before updating local state, determine whether you are inside a git worktree:
+
+```bash
+git rev-parse --git-dir
+git rev-parse --git-common-dir
+```
+
+- If these values are **identical**, you are in a normal repo — proceed with Step 5a.
+- If they **differ**, you are in a worktree — proceed with Step 5b.
+
+### Step 5a: Update local state (normal repo)
 
 After `gh pr merge` completes:
 
 - Switch to the base branch (e.g., `main`, `master`, or whatever `baseRefName` was detected in Step 1) and pull: `git switch <base-branch> && git pull`
 - Delete the local feature branch with `git branch -D <branch-name>` (force-delete is required because squash merges produce a different SHA, so `-d` cannot detect the branch as merged)
 
-### Step 5: Confirm completion
+Then skip to Step 6.
 
-Report:
+### Step 5b: Update local state (worktree)
+
+When inside a worktree, `git switch` to the base branch will fail because it is checked out in another worktree. Handle this differently:
+
+1. **Find the primary worktree** on the base branch:
+
+   ```bash
+   git worktree list --porcelain
+   ```
+
+   Parse the output to find the worktree entry whose `branch` matches `refs/heads/<base-branch>`. Extract its path.
+
+2. **Pull the base branch** from the primary worktree:
+
+   ```bash
+   git -C <primary-worktree-path> pull
+   ```
+
+3. **Do not delete the branch or remove the worktree automatically.** The branch cannot be deleted while it is checked out in a worktree, and removing the worktree would destroy the user's current working directory. Instead, provide the cleanup commands in the completion report.
+
+### Step 6: Confirm completion
+
+**Normal repo** — report:
 
 ```text
 ## Merge Complete
@@ -47,6 +81,21 @@ Report:
 - Remote branch: deleted
 - Local branch: deleted (or kept — reason)
 - Local main: up to date
+```
+
+**Worktree** — report:
+
+```text
+## Merge Complete
+
+- PR: #N — [title]
+- Remote branch: deleted
+- Local main: up to date (pulled in primary worktree)
+
+## Worktree cleanup (run from outside this directory)
+
+    git worktree remove <this-worktree-path>
+    git branch -D <branch-name>
 ```
 
 ## Important
