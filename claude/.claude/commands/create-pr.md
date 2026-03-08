@@ -4,7 +4,7 @@ Create a pull request from the current branch with proper formatting and issue l
 
 ## Command Options
 
-- `--issue N`: Explicitly link to issue #N (recommended for reliability)
+- `$ARGUMENTS`: Optional PR number or `--issue N` to explicitly link an issue
 - `--skip-issue-link`: Skip automatic issue linking
 - `--draft`: Create PR as draft (default is ready-to-review)
 
@@ -22,7 +22,7 @@ Create a pull request from the current branch with proper formatting and issue l
    - Follow Conventional Commits format from global CLAUDE.md
 
 3. **Analyze commits for description**:
-   - Get commit history: `git log origin/main..HEAD --oneline`
+   - Get commit history: `git log origin/<base-branch>..HEAD --oneline` (use the base branch identified in step 1)
    - Group commits by type (feat, fix, docs, etc.)
    - Identify patterns and overall theme
 
@@ -38,9 +38,10 @@ Create a pull request from the current branch with proper formatting and issue l
    - If no matching item exists, skip this step
 
 6. **Identify and link related issues**:
-   - **If `--issue N` provided**: Use "Closes #N" in PR description
-   - **If no flag**: Extract issue number from branch name (`fix/gh-123` → Issue #123)
+   - **If `--issue N` or issue number provided as argument**: Use "Closes #N" in PR description
+   - **Default (no argument)**: Automatically extract issue number from branch name (`fix/gh-123` → Issue #123). Also check the issue description and any linked issues to ensure ALL related issues are referenced with closing keywords (e.g., "Closes #X, Closes #Y").
    - **If `--skip-issue-link`**: Skip issue linking entirely
+   - **If no issue number can be determined**: Warn the user and ask whether to proceed without issue linking
    - **Default format**: Always use "Closes #N" (assume PR fully resolves issue)
 
 7. **Create the PR**:
@@ -75,9 +76,12 @@ Closes #123
 ## Example Usage
 
 ```bash
-# Recommended: Explicit issue linking
+# Default: Automatically detects issue from branch name (e.g., fix/gh-123-description)
+/create-pr
+
+# Explicit issue linking (when branch name doesn't contain an issue number)
 /create-pr --issue 123
 
-# Automatic: Detects from branch name
-/create-pr
+# Skip issue linking entirely
+/create-pr --skip-issue-link
 ```
