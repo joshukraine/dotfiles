@@ -137,6 +137,15 @@
             "command": "osascript -e 'display notification \"Claude needs your attention\" with title \"Claude Code\"'"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
       }
     ]
   },
