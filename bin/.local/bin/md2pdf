@@ -1,0 +1,117 @@
+#!/bin/bash
+# Convert Markdown files to PDF with GitHub-style formatting.
+# Requires: greadlink (brew install coreutils), pandoc, python3, weasyprint (pip3 install weasyprint)
+#
+# Usage:
+#   md2pdf file.md                    # Convert single file → file.pdf
+#   md2pdf file1.md file2.md          # Convert multiple files
+#   md2pdf docs/guides/*.md           # Convert with glob
+#   md2pdf -o output.pdf file.md      # Custom output path
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$(greadlink -f "$0")")" && pwd)"
+CSS_FILE="${MD2PDF_CSS:-${SCRIPT_DIR}/md2pdf-github.css}"
+
+usage() {
+  echo "Usage: md2pdf [-o output.pdf] file.md [file2.md ...]"
+  echo ""
+  echo "Convert Markdown files to PDF with GitHub-style formatting."
+  echo ""
+  echo "Options:"
+  echo "  -o FILE   Custom output path (only valid with single input file)"
+  echo "  -h        Show this help"
+  echo ""
+  echo "Environment:"
+  echo "  MD2PDF_CSS   Path to custom CSS file (default: md2pdf-github.css next to this script)"
+  exit 0
+}
+
+check_deps() {
+  local missing=()
+  command -v greadlink >/dev/null 2>&1 || missing+=("coreutils (brew install coreutils)")
+  command -v pandoc >/dev/null 2>&1 || missing+=("pandoc")
+  command -v python3 >/dev/null 2>&1 || missing+=("python3")
+  python3 -c "import weasyprint" 2>/dev/null || missing+=("weasyprint (pip3 install weasyprint)")
+
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    echo "Error: missing dependencies: ${missing[*]}" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "${CSS_FILE}" ]]; then
+    echo "Error: CSS file not found: ${CSS_FILE}" >&2
+    echo "Run 'md2pdf -h' for configuration details." >&2
+    exit 1
+  fi
+}
+
+convert_file() {
+  local md_file="$1"
+  local pdf_file="$2"
+  local tmp_raw="/tmp/md2pdf-raw-$$.html"
+  local tmp_fixed="/tmp/md2pdf-fixed-$$.html"
+  trap 'rm -f "${tmp_raw}" "${tmp_fixed}"' RETURN
+
+  # Convert Markdown to HTML with GitHub-style CSS
+  pandoc "${md_file}" -o "${tmp_raw}" --standalone --css="${CSS_FILE}" --metadata title=""
+
+  # Replace <input> checkboxes with Unicode characters (weasyprint can't render inputs inline)
+  python3 -c "
+import re, sys
+with open('${tmp_raw}', 'r') as f:
+    html = f.read()
+html = re.sub(r'<input type=\"checkbox\" checked[^/]*/>', '☑ ', html)
+html = re.sub(r'<input type=\"checkbox\"[^/]*/>', '☐ ', html)
+html = html.replace('<label>', '').replace('</label>', '')
+with open('${tmp_fixed}', 'w') as f:
+    f.write(html)
+"
+
+  # Convert HTML to PDF
+  if ! python3 -m weasyprint "${tmp_fixed}" "${pdf_file}" 2>/dev/null; then
+    echo "Error: weasyprint failed for ${md_file}" >&2
+    return 1
+  fi
+
+  echo "  $(basename "${md_file}") → $(basename "${pdf_file}")"
+}
+
+# Parse arguments
+output_file=""
+while getopts "ho:" opt; do
+  case ${opt} in
+    h) usage ;;
+    o) output_file="${OPTARG}" ;;
+    *) usage ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [[ $# -eq 0 ]]; then
+  echo "Error: no input files specified" >&2
+  echo "Usage: md2pdf [-o output.pdf] file.md [file2.md ...]" >&2
+  exit 1
+fi
+
+if [[ -n "${output_file}" && $# -gt 1 ]]; then
+  echo "Error: -o can only be used with a single input file" >&2
+  exit 1
+fi
+
+check_deps
+
+for md_file in "$@"; do
+  if [[ ! -f "${md_file}" ]]; then
+    echo "Error: file not found: ${md_file}" >&2
+    continue
+  fi
+
+  if [[ -n "${output_file}" ]]; then
+    pdf_file="${output_file}"
+  else
+    pdf_file="${md_file%.md}.pdf"
+  fi
+
+  convert_file "${md_file}" "${pdf_file}"
+done
