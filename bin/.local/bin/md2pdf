@@ -1,6 +1,6 @@
 #!/bin/bash
 # Convert Markdown files to PDF with GitHub-style formatting.
-# Requires: pandoc, python3, weasyprint (pip3 install weasyprint)
+# Requires: greadlink (brew install coreutils), pandoc, python3, weasyprint (pip3 install weasyprint)
 #
 # Usage:
 #   md2pdf file.md                    # Convert single file → file.pdf
@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$(greadlink -f "$0")")" && pwd)"
 CSS_FILE="${MD2PDF_CSS:-${SCRIPT_DIR}/md2pdf-github.css}"
 
 usage() {
@@ -29,6 +29,7 @@ usage() {
 
 check_deps() {
   local missing=()
+  command -v greadlink >/dev/null 2>&1 || missing+=("coreutils (brew install coreutils)")
   command -v pandoc >/dev/null 2>&1 || missing+=("pandoc")
   command -v python3 >/dev/null 2>&1 || missing+=("python3")
   python3 -c "import weasyprint" 2>/dev/null || missing+=("weasyprint (pip3 install weasyprint)")
@@ -50,6 +51,7 @@ convert_file() {
   local pdf_file="$2"
   local tmp_raw="/tmp/md2pdf-raw-$$.html"
   local tmp_fixed="/tmp/md2pdf-fixed-$$.html"
+  trap 'rm -f "${tmp_raw}" "${tmp_fixed}"' RETURN
 
   # Convert Markdown to HTML with GitHub-style CSS
   pandoc "${md_file}" -o "${tmp_raw}" --standalone --css="${CSS_FILE}" --metadata title=""
@@ -67,10 +69,10 @@ with open('${tmp_fixed}', 'w') as f:
 "
 
   # Convert HTML to PDF
-  python3 -m weasyprint "${tmp_fixed}" "${pdf_file}" 2>&1 | grep -v WARNING || true
-
-  # Clean up temp files
-  rm -f "${tmp_raw}" "${tmp_fixed}"
+  if ! python3 -m weasyprint "${tmp_fixed}" "${pdf_file}" 2>/dev/null; then
+    echo "Error: weasyprint failed for ${md_file}" >&2
+    return 1
+  fi
 
   echo "  $(basename "${md_file}") → $(basename "${pdf_file}")"
 }
@@ -88,7 +90,8 @@ shift $((OPTIND - 1))
 
 if [[ $# -eq 0 ]]; then
   echo "Error: no input files specified" >&2
-  usage
+  echo "Usage: md2pdf [-o output.pdf] file.md [file2.md ...]" >&2
+  exit 1
 fi
 
 if [[ -n "${output_file}" && $# -gt 1 ]]; then
