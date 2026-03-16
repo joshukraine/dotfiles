@@ -34,7 +34,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `/resolve-issue 123` | Full workflow for a GitHub issue — research, plan, implement, verify |
 | `/sprint-issue 123` | Fast-track a small, well-scoped issue — skips the plan checkpoint |
 | `/commit` | Stage and commit with smart splitting and Conventional Commits |
-| `/create-pr --issue 123` | Create a draft PR with auto-generated description and issue linking |
+| `/create-pr` | Create a PR with auto-generated description and issue linking (inferred from branch name) |
 | `/simplify` | Post-implementation code review — run before creating a PR |
 
 All custom commands live in `claude/.claude/commands/`. Type `/` to browse the full list including PRD-specific commands (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
@@ -42,7 +42,7 @@ All custom commands live in `claude/.claude/commands/`. Type `/` to browse the f
 ### Common Workflow
 
 ```text
-/resolve-issue 123  →  /simplify  →  /create-pr --issue 123
+/resolve-issue 123  →  /simplify  →  /create-pr
 ```
 
 ## Context Management

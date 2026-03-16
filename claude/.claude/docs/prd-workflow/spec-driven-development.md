@@ -297,7 +297,7 @@ This is where most development time is spent. One pass through this cycle produc
    └─ /drift-check             (spec alignment — see below)
 
 5. Create PR
-   └─ /create-pr --issue N     (links issue, updates ROADMAP)
+   └─ /create-pr               (links issue from branch name, updates ROADMAP)
 
 6. Review
    └─ /review-pr               (quality, security, correctness)

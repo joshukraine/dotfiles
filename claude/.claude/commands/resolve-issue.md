@@ -55,7 +55,7 @@ Track your progress through the 6 steps below. Report completion of each step be
 - Summarize: files modified, commits made, test status, resolution confirmation
 - **STOP**: Ask user if they want to create PR now
 - For non-trivial implementations, suggest running `/simplify` first to review for code reuse, quality, and efficiency improvements
-- Recommend: `/create-pr --issue $ARGUMENTS`
+- Recommend: `/create-pr` (issue number will be inferred from branch name)
 - **Do NOT automatically create PR**
 
 ## Branch Naming

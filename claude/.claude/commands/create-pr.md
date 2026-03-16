@@ -4,9 +4,11 @@ Create a pull request from the current branch with proper formatting and issue l
 
 ## Command Options
 
-- `$ARGUMENTS`: Optional PR number or `--issue N` to explicitly link an issue
-- `--skip-issue-link`: Skip automatic issue linking
-- `--draft`: Create PR as draft (default is ready-to-review)
+All flags are optional. By default, the issue number is inferred from the branch name and the PR is created as ready-to-review.
+
+- `--issue N`: Override automatic issue linking with a specific issue number
+- `--skip-issue-link`: Skip issue linking entirely
+- `--draft`: Create PR as draft
 
 ## Your task
 
