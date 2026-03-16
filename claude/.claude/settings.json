@@ -157,11 +157,13 @@
   "enabledPlugins": {
     "lua-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "starship-claude@starship-claude": true
+    "starship-claude@starship-claude": true,
+    "ruby-lsp@claude-plugins-official": true
   },
   "sandbox": {
     "enabled": false
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "voiceEnabled": true
 }
