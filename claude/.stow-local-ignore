@@ -1,3 +1,2 @@
-# Do not symlink reference docs to ~/.claude/
-cheatsheet\.md
-claudecode-nvim-vs-tmux\.md
+# Do not symlink markdown docs to ~/.claude/
+.*\.md
