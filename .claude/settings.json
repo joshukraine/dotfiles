@@ -77,7 +77,6 @@
       "Bash(which:*)",
       "Bash(xargs:*)",
       "Edit",
-      "MultiEdit",
       "WebFetch(domain:cmp.saghen.dev)",
       "WebFetch(domain:context7.com)",
       "WebFetch(domain:docs.anthropic.com)",

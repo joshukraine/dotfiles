@@ -102,7 +102,6 @@
       "Bash(xargs:*)",
       "Bash(yarn:*)",
       "Edit",
-      "MultiEdit",
       "WebFetch(domain:api.rubyonrails.org)",
       "WebFetch(domain:cmp.saghen.dev)",
       "WebFetch(domain:context7.com)",

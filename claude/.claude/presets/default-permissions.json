@@ -2,7 +2,6 @@
   "permissions": {
     "allow": [
       "Edit",
-      "MultiEdit",
 
       "Bash(awk:*)",
       "Bash(basename:*)",
