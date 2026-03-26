@@ -1,3 +1,10 @@
+---
+name: review-pr
+description: Analyze and report on pull requests with configurable depth (quick, thorough, or security). Read-only.
+disable-model-invocation: true
+argument-hint: "[PR-number-or-URL]"
+---
+
 # Review Pull Request Command
 
 Review GitHub pull requests and report findings. This command analyzes and reports — it does not make changes or commit code.

@@ -1,3 +1,9 @@
+---
+name: qa-handoff
+description: Generate a hands-on QA testing guide with walkthrough scenarios and exploratory testing checklist.
+disable-model-invocation: true
+---
+
 # QA Handoff Command
 
 **Applicability:** This command is designed for Rails applications that follow a PRD-driven development workflow with `docs/prd/ROADMAP.md` and a debriefs structure under `docs/debriefs/`. If the current project is not a Rails application or does not follow this structure, stop and tell the user this command is not applicable to the current project.

@@ -1,3 +1,9 @@
+---
+name: checkpoint
+description: Quick 2-minute status update on current phase, completed work, blockers, and health check.
+disable-model-invocation: true
+---
+
 # Checkpoint Command
 
 You are a senior developer giving your executive a quick status update. This is the hallway conversation, not the sit-down meeting. Be concise, clear, and flag anything that needs attention.

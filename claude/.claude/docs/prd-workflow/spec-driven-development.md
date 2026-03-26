@@ -276,7 +276,7 @@ This section maps every command to its place in the development cycle. Think of 
 | `/update-deps` | Update dependencies with testing between categories | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
-> **Note:** `/simplify` is a built-in Claude Code skill, not a custom command in `~/.claude/commands/`. All other commands listed above are custom command definitions. When invoking `/simplify`, Claude Code loads it automatically as a skill — there is no `.md` file to maintain for it.
+> **Note:** `/simplify` is a built-in Claude Code skill. All other entries listed above are custom skills defined in `~/.claude/skills/`.
 
 ### The PR cycle (inner loop)
 

@@ -18,6 +18,6 @@ Everything related to spec-driven (PRD-based) development lives in `prd-workflow
 | --- | --- | --- |
 | [`label-taxonomy.md`](label-taxonomy.md) | Unified vocabulary for commits, branches, issues, and project boards | Naming a branch, choosing a commit type, setting up GitHub labels |
 
-## Slash Commands
+## Skills
 
-Custom slash commands live in `~/.claude/commands/`. See the spec-driven development handbook (§7 "Slash Commands in the Development Cycle") for a full command map and lifecycle stage guidance.
+Custom skills live in `~/.claude/skills/`. See the spec-driven development handbook (§7 "Slash Commands in the Development Cycle") for a full command map and lifecycle stage guidance.

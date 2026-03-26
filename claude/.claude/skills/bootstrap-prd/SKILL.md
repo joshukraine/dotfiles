@@ -1,3 +1,9 @@
+---
+name: bootstrap-prd
+description: Set up PRD-driven development infrastructure for a new project, including directory structure, templates, and roadmap.
+disable-model-invocation: true
+---
+
 # Bootstrap PRD Command
 
 Set up PRD-driven development infrastructure for a new project. This command handles two workflows: **PRD-first** (PRD files already exist, scaffold the project around them) and **scaffold-first** (no PRD yet, create template files to be filled in). The command detects which situation applies and adapts.

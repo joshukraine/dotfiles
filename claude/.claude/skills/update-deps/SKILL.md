@@ -1,3 +1,9 @@
+---
+name: update-deps
+description: Update project dependencies incrementally with testing between categories. Framework-agnostic.
+disable-model-invocation: true
+---
+
 # Update Dependencies Command
 
 Update project dependencies safely with testing between updates and documentation of breaking changes.

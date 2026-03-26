@@ -1,3 +1,10 @@
+---
+name: md2pdf
+description: Convert a Markdown file to PDF with GitHub-style formatting using the md2pdf tool.
+disable-model-invocation: true
+argument-hint: "[file.md]"
+---
+
 # Markdown to PDF Command
 
 Convert Markdown files to PDF with GitHub-style formatting using the `md2pdf` tool.

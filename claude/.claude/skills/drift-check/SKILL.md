@@ -1,3 +1,9 @@
+---
+name: drift-check
+description: Pre-PR advisory check for deviations from the project spec. Read-only analysis.
+disable-model-invocation: true
+---
+
 # Drift Check Command
 
 Pre-PR deviation check against the project spec. Run this before `/create-pr` to verify alignment between implementation and documentation.

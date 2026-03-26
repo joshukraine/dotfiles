@@ -1,3 +1,9 @@
+---
+name: plan-phase
+description: Plan the next PRD phase by drafting issues, creating GitHub issues, and bridging planning to building.
+disable-model-invocation: true
+---
+
 # Plan Phase Command
 
 Plan the next phase of development from the PRD, create GitHub issues, and prepare for implementation. This command bridges planning and building — it creates the structure but writes no application code.

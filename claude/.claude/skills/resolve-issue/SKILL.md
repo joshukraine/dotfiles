@@ -1,3 +1,10 @@
+---
+name: resolve-issue
+description: Full issue workflow — fetch details, research, plan solution, implement, and verify.
+disable-model-invocation: true
+argument-hint: "[issue-number]"
+---
+
 # Resolve GitHub Issue Command
 
 Systematically resolve GitHub issues with a structured workflow.

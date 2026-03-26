@@ -1,3 +1,9 @@
+---
+name: readme-refresh
+description: Audit and update a project README, or bootstrap a new one. Detects tech stack, versions, and services.
+disable-model-invocation: true
+---
+
 # README Refresh Command
 
 Audit and update the project README, or bootstrap one if it doesn't exist. The README is a living document — it evolves with the code and should always reflect the current state of the project.

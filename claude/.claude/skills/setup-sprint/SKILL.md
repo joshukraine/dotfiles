@@ -1,3 +1,9 @@
+---
+name: setup-sprint
+description: Create parallel git worktrees for a batch of issues by label, with permissions and isolation.
+disable-model-invocation: true
+---
+
 # Setup Sprint Command
 
 Prepare parallel Git worktrees for a batch of issues filtered by label. This command sets up the workspace but does not start Claude Code instances or begin implementation.
