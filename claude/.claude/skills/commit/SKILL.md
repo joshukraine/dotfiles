@@ -4,7 +4,7 @@ description: Stage and commit changes with intelligent Conventional Commits mess
 disable-model-invocation: true
 ---
 
-# Commit Command
+# Commit
 
 Create git commits with intelligent message generation and commit-splitting analysis.
 

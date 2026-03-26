@@ -4,7 +4,7 @@ description: Audit and update a project README, or bootstrap a new one. Detects 
 disable-model-invocation: true
 ---
 
-# README Refresh Command
+# README Refresh
 
 Audit and update the project README, or bootstrap one if it doesn't exist. The README is a living document — it evolves with the code and should always reflect the current state of the project.
 
@@ -146,7 +146,7 @@ Write the file to `README.md` at the project root. Do **not** commit — let the
 
 ## Important
 
-- This command inspects and reports. It does not refactor code, change configuration, or install dependencies.
+- This skill inspects and reports. It does not refactor code, change configuration, or install dependencies.
 - Prose and subjective descriptions are the human's domain. The command handles mechanical, verifiable facts.
 - The command is framework-aware but not framework-specific. The scan in Step 1 covers Rails, Node, Python, Go, Rust, and Hugo projects. For unrecognized stacks, fall back to checking common files (`Makefile`, `Dockerfile`, `docker-compose.yml`, `README.md`).
 - When in doubt about whether something belongs in the README, include it in the findings report and let the user decide.

@@ -4,9 +4,9 @@ description: Plan the next PRD phase by drafting issues, creating GitHub issues,
 disable-model-invocation: true
 ---
 
-# Plan Phase Command
+# Plan Phase
 
-Plan the next phase of development from the PRD, create GitHub issues, and prepare for implementation. This command bridges planning and building — it creates the structure but writes no application code.
+Plan the next phase of development from the PRD, create GitHub issues, and prepare for implementation. This skill bridges planning and building — it creates the structure but writes no application code.
 
 ## Your task
 
@@ -84,7 +84,7 @@ When the user is ready to begin, suggest the `/resolve-issue` command for the fi
 
 ## Important
 
-- **This command creates GitHub issues only.** It does not write application code, create branches, modify source files, or run tests.
+- **This skill creates GitHub issues only.** It does not write application code, create branches, modify source files, or run tests.
 - **Both checkpoints are hard stops.** Do not proceed without explicit approval.
 - **If a context window clear is needed**, it is safe to do so after Step 4 — the issues exist on GitHub and will survive the clear.
 - **Keep issues focused.** Each issue should be completable in a single PR. If an issue feels too large, split it.

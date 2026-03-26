@@ -400,7 +400,7 @@ echo "       • Pull request merged    → Set status to Done"
 echo "       • Item closed            → Set status to Done"
 echo "       • Item reopened          → Set status to In Progress"
 echo ""
-echo -e "  3. ${BOLD}Copy CLAUDE.md and slash commands${NC} to the new repo"
+echo -e "  3. ${BOLD}Copy CLAUDE.md and skills${NC} to the new repo"
 echo "     (These live in your dotfiles and are already portable.)"
 echo ""
 

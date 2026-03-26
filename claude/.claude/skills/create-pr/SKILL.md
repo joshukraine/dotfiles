@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "[base-branch]"
 ---
 
-# Create Pull Request Command
+# Create Pull Request
 
 Create a pull request from the current branch with proper formatting and issue linking.
 

@@ -4,7 +4,7 @@ A collaborative workflow for building software against a Product Requirements Do
 
 Informed by lessons learned building ComixDistro (13 phases, 380+ PRs, 18 PRD files).
 
-**Platform assumptions:** This workflow assumes GitHub as the hosting platform and the `gh` CLI for issue tracking, pull requests, and CI integration. The principles (modular specs, deviation tracking, checkpoint cadence) are platform-agnostic, but the slash commands and specific procedures rely on GitHub tooling. Adapting to GitLab, Bitbucket, or other platforms would require substituting the `gh`-based steps with equivalent tooling.
+**Platform assumptions:** This workflow assumes GitHub as the hosting platform and the `gh` CLI for issue tracking, pull requests, and CI integration. The principles (modular specs, deviation tracking, checkpoint cadence) are platform-agnostic, but the skills and specific procedures rely on GitHub tooling. Adapting to GitLab, Bitbucket, or other platforms would require substituting the `gh`-based steps with equivalent tooling.
 
 ---
 
@@ -195,7 +195,7 @@ The PRD is the primary driver. The ROADMAP is the work queue. Every implementati
 - ROADMAP checkboxes are the unit of work. One checkbox = one PR.
 - Deviation tracking is at its most rigorous — the spec is fresh and the system is being shaped.
 - The CHANGELOG is active. New entries appear regularly as implementation reveals things the spec didn't anticipate.
-- Slash commands like `/plan-phase`, `/resolve-issue`, and `/create-pr` drive the development cycle.
+- Skills like `/plan-phase`, `/resolve-issue`, and `/create-pr` drive the development cycle.
 
 **Risk:** Over-adherence. The spec is a plan, not a contract. If implementation reveals a better approach, update the spec — don't force the code into a shape that no longer makes sense.
 
@@ -249,15 +249,15 @@ The spec-driven approach isn't a phase you pass through — it's a habit you car
 
 ---
 
-## 7 Slash Commands in the Development Cycle
+## 7 Skills in the Development Cycle
 
-Slash commands are the operational backbone of spec-driven development. They encapsulate consistent, repeatable behavior at each stage of the workflow — reducing cognitive load, fighting fatigue, and ensuring steps aren't skipped.
+Skills are the operational backbone of spec-driven development. They encapsulate consistent, repeatable behavior at each stage of the workflow — reducing cognitive load, fighting fatigue, and ensuring steps aren't skipped.
 
-This section maps every command to its place in the development cycle. Think of it as the answer to: "What command do I run right now?"
+This section maps every skill to its place in the development cycle. Think of it as the answer to: "What skill do I run right now?"
 
-### The command library
+### The skill library
 
-| Command | Purpose | Cadence |
+| Skill | Purpose | Cadence |
 | ------- | ------- | ------- |
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
@@ -314,7 +314,7 @@ Step 7 closes the loop. `/merge-pr` encapsulates the merge preferences (squash m
 
 At the start of each phase:
 
-1. **`/plan-phase`** — Read the relevant PRD files, create GitHub issues with acceptance criteria and implementation order. This is a planning-only command — no code is written.
+1. **`/plan-phase`** — Read the relevant PRD files, create GitHub issues with acceptance criteria and implementation order. This is a planning-only skill — no code is written.
 2. **`/setup-sprint`** *(optional)* — If the phase contains a batch of small, independent issues (common for chore or fix batches), create parallel worktrees. Each worktree gets its own branch and can be worked independently.
 
 ### Phase boundary
@@ -331,14 +331,14 @@ The `/debrief` is the natural place to surface drift that was missed during the 
 
 When you're disoriented, fatigued, or returning from a break:
 
-- **`/checkpoint`** — Reorient. Where am I in the ROADMAP? What's in flight? What are the next 2–3 items? This is the "where was I?" command.
+- **`/checkpoint`** — Reorient. Where am I in the ROADMAP? What's in flight? What are the next 2–3 items? This is the "where was I?" skill.
 - **Appendix A quick reference** — Scan the checklists to re-engage the workflow discipline.
 
 When you suspect drift has occurred:
 
 - **`/drift-check`** — Run it against the current branch to assess alignment. If drift is confirmed, follow the reactive workflow in §3b.
 
-### Project-level commands
+### Project-level skills
 
 These run infrequently but are important bookends:
 
@@ -348,9 +348,9 @@ These run infrequently but are important bookends:
 
 ### Lifecycle stage mapping
 
-Commands shift in importance as the project matures (see §6):
+Skills shift in importance as the project matures (see §6):
 
-| Command | Greenfield | MVP Complete | Mature |
+| Skill | Greenfield | MVP Complete | Mature |
 | ------- | ---------- | ------------ | ------ |
 | `/bootstrap-prd` | **Setup** | — | — |
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
@@ -369,11 +369,11 @@ Commands shift in importance as the project matures (see §6):
 | `/update-deps` | Periodic | Periodic | **Regular cadence** |
 | `/readme-refresh` | Bootstrap | **Full refresh** | Light periodic |
 
-Note how `/drift-check` intensity tracks project maturity: critical during greenfield when the spec is the primary reference, important during MVP transition, and lighter in the mature stage when living documents replace the PRD. The command still has value in the mature stage — it just checks against living docs (domain model, integration guides) rather than PRD files.
+Note how `/drift-check` intensity tracks project maturity: critical during greenfield when the spec is the primary reference, important during MVP transition, and lighter in the mature stage when living documents replace the PRD. The skill still has value in the mature stage — it just checks against living docs (domain model, integration guides) rather than PRD files.
 
-### The `/drift-check` command
+### The `/drift-check` skill
 
-The per-PR deviation check from §4 is supported by the `/drift-check` command.
+The per-PR deviation check from §4 is supported by the `/drift-check` skill.
 
 **When to run:** Before `/create-pr`, after implementation is complete. Also useful ad-hoc when you suspect drift.
 
@@ -390,7 +390,7 @@ The per-PR deviation check from §4 is supported by the `/drift-check` command.
 - Block the PR. It's advisory — a nudge, not a gate.
 - Replace human judgment. It surfaces signals; the developer interprets them.
 
-**Design principle:** Lightweight and fast. If running this command feels like a burden, it won't get used. Target: under 30 seconds for a typical PR.
+**Design principle:** Lightweight and fast. If running this skill feels like a burden, it won't get used. Target: under 30 seconds for a typical PR.
 
 ---
 

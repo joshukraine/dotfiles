@@ -8,7 +8,7 @@
 - [Starship][starship] prompt
 - [Zsh][zsh] shell with [zsh-abbr][zsh-abbr] for abbreviations
 - Flexible, terminal-based dev environment with [ghostty][ghostty] 👻 + [Tmux][tmux]!
-- [Claude Code][claude-code] with custom commands, permission presets, and safety hooks
+- [Claude Code][claude-code] with custom skills, permission presets, and safety hooks
 - Fast, idempotent setup with [GNU Stow][gnu-stow]
 - New Mac bootstrap based on thoughtbot's [Laptop][laptop]
 - Support for both Apple Silicon and Intel Macs
@@ -226,12 +226,12 @@ These functions work with both `main` and `master` branch names automatically.
 > [!TIP]
 > Claude Code can also run inside Neovim via the [claude-code.nvim][claude-code-nvim] plugin, which is how I use it most of the time during development.
 
-### Custom Commands
+### Skills
 
-Slash commands provide structured workflows for the full development lifecycle:
+Custom [skills][agent-skills] provide structured workflows for the full development lifecycle:
 
-| Command | Purpose |
-| ------- | ------- |
+| Skill | Purpose |
+| ----- | ------- |
 | `/bootstrap-prd` | Scaffold PRD-driven development infrastructure into a new project |
 | `/checkpoint` | Quick status update — what's done, in progress, and blocked |
 | `/commit` | Analyze diffs, split into logical commits, Conventional Commits format |
@@ -460,6 +460,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 
 [1p-cli-ssh]: https://developer.1password.com/docs/ssh
 [1p-cli-start]: https://developer.1password.com/docs/cli/get-started
+[agent-skills]: https://agentskills.io
 [asdf]: https://asdf-vm.com/
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
 [claude-code-nvim]: https://github.com/coder/claudecode.nvim

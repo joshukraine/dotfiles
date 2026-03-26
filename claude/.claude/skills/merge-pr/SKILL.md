@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "[PR-number]"
 ---
 
-# Merge Pull Request Command
+# Merge Pull Request
 
 Merge a pull request with consistent practices: verify checks, squash merge, clean up the branch, and pull latest main.
 

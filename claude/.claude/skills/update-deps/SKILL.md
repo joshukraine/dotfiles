@@ -4,7 +4,7 @@ description: Update project dependencies incrementally with testing between cate
 disable-model-invocation: true
 ---
 
-# Update Dependencies Command
+# Update Dependencies
 
 Update project dependencies safely with testing between updates and documentation of breaking changes.
 

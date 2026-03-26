@@ -27,7 +27,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `/sandbox` | Enable OS-level filesystem and network sandboxing |
 | `/simplify` | Review changed code for reuse, quality, and efficiency |
 
-## Skills (Custom Commands)
+## Skills
 
 | Skill | When to use |
 | ----- | ----------- |

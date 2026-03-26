@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "[issue-number]"
 ---
 
-# Resolve GitHub Issue Command
+# Resolve GitHub Issue
 
 Systematically resolve GitHub issues with a structured workflow.
 

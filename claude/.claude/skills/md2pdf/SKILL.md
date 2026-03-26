@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "[file.md]"
 ---
 
-# Markdown to PDF Command
+# Markdown to PDF
 
 Convert Markdown files to PDF with GitHub-style formatting using the `md2pdf` tool.
 
