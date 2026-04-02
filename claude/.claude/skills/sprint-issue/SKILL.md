@@ -1,4 +1,11 @@
-# Sprint Issue Command
+---
+name: sprint-issue
+description: Fast-track workflow for small, well-scoped issues. Skips the plan checkpoint for speed.
+disable-model-invocation: true
+argument-hint: "[issue-number]"
+---
+
+# Sprint Issue
 
 Quickly resolve a small, well-scoped GitHub issue with a streamlined workflow. Use `/resolve-issue` for larger or more complex work that needs full checkpoints.
 
@@ -27,7 +34,7 @@ Quickly resolve a small, well-scoped GitHub issue with a streamlined workflow. U
 
 ## Important
 
-- This command is for small, well-scoped issues.
+- This skill is for small, well-scoped issues.
 - Skip the implementation plan checkpoint — move directly to implementation.
 - Still verify tests and linting before creating the PR.
 - **Commit messages**: Describe what the commit does, NO issue references.

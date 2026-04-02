@@ -1,6 +1,12 @@
-# Bootstrap PRD Command
+---
+name: bootstrap-prd
+description: Set up PRD-driven development infrastructure for a new project, including directory structure, templates, and roadmap.
+disable-model-invocation: true
+---
 
-Set up PRD-driven development infrastructure for a new project. This command handles two workflows: **PRD-first** (PRD files already exist, scaffold the project around them) and **scaffold-first** (no PRD yet, create template files to be filled in). The command detects which situation applies and adapts.
+# Bootstrap PRD
+
+Set up PRD-driven development infrastructure for a new project. This skill handles two workflows: **PRD-first** (PRD files already exist, scaffold the project around them) and **scaffold-first** (no PRD yet, create template files to be filled in). The skill detects which situation applies and adapts.
 
 ## Your task
 
@@ -160,7 +166,7 @@ After approval, create each file:
 
 ## Important
 
-- **This command creates project files only.** It does not write application code or call any external APIs beyond `git` and `gh`.
+- **This skill creates project files only.** It does not write application code or call any external APIs beyond `git` and `gh`.
 - **Both checkpoints are hard stops.** Do not proceed without explicit approval.
 - **Shared docs are NOT copied.** `~/.claude/docs/label-taxonomy.md` remains a global reference — it should not be duplicated into individual projects.
 - **If a context window clear is needed**, it is safe to do so after Step 7 — the files exist on disk and will survive the clear.

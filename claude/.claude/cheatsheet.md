@@ -1,6 +1,6 @@
 # Claude Code Cheatsheet
 
-*Last updated: 2026-03-01* <!-- Update this date when editing this file -->
+*Last updated: 2026-03-26* <!-- Update this date when editing this file -->
 
 Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
@@ -27,17 +27,17 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `/sandbox` | Enable OS-level filesystem and network sandboxing |
 | `/simplify` | Review changed code for reuse, quality, and efficiency |
 
-## Custom Commands
+## Skills
 
-| Command | When to use |
-| ------- | ----------- |
+| Skill | When to use |
+| ----- | ----------- |
 | `/resolve-issue 123` | Full workflow for a GitHub issue — research, plan, implement, verify |
 | `/sprint-issue 123` | Fast-track a small, well-scoped issue — skips the plan checkpoint |
 | `/commit` | Stage and commit with smart splitting and Conventional Commits |
 | `/create-pr` | Create a PR with auto-generated description and issue linking (inferred from branch name) |
 | `/simplify` | Post-implementation code review — run before creating a PR |
 
-All custom commands live in `claude/.claude/commands/`. Type `/` to browse the full list including PRD-specific commands (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
+All skills live in `claude/.claude/skills/`. Type `/` to browse the full list including PRD-specific skills (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
 
 ### Common Workflow
 
@@ -64,4 +64,4 @@ All custom commands live in `claude/.claude/commands/`. Type `/` to browse the f
 
 ## Weekly Habit
 
-Run `/insights` once a week. When it surfaces a pattern, act on it: add a rule to CLAUDE.md, write a hook, or extract a repeated workflow into a command.
+Run `/insights` once a week. When it surfaces a pattern, act on it: add a rule to CLAUDE.md, write a hook, or extract a repeated workflow into a skill.

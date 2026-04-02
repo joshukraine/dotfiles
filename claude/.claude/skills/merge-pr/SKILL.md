@@ -1,4 +1,11 @@
-# Merge Pull Request Command
+---
+name: merge-pr
+description: Merge a pull request with status checks, squash merge, and branch cleanup. Handles worktree contexts.
+disable-model-invocation: true
+argument-hint: "[PR-number]"
+---
+
+# Merge Pull Request
 
 Merge a pull request with consistent practices: verify checks, squash merge, clean up the branch, and pull latest main.
 

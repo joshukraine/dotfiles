@@ -243,7 +243,7 @@ handle_stow_conflicts() {
     ".bashrc"
     ".claude/CLAUDE.md"
     ".claude/cheatsheet.md"
-    ".claude/commands"
+    ".claude/skills"
     ".claude/presets"
     ".claude/settings.json"
     ".claude/starship.toml"

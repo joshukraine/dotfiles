@@ -1,4 +1,10 @@
-# Commit Command
+---
+name: commit
+description: Stage and commit changes with intelligent Conventional Commits message generation and commit-splitting analysis.
+disable-model-invocation: true
+---
+
+# Commit
 
 Create git commits with intelligent message generation and commit-splitting analysis.
 

@@ -1,6 +1,12 @@
-# Setup Sprint Command
+---
+name: setup-sprint
+description: Create parallel git worktrees for a batch of issues by label, with permissions and isolation.
+disable-model-invocation: true
+---
 
-Prepare parallel Git worktrees for a batch of issues filtered by label. This command sets up the workspace but does not start Claude Code instances or begin implementation.
+# Setup Sprint
+
+Prepare parallel Git worktrees for a batch of issues filtered by label. This skill sets up the workspace but does not start Claude Code instances or begin implementation.
 
 ## Your task
 
@@ -69,7 +75,7 @@ Then in each Claude Code session:
 
 ## Important
 
-- This command creates worktrees and copies permission files only. It does not start Claude Code instances, write application code, or begin implementation.
+- This skill creates worktrees and copies permission files only. It does not start Claude Code instances, write application code, or begin implementation.
 - The checkpoint in Step 2 is a hard stop. Do not create worktrees without user confirmation.
 - If `bundle install` or similar dependency setup is needed in each worktree, mention it in the report but do not run it.
 - The `$ARGUMENTS` value is typically a type label (e.g., `chore`, `fix`) but can be any GitHub issue label. The command filters by whatever label is provided.
