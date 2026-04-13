@@ -7,7 +7,6 @@
   "permissions": {
     "allow": [
       "Edit",
-      "MultiEdit",
       "Bash(awk:*)",
       "Bash(basename:*)",
       "Bash(cat:*)",
@@ -165,5 +164,13 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "extraKnownMarketplaces": {
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    }
+  }
 }
