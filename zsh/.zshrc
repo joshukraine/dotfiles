@@ -25,8 +25,8 @@ export GPG_TTY=$(tty)
 . "$HOME/.zshrc.local"
 
 # Configure npm to use asdf's Node for global packages
-if command -v npm >/dev/null; then
-    export npm_config_prefix=$(dirname $(dirname $(which node)))
+if command -v asdf >/dev/null; then
+    export npm_config_prefix="$(asdf where nodejs 2>/dev/null)"
 fi
 
 # History configuration
@@ -79,3 +79,7 @@ if command -v gh >/dev/null 2>&1; then
 fi
 
 . "$HOME/.config/zsh/profiler.stop"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
