@@ -1,7 +1,6 @@
 ---
 name: drift-check
 description: Pre-PR advisory check for deviations from the project spec. Read-only analysis.
-disable-model-invocation: true
 ---
 
 # Drift Check
