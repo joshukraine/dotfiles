@@ -1,7 +1,6 @@
 ---
 name: readme-refresh
 description: Audit and update a project README, or bootstrap a new one. Detects tech stack, versions, and services.
-disable-model-invocation: true
 ---
 
 # README Refresh

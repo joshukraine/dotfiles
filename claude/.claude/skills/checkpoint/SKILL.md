@@ -1,7 +1,6 @@
 ---
 name: checkpoint
 description: Quick 2-minute status update on current phase, completed work, blockers, and health check.
-disable-model-invocation: true
 ---
 
 # Checkpoint

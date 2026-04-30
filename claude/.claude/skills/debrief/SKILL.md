@@ -1,7 +1,6 @@
 ---
 name: debrief
 description: Detailed technical walkthrough covering architecture, test coverage, product tour, and key design decisions.
-disable-model-invocation: true
 ---
 
 # Debrief
