@@ -159,12 +159,6 @@
     "starship-claude@starship-claude": true,
     "ruby-lsp@claude-plugins-official": true
   },
-  "sandbox": {
-    "enabled": false
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "voiceEnabled": true,
   "extraKnownMarketplaces": {
     "obsidian-skills": {
       "source": {
@@ -172,5 +166,12 @@
         "repo": "kepano/obsidian-skills"
       }
     }
-  }
+  },
+  "sandbox": {
+    "enabled": false
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "voiceEnabled": true,
+  "editorMode": "vim"
 }
