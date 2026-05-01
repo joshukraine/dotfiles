@@ -5,10 +5,6 @@
 return {
   "coder/claudecode.nvim",
   opts = {
-    -- Workaround for tmux color desaturation (anthropics/claude-code#35148)
-    -- Remove when upstream fix lands.
-    terminal_cmd = "claude-wrapper",
-
     -- Terminal display configuration
     terminal = {
       split_side = "right",

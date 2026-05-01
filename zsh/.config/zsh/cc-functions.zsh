@@ -1,15 +1,5 @@
-# Claude Code shell functions
+# Claude Code preset management
 # Sourced from .zshrc
-
-# Workaround for tmux color desaturation (anthropics/claude-code#35148)
-# Remove when upstream fix lands.
-claude() {
-  if [[ -n "${TMUX}" ]]; then
-    env -u TMUX command claude "$@"
-  else
-    command claude "$@"
-  fi
-}
 
 # Back up target file if it exists and differs from the new source.
 # Prevents silent data loss when a preset overwrites customized permissions.

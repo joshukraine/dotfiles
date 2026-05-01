@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# Workaround: Claude Code downgrades colors when $TMUX is set.
-# https://github.com/anthropics/claude-code/issues/35148
-# Remove this wrapper when the upstream fix lands.
-exec env -u TMUX claude "$@"

@@ -20,6 +20,9 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export RUBY_CONFIGURE_OPTS="--with-opt-dir=${HOMEBREW_PREFIX}/opt/openssl:${HOMEBREW_PREFIX}/opt/readline:${HOMEBREW_PREFIX}/opt/libyaml:${HOMEBREW_PREFIX}/opt/gdbm"
 
+# Claude Code: allow truecolor inside tmux (anthropics/claude-code#35148)
+export CLAUDE_CODE_TMUX_TRUECOLOR=1
+
 # XDG Base Directory Specification
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="${HOME}/.local/share"
