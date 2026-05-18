@@ -14,7 +14,7 @@ This skill does not modify code or perform code review. With `--publish` it post
 **Where it sits in the workflow — two slots:**
 
 - **Generate** (default) — run after `/create-pr` and before `/review-pr`, and re-run as needed. The orchestrator's iterative pre-flight check.
-- **Publish** (`--publish`) — run once after `/review-pr` and any review fixes, just before merge. Posts the final walkthrough to the PR so the QA tester can follow it after deploy.
+- **Publish** (`--publish`) — run once after `/review-pr` and any review fixes, just before merge (or after merge, to backfill a walkthrough that was missed). Posts the final walkthrough to the PR so the QA tester can follow it after deploy.
 
 **Not the same as:**
 
@@ -23,7 +23,7 @@ This skill does not modify code or perform code review. With `--publish` it post
 
 ## Command Options
 
-- `--publish`: Post the final walkthrough as a comment on the PR, regenerating it first so it matches the merged code. Run once, after review, just before merge. See the Publishing section.
+- `--publish`: Post the final walkthrough as a comment on the PR, regenerating it first so it matches the code under review. Run once, after review — normally just before merge, but it also works on an already-merged PR to backfill a missed walkthrough. See the Publishing section.
 
 ## Your task
 
@@ -88,15 +88,16 @@ Use the template below. Principles:
 
 ## Publishing the final walkthrough (`--publish`)
 
-Run once, after `/review-pr` and any review fixes, just before merge. This posts the final walkthrough as a comment on the PR, where the QA tester — already a participant — will see it and can follow it after deploy.
+Run once, after `/review-pr` and any review fixes — normally just before merge, but also valid on an **already-merged** PR to backfill a walkthrough that was missed. This posts the final walkthrough as a comment on the PR, where the QA tester can follow it after deploy.
 
-1. **Confirm the PR.** Identify the open PR for the branch (`gh pr view`). If there is none, stop: a walkthrough can only be published to an existing PR.
+1. **Resolve the PR.** Use the PR number or branch given as an argument; otherwise find the PR for the current branch (`gh pr view`). The PR may be **open or merged** — both are valid publish targets. Only stop if no PR exists at all.
 2. **Re-run the gate.** If the change is not user-facing (step 2 above), there is nothing to publish — say so and stop.
-3. **Regenerate from the current branch state.** Do not reuse a possibly-stale scratch file — review may have changed the code. Rebuild the walkthrough exactly as steps 1–5 describe, so the published copy matches what will merge.
-4. **Prepend a production-verification note** — a short block quote at the very top stating that QA testers verifying on production should use the production app and their own account in place of the local server and seed logins; the steps and expected results are identical.
-5. **Confirm before posting.** Show the final document to the user and get explicit approval. Posting a PR comment is outward-facing and notifies others — never post without a clear yes.
-6. **Post the comment:** `gh pr comment <N> --body-file <file>`.
-7. Confirm to the user that it is posted, and that the QA tester will be notified as a PR participant.
+3. **Regenerate from the PR diff.** Do not reuse a possibly-stale scratch file — review may have changed the code, and on a merged PR the branch is likely deleted. Rebuild the walkthrough from `gh pr diff <N>` exactly as steps 1–5 describe, so the published copy matches the code that merged.
+4. **Prepend a production-verification note** — a short block quote at the very top stating that QA testers verifying on production should use the production app and their own account in place of the local server and seed logins; the steps and expected results are identical. This is the normal case for a post-merge publish, since the feature is already deployed.
+5. **Decide who to notify.** A PR comment only notifies people already participating in the PR. If a QA reporter/tester should follow the walkthrough and is not already a participant (e.g. they were never @-mentioned in the PR body), @-mention their handle in the comment so they get a directed notification. Get the handle from the linked QA report's author, the PR body, or by asking the user; if in doubt, ask.
+6. **Confirm before posting.** Show the final document — including any @-mention — to the user and get explicit approval. Posting a PR comment is outward-facing and notifies others — never post without a clear yes.
+7. **Post the comment:** `gh pr comment <N> --body-file <file>`.
+8. Confirm to the user that it is posted, and who will be notified (PR participants, plus anyone @-mentioned).
 
 ## Document template
 
