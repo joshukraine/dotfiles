@@ -1,26 +1,33 @@
 ---
 name: walkthrough
-description: Generate a hands-on browser walkthrough of a PR's user-facing changes for the orchestrator to exercise before formal review.
+description: Generate a hands-on browser walkthrough of a PR's user-facing changes to exercise before review; --publish posts the final version to the PR for QA.
 disable-model-invocation: true
-argument-hint: "[PR-number-or-branch]"
+argument-hint: "[PR-number-or-branch] [--publish]"
 ---
 
 # Walkthrough
 
 Generate a concise, click-by-click manual walkthrough of the current branch's user-facing changes, so the human orchestrator can exercise the feature in a browser **before** the formal `/review-pr`. Seeing a feature work is faster than reading code or a PR description for catching UX problems.
 
-This skill produces a throwaway checklist. It does not change code, commit, or review.
+This skill does not modify code or perform code review. With `--publish` it posts the walkthrough as a PR comment; otherwise it only writes a local scratch file.
 
-**Where it sits in the workflow:** after `/create-pr`, before `/review-pr` — the orchestrator's pre-flight check.
+**Where it sits in the workflow — two slots:**
+
+- **Generate** (default) — run after `/create-pr` and before `/review-pr`, and re-run as needed. The orchestrator's iterative pre-flight check.
+- **Publish** (`--publish`) — run once after `/review-pr` and any review fixes, just before merge. Posts the final walkthrough to the PR so the QA tester can follow it after deploy.
 
 **Not the same as:**
 
 - `/debrief` — a heavy architecture and test-coverage write-up for milestones.
-- `/qa-handoff` — a polished, committed guide handed to a separate QA tester.
+- `/qa-handoff` — a broad, committed QA guide for a whole phase. `/walkthrough --publish` is the per-PR counterpart: one change, posted to the PR.
 
-This is lighter than both: a private, ephemeral aid for the person about to merge the PR.
+## Command Options
+
+- `--publish`: Post the final walkthrough as a comment on the PR, regenerating it first so it matches the merged code. Run once, after review, just before merge. See the Publishing section.
 
 ## Your task
+
+If invoked with `--publish`, follow the **Publishing the final walkthrough** section below instead. Otherwise, generate a new walkthrough:
 
 ### 1. Identify the change set
 
@@ -72,12 +79,24 @@ Use the template below. Principles:
 
 - Save to `tmp/pr-<N>-walkthrough.md` (or `tmp/<branch-slug>-walkthrough.md` if there is no PR).
 - `tmp/` is gitignored in most projects — confirm it is. If not, choose another gitignored scratch path, or tell the user the file must not be committed.
-- This document is ephemeral: never commit it, never add it to the PR.
+- This document is the orchestrator's editable scratch copy: not committed, not part of the PR. The PR comment posted later by `--publish` is the published snapshot.
 - Send the file to the user and tell them the path.
 
 ### 7. Recommend the next step
 
-> Exercise the walkthrough in the browser. If anything is off, fix it on the branch. When it looks right, run `/review-pr`.
+> Exercise the walkthrough in the browser. If anything is off, fix it on the branch and re-run `/walkthrough` to refresh. When it looks right, proceed to `/review-pr` — then publish the final version with `/walkthrough --publish` before merge.
+
+## Publishing the final walkthrough (`--publish`)
+
+Run once, after `/review-pr` and any review fixes, just before merge. This posts the final walkthrough as a comment on the PR, where the QA tester — already a participant — will see it and can follow it after deploy.
+
+1. **Confirm the PR.** Identify the open PR for the branch (`gh pr view`). If there is none, stop: a walkthrough can only be published to an existing PR.
+2. **Re-run the gate.** If the change is not user-facing (step 2 above), there is nothing to publish — say so and stop.
+3. **Regenerate from the current branch state.** Do not reuse a possibly-stale scratch file — review may have changed the code. Rebuild the walkthrough exactly as steps 1–5 describe, so the published copy matches what will merge.
+4. **Prepend a production-verification note** — a short block quote at the very top stating that QA testers verifying on production should use the production app and their own account in place of the local server and seed logins; the steps and expected results are identical.
+5. **Confirm before posting.** Show the final document to the user and get explicit approval. Posting a PR comment is outward-facing and notifies others — never post without a clear yes.
+6. **Post the comment:** `gh pr comment <N> --body-file <file>`.
+7. Confirm to the user that it is posted, and that the QA tester will be notified as a PR participant.
 
 ## Document template
 
