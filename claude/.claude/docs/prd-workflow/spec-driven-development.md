@@ -268,7 +268,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
-| `/walkthrough` | Generate a browser walkthrough of user-facing changes | Pre-review (user-facing PRs) |
+| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` posts it to the PR for QA | Pre-review, then pre-merge (user-facing PRs) |
 | `/review-pr` | Analyze a PR for quality issues | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide | Per feature (when needed) |
@@ -306,15 +306,18 @@ This is where most development time is spent. One pass through this cycle produc
 7. Review
    └─ /review-pr               (quality, security, correctness)
 
-8. Merge
+8. Publish walkthrough
+   └─ /walkthrough --publish   (final walkthrough → PR comment for QA — user-facing PRs)
+
+9. Merge
    └─ /merge-pr                (squash merge, clean up, pull main)
 ```
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Step 6 is conditional: for a PR with user-facing changes, `/walkthrough` produces a throwaway browser checklist so the orchestrator can exercise the feature before spending review attention on the code. For PRs with no user-facing surface the skill reports that and exits — skip straight to review.
+Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` posts that walkthrough as a PR comment so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
 
-Step 8 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
+Step 9 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
 
 ### Phase planning
 
