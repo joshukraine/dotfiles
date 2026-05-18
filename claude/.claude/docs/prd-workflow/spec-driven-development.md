@@ -268,6 +268,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
+| `/walkthrough` | Generate a browser walkthrough of user-facing changes | Pre-review (user-facing PRs) |
 | `/review-pr` | Analyze a PR for quality issues | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide | Per feature (when needed) |
@@ -299,16 +300,21 @@ This is where most development time is spent. One pass through this cycle produc
 5. Create PR
    └─ /create-pr               (links issue from branch name, updates ROADMAP)
 
-6. Review
+6. Walkthrough
+   └─ /walkthrough             (browser pre-flight — user-facing PRs only)
+
+7. Review
    └─ /review-pr               (quality, security, correctness)
 
-7. Merge
+8. Merge
    └─ /merge-pr                (squash merge, clean up, pull main)
 ```
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Step 7 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
+Step 6 is conditional: for a PR with user-facing changes, `/walkthrough` produces a throwaway browser checklist so the orchestrator can exercise the feature before spending review attention on the code. For PRs with no user-facing surface the skill reports that and exits — skip straight to review.
+
+Step 8 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
 
 ### Phase planning
 
