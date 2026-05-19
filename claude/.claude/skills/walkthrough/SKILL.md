@@ -77,8 +77,7 @@ Use the template below. Principles:
 
 ### 6. Save and surface
 
-- Save to `tmp/pr-<N>-walkthrough.md` (or `tmp/<branch-slug>-walkthrough.md` if there is no PR).
-- `tmp/` is gitignored in most projects — confirm it is. If not, choose another gitignored scratch path, or tell the user the file must not be committed.
+- Save to the project's `tmp/` directory — `tmp/pr-<N>-walkthrough.md` (or `tmp/<branch-slug>-walkthrough.md` if there is no PR). Use the project-local `tmp/`, not the system `/tmp`.
 - This document is the orchestrator's editable scratch copy: not committed, not part of the PR. The PR comment posted later by `--publish` is the published snapshot.
 - Send the file to the user and tell them the path.
 
@@ -92,11 +91,11 @@ Run once, after `/review-pr` and any review fixes — normally just before merge
 
 1. **Resolve the PR.** Use the PR number or branch given as an argument; otherwise find the PR for the current branch (`gh pr view`). The PR may be **open or merged** — both are valid publish targets. Only stop if no PR exists at all.
 2. **Re-run the gate.** If the change is not user-facing (step 2 above), there is nothing to publish — say so and stop.
-3. **Regenerate from the PR diff.** Do not reuse a possibly-stale scratch file — review may have changed the code, and on a merged PR the branch is likely deleted. Rebuild the walkthrough from `gh pr diff <N>` exactly as steps 1–5 describe, so the published copy matches the code that merged.
+3. **Regenerate from the PR diff.** Do not reuse a possibly-stale scratch file — review may have changed the code, and on a merged PR the branch is likely deleted. Rebuild the walkthrough from `gh pr diff <N>` exactly as steps 1–5 describe, so the published copy matches the code that merged. Save the regenerated document to the project's `tmp/` directory — `tmp/pr-<N>-walkthrough-published.md`, not the system `/tmp` — so the user can open it easily alongside the project.
 4. **Prepend a production-verification note** — a short block quote at the very top stating that QA testers verifying on production should use the production app and their own account in place of the local server and seed logins; the steps and expected results are identical. This is the normal case for a post-merge publish, since the feature is already deployed.
 5. **Decide who to notify.** A PR comment only notifies people already participating in the PR. If a QA reporter/tester should follow the walkthrough and is not already a participant (e.g. they were never @-mentioned in the PR body), @-mention their handle in the comment so they get a directed notification. Get the handle from the linked QA report's author, the PR body, or by asking the user; if in doubt, ask.
 6. **Confirm before posting.** Show the final document — including any @-mention — to the user and get explicit approval. Posting a PR comment is outward-facing and notifies others — never post without a clear yes.
-7. **Post the comment:** `gh pr comment <N> --body-file <file>`.
+7. **Post the comment:** `gh pr comment <N> --body-file tmp/pr-<N>-walkthrough-published.md`.
 8. Confirm to the user that it is posted, and who will be notified (PR participants, plus anyone @-mentioned).
 
 ## Document template
