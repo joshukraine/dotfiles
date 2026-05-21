@@ -12,6 +12,13 @@ return {
         backend = "tmux",
         enabled = true,
       },
+      win = {
+        layout = "right",
+        -- Size the right split to 35% of editor width on each open.
+        config = function(terminal)
+          terminal.opts.split.width = math.floor(vim.o.columns * 0.35)
+        end,
+      },
     },
     nes = {
       enabled = true,
@@ -34,6 +41,11 @@ return {
       "<leader>aii",
       function() require("sidekick.cli").toggle() end,
       desc = "Sidekick: Toggle CLI",
+    },
+    {
+      "<leader>aic",
+      function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+      desc = "Sidekick: Toggle Claude",
     },
     {
       "<leader>ais",

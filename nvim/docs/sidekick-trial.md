@@ -30,7 +30,8 @@ claudecode.nvim remains the deeper Claude-specific integration (MCP/WebSocket pr
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<leader>aii` | n | Toggle CLI (defaults to claude) |
+| `<leader>aii` | n | Toggle CLI (last-used, or picker if none) |
+| `<leader>aic` | n | Toggle Claude directly (skip picker) |
 | `<leader>ais` | n | Select CLI from picker |
 | `<leader>aid` | n | Detach session |
 | `<leader>ait` | n, x | Send "this" (cursor context or visual) |
