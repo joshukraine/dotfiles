@@ -14,9 +14,9 @@ return {
       },
       win = {
         layout = "right",
-        -- Size the right split to 35% of editor width on each open.
+        -- Size the right split to 40% of editor width on each open.
         config = function(terminal)
-          terminal.opts.split.width = math.floor(vim.o.columns * 0.35)
+          terminal.opts.split.width = math.floor(vim.o.columns * 0.40)
         end,
       },
     },
