@@ -79,7 +79,7 @@ return {
 
     -- 8. Enhanced completion sources with Copilot and emoji support
     opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
-      default = { "lsp", "path", "snippets", "buffer", "copilot", "emoji" },
+      default = { "lsp", "path", "snippets", "buffer", "emoji" },
       providers = {
         -- Buffer completions with performance optimizations only
         buffer = {
