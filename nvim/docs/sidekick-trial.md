@@ -26,18 +26,20 @@ claudecode.nvim remains the deeper Claude-specific integration (MCP/WebSocket pr
 | `<leader>aa` | n | Accept diff |
 | `<leader>ad` | n | Deny diff |
 
-### sidekick (new, all under `<leader>ai*`)
+### sidekick (new)
+
+Primary toggles are flat 3-keystroke bindings; secondary actions sit under the `<leader>ak*` group.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<leader>aii` | n | Toggle CLI (last-used, or picker if none) |
-| `<leader>aic` | n | Toggle Claude directly (skip picker) |
-| `<leader>ais` | n | Select CLI from picker |
-| `<leader>aid` | n | Detach session |
-| `<leader>ait` | n, x | Send "this" (cursor context or visual) |
-| `<leader>aiF` | n | Send file (capital F) |
-| `<leader>aiv` | x | Send visual selection |
-| `<leader>aip` | n, x | Pick a built-in prompt (explain, fix, review, tests, …) |
+| `<leader>ai` | n | Toggle CLI (last-used, or picker if none) |
+| `<leader>aj` | n | Toggle Claude directly (skip picker) |
+| `<leader>aks` | n | Select CLI from picker |
+| `<leader>akd` | n | Detach session |
+| `<leader>akt` | n, x | Send "this" (cursor context or visual) |
+| `<leader>akf` | n | Send file |
+| `<leader>akv` | x | Send visual selection |
+| `<leader>akp` | n, x | Pick a built-in prompt (explain, fix, review, tests, …) |
 
 ### sidekick non-leader (defaults kept)
 
@@ -51,9 +53,9 @@ claudecode.nvim remains the deeper Claude-specific integration (MCP/WebSocket pr
 
 1. Quit nvim, relaunch. Lazy will install `folke/sidekick.nvim` and uninstall `copilot.lua` / `copilot-cmp`.
 2. Copilot LSP needs to be installed and signed in. Run `:LspCopilotSignIn` if NES doesn't fire after a few seconds of editing.
-3. **Verify tmux integration**: from inside tmux, `<leader>aii` should open Claude in a new tmux pane (not a Neovim terminal split). Detach Neovim — the pane survives.
+3. **Verify tmux integration**: from inside tmux, `<leader>ai` should open Claude in a new tmux pane (not a Neovim terminal split). Detach Neovim — the pane survives.
 4. **Try NES**: edit a function so it's "obviously incomplete" (rename a param, leave a TODO). After a brief pause, ghost-text diff should appear. `<Tab>` accepts.
-5. **Try the multi-CLI hub**: `<leader>ais` to see the picker. Gives a feel for what could be useful to recommend to others.
+5. **Try the multi-CLI hub**: `<leader>aks` to see the picker. Gives a feel for what could be useful to recommend to others.
 
 ## Gotchas
 
