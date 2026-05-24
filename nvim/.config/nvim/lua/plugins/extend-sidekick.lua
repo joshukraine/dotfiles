@@ -33,6 +33,14 @@ return {
       function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
       desc = "Sidekick: Toggle Claude",
     },
+    -- {line} sends just the line text, where {this} (LazyVim's <leader>at)
+    -- sends "file:line:col" position context. Useful for asking about the
+    -- literal content of a line without the surrounding location metadata.
+    {
+      "<leader>al",
+      function() require("sidekick.cli").send({ msg = "{line}" }) end,
+      desc = "Sidekick: Send Line",
+    },
     -- All other <leader>a* bindings inherit LazyVim's sidekick defaults:
     --   <leader>aa  Toggle CLI       <leader>at  Send This
     --   <leader>as  Select CLI       <leader>af  Send File
