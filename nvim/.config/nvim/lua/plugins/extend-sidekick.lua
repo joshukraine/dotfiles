@@ -1,7 +1,8 @@
--- sidekick.nvim — parallel trial alongside claudecode.nvim
--- The two primary toggles live at <leader>ai / <leader>aj (3 keystrokes).
--- Secondary actions sit under the <leader>ak* group. None of these collide
--- with claudecode's <leader>a{c,a,f,r,C,m,b,s,d} bindings. NES stays on <Tab>.
+-- sidekick.nvim — primary AI CLI integration during the trial
+-- claudecode.nvim is disabled (extend-claudecode.lua early-returns) so there
+-- are no collisions on the <leader>a* namespace. LazyVim's sidekick defaults
+-- handle the generic actions; <leader>ac is the one custom binding, kept as
+-- claudecode muscle memory for "open and focus Claude" in a single keystroke.
 -- Reference: https://github.com/folke/sidekick.nvim
 
 return {
@@ -27,66 +28,16 @@ return {
   },
   -- stylua: ignore
   keys = {
-    -- Disable LazyVim sidekick defaults that collide with claudecode.
-    { "<leader>aa", false },
-    { "<leader>af", false },
-    { "<leader>as", false },
-    { "<leader>ad", false },
-    { "<leader>at", false },
-    { "<leader>av", false },
-    { "<leader>ap", false },
-
-    -- Primary toggles promoted to 3-keystroke bindings (no group prefix to
-    -- pause on). Each is a complete mapping with no longer sibling, so there
-    -- is no complete-vs-prefix ambiguity and no timeoutlen wait.
     {
-      "<leader>ai",
-      function() require("sidekick.cli").toggle() end,
-      desc = "Sidekick: Toggle CLI",
-    },
-    {
-      "<leader>aj",
+      "<leader>ac",
       function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
       desc = "Sidekick: Toggle Claude",
     },
-
-    -- Secondary actions under a proper which-key group. Declared with `group`
-    -- (not an empty-string rhs) so <leader>ak is a pure prefix, never a
-    -- firing mapping.
-    { "<leader>ak", group = "sidekick", mode = { "n", "x" } },
-    {
-      "<leader>aks",
-      function() require("sidekick.cli").select() end,
-      desc = "Sidekick: Select CLI",
-    },
-    {
-      "<leader>akd",
-      function() require("sidekick.cli").close() end,
-      desc = "Sidekick: Detach session",
-    },
-    {
-      "<leader>akt",
-      function() require("sidekick.cli").send({ msg = "{this}" }) end,
-      mode = { "n", "x" },
-      desc = "Sidekick: Send This",
-    },
-    {
-      "<leader>akf",
-      function() require("sidekick.cli").send({ msg = "{file}" }) end,
-      desc = "Sidekick: Send File",
-    },
-    {
-      "<leader>akv",
-      function() require("sidekick.cli").send({ msg = "{selection}" }) end,
-      mode = { "x" },
-      desc = "Sidekick: Send Visual Selection",
-    },
-    {
-      "<leader>akp",
-      function() require("sidekick.cli").prompt() end,
-      mode = { "n", "x" },
-      desc = "Sidekick: Select Prompt",
-    },
-    -- Non-leader bindings kept at defaults: <c-.> Focus, <Tab> NES, <leader>uN Toggle NES.
+    -- All other <leader>a* bindings inherit LazyVim's sidekick defaults:
+    --   <leader>aa  Toggle CLI       <leader>at  Send This
+    --   <leader>as  Select CLI       <leader>af  Send File
+    --   <leader>ad  Detach           <leader>av  Send Visual (x mode)
+    --   <leader>ap  Select Prompt
+    -- Non-leader defaults: <c-.> Focus pane, <Tab> Accept NES, <leader>uN Toggle NES.
   },
 }

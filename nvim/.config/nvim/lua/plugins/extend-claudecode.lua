@@ -2,6 +2,10 @@
 -- Customizes terminal display, split behavior, and context integration
 -- Reference: https://github.com/coder/claudecode.nvim
 
+-- Uncomment the conditional to disable this config.
+-- stylua: ignore
+if true then return {} end
+
 return {
   "coder/claudecode.nvim",
   opts = {
