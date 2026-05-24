@@ -25,7 +25,7 @@
   tl = tag --list
   re = reset
   rsh = reset --soft HEAD^
-  wch = whatchanged -p --abbrev-commit --pretty=medium -10
+  wch = log -p --no-merges --abbrev-commit --pretty=medium -10
 
 [apply]
   whitespace = nowarn
