@@ -39,6 +39,7 @@ return {
     {
       "<leader>al",
       function() require("sidekick.cli").send({ msg = "{line}" }) end,
+      mode = { "x", "n" },
       desc = "Sidekick: Send Line",
     },
     -- All other <leader>a* bindings inherit LazyVim's sidekick defaults:
