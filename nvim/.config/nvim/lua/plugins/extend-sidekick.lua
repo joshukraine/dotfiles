@@ -1,8 +1,9 @@
--- sidekick.nvim — primary AI CLI integration during the trial
--- claudecode.nvim is disabled (extend-claudecode.lua early-returns) so there
--- are no collisions on the <leader>a* namespace. LazyVim's sidekick defaults
--- handle the generic actions; <leader>ac is the one custom binding, kept as
--- claudecode muscle memory for "open and focus Claude" in a single keystroke.
+-- sidekick.nvim — primary AI CLI integration.
+-- claudecode.nvim is retired but its config is kept in extend-claudecode.lua
+-- (early-returns) so the revert path stays straightforward. LazyVim's sidekick
+-- defaults handle the generic <leader>a* actions; <leader>ac is the one custom
+-- binding, kept as claudecode muscle memory for "open and focus Claude" in a
+-- single keystroke.
 -- Reference: https://github.com/folke/sidekick.nvim
 
 return {

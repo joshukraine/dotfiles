@@ -1,8 +1,16 @@
--- ClaudeCode.nvim configuration
--- Customizes terminal display, split behavior, and context integration
+-- ClaudeCode.nvim configuration — RETIRED in favor of sidekick.nvim.
+-- This config is kept in place (disabled via early-return below) so the
+-- revert path stays simple. To re-enable claudecode and step back from
+-- sidekick:
+--   1. Remove the `if true then return {} end` line below.
+--   2. In nvim/.config/nvim/lazyvim.json, re-add the extras:
+--        "lazyvim.plugins.extras.ai.claudecode"
+--        "lazyvim.plugins.extras.ai.copilot"   (if you want copilot back)
+--   3. In extend-blink.lua, re-add "copilot" to opts.sources.default.
+--   4. Optionally drop sidekick: remove "lazyvim.plugins.extras.ai.sidekick"
+--      from lazyvim.json and delete extend-sidekick.lua.
 -- Reference: https://github.com/coder/claudecode.nvim
 
--- Uncomment the conditional to disable this config.
 -- stylua: ignore
 if true then return {} end
 
