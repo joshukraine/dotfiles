@@ -17,7 +17,7 @@ When citing PRD sections, always use the format `filename.md §N "Section Headin
 
 Present a debrief covering the sections below. Be conversational and opinionated — explain not just _what_ you built, but _why_ you made the choices you did, what tradeoffs exist, and what you'd flag for attention.
 
-**Save both files under `docs/debriefs/`** so the executive can open them in their editor for easy navigation, scrolling, and copying. The full debrief and summary go in separate subdirectories as described in Section 5.
+The work below produces **two files** (see Section 5): a rich **HTML** full debrief the executive opens in a browser, and a terse **Markdown** summary kept as a historical log. Write the section content first, then render it into the HTML template.
 
 ---
 
@@ -84,21 +84,34 @@ Include at least one story per user role that's relevant to the new work. If the
 
 ### 5. Save Debrief Files
 
-Save two files with identical filenames in separate subdirectories:
+Save two files with the same date-and-slug stem in separate subdirectories — one HTML, one Markdown:
 
-**Full debrief** — the complete document covering Sections 1-4:
+**Full debrief (HTML)** — the complete document covering Sections 1-4, rendered as a rich, self-contained HTML page:
 
 ```text
-docs/debriefs/full/YYYY-MM-DD-[brief-topic].md
+docs/debriefs/full/YYYY-MM-DD-[brief-topic].html
 ```
 
-**Summary** — a concise historical record:
+**Summary (Markdown)** — a concise historical record:
 
 ```text
 docs/debriefs/summary/YYYY-MM-DD-[brief-topic].md
 ```
 
-The summary should contain:
+#### Rendering the full debrief into HTML
+
+The house style lives in `template.html` (in this skill's directory). Produce the full debrief by filling that template:
+
+1. **Read `template.html`** from this skill's directory and use it as the exact structure. Its head comment documents every token and section.
+2. **Inline the styles** — copy the template's `<style>` block verbatim into the output so the file is a single self-contained, portable `.html` (no external CSS, no build step). Do not link an external stylesheet.
+3. **Replace the `{{TOKENS}}`** (`{{PROJECT}}`, `{{TITLE}}`, `{{DATE}}`, `{{SCOPE}}`, `{{PRS}}`, `{{ISSUES}}`, `{{PRD_REFS}}`, and the section bodies `{{BUILT}}`, `{{ARCHITECTURE}}`, `{{TESTS}}`, `{{TOUR}}`). Drop metadata rows that don't apply.
+4. **Use the provided patterns:** Product Tour user stories become `<div class="story">` cards; the POODR spotlight and any flagged follow-ups become `<div class="callout">` blocks; architecture and data-flow structure becomes inline `<svg>` inside `<figure class="diagram">` — never ASCII art.
+5. **Keep the TOC in sync** with the sections you actually emit, and leave the high-value sections (What We Built, Product Tour) `open` by default.
+6. **No JavaScript.** The debrief is read-only; rely on native `<details>`/`<summary>` for collapsing.
+
+#### The summary file
+
+The Markdown summary should contain:
 
 - Project name, date, and scope (which PRD phase, which PRs/issues)
 - One-paragraph summary of what was built
@@ -106,18 +119,18 @@ The summary should contain:
 - Test coverage status (pass/fail, notable gaps)
 - Any items flagged for follow-up
 
-**Metadata formatting:** Both files begin with a metadata block (date, scope, PRs, issues, PRD references, etc.) immediately after the title. Format each metadata item as a **bulleted list** so that items render vertically in HTML instead of collapsing into a single paragraph.
+Begin it with a metadata block (date, scope, PRs, issues, PRD references) formatted as a bulleted list so items render vertically.
 
 Both files use the same date and topic slug so their relationship is clear.
 
-After saving, tell the executive where the files are and suggest opening the full debrief:
+After saving, tell the executive where the files are and suggest opening the full debrief in a browser:
 
 ```text
 Project:      MyApp
-Full debrief: docs/debriefs/full/2026-02-10-user-authentication.md
+Full debrief: docs/debriefs/full/2026-02-10-user-authentication.html
 Summary:      docs/debriefs/summary/2026-02-10-user-authentication.md
 
-Open the full debrief in your editor to walk through the user stories.
+Open the full debrief in your browser to walk through the user stories.
 ```
 
 ---
