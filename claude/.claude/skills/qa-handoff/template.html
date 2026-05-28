@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--
+  QA handoff structural template.
+
+  The /qa-handoff skill fills this skeleton, then inlines the shared house
+  style so the output is a single self-contained, portable .html file.
+
+  How to use:
+  - Copy this whole document, then replace the {{TOKENS}} and the annotated
+    section regions with real content.
+  - Produce a CLEAN artifact: strip every instructional comment (this head
+    block and the explanatory notes in the body). They guide template-filling
+    only and must not appear in the output. (HTML comments do not nest, so a
+    stray instructional comment can also break rendering.)
+  - Inline the shared house style: copy the style block from
+    ../_shared/house-style.html into the head (replacing the HOUSE STYLE
+    marker) and its script block where the second HOUSE STYLE marker sits
+    (before the closing body tag). Do NOT link external assets.
+  - KEEP the feedback-export script at the very end verbatim — it is this
+    skill's own interactivity (builds Markdown from the form) and is separate
+    from the shared click-to-copy helper.
+  - Make every command, credential, and URL the tester will paste a
+    click-to-copy control: a button with class "copy" and a data-copy value.
+  - The feedback form fields are LITERAL (the tester fills them live); they are
+    not tokens. Keep them and the export button as-is.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PROJECT}} — QA Handoff: {{TITLE}}</title>
+<!-- HOUSE STYLE: inline the <style> block from ../_shared/house-style.html here -->
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#new">What's New</a></li>
+      <li><a href="#setup">Getting Current</a></li>
+      <li><a href="#walkthrough">Guided Walkthrough</a></li>
+      <li><a href="#exploratory">Exploratory Testing</a></li>
+      <li><a href="#tests">Test Suite</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="doc">
+      <p class="eyebrow">{{PROJECT}} · QA Handoff</p>
+      <h1>{{TITLE}}</h1>
+      <dl class="meta">
+        <dt>Project</dt><dd>{{PROJECT}}</dd>
+        <dt>Date</dt><dd>{{DATE}}</dd>
+        <dt>Branch</dt><dd>{{BRANCH}}</dd>
+        <dt>Commit</dt><dd>{{COMMIT}}</dd>
+        <dt>Debrief</dt><dd>{{DEBRIEF_REF}}</dd>
+      </dl>
+    </header>
+
+    <details class="section" id="new" open>
+      <summary>What's New</summary>
+      <div class="section-body">
+        <!-- Plain-language summary of what was built; connect to the roadmap. No file paths / jargon. -->
+        {{WHATS_NEW}}
+      </div>
+    </details>
+
+    <details class="section" id="setup" open>
+      <summary>Getting Current</summary>
+      <div class="section-body">
+        <!-- Exact setup steps. Make each command a click-to-copy control, e.g.:
+             <button type="button" class="copy" data-copy="git pull">git pull</button>
+             List new deps / env vars / whether a db reset is needed, or "None". -->
+        {{SETUP}}
+      </div>
+    </details>
+
+    <details class="section" id="walkthrough" open>
+      <summary>Guided Walkthrough</summary>
+      <div class="section-body">
+        <!-- One <div class="story"> per scenario; copyable creds/URLs; .expect for expected result. -->
+        {{WALKTHROUGH}}
+      </div>
+    </details>
+
+    <details class="section" id="exploratory" open>
+      <summary>Exploratory Testing</summary>
+      <div class="section-body">
+        <!-- Open-ended things to poke at, as an interactive checklist:
+        <ul class="checklist">
+          <li><label><input type="checkbox" data-check="Try accessing another user's record"> Try accessing another user's record</label></li>
+        </ul>
+        The data-check value is exported with the feedback. -->
+        {{EXPLORATORY}}
+      </div>
+    </details>
+
+    <details class="section" id="tests">
+      <summary>Test Suite</summary>
+      <div class="section-body">
+        <!-- Commands to run the suite; make each a click-to-copy control. Note known skips. -->
+        {{TESTS}}
+      </div>
+    </details>
+
+    <details class="section" id="feedback" open>
+      <summary>Feedback</summary>
+      <div class="section-body">
+        <p>Fill in whatever's relevant — brief bullets and gut reactions are welcome. When done, click <strong>Copy feedback as Markdown</strong> and paste it back into the pull request or send it over.</p>
+        <form id="qa-feedback" onsubmit="return false">
+          <div class="field">
+            <label for="fb-tester">Your name (optional)</label>
+            <input type="text" id="fb-tester" placeholder="e.g. Nathan">
+          </div>
+          <div class="field">
+            <label for="fb-bugs">Bugs or broken behavior</label>
+            <textarea id="fb-bugs" data-fb="Bugs or Broken Behavior"></textarea>
+          </div>
+          <div class="field">
+            <label for="fb-off">Things that felt off</label>
+            <textarea id="fb-off" data-fb="Things That Felt Off"></textarea>
+          </div>
+          <div class="field">
+            <label for="fb-gaps">Edge cases or gaps</label>
+            <textarea id="fb-gaps" data-fb="Edge Cases or Gaps"></textarea>
+          </div>
+          <div class="field">
+            <label for="fb-ideas">Ideas or suggestions</label>
+            <textarea id="fb-ideas" data-fb="Ideas or Suggestions"></textarea>
+          </div>
+          <div class="field">
+            <label for="fb-other">Other notes</label>
+            <textarea id="fb-other" data-fb="Other Notes"></textarea>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn" id="fb-copy">Copy feedback as Markdown</button>
+            <span class="form-status" id="fb-status"></span>
+          </div>
+        </form>
+      </div>
+    </details>
+
+    <footer class="doc">
+      Generated by the <code>/qa-handoff</code> skill · {{DATE}}
+    </footer>
+  </main>
+</div>
+<!-- HOUSE STYLE: inline the <script> block from ../_shared/house-style.html here -->
+<script>
+  // Feedback export (qa-handoff only): assemble the form + exploratory
+  // checklist into Markdown and copy it, so the tester pastes it back.
+  (function () {
+    var btn = document.getElementById("fb-copy");
+    if (!btn) return;
+    function legacyCopy(text, cb) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); cb(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    btn.addEventListener("click", function () {
+      var lines = ["## QA Feedback — " + document.title, ""];
+      var tester = document.getElementById("fb-tester");
+      if (tester && tester.value.trim()) lines.push("**Tester:** " + tester.value.trim(), "");
+      var checks = document.querySelectorAll("[data-check]");
+      if (checks.length) {
+        lines.push("### Exploratory checklist", "");
+        checks.forEach(function (c) {
+          lines.push("- [" + (c.checked ? "x" : " ") + "] " + c.getAttribute("data-check"));
+        });
+        lines.push("");
+      }
+      document.querySelectorAll("[data-fb]").forEach(function (t) {
+        lines.push("### " + t.getAttribute("data-fb"), "", t.value.trim() || "_None_", "");
+      });
+      var md = lines.join("\n");
+      var done = function () {
+        var s = document.getElementById("fb-status");
+        if (s) {
+          s.textContent = "Copied — paste it into the PR or send it back.";
+          clearTimeout(s._t);
+          s._t = setTimeout(function () { s.textContent = ""; }, 5000);
+        }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(md).then(done, function () { legacyCopy(md, done); });
+      } else {
+        legacyCopy(md, done);
+      }
+    });
+  })();
+</script>
+</body>
+</html>

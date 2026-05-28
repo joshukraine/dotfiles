@@ -22,110 +22,52 @@ You are a senior developer preparing a hands-on testing guide for a QA colleague
 
 ## Output Format
 
-Generate a markdown document with the following sections. Follow this structure exactly.
+Render the handoff as a single self-contained **HTML** page using this skill's `template.html` and the shared house style — not a Markdown document. The tester opens it in a browser and gets click-to-copy logins, an interactive exploratory checklist, and a feedback form that exports Markdown.
 
----
+### Rendering
 
-### Header
+1. **Read `template.html`** (this skill's directory) for the structure and `../_shared/house-style.html` for the look. The template's head comment documents every token.
+2. **Inline the shared house style** — copy its `<style>` block in place of the `<!-- HOUSE STYLE ... -->` marker in `<head>`, and its `<script>` block in place of the second marker before `</body>`. The output must be a single self-contained `.html` (no external assets). Do not link a stylesheet.
+3. **Keep the feedback-export `<script>`** at the end of the template verbatim — it builds Markdown from the form and is this skill's own interactivity, separate from the shared click-to-copy helper.
+4. **Strip every instructional comment** from the output (the head how-to block and the body notes). The artifact must be clean. (HTML comments do not nest, so a leftover one can break rendering, not just clutter it.)
+5. **Fill the metadata tokens:** `{{PROJECT}}`, `{{TITLE}}` (e.g. `Phase N: Phase Title`), `{{DATE}}`, `{{BRANCH}}`, `{{COMMIT}}` (short SHA from `HEAD`), `{{DEBRIEF_REF}}` (path to the related debrief, or `N/A`).
+6. **Make every command, credential, and URL the tester will paste a click-to-copy control:** `<button type="button" class="copy" data-copy="VALUE">VALUE</button>`.
 
-```markdown
-# QA Handoff — Phase [N]: [Phase Title]
+### Section content
 
-**Project:** [project name]
-**Date:** [YYYY-MM-DD]
-**Branch:** `main` (or feature branch if applicable)
-**Commit:** [short SHA from HEAD]
-**Debrief reference:** [path to related debrief, or "N/A" if none]
-```
+Fill each section token with the content described below.
 
-### Section 1: What's New
+**What's New (`{{WHATS_NEW}}`)** — a plain-language summary of what was built, for someone who understands the product but isn't tracking implementation details. 2-4 short paragraphs; connect to the roadmap. No file paths, class names, or architecture jargon.
 
-A plain-language summary of what was built in this phase or milestone. Write for someone who understands the product but isn't tracking implementation details. 2-4 paragraphs covering the key features, changes, or capabilities added. Connect the work to the roadmap — where are we in the bigger picture?
+**Getting Current (`{{SETUP}}`)** — exact setup steps, each command a copy control: pull/install (`git pull`, `bundle install`, `bin/rails db:migrate`, `bin/rails db:seed`), whether a full `bin/rails db:reset` is needed, new gems/system packages, new env vars or credentials, and the command to start the app plus the URL to confirm it boots. List specifics — never "some dependencies changed." Say "None" where a category is unchanged.
 
-No file paths, class names, or architecture jargon.
+**Guided Walkthrough (`{{WALKTHROUGH}}`)** — one `<div class="story">` per scenario, in order. Each: a descriptive `.story-head` with a `.role-pill` for the user type; a copyable login (email + password from seed data) and starting URL; extremely literal numbered steps; and a `.expect` expected result precise enough that a deviation is obvious. Include at least one scenario per affected role. Read the project's `CLAUDE.md` for audience/viewport guidance (mobile-first user types, dual-audience designs) and add matching scenarios.
 
-### Section 2: Getting Current
+**Exploratory Testing (`{{EXPLORATORY}}`)** — an interactive `<ul class="checklist">`; each item `<li><label><input type="checkbox" data-check="..."> ...</label></li>`. Draw from debrief-flagged thin coverage, permission boundaries (accessing another user's data, role escalation), responsive/mobile checks for UI changes, and edge cases a developer might skip. The `data-check` text is included in the exported feedback, so make it self-describing.
 
-Specific setup instructions to get the tester's local environment up to date. Check for each of these and report concretely:
+**Test Suite (`{{TESTS}}`)** — commands to run the full suite and the targeted files most relevant to the new work, each a copy control. Note any known skips or expected failures.
 
-- Commands to pull and install (`git pull`, `bundle install`, `bin/rails db:migrate`, `bin/rails db:seed`)
-- Whether a full `bin/rails db:reset` is needed instead of `db:migrate`
-- New gem dependencies or system packages
-- New environment variables or credentials changes
-- The command to start the app (typically `bin/dev`) and the URL to confirm it boots
-
-Don't say "some dependencies changed" — list them. If nothing changed in a category, say "None."
-
-### Section 3: Guided Walkthrough
-
-A series of numbered scenarios the tester should work through in order. Each scenario includes:
-
-- **A descriptive name** as the heading
-- **Role** — which user type (from seed data)
-- **Login** — exact email and password from seed data
-- **URL** — exact starting URL
-- **Steps** — extremely literal, numbered instructions. The tester should be able to follow these without guessing.
-- **Expected behavior** — precise enough that a deviation is obvious.
-
-Include at least one scenario per user role affected by the new work. Read the project's `CLAUDE.md` for any audience-specific or viewport-specific testing guidance (e.g., mobile-first user types, dual-audience designs) and include appropriate scenarios.
-
-### Section 4: Exploratory Testing
-
-An open-ended checklist (using `- [ ]` checkboxes) of areas to poke at. The goal is to surface anything that feels off, confusing, or broken. Draw from:
-
-- Areas the debrief flagged as "thin test coverage" or "worth manual verification"
-- Permission boundary tests (accessing another user's data, role escalation)
-- Responsive/mobile checks if the work has UI changes
-- Edge cases a careful tester would try that a developer might not
-
-### Section 5: Test Suite Verification
-
-Commands to run the test suite, including both the full suite and targeted test files most relevant to the new work. Note any known skips or expected failures.
-
-```bash
-# Full suite
-bin/rails test
-
-# System tests
-bin/rails test:system
-
-# Phase-specific tests
-bin/rails test test/models/[relevant_file].rb
-```
-
-### Section 6: Feedback
-
-A section for the tester to fill in, with these subsections:
-
-- **Bugs or Broken Behavior** — anything that didn't work as described or produced an error
-- **Things That Felt Off** — UI confusion, clunky flows, odd wording
-- **Edge Cases or Gaps** — scenarios they tried that weren't covered
-- **Ideas or Suggestions** — feature ideas, UX improvements
-- **Other Notes** — anything else
-
-Include a note that brief bullet points and gut reactions are welcome — this section shouldn't feel like homework.
+**Feedback** — already built into the template (a literal form plus the "Copy feedback as Markdown" button). Do not tokenize or rewrite it; leave it as-is.
 
 ---
 
 ## Save Location
 
-Save the completed QA handoff to:
+Save the completed handoff to:
 
 ```text
-docs/qa-handoffs/YYYY-MM-DD-[brief-topic].md
+docs/qa-handoffs/YYYY-MM-DD-[brief-topic].html
 ```
 
-Create the `docs/qa-handoffs/` directory if it doesn't exist. Use the same date-and-slug convention as debriefs. After saving, tell the user:
+Create `docs/qa-handoffs/` if it doesn't exist; use the same date-and-slug convention as debriefs. After saving, open it so the result is in front of you (single self-contained file — instant, no server):
 
-```text
-QA handoff saved: docs/qa-handoffs/YYYY-MM-DD-[brief-topic].md
-
-Hand this file to your QA colleague. They should:
-1. Pull the latest code
-2. Follow the "Getting Current" section
-3. Work through the walkthrough and exploratory testing
-4. Fill in the Feedback section and return it to you
+```bash
+open docs/qa-handoffs/YYYY-MM-DD-[brief-topic].html
 ```
+
+> **Remote testers:** publishing the handoff to a shared host (so a tester can open it without cloning) is handled by the publish step, which reads the per-project target from the project's `CLAUDE.md`. With no target configured, the handoff stays local. Until publishing is wired, hand off the local file or its hosted copy.
+
+Then tell the user where the file is and that the tester should: follow **Getting Current**, work through the walkthrough and tick the exploratory checklist, then click **Copy feedback as Markdown** and paste the result back into the PR (or send it over).
 
 ## Tone & Approach
 

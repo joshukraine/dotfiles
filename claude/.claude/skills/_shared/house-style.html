@@ -30,7 +30,16 @@
   - Copy:       button.copy[data-copy="VALUE"] — click-to-copy control; copies
                 data-copy (falling back to text). Use for anything the reader
                 will paste (credentials, emails, URLs).
+  - Forms:      .field (label + input/textarea), input[type=text], textarea,
+                .btn (primary button), .actions (button row), .form-status
+                (green confirmation text). For interactive artifacts.
+  - Checklist:  ul.checklist > li > label > input[type=checkbox] — interactive
+                checkboxes the reader can tick.
   - Footer:     footer.doc.
+
+  The click-to-copy <script> below is the ONLY shared script. A skill that
+  needs richer interactivity (e.g. a feedback form that exports Markdown) adds
+  its own small vanilla <script> in its own template — not here.
 -->
 <style>
   :root {
@@ -259,6 +268,40 @@
   .copy::after { content: "\29C9"; opacity: 0.55; font-size: 0.9em; }
   .copy.copied { color: var(--good); border-color: var(--good); }
   .copy.copied::after { content: "\2713"; opacity: 1; }
+  /* ---- Forms ---- */
+  .field { margin: 14px 0; }
+  .field label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  input[type="text"], textarea {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
+  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  .btn {
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 8px 16px;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .actions { display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .form-status { color: var(--good); font-size: 13px; font-weight: 500; }
+  /* ---- Checklist ---- */
+  ul.checklist { list-style: none; margin: 12px 0; padding: 0; }
+  ul.checklist li { margin: 8px 0; }
+  ul.checklist label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+  ul.checklist input { margin-top: 5px; flex: none; }
   footer.doc { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
   /* ---- Responsive ---- */
   @media (max-width: 800px) {
