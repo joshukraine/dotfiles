@@ -237,13 +237,19 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/commit` | Analyze diffs, split into logical commits, Conventional Commits format |
 | `/create-pr` | Create a PR with auto-linked issues and formatted description |
 | `/debrief` | Comprehensive walkthrough of recent work with architecture rationale |
+| `/drift-check` | Pre-PR advisory check for deviations from the project spec (read-only) |
+| `/md2pdf` | Convert a Markdown file to PDF with GitHub-style formatting |
+| `/merge-pr` | Merge a PR with status checks, squash merge, and branch cleanup |
 | `/plan-phase` | Draft implementation plan and create GitHub issues (no code written) |
 | `/qa-handoff` | Prepare a hands-on QA testing guide for a completed PRD phase |
+| `/readme-refresh` | Audit and update a project README, or bootstrap a new one |
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
 | `/review-pr` | Read-only PR review with severity-ranked findings |
 | `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
 | `/sprint-issue` | Streamlined variant for small, well-scoped issues |
+| `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
 | `/update-deps` | Safe dependency updates with testing between each category |
+| `/walkthrough` | Generate a browser walkthrough of a PR's user-facing changes |
 
 ### Permission Presets
 
@@ -476,7 +482,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [git]: https://git-scm.com/
 [gnu-stow]: https://www.gnu.org/software/stow/
 [hack]: https://sourcefoundry.org/hack
-[homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask-fonts
+[homebrew-cask-fonts]: https://github.com/Homebrew/homebrew-cask
 [homebrew]: http://brew.sh
 [i-tried-neovim-distros-video]: https://youtu.be/bbHtl0Pxzj8
 [install-clt]: https://www.freecodecamp.org/news/install-xcode-command-line-tools/
