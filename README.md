@@ -224,7 +224,7 @@ These functions work with both `main` and `master` branch names automatically.
 [Claude Code][claude-code] is Anthropic's CLI tool for AI-assisted development. This repo includes a full configuration under the `claude/` directory, stowed to `~/.claude/`.
 
 > [!TIP]
-> Claude Code can also run inside Neovim via the [claude-code.nvim][claude-code-nvim] plugin, which is how I use it most of the time during development.
+> Claude Code can also run inside Neovim via the [sidekick.nvim][sidekick-nvim] plugin, which is how I use it most of the time during development.
 
 ### Skills
 
@@ -463,7 +463,6 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [agent-skills]: https://agentskills.io
 [asdf]: https://asdf-vm.com/
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
-[claude-code-nvim]: https://github.com/coder/claudecode.nvim
 [context7]: https://context7.com/
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
@@ -503,6 +502,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
+[sidekick-nvim]: https://github.com/folke/sidekick.nvim
 [smoke-test-output]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700085278/screenshots/smoke-test_tddntp.png
 [starship]: https://starship.rs/
 [symbols-nerd-font-mono]: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip
