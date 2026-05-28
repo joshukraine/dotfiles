@@ -106,8 +106,9 @@ The house style lives in `template.html` (in this skill's directory). Produce th
 2. **Inline the styles** — copy the template's `<style>` block verbatim into the output so the file is a single self-contained, portable `.html` (no external CSS, no build step). Do not link an external stylesheet.
 3. **Replace the `{{TOKENS}}`** (`{{PROJECT}}`, `{{TITLE}}`, `{{DATE}}`, `{{SCOPE}}`, `{{PRS}}`, `{{ISSUES}}`, `{{PRD_REFS}}`, and the section bodies `{{BUILT}}`, `{{ARCHITECTURE}}`, `{{TESTS}}`, `{{TOUR}}`). Drop metadata rows that don't apply.
 4. **Use the provided patterns:** Product Tour user stories become `<div class="story">` cards; the POODR spotlight and any flagged follow-ups become `<div class="callout">` blocks; architecture and data-flow structure becomes inline `<svg>` inside `<figure class="diagram">` — never ASCII art.
-5. **Keep the TOC in sync** with the sections you actually emit, and leave the high-value sections (What We Built, Product Tour) `open` by default.
-6. **No JavaScript.** The debrief is read-only; rely on native `<details>`/`<summary>` for collapsing.
+5. **Make pasteable values click-to-copy.** Anything the reader will type into the app — seed credentials, emails, and key URLs in the Product Tour — should be a `<button type="button" class="copy" data-copy="VALUE">VALUE</button>` control so it copies on click. This removes the single biggest walkthrough papercut.
+6. **Keep the TOC in sync** with the sections you actually emit, and leave the high-value sections (What We Built, Product Tour) `open` by default.
+7. **JavaScript is limited to the bundled click-to-copy helper** (the trailing `<script>` in the template). Keep it; add no other scripts, frameworks, or dependencies. Collapsing uses native `<details>`/`<summary>`.
 
 #### The summary file
 
@@ -123,14 +124,22 @@ Begin it with a metadata block (date, scope, PRs, issues, PRD references) format
 
 Both files use the same date and topic slug so their relationship is clear.
 
-After saving, tell the executive where the files are and suggest opening the full debrief in a browser:
+#### Open the debrief automatically
+
+After saving, **open the full debrief in the browser** so the executive doesn't have to — it is a single self-contained file, so this is instant and needs no server:
+
+```bash
+open docs/debriefs/full/YYYY-MM-DD-[brief-topic].html
+```
+
+`open` uses the system default browser. If the project needs a specific browser (e.g. for the Clipboard API), pin it: `open -a "Google Chrome" <file>`.
+
+Then tell the executive where both files are:
 
 ```text
 Project:      MyApp
-Full debrief: docs/debriefs/full/2026-02-10-user-authentication.html
+Full debrief: docs/debriefs/full/2026-02-10-user-authentication.html  (opened in your browser)
 Summary:      docs/debriefs/summary/2026-02-10-user-authentication.md
-
-Open the full debrief in your browser to walk through the user stories.
 ```
 
 ---

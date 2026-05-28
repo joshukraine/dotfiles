@@ -9,13 +9,19 @@
   How to use:
   - Copy this whole document, then replace the {{TOKENS}} and the
     annotated <!-- SECTION --> regions with real content.
-  - Keep the <style> block verbatim unless intentionally evolving the
-    house style. Do NOT link an external stylesheet — inline only.
+  - Keep the <style> block and the trailing <script> verbatim unless
+    intentionally evolving the house style. Do NOT link external assets —
+    inline only, so each output is a single portable file.
   - Every major section is a <details> so the reader can collapse it.
     Leave the high-value sections (What We Built, Product Tour) open by
     default (the `open` attribute); collapse the rest.
   - Use inline <svg> for architecture / data-flow diagrams. Never ASCII art.
   - The table of contents is plain anchor links to each section's id.
+  - JavaScript is limited to the bundled click-to-copy helper — no
+    frameworks, no dependencies, no network. Make anything the reader will
+    paste (seed credentials, emails, URLs) a click-to-copy control:
+      <button type="button" class="copy" data-copy="admin@example.com">admin@example.com</button>
+    The value copied is data-copy (falling back to the element's text).
 -->
 <html lang="en">
 <head>
@@ -228,6 +234,27 @@
   .tag.good { color: var(--good); background: color-mix(in srgb, var(--good) 15%, var(--bg)); }
   .tag.warn { color: var(--warn); background: color-mix(in srgb, var(--warn) 15%, var(--bg)); }
   .tag.bad { color: var(--bad); background: color-mix(in srgb, var(--bad) 15%, var(--bg)); }
+  /* ---- Click-to-copy ---- */
+  .copy {
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: inherit;
+    font-family: var(--mono);
+    font-size: 0.85em;
+    padding: 0.1em 0.5em;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    user-select: none;
+    vertical-align: baseline;
+    transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  .copy:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .copy::after { content: "\29C9"; opacity: 0.55; font-size: 0.9em; }
+  .copy.copied { color: var(--good); border-color: var(--good); }
+  .copy.copied::after { content: "\2713"; opacity: 1; }
   footer.doc { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
   /* ---- Responsive ---- */
   @media (max-width: 800px) {
@@ -297,14 +324,18 @@
     <details class="section" id="tour" open>
       <summary>4 · Product Tour — Try It Yourself</summary>
       <div class="section-body">
-        <!-- One <div class="story"> per user story. Pattern:
+        <!-- One <div class="story"> per user story. Make credentials and URLs
+             click-to-copy so the reader can paste them without retyping. Pattern:
         <div class="story">
           <div class="story-head">Admin creates and approves a distributor
             <span class="role-pill">Admin</span></div>
           <div class="story-body">
             <ol>
-              <li>Visit <code>http://localhost:3000/...</code></li>
-              <li>Log in as <code>admin@example.com / password</code></li>
+              <li>Visit <button type="button" class="copy" data-copy="http://localhost:3000/admin/distributors">http://localhost:3000/admin/distributors</button></li>
+              <li>Log in as
+                <button type="button" class="copy" data-copy="admin@example.com">admin@example.com</button>
+                /
+                <button type="button" class="copy" data-copy="password">password</button></li>
               <li>Click "Distributors" in the nav.
                 <span class="expect">Expected: the table lists 3 seeded orgs.</span></li>
             </ol>
@@ -320,5 +351,39 @@
     </footer>
   </main>
 </div>
+<script>
+  // Click-to-copy. Any [data-copy] element copies its data-copy value
+  // (falling back to its text). Modern Clipboard API with a legacy
+  // execCommand fallback so it works on file:// and older browsers.
+  (function () {
+    function flash(el) {
+      el.classList.add("copied");
+      clearTimeout(el._copyTimer);
+      el._copyTimer = setTimeout(function () { el.classList.remove("copied"); }, 1200);
+    }
+    function legacyCopy(text, el) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); flash(el); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    document.addEventListener("click", function (e) {
+      var el = e.target.closest("[data-copy]");
+      if (!el) return;
+      var text = el.getAttribute("data-copy") || el.textContent.trim();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash(el); },
+          function () { legacyCopy(text, el); });
+      } else {
+        legacyCopy(text, el);
+      }
+    });
+  })();
+</script>
 </body>
 </html>
