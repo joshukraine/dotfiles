@@ -78,13 +78,18 @@ valid_target=1
 [[ -z "${repo}" || -z "${subfolder}" ]] && valid_target=0
 [[ "${repo}" == *"<"* || "${repo}" == *">"* ]] && valid_target=0
 [[ "${subfolder}" == *"<"* || "${subfolder}" == *">"* ]] && valid_target=0
-if [[ -n "${repo}" && ! "${repo}" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
-  warn "repo '${repo}' is not a valid <owner>/<name> — treating as undeclared"
-  valid_target=0
-fi
-if [[ "${subfolder}" == /* || "${subfolder}" == *".."* ]]; then
-  warn "subfolder '${subfolder}' is invalid — treating as undeclared"
-  valid_target=0
+# Only run the shape checks if the placeholder/empty checks above haven't
+# already disqualified the target — otherwise a placeholder value emits both
+# the shape warning and the "staying local" warning for the same condition.
+if (( valid_target == 1 )); then
+  if [[ ! "${repo}" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
+    warn "repo '${repo}' is not a valid <owner>/<name> — treating as undeclared"
+    valid_target=0
+  fi
+  if [[ "${subfolder}" == /* || "${subfolder}" == *".."* ]]; then
+    warn "subfolder '${subfolder}' is invalid — treating as undeclared"
+    valid_target=0
+  fi
 fi
 
 if (( valid_target == 0 )); then
