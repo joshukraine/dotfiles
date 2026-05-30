@@ -39,3 +39,5 @@ keybind = super+ctrl+right=resize_split:right,100
 
 # Reload config
 keybind = super+shift+comma=reload_config
+
+config-file = ?~/.config/ghostty/config.local
