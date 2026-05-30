@@ -16,13 +16,12 @@
     ../_shared/house-style.html into the head (replacing the HOUSE STYLE
     marker) and its script block where the second HOUSE STYLE marker sits
     (before the closing body tag). Do NOT link external assets.
-  - KEEP the feedback-export script at the very end verbatim — it is this
-    skill's own interactivity (builds Markdown from the form) and is separate
-    from the shared click-to-copy helper.
   - Make every command, credential, and URL the tester will paste a
     click-to-copy control: a button with class "copy" and a data-copy value.
-  - The feedback form fields are LITERAL (the tester fills them live); they are
-    not tokens. Keep them and the export button as-is.
+  - The Feedback section is a CALL TO ACTION to the project's existing QA
+    issue form, not a reimplementation. Fill {{REPORT_URL}} with the deep
+    link (see the skill instructions). If no QA template exists, fall back to
+    the plain "issues/new" URL or a tracker note.
 -->
 <html lang="en">
 <head>
@@ -106,39 +105,10 @@
     </details>
 
     <details class="section" id="feedback" open>
-      <summary>Feedback</summary>
+      <summary>Found something? File a QA report</summary>
       <div class="section-body">
-        <p>Fill in whatever's relevant — brief bullets and gut reactions are welcome. When done, click <strong>Copy feedback as Markdown</strong> and paste it back into the pull request or send it over.</p>
-        <form id="qa-feedback" onsubmit="return false">
-          <div class="field">
-            <label for="fb-tester">Your name (optional)</label>
-            <input type="text" id="fb-tester" placeholder="e.g. Nathan">
-          </div>
-          <div class="field">
-            <label for="fb-bugs">Bugs or broken behavior</label>
-            <textarea id="fb-bugs" data-fb="Bugs or Broken Behavior"></textarea>
-          </div>
-          <div class="field">
-            <label for="fb-off">Things that felt off</label>
-            <textarea id="fb-off" data-fb="Things That Felt Off"></textarea>
-          </div>
-          <div class="field">
-            <label for="fb-gaps">Edge cases or gaps</label>
-            <textarea id="fb-gaps" data-fb="Edge Cases or Gaps"></textarea>
-          </div>
-          <div class="field">
-            <label for="fb-ideas">Ideas or suggestions</label>
-            <textarea id="fb-ideas" data-fb="Ideas or Suggestions"></textarea>
-          </div>
-          <div class="field">
-            <label for="fb-other">Other notes</label>
-            <textarea id="fb-other" data-fb="Other Notes"></textarea>
-          </div>
-          <div class="actions">
-            <button type="button" class="btn" id="fb-copy">Copy feedback as Markdown</button>
-            <span class="form-status" id="fb-status"></span>
-          </div>
-        </form>
+        <p>Report findings using the project's QA issue form — it has dedicated fields for steps, expected vs. actual behavior, screenshots (drag-and-drop), locale, browser/device, and more, and the issue is auto-tagged for triage.</p>
+        <p><a class="btn" href="{{REPORT_URL}}" target="_blank" rel="noopener">File a QA report &rarr;</a></p>
       </div>
     </details>
 
@@ -148,54 +118,5 @@
   </main>
 </div>
 <!-- HOUSE STYLE: inline the <script> block from ../_shared/house-style.html here -->
-<script>
-  // Feedback export (qa-handoff only): assemble the form + exploratory
-  // checklist into Markdown and copy it, so the tester pastes it back.
-  (function () {
-    var btn = document.getElementById("fb-copy");
-    if (!btn) return;
-    function legacyCopy(text, cb) {
-      var ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.position = "absolute";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand("copy"); cb(); } catch (e) {}
-      document.body.removeChild(ta);
-    }
-    btn.addEventListener("click", function () {
-      var lines = ["## QA Feedback — " + document.title, ""];
-      var tester = document.getElementById("fb-tester");
-      if (tester && tester.value.trim()) lines.push("**Tester:** " + tester.value.trim(), "");
-      var checks = document.querySelectorAll("[data-check]");
-      if (checks.length) {
-        lines.push("### Exploratory checklist", "");
-        checks.forEach(function (c) {
-          lines.push("- [" + (c.checked ? "x" : " ") + "] " + c.getAttribute("data-check"));
-        });
-        lines.push("");
-      }
-      document.querySelectorAll("[data-fb]").forEach(function (t) {
-        lines.push("### " + t.getAttribute("data-fb"), "", t.value.trim() || "_None_", "");
-      });
-      var md = lines.join("\n");
-      var done = function () {
-        var s = document.getElementById("fb-status");
-        if (s) {
-          s.textContent = "Copied — paste it into the PR or send it back.";
-          clearTimeout(s._t);
-          s._t = setTimeout(function () { s.textContent = ""; }, 5000);
-        }
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(md).then(done, function () { legacyCopy(md, done); });
-      } else {
-        legacyCopy(md, done);
-      }
-    });
-  })();
-</script>
 </body>
 </html>

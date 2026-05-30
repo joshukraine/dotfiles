@@ -22,15 +22,18 @@ You are a senior developer preparing a hands-on testing guide for a QA colleague
 
 ## Output Format
 
-Render the handoff as a single self-contained **HTML** page using this skill's `template.html` and the shared house style — not a Markdown document. The tester opens it in a browser and gets click-to-copy logins, an interactive exploratory checklist, and a feedback form that exports Markdown.
+Render the handoff as a single self-contained **HTML** page using this skill's `template.html` and the shared house style — not a Markdown document. The tester opens it in a browser and gets click-to-copy logins, an interactive exploratory checklist, and a one-click link to the project's existing QA issue form for reporting findings.
 
 ### Rendering
 
 1. **Read `template.html`** (this skill's directory) for the structure and `../_shared/house-style.html` for the look. The template's head comment documents every token.
 2. **Inline the shared house style** — copy its `<style>` block in place of the `<!-- HOUSE STYLE ... -->` marker in `<head>`, and its `<script>` block in place of the second marker before `</body>`. The output must be a single self-contained `.html` (no external assets). Do not link a stylesheet.
-3. **Keep the feedback-export `<script>`** at the end of the template verbatim — it builds Markdown from the form and is this skill's own interactivity, separate from the shared click-to-copy helper.
-4. **Strip every instructional comment** from the output (the head how-to block and the body notes). The artifact must be clean. (HTML comments do not nest, so a leftover one can break rendering, not just clutter it.)
-5. **Fill the metadata tokens:** `{{PROJECT}}`, `{{TITLE}}` (e.g. `Phase N: Phase Title`), `{{DATE}}`, `{{BRANCH}}`, `{{COMMIT}}` (short SHA from `HEAD`), `{{DEBRIEF_REF}}` (path to the related debrief, or `N/A`).
+3. **Strip every instructional comment** from the output (the head how-to block and the body notes). The artifact must be clean. (HTML comments do not nest, so a leftover one can break rendering, not just clutter it.)
+4. **Resolve the QA report URL (`{{REPORT_URL}}`).** Find the project's GitHub repo via `gh repo view --json nameWithOwner --jq .nameWithOwner`. Look in `.github/ISSUE_TEMPLATE/` for a QA template (filename matching `qa`, case-insensitive — prefer YAML issue forms over plain Markdown). Build the URL:
+    - **QA template found:** `https://github.com/<owner>/<repo>/issues/new?template=<filename>`. Leave the title blank so the template's own `QA: <short description>` placeholder guides the tester.
+    - **No QA template:** `https://github.com/<owner>/<repo>/issues/new`.
+    - **No GitHub remote:** omit the CTA. Replace the Feedback section's button paragraph with a one-line note pointing at the project's actual tracker.
+5. **Fill the metadata tokens:** `{{PROJECT}}`, `{{TITLE}}` (e.g. `Phase N: Phase Title`), `{{DATE}}`, `{{BRANCH}}`, `{{COMMIT}}` (short SHA from `HEAD`), `{{DEBRIEF_REF}}` (path to the related debrief, or `N/A`), `{{REPORT_URL}}` (from step 4).
 6. **Make every command, credential, and URL the tester will paste a click-to-copy control:** `<button type="button" class="copy" data-copy="VALUE">VALUE</button>`.
 
 ### Section content
@@ -43,11 +46,11 @@ Fill each section token with the content described below.
 
 **Guided Walkthrough (`{{WALKTHROUGH}}`)** — one `<div class="story">` per scenario, in order. Each: a descriptive `.story-head` with a `.role-pill` for the user type; a copyable login (email + password from seed data) and starting URL; extremely literal numbered steps; and a `.expect` expected result precise enough that a deviation is obvious. Include at least one scenario per affected role. Read the project's `CLAUDE.md` for audience/viewport guidance (mobile-first user types, dual-audience designs) and add matching scenarios.
 
-**Exploratory Testing (`{{EXPLORATORY}}`)** — an interactive `<ul class="checklist">`; each item `<li><label><input type="checkbox" data-check="..."> ...</label></li>`. Draw from debrief-flagged thin coverage, permission boundaries (accessing another user's data, role escalation), responsive/mobile checks for UI changes, and edge cases a developer might skip. The `data-check` text is included in the exported feedback, so make it self-describing.
+**Exploratory Testing (`{{EXPLORATORY}}`)** — an interactive `<ul class="checklist">`; each item `<li><label><input type="checkbox" data-check="..."> ...</label></li>`. Draw from debrief-flagged thin coverage, permission boundaries (accessing another user's data, role escalation), responsive/mobile checks for UI changes, and edge cases a developer might skip. The checkboxes are a self-tracking aid the tester ticks as they go — make each item self-describing.
 
 **Test Suite (`{{TESTS}}`)** — commands to run the full suite and the targeted files most relevant to the new work, each a copy control. Note any known skips or expected failures.
 
-**Feedback** — already built into the template (a literal form plus the "Copy feedback as Markdown" button). Do not tokenize or rewrite it; leave it as-is.
+**Feedback** — already built into the template: a CTA button linking to the QA issue form via `{{REPORT_URL}}`. Do not reconstruct the form. If you fell back to the "no GitHub remote" case in step 4, replace the button paragraph with the tracker note instead.
 
 ---
 
@@ -67,7 +70,7 @@ open docs/qa-handoffs/YYYY-MM-DD-[brief-topic].html
 
 > **Remote testers:** publishing the handoff to a shared host (so a tester can open it without cloning) is handled by the publish step, which reads the per-project target from the project's `CLAUDE.md`. With no target configured, the handoff stays local. Until publishing is wired, hand off the local file or its hosted copy.
 
-Then tell the user where the file is and that the tester should: follow **Getting Current**, work through the walkthrough and tick the exploratory checklist, then click **Copy feedback as Markdown** and paste the result back into the PR (or send it over).
+Then tell the user where the file is and that the tester should: follow **Getting Current**, work through the walkthrough and tick the exploratory checklist, then click **File a QA report** for any findings — that opens the project's QA issue form (with drag-and-drop screenshots and auto-tagging) so the report lands in the tracker.
 
 ## Tone & Approach
 
