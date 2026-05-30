@@ -48,6 +48,10 @@ done
 [[ -f "${html}" ]] || die "html file not found: ${html}"
 [[ -n "${label}" ]] || die "--label is required"
 [[ -d "${project_root}" ]] || die "project root not a directory: ${project_root}"
+# Fail fast on missing optional-flag files — a silent skip hides typos and
+# leaves callers thinking the body was posted when it wasn't.
+[[ -z "${comment_body}" || -f "${comment_body}" ]] || die "--comment-body file not found: ${comment_body}"
+[[ -z "${md_fallback_only}" || -f "${md_fallback_only}" ]] || die "--md-fallback-only file not found: ${md_fallback_only}"
 
 cd "${project_root}"
 
@@ -85,7 +89,7 @@ fi
 
 if (( valid_target == 0 )); then
   warn "no QA Publish Target declared in ${project_root}/CLAUDE.md — staying local"
-  if [[ -n "${pr}" && -n "${md_fallback_only}" && -f "${md_fallback_only}" ]]; then
+  if [[ -n "${pr}" && -n "${md_fallback_only}" ]]; then
     gh pr comment "${pr}" --body-file "${md_fallback_only}" >/dev/null
     warn "posted Markdown-only fallback PR comment to PR #${pr}"
   fi
@@ -131,14 +135,22 @@ fi
 
 gh api -X PUT "repos/${repo}/contents/${dest_path}" --input "${payload_file}" >/dev/null
 
-pages_url="https://${owner}.github.io/${repo_name}/${dest_path}"
+# Pages URL assumes a project-pages repo served from the default branch. A
+# user/org-pages repo (named "<owner>.github.io") is served at the apex with
+# no <repo> path segment, so the project-pages template would be wrong.
+if [[ "${repo_name}" == "${owner}.github.io" ]]; then
+  warn "repo '${repo}' looks like a user/org-pages repo — the live URL omits the repo segment; verify GitHub Pages settings"
+  pages_url="https://${repo_name}/${dest_path}"
+else
+  pages_url="https://${owner}.github.io/${repo_name}/${dest_path}"
+fi
 echo "${pages_url}"
 
 if [[ -n "${pr}" ]]; then
   comment_file=$(mktemp)
   {
     printf '**[Open %s on Pages →](%s)**\n\n' "${label}" "${pages_url}"
-    if [[ -n "${comment_body}" && -f "${comment_body}" ]]; then
+    if [[ -n "${comment_body}" ]]; then
       cat "${comment_body}"
     fi
   } > "${comment_file}"

@@ -393,7 +393,7 @@ Note how `/drift-check` intensity tracks project maturity: critical during green
 
 `/walkthrough` and `/qa-handoff` produce HTML artifacts. A remote tester who is not cloning the repo needs a hosted copy. Publishing is per-project opt-in, declared in the project's own `CLAUDE.md`: a `## QA Publish Target` heading followed by a `yaml` fenced code block containing `repo: <owner>/<pages-repo>` and `subfolder: <project-slug>`. See the bootstrap template at `~/.claude/docs/prd-workflow/templates/CLAUDE.md` for the exact block.
 
-The repo must have GitHub Pages enabled; the live URL is derived as `https://<owner>.github.io/<pages-repo>/<subfolder>/<file>.html`.
+The repo must have GitHub Pages enabled and served from the **default branch** (the Contents API writes there); the live URL is derived as `https://<owner>.github.io/<pages-repo>/<subfolder>/<file>.html`. A user/org-pages repo (named `<owner>.github.io`) is served at the apex with no repo segment — the pipeline detects that and emits the correct URL with a warning so the configuration is visible.
 
 The shared pipeline at `~/.claude/skills/_shared/publish-artifact.sh` reads that block, uploads the HTML via the GitHub Contents API (create or update via SHA), and — when given `--pr <N>` — posts a PR comment with the live link.
 
