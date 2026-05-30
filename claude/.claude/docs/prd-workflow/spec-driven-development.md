@@ -180,6 +180,15 @@ On ComixDistro, the data model started as PRD file `02-data-model.md` (planning)
 
 Documents that have served their purpose but contain valuable historical context should be archived, not deleted. An `archives/` directory within `docs/` keeps them accessible without cluttering the working document set. Good candidates: research documents, one-time audit reports, brainstorming artifacts, and reading guides for completed reviews.
 
+### Medium: HTML vs. Markdown
+
+Document medium follows the same lifecycle split. Markdown for what an agent edits or an archive preserves; HTML for what a human reads once and moves on.
+
+- **Markdown:** PRD files, ROADMAP, CHANGELOG, this handbook, skill instructions (SKILL.md), debrief summaries. Diffable, machine-readable, single source of truth.
+- **HTML:** debrief full reports, walkthroughs, QA handoffs, plans, mockups. Self-contained single files with click-to-copy controls, interactive checklists, and inline SVG. Opened in a browser with `open` — no build, no server.
+
+The skills that produce HTML artifacts share a house style (`~/.claude/skills/_shared/house-style.html`) and a publish pipeline (see §7 "Publishing artifacts to remote testers") so the output is consistent and portable. The format that is easiest to maintain is not always the format that is most useful to read; the split keeps both honest.
+
 ---
 
 ## 6 PRD Lifecycle — From Greenfield to Mature
@@ -268,10 +277,10 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
-| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` posts it to the PR for QA | Pre-review, then pre-merge (user-facing PRs) |
+| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | Pre-review, then pre-merge (user-facing PRs) |
 | `/review-pr` | Analyze a PR for quality issues | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
-| `/qa-handoff` | Generate a hands-on QA testing guide | Per feature (when needed) |
+| `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
 | `/update-deps` | Update dependencies with testing between categories | Periodic maintenance |
@@ -307,7 +316,7 @@ This is where most development time is spent. One pass through this cycle produc
    └─ /review-pr               (quality, security, correctness)
 
 8. Publish walkthrough
-   └─ /walkthrough --publish   (final walkthrough → PR comment for QA — user-facing PRs)
+   └─ /walkthrough --publish   (renders HTML, uploads to project's QA host, posts PR comment with link)
 
 9. Merge
    └─ /merge-pr                (squash merge, clean up, pull main)
@@ -315,7 +324,7 @@ This is where most development time is spent. One pass through this cycle produc
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` posts that walkthrough as a PR comment so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
+Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
 
 Step 9 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
 
@@ -379,6 +388,21 @@ Skills shift in importance as the project matures (see §6):
 | `/readme-refresh` | Bootstrap | **Full refresh** | Light periodic |
 
 Note how `/drift-check` intensity tracks project maturity: critical during greenfield when the spec is the primary reference, important during MVP transition, and lighter in the mature stage when living documents replace the PRD. The skill still has value in the mature stage — it just checks against living docs (domain model, integration guides) rather than PRD files.
+
+### Publishing artifacts to remote testers
+
+`/walkthrough` and `/qa-handoff` produce HTML artifacts. A remote tester who is not cloning the repo needs a hosted copy. Publishing is per-project opt-in, declared in the project's own `CLAUDE.md`: a `## QA Publish Target` heading followed by a `yaml` fenced code block containing `repo: <owner>/<pages-repo>` and `subfolder: <project-slug>`. See the bootstrap template at `~/.claude/docs/prd-workflow/templates/CLAUDE.md` for the exact block.
+
+The repo must have GitHub Pages enabled; the live URL is derived as `https://<owner>.github.io/<pages-repo>/<subfolder>/<file>.html`.
+
+The shared pipeline at `~/.claude/skills/_shared/publish-artifact.sh` reads that block, uploads the HTML via the GitHub Contents API (create or update via SHA), and — when given `--pr <N>` — posts a PR comment with the live link.
+
+If the block is absent or contains placeholder values, the pipeline never guesses a target:
+
+- **`/walkthrough --publish`** falls back to posting the Markdown twin alone as the PR comment (the pre-HTML behaviour).
+- **`/qa-handoff --publish`** stays local and prints a warning.
+
+Solo projects (a blog, a one-off prototype) simply omit the block.
 
 ### The `/drift-check` skill
 
