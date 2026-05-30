@@ -1,7 +1,8 @@
 ---
 name: qa-handoff
-description: Generate a hands-on QA testing guide with walkthrough scenarios and exploratory testing checklist.
+description: Generate a hands-on QA testing guide with walkthrough scenarios and exploratory testing checklist. --publish uploads the HTML to the project's configured QA host.
 disable-model-invocation: true
+argument-hint: "[--publish] [--pr <N>]"
 ---
 
 # QA Handoff
@@ -68,9 +69,37 @@ Create `docs/qa-handoffs/` if it doesn't exist; use the same date-and-slug conve
 open docs/qa-handoffs/YYYY-MM-DD-[brief-topic].html
 ```
 
-> **Remote testers:** publishing the handoff to a shared host (so a tester can open it without cloning) is handled by the publish step, which reads the per-project target from the project's `CLAUDE.md`. With no target configured, the handoff stays local. Until publishing is wired, hand off the local file or its hosted copy.
-
 Then tell the user where the file is and that the tester should: follow **Getting Current**, work through the walkthrough and tick the exploratory checklist, then click **File a QA report** for any findings — that opens the project's QA issue form (with drag-and-drop screenshots and auto-tagging) so the report lands in the tracker.
+
+## Publishing for remote testers (`--publish`)
+
+A remote tester who is not cloning the repo needs a hosted copy. With `--publish`, the skill uploads the saved HTML to the project's configured QA host so the tester can open it from a URL.
+
+1. **Generate and save the HTML locally first** (the steps above). `--publish` operates on the saved file; it does not regenerate it.
+2. **Build a one-line blurb file** at `tmp/qa-handoff-comment.md` describing what is inside the HTML so a PR reader has context. One short paragraph — the HTML is the artifact, not a Markdown twin. Example:
+
+    ```markdown
+    Click-to-copy logins, interactive exploratory checklist, and a one-click
+    deep link to the project's QA report form are inside.
+    ```
+
+3. **Confirm before publishing.** This is outward-facing: it pushes a file to a shared repo and, when `--pr <N>` is given, posts a PR comment. Get explicit approval first.
+4. **Call the shared publish pipeline:**
+
+    ```bash
+    ~/.claude/skills/_shared/publish-artifact.sh \
+      --html docs/qa-handoffs/YYYY-MM-DD-[brief-topic].html \
+      --label "QA handoff: <Title>" \
+      [--pr <N>] \
+      [--comment-body tmp/qa-handoff-comment.md]
+    ```
+
+    Behaviour:
+    - **Target declared, no `--pr`** → uploads the HTML, prints the live Pages URL. Share that URL with the tester.
+    - **Target declared, `--pr <N>` given** → also posts a PR comment with the live link above the blurb.
+    - **Target undeclared** → prints a warning and stays local. No PR comment (`--md-fallback-only` is not used here because the HTML is the artifact — a Markdown twin would lose the click-to-copy logins and the interactive checklist that make the handoff useful).
+
+5. Report back to the user with the Pages URL (and PR-comment confirmation when applicable).
 
 ## Tone & Approach
 

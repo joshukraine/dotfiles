@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+  Walkthrough structural template.
+
+  The /walkthrough skill fills this skeleton, then inlines the shared house
+  style so the output is a single self-contained, portable .html file.
+
+  How to use:
+  - Copy this whole document, then replace the {{TOKENS}} and the annotated
+    section regions with real content.
+  - Produce a CLEAN artifact: strip every instructional comment (this head
+    block and the explanatory notes in the body). They guide template-filling
+    only and must not appear in the output. (HTML comments do not nest, so a
+    stray instructional comment can also break rendering.)
+  - Inline the shared house style: copy the style block from
+    ../_shared/house-style.html into the head (replacing the HOUSE STYLE
+    marker) and its script block where the second HOUSE STYLE marker sits
+    (before the closing body tag). Do NOT link external assets.
+  - Make every command, credential, and URL the tester will paste a
+    click-to-copy control: a button with class "copy" and a data-copy value.
+  - When this is the post-merge/publish version, keep the production-verification
+    callout near the top; when it is the pre-review scratch copy, omit it.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PROJECT}} — Walkthrough: PR #{{PR}}</title>
+<!-- HOUSE STYLE: inline the <style> block from ../_shared/house-style.html here -->
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="#walkthrough">Walkthrough</a></li>
+      <li><a href="#not-browser-testable">Not browser-testable</a></li>
+      <li><a href="#cleanup">Cleanup</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="doc">
+      <p class="eyebrow">{{PROJECT}} · PR Walkthrough</p>
+      <h1>PR #{{PR}}: {{FEATURE}}</h1>
+      <dl class="meta">
+        <dt>Project</dt><dd>{{PROJECT}}</dd>
+        <dt>PR</dt><dd>{{PR_LINK}}</dd>
+        <dt>Branch</dt><dd>{{BRANCH}}</dd>
+        <dt>Commit</dt><dd>{{COMMIT}}</dd>
+        <dt>Date</dt><dd>{{DATE}}</dd>
+        <dt>Estimate</dt><dd>~{{ESTIMATE}} minutes</dd>
+      </dl>
+    </header>
+
+    <!-- PRODUCTION VERIFICATION CALLOUT
+         Include this only when publishing the post-merge version. For a
+         pre-review scratch copy, remove the entire .callout block. -->
+    <div class="callout">
+      <span class="label">Verifying on production?</span>
+      Use the production app and your own account in place of the local server
+      and seed logins below. The steps and expected results are identical.
+    </div>
+
+    <details class="section" id="setup" open>
+      <summary>Setup</summary>
+      <div class="section-body">
+        <!-- Each command is a click-to-copy control, e.g.:
+             <button type="button" class="copy" data-copy="bin/dev">bin/dev</button>
+             Cover: start command + boot URL, migrations/deps/env vars/seed
+             reset (or "None"), locale/viewport notes if relevant. -->
+        {{SETUP}}
+
+        <h3>Logins</h3>
+        <!-- Replace with a table of test accounts. Each credential a .copy button:
+        <table>
+          <thead><tr><th>Role</th><th>Credentials</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>admin <span class="role-pill">admin</span></td>
+              <td>
+                <button type="button" class="copy" data-copy="admin@example.com">admin@example.com</button>
+                /
+                <button type="button" class="copy" data-copy="password">password</button>
+              </td>
+              <td>full access</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>One literal sentence on how to log in (form / magic link / dev shortcut).</p>
+        -->
+        {{LOGINS}}
+      </div>
+    </details>
+
+    <details class="section" id="walkthrough" open>
+      <summary>Walkthrough</summary>
+      <div class="section-body">
+        <!-- One .story per Part. Label new-in-PR vs. pre-existing in the head.
+        <div class="story">
+          <div class="story-head">
+            Part 1 — Create a campaign
+            <span class="role-pill">new in this PR</span>
+          </div>
+          <div class="story-body">
+            <ol>
+              <li>Click <em>New campaign</em>.<br>
+                  <span class="expect">✅ Modal opens with empty form.</span></li>
+              <li>...</li>
+            </ol>
+          </div>
+        </div>
+        Use .role-pill for "new in this PR" / "pre-existing — for context". -->
+        {{PARTS}}
+      </div>
+    </details>
+
+    <details class="section" id="not-browser-testable">
+      <summary>Not browser-testable</summary>
+      <div class="section-body">
+        <!-- Bullet list of behaviors only covered by automated tests, with a
+             one-line reason each. Omit this section if everything is in-browser. -->
+        {{NOT_BROWSER_TESTABLE}}
+      </div>
+    </details>
+
+    <details class="section" id="cleanup">
+      <summary>Cleanup</summary>
+      <div class="section-body">
+        <!-- How to restore state after the walkthrough; whether the scratch
+             file is gitignored; anything else to tidy up. -->
+        {{CLEANUP}}
+      </div>
+    </details>
+
+    <footer class="doc">
+      Generated by the <code>/walkthrough</code> skill · {{DATE}}
+    </footer>
+  </main>
+</div>
+<!-- HOUSE STYLE: inline the <script> block from ../_shared/house-style.html here -->
+</body>
+</html>
