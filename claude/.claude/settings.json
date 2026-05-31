@@ -101,7 +101,7 @@
       "Read(~/.ssh/**)",
       "Read(~/Library/Keychains/**)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
   "hooks": {
@@ -172,7 +172,7 @@
     "enabled": false
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "editorMode": "vim",
   "agentPushNotifEnabled": true,
   "voiceEnabled": true
