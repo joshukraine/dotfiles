@@ -35,7 +35,9 @@ Render the handoff as a single self-contained **HTML** page using this skill's `
     - **No QA template:** `https://github.com/<owner>/<repo>/issues/new`.
     - **No GitHub remote:** omit the CTA. Replace the Feedback section's button paragraph with a one-line note pointing at the project's actual tracker.
 5. **Fill the metadata tokens:** `{{PROJECT}}`, `{{TITLE}}` (e.g. `Phase N: Phase Title`), `{{DATE}}`, `{{BRANCH}}`, `{{COMMIT}}` (short SHA from `HEAD`), `{{DEBRIEF_REF}}` (path to the related debrief, or `N/A`), `{{REPORT_URL}}` (from step 4).
-6. **Make every command, credential, and URL the tester will paste a click-to-copy control:** `<button type="button" class="copy" data-copy="VALUE">VALUE</button>`.
+6. **Make every real command and URL the tester will paste a click-to-copy control:** `<button type="button" class="copy" data-copy="VALUE">VALUE</button>`.
+
+**Credentials.** The handoff HTML is a single file that is both committed and (with `--publish`) uploaded to a public QA host. A login may be a click-to-copy control only when it is a *reserved, non-routable example identity*: an RFC 2606 reserved domain (`example.com`/`.net`/`.org`) or the `.example` TLD, with any password an obviously-fake seed value (e.g. `password`). Such fakes are documentation, not credentials — and login is the most repetitive step, so keep them click-to-copy. Any real or real-looking login (real domain, actual person, live tenant, real password/token) must be a plain placeholder (`<code>&lt;your-admin-email&gt;</code>`), never a copy control; add a one-line note (local: seeded logins from `db/seeds.rb`; production: your own account). Never publish a real secret in any form.
 
 ### Section content
 
@@ -45,7 +47,7 @@ Fill each section token with the content described below.
 
 **Getting Current (`{{SETUP}}`)** — exact setup steps, each command a copy control: pull/install (`git pull`, `bundle install`, `bin/rails db:migrate`, `bin/rails db:seed`), whether a full `bin/rails db:reset` is needed, new gems/system packages, new env vars or credentials, and the command to start the app plus the URL to confirm it boots. List specifics — never "some dependencies changed." Say "None" where a category is unchanged.
 
-**Guided Walkthrough (`{{WALKTHROUGH}}`)** — one `<div class="story">` per scenario, in order. Each: a descriptive `.story-head` with a `.role-pill` for the user type; a copyable login (email + password from seed data) and starting URL; extremely literal numbered steps; and a `.expect` expected result precise enough that a deviation is obvious. Include at least one scenario per affected role. Read the project's `CLAUDE.md` for audience/viewport guidance (mobile-first user types, dual-audience designs) and add matching scenarios.
+**Guided Walkthrough (`{{WALKTHROUGH}}`)** — one `<div class="story">` per scenario, in order. Each: a descriptive `.story-head` with a `.role-pill` for the user type; a click-to-copy login when it is a reserved-example identity, otherwise a placeholder (see Credentials), plus a copyable starting URL; extremely literal numbered steps; and a `.expect` expected result precise enough that a deviation is obvious. Include at least one scenario per affected role. Read the project's `CLAUDE.md` for audience/viewport guidance (mobile-first user types, dual-audience designs) and add matching scenarios.
 
 **Exploratory Testing (`{{EXPLORATORY}}`)** — an interactive `<ul class="checklist">`; each item `<li><label><input type="checkbox" data-check="..."> ...</label></li>`. Draw from debrief-flagged thin coverage, permission boundaries (accessing another user's data, role escalation), responsive/mobile checks for UI changes, and edge cases a developer might skip. The checkboxes are a self-tracking aid the tester ticks as they go — make each item self-describing.
 

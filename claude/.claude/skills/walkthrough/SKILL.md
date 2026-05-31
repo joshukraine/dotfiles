@@ -52,7 +52,7 @@ If the change is user-facing — or a mix where the UI surface is worth exercisi
 
 - From the changed views/controllers/routes, determine which screens and user journeys changed.
 - Identify every user role/persona that touches the changed flows.
-- Find concrete test accounts for each persona by reading the project's seed data (e.g. `db/seeds.rb`), fixtures, or factories. Use exact credentials.
+- Find concrete test accounts for each persona by reading the project's seed data (e.g. `db/seeds.rb`), fixtures, or factories. Use exact credentials. Reserved-example logins (`@example.com` and friends) stay click-to-copy when published; real-looking ones become placeholders — see Credentials in published artifacts under Publishing.
 - Determine the local login mechanism by reading the project (password, magic link via a dev mail catcher, a dev-only shortcut) and describe it literally.
 - Read `CLAUDE.md` for project-specific concerns to fold in: default locale and bilingual requirements, mobile-first/viewport rules, theme, accessibility.
 
@@ -89,6 +89,8 @@ Use the template below. Principles:
 
 Run once, after `/review-pr` and any review fixes — normally just before merge, but also valid on an **already-merged** PR to backfill a walkthrough that was missed. This renders the walkthrough as rich HTML, publishes it to the project's configured QA host (if any), and posts a PR comment with the live link and a collapsible Markdown fallback.
 
+**Credentials in published artifacts.** A login may be a click-to-copy control only when it is a *reserved, non-routable example identity*: the email domain is an RFC 2606 reserved-for-documentation domain (`example.com`, `example.net`, `example.org`) or the `.example` TLD, and any accompanying password is an obviously-fake seed value (e.g. `password`), not a real secret. Such logins are documentation, not credentials — guaranteed unregisterable and non-deliverable — so publishing them as copy controls is safe and removes the single most repetitive step in any walkthrough (login). Anything else — a real or real-looking domain, an actual person's address, a live tenant, or a real password/token/API key — must be a plain-text placeholder (`<code>&lt;your-admin-email&gt;</code>`), never a copy control; pair it with a one-line note (local testers use the seeded login from `db/seeds.rb`; production testers use their own account). Never publish a real password, token, or secret in any form. The publish step stays human-gated regardless.
+
 1. **Resolve the PR.** Use the PR number or branch given as an argument; otherwise find the PR for the current branch (`gh pr view`). The PR may be **open or merged** — both are valid publish targets. Only stop if no PR exists at all.
 2. **Re-run the gate.** If the change is not user-facing (the **Gate** step above), there is nothing to publish — say so and stop.
 3. **Regenerate from the PR diff.** Do not reuse a possibly-stale scratch file — review may have changed the code, and on a merged PR the branch is likely deleted. Rebuild the walkthrough content from `gh pr diff <N>` exactly as steps 1–5 describe, so the published copy matches the code that merged.
@@ -98,7 +100,7 @@ Run once, after `/review-pr` and any review fixes — normally just before merge
     - Inline the shared house style — copy its `<style>` block in place of the `<!-- HOUSE STYLE ... -->` marker in `<head>`, and its `<script>` block in place of the second marker before `</body>`. The output must be a single self-contained `.html` (no external assets).
     - Strip every instructional comment from the output (the head how-to block and the body notes). The artifact must be clean.
     - Fill the metadata tokens: `{{PROJECT}}`, `{{PR}}`, `{{PR_LINK}}` (Markdown link to the PR), `{{FEATURE}}` (short feature name), `{{BRANCH}}`, `{{COMMIT}}` (short SHA), `{{DATE}}`, `{{ESTIMATE}}`.
-    - Keep the production-verification callout in the HTML version too (it is part of the template). Convert the Markdown setup, logins, parts, not-browser-testable, and cleanup content into the HTML structure described inline in the template. Every command/credential/URL the tester will paste is a `<button type="button" class="copy" data-copy="VALUE">VALUE</button>` control.
+    - Keep the production-verification callout in the HTML version too (it is part of the template). Convert the Markdown setup, logins, parts, not-browser-testable, and cleanup content into the HTML structure described inline in the template. Every command/URL the tester will paste is a `<button type="button" class="copy" data-copy="VALUE">VALUE</button>` control, and so are reserved-example logins (see Credentials in published artifacts above) — login is the most repetitive step, so keep it click-to-copy. Only non-example/real credentials are the exception: render those as plain `<code>&lt;your-admin-email&gt;</code>`, not copy buttons.
     - Save to `tmp/pr-<N>-walkthrough-published.html`.
 6. **Build the PR-comment body** at `tmp/pr-<N>-walkthrough-comment.md`: a `<details>` block wrapping the Markdown twin so the link sits above and the Markdown is a collapsible fallback below.
 
