@@ -234,17 +234,18 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | ----- | ------- |
 | `/bootstrap-prd` | Scaffold PRD-driven development infrastructure into a new project |
 | `/checkpoint` | Quick status update — what's done, in progress, and blocked |
-| `/commit` | Analyze diffs, split into logical commits, Conventional Commits format |
 | `/create-pr` | Create a PR with auto-linked issues and formatted description |
 | `/debrief` | Comprehensive walkthrough of recent work with architecture rationale |
 | `/drift-check` | Pre-PR advisory check for deviations from the project spec (read-only) |
+| `/dustoff` | Read-only re-entry assessment for a dormant project, with a prioritized plan |
 | `/md2pdf` | Convert a Markdown file to PDF with GitHub-style formatting |
 | `/merge-pr` | Merge a PR with status checks, squash merge, and branch cleanup |
 | `/plan-phase` | Draft implementation plan and create GitHub issues (no code written) |
+| `/prd-view` | Render a PRD Markdown file as a rich HTML reading view in the browser |
 | `/qa-handoff` | Prepare a hands-on QA testing guide for a completed PRD phase |
+| `/qa-triage` | Triage a QA-labeled report, classify it, and draft the technical issue(s) |
 | `/readme-refresh` | Audit and update a project README, or bootstrap a new one |
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
-| `/review-pr` | Read-only PR review with severity-ranked findings |
 | `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
 | `/update-deps` | Dependabot-aware dependency updates with security audit, CI validation, and a unified PR |
@@ -450,6 +451,27 @@ The `.zshrc` script can be profiled by touching the file `~/.zshrc.profiler` and
 - <http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/>
 - <https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell>
 
+## Development
+
+This repo ships a small test and lint suite. Run both from the `dotfiles` root.
+
+Lint shell scripts with [shellcheck][shellcheck]:
+
+```sh
+./scripts/lint-shell
+```
+
+Run the [bats][bats] test suite:
+
+```sh
+./scripts/run-tests          # all tests
+./scripts/run-tests git      # git function tests
+./scripts/run-tests abbr     # abbreviation tests
+./scripts/run-tests presets  # permission-preset merge tests
+```
+
+Both checks also run in CI on every push and pull request via [GitHub Actions][gh-actions] (`.github/workflows/test.yml`), which additionally lints Markdown with [markdownlint-cli2][markdownlint].
+
 ## Customization
 
 Local customizations should be placed in `*.local` files:
@@ -467,6 +489,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [1p-cli-start]: https://developer.1password.com/docs/cli/get-started
 [agent-skills]: https://agentskills.io
 [asdf]: https://asdf-vm.com/
+[bats]: https://github.com/bats-core/bats-core
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
 [context7]: https://context7.com/
 [cascadia-code]: https://github.com/microsoft/cascadia-code
@@ -477,6 +500,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [fira-code]: https://github.com/tonsky/FiraCode
 [fish]: https://fishshell.com/
 [folke]: https://github.com/folke
+[gh-actions]: https://github.com/joshukraine/dotfiles/actions
 [ghostty]: https://ghostty.org/
 [git]: https://git-scm.com/
 [gnu-stow]: https://www.gnu.org/software/stow/
@@ -492,6 +516,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [lazyvim]: https://www.lazyvim.org/
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [lunar-vim]: https://www.lunarvim.org/
+[markdownlint]: https://github.com/DavidAnson/markdownlint-cli2
 [monaspace]: https://monaspace.githubnext.com
 [monolisa]: https://www.monolisa.dev/
 [neovim-from-scratch]: https://youtu.be/J9yqSdvAKXY
@@ -507,6 +532,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [programming-fonts]: https://app.programmingfonts.org/
 [ruby]: https://www.ruby-lang.org/en
 [screenshot]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700154289/screenshots/dotfiles-nov-2023_gx2wrw.png
+[shellcheck]: https://www.shellcheck.net/
 [sidekick-nvim]: https://github.com/folke/sidekick.nvim
 [smoke-test-output]: https://res.cloudinary.com/dnkvsijzu/image/upload/v1700085278/screenshots/smoke-test_tddntp.png
 [starship]: https://starship.rs/
