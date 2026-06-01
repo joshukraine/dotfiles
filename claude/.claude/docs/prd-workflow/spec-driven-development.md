@@ -279,7 +279,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
 | `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | Pre-review, then pre-merge (user-facing PRs) |
-| `/review-pr` | Analyze a PR for quality issues | Pre-merge |
+| `/code-review` | Review the diff for correctness bugs and cleanups at a chosen effort level (built-in; `/review` for an existing PR by number) | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/qa-triage` | Triage a `qa`-labeled report — confirm it against the code, classify it, and draft the tech issue(s) it warrants | Per QA report |
@@ -289,7 +289,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
-> **Note:** `/simplify` is a built-in Claude Code skill. All other entries listed above are custom skills defined in `~/.claude/skills/`.
+> **Note:** `/simplify` and `/code-review` are built-in Claude Code skills. All other entries listed above are custom skills defined in `~/.claude/skills/`.
 
 ### The PR cycle (inner loop)
 
@@ -315,7 +315,7 @@ This is where most development time is spent. One pass through this cycle produc
    └─ /walkthrough             (browser pre-flight — user-facing PRs only)
 
 7. Review
-   └─ /review-pr               (quality, security, correctness)
+   └─ /code-review             (correctness + cleanups; built-in /review for an existing PR by number)
 
 8. Publish walkthrough
    └─ /walkthrough --publish   (renders HTML, uploads to project's QA host, posts PR comment with link)
@@ -401,7 +401,7 @@ Skills shift in importance as the project matures (see §6):
 | `/drift-check` | **Critical** | Important | Light (living docs) |
 | `/create-pr` | **Always** | **Always** | **Always** |
 | `/walkthrough` | User-facing PRs | User-facing PRs | User-facing PRs |
-| `/review-pr` | Pre-merge | Pre-merge | Pre-merge |
+| `/code-review` | Pre-merge | Pre-merge | Pre-merge |
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |
 | `/qa-triage` | Rare (pre-launch) | **Frequent** | Ongoing |

@@ -28,6 +28,7 @@ Check each of the following and report status:
 
 - **CI status**: Run `gh pr checks` to verify all required checks have passed
 - **Merge conflicts**: Run `gh pr view --json mergeable` to verify no conflicts
+- **Review feedback**: Run `gh pr view --json reviewDecision,reviews` to surface any unresolved review threads or a pending "changes requested" — advisory, not a hard gate. (Carries over the review-thread awareness from the retired `/review-pr`.)
 
 If CI has not passed, **stop and report**. Do not proceed with the merge.
 

@@ -11,7 +11,7 @@ Turn a QA report into a triaged decision and, where warranted, one or more well-
 
 QA reports (filed by a tester, usually carrying a `qa` label) are the *tester's view* of a problem. They describe user-visible symptoms; the engineering fix is often differently scoped — one report may need several tech issues, or several reports may share one root cause. This skill does the standard review-and-extrapolate ritual: read the report, confirm it against the codebase, decide what (if anything) to build, and draft the issue(s) — then **stop for the human to approve** before anything is created.
 
-**Where it sits in the workflow.** This is the *first* step for a `qa`-labeled issue. Its output feeds the normal pipeline: an approved tech issue goes to `/resolve-issue` → `/create-pr` → `/walkthrough` + `/review-pr` → merge. This skill never implements; it only triages and drafts.
+**Where it sits in the workflow.** This is the *first* step for a `qa`-labeled issue. Its output feeds the normal pipeline: an approved tech issue goes to `/resolve-issue` → `/create-pr` → `/walkthrough` + `/code-review` → merge. This skill never implements; it only triages and drafts.
 
 **Applicability.** Needs a GitHub repo (`gh`). Built around a QA-report labeling convention but otherwise project-agnostic — no project names, tester identities, or paths are hardcoded. It reads the project's `CLAUDE.md` for local conventions (board, workflow, bilingual i18n, etc.) and embeds the rest itself.
 
