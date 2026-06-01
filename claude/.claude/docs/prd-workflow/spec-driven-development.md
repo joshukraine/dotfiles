@@ -281,6 +281,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
+| `/dustoff` | Re-entry assessment for a dormant project: lifecycle stage, staleness, and convention drift → prioritized plan | Returning after months away |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
 | `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
@@ -350,6 +351,10 @@ When you're disoriented, fatigued, or returning from a break:
 - **`/checkpoint`** — Reorient. Where am I in the ROADMAP? What's in flight? What are the next 2–3 items? This is the "where was I?" skill.
 - **Appendix A quick reference** — Scan the checklists to re-engage the workflow discipline.
 
+When you're returning to a project that's been dormant for months:
+
+- **`/dustoff`** — The deeper counterpart to `/checkpoint`. Where `/checkpoint` assumes you know where you are and just need orientation, `/dustoff` re-derives the project's state from scratch: its lifecycle stage (§6), what's stale or broken, and how far the project's adopted conventions have drifted from the current `~/.claude` toolset. It produces a single prioritized re-entry plan and hands each item to the skill that executes it (`/update-deps`, `/readme-refresh`, `/plan-phase`). Read-only — it plans, it doesn't act.
+
 When you suspect drift has occurred:
 
 - **`/drift-check`** — Run it against the current branch to assess alignment. If drift is confirmed, follow the reactive workflow in §3b.
@@ -380,6 +385,7 @@ Skills shift in importance as the project matures (see §6):
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |
 | `/checkpoint` | Ad-hoc | **Frequent** (transition period) | Ad-hoc |
+| `/dustoff` | **On return** | **On return** | **On return** |
 | `/debrief` | **Phase boundary** | Milestone reviews | Rare |
 | `/update-deps` | Periodic | Periodic | **Regular cadence** |
 | `/readme-refresh` | Bootstrap | **Full refresh** | Light periodic |
