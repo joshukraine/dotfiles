@@ -25,7 +25,7 @@ Both paths produce the same kind of artifact — a single self-contained HTML pa
 
 **Rails path also:** Read `db/seeds.rb` to identify test accounts and credentials (reference them exactly). Review the `Gemfile` and recent migrations for setup the tester needs.
 
-**Static-site path also:** Identify the **deploy-preview URL** the tester should open — a Netlify deploy preview is the typical source; if it isn't obvious from `CLAUDE.md` or the repo, ask the user. Note the local preview command (`hugo server`). Check for a redirects file or redirect map (`static/_redirects`, `netlify.toml`, or a documented map) — if one exists, pull specific old→new URLs to list as redirects to verify. Note whether the deploy preview is access-gated.
+**Static-site path also:** Identify the **deploy-preview URL** the tester should open — a Netlify deploy preview is the typical source; if it isn't obvious from `CLAUDE.md` or the repo, ask the user. Note the local preview command (`hugo server`) and whether the preview is access-gated. Check the Hugo config for **multiple languages** (`languages` / `defaultContentLanguage`, an `i18n/` dir, or `content/<lang>/`) — if multilingual, include the Languages & Translations section. Identify **forms and external integrations** and their backends (Netlify Forms, an external API, a separate app), and note any restricted to certain domains (e.g. a CORS allowlist) so the guide can tell testers which environment to use. For URL continuity, remember Hugo migrations often preserve old paths by slug-matching rather than redirect maps — check both that preserved URLs still resolve and that removed URLs are intentionally gone.
 
 ## Output Format
 
@@ -38,7 +38,7 @@ Render the handoff as a single self-contained **HTML** page using the shared hou
 
 1. **Read your mode's template** (this skill's directory) for the structure and `../_shared/house-style.html` for the look. The template's head comment documents every token.
 2. **Inline the shared house style** — copy its `<style>` block in place of the `<!-- HOUSE STYLE ... -->` marker in `<head>`, and its `<script>` block in place of the second marker before `</body>`. The output must be a single self-contained `.html` (no external assets). Do not link a stylesheet.
-3. **Strip every instructional comment** from the output (the head how-to block and the body notes). The artifact must be clean. (HTML comments do not nest, so a leftover one can break rendering, not just clutter it.) *Static template only:* if the site has no giving/commerce/signup flows, also delete the optional **Donation Paths** section and its TOC entry.
+3. **Strip every instructional comment** from the output (the head how-to block and the body notes). The artifact must be clean. (HTML comments do not nest, so a leftover one can break rendering, not just clutter it.) *Static template only:* delete any optional section that doesn't apply — the **Languages & Translations** section for a single-language site, and the **Key Flows & Forms** section for a purely informational site — along with its TOC entry.
 4. **Resolve the QA report URL (`{{REPORT_URL}}`).** Find the project's GitHub repo via `gh repo view --json nameWithOwner --jq .nameWithOwner`. Look in `.github/ISSUE_TEMPLATE/` for a QA template (filename matching `qa`, case-insensitive — prefer YAML issue forms over plain Markdown). Build the URL:
     - **QA template found:** `https://github.com/<owner>/<repo>/issues/new?template=<filename>`. Leave the title blank so the template's own placeholder guides the tester.
     - **No QA template:** `https://github.com/<owner>/<repo>/issues/new`.
@@ -70,21 +70,28 @@ Fill each token with the content below. The checklist sections use an interactiv
 
 **What's New (`{{WHATS_NEW}}`)** — a plain-language summary of what changed on the site (new or updated pages, redesigns, migrated content). 2–4 short paragraphs connecting to the goal. No jargon.
 
-**Where to Test (`{{WHERE}}`)** — the **deploy-preview URL** as a copy control (a Netlify deploy preview is typical). Add the local option for testers who clone: `git pull`, then `hugo server`, and the localhost URL — each a copy control. If the preview is access-gated, add a one-line preview-access note (placeholder only — see Credentials).
+**Where to Test (`{{WHERE}}`)** — the **deploy-preview URL** as a copy control (a Netlify deploy preview is typical). Add the local option for testers who clone: `git pull`, then `hugo server`, and the localhost URL — each a copy control. If the preview is access-gated, add a one-line preview-access note (placeholder only — see Credentials). **Call out environment limits:** some checks cannot be done on a per-PR deploy preview — an external API with a CORS allowlist, or form-email notifications that only fire in production. For each, say which environment it must be done in (per-PR preview vs. branch deploy vs. production) so testers don't file false "broken form" reports.
 
 **Guided Walkthrough (`{{WALKTHROUGH}}`)** — one `<div class="story">` per key page or flow, in reading order. The `.role-pill` is the visitor type (Visitor / Donor / Mobile visitor). Give a copyable starting URL (preview URL + path), literal numbered steps, and a `.expect` result. Cover the new/changed pages; add a mobile scenario per any `CLAUDE.md` viewport guidance.
 
-**Content & Links (`{{CONTENT}}`)** — checklist: copy accuracy (no lorem/placeholder; names, dates, figures, and contact info correct); every nav/footer/CTA link resolves; **old→new redirects resolve with no 404s** — when a redirect map/file exists, list the specific old URLs to verify; navigation works (menu, breadcrumbs, footer).
+**Content & Links (`{{CONTENT}}`)** — checklist: copy accuracy (no lorem/placeholder; names, dates, figures, and contact info correct); every nav/footer/CTA link resolves; navigation works (menu, breadcrumbs, footer). **URL continuity from the old site:** Hugo migrations often preserve URLs by slug-matching rather than redirect maps, so check both directions — (a) every preserved old URL still resolves at the same path, and (b) every *removed* old URL is intentionally gone (redirect it if it was indexed/linked, or accept the 404).
 
-**Donation Paths (`{{DONATION}}`) — optional** — include for giving/commerce/signup sites; delete the section and its TOC entry otherwise. Highest-stakes for a donor-facing site: exercise each give route end to end (mail-a-check address correct; PayPal link works and lands on the right account; any new platform flow completes), plus related form submissions (contact, newsletter) and their confirmations.
+**Languages & Translations (`{{I18N}}`) — optional** — include only for multilingual sites; delete the section and its TOC entry for a single-language site. Checklist: the language switcher works and appears only where a translation actually exists (not on single-language pages); each language's URLs resolve (e.g. `/` and `/en/...`) and routes with no translation 404 intentionally rather than rendering a broken page; **hreflang tags are present** linking the language variants; translated pages show the target language throughout (no silent fallback to the default language); language-specific metadata (`og:locale`) is correct.
 
-**Responsive & Visual (`{{RESPONSIVE}}`)** — checklist: mobile/tablet/desktop layouts; images load and aren't distorted; logos, brand colors, and favicon render; no horizontal overflow; text readable; nav collapses correctly on small screens.
+**Key Flows & Forms (`{{FLOWS}}`) — optional** — include for sites with conversion/action paths; delete the section and its TOC entry for a purely informational site. Exercise the site's primary actions end to end as a checklist:
+
+- **Donations** (when present — first-class for donor-giving sites): each give route works (mail-a-check address correct; PayPal link lands on the right account; any new platform flow completes).
+- **Forms by backend:** list each form with its backend, *where it can actually be tested* (see Where to Test), and its success UX (often an inline message rather than a redirect). Verify each confirmation.
+- **External-app handoffs:** links/CTAs that hand off to a separate app or domain land correctly.
+- **Disabled/empty states:** if a form or flow can be toggled off (out-of-stock, closed), the off state replaces it cleanly.
+
+**Responsive & Visual (`{{RESPONSIVE}}`)** — checklist: mobile/tablet/desktop layouts; images load and aren't distorted; logos, brand colors, favicon, and any PWA manifest render; no horizontal overflow; text readable; nav collapses correctly on small screens; **no flash-of-unstyled-content (FOUC)** on load, especially for sticky or scroll-reactive headers.
 
 **Meta & Sharing (`{{META}}`)** — checklist: page titles and meta descriptions present and accurate; social share cards (`og:image`, `og:title`, `twitter:*`) render when a page is shared; canonical URLs correct.
 
-**Accessibility (`{{A11Y}}`)** — checklist: images have meaningful alt text; color contrast is sufficient; keyboard navigation reaches all interactive elements with a visible focus state; heading order is logical. Spot checks, not an exhaustive audit.
+**Accessibility (`{{A11Y}}`)** — checklist: images have meaningful alt text **in the site's language(s)**; color contrast is sufficient; keyboard navigation reaches all interactive elements with a visible focus state; heading order is logical. Spot checks, not an exhaustive audit.
 
-**Build & Health (`{{BUILD}}`)** — commands as copy controls: a clean production build (`hugo --gc --minify`) with no errors or warnings. Note checks to do on the preview: no browser console errors; no mixed-content (all assets over https). Actual broken-link crawling is out of scope for this skill — the Content & Links checklist covers links by hand.
+**Build & Health (`{{BUILD}}`)** — commands as copy controls: a clean production build (`hugo --gc --minify`) with no errors or warnings. **A green build is not enough** — also verify: interactive JS still works *after* minification (tree-shaking can silently drop handlers a dev build kept, shipping a clean build with broken forms); the pinned Hugo version matches across deploy config and CI (`netlify.toml`, `.github/workflows/`); on the preview, no browser console errors and no mixed-content (all https). Actual broken-link crawling stays out of scope — Content & Links covers links by hand.
 
 **Feedback** — built into the template: a CTA button linking to the QA issue form via `{{REPORT_URL}}`. Do not reconstruct the form.
 

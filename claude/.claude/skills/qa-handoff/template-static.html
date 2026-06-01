@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <!--
   QA handoff structural template — STATIC SITE variant (Hugo and other static
-  site generators). The /qa-handoff skill uses this skeleton when the project is
+  site generators). The /qa-handoff skill fills this skeleton when the project is
   a static site; the Rails variant lives in template.html.
 
   How to use:
   - Copy this whole document, then replace the {{TOKENS}} and the annotated
     section regions with real content.
   - Produce a CLEAN artifact: strip every instructional comment (this head block
-    and the explanatory notes in the body). They guide template-filling only and
-    must not appear in the output. (HTML comments do not nest, so a stray
-    instructional comment can also break rendering.)
+    and the body notes). They guide template-filling only and must not appear in
+    the output. (HTML comments do not nest, so a stray instructional comment can
+    also break rendering.)
   - Inline the shared house style: copy the style block from
     ../_shared/house-style.html into the head (replacing the HOUSE STYLE marker)
     and its script block where the second HOUSE STYLE marker sits (before the
@@ -18,13 +18,12 @@
   - Make every command and URL the tester will paste a click-to-copy control: a
     button with class "copy" and a data-copy value.
   - The Feedback section is a CALL TO ACTION to the project's existing QA issue
-    form, not a reimplementation. Fill {{REPORT_URL}} with the deep link (see the
-    skill instructions). If no QA template exists, fall back to the plain
-    "issues/new" URL or a tracker note.
-  - The Donation Paths section is OPTIONAL: keep it for sites with giving /
-    commerce / signup flows (e.g. a nonprofit site), and fold related form checks
-    (contact, newsletter) into it. DELETE the section AND its TOC entry for a
-    purely informational site (e.g. a blog).
+    form, not a reimplementation. Fill {{REPORT_URL}} with the deep link.
+  - TWO sections are OPTIONAL. Delete the section AND its TOC entry when it
+    doesn't apply:
+      * Languages & Translations — delete for a single-language site.
+      * Key Flows & Forms — delete for a purely informational site (no forms,
+        donations, signups, or external-app handoffs).
 -->
 <html lang="en">
 <head>
@@ -43,7 +42,8 @@
       <li><a href="#where">Where to Test</a></li>
       <li><a href="#walkthrough">Guided Walkthrough</a></li>
       <li><a href="#content">Content &amp; Links</a></li>
-      <li><a href="#donation">Donation Paths</a></li>
+      <li><a href="#i18n">Languages &amp; Translations</a></li>
+      <li><a href="#flows">Key Flows &amp; Forms</a></li>
       <li><a href="#responsive">Responsive &amp; Visual</a></li>
       <li><a href="#meta">Meta &amp; Sharing</a></li>
       <li><a href="#a11y">Accessibility</a></li>
@@ -78,7 +78,10 @@
       <div class="section-body">
         <!-- The deploy-preview URL the tester opens (e.g. a Netlify deploy preview) as a click-to-copy control.
              Optional: local preview for testers who clone (git pull, then `hugo server`, and the localhost URL).
-             Optional: a "preview access" note if the deploy preview is password-gated — placeholder only, never a real secret. -->
+             Optional: a "preview access" note if the deploy preview is password-gated — placeholder only, never a real secret.
+             ENVIRONMENT LIMITS: call out checks that CANNOT be done on a per-PR deploy preview — e.g. an external API with a
+             CORS allowlist, or form-email notifications that only fire in production — and say which environment to use for each
+             (per-PR preview vs. branch deploy vs. production), so testers don't file false "broken form" reports. -->
         {{WHERE}}
       </div>
     </details>
@@ -96,28 +99,47 @@
       <summary>Content &amp; Links</summary>
       <div class="section-body">
         <!-- Interactive checklist <ul class="checklist">: copy accuracy (no lorem/placeholder; names/dates/figures/contact correct);
-             every nav/footer/CTA link resolves; OLD -> NEW redirects resolve with no 404s (list specific old URLs to verify when a
-             redirect map exists in the repo); navigation (menu, breadcrumbs, footer). -->
+             every nav/footer/CTA link resolves; navigation (menu, breadcrumbs, footer).
+             URL CONTINUITY (migrations): Hugo migrations often preserve old URLs by slug-matching, not redirect maps. Check BOTH
+             directions — (a) every preserved old URL still resolves at the same path, and (b) every REMOVED old URL is intentionally
+             gone (redirect it if it was indexed/linked, or accept the 404). -->
         {{CONTENT}}
       </div>
     </details>
 
-    <details class="section" id="donation" open>
-      <!-- OPTIONAL section — see head note. Keep for giving/commerce/signup sites; fold contact/newsletter form checks in here. Delete this whole block + its TOC entry for an informational-only site. -->
-      <summary>Donation Paths</summary>
+    <details class="section" id="i18n" open>
+      <!-- OPTIONAL section — see head note. Keep for multilingual sites; DELETE this block + its TOC entry for a single-language site. -->
+      <summary>Languages &amp; Translations</summary>
       <div class="section-body">
-        <!-- Highest-stakes for a donor-facing site. Exercise each give route end to end as a checklist:
-             mail-a-check address correct; PayPal link works and lands on the right account; any new platform (e.g. iDonate) flow completes.
-             Include related form submissions (contact, newsletter) and their confirmations. -->
-        {{DONATION}}
+        <!-- Checklist: the language switcher works and appears only where a translation exists (not on single-language pages);
+             each language's URLs resolve and routes with no translation 404 intentionally (not a broken page); hreflang tags link
+             the language variants; translated pages show the target language throughout (no silent fallback to the default
+             language); language-specific metadata (og:locale) is correct. -->
+        {{I18N}}
+      </div>
+    </details>
+
+    <details class="section" id="flows" open>
+      <!-- OPTIONAL section — see head note. Keep for sites with conversion/action paths; DELETE this block + its TOC entry for a purely informational site. -->
+      <summary>Key Flows &amp; Forms</summary>
+      <div class="section-body">
+        <!-- Exercise the site's primary actions end to end as a checklist:
+             - Donations (when present — first-class for donor-giving sites): each give route works (mail-a-check address correct;
+               PayPal link lands on the right account; any new platform flow completes).
+             - Forms by backend: list each form, its backend, WHERE it can actually be tested (see Where to Test), and its success
+               UX (often an inline message, not a redirect).
+             - External-app handoffs: links/CTAs that hand off to a separate app or domain land correctly.
+             - Disabled/empty states: if a form/flow can be toggled off (out-of-stock, closed), the off state replaces it cleanly. -->
+        {{FLOWS}}
       </div>
     </details>
 
     <details class="section" id="responsive" open>
       <summary>Responsive &amp; Visual</summary>
       <div class="section-body">
-        <!-- Checklist: mobile / tablet / desktop layouts; images load and aren't distorted; logos, brand colors, and favicon render;
-             no horizontal overflow; text readable; nav collapses correctly on small screens. -->
+        <!-- Checklist: mobile / tablet / desktop layouts; images load and aren't distorted; logos, brand colors, favicon and any
+             PWA manifest render; no horizontal overflow; text readable; nav collapses on small screens; no flash-of-unstyled-content
+             (FOUC) on load, especially for sticky or scroll-reactive headers. -->
         {{RESPONSIVE}}
       </div>
     </details>
@@ -125,8 +147,8 @@
     <details class="section" id="meta" open>
       <summary>Meta &amp; Sharing</summary>
       <div class="section-body">
-        <!-- Checklist: page titles and meta descriptions present and accurate; social share cards (og:image, og:title, twitter:*) render
-             when a page is shared; canonical URLs correct; favicon present. -->
+        <!-- Checklist: page titles and meta descriptions present and accurate; social share cards (og:image, og:title, twitter:*)
+             render when a page is shared; canonical URLs correct; favicon present. (hreflang is checked in Languages & Translations.) -->
         {{META}}
       </div>
     </details>
@@ -134,8 +156,8 @@
     <details class="section" id="a11y" open>
       <summary>Accessibility</summary>
       <div class="section-body">
-        <!-- Checklist: images have meaningful alt text; color contrast is sufficient; keyboard navigation reaches all interactive elements
-             with a visible focus state; heading order is logical. Spot checks, not an exhaustive audit. -->
+        <!-- Checklist: images have meaningful alt text in the site's language(s); color contrast is sufficient; keyboard navigation
+             reaches all interactive elements with a visible focus state; heading order is logical. Spot checks, not a full audit. -->
         {{A11Y}}
       </div>
     </details>
@@ -144,7 +166,9 @@
       <summary>Build &amp; Health</summary>
       <div class="section-body">
         <!-- Commands as click-to-copy controls: a clean production build (e.g. `hugo --gc --minify`) with no errors or warnings.
-             Note checks to do on the preview: no browser console errors; no mixed-content (all assets over https). -->
+             A green build is NOT enough — also verify: interactive JS still works AFTER minification (tree-shaking can silently drop
+             handlers a dev build kept); the pinned Hugo version matches across deploy config and CI (netlify.toml, .github/workflows/);
+             on the preview, no browser console errors and no mixed-content (all assets over https). -->
         {{BUILD}}
       </div>
     </details>
