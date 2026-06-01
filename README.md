@@ -248,7 +248,7 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
 | `/sprint-issue` | Streamlined variant for small, well-scoped issues |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
-| `/update-deps` | Safe dependency updates with testing between each category |
+| `/update-deps` | Dependabot-aware dependency updates with security audit, CI validation, and a unified PR |
 | `/walkthrough` | Generate a browser walkthrough of a PR's user-facing changes |
 
 ### Permission Presets
