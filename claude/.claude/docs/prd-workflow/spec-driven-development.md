@@ -275,7 +275,6 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
 | `/setup-sprint` | Create parallel worktrees for a batch of issues | Per sprint (optional) |
 | `/resolve-issue` | Implement an issue end-to-end; planning checkpoint scales to complexity | Per issue |
-| `/commit` | Stage and commit with Conventional Commits message | Multiple per issue |
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
@@ -300,7 +299,7 @@ This is where most development time is spent. One pass through this cycle produc
    └─ /resolve-issue N        (research, plan, implement, verify — checkpoint scales to complexity)
 
 2. Implement
-   └─ /commit                  (multiple times — small, frequent commits)
+   └─ commit as you go         (small, frequent commits — Conventional Commits per CLAUDE.md)
 
 3. Quality check
    └─ /simplify                (code reuse, efficiency, readability)
@@ -380,7 +379,6 @@ Skills shift in importance as the project matures (see §6):
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
 | `/setup-sprint` | Optional | Useful for bug batches | Useful for bug batches |
 | `/resolve-issue` | **Primary workflow** | **Primary workflow** | **Primary workflow** |
-| `/commit` | **Always** | **Always** | **Always** |
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
 | `/drift-check` | **Critical** | Important | Light (living docs) |
 | `/create-pr` | **Always** | **Always** | **Always** |
