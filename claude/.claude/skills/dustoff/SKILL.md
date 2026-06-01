@@ -1,6 +1,6 @@
 ---
 name: dustoff
-description: Assess a project that's been dormant for months and produce a prioritized re-entry plan — lifecycle stage, what's stale or broken, and how far the project's tooling has drifted from current conventions — delegating every fix to the skill that owns it.
+description: Assess a project that's been dormant for months and produce a prioritized re-entry plan — lifecycle stage, what's stale or broken, and how far the project's tooling has drifted from current conventions — delegating every fix to the skill that owns it, and optionally capturing the plan as a tracking issue that survives sessions.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Take stock of a project that's been sitting untouched for months and produce a single, prioritized **re-entry plan** for getting it back into active development. Dependencies have fallen behind, tests may be broken, and the project's adopted conventions have probably drifted from the current `~/.claude` toolset. This skill assesses all of that and tells you, in priority order, what to do first — but it does not do the work itself.
 
-It is **read-only and advisory**. It inspects, reports, and recommends; it never updates dependencies, edits docs, marks ROADMAP checkboxes, or writes code. The deliverable is a plan, and every item on that plan names the existing skill (or manual step) that acts on it.
+It is **read-only with respect to the codebase**, and advisory. It inspects, reports, and recommends; it never updates dependencies, edits project files, marks ROADMAP checkboxes, or writes code. Its one deliberate write is optional and opt-in: capturing the finished plan as a tracking issue (or a `DUSTOFF.md`) so it survives the session — see step 5. The deliverable is a plan, and every item on that plan names the existing skill (or manual step) that acts on it.
 
 **Where it sits in the workflow.** This is the *first* thing you run when returning to a dormant project — before picking up an issue, before `/plan-phase`, before any new work. Its output feeds the normal cycle: a clean assessment hands off to `/update-deps`, `/readme-refresh`, `/plan-phase`, and `/resolve-issue` to actually execute the catch-up.
 
@@ -22,11 +22,11 @@ It is **read-only and advisory**. It inspects, reports, and recommends; it never
 
 ## The core guardrail
 
-The output is a plan, never an action. The one-line test for any step you're tempted to add or take: *"Does this belong to re-entry assessment, or am I about to re-implement `/update-deps` (or `/readme-refresh`, or `/plan-phase`)?"* If it's the latter, stop — flag it as a plan item and hand off. The value of this skill is the synthesis, not the mechanics it would otherwise duplicate.
+The output is a plan, not a fix — dustoff routes work to other skills, it doesn't perform it. (Capturing the plan as a tracking issue in step 5 is the one write it makes, and only when you approve it.) The one-line test for any step you're tempted to add or take: *"Does this belong to re-entry assessment, or am I about to re-implement `/update-deps` (or `/readme-refresh`, or `/plan-phase`)?"* If it's the latter, stop — flag it as a plan item and hand off. The value of this skill is the synthesis, not the mechanics it would otherwise duplicate.
 
 ## Your task
 
-Work through the four phases below, all read-only. Gather findings as you go and present a **single consolidated re-entry plan** at the end (Phase 4) — not four separate reports. If the working directory isn't a git repository, say so and stop; there's no dormant project to dust off.
+Work through the five steps below. Steps 1–4 are read-only; step 5 is the one optional, opt-in write (capturing the plan). Gather findings as you go and present a **single consolidated re-entry plan** at the end of step 4 — not a separate report per step. If the working directory isn't a git repository, say so and stop; there's no dormant project to dust off.
 
 ### 1. Orient — how dusty, and where in the lifecycle
 
@@ -96,7 +96,18 @@ Reorientation:
   • Deployed at fly.io — confirm the live app still boots (manual)
 ```
 
-The plan is the deliverable. **STOP there** — do not start executing it. Offer to kick off the first item (e.g. "Want me to start with `/update-deps`?") and let the user choose.
+The plan is the deliverable. Present it in full — then move to step 5 to decide how to keep it.
+
+### 5. Persist the plan — so it survives the session
+
+A long-dormant project's plan can run to a dozen items across several sessions; don't let it scroll off the terminal. After presenting the plan, offer to capture it. This is the skill's one write, and it's opt-in:
+
+- **Default offer — a tracking issue.** File the plan as a single GitHub issue (label `chore`, title like `chore: dust off <project>`). The body is the tiered checklist from step 4, each item a `- [ ]` so progress is visible ("3 of 9") and checkable across sessions. Add it to the project board if one exists (`gh project list`, or per `CLAUDE.md`).
+- **Resume, don't duplicate.** Before creating, search for an existing open dust-off issue (the `chore` label plus the title convention). If one exists, offer to **refresh** it — reconcile new findings, preserve already-checked items — rather than open a second.
+- **No `gh` or no remote.** Fall back to writing a `DUSTOFF.md` at the project root with the same checklist. Same survives-the-session benefit, no GitHub dependency.
+- **Decline path.** If the user wants it terminal-only, that's fine — leave the plan on screen and stop.
+
+Whichever way it's captured, **stop there** — do not start executing the plan. Offer to kick off the top item (e.g. "Want me to start with `/update-deps`?") and let the user choose. The discrete new-work items (a discovered bug, failing tests with no obvious cause) become their own issues when you pick them up — via `/plan-phase` or the owning skill — and the tracking issue links to them. Dustoff doesn't file those itself.
 
 ## Tone
 

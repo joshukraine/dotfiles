@@ -281,7 +281,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
-| `/dustoff` | Re-entry assessment for a dormant project: lifecycle stage, staleness, and convention drift → prioritized plan | Returning after months away |
+| `/dustoff` | Re-entry assessment for a dormant project: lifecycle stage, staleness, and convention drift → prioritized plan, optionally captured as a tracking issue | Returning after months away |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
 | `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
