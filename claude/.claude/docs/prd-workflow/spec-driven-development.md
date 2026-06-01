@@ -187,6 +187,8 @@ Document medium follows the same lifecycle split. Markdown for what an agent edi
 - **Markdown:** PRD files, ROADMAP, CHANGELOG, this handbook, skill instructions (SKILL.md), debrief summaries. Diffable, machine-readable, single source of truth.
 - **HTML:** debrief full reports, walkthroughs, QA handoffs, plans, mockups. Self-contained single files with click-to-copy controls, interactive checklists, and inline SVG. Opened in a browser with `open` — no build, no server.
 
+A third case sits between the two: a **derived reading view**. The canonical document stays Markdown — authoritative, diffable, the source of truth — while `/prd-view` *renders* a PRD file to a rich HTML Dashboard on demand (sidebar nav, an at-a-glance metric strip, collapsible cards, inline SVG). The HTML is ephemeral: generated to a gitignored `tmp/`, never committed, always regenerated from the current Markdown — so it cannot drift and never becomes a second source of truth. Its purpose is engagement *and* vetting — reading the rendered view surfaces gaps or errors, which are fixed in the Markdown and re-rendered. The spec earns its authority by being repeatedly engaged with, not skimmed once.
+
 The skills that produce HTML artifacts share a house style (`~/.claude/skills/_shared/house-style.html`) and a publish pipeline (see §7 "Publishing artifacts to remote testers") so the output is consistent and portable. The format that is easiest to maintain is not always the format that is most useful to read; the split keeps both honest.
 
 ---
@@ -269,6 +271,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | Skill | Purpose | Cadence |
 | ------- | ------- | ------- |
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
+| `/prd-view` | Render a PRD file as a rich HTML reading view (Dashboard style) for engaged reading and vetting; Markdown stays authoritative, the HTML is ephemeral | Ad-hoc (reading / vetting a spec) |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
 | `/setup-sprint` | Create parallel worktrees for a batch of issues | Per sprint (optional) |
 | `/resolve-issue` | Implement an issue end-to-end; planning checkpoint scales to complexity | Per issue |
