@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--
+  QA handoff structural template — STATIC SITE variant (Hugo and other static
+  site generators). The /qa-handoff skill uses this skeleton when the project is
+  a static site; the Rails variant lives in template.html.
+
+  How to use:
+  - Copy this whole document, then replace the {{TOKENS}} and the annotated
+    section regions with real content.
+  - Produce a CLEAN artifact: strip every instructional comment (this head block
+    and the explanatory notes in the body). They guide template-filling only and
+    must not appear in the output. (HTML comments do not nest, so a stray
+    instructional comment can also break rendering.)
+  - Inline the shared house style: copy the style block from
+    ../_shared/house-style.html into the head (replacing the HOUSE STYLE marker)
+    and its script block where the second HOUSE STYLE marker sits (before the
+    closing body tag). Do NOT link external assets.
+  - Make every command and URL the tester will paste a click-to-copy control: a
+    button with class "copy" and a data-copy value.
+  - The Feedback section is a CALL TO ACTION to the project's existing QA issue
+    form, not a reimplementation. Fill {{REPORT_URL}} with the deep link (see the
+    skill instructions). If no QA template exists, fall back to the plain
+    "issues/new" URL or a tracker note.
+  - The Donation Paths section is OPTIONAL: keep it for sites with giving /
+    commerce / signup flows (e.g. a nonprofit site), and fold related form checks
+    (contact, newsletter) into it. DELETE the section AND its TOC entry for a
+    purely informational site (e.g. a blog).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PROJECT}} — QA Handoff: {{TITLE}}</title>
+<!-- HOUSE STYLE: inline the <style> block from ../_shared/house-style.html here -->
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#new">What's New</a></li>
+      <li><a href="#where">Where to Test</a></li>
+      <li><a href="#walkthrough">Guided Walkthrough</a></li>
+      <li><a href="#content">Content &amp; Links</a></li>
+      <li><a href="#donation">Donation Paths</a></li>
+      <li><a href="#responsive">Responsive &amp; Visual</a></li>
+      <li><a href="#meta">Meta &amp; Sharing</a></li>
+      <li><a href="#a11y">Accessibility</a></li>
+      <li><a href="#build">Build &amp; Health</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="doc">
+      <p class="eyebrow">{{PROJECT}} · QA Handoff</p>
+      <h1>{{TITLE}}</h1>
+      <dl class="meta">
+        <dt>Project</dt><dd>{{PROJECT}}</dd>
+        <dt>Date</dt><dd>{{DATE}}</dd>
+        <dt>Branch</dt><dd>{{BRANCH}}</dd>
+        <dt>Commit</dt><dd>{{COMMIT}}</dd>
+        <dt>Preview</dt><dd>{{PREVIEW_URL}}</dd>
+      </dl>
+    </header>
+
+    <details class="section" id="new" open>
+      <summary>What's New</summary>
+      <div class="section-body">
+        <!-- Plain-language summary of what changed on the site; connect to the roadmap/goal. No file paths / jargon. -->
+        {{WHATS_NEW}}
+      </div>
+    </details>
+
+    <details class="section" id="where" open>
+      <summary>Where to Test</summary>
+      <div class="section-body">
+        <!-- The deploy-preview URL the tester opens (e.g. a Netlify deploy preview) as a click-to-copy control.
+             Optional: local preview for testers who clone (git pull, then `hugo server`, and the localhost URL).
+             Optional: a "preview access" note if the deploy preview is password-gated — placeholder only, never a real secret. -->
+        {{WHERE}}
+      </div>
+    </details>
+
+    <details class="section" id="walkthrough" open>
+      <summary>Guided Walkthrough</summary>
+      <div class="section-body">
+        <!-- One <div class="story"> per key page/flow; role pill is the visitor type (Visitor / Donor / Mobile visitor);
+             a copyable starting URL (preview URL + path); literal numbered steps; a .expect expected result. -->
+        {{WALKTHROUGH}}
+      </div>
+    </details>
+
+    <details class="section" id="content" open>
+      <summary>Content &amp; Links</summary>
+      <div class="section-body">
+        <!-- Interactive checklist <ul class="checklist">: copy accuracy (no lorem/placeholder; names/dates/figures/contact correct);
+             every nav/footer/CTA link resolves; OLD -> NEW redirects resolve with no 404s (list specific old URLs to verify when a
+             redirect map exists in the repo); navigation (menu, breadcrumbs, footer). -->
+        {{CONTENT}}
+      </div>
+    </details>
+
+    <details class="section" id="donation" open>
+      <!-- OPTIONAL section — see head note. Keep for giving/commerce/signup sites; fold contact/newsletter form checks in here. Delete this whole block + its TOC entry for an informational-only site. -->
+      <summary>Donation Paths</summary>
+      <div class="section-body">
+        <!-- Highest-stakes for a donor-facing site. Exercise each give route end to end as a checklist:
+             mail-a-check address correct; PayPal link works and lands on the right account; any new platform (e.g. iDonate) flow completes.
+             Include related form submissions (contact, newsletter) and their confirmations. -->
+        {{DONATION}}
+      </div>
+    </details>
+
+    <details class="section" id="responsive" open>
+      <summary>Responsive &amp; Visual</summary>
+      <div class="section-body">
+        <!-- Checklist: mobile / tablet / desktop layouts; images load and aren't distorted; logos, brand colors, and favicon render;
+             no horizontal overflow; text readable; nav collapses correctly on small screens. -->
+        {{RESPONSIVE}}
+      </div>
+    </details>
+
+    <details class="section" id="meta" open>
+      <summary>Meta &amp; Sharing</summary>
+      <div class="section-body">
+        <!-- Checklist: page titles and meta descriptions present and accurate; social share cards (og:image, og:title, twitter:*) render
+             when a page is shared; canonical URLs correct; favicon present. -->
+        {{META}}
+      </div>
+    </details>
+
+    <details class="section" id="a11y" open>
+      <summary>Accessibility</summary>
+      <div class="section-body">
+        <!-- Checklist: images have meaningful alt text; color contrast is sufficient; keyboard navigation reaches all interactive elements
+             with a visible focus state; heading order is logical. Spot checks, not an exhaustive audit. -->
+        {{A11Y}}
+      </div>
+    </details>
+
+    <details class="section" id="build">
+      <summary>Build &amp; Health</summary>
+      <div class="section-body">
+        <!-- Commands as click-to-copy controls: a clean production build (e.g. `hugo --gc --minify`) with no errors or warnings.
+             Note checks to do on the preview: no browser console errors; no mixed-content (all assets over https). -->
+        {{BUILD}}
+      </div>
+    </details>
+
+    <details class="section" id="feedback" open>
+      <summary>Found something? File a QA report</summary>
+      <div class="section-body">
+        <p>Report findings using the project's QA issue form — it has dedicated fields for steps, expected vs. actual behavior, screenshots (drag-and-drop), browser/device, and more, and the issue is auto-tagged for triage.</p>
+        <p><a class="btn" href="{{REPORT_URL}}" target="_blank" rel="noopener">File a QA report &rarr;</a></p>
+      </div>
+    </details>
+
+    <footer class="doc">
+      Generated by the <code>/qa-handoff</code> skill · {{DATE}}
+    </footer>
+  </main>
+</div>
+<!-- HOUSE STYLE: inline the <script> block from ../_shared/house-style.html here -->
+</body>
+</html>
