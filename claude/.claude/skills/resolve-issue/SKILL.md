@@ -31,13 +31,19 @@ Track your progress through the 6 steps below. Report completion of each step be
 - Identify files that need changes
 - Consider edge cases and testing requirements
 
-**CHECKPOINT**: Present implementation plan to user and ask for approval before proceeding.
+**CHECKPOINT**: Present the plan and get sign-off before implementing — but right-size the ceremony to the issue:
 
-### Step 4: Create branch and implement
+- **Small, well-scoped** (a few files, an obvious approach): a one-line plan and a quick confirm. If the path is genuinely unambiguous, state your assumption and proceed without waiting — the global "bias toward action" rule applies.
+- **Complex or ambiguous** (multiple subsystems, design choices, real risk): present a full implementation plan and wait for explicit approval before proceeding.
 
-- Determine the branch prefix from the issue's type label (see Branch Naming below)
-- Create feature branch: `git switch -c <prefix>/gh-$ARGUMENTS-<short-description>`
-- Verify branch: `git branch --show-current`
+When unsure which applies, treat it as complex and ask.
+
+### Step 4: Create or reuse branch, then implement
+
+- Check the current branch first: `git branch --show-current`
+  - **If already on a feature branch for this issue** (e.g. a worktree created by `/setup-sprint`, named `<prefix>/gh-$ARGUMENTS-...`): reuse it — do not create a new branch.
+  - **Otherwise** (on `main`/`master` or an unrelated branch): determine the branch prefix from the issue's type label (see Branch Naming below) and create the feature branch: `git switch -c <prefix>/gh-$ARGUMENTS-<short-description>`
+- Confirm the working branch: `git branch --show-current`
 - Implement with frequent commits (see commit strategy below)
 - **Do NOT include issue references** in commit messages
 
