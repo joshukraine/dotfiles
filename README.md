@@ -457,6 +457,7 @@ Local customizations should be placed in `*.local` files:
 
 - `~/.gitconfig.local` - Personal git configuration
 - `~/.laptop.local` - Additional laptop setup customizations
+- `~/.config/ghostty/config.local` - Personal ghostty overrides (keybinds, fonts, theme)
 
 ## License
 
