@@ -61,17 +61,21 @@ Projects with a Product Requirements Document (PRD) follow these conventions:
 
 ## Git Commit Protocol
 
-To avoid permission prompts caused by command substitution and subshells, always use the following procedure for git commits:
+Claude Code's permission system flags command substitution — `$(...)` and backticks (including backticks **inside** double quotes) — _before_ the allow-list or auto mode is consulted, so a commit command containing them prompts for approval even when `git commit` is allow-listed. Keep substitution out of the commit command:
 
-1. Draft the Message: Prepare the commit subject and body.
+1. **Draft the message** — prepare the subject and body.
 
-2. Write to Temp File: Use `cat << 'EOF' > .git_commit_msg` or a similar filesystem write to save the full message into a temporary file named `.git_commit_msg`.
+2. **Write it to a temp file** — use the **Write tool** to create `.git_commit_msg` (not a `cat << 'EOF'` heredoc; the Write tool involves no shell parsing).
 
-3. Execute Commit: Run `git commit -F .git_commit_msg`.
+3. **Commit** — run `git commit -F .git_commit_msg`.
 
-4. Cleanup: Immediately remove the temporary file with `rm .git_commit_msg`.
+4. **Clean up** — remove the temp file with `rm .git_commit_msg`.
 
-Constraint: Do not use `$(...)`, backticks, or complex shell nesting for commits. Rely solely on the file-based `-F` flag.
+**Trivial messages:** a single-line message with no backticks or `$(...)` may use `git commit -m "type(scope): subject"` directly — it's lighter and prompts nothing. Use the file-based `-F` flow for anything with backticks, code references, or multiple paragraphs (most real messages).
+
+**Splitting:** when staged changes span multiple logical concerns, split them into separate commits, each a self-contained working unit.
+
+Constraint: never put `$(...)`, backticks, or complex shell nesting in a commit command — rely on the file-based `-F` flow (or a backtick-free inline `-m`).
 
 ## Code Quality
 

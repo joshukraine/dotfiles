@@ -160,7 +160,7 @@ After approval, create each file:
   1. Fill in architectural guardrails in `CLAUDE.md`
   2. Add project-specific phases to `docs/prd/ROADMAP.md`
   3. Set up GitHub labels (see `~/.claude/docs/label-taxonomy.md`)
-  4. Commit the scaffolded files via `/commit`
+  4. Commit the scaffolded files (Conventional Commits — see CLAUDE.md "Git Commit Protocol")
 
 ---
 

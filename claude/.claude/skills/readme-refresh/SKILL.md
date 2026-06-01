@@ -112,7 +112,7 @@ For each confirmed finding:
 After applying changes:
 
 - Show a diff summary of what was changed.
-- Do **not** commit automatically — let the user review and commit when ready (or suggest using `/commit`).
+- Do **not** commit automatically — let the user review and commit when ready (or offer to commit it for them).
 
 ---
 
