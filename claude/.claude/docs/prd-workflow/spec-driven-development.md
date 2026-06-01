@@ -282,6 +282,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/review-pr` | Analyze a PR for quality issues | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
+| `/qa-triage` | Triage a `qa`-labeled report — confirm it against the code, classify it, and draft the tech issue(s) it warrants | Per QA report |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
 | `/dustoff` | Re-entry assessment for a dormant project: lifecycle stage, staleness, and convention drift → prioritized plan, optionally captured as a tracking issue | Returning after months away |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
@@ -328,6 +329,22 @@ Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself
 Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
 
 Step 9 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
+
+### The QA feedback loop
+
+Published walkthroughs and QA handoffs (see "Publishing artifacts to remote testers" below) put the work in front of a tester. When a tester reports back, the report re-enters development through its own short loop:
+
+```text
+1. Tester files a `qa`-labeled issue   (bug, confusion, or suggestion from QA)
+
+2. Triage
+   └─ /qa-triage              (confirm against the code, classify, draft the tech issue(s) — stops for approval)
+
+3. Implement the approved issue
+   └─ /resolve-issue N        (rejoins the PR cycle above)
+```
+
+`/qa-triage` is the gate between an end-user-flavored report and an actionable technical issue: it investigates the report against the code, classifies it (real bug / works-as-designed / enhancement), and drafts the issue(s) it warrants — but never implements. An approved issue then flows through the normal PR cycle. This is the inbound counterpart to the outbound publishing step: `/walkthrough --publish` and `/qa-handoff` send work *out* to testers; `/qa-triage` brings their findings back *in*.
 
 ### Phase planning
 
@@ -376,15 +393,18 @@ Skills shift in importance as the project matures (see §6):
 | Skill | Greenfield | MVP Complete | Mature |
 | ------- | ---------- | ------------ | ------ |
 | `/bootstrap-prd` | **Setup** | — | — |
+| `/prd-view` | **Spec vetting** | Occasional | Rare |
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
 | `/setup-sprint` | Optional | Useful for bug batches | Useful for bug batches |
 | `/resolve-issue` | **Primary workflow** | **Primary workflow** | **Primary workflow** |
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
 | `/drift-check` | **Critical** | Important | Light (living docs) |
 | `/create-pr` | **Always** | **Always** | **Always** |
+| `/walkthrough` | User-facing PRs | User-facing PRs | User-facing PRs |
 | `/review-pr` | Pre-merge | Pre-merge | Pre-merge |
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |
+| `/qa-triage` | Rare (pre-launch) | **Frequent** | Ongoing |
 | `/checkpoint` | Ad-hoc | **Frequent** (transition period) | Ad-hoc |
 | `/dustoff` | **On return** | **On return** | **On return** |
 | `/debrief` | **Phase boundary** | Milestone reviews | Rare |
