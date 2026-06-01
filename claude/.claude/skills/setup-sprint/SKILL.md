@@ -70,7 +70,7 @@ To start working, open a separate terminal for each worktree:
   cd ../<project-name>-issue-52 && claude
 
 Then in each Claude Code session:
-  /sprint-issue <number>
+  /resolve-issue <number>
 ```
 
 ## Important

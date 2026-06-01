@@ -31,8 +31,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
 | Skill | When to use |
 | ----- | ----------- |
-| `/resolve-issue 123` | Full workflow for a GitHub issue — research, plan, implement, verify |
-| `/sprint-issue 123` | Fast-track a small, well-scoped issue — skips the plan checkpoint |
+| `/resolve-issue 123` | Full workflow for a GitHub issue — research, plan, implement, verify; right-sizes its rigor to issue complexity |
 | `/commit` | Stage and commit with smart splitting and Conventional Commits |
 | `/create-pr` | Create a PR with auto-generated description and issue linking (inferred from branch name) |
 | `/simplify` | Post-implementation code review — run before creating a PR |

@@ -271,8 +271,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
 | `/setup-sprint` | Create parallel worktrees for a batch of issues | Per sprint (optional) |
-| `/resolve-issue` | Implement a complex issue with planning checkpoint | Per issue |
-| `/sprint-issue` | Quick-resolve a small, well-scoped issue | Per issue (lightweight) |
+| `/resolve-issue` | Implement an issue end-to-end; planning checkpoint scales to complexity | Per issue |
 | `/commit` | Stage and commit with Conventional Commits message | Multiple per issue |
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
@@ -294,8 +293,7 @@ This is where most development time is spent. One pass through this cycle produc
 
 ```text
 1. Pick an issue
-   └─ /resolve-issue N        (complex: planning checkpoint, then implement)
-   └─ /sprint-issue N          (small: straight to implementation)
+   └─ /resolve-issue N        (research, plan, implement, verify — checkpoint scales to complexity)
 
 2. Implement
    └─ /commit                  (multiple times — small, frequent commits)
@@ -374,7 +372,6 @@ Skills shift in importance as the project matures (see §6):
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
 | `/setup-sprint` | Optional | Useful for bug batches | Useful for bug batches |
 | `/resolve-issue` | **Primary workflow** | **Primary workflow** | **Primary workflow** |
-| `/sprint-issue` | Chore batches | Common | Common |
 | `/commit` | **Always** | **Always** | **Always** |
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
 | `/drift-check` | **Critical** | Important | Light (living docs) |
