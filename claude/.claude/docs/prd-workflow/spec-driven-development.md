@@ -283,7 +283,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
-| `/update-deps` | Update dependencies with testing between categories | Periodic maintenance |
+| `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
 > **Note:** `/simplify` is a built-in Claude Code skill. All other entries listed above are custom skills defined in `~/.claude/skills/`.
