@@ -457,6 +457,7 @@ Local customizations should be placed in `*.local` files:
 
 - `~/.gitconfig.local` - Personal git configuration
 - `~/.laptop.local` - Additional laptop setup customizations
+- `~/.config/tmux/tmux.conf.local` - Personal tmux overrides (extra plugins, key bindings, options)
 
 ## License
 
