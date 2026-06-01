@@ -246,7 +246,6 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
 | `/review-pr` | Read-only PR review with severity-ranked findings |
 | `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
-| `/sprint-issue` | Streamlined variant for small, well-scoped issues |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
 | `/update-deps` | Dependabot-aware dependency updates with security audit, CI validation, and a unified PR |
 | `/walkthrough` | Generate a browser walkthrough of a PR's user-facing changes |
