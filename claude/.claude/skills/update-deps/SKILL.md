@@ -62,7 +62,7 @@ Keep the safe, category-by-category loop:
 - **Security updates first** (always include), then **patch**, then **minor**.
 - **Major updates** only with `--major`. Isolate a risky major into **its own commit — or its own PR** — so it can be rolled back cleanly without reverting the safe bumps.
 - Run the detected test gate after each category. **If `--skip-tests`**: skip test execution.
-- For major bumps, flag **soft-dependency and default-behavior changes** explicitly (a new transitive gem, a changed default `require:`, a renamed config key). These are where "the tests pass but boot breaks" lives.
+- For major bumps, flag **soft-dependency and default-behavior changes** explicitly — a newly pulled-in transitive dependency, a changed default load/eager-load behavior (e.g. Bundler's `require:`), a renamed config key. These are where "the tests pass but boot breaks" lives.
 - Stop and report if the gate fails; offer to revert the specific update that caused it.
 
 ### 4. Run the security audit
@@ -71,7 +71,7 @@ This is the highest-value stage on a dependency PR — not an afterthought. Afte
 
 | Ecosystem | Audit tools (detect what's present) |
 | --------- | ----------------------------------- |
-| Ruby | `bundler-audit`, `brakeman`, `importmap audit` |
+| Ruby | `bundler-audit`; plus `brakeman` and `importmap audit` on Rails |
 | Node | `npm audit`, `yarn npm audit`, `pnpm audit` |
 | Python | `pip-audit`, `safety` |
 | Rust | `cargo audit` |
