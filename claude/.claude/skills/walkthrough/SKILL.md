@@ -7,14 +7,14 @@ argument-hint: "[PR-number-or-branch] [--publish]"
 
 # Walkthrough
 
-Generate a concise, click-by-click manual walkthrough of the current branch's user-facing changes, so the human orchestrator can exercise the feature in a browser **before** the formal `/review-pr`. Seeing a feature work is faster than reading code or a PR description for catching UX problems.
+Generate a concise, click-by-click manual walkthrough of the current branch's user-facing changes, so the human orchestrator can exercise the feature in a browser **before** the formal `/code-review`. Seeing a feature work is faster than reading code or a PR description for catching UX problems.
 
 This skill does not modify code or perform code review. With `--publish` it renders a rich HTML version, publishes it to the project's configured QA host (when one is declared in the project's `CLAUDE.md`), and posts a PR comment linking to it with the Markdown body as a collapsible fallback. Without `--publish` it only writes local scratch files.
 
 **Where it sits in the workflow — two slots:**
 
-- **Generate** (default) — run after `/create-pr` and before `/review-pr`, and re-run as needed. The orchestrator's iterative pre-flight check.
-- **Publish** (`--publish`) — run once after `/review-pr` and any review fixes, just before merge (or after merge, to backfill a walkthrough that was missed). Posts the final walkthrough to the PR so the QA tester can follow it after deploy.
+- **Generate** (default) — run after `/create-pr` and before `/code-review`, and re-run as needed. The orchestrator's iterative pre-flight check.
+- **Publish** (`--publish`) — run once after `/code-review` and any review fixes, just before merge (or after merge, to backfill a walkthrough that was missed). Posts the final walkthrough to the PR so the QA tester can follow it after deploy.
 
 **Not the same as:**
 
@@ -44,7 +44,7 @@ Classify the diff:
 
 If the diff has **no user-facing surface**, STOP. Do not generate a document. Tell the user plainly:
 
-> No user-facing changes detected in this PR — a browser walkthrough doesn't apply. Proceed to `/review-pr`.
+> No user-facing changes detected in this PR — a browser walkthrough doesn't apply. Proceed to `/code-review`.
 
 If the change is user-facing — or a mix where the UI surface is worth exercising — continue.
 
@@ -83,11 +83,11 @@ Use the template below. Principles:
 
 ### 7. Recommend the next step
 
-> Exercise the walkthrough in the browser. If anything is off, fix it on the branch and re-run `/walkthrough` to refresh. When it looks right, proceed to `/review-pr` — then publish the final version with `/walkthrough --publish` before merge.
+> Exercise the walkthrough in the browser. If anything is off, fix it on the branch and re-run `/walkthrough` to refresh. When it looks right, proceed to `/code-review` — then publish the final version with `/walkthrough --publish` before merge.
 
 ## Publishing the final walkthrough (`--publish`)
 
-Run once, after `/review-pr` and any review fixes — normally just before merge, but also valid on an **already-merged** PR to backfill a walkthrough that was missed. This renders the walkthrough as rich HTML, publishes it to the project's configured QA host (if any), and posts a PR comment with the live link and a collapsible Markdown fallback.
+Run once, after `/code-review` and any review fixes — normally just before merge, but also valid on an **already-merged** PR to backfill a walkthrough that was missed. This renders the walkthrough as rich HTML, publishes it to the project's configured QA host (if any), and posts a PR comment with the live link and a collapsible Markdown fallback.
 
 **Credentials in published artifacts.** A login may be a click-to-copy control only when it is a *reserved, non-routable example identity*: the email domain is an RFC 2606 reserved-for-documentation domain (`example.com`, `example.net`, `example.org`) or the `.example` TLD, and any accompanying password is an obviously-fake seed value (e.g. `password`), not a real secret. Such logins are documentation, not credentials — guaranteed unregisterable and non-deliverable — so publishing them as copy controls is safe and removes the single most repetitive step in any walkthrough (login). Anything else — a real or real-looking domain, an actual person's address, a live tenant, or a real password/token/API key — must be a plain-text placeholder (`<code>&lt;your-admin-email&gt;</code>`), never a copy control; pair it with a one-line note (local testers use the seeded login from `db/seeds.rb`; production testers use their own account). Never publish a real password, token, or secret in any form. The publish step stays human-gated regardless.
 

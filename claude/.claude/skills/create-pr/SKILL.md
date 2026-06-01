@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: Create a pull request with auto-generated description, issue linking, and ROADMAP updates.
+description: Create a pull request with auto-generated description, issue linking, ROADMAP updates, and PR-metadata validation.
 disable-model-invocation: true
 argument-hint: "[base-branch]"
 ---
@@ -58,9 +58,10 @@ All flags are optional. By default, the issue number is inferred from the branch
    - Set base branch (usually main/master)
    - **Default to ready** (no `--draft` flag) unless `--draft` flag is explicitly passed
 
-8. **Confirm and display**:
+8. **Confirm and validate**:
    - Show PR URL and title
    - Confirm issue linking (e.g., "✅ Linked to issue #123" or "⚠️ No issues linked")
+   - **Validate PR metadata (warn, don't block):** confirm the title follows Conventional Commits and the description contains a closing keyword (`Closes #N`). If either is missing, surface a warning so it can be fixed before review. (These checks previously lived in the retired `/review-pr`.)
 
 ## PR Description Template
 
