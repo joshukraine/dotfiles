@@ -30,7 +30,7 @@ Work through the five steps below. Steps 1–4 are read-only; step 5 is the one 
 
 ### 1. Orient — how dusty, and where in the lifecycle
 
-- **Dormancy duration**: `git log -1 --format=%cd --date=short` for the last commit date; `git log --oneline -20 --format='%cd %s' --date=short` to see the cadence before it stopped (steady work that abruptly halted reads differently than a project that was always sporadic).
+- **Dormancy duration**: `git log -1 --format=%cd --date=short` for the last commit date; `git log -20 --format='%cd %s' --date=short` to see the cadence before it stopped (steady work that abruptly halted reads differently than a project that was always sporadic).
 - **Read the project's own account of itself**: the project `CLAUDE.md`, `docs/prd/ROADMAP.md` (if present), and the `README`. Don't trust them as current — they're inputs to assess, not ground truth.
 - **Determine the lifecycle stage** per the handbook (`~/.claude/docs/prd-workflow/spec-driven-development.md` §6 "PRD Lifecycle") and **state it explicitly with evidence**:
   - **Greenfield** — building against the spec; ROADMAP checkboxes are the active work queue, many unchecked.
@@ -70,7 +70,7 @@ This is the check no off-the-shelf tool does: how far has the project's adopted 
 Fold everything into **one prioritized, housekeeping-first plan**. This is the whole point of the skill. Order strictly by what unblocks new development:
 
 1. **Critical / broken** — failing tests, security advisories, a broken boot. These block new work and come first.
-2. **Stale housekeeping** — dependency updates, README drift, convention catch-up from Phase 3.
+2. **Stale housekeeping** — dependency updates, README drift, convention catch-up from step 3.
 3. **Reorientation** — where you left off (the last in-flight ROADMAP item or open issue) and the recommended next development step.
 
 Every item **names the action to take on it** — a skill invocation or an explicit manual step:
@@ -102,9 +102,9 @@ The plan is the deliverable. Present it in full — then move to step 5 to decid
 
 A long-dormant project's plan can run to a dozen items across several sessions; don't let it scroll off the terminal. After presenting the plan, offer to capture it. This is the skill's one write, and it's opt-in:
 
-- **Default offer — a tracking issue.** File the plan as a single GitHub issue (label `chore`, title like `chore: dust off <project>`). The body is the tiered checklist from step 4, each item a `- [ ]` so progress is visible ("3 of 9") and checkable across sessions. Add it to the project board if one exists (`gh project list`, or per `CLAUDE.md`).
-- **Resume, don't duplicate.** Before creating, search for an existing open dust-off issue (the `chore` label plus the title convention). If one exists, offer to **refresh** it — reconcile new findings, preserve already-checked items — rather than open a second.
-- **No `gh` or no remote.** Fall back to writing a `DUSTOFF.md` at the project root with the same checklist. Same survives-the-session benefit, no GitHub dependency.
+- **Default offer — a tracking issue.** File the plan as a single GitHub issue (title like `chore: dust off <project>`), with a tiered checklist body (from step 4) where each item is a `- [ ]` so progress is visible ("3 of 9") and checkable across sessions. Apply the `chore` label **if it exists** (`gh label list`) — don't assume it does. If it's absent, create it or file without a label rather than letting `gh issue create --label` error out; the title convention is what the refresh step keys on, not the label. Add it to the project board if one exists (`gh project list`, or per `CLAUDE.md`).
+- **Resume, don't duplicate.** Before creating, search for an existing open dust-off issue by the title convention (`gh issue list --search "dust off in:title" --state open`). If one exists, offer to **refresh** it — reconcile new findings, preserve already-checked items — rather than open a second.
+- **No `gh` or no remote.** Fall back to writing a `DUSTOFF.md` at the project root with the same checklist. Same survives-the-session benefit, no GitHub dependency. Ask whether to commit it (durable, shared with collaborators) or add it to `.gitignore` (a private scratch worklist) — don't leave it as a silent untracked file.
 - **Decline path.** If the user wants it terminal-only, that's fine — leave the plan on screen and stop.
 
 Whichever way it's captured, **stop there** — do not start executing the plan. Offer to kick off the top item (e.g. "Want me to start with `/update-deps`?") and let the user choose. The discrete new-work items (a discovered bug, failing tests with no obvious cause) become their own issues when you pick them up — via `/plan-phase` or the owning skill — and the tracking issue links to them. Dustoff doesn't file those itself.

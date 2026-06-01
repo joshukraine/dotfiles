@@ -353,7 +353,7 @@ When you're disoriented, fatigued, or returning from a break:
 
 When you're returning to a project that's been dormant for months:
 
-- **`/dustoff`** — The deeper counterpart to `/checkpoint`. Where `/checkpoint` assumes you know where you are and just need orientation, `/dustoff` re-derives the project's state from scratch: its lifecycle stage (§6), what's stale or broken, and how far the project's adopted conventions have drifted from the current `~/.claude` toolset. It produces a single prioritized re-entry plan and hands each item to the skill that executes it (`/update-deps`, `/readme-refresh`, `/plan-phase`). Read-only — it plans, it doesn't act.
+- **`/dustoff`** — The deeper counterpart to `/checkpoint`. Where `/checkpoint` assumes you know where you are and just need orientation, `/dustoff` re-derives the project's state from scratch: its lifecycle stage (§6), what's stale or broken, and how far the project's adopted conventions have drifted from the current `~/.claude` toolset. It produces a single prioritized re-entry plan and hands each item to the skill that executes it (`/update-deps`, `/readme-refresh`, `/plan-phase`). Read-only with respect to the codebase — it plans, it doesn't fix; its one opt-in write is capturing the plan as a tracking issue so it survives sessions.
 
 When you suspect drift has occurred:
 
