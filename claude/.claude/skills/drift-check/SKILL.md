@@ -15,8 +15,9 @@ Perform a lightweight, advisory review of the current branch's changes against t
 
 ### Step 1: Identify scope
 
-- Run `git log main..HEAD --oneline` to see all commits on this branch
-- Run `git diff main...HEAD --stat` to see all files changed
+- **Determine the default branch first — don't assume `main`.** Run `git rev-parse --abbrev-ref origin/HEAD`; it prints e.g. `origin/main` or `origin/master`, and the part after `origin/` is the base branch for the commands below. If it errors (no `origin/HEAD` set locally), fall back to `git remote show origin` (read its "HEAD branch:" line) or default to `main`. Use this detected base wherever `<base>` appears below. (Run the detection as a plain command and substitute the result literally — don't wrap it in `$(...)`, which triggers a permission prompt.)
+- Run `git log <base>..HEAD --oneline` to see all commits on this branch
+- Run `git diff <base>...HEAD --stat` to see all files changed
 - Determine which feature area this work relates to (from branch name, commit messages, or changed files)
 
 ### Step 2: Identify the relevant spec
@@ -28,7 +29,7 @@ Perform a lightweight, advisory review of the current branch's changes against t
 
 ### Step 3: Scan for deviation signals
 
-Review `git diff main...HEAD` for changes that cross the deviation threshold:
+Review `git diff <base>...HEAD` (the base branch detected in Step 1) for changes that cross the deviation threshold:
 
 **Flag if present:**
 
