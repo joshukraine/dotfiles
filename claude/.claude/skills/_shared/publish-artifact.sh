@@ -102,8 +102,19 @@ if (( valid_target == 0 )); then
 fi
 
 dest_path="${subfolder}/$(basename "${html}")"
-owner="${repo%%/*}"
-repo_name="${repo#*/}"
+
+# Resolve the live URL from the GitHub Pages API instead of guessing it from
+# the repo name. `html_url` is a single source of truth: it already returns
+# the correct base for project pages, user/org pages, AND custom-domain
+# (CNAME) sites. If Pages isn't enabled we could only print a URL that won't
+# resolve, so fail fast — before uploading — rather than publishing an orphan
+# file with a dead link.
+if ! pages_info=$(gh api "repos/${repo}/pages" 2>/dev/null); then
+  die "GitHub Pages is not enabled for ${repo} — enable Pages (or fix the QA Publish Target) before publishing"
+fi
+pages_base=$(printf '%s' "${pages_info}" | jq -r '.html_url // empty' | sed 's:/*$::')
+[[ -n "${pages_base}" ]] || die "GitHub Pages API returned no html_url for ${repo} — cannot derive a live URL"
+pages_url="${pages_base}/${dest_path}"
 
 source_repo=$(gh repo view --json nameWithOwner --jq .nameWithOwner 2>/dev/null || echo "unknown")
 short_sha=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
@@ -140,15 +151,6 @@ fi
 
 gh api -X PUT "repos/${repo}/contents/${dest_path}" --input "${payload_file}" >/dev/null
 
-# Pages URL assumes a project-pages repo served from the default branch. A
-# user/org-pages repo (named "<owner>.github.io") is served at the apex with
-# no <repo> path segment, so the project-pages template would be wrong.
-if [[ "${repo_name}" == "${owner}.github.io" ]]; then
-  warn "repo '${repo}' looks like a user/org-pages repo — the live URL omits the repo segment; verify GitHub Pages settings"
-  pages_url="https://${repo_name}/${dest_path}"
-else
-  pages_url="https://${owner}.github.io/${repo_name}/${dest_path}"
-fi
 echo "${pages_url}"
 
 if [[ -n "${pr}" ]]; then
