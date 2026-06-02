@@ -2,11 +2,13 @@
 .vimrc.local
 .zshrc.local
 brew/Brewfile.lock.json
+ghostty/.config/ghostty/config.local
 kitty.conf.bak
 lazygit/.config/lazygit/state.yml
 local/*
 startup.conf
 tmux/.config/tmux/plugins
+tmux/.config/tmux/tmux.conf.local
 vim/.netrwhist
 vim/bundle
 
