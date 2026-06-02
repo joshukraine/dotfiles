@@ -10,7 +10,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | ---------- | ------ |
 | `Option+T` | Toggle extended thinking on/off for current session |
 | `Esc Esc` | Open checkpoint/rewind menu |
-| `Shift+Tab` | Cycle permission modes (default → accept-edits → plan) |
+| `Shift+Tab` | Cycle permission modes (default → accept-edits → plan → auto) |
 
 ## Useful Commands
 
