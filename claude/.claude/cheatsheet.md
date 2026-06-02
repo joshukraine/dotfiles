@@ -1,6 +1,6 @@
 # Claude Code Cheatsheet
 
-*Last updated: 2026-06-01* <!-- Update this date when editing this file -->
+*Last updated: 2026-06-02* <!-- Update this date when editing this file -->
 
 Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
@@ -10,7 +10,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | ---------- | ------ |
 | `Option+T` | Toggle extended thinking on/off for current session |
 | `Esc Esc` | Open checkpoint/rewind menu |
-| `Shift+Tab` | Accept suggested edits |
+| `Shift+Tab` | Cycle permission modes (default → accept-edits → plan) |
 
 ## Useful Commands
 
@@ -21,8 +21,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `/compact Focus on X` | Compact with focus instructions |
 | `/rewind` | Restore code and conversation to a previous prompt |
 | `/insights` | Analyze recent sessions for patterns — run weekly |
-| `/output-style explanatory` | Explain patterns as it works (verbose) |
-| `/output-style` | Reset to default output style |
+| `/config` → Output style | Switch output style (e.g. `explanatory`, `learning`); replaces the removed `/output-style` command |
 | `/fast` | Toggle fast mode (same model, ~2.5x faster, 6x cost) |
 | `/sandbox` | Enable OS-level filesystem and network sandboxing |
 | `/simplify` | Review changed code for reuse, quality, and efficiency |
@@ -35,7 +34,7 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `/create-pr` | Create a PR with auto-generated description and issue linking (inferred from branch name) |
 | `/simplify` | Post-implementation code review — run before creating a PR |
 
-All skills live in `claude/.claude/skills/`. Type `/` to browse the full list including PRD-specific skills (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
+Custom skills live in `claude/.claude/skills/`; `/simplify` and `/code-review` are built-in Claude Code skills. Type `/` to browse the full list including PRD-specific skills (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
 
 ### Common Workflow
 
