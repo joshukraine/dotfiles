@@ -39,3 +39,7 @@ keybind = super+ctrl+right=resize_split:right,100
 
 # Reload config
 keybind = super+shift+comma=reload_config
+
+# Load optional local overrides if present (keybinds, fonts, theme).
+# The `?` prefix makes this a no-op when the file doesn't exist.
+config-file = ?~/.config/ghostty/config.local
