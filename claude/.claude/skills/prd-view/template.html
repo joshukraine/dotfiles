@@ -1,0 +1,131 @@
+<!--
+  /prd-view DASHBOARD TEMPLATE — structure only. The look + click-to-copy come
+  from ../_shared/house-style.html (inlined at build time). Fill the tokens,
+  inline the house style, and STRIP every instructional comment (including this
+  block and the example snippets) from the final output. HTML comments do not
+  nest, so a leftover instructional comment can break rendering.
+
+  This view is a DERIVED, EPHEMERAL presentation of an authoritative PRD
+  Markdown file. Render what the source says — present, do not embellish. Every
+  claim must be traceable to the source file; diagrams encode only stated facts.
+
+  KEEP the interactive shell verbatim — it is real content, not instructional:
+    - the supplemental <style> block (skill-local interactive chrome)
+    - the supplemental <script> block (expand/collapse-all + back-to-top)
+    - the <a class="crumb" href="#top">, the .toc-actions controls,
+      the #toTop button, and the click-to-copy source path.
+
+  TOKENS (single source value, used in head + sidebar + header + footer):
+    {{PRD_NAME}}     Project + doc family, e.g. "ComixDistro PRD"
+    {{DOC_TITLE}}    File number + title, e.g. "11 · Individual Book Requests"
+    {{TITLE}}        The H1, e.g. "Individual Book Requests"
+    {{SUBTITLE}}     One-line description (the source's opening sentence, trimmed)
+    {{STATUS_LINE}}  Eyebrow, e.g. "Feature spec · Status: Specified"
+    {{SOURCE_PATH}}  Repo-relative path, e.g. "docs/prd/11-individual-book-requests.md"
+    {{TOC}}          One <li> per rendered section (see snippet)
+    {{METRICS}}      4–6 .metric cards of the most salient counts (see snippet)
+    {{SECTIONS}}     One details.section card per source "##" section (see snippet)
+
+  COMPONENT SNIPPETS (copy, fill, repeat — then delete the snippet comments):
+
+    TOC entry:
+      <li><a href="#s3"><span class="n">3</span> BookRequest model</a></li>
+
+    Metric card (pick the counts that matter for THIS file):
+      <div class="metric"><div class="v">5</div><div class="k">lifecycle states</div></div>
+
+    Section card (open the high-value ones; add the §N badge):
+      <details class="section" id="s3" open>
+        <summary>3 · BookRequest model <span class="badge">§3</span></summary>
+        <div class="section-body"> ...rendered section content... </div>
+      </details>
+
+    RFC keyword inline:  <span class="kw">SHOULD</span>
+    Callout (info / .warn / .flag): <div class="callout"><span class="label">…</span>…</div>
+    Data-model table cell markers: <span class="pill">string</span> · <span class="req">required</span> · <span class="opt">optional</span>
+    Cross-ref pointer back to canonical MD: keep "→ See file.md §N" as text or a <code>§N</code> tag.
+    Diagram (NEVER ASCII): <figure class="diagram"><svg …>…</svg><figcaption>…</figcaption></figure>
+    Click-to-copy a pasteable value: <button class="copy" data-copy="VALUE">VALUE</button>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — {{PRD_NAME}}</title>
+<!-- HOUSE STYLE: replace this marker with the <style> block from ../_shared/house-style.html -->
+<style>
+  /* /prd-view interactive chrome — skill-local (the shared house style is visual only). */
+  nav.toc a.crumb { text-decoration: none; cursor: pointer; display: inline-block; }
+  nav.toc a.crumb:hover { text-decoration: underline; }
+  .toc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .toc-actions { font-size: 11px; white-space: nowrap; color: var(--muted); }
+  .lnk { background: none; border: 0; padding: 0; margin: 0; color: var(--accent); font: inherit; font-size: 11px; cursor: pointer; }
+  .lnk:hover { text-decoration: underline; }
+  .to-top {
+    position: fixed; right: 20px; bottom: 20px; z-index: 20;
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--accent); color: #fff; border: 1px solid var(--accent); border-radius: 999px;
+    padding: 8px 14px; font: 600 13px var(--sans); cursor: pointer;
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease; box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { filter: brightness(1.08); }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <nav class="toc">
+    <a class="crumb" href="#top">{{PRD_NAME}}</a>
+    <p class="ttl">{{DOC_TITLE}}</p>
+    <div class="toc-head">
+      <h2>On this page</h2>
+      <span class="toc-actions"><button type="button" class="lnk" data-sections="open">Expand all</button> · <button type="button" class="lnk" data-sections="close">Collapse all</button></span>
+    </div>
+    <ol>
+      {{TOC}}
+    </ol>
+    <div class="srcbox"><b>Source of truth</b><br>Generated from <button class="copy" data-copy="{{SOURCE_PATH}}">{{SOURCE_PATH}}</button> — click to copy the path, then open it in your editor. Edit the Markdown; never this page.</div>
+  </nav>
+
+  <main>
+    <header class="doc">
+      <p class="eyebrow">{{STATUS_LINE}}</p>
+      <h1>{{TITLE}}</h1>
+      <p class="sub">{{SUBTITLE}}</p>
+      <div class="metrics">
+        {{METRICS}}
+      </div>
+    </header>
+
+    {{SECTIONS}}
+
+    <footer class="doc">Generated reading view of <code>{{SOURCE_PATH}}</code> — the authoritative source. Every claim here is drawn from that file: presented, not embellished. Regenerate after any edit to the Markdown.</footer>
+  </main>
+</div>
+
+<button type="button" id="toTop" class="to-top" aria-label="Back to top" title="Back to top">↑ Top</button>
+
+<!-- HOUSE SCRIPT: replace this marker with the <script> block from ../_shared/house-style.html -->
+<script>
+  // Skill-local interactivity: expand/collapse all sections + back-to-top.
+  (function () {
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-sections]");
+      if (!b) return;
+      var open = b.getAttribute("data-sections") === "open";
+      document.querySelectorAll("details.section").forEach(function (d) { d.open = open; });
+    });
+    var btn = document.getElementById("toTop");
+    if (btn) {
+      var toggle = function () { btn.classList.toggle("show", window.scrollY > 400); };
+      window.addEventListener("scroll", toggle, { passive: true });
+      toggle();
+      btn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    }
+  })();
+</script>
+</body>
+</html>

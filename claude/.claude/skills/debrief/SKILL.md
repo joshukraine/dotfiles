@@ -100,15 +100,16 @@ docs/debriefs/summary/YYYY-MM-DD-[brief-topic].md
 
 #### Rendering the full debrief into HTML
 
-The house style lives in `template.html` (in this skill's directory). Produce the full debrief by filling that template:
+The document structure lives in `template.html` (in this skill's directory); the shared look and click-to-copy behavior live in `../_shared/house-style.html`. Produce the full debrief by filling the template and inlining the shared house style:
 
 1. **Read `template.html`** from this skill's directory and use it as the exact structure. Its head comment documents every token and section.
-2. **Inline the styles** — copy the template's `<style>` block verbatim into the output so the file is a single self-contained, portable `.html` (no external CSS, no build step). Do not link an external stylesheet.
+2. **Inline the shared house style** — read `../_shared/house-style.html` and copy its `<style>` block in place of the `<!-- HOUSE STYLE: ... <style> ... -->` marker in `<head>`, and its `<script>` block in place of the marker before `</body>`. The output must be a single self-contained, portable `.html` (no external assets, no build step). Do not link an external stylesheet.
 3. **Replace the `{{TOKENS}}`** (`{{PROJECT}}`, `{{TITLE}}`, `{{DATE}}`, `{{SCOPE}}`, `{{PRS}}`, `{{ISSUES}}`, `{{PRD_REFS}}`, and the section bodies `{{BUILT}}`, `{{ARCHITECTURE}}`, `{{TESTS}}`, `{{TOUR}}`). Drop metadata rows that don't apply.
-4. **Use the provided patterns:** Product Tour user stories become `<div class="story">` cards; the POODR spotlight and any flagged follow-ups become `<div class="callout">` blocks; architecture and data-flow structure becomes inline `<svg>` inside `<figure class="diagram">` — never ASCII art.
+4. **Use the shared components** (documented in `house-style.html`): Product Tour user stories become `<div class="story">` cards; the POODR spotlight and any flagged follow-ups become `<div class="callout">` blocks; architecture and data-flow structure becomes inline `<svg>` inside `<figure class="diagram">` — never ASCII art.
 5. **Make pasteable values click-to-copy.** Anything the reader will type into the app — seed credentials, emails, and key URLs in the Product Tour — should be a `<button type="button" class="copy" data-copy="VALUE">VALUE</button>` control so it copies on click. This removes the single biggest walkthrough papercut.
 6. **Keep the TOC in sync** with the sections you actually emit, and leave the high-value sections (What We Built, Product Tour) `open` by default.
-7. **JavaScript is limited to the bundled click-to-copy helper** (the trailing `<script>` in the template). Keep it; add no other scripts, frameworks, or dependencies. Collapsing uses native `<details>`/`<summary>`.
+7. **JavaScript is limited to the shared click-to-copy helper.** Add no other scripts, frameworks, or dependencies. Collapsing uses native `<details>`/`<summary>`.
+8. **Strip every instructional comment** — the template's head how-to block and all explanatory `<!-- ... -->` notes inside the body guide template-filling only and must not appear in the output. The artifact should contain real content plus the inlined house style, nothing else. (HTML comments do not nest, so a leftover instructional comment can break rendering, not just clutter it.)
 
 #### The summary file
 

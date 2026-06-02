@@ -180,6 +180,17 @@ On ComixDistro, the data model started as PRD file `02-data-model.md` (planning)
 
 Documents that have served their purpose but contain valuable historical context should be archived, not deleted. An `archives/` directory within `docs/` keeps them accessible without cluttering the working document set. Good candidates: research documents, one-time audit reports, brainstorming artifacts, and reading guides for completed reviews.
 
+### Medium: HTML vs. Markdown
+
+Document medium follows the same lifecycle split. Markdown for what an agent edits or an archive preserves; HTML for what a human reads once and moves on.
+
+- **Markdown:** PRD files, ROADMAP, CHANGELOG, this handbook, skill instructions (SKILL.md), debrief summaries. Diffable, machine-readable, single source of truth.
+- **HTML:** debrief full reports, walkthroughs, QA handoffs, plans, mockups. Self-contained single files with click-to-copy controls, interactive checklists, and inline SVG. Opened in a browser with `open` — no build, no server.
+
+A third case sits between the two: a **derived reading view**. The canonical document stays Markdown — authoritative, diffable, the source of truth — while `/prd-view` *renders* a PRD file to a rich HTML Dashboard on demand (sidebar nav, an at-a-glance metric strip, collapsible cards, inline SVG). The HTML is ephemeral: generated to a gitignored `tmp/`, never committed, always regenerated from the current Markdown — so it cannot drift and never becomes a second source of truth. Its purpose is engagement *and* vetting — reading the rendered view surfaces gaps or errors, which are fixed in the Markdown and re-rendered. The spec earns its authority by being repeatedly engaged with, not skimmed once.
+
+The skills that produce HTML artifacts share a house style (`~/.claude/skills/_shared/house-style.html`) and a publish pipeline (see §7 "Publishing artifacts to remote testers") so the output is consistent and portable. The format that is easiest to maintain is not always the format that is most useful to read; the split keeps both honest.
+
 ---
 
 ## 6 PRD Lifecycle — From Greenfield to Mature
@@ -260,24 +271,25 @@ This section maps every skill to its place in the development cycle. Think of it
 | Skill | Purpose | Cadence |
 | ------- | ------- | ------- |
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
+| `/prd-view` | Render a PRD file as a rich HTML reading view (Dashboard style) for engaged reading and vetting; Markdown stays authoritative, the HTML is ephemeral | Ad-hoc (reading / vetting a spec) |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
 | `/setup-sprint` | Create parallel worktrees for a batch of issues | Per sprint (optional) |
-| `/resolve-issue` | Implement a complex issue with planning checkpoint | Per issue |
-| `/sprint-issue` | Quick-resolve a small, well-scoped issue | Per issue (lightweight) |
-| `/commit` | Stage and commit with Conventional Commits message | Multiple per issue |
+| `/resolve-issue` | Implement an issue end-to-end; planning checkpoint scales to complexity | Per issue |
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
-| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` posts it to the PR for QA | Pre-review, then pre-merge (user-facing PRs) |
-| `/review-pr` | Analyze a PR for quality issues | Pre-merge |
+| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | Pre-review, then pre-merge (user-facing PRs) |
+| `/code-review` | Review the diff for correctness bugs and cleanups at a chosen effort level (built-in; `/review` for an existing PR by number) | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
-| `/qa-handoff` | Generate a hands-on QA testing guide | Per feature (when needed) |
+| `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
+| `/qa-triage` | Triage a `qa`-labeled report — confirm it against the code, classify it, and draft the tech issue(s) it warrants | Per QA report |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
+| `/dustoff` | Re-entry assessment for a dormant project: lifecycle stage, staleness, and convention drift → prioritized plan, optionally captured as a tracking issue | Returning after months away |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
-| `/update-deps` | Update dependencies with testing between categories | Periodic maintenance |
+| `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
-> **Note:** `/simplify` is a built-in Claude Code skill. All other entries listed above are custom skills defined in `~/.claude/skills/`.
+> **Note:** `/simplify` and `/code-review` are built-in Claude Code skills. All other entries listed above are custom skills defined in `~/.claude/skills/`.
 
 ### The PR cycle (inner loop)
 
@@ -285,11 +297,10 @@ This is where most development time is spent. One pass through this cycle produc
 
 ```text
 1. Pick an issue
-   └─ /resolve-issue N        (complex: planning checkpoint, then implement)
-   └─ /sprint-issue N          (small: straight to implementation)
+   └─ /resolve-issue N        (research, plan, implement, verify — checkpoint scales to complexity)
 
 2. Implement
-   └─ /commit                  (multiple times — small, frequent commits)
+   └─ commit as you go         (small, frequent commits — Conventional Commits per CLAUDE.md)
 
 3. Quality check
    └─ /simplify                (code reuse, efficiency, readability)
@@ -304,10 +315,10 @@ This is where most development time is spent. One pass through this cycle produc
    └─ /walkthrough             (browser pre-flight — user-facing PRs only)
 
 7. Review
-   └─ /review-pr               (quality, security, correctness)
+   └─ /code-review             (correctness + cleanups; built-in /review for an existing PR by number)
 
 8. Publish walkthrough
-   └─ /walkthrough --publish   (final walkthrough → PR comment for QA — user-facing PRs)
+   └─ /walkthrough --publish   (renders HTML, uploads to project's QA host, posts PR comment with link)
 
 9. Merge
    └─ /merge-pr                (squash merge, clean up, pull main)
@@ -315,9 +326,25 @@ This is where most development time is spent. One pass through this cycle produc
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` posts that walkthrough as a PR comment so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
+Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
 
 Step 9 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
+
+### The QA feedback loop
+
+Published walkthroughs and QA handoffs (see "Publishing artifacts to remote testers" below) put the work in front of a tester. When a tester reports back, the report re-enters development through its own short loop:
+
+```text
+1. Tester files a `qa`-labeled issue   (bug, confusion, or suggestion from QA)
+
+2. Triage
+   └─ /qa-triage              (confirm against the code, classify, draft the tech issue(s) — stops for approval)
+
+3. Implement the approved issue
+   └─ /resolve-issue N        (rejoins the PR cycle above)
+```
+
+`/qa-triage` is the gate between an end-user-flavored report and an actionable technical issue: it investigates the report against the code, classifies it (real bug / works-as-designed / enhancement), and drafts the issue(s) it warrants — but never implements. An approved issue then flows through the normal PR cycle. This is the inbound counterpart to the outbound publishing step: `/walkthrough --publish` and `/qa-handoff` send work *out* to testers; `/qa-triage` brings their findings back *in*.
 
 ### Phase planning
 
@@ -343,6 +370,10 @@ When you're disoriented, fatigued, or returning from a break:
 - **`/checkpoint`** — Reorient. Where am I in the ROADMAP? What's in flight? What are the next 2–3 items? This is the "where was I?" skill.
 - **Appendix A quick reference** — Scan the checklists to re-engage the workflow discipline.
 
+When you're returning to a project that's been dormant for months:
+
+- **`/dustoff`** — The deeper counterpart to `/checkpoint`. Where `/checkpoint` assumes you know where you are and just need orientation, `/dustoff` re-derives the project's state from scratch: its lifecycle stage (§6), what's stale or broken, and how far the project's adopted conventions have drifted from the current `~/.claude` toolset. It produces a single prioritized re-entry plan and hands each item to the skill that executes it (`/update-deps`, `/readme-refresh`, `/plan-phase`). Read-only with respect to the codebase — it plans, it doesn't fix; its one opt-in write is capturing the plan as a tracking issue so it survives sessions.
+
 When you suspect drift has occurred:
 
 - **`/drift-check`** — Run it against the current branch to assess alignment. If drift is confirmed, follow the reactive workflow in §3b.
@@ -362,23 +393,40 @@ Skills shift in importance as the project matures (see §6):
 | Skill | Greenfield | MVP Complete | Mature |
 | ------- | ---------- | ------------ | ------ |
 | `/bootstrap-prd` | **Setup** | — | — |
+| `/prd-view` | **Spec vetting** | Occasional | Rare |
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
 | `/setup-sprint` | Optional | Useful for bug batches | Useful for bug batches |
 | `/resolve-issue` | **Primary workflow** | **Primary workflow** | **Primary workflow** |
-| `/sprint-issue` | Chore batches | Common | Common |
-| `/commit` | **Always** | **Always** | **Always** |
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
 | `/drift-check` | **Critical** | Important | Light (living docs) |
 | `/create-pr` | **Always** | **Always** | **Always** |
-| `/review-pr` | Pre-merge | Pre-merge | Pre-merge |
+| `/walkthrough` | User-facing PRs | User-facing PRs | User-facing PRs |
+| `/code-review` | Pre-merge | Pre-merge | Pre-merge |
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |
+| `/qa-triage` | Rare (pre-launch) | **Frequent** | Ongoing |
 | `/checkpoint` | Ad-hoc | **Frequent** (transition period) | Ad-hoc |
+| `/dustoff` | **On return** | **On return** | **On return** |
 | `/debrief` | **Phase boundary** | Milestone reviews | Rare |
 | `/update-deps` | Periodic | Periodic | **Regular cadence** |
 | `/readme-refresh` | Bootstrap | **Full refresh** | Light periodic |
 
 Note how `/drift-check` intensity tracks project maturity: critical during greenfield when the spec is the primary reference, important during MVP transition, and lighter in the mature stage when living documents replace the PRD. The skill still has value in the mature stage — it just checks against living docs (domain model, integration guides) rather than PRD files.
+
+### Publishing artifacts to remote testers
+
+`/walkthrough` and `/qa-handoff` produce HTML artifacts. A remote tester who is not cloning the repo needs a hosted copy. Publishing is per-project opt-in, declared in the project's own `CLAUDE.md`: a `## QA Publish Target` heading followed by a `yaml` fenced code block containing `repo: <owner>/<pages-repo>` and `subfolder: <project-slug>`. See the bootstrap template at `~/.claude/docs/prd-workflow/templates/CLAUDE.md` for the exact block.
+
+The repo must have GitHub Pages enabled and served from the **default branch** (the Contents API writes there); the live URL is derived as `https://<owner>.github.io/<pages-repo>/<subfolder>/<file>.html`. A user/org-pages repo (named `<owner>.github.io`) is served at the apex with no repo segment — the pipeline detects that and emits the correct URL with a warning so the configuration is visible.
+
+The shared pipeline at `~/.claude/skills/_shared/publish-artifact.sh` reads that block, uploads the HTML via the GitHub Contents API (create or update via SHA), and — when given `--pr <N>` — posts a PR comment with the live link.
+
+If the block is absent or contains placeholder values, the pipeline never guesses a target:
+
+- **`/walkthrough --publish`** falls back to posting the Markdown twin alone as the PR comment (the pre-HTML behaviour).
+- **`/qa-handoff --publish`** stays local and prints a warning.
+
+Solo projects (a blog, a one-off prototype) simply omit the block.
 
 ### The `/drift-check` skill
 

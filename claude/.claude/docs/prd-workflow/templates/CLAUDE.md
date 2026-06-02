@@ -45,3 +45,26 @@ bin/standardrb --fix       # Lint and auto-fix
 - **Linting:** <!-- TODO: linter name -->, zero warnings, run before every commit
 - **PRD deviations:** Log in `docs/prd/CHANGELOG.md` before merging — never silently deviate
 - **Testing:** <!-- TODO: framework -->, AAA pattern, <!-- TODO: test runner command -->
+
+## QA Publish Target
+
+<!--
+  Opt-in: tester-facing HTML from `/walkthrough` and `/qa-handoff` will be
+  published to the repo + subfolder declared below, and a live GitHub Pages
+  link will be posted as the PR comment.
+
+  Delete this entire section to keep tester artifacts local-only. With no
+  declaration, `--publish` falls back to a Markdown PR comment and never
+  guesses a remote target.
+
+  Required fields:
+    - repo:      <owner>/<repo>  — must have GitHub Pages enabled
+    - subfolder: <slug>          — path under the repo; isolates this project
+
+  Live URL is derived: https://<owner>.github.io/<repo>/<subfolder>/<file>.html
+-->
+
+```yaml
+repo: <owner>/<repo>
+subfolder: <project-slug>
+```

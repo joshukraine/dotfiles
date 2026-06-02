@@ -1,0 +1,359 @@
+<!--
+  Shared house style for HTML artifacts.
+
+  This is NOT a skill (no SKILL.md) and not a standalone page. It is the single
+  source of the visual look + click-to-copy behavior shared by the artifact
+  skills (/debrief, /qa-handoff, /walkthrough).
+
+  How skills use it:
+  - Inline the <style> block below into the output's <head>.
+  - Inline the <script> block below just before the output's </body>.
+  - Each skill supplies its own document BODY structure; this file only
+    supplies the look and the copy helper. Keep both blocks verbatim so every
+    artifact stays a single self-contained, portable file (no external assets,
+    no build step).
+  - When a skill needs a genuinely new component, add its CSS here so the look
+    stays consistent across artifacts — do not fork per-skill styles.
+
+  Component vocabulary (classes available to every artifact):
+  - Layout:     .wrap (240px sidebar + content grid), nav.toc (sticky TOC),
+                main, header.doc, .eyebrow, h1, dl.meta (metadata grid).
+  - Sections:   details.section > summary  (collapsible card; add `open` to
+                expand by default), .section-body.
+  - Prose:      h3, h4, p, a, code, pre, table/th/td.
+  - Callouts:   .callout (info, default), .callout.warn, .callout.flag (alert);
+                put a .label inside for the heading.
+  - Stories:    .story > .story-head (+ .role-pill), .story-body,
+                .story .expect (green "expected result" text).
+  - Diagrams:   figure.diagram > svg + figcaption (inline SVG; never ASCII art).
+  - Tags:       .tag.good / .tag.warn / .tag.bad (small status pills).
+  - Copy:       button.copy[data-copy="VALUE"] — click-to-copy control; copies
+                data-copy (falling back to text). Use for anything the reader
+                will paste (credentials, emails, URLs).
+  - Button:     .btn — primary CTA. Works on both <button> and <a>.
+  - Checklist:  ul.checklist > li > label > input[type=checkbox] — interactive
+                checkboxes the reader can tick.
+  - Footer:     footer.doc.
+  - Metrics:    .metrics (grid) > .metric > .v (number) + .k (label) — the
+                at-a-glance summary strip under a doc header.
+  - Keyword:    .kw — RFC keyword chip (MUST/SHOULD/MAY) for spec text.
+  - TOC extras: nav.toc .crumb (breadcrumb), .ttl (doc title), a > .n (section
+                number), and .srcbox (the "source of truth" box).
+  - Section §:  details.section > summary .badge — a small right-aligned tag
+                (e.g. "§3") marking which source section a card renders.
+  - Fields:     in tables, .pill (type), .req (required marker), .opt (optional
+                / default marker) — for data-model field tables.
+
+  The click-to-copy <script> below is the ONLY shared script. A skill that
+  needs richer interactivity adds its own small vanilla <script> in its own
+  template — not here.
+-->
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --surface-2: #eaeef2;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --muted: #656d76;
+    --accent: #0969da;
+    --accent-soft: #ddf4ff;
+    --good: #1a7f37;
+    --warn: #9a6700;
+    --bad: #cf222e;
+    --code-bg: #f6f8fa;
+    --radius: 10px;
+    --maxw: 1080px;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface-2: #21262d;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #9198a1;
+      --accent: #4493f8;
+      --accent-soft: #121d2f;
+      --good: #3fb950;
+      --warn: #d29922;
+      --bad: #f85149;
+      --code-bg: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 40px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 32px 24px 96px;
+  }
+  /* ---- Table of contents ---- */
+  nav.toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    font-size: 14px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+  nav.toc h2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; }
+  nav.toc li { margin: 0 0 8px; }
+  nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+    display: block;
+    padding: 4px 10px;
+    border-left: 2px solid transparent;
+    border-radius: 0 6px 6px 0;
+  }
+  nav.toc a:hover { background: var(--surface); border-left-color: var(--accent); color: var(--accent); }
+  /* ---- Main column ---- */
+  main { min-width: 0; }
+  header.doc {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 8px;
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 6px;
+  }
+  header.doc h1 { font-size: 30px; line-height: 1.2; margin: 0 0 16px; }
+  dl.meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    margin: 0;
+    font-size: 14px;
+  }
+  dl.meta dt { color: var(--muted); font-weight: 600; }
+  dl.meta dd { margin: 0; }
+  /* ---- Sections ---- */
+  details.section {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 16px 0;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  details.section > summary {
+    cursor: pointer;
+    padding: 16px 20px;
+    font-size: 19px;
+    font-weight: 600;
+    background: var(--surface);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  details.section > summary::-webkit-details-marker { display: none; }
+  details.section > summary::before {
+    content: "›";
+    display: inline-block;
+    transition: transform 0.15s ease;
+    color: var(--muted);
+    font-size: 22px;
+    line-height: 1;
+  }
+  details.section[open] > summary::before { transform: rotate(90deg); }
+  .section-body { padding: 4px 20px 20px; }
+  h3 { font-size: 17px; margin: 24px 0 8px; }
+  h4 { font-size: 15px; margin: 18px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin: 10px 0; }
+  a { color: var(--accent); }
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--surface-2);
+    padding: 0.15em 0.4em;
+    border-radius: 5px;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--surface); font-weight: 600; }
+  /* ---- Callouts ---- */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 12px 16px;
+    margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, var(--bg)); }
+  .callout.flag { border-left-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--bg)); }
+  .callout .label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px; }
+  /* ---- Story / step cards ---- */
+  .story {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 16px 0;
+    overflow: hidden;
+  }
+  .story > .story-head {
+    background: var(--surface);
+    padding: 12px 16px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .story .role-pill {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin-left: 8px;
+  }
+  .story ol { margin: 12px 0; padding-left: 28px; }
+  .story ol li { margin: 6px 0; }
+  .story .expect { color: var(--good); font-weight: 500; }
+  .story-body { padding: 4px 16px 14px; }
+  /* ---- Diagram figure ---- */
+  figure.diagram { margin: 18px 0; text-align: center; }
+  figure.diagram svg { max-width: 100%; height: auto; }
+  figure.diagram figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  /* ---- Tags ---- */
+  .tag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tag.good { color: var(--good); background: color-mix(in srgb, var(--good) 15%, var(--bg)); }
+  .tag.warn { color: var(--warn); background: color-mix(in srgb, var(--warn) 15%, var(--bg)); }
+  .tag.bad { color: var(--bad); background: color-mix(in srgb, var(--bad) 15%, var(--bg)); }
+  /* ---- Click-to-copy ---- */
+  .copy {
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: inherit;
+    font-family: var(--mono);
+    font-size: 0.85em;
+    padding: 0.1em 0.5em;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    user-select: none;
+    vertical-align: baseline;
+    transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  .copy:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .copy::after { content: "\29C9"; opacity: 0.55; font-size: 0.9em; }
+  .copy.copied { color: var(--good); border-color: var(--good); }
+  .copy.copied::after { content: "\2713"; opacity: 1; }
+  /* ---- Button (primary CTA; works on <button> or <a>) ---- */
+  .btn {
+    display: inline-block;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  /* ---- Checklist ---- */
+  ul.checklist { list-style: none; margin: 12px 0; padding: 0; }
+  ul.checklist li { margin: 8px 0; }
+  ul.checklist label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+  ul.checklist input { margin-top: 5px; flex: none; }
+  footer.doc { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+  /* ---- Metric strip (at-a-glance summary under a doc header) ---- */
+  .metrics { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 18px 0 4px; }
+  .metric { border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; background: var(--surface); }
+  .metric .v { font-size: 21px; font-weight: 700; line-height: 1; }
+  .metric .k { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.3; }
+  /* ---- TOC extras: breadcrumb, doc title, section number, source-of-truth box ---- */
+  nav.toc .crumb { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+  nav.toc .ttl { font-size: 16px; font-weight: 700; line-height: 1.25; margin: 0 0 16px; }
+  nav.toc a .n { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 4px; }
+  .srcbox { font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-top: 14px; }
+  .srcbox b { color: var(--text); }
+  .srcbox code { font-family: var(--mono); font-size: 11.5px; }
+  /* ---- Section §N badge (right-aligned in a section summary) ---- */
+  details.section > summary .badge { margin-left: auto; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; }
+  /* ---- RFC keyword chip (MUST / SHOULD / MAY) ---- */
+  .kw { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 1px 7px; border-radius: 5px; background: color-mix(in srgb, var(--warn) 14%, var(--bg)); color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+  /* ---- Data-model field markers (used inside tables) ---- */
+  .pill { font-family: var(--mono); font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .req { color: var(--bad); font-size: 11px; font-weight: 700; }
+  .opt { color: var(--muted); font-size: 11px; }
+  /* ---- Responsive ---- */
+  @media (max-width: 800px) {
+    .wrap { grid-template-columns: 1fr; gap: 16px; padding: 20px 16px 64px; }
+    nav.toc { position: static; max-height: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; background: var(--surface); }
+    .metrics { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+<script>
+  // Click-to-copy. Any [data-copy] element copies its data-copy value
+  // (falling back to its text). Modern Clipboard API with a legacy
+  // execCommand fallback so it works on file:// and older browsers.
+  (function () {
+    function flash(el) {
+      el.classList.add("copied");
+      clearTimeout(el._copyTimer);
+      el._copyTimer = setTimeout(function () { el.classList.remove("copied"); }, 1200);
+    }
+    function legacyCopy(text, el) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); flash(el); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    document.addEventListener("click", function (e) {
+      var el = e.target.closest("[data-copy]");
+      if (!el) return;
+      var text = el.getAttribute("data-copy") || el.textContent.trim();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash(el); },
+          function () { legacyCopy(text, el); });
+      } else {
+        legacyCopy(text, el);
+      }
+    });
+  })();
+</script>
