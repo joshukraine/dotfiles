@@ -61,6 +61,10 @@ brew bundle install
 ./scripts/run-tests abbr        # Abbreviation tests
 ```
 
+## Git Workflow
+
+This repo overrides the global PR-first default. Small changes — config tweaks, single-line edits, typo/doc touch-ups — are committed directly to `master` and pushed, no branch or PR. Reserve the branch → PR → squash-merge pipeline for major feature changes or anything that genuinely benefits from review. When unsure which bucket a change falls in, ask.
+
 ## Architecture Notes
 
 ### Shell Configuration
