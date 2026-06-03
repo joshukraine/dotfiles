@@ -305,7 +305,7 @@ To repair an already-folded `~/.claude`, quit all `claude` sessions and run:
 cd ~/dotfiles
 
 stow -D claude/                                  # detach the folded ~/.claude symlink
-mkdir ~/.claude                                  # recreate it as a real directory
+mkdir -p ~/.claude                               # recreate it as a real directory
 
 git restore --staged claude/.claude/             # unstage anything Claude's writes added
 git restore claude/.claude/settings.json         # discard Claude's auto-edit, if present

@@ -2,27 +2,44 @@
 
 # Regression tests for the GNU Stow "folding trap" on the claude package (issue #205).
 #
-# On a fresh machine ~/.claude does not exist, so `stow claude/` folds the whole
-# directory into a single symlink into the repo — and Claude Code then writes its
-# runtime state into the dotfiles working tree. setup.sh's setup_directories()
-# pre-creates ~/.claude as a real directory to prevent this. These tests lock in
-# the resulting invariant: a pre-existing real .claude gets per-item symlinks, and
-# CLAUDE.md (which the .stow-local-ignore once over-matched) is among them.
+# On a fresh machine ~/.claude does not exist, so `stow claude/` would fold the
+# whole directory into a single symlink into the repo — and Claude Code then
+# writes its runtime state into the dotfiles working tree. setup.sh's
+# setup_directories() pre-creates ~/.claude (via ensure_dir) as a real directory
+# to prevent this. Test 1 drives that production code path directly; test 2 locks
+# in the resulting stow invariant (per-item symlinks, CLAUDE.md included).
 
 load '../helpers/common.bash'
 load '../helpers/shell_helpers.bash'
 
 setup() {
-  command -v stow >/dev/null 2>&1 || skip "stow not installed"
   TEST_TMPDIR=$(mktemp -d)
 }
 
 teardown() {
-  # Removes the temp target (symlinks only); never follows them into the repo.
+  # Removes the temp target only (symlinks, never followed into the repo).
   rm -rf "${TEST_TMPDIR}"
 }
 
-@test "claude: pre-existing real ~/.claude yields per-item symlinks, not a fold" {
+@test "setup_directories creates ~/.claude as a real directory (guards the fix)" {
+  # Run the real production function against a throwaway HOME. If the ~/.claude
+  # creation is removed or broken in setup.sh, this fails. setup.sh guards its
+  # main() behind a BASH_SOURCE check, so sourcing it here is side-effect free.
+  #
+  # The bash -c body is single-quoted on purpose: ${HOME} and ${DOTFILES} must be
+  # expanded by the inner shell (from the env we pass it), not by bats.
+  # shellcheck disable=SC2016
+  run env HOME="${TEST_TMPDIR}/home" DOTFILES="${DOTFILES}" bash -c '
+    mkdir -p "${HOME}"
+    source "${DOTFILES}/setup.sh"
+    setup_directories >/dev/null 2>&1
+    [ -d "${HOME}/.claude" ] && [ ! -L "${HOME}/.claude" ]
+  '
+  [ "${status}" -eq 0 ]
+}
+
+@test "stowing into a pre-existing real ~/.claude links each item, not a fold" {
+  command -v stow >/dev/null 2>&1 || skip "stow not installed"
   mkdir "${TEST_TMPDIR}/.claude"
 
   run stow -d "${DOTFILES}" -t "${TEST_TMPDIR}" claude
@@ -43,14 +60,4 @@ teardown() {
 
   # Reference docs stay excluded by .stow-local-ignore.
   [ ! -e "${TEST_TMPDIR}/.claude/cheatsheet.md" ]
-}
-
-@test "claude: missing target folds ~/.claude into one symlink (the trap setup.sh prevents)" {
-  # No mkdir — an empty target reproduces a fresh machine.
-  run stow -d "${DOTFILES}" -t "${TEST_TMPDIR}" claude
-  [ "${status}" -eq 0 ]
-
-  # The whole directory collapses into a single symlink. This is exactly the
-  # state setup_directories() avoids by creating ~/.claude first.
-  [ -L "${TEST_TMPDIR}/.claude" ]
 }
