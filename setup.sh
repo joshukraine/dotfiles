@@ -121,6 +121,25 @@ backup_stow_conflict() {
   fi
 }
 
+# Create a directory if it does not already exist, honoring DRY_RUN. Used for
+# paths that must be REAL directories before stow runs: if the target dir is
+# missing, GNU Stow folds the whole package into a single symlink into the repo.
+ensure_dir() {
+  local dir="$1"
+  local description="$2"
+
+  if [ -d "${dir}" ]; then
+    return 0
+  fi
+
+  dotfiles_echo "Setting up ${dir} directory..."
+  if [[ "${DRY_RUN}" == "true" ]]; then
+    dotfiles_info "[DRY RUN] Would create directory: %s" "${dir}"
+  else
+    run_command "mkdir -pv '${dir}'" "${description}"
+  fi
+}
+
 # Main script starts here
 main() {
   if [[ "${DRY_RUN}" == "true" ]]; then
@@ -204,26 +223,17 @@ setup_directories() {
   fi
 
   if [ -z "${XDG_CONFIG_HOME}" ]; then
-    dotfiles_echo "Setting up ~/.config directory..."
-    if [ ! -d "${HOME}/.config" ]; then
-      if [[ "${DRY_RUN}" == "true" ]]; then
-        dotfiles_info "[DRY RUN] Would create directory: %s" "${HOME}/.config"
-      else
-        run_command "mkdir '${HOME}/.config'" "Create XDG config directory"
-      fi
-    fi
+    ensure_dir "${HOME}/.config" "Create XDG config directory"
     export XDG_CONFIG_HOME="${HOME}/.config"
   fi
 
-  if [ ! -d "${HOME}/.local/bin" ]; then
-    dotfiles_echo "Setting up ~/.local/bin directory..."
-    if [[ "${DRY_RUN}" == "true" ]]; then
-      dotfiles_info "[DRY RUN] Would create directory: %s" "${HOME}/.local/bin"
-    else
-      run_command "mkdir -pv '${HOME}/.local/bin'" "Create local bin directory"
-    fi
-  fi
+  ensure_dir "${HOME}/.local/bin" "Create local bin directory"
 
+  # Pre-create ~/.claude as a real directory before stowing. Otherwise GNU Stow
+  # folds the whole directory into a single symlink into the repo, and Claude Code
+  # then writes its runtime state (sessions/, projects/, history.jsonl, …) into the
+  # dotfiles working tree. See README "Troubleshooting: ~/.claude folding".
+  ensure_dir "${HOME}/.claude" "Create Claude config directory (prevents stow folding)"
 }
 
 handle_stow_conflicts() {
@@ -399,8 +409,10 @@ show_next_steps() {
   echo
 }
 
-# Error handling
-trap 'dotfiles_error "Script failed at line $LINENO"' ERR
+# Run main only when executed directly, not when sourced (e.g. by the test suite).
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  # Error handling
+  trap 'dotfiles_error "Script failed at line $LINENO"' ERR
 
-# Run main function
-main "$@"
+  main "$@"
+fi
