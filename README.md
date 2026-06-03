@@ -292,7 +292,6 @@ See `zsh/.config/zsh-abbr/abbreviations.zsh` for the full set (`clsp`, `clh`, `c
 - **`CLAUDE.md`** — Global development philosophy and coding standards applied across all projects
 - **`cheatsheet.md`** — Quick reference for keyboard shortcuts, commands, and context management tips
 - **`starship.toml`** — Custom [Starship prompt][starship-claude] showing model, context window status, and token cost
-- **`.mcp.json`** — [Context7][context7] MCP server for querying up-to-date library documentation
 
 ## About Neovim Distributions
 
@@ -493,7 +492,6 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [asdf]: https://asdf-vm.com/
 [bats]: https://github.com/bats-core/bats-core
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
-[context7]: https://context7.com/
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [comic-code]: https://tosche.net/fonts/comic-code
