@@ -114,6 +114,8 @@ The dotfiles `setup.sh` script uses [GNU Stow][gnu-stow] to symlink all the conf
 
 The setup script will try to detect and backup these files ahead of Stow, but it's still a good idea to check your `$HOME` directory as well as `$HOME/.config` and `$HOME/.local/bin`.
 
+On a fresh machine, `setup.sh` also pre-creates `~/.claude` as a real directory so Stow links the Claude config files individually instead of folding the whole directory into one symlink (which would route Claude Code's runtime state into the repo). If you forked before this behavior existed and see Claude runtime files appearing in `git status`, see [Troubleshooting: `~/.claude` folding](#troubleshooting-claude-folding).
+
 ### 📍 3. Clone and setup the dotfiles
 
 Clone
@@ -292,6 +294,34 @@ See `zsh/.config/zsh-abbr/abbreviations.zsh` for the full set (`clsp`, `clh`, `c
 - **`CLAUDE.md`** — Global development philosophy and coding standards applied across all projects
 - **`cheatsheet.md`** — Quick reference for keyboard shortcuts, commands, and context management tips
 - **`starship.toml`** — Custom [Starship prompt][starship-claude] showing model, context window status, and token cost
+
+### Troubleshooting: `~/.claude` folding
+
+`setup.sh` creates `~/.claude` as a real directory before stowing, so a fresh install links the Claude config files individually. If you cloned **before** that fix landed, you may have a _folded_ `~/.claude` — a single symlink pointing back into the repo — which makes Claude Code write its runtime state (`sessions/`, `projects/`, `history.jsonl`, …) straight into your dotfiles. The tells: a flood of untracked `claude/.claude/…` entries in `git status`, and `ls -ld ~/.claude` showing a symlink (`lrwx…`) rather than a directory (`drwx…`).
+
+To repair an already-folded `~/.claude`, quit all `claude` sessions and run:
+
+```bash
+cd ~/dotfiles
+
+stow -D claude/                                  # detach the folded ~/.claude symlink
+mkdir ~/.claude                                  # recreate it as a real directory
+
+git restore --staged claude/.claude/             # unstage anything Claude's writes added
+git restore claude/.claude/settings.json         # discard Claude's auto-edit, if present
+git clean -fd claude/.claude/                    # delete the leaked runtime state
+
+stow claude/                                     # re-link only the managed config
+```
+
+Then confirm the result:
+
+```bash
+ls -ld ~/.claude               # expect a real directory (drwx…), not a symlink (lrwx…)
+ls -la ~/.claude | grep ' -> ' # expect exactly: CLAUDE.md, settings.json, starship.toml, skills, docs, presets
+```
+
+If a stray symlink such as `sessions` still points into the repo, remove just that link (`rm ~/.claude/sessions`) and re-run the `git clean` above so a later `stow -R` can't fold it back.
 
 ## About Neovim Distributions
 

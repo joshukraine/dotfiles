@@ -224,6 +224,19 @@ setup_directories() {
     fi
   fi
 
+  # Pre-create ~/.claude as a real directory before stowing. Otherwise GNU Stow
+  # folds the whole directory into a single symlink into the repo, and Claude Code
+  # then writes its runtime state (sessions/, projects/, history.jsonl, …) into the
+  # dotfiles working tree. See README "Troubleshooting: ~/.claude folding".
+  if [ ! -d "${HOME}/.claude" ]; then
+    dotfiles_echo "Setting up ~/.claude directory..."
+    if [[ "${DRY_RUN}" == "true" ]]; then
+      dotfiles_info "[DRY RUN] Would create directory: %s" "${HOME}/.claude"
+    else
+      run_command "mkdir -pv '${HOME}/.claude'" "Create Claude config directory (prevents stow folding)"
+    fi
+  fi
+
 }
 
 handle_stow_conflicts() {
