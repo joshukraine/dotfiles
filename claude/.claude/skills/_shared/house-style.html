@@ -15,28 +15,39 @@
   - When a skill needs a genuinely new component, add its CSS here so the look
     stays consistent across artifacts — do not fork per-skill styles.
 
-  Look: cool slate text on light paper neutrals, teal accent, 18px base.
-  Light is :root; dark is supplied automatically via prefers-color-scheme.
+  Look: cool slate text on blue-gray neutrals, blue accent, 16px base, soft
+  shadows on white cards. Light is :root; a derived blue-navy dark palette is
+  supplied automatically via prefers-color-scheme.
+
+  Layout note — the header is FULL-BLEED. Templates place
+  `<header class="hero">` (with an inner `.hero-inner` wrapper) BEFORE the
+  `<div class="wrap">` grid, so the navy gradient banner spans the whole page
+  width above the sidebar+content row. Everything else lives inside .wrap.
 
   Component vocabulary (classes available to every artifact):
+  - Hero:       header.hero > .hero-inner (full-bleed gradient banner) with
+                .eyebrow, h1, optional .sub, dl.meta — all on light-on-navy.
   - Layout:     .wrap (260px sidebar + content grid), nav.toc (sticky TOC),
-                main, header.doc, .eyebrow, h1, dl.meta (metadata grid).
+                main.
   - Sections:   details.section > summary  (collapsible; open underlined header
                 with a caret marker, add `open` to expand by default),
                 .section-body.
-  - Prose:      h3, h4, p, a, code (light inline chip), table/th/td.
-  - Code:       pre — dark block in both light/dark mode. For hand-curated
-                snippets, wrap tokens in `pre .c` (comment / delimiter),
-                `pre .k` (keyword), `pre .s` (string). Plain <pre><code> still
-                renders fine (monochrome light-on-dark).
-  - Tables:     render as an inset white card (surface bg, border, radius) with
-                horizontal rules inside — no per-cell box. Works on bare
-                markdown tables; no wrapper needed.
-  - Callouts:   .callout (info, default), .callout.warn, .callout.flag (alert);
-                put a .label inside for the heading.
+  - Prose:      h3, h4, p, a, code (light bordered chip, blue text),
+                table/th/td.
+  - Code:       pre — navy block in both light/dark mode (echoes the hero). For
+                hand-curated snippets, wrap tokens in `pre .c` (comment /
+                delimiter), `pre .k` (keyword), `pre .s` (string). Plain
+                <pre><code> still renders fine (monochrome light-on-navy).
+  - Tables:     white card (surface bg, border, radius, soft shadow) with a
+                navy thead (white uppercase labels) and zebra-striped rows.
+                Works on bare markdown tables; no wrapper needed.
+  - Callouts:   .callout (info, default — blue left-rule on a tinted card),
+                .callout.warn (amber), .callout.flag (alert/red); put a .label
+                inside for the heading.
   - Rundown:    .rundown > .item (each with an optional .ico emoji + .body) —
-                icon-led key points separated by airy hairline dividers. Use
-                for "known gaps", "things to ignore", quick fact lists.
+                icon-led key points on a white card with airy hairline
+                dividers; items with no .ico get a blue dot marker. Use for
+                "known gaps", "things to ignore", quick fact lists.
   - Stories:    .story > .story-head (+ .role-pill), .story-body,
                 .story .expect (green "expected result" text).
   - Diagrams:   figure.diagram > svg + figcaption (inline SVG; never ASCII art).
@@ -49,7 +60,9 @@
                 checkboxes the reader can tick.
   - Footer:     footer.doc.
   - Metrics:    .metrics (grid) > .metric > .v (number) + .k (label) — the
-                at-a-glance summary strip under a doc header.
+                at-a-glance summary strip. Render it at the TOP of <main>
+                (under the hero), not inside the hero, so the white cards sit
+                on the page background.
   - Keyword:    .kw — RFC keyword chip (MUST/SHOULD/MAY) for spec text.
   - TOC extras: nav.toc .crumb (breadcrumb), .ttl (doc title), a > .n (section
                 number), and .srcbox (the "source of truth" box).
@@ -64,43 +77,71 @@
 -->
 <style>
   :root {
-    --bg:#f7f5f0; --surface:#ffffff; --surface-2:#edeae3; --border:#e4e0d7;
-    --strong:#1f2933; --text:#515b66; --muted:#7b8794;
-    --accent:#2a6f6b; --accent-soft:#e0edeb;
-    --good:#2c7a52; --warn:#94701d; --bad:#b03d30;
-    --pre-bg:#1f2530; --pre-text:#cdd6e0;
-    --tok-c:#8693a1; --tok-k:#8fd3c8; --tok-s:#e6c07b;
-    --radius: 11px;
+    --bg:#f1f5f9; --surface:#ffffff; --surface-2:#f8fafc; --border:#e2e8f0;
+    --strong:#1e293b; --text:#334155; --muted:#64748b;
+    --accent:#1992d4; --accent-bright:#2bb0ed; --accent-deep:#0f2847;
+    --accent-code:#024775; --accent-soft:#e0f2fe; --heading:#0f2847;
+    --hero-from:#024775; --hero-to:#0f2847;
+    --good:#15803d; --warn:#b45309; --bad:#b91c1c;
+    --cal-info-rule:#1992d4; --cal-info-fill:#dbeafe;
+    --cal-warn-rule:#f59e0b; --cal-warn-fill:#fef3c7;
+    --cal-bad-rule:#dc2626;  --cal-bad-fill:#fee2e2;
+    --cal-good-fill:#dcfce7;
+    --pre-bg:#0f2847; --pre-text:#e2e8f0;
+    --tok-c:#64748b; --tok-k:#7dd3fc; --tok-s:#fcd34d;
+    --radius: 12px; --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(15,40,71,0.06);
+    --shadow-hero: 0 2px 14px rgba(15,40,71,0.25);
     --maxw: 1160px;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg:#14171c; --surface:#1b1f26; --surface-2:#232932; --border:#2e343d;
-      --strong:#eef1f5; --text:#bcc5d0; --muted:#828d9b;
-      --accent:#5cc2bb; --accent-soft:#143030;
-      --good:#5cbf8d; --warn:#d4ad5e; --bad:#e87d6e;
-      --pre-bg:#0e1116; --pre-text:#cdd6e0;
-      --tok-c:#6b7682; --tok-k:#7fd0c5; --tok-s:#e6c07b;
+      --bg:#0b1622; --surface:#111f30; --surface-2:#16273b; --border:#243b53;
+      --strong:#e6eef7; --text:#b7c5d6; --muted:#7e93ab;
+      --accent:#38bdf8; --accent-bright:#5cc6f5; --accent-deep:#0e2a4a;
+      --accent-code:#7dd3fc; --accent-soft:#0c2a44; --heading:#cfe0f2;
+      --hero-from:#024775; --hero-to:#07223f;
+      --good:#4ade80; --warn:#fbbf24; --bad:#f87171;
+      --cal-info-rule:#38bdf8; --cal-info-fill:#0e2438;
+      --cal-warn-rule:#fbbf24; --cal-warn-fill:#2c2310;
+      --cal-bad-rule:#f87171;  --cal-bad-fill:#371718;
+      --cal-good-fill:#0e2a1a;
+      --pre-bg:#081522; --pre-text:#d6e2f0;
+      --tok-c:#6b7d91; --tok-k:#7dd3fc; --tok-s:#fcd34d;
     }
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
-    font-family: var(--sans); line-height: 1.68; font-size: 18px;
+    font-family: var(--sans); line-height: 1.6; font-size: 16px;
   }
   strong, b { color: var(--strong); }
-  .wrap { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 46px; max-width: var(--maxw); margin: 0 auto; padding: 38px 24px 96px; }
+  /* ---- Full-bleed hero (placed BEFORE .wrap in the template) ---- */
+  header.hero {
+    background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+    color: #fff; padding: 44px 0 38px; margin-bottom: 36px; box-shadow: var(--shadow-hero);
+  }
+  header.hero .hero-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  header.hero h1 { font-size: 34px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 0 0 14px; color: #fff; }
+  header.hero .eyebrow { color: var(--accent-bright); }
+  header.hero .sub { color: #cfe6f6; font-size: 16px; margin: -4px 0 16px; }
+  header.hero dl.meta dt { color: #9fc6e6; }
+  header.hero dl.meta dd { color: #eaf6ff; }
+  header.hero dl.meta a { color: #eaf6ff; text-decoration: underline; }
+  header.hero code { background: rgba(255,255,255,0.12); border-color: transparent; color: #eaf6ff; }
+  .eyebrow { color: var(--accent); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 8px; }
+  .wrap { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 46px; max-width: var(--maxw); margin: 0 auto; padding: 8px 24px 96px; }
   /* ---- Table of contents ---- */
-  nav.toc { position: sticky; top: 24px; align-self: start; font-size: 14.5px; max-height: calc(100vh - 48px); overflow-y: auto; }
+  nav.toc { position: sticky; top: 24px; align-self: start; font-size: 14px; max-height: calc(100vh - 48px); overflow-y: auto; }
   nav.toc h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
   nav.toc ol { list-style: none; margin: 0; padding: 0; }
   nav.toc li { margin: 0 0 8px; }
   nav.toc a { color: var(--muted); text-decoration: none; display: block; padding: 5px 11px; border-left: 2px solid transparent; border-radius: 0 6px 6px 0; }
   nav.toc a:hover { background: var(--surface); border-left-color: var(--accent); color: var(--accent); }
-  nav.toc .crumb { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+  nav.toc .crumb { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; padding: 0; border-left: 0; }
   nav.toc .ttl { font-size: 17px; font-weight: 700; line-height: 1.25; margin: 0 0 16px; color: var(--strong); }
   nav.toc a .n { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 6px; }
   .srcbox { font-size: 12.5px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 11px 13px; margin-top: 16px; }
@@ -108,61 +149,61 @@
   .srcbox code { font-family: var(--mono); font-size: 12px; }
   /* ---- Main column ---- */
   main { min-width: 0; }
-  header.doc { border-bottom: 1px solid var(--border); padding-bottom: 28px; margin-bottom: 10px; }
-  .eyebrow { color: var(--accent); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .07em; margin: 0 0 8px; }
-  header.doc h1 { font-size: 34px; line-height: 1.18; margin: 0 0 18px; letter-spacing: -.015em; color: var(--strong); }
-  dl.meta { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 0; font-size: 15px; }
+  dl.meta { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 0; font-size: 14px; }
   dl.meta dt { color: var(--muted); font-weight: 600; }
   dl.meta dd { margin: 0; }
-  /* ---- Metric strip ---- */
-  .metrics { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 24px 0 8px; }
-  .metric { border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 15px; background: var(--surface); }
-  .metric .v { font-size: 24px; font-weight: 700; line-height: 1; color: var(--strong); }
+  .sub { color: var(--muted); }
+  /* ---- Metric strip (render at top of main, under the hero) ---- */
+  .metrics { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 0 0 26px; }
+  .metric { border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 15px; background: var(--surface); box-shadow: var(--shadow); }
+  .metric .v { font-size: 24px; font-weight: 700; line-height: 1; color: var(--heading); }
   .metric .k { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
   /* ---- Sections: OPEN underlined headers (collapsible, no box) ---- */
   details.section { margin: 30px 0; }
   details.section > summary {
-    cursor: pointer; list-style: none; font-size: 22px; font-weight: 600; color: var(--strong);
-    padding: 0 0 10px; border-bottom: 1px solid var(--border);
+    cursor: pointer; list-style: none; font-size: 20px; font-weight: 700; color: var(--heading);
+    padding: 0 0 8px; border-bottom: 2px solid var(--border);
     display: flex; align-items: center; gap: 12px; letter-spacing: -.01em;
   }
   details.section > summary::-webkit-details-marker { display: none; }
   details.section > summary::before {
     content: "›"; display: inline-block; transition: transform .15s ease;
-    color: var(--muted); font-size: 19px; line-height: 1; font-weight: 400;
+    color: var(--accent-bright); font-size: 19px; line-height: 1; font-weight: 700;
   }
   details.section[open] > summary::before { transform: rotate(90deg); }
   details.section > summary .badge { margin-left: auto; font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
   .section-body { padding: 16px 0 0; }
-  h3 { font-size: 19px; margin: 26px 0 9px; letter-spacing: -.01em; color: var(--strong); }
-  h4 { font-size: 14.5px; margin: 22px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-  p { margin: 13px 0; }
+  h3 { font-size: 17px; margin: 24px 0 9px; letter-spacing: -.01em; color: var(--strong); }
+  h4 { font-size: 13px; margin: 20px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  p { margin: 14px 0; }
   a { color: var(--accent); }
-  code { font-family: var(--mono); font-size: 0.9em; background: var(--surface-2); padding: 0.15em 0.42em; border-radius: 5px; }
-  /* ---- Code blocks: cool-dark in BOTH modes, with optional syntax tokens ---- */
-  pre { background: var(--pre-bg); color: var(--pre-text); border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; font-size: 14px; line-height: 1.6; }
-  pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
+  code { font-family: var(--mono); font-size: 13px; background: var(--bg); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; color: var(--accent-code); }
+  /* ---- Code blocks: navy in BOTH modes (echoes the hero), syntax tokens ---- */
+  pre { background: var(--pre-bg); color: var(--pre-text); border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; font-size: 13.5px; line-height: 1.6; box-shadow: var(--shadow); }
+  pre code { background: none; border: 0; padding: 0; font-size: inherit; color: inherit; }
   pre .c { color: var(--tok-c); }   /* comment / delimiter */
   pre .k { color: var(--tok-k); }   /* keyword */
   pre .s { color: var(--tok-s); }   /* string */
-  /* ---- Tables: inset on a white card, horizontal rules inside ---- */
-  table { border-collapse: separate; border-spacing: 0; width: 100%; margin: 18px 0; font-size: 15px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  th, td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  th { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
-  /* ---- Callouts ---- */
-  .callout { border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 20px 0; }
-  .callout.warn { border-left-color: var(--warn); background: color-mix(in srgb, var(--warn) 11%, var(--bg)); }
-  .callout.flag { border-left-color: var(--bad); background: color-mix(in srgb, var(--bad) 11%, var(--bg)); }
+  /* ---- Tables: white card, navy thead, zebra rows ---- */
+  table { border-collapse: separate; border-spacing: 0; width: 100%; margin: 18px 0; font-size: 14.5px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  thead th { background: var(--accent-deep); color: #fff; text-align: left; padding: 12px 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  tbody td { text-align: left; padding: 13px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--surface-2); }
+  /* ---- Callouts (info default; warn; flag) ---- */
+  .callout { border-left: 4px solid var(--cal-info-rule); background: var(--cal-info-fill); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 14px 18px; margin: 20px 0; }
+  .callout.warn { border-left-color: var(--cal-warn-rule); background: var(--cal-warn-fill); }
+  .callout.flag { border-left-color: var(--cal-bad-rule); background: var(--cal-bad-fill); }
   .callout .label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 5px; color: var(--strong); }
-  /* ---- Rundown: icon-led points with airy hairline dividers ---- */
-  .rundown { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 2px 22px; margin: 20px 0; }
+  /* ---- Rundown: icon-led points on a card with hairline dividers ---- */
+  .rundown { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); padding: 2px 22px; margin: 20px 0; }
   .rundown .item { display: flex; gap: 14px; padding: 15px 0; border-bottom: 1px solid var(--border); }
   .rundown .item:last-child { border-bottom: none; }
   .rundown .ico { flex: none; width: 24px; text-align: center; font-size: 17px; line-height: 1.55; }
+  .rundown .item:not(:has(.ico)) .body { position: relative; padding-left: 20px; }
+  .rundown .item:not(:has(.ico)) .body::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-bright); }
   .rundown .item .body { color: var(--text); }
   /* ---- Story / step cards ---- */
-  .story { border: 1px solid var(--border); border-radius: var(--radius); margin: 20px 0; overflow: hidden; background: var(--surface); }
+  .story { border: 1px solid var(--border); border-radius: var(--radius); margin: 20px 0; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
   .story > .story-head { background: var(--surface-2); padding: 12px 18px; font-weight: 600; font-size: 16px; color: var(--strong); border-bottom: 1px solid var(--border); }
   .story .role-pill { display: inline-block; font-size: 12.5px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 11px; margin-left: 8px; }
   .story ol { margin: 12px 0; padding-left: 28px; }
@@ -175,9 +216,9 @@
   figure.diagram figcaption { color: var(--muted); font-size: 13px; margin-top: 9px; }
   /* ---- Tags ---- */
   .tag { font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; }
-  .tag.good { color: var(--good); background: color-mix(in srgb, var(--good) 15%, var(--bg)); }
-  .tag.warn { color: var(--warn); background: color-mix(in srgb, var(--warn) 15%, var(--bg)); }
-  .tag.bad { color: var(--bad); background: color-mix(in srgb, var(--bad) 15%, var(--bg)); }
+  .tag.good { color: var(--good); background: var(--cal-good-fill); }
+  .tag.warn { color: var(--warn); background: var(--cal-warn-fill); }
+  .tag.bad { color: var(--bad); background: var(--cal-bad-fill); }
   /* ---- Click-to-copy ---- */
   .copy { cursor: pointer; border: 1px solid var(--border); background: var(--surface-2); color: inherit; font-family: var(--mono); font-size: 0.85em; padding: 0.12em 0.55em; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.4em; user-select: none; vertical-align: baseline; transition: background .12s ease, border-color .12s ease, color .12s ease; }
   .copy:hover { background: var(--accent-soft); border-color: var(--accent); }
@@ -185,23 +226,26 @@
   .copy.copied { color: var(--good); border-color: var(--good); }
   .copy.copied::after { content: "\2713"; opacity: 1; }
   /* ---- Button (primary CTA; works on <button> or <a>) ---- */
-  .btn { display: inline-block; cursor: pointer; font-family: var(--sans); font-size: 15px; font-weight: 600; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 8px; padding: 9px 17px; text-decoration: none; }
+  .btn { display: inline-block; cursor: pointer; font-family: var(--sans); font-size: 15px; font-weight: 600; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius-sm); padding: 9px 17px; text-decoration: none; }
   .btn:hover { filter: brightness(1.08); }
   /* ---- Checklist ---- */
   ul.checklist { list-style: none; margin: 14px 0; padding: 0; }
   ul.checklist li { margin: 10px 0; }
   ul.checklist label { display: flex; gap: 9px; align-items: flex-start; cursor: pointer; }
-  ul.checklist input { margin-top: 6px; flex: none; accent-color: var(--accent); }
+  ul.checklist input { margin-top: 5px; flex: none; accent-color: var(--accent); }
   footer.doc { margin-top: 46px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13.5px; }
   /* ---- RFC keyword chip (MUST / SHOULD / MAY) ---- */
-  .kw { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; padding: 1px 8px; border-radius: 5px; background: color-mix(in srgb, var(--warn) 14%, var(--bg)); color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+  .kw { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; padding: 1px 8px; border-radius: 5px; background: var(--cal-warn-fill); color: var(--warn); border: 1px solid var(--cal-warn-rule); }
   /* ---- Data-model field markers (used inside tables) ---- */
   .pill { font-family: var(--mono); font-size: 11.5px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
   .req { color: var(--bad); font-size: 11.5px; font-weight: 700; }
   .opt { color: var(--muted); font-size: 11.5px; }
   /* ---- Responsive ---- */
   @media (max-width: 820px) {
-    .wrap { grid-template-columns: 1fr; gap: 18px; padding: 22px 16px 64px; }
+    header.hero { padding: 32px 0 28px; margin-bottom: 24px; }
+    header.hero .hero-inner { padding: 0 16px; }
+    header.hero h1 { font-size: 27px; }
+    .wrap { grid-template-columns: 1fr; gap: 18px; padding: 4px 16px 64px; }
     nav.toc { position: static; max-height: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; background: var(--surface); }
     .metrics { grid-template-columns: repeat(3, 1fr); }
   }

@@ -29,6 +29,23 @@
 <!-- HOUSE STYLE: inline the <style> block from ../_shared/house-style.html here -->
 </head>
 <body>
+
+<!-- HERO: full-bleed gradient banner — sits BEFORE the .wrap grid. -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">{{PROJECT}} · PR Walkthrough</p>
+    <h1>PR #{{PR}}: {{FEATURE}}</h1>
+    <dl class="meta">
+      <dt>Project</dt><dd>{{PROJECT}}</dd>
+      <dt>PR</dt><dd>{{PR_LINK}}</dd>
+      <dt>Branch</dt><dd>{{BRANCH}}</dd>
+      <dt>Commit</dt><dd>{{COMMIT}}</dd>
+      <dt>Date</dt><dd>{{DATE}}</dd>
+      <dt>Estimate</dt><dd>~{{ESTIMATE}} minutes</dd>
+    </dl>
+  </div>
+</header>
+
 <div class="wrap">
 
   <nav class="toc">
@@ -42,18 +59,6 @@
   </nav>
 
   <main>
-    <header class="doc">
-      <p class="eyebrow">{{PROJECT}} · PR Walkthrough</p>
-      <h1>PR #{{PR}}: {{FEATURE}}</h1>
-      <dl class="meta">
-        <dt>Project</dt><dd>{{PROJECT}}</dd>
-        <dt>PR</dt><dd>{{PR_LINK}}</dd>
-        <dt>Branch</dt><dd>{{BRANCH}}</dd>
-        <dt>Commit</dt><dd>{{COMMIT}}</dd>
-        <dt>Date</dt><dd>{{DATE}}</dd>
-        <dt>Estimate</dt><dd>~{{ESTIMATE}} minutes</dd>
-      </dl>
-    </header>
 
     <!-- PRODUCTION VERIFICATION CALLOUT
          Include this only when publishing the post-merge version. For a

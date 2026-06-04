@@ -75,6 +75,16 @@
 </style>
 </head>
 <body>
+
+<!-- HERO: full-bleed gradient banner — sits BEFORE the .wrap grid. -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">{{STATUS_LINE}}</p>
+    <h1>{{TITLE}}</h1>
+    <p class="sub">{{SUBTITLE}}</p>
+  </div>
+</header>
+
 <div class="wrap" id="top">
 
   <nav class="toc">
@@ -91,14 +101,11 @@
   </nav>
 
   <main>
-    <header class="doc">
-      <p class="eyebrow">{{STATUS_LINE}}</p>
-      <h1>{{TITLE}}</h1>
-      <p class="sub">{{SUBTITLE}}</p>
-      <div class="metrics">
-        {{METRICS}}
-      </div>
-    </header>
+
+    <!-- METRIC STRIP: sits at the top of main, under the hero (white cards on the page bg). -->
+    <div class="metrics">
+      {{METRICS}}
+    </div>
 
     {{SECTIONS}}
 

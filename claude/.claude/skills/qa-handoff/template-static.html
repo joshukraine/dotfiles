@@ -33,6 +33,22 @@
 <!-- HOUSE STYLE: inline the <style> block from ../_shared/house-style.html here -->
 </head>
 <body>
+
+<!-- HERO: full-bleed gradient banner — sits BEFORE the .wrap grid. -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">{{PROJECT}} · QA Handoff</p>
+    <h1>{{TITLE}}</h1>
+    <dl class="meta">
+      <dt>Project</dt><dd>{{PROJECT}}</dd>
+      <dt>Date</dt><dd>{{DATE}}</dd>
+      <dt>Branch</dt><dd>{{BRANCH}}</dd>
+      <dt>Commit</dt><dd>{{COMMIT}}</dd>
+      <dt>Preview</dt><dd>{{PREVIEW_URL}}</dd>
+    </dl>
+  </div>
+</header>
+
 <div class="wrap">
 
   <nav class="toc">
@@ -53,17 +69,6 @@
   </nav>
 
   <main>
-    <header class="doc">
-      <p class="eyebrow">{{PROJECT}} · QA Handoff</p>
-      <h1>{{TITLE}}</h1>
-      <dl class="meta">
-        <dt>Project</dt><dd>{{PROJECT}}</dd>
-        <dt>Date</dt><dd>{{DATE}}</dd>
-        <dt>Branch</dt><dd>{{BRANCH}}</dd>
-        <dt>Commit</dt><dd>{{COMMIT}}</dd>
-        <dt>Preview</dt><dd>{{PREVIEW_URL}}</dd>
-      </dl>
-    </header>
 
     <details class="section" id="new" open>
       <summary>What's New</summary>
