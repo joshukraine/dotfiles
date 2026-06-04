@@ -523,13 +523,13 @@ cp project-accent.local.sh.example project-accent.local.sh
 $EDITOR project-accent.local.sh
 ```
 
-Map each project to a color in the `accent_for` function:
+Map each session to a color in the `accent_for` function, keyed by the tmux session name (the `#S` shown in the pill):
 
 ```sh
 accent_for() {
   case "$1" in
-    my_work_app) printf '%s' "#ff966c" ;;  # orange
-    my_side_proj) printf '%s' "#c3e88d" ;; # green
+    my-work-app) printf '%s' "#ff966c" ;;  # orange
+    my-side-proj) printf '%s' "#c3e88d" ;; # green
     *) printf '%s' "" ;;
   esac
 }
@@ -537,7 +537,7 @@ accent_for() {
 
 Colors can be hex (`#rrggbb`), a named color (`red`), or `colour0`–`colour255`. The real `project-accent.local.sh` is gitignored, so your project names and color choices never leave your machine.
 
-> **Note:** the lookup key is the **project directory's basename**, not the tmux session name. `tat` converts dots to dashes in the session _name_ (so a `foo.bar` directory shows as session `foo-bar`), but the map keys on the raw directory name — use `foo.bar`.
+> **Note:** the lookup key is the **tmux session name**, not the directory path. With [`tat`](bin/.local/bin/tat) the session name is the current directory's basename with dots converted to dashes (a `foo.bar` directory becomes session `foo-bar`), so map it as `foo-bar`. Keying on the session name lets two checkouts that share a directory name (e.g. `bfo1` and `bfo2`) still get distinct colors.
 
 Colors apply automatically to new sessions (via a `session-created` hook) and backfill existing sessions whenever tmux is reloaded. The override mirrors the active theme; if you switch away from TokyoNight Moon, re-derive the `status-left` line — see the comments in `~/.config/tmux/project-accent.tmux`.
 

@@ -27,10 +27,10 @@ local_map="${XDG_CONFIG_HOME:-${HOME}/.config}/tmux/project-accent.local.sh"
 [ -r "${local_map}" ] && . "${local_map}"
 
 apply_one() {
-  local session="$1" path color
-  path="$(tmux display-message -p -t "${session}" '#{session_path}' 2>/dev/null)" || return 0
-  [ -n "${path}" ] || return 0
-  color="$(accent_for "$(basename "${path}")")"
+  local session="$1" name color
+  name="$(tmux display-message -p -t "${session}" '#{session_name}' 2>/dev/null)" || return 0
+  [ -n "${name}" ] || return 0
+  color="$(accent_for "${name}")"
   [ -n "${color}" ] && tmux set-option -t "${session}" @accent "${color}"
   return 0
 }

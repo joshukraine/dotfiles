@@ -7,9 +7,10 @@
 #   - `@accent` is a user option holding the pill's background color. The
 #     status-left override below renders it; #{@accent} resolves per session.
 #   - The `session-created` hook runs scripts/project-accent.sh, which looks up
-#     the project (by directory basename) in its central map and sets @accent
-#     for that session.
-#   - Add/remove projects by editing the case map in scripts/project-accent.sh.
+#     the project (by tmux session name) in the local map and sets @accent for
+#     that session.
+#   - Add/remove projects by editing the case map in project-accent.local.sh
+#     (your gitignored copy of project-accent.local.sh.example).
 #
 # NOTE: the status-left string below mirrors tokyonight_moon.tmux exactly,
 # except the literal #82aaff becomes #{@accent}. If you switch themes, re-derive
