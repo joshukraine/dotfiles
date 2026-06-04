@@ -1,0 +1,17 @@
+# shellcheck shell=bash
+#
+# Per-project tmux status accent -- EXAMPLE template.
+#
+# Copy this file to `project-accent.local.sh` (same directory) and edit it. The
+# real file is gitignored, so your project names and color choices never get
+# committed or published.
+#
+# Map each project directory's basename to a color: hex (#rrggbb), a named
+# color (e.g. "red"), or colour0-255. Return empty to keep the theme default.
+accent_for() {
+  case "$1" in
+    my_work_app) printf '%s' "#ff966c" ;;  # orange
+    my_side_proj) printf '%s' "#c3e88d" ;; # green
+    *) printf '%s' "" ;;
+  esac
+}
