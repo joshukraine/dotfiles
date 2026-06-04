@@ -31,7 +31,13 @@ apply_one() {
   name="$(tmux display-message -p -t "${session}" '#{session_name}' 2>/dev/null)" || return 0
   [ -n "${name}" ] || return 0
   color="$(accent_for "${name}")"
-  [ -n "${color}" ] && tmux set-option -t "${session}" @accent "${color}"
+  if [ -n "${color}" ]; then
+    tmux set-option -t "${session}" @accent "${color}"
+  else
+    # No match: clear any session-level accent so it reverts to the theme
+    # default. Keeps re-runs idempotent after the map changes.
+    tmux set-option -t "${session}" -u @accent
+  fi
   return 0
 }
 
