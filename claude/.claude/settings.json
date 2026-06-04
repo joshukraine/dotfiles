@@ -175,5 +175,8 @@
   "effortLevel": "xhigh",
   "editorMode": "vim",
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true
+  "voice": {
+    "enabled": true
+  },
+  "inputNeededNotifEnabled": true
 }
