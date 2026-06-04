@@ -509,6 +509,37 @@ Local customizations should be placed in `*.local` files:
 - `~/.laptop.local` - Additional laptop setup customizations
 - `~/.config/ghostty/config.local` - Personal ghostty overrides (keybinds, fonts, theme)
 - `~/.config/tmux/tmux.conf.local` - Personal tmux overrides (extra plugins, key bindings, options)
+- `~/.config/tmux/project-accent.local.sh` - Per-project status bar accent colors (see below)
+
+### Per-project tmux accent
+
+When several projects are open at once — one tmux session each, created with [`tat`](bin/.local/bin/tat) — the session-name "pill" at the left of the status bar can be color-coded per project so they're easy to tell apart. Sessions without a mapping keep the theme's default blue, so this is a no-op until you opt in.
+
+To enable it, copy the example map and edit it:
+
+```sh
+cd ~/.config/tmux
+cp project-accent.local.sh.example project-accent.local.sh
+$EDITOR project-accent.local.sh
+```
+
+Map each project to a color in the `accent_for` function:
+
+```sh
+accent_for() {
+  case "$1" in
+    my_work_app) printf '%s' "#ff966c" ;;  # orange
+    my_side_proj) printf '%s' "#c3e88d" ;; # green
+    *) printf '%s' "" ;;
+  esac
+}
+```
+
+Colors can be hex (`#rrggbb`), a named color (`red`), or `colour0`–`colour255`. The real `project-accent.local.sh` is gitignored, so your project names and color choices never leave your machine.
+
+> **Note:** the lookup key is the **project directory's basename**, not the tmux session name. `tat` converts dots to dashes in the session _name_ (so a `foo.bar` directory shows as session `foo-bar`), but the map keys on the raw directory name — use `foo.bar`.
+
+Colors apply automatically to new sessions (via a `session-created` hook) and backfill existing sessions whenever tmux is reloaded. The override mirrors the active theme; if you switch away from TokyoNight Moon, re-derive the `status-left` line — see the comments in `~/.config/tmux/project-accent.tmux`.
 
 ## License
 
