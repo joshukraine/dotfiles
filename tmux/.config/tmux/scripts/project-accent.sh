@@ -27,7 +27,7 @@ local_map="${XDG_CONFIG_HOME:-${HOME}/.config}/tmux/project-accent.local.sh"
 [ -r "${local_map}" ] && . "${local_map}"
 
 apply_one() {
-  local session="$1" name color
+  local session="$1" name color client
   name="$(tmux display-message -p -t "${session}" '#{session_name}' 2>/dev/null)" || return 0
   [ -n "${name}" ] || return 0
   color="$(accent_for "${name}")"
@@ -38,6 +38,14 @@ apply_one() {
     # default. Keeps re-runs idempotent after the map changes.
     tmux set-option -t "${session}" -u @accent
   fi
+  # set-option does not repaint the status bar. When a client is already attached
+  # (e.g. tmuxinator attaches before this async session-created hook runs), the
+  # bar would keep the default color until the next status-interval tick or a
+  # manual reload. Force a status redraw on the session's clients so the accent
+  # shows immediately.
+  while IFS= read -r client; do
+    [ -n "${client}" ] && tmux refresh-client -S -t "${client}" 2>/dev/null
+  done < <(tmux list-clients -t "${session}" -F '#{client_name}' 2>/dev/null)
   return 0
 }
 
