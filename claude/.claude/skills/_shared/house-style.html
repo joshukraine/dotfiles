@@ -6,12 +6,19 @@
   skills (/debrief, /qa-handoff, /walkthrough, /prd-view).
 
   How skills use it:
-  - Inline the <style> block below into the output's <head>.
-  - Inline the <script> block below just before the output's </body>.
+  - Inline the style block below into the output's head.
+  - Inline the script block below just before the output's closing body tag.
   - Each skill supplies its own document BODY structure; this file only
     supplies the look and the copy helper. Keep both blocks verbatim so every
     artifact stays a single self-contained, portable file (no external assets,
     no build step).
+
+  EXTRACTION GUARDRAIL: never write angle-bracket style or script tags (opening
+  or closing) anywhere in THIS comment — refer to them in prose only ("the style
+  block", "the script block"). A naive "grab the style/script block" step matches
+  the FIRST such tag in the file; if one appears here, the extractor captures
+  this comment instead of the real block and the CSS breaks. The only real tags
+  must live below this comment.
   - When a skill needs a genuinely new component, add its CSS here so the look
     stays consistent across artifacts — do not fork per-skill styles.
 
@@ -37,7 +44,7 @@
   - Code:       pre — navy block in both light/dark mode (echoes the hero). For
                 hand-curated snippets, wrap tokens in `pre .c` (comment /
                 delimiter), `pre .k` (keyword), `pre .s` (string). Plain
-                <pre><code> still renders fine (monochrome light-on-navy).
+                pre/code still renders fine (monochrome light-on-navy).
   - Tables:     white card (surface bg, border, radius, soft shadow) with a
                 navy thead (white uppercase labels) and zebra-striped rows.
                 Works on bare markdown tables; no wrapper needed.
@@ -71,8 +78,8 @@
   - Fields:     in tables, .pill (type), .req (required marker), .opt (optional
                 / default marker) — for data-model field tables.
 
-  The click-to-copy <script> below is the ONLY shared script. A skill that
-  needs richer interactivity adds its own small vanilla <script> in its own
+  The click-to-copy script below is the ONLY shared script. A skill that
+  needs richer interactivity adds its own small vanilla script in its own
   template — not here.
 -->
 <style>
