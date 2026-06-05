@@ -1,26 +1,24 @@
 # Per-project status accent
 #
-# Recolors the session-name pill in status-left per session, so each tmux
-# session (one per project, created via `tat`) shows a distinct color badge.
+# Recolors the session-name pill (status-left) and the hostname pill
+# (status-right) per session, so each tmux session — one per project, created
+# via `tat` — shows a distinct color on both ends of the status bar.
 #
 # Mechanism:
-#   - `@accent` is a user option holding the pill's background color. The
-#     status-left override below renders it; #{@accent} resolves per session.
+#   - The theme (themes/tokyonight_moon.tmux) renders both pills from the
+#     `@accent` user option and sets the default, so @accent is the single knob
+#     that drives the accent color. Nothing here mirrors the theme's status
+#     strings.
 #   - The `session-created` hook runs scripts/project-accent.sh, which looks up
-#     the project (by tmux session name) in the local map and sets @accent for
-#     that session.
+#     the project (by tmux session name) in the local map and sets a
+#     session-level @accent. tmux resolves #{@accent} in each session's context,
+#     so a session's pills take its color; unmatched sessions fall back to the
+#     theme default.
 #   - Add/remove projects by editing the case map in project-accent.local.sh
 #     (your gitignored copy of project-accent.local.sh.example).
 #
-# NOTE: the status-left string below mirrors tokyonight_moon.tmux exactly,
-# except the literal #82aaff becomes #{@accent}. If you switch themes, re-derive
-# this line from the new theme — otherwise it imposes Moon's separator colors.
-
-# Default accent = TokyoNight Moon blue (matches the stock theme)
-set -g @accent "#82aaff"
-
-# status-left with the session-name pill driven by @accent
-set -g status-left "#[fg=#1b1d2b,bg=#{@accent},bold] #S #[fg=#{@accent},bg=#1e2030,nobold,nounderscore,noitalics]"
+# Switching themes: parameterize the new theme's pills with #{@accent} the same
+# way (see tokyonight_moon.tmux) — that is all this feature needs from a theme.
 
 # Apply the project color whenever a session is created...
 set-hook -g session-created 'run-shell "~/.config/tmux/scripts/project-accent.sh #{hook_session}"'
