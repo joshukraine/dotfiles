@@ -9,6 +9,7 @@ local/*
 startup.conf
 tmux/.config/tmux/plugins
 tmux/.config/tmux/tmux.conf.local
+tmux/.config/tmux/project-accent.local.sh
 vim/.netrwhist
 vim/bundle
 

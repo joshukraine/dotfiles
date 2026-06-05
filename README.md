@@ -509,6 +509,37 @@ Local customizations should be placed in `*.local` files:
 - `~/.laptop.local` - Additional laptop setup customizations
 - `~/.config/ghostty/config.local` - Personal ghostty overrides (keybinds, fonts, theme)
 - `~/.config/tmux/tmux.conf.local` - Personal tmux overrides (extra plugins, key bindings, options)
+- `~/.config/tmux/project-accent.local.sh` - Per-project status bar accent colors (see below)
+
+### Per-project tmux accent
+
+When several projects are open at once — one tmux session each, created with [`tat`](bin/.local/bin/tat) — the status bar can be color-coded per project so they're easy to tell apart. Both ends of the bar are accented: the session-name "pill" on the left and the hostname pill on the right, giving a matching color band on each side that's easy to catch at a glance. Sessions without a mapping keep the theme's default blue, so this is a no-op until you opt in.
+
+To enable it, copy the example map and edit it:
+
+```sh
+cd ~/.config/tmux
+cp project-accent.local.sh.example project-accent.local.sh
+$EDITOR project-accent.local.sh
+```
+
+Map each session to a color in the `accent_for` function, keyed by the tmux session name (the `#S` shown in the pill):
+
+```sh
+accent_for() {
+  case "$1" in
+    my-work-app) printf '%s' "#ff966c" ;;  # orange
+    my-side-proj) printf '%s' "#c3e88d" ;; # green
+    *) printf '%s' "" ;;
+  esac
+}
+```
+
+Colors can be hex (`#rrggbb`), a named color (`red`), or `colour0`–`colour255`. The real `project-accent.local.sh` is gitignored, so your project names and color choices never leave your machine.
+
+> **Note:** the lookup key is the **tmux session name**, not the directory path. With [`tat`](bin/.local/bin/tat) the session name is the current directory's basename with dots converted to dashes (a `foo.bar` directory becomes session `foo-bar`), so map it as `foo-bar`. Keying on the session name lets two checkouts that share a directory name (e.g. `bfo1` and `bfo2`) still get distinct colors.
+
+Colors apply automatically to new sessions (via a `session-created` hook) and backfill existing sessions whenever tmux is reloaded. The color is driven entirely by the `@accent` user option, which the theme renders into both pills; if you switch away from TokyoNight Moon, parameterize the new theme's pills with `#{@accent}` — see the comments in `~/.config/tmux/themes/tokyonight_moon.tmux`.
 
 ## License
 

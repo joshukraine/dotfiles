@@ -1,0 +1,19 @@
+# shellcheck shell=bash
+#
+# Per-project tmux status accent -- EXAMPLE template.
+#
+# Copy this file to `project-accent.local.sh` (same directory) and edit it. The
+# real file is gitignored, so your project names and color choices never get
+# committed or published.
+#
+# Map each tmux session name (the `#S` shown in the status-bar pill) to a color:
+# hex (#rrggbb), a named color (e.g. "red"), or colour0-255. Return empty to keep
+# the theme default. With `tat`, the session name is the directory's basename with
+# dots converted to dashes -- so a `my.app` directory is session `my-app`.
+accent_for() {
+  case "$1" in
+    my-work-app) printf '%s' "#ff966c" ;;  # orange
+    my-side-proj) printf '%s' "#c3e88d" ;; # green
+    *) printf '%s' "" ;;
+  esac
+}
