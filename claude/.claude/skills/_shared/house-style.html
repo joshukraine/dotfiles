@@ -229,9 +229,9 @@
   /* ---- Click-to-copy ---- */
   .copy { cursor: pointer; border: 1px solid var(--border); background: var(--surface-2); color: inherit; font-family: var(--mono); font-size: 0.85em; padding: 0.12em 0.55em; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.4em; user-select: none; vertical-align: baseline; transition: background .12s ease, border-color .12s ease, color .12s ease; }
   .copy:hover { background: var(--accent-soft); border-color: var(--accent); }
-  .copy::after { content: "\29C9"; opacity: 0.55; font-size: 0.9em; }
+  .copy::after { content: "⧉"; opacity: 0.55; font-size: 0.9em; }
   .copy.copied { color: var(--good); border-color: var(--good); }
-  .copy.copied::after { content: "\2713"; opacity: 1; }
+  .copy.copied::after { content: "✓"; opacity: 1; }
   /* ---- Button (primary CTA; works on <button> or <a>) ---- */
   .btn { display: inline-block; cursor: pointer; font-family: var(--sans); font-size: 15px; font-weight: 600; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius-sm); padding: 9px 17px; text-decoration: none; }
   .btn:hover { filter: brightness(1.08); }
