@@ -227,9 +227,9 @@
   .tag.warn { color: var(--warn); background: var(--cal-warn-fill); }
   .tag.bad { color: var(--bad); background: var(--cal-bad-fill); }
   /* ---- Click-to-copy ---- */
-  .copy { cursor: pointer; border: 1px solid var(--border); background: var(--surface-2); color: inherit; font-family: var(--mono); font-size: 0.85em; padding: 0.12em 0.55em; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.4em; user-select: none; vertical-align: baseline; transition: background .12s ease, border-color .12s ease, color .12s ease; }
+  .copy { cursor: pointer; border: 1px solid var(--border); background: var(--surface-2); color: inherit; font-family: var(--mono); font-size: 0.95em; line-height: 1; padding: 0.2em 0.65em; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.45em; user-select: none; vertical-align: baseline; transition: background .12s ease, border-color .12s ease, color .12s ease; }
   .copy:hover { background: var(--accent-soft); border-color: var(--accent); }
-  .copy::after { content: "⧉"; opacity: 0.55; font-size: 0.9em; }
+  .copy::after { content: "⧉"; opacity: 0.7; font-size: 1.05em; }
   .copy.copied { color: var(--good); border-color: var(--good); }
   .copy.copied::after { content: "✓"; opacity: 1; }
   /* ---- Button (primary CTA; works on <button> or <a>) ---- */
