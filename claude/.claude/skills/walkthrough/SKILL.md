@@ -9,7 +9,7 @@ argument-hint: "[PR-number-or-branch] [--publish]"
 
 Generate a concise, click-by-click manual walkthrough of the current branch's user-facing changes, so the human orchestrator can exercise the feature in a browser **before** the formal `/code-review`. Seeing a feature work is faster than reading code or a PR description for catching UX problems.
 
-This skill does not modify code or perform code review. With `--publish` it renders a rich HTML version, publishes it to the project's configured QA host (when one is declared in the project's `CLAUDE.md`), and posts a PR comment linking to it with the Markdown body as a collapsible fallback. Without `--publish` it only writes local scratch files.
+This skill does not modify code or perform code review. It renders the walkthrough as a single self-contained **HTML** file — with click-to-copy commands, URLs, and logins — in **both** modes. By default it writes that HTML to the project's local `tmp/` as scratch and opens it. With `--publish` it also uploads the HTML to the project's configured QA host (when one is declared in the project's `CLAUDE.md`) and posts a PR comment linking to it, with a Markdown rendition as a collapsible fallback (Markdown is the only thing a GitHub comment can render inline).
 
 **Where it sits in the workflow — two slots:**
 
@@ -52,7 +52,7 @@ If the change is user-facing — or a mix where the UI surface is worth exercisi
 
 - From the changed views/controllers/routes, determine which screens and user journeys changed.
 - Identify every user role/persona that touches the changed flows.
-- Find concrete test accounts for each persona by reading the project's seed data (e.g. `db/seeds.rb`), fixtures, or factories. Use exact credentials. Reserved-example logins (`@example.com` and friends) stay click-to-copy when published; real-looking ones become placeholders — see Credentials in published artifacts under Publishing.
+- Find concrete test accounts for each persona by reading the project's seed data (e.g. `db/seeds.rb`), fixtures, or factories. Use exact credentials. Reserved-example logins (`@example.com` and friends) render as click-to-copy controls in the HTML; real-looking ones become plain-text placeholders — see **Credentials in published artifacts** under Publishing.
 - Determine the local login mechanism by reading the project (password, magic link via a dev mail catcher, a dev-only shortcut) and describe it literally.
 - Read `CLAUDE.md` for project-specific concerns to fold in: default locale and bilingual requirements, mobile-first/viewport rules, theme, accessibility.
 
@@ -64,7 +64,7 @@ If the change is user-facing — or a mix where the UI surface is worth exercisi
 
 ### 5. Generate the walkthrough document
 
-Use the template below. Principles:
+Plan the content using the principles below, then render it as a self-contained HTML file per **Rendering the HTML artifact** (the same renderer both modes use). Principles:
 
 - One numbered **Part** per distinct flow or persona. Cover every affected persona.
 - Steps are literal and clickable — the reader should never have to guess.
@@ -75,15 +75,31 @@ Use the template below. Principles:
 - Keep it brief — this is a pre-flight check, not exhaustive QA. Favor the highest-signal paths.
 - If you notice something that looks broken while writing the walkthrough, flag it to the user directly — do not bury it as a test step.
 
-### 6. Save and surface
+### 6. Render, save, and surface
 
-- Save to the project's `tmp/` directory — `tmp/pr-<N>-walkthrough.md` (or `tmp/<branch-slug>-walkthrough.md` if there is no PR). Use the project-local `tmp/`, not the system `/tmp`.
-- This document is the orchestrator's editable scratch copy: not committed, not part of the PR. The PR comment posted later by `--publish` is the published snapshot.
-- Send the file to the user and tell them the path.
+- Render the content as HTML following **Rendering the HTML artifact** below. This is the pre-review scratch copy, so **omit the production-verification callout**.
+- Save to the project-local `tmp/` directory — `tmp/pr-<N>-walkthrough.html` (or `tmp/<branch-slug>-walkthrough.html` if there is no PR). Not the system `/tmp`.
+- This file is the orchestrator's scratch copy: not committed, not part of the PR. The PR comment posted later by `--publish` is the published snapshot.
+- Open it for the user (`open tmp/pr-<N>-walkthrough.html`) and tell them the path.
 
 ### 7. Recommend the next step
 
 > Exercise the walkthrough in the browser. If anything is off, fix it on the branch and re-run `/walkthrough` to refresh. When it looks right, proceed to `/code-review` — then publish the final version with `/walkthrough --publish` before merge.
+
+## Rendering the HTML artifact
+
+Both modes render the walkthrough as a single self-contained HTML file using this skill's `template.html` and the shared house style. Same renderer; the only differences are called out inline.
+
+- Read `template.html` (this skill's directory) for the structure and `../_shared/house-style.html` for the look.
+- Inline the shared house style — copy its `<style>` block in place of the first `HOUSE STYLE` marker in `<head>`, and its `<script>` block in place of the second marker before `</body>`. The output must be a single self-contained `.html` (no external assets).
+- Strip every instructional comment from the output (the head how-to block and the body notes). The artifact must be clean — HTML comments don't nest, so a stray instructional comment can break rendering.
+- Fill the metadata tokens: `{{PROJECT}}`, `{{PR}}`, `{{PR_LINK}}` (link to the PR), `{{FEATURE}}` (short feature name), `{{BRANCH}}`, `{{COMMIT}}` (short SHA), `{{DATE}}`, `{{ESTIMATE}}`. Before a PR exists, use the branch name and point `{{PR_LINK}}` at the branch.
+- **Production-verification callout:** include it for the `--publish` (post-merge) version; **omit** the entire `.callout` block for the default pre-review copy.
+- Every command, URL, and reserved-example login the reader will paste is a `<button type="button" class="copy" data-copy="VALUE">VALUE</button>` control (see **Credentials in published artifacts**). Only real/non-example credentials are the exception — render those as plain `<code>&lt;your-admin-email&gt;</code>`, never a copy control.
+
+Reliable way to inline the bulky house style without hand-copying it: write the filled template with two sentinel lines where the markers sit, then splice the `<style>` and `<script>` blocks out of `house-style.html` into them with a short script. Extract by the exact tags (`<style>` … `</style>`, `<script>` … `</script>`) — `house-style.html` keeps its instructional comment tag-free precisely so this match is unambiguous.
+
+- **Verify before surfacing the artifact.** The finished HTML must contain exactly one `<style>` and one `<script>`, with no instructional text leaked into the `<head>`. Grep the output for `Inline the`, `Component vocabulary`, `EXTRACTION GUARDRAIL`, or a stray `-->` before the first `:root` — any hit means a comment was captured instead of the real block. Re-extract by the exact tags and re-check. This has bitten us before; do not skip it.
 
 ## Publishing the final walkthrough (`--publish`)
 
@@ -94,15 +110,9 @@ Run once, after `/code-review` and any review fixes — normally just before mer
 1. **Resolve the PR.** Use the PR number or branch given as an argument; otherwise find the PR for the current branch (`gh pr view`). The PR may be **open or merged** — both are valid publish targets. Only stop if no PR exists at all.
 2. **Re-run the gate.** If the change is not user-facing (the **Gate** step above), there is nothing to publish — say so and stop.
 3. **Regenerate from the PR diff.** Do not reuse a possibly-stale scratch file — review may have changed the code, and on a merged PR the branch is likely deleted. Rebuild the walkthrough content from `gh pr diff <N>` exactly as steps 1–5 describe, so the published copy matches the code that merged.
-4. **Save the Markdown twin** to `tmp/pr-<N>-walkthrough-published.md` (the project-local `tmp/`, not the system `/tmp`). This Markdown is what fills the PR-comment fallback and is also used as the no-target fallback if the project has not declared a QA Publish Target. Prepend a short block-quote note at the very top: testers verifying on production should use the production app and their own account in place of the local server and seed logins; the steps and expected results are identical. This is the normal case for a post-merge publish.
-5. **Render the HTML twin** using this skill's `template.html` and the shared house style:
-    - Read `template.html` (this skill's directory) for the structure and `../_shared/house-style.html` for the look.
-    - Inline the shared house style — copy its `<style>` block in place of the `<!-- HOUSE STYLE ... -->` marker in `<head>`, and its `<script>` block in place of the second marker before `</body>`. The output must be a single self-contained `.html` (no external assets).
-    - Strip every instructional comment from the output (the head how-to block and the body notes). The artifact must be clean.
-    - Fill the metadata tokens: `{{PROJECT}}`, `{{PR}}`, `{{PR_LINK}}` (Markdown link to the PR), `{{FEATURE}}` (short feature name), `{{BRANCH}}`, `{{COMMIT}}` (short SHA), `{{DATE}}`, `{{ESTIMATE}}`.
-    - Keep the production-verification callout in the HTML version too (it is part of the template). Convert the Markdown setup, logins, parts, not-browser-testable, and cleanup content into the HTML structure described inline in the template. Every command/URL the tester will paste is a `<button type="button" class="copy" data-copy="VALUE">VALUE</button>` control, and so are reserved-example logins (see Credentials in published artifacts above) — login is the most repetitive step, so keep it click-to-copy. Only non-example/real credentials are the exception: render those as plain `<code>&lt;your-admin-email&gt;</code>`, not copy buttons.
-    - Save to `tmp/pr-<N>-walkthrough-published.html`.
-6. **Build the PR-comment body** at `tmp/pr-<N>-walkthrough-comment.md`: a `<details>` block wrapping the Markdown twin so the link sits above and the Markdown is a collapsible fallback below.
+4. **Build the Markdown fallback** at `tmp/pr-<N>-walkthrough-published.md` (the project-local `tmp/`, not the system `/tmp`). This is **not** a standalone deliverable — it exists only because a GitHub PR comment renders Markdown, not a full HTML page. It fills the collapsible fallback in the comment, and it is the entire comment body when the project declares no QA Publish Target. Mirror the same content as the HTML. Prepend a short block-quote note at the very top: testers verifying on production should use the production app and their own account in place of the local server and seed logins; the steps and expected results are identical. This is the normal case for a post-merge publish.
+5. **Render the HTML** following **Rendering the HTML artifact** above. This is the post-merge version, so **keep** the production-verification callout. Save to `tmp/pr-<N>-walkthrough-published.html`.
+6. **Build the PR-comment body** at `tmp/pr-<N>-walkthrough-comment.md`: a `<details>` block wrapping the Markdown fallback so the link sits above and the Markdown is a collapsible fallback below.
 
     ```markdown
     <details><summary>Markdown fallback</summary>
@@ -132,7 +142,9 @@ Run once, after `/code-review` and any review fixes — normally just before mer
 
 10. Confirm to the user that it is posted, share the Pages URL (if any) printed by the pipeline, and note who will be notified (PR participants, plus anyone @-mentioned).
 
-## Document template
+## Content outline (and Markdown PR-comment fallback)
+
+The HTML (via `template.html`) is the primary artifact in both modes. This Markdown outline serves two remaining purposes: it's the content plan you fill in before rendering, and it's the exact shape of the collapsible **PR-comment fallback** that `--publish` posts (a GitHub comment renders Markdown, not the HTML page).
 
 ```markdown
 # PR #<N> — Manual Walkthrough: <short feature name>
