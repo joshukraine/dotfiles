@@ -20,8 +20,12 @@
 # Switching themes: parameterize the new theme's pills with #{@accent} the same
 # way (see tokyonight_moon.tmux) — that is all this feature needs from a theme.
 
-# Apply the project color whenever a session is created...
-set-hook -g session-created 'run-shell "~/.config/tmux/scripts/project-accent.sh #{hook_session}"'
+# Apply the project color whenever a session is created. Background the hook
+# (-b) so it stays off tmux's command-queue critical path: a foreground
+# run-shell here blocks the server while tmuxinator spawns a project's panes,
+# adding shell-startup contention. The script's own `refresh-client -S` still
+# paints the accent right away, so backgrounding costs no immediacy.
+set-hook -g session-created 'run-shell -b "~/.config/tmux/scripts/project-accent.sh #{hook_session}"'
 
 # ...and backfill any sessions that already exist when this file is (re)sourced.
 run-shell "~/.config/tmux/scripts/project-accent.sh"
