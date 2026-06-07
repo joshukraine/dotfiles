@@ -173,10 +173,11 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
-  "editorMode": "vim",
-  "agentPushNotifEnabled": true,
   "voice": {
     "enabled": true
   },
-  "inputNeededNotifEnabled": true
+  "editorMode": "vim",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "tui": "fullscreen"
 }
