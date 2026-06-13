@@ -311,24 +311,29 @@ This is where most development time is spent. One pass through this cycle produc
 5. Create PR
    └─ /create-pr               (links issue from branch name, updates ROADMAP)
 
-6. Walkthrough
-   └─ /walkthrough             (browser pre-flight — user-facing PRs only)
+6. Verify
+   └─ /verify                  (agent drives the running app — user-facing PRs only)
 
-7. Review
+7. Walkthrough
+   └─ /walkthrough             (human browser pre-flight — user-facing PRs only)
+
+8. Review
    └─ /code-review             (correctness + cleanups; built-in /review for an existing PR by number)
 
-8. Publish walkthrough
+9. Publish walkthrough
    └─ /walkthrough --publish   (renders HTML, uploads to project's QA host, posts PR comment with link)
 
-9. Merge
+10. Merge
    └─ /merge-pr                (squash merge, clean up, pull main)
 ```
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 6, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 8, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
+Step 6 is `/verify` (user-facing PRs only): the *agent* drives the running app and reports what it observed, confirming the change actually works and catching runtime bugs before review. It complements the walkthrough rather than duplicating it — `/verify` is agent-driven (the agent runs the feature and judges the output), while `/walkthrough` is human-driven (the agent writes a checklist for the orchestrator to exercise). The two catch different classes of issue (mechanics/regressions vs. UX/visual judgment), so run both for substantive user-facing work; skip both when there is no runnable user-facing surface.
 
-Step 9 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
+Steps 7 and 9 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 7, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 9, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
+
+Step 10 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
 
 **Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the *pushed* branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any walkthrough or review fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
 
