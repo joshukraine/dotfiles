@@ -22,6 +22,14 @@ return {
           config = function(terminal)
             terminal.opts.split.width = math.floor(vim.o.columns * 0.40)
           end,
+          -- Sidekick's CLI keymaps are buffer-local to the AI terminal. Its
+          -- default <c-b> (the buffer picker that @-mentions a buffer into the
+          -- Claude prompt) shadows Claude Code's own Ctrl+B "background job"
+          -- shortcut in terminal mode. Move the picker to <c-g> so both work:
+          -- Ctrl+B passes through to Claude Code, Ctrl+G keeps the @-mention.
+          keys = {
+            buffers = { "<c-g>", "buffers", mode = "nt", desc = "Add buffer to Claude prompt (@-mention)" },
+          },
         },
       },
       nes = {
