@@ -330,6 +330,8 @@ Steps 6 and 8 are the walkthrough's two slots, both conditional on the PR having
 
 Step 9 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
 
+**Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the *pushed* branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any walkthrough or review fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
+
 ### The QA feedback loop
 
 Published walkthroughs and QA handoffs (see "Publishing artifacts to remote testers" below) put the work in front of a tester. When a tester reports back, the report re-enters development through its own short loop:
