@@ -40,6 +40,22 @@ return {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/herb-language-server", "--stdio" },
         filetypes = { "eruby" },
       },
+      -- Obsidian vault: silence Marksman's link diagnostics. They're false positives
+      -- here — Marksman can't resolve Obsidian wikilinks (escaped `\|` aliases in
+      -- tables, vault-wide name resolution), and Obsidian itself is the authority on
+      -- link resolution. Completion / go-to-definition / hover stay active, and
+      -- Markdown in other projects keeps normal Marksman diagnostics.
+      marksman = {
+        handlers = {
+          ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+            local vault = vim.fn.expand("~/obsidian-vault")
+            if result and result.uri and vim.uri_to_fname(result.uri):sub(1, #vault) == vault then
+              result.diagnostics = {}
+            end
+            return vim.lsp.handlers["textDocument/publishDiagnostics"](err, result, ctx, config)
+          end,
+        },
+      },
     },
   },
 }

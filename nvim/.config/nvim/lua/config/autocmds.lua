@@ -23,6 +23,18 @@ create_autocmd("FileType", {
   end,
 })
 
+create_autocmd("FileType", {
+  desc = "Disable format-on-save (Prettier) for Markdown inside the Obsidian vault — Obsidian is the formatting authority there",
+  group = "file_types",
+  pattern = "markdown",
+  callback = function(args)
+    local vault = vim.fn.expand("~/obsidian-vault")
+    if vim.api.nvim_buf_get_name(args.buf):sub(1, #vault) == vault then
+      vim.b.autoformat = false
+    end
+  end,
+})
+
 create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   desc = "Recognize .gemrc as yaml",
   group = "file_types",
