@@ -42,3 +42,14 @@ config:
 
   # MD041/first-line-heading/first-line-h1 : First line in a file should be a top-level heading : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md041.md
   MD041: false
+
+  # MD049/emphasis-style : Emphasis style : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md049.md
+  # Standardize italics on underscore — matches Prettier's output and gives visual
+  # distinction from asterisk bold.
+  MD049:
+    style: underscore
+
+  # MD050/strong-style : Strong style : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md050.md
+  # Standardize bold on asterisk — matches Prettier.
+  MD050:
+    style: asterisk
