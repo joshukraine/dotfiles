@@ -158,11 +158,11 @@ cask "whatsapp"
 
 mas "1Password for Safari", id: 1569813296
 mas "e-Sword X", id: 968437868
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Logic Pro", id: 634148309
 mas "Marked 2", id: 890031187
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "The Unarchiver", id: 425424353
 mas "Toggl Track", id: 1291898086
 
