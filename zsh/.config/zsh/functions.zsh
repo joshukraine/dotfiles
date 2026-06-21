@@ -435,3 +435,68 @@ function saf() {
   defaults write com.apple.finder AppleShowAllFiles TRUE
   killall Finder
 }
+
+# Load 1Password-backed secrets into the current shell, on demand
+#
+# Resolves the op:// references in ~/.secrets/secrets.env and exports each as an
+# environment variable in the CURRENT shell. Lazy by design: only contacts
+# 1Password when you run it, never on shell startup. Each value is read via
+# command substitution, so secrets containing shell-special characters are safe.
+# AWS is handled separately via ~/.aws credential_process and is not included here.
+#
+# Usage: loadsecrets [env-file]
+# Arguments:
+#   env-file - Optional references file (defaults to ~/.secrets/secrets.env)
+#
+# Examples:
+#   loadsecrets             # Export all secrets from ~/.secrets/secrets.env
+#   echo "${GITHUB_TOKEN}"  # Now resolves to the real value
+#
+# Returns: Prompts once to authorize, shows live progress, exports each VAR for the
+#          session, and prints a summary; non-zero if op, auth, or the file is unavailable
+function loadsecrets() {
+  local envfile="${1:-${HOME}/.secrets/secrets.env}"
+
+  if ! command -v op > /dev/null 2>&1; then
+    echo "loadsecrets: 1Password CLI (op) not found on PATH." >&2
+    return 1
+  fi
+
+  if [[ ! -r "${envfile}" ]]; then
+    echo "loadsecrets: cannot read ${envfile}" >&2
+    return 1
+  fi
+
+  # One explicit auth prompt up front, fail fast if the app is locked. This also
+  # primes the session so the per-secret reads below don't each re-authorize.
+  echo "loadsecrets: authorizing with 1Password..." >&2
+  if ! op vault list > /dev/null 2>&1; then
+    echo "loadsecrets: could not authorize — is the 1Password app unlocked?" >&2
+    return 1
+  fi
+
+  local line name ref value count=0 failed=0
+  while IFS= read -r line; do
+    # Skip blanks and comments; only process VAR=op://... entries
+    [[ -z "${line}" || "${line}" == \#* ]] && continue
+    [[ "${line}" == *=op://* ]] || continue
+
+    name="${line%%=*}"
+    ref="${line#*=}"
+
+    # Live status overwrites a single line so the ~12s of reads shows motion.
+    # </dev/null keeps op from inheriting the loop's file as its stdin.
+    printf '\r\033[2K  loading %s' "${name}" >&2
+    if value="$(op read "${ref}" </dev/null 2>/dev/null)"; then
+      export "${name}=${value}"
+      (( ++count ))
+    else
+      (( ++failed ))
+      printf '\r\033[2K  failed: %s (%s)\n' "${name}" "${ref}" >&2
+    fi
+  done < "${envfile}"
+
+  printf '\r\033[2Kloadsecrets: exported %d secrets from %s' "${count}" "${envfile:t}" >&2
+  (( failed )) && printf ' (%d failed)' "${failed}" >&2
+  printf '\n' >&2
+}
