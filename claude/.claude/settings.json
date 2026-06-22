@@ -2,7 +2,8 @@
   "cleanupPeriodDays": 365,
   "attribution": {
     "commit": "",
-    "pr": ""
+    "pr": "",
+    "sessionUrl": false
   },
   "permissions": {
     "allow": [
