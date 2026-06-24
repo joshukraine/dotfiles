@@ -1,4 +1,5 @@
 .gitconfig.local
+.mailmap
 .vimrc.local
 .zshrc.local
 brew/Brewfile.lock.json
