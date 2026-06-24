@@ -46,6 +46,17 @@ bin/standardrb --fix       # Lint and auto-fix
 - **PRD deviations:** Log in `docs/prd/CHANGELOG.md` before merging — never silently deviate
 - **Testing:** <!-- TODO: framework -->, AAA pattern, <!-- TODO: test runner command -->
 
+## QA Testing Policy
+
+**Launch status: PRE-LAUNCH.**
+
+QA — walkthroughs (`/walkthrough`) and `/verify` runs — is gated on launch status:
+
+- **Pre-launch (current):** running QA against the **production** site is fine. Production holds disposable test data that gets wiped at cutover, so reviewers without a local environment (e.g. non-technical testers) can exercise features there freely.
+- **Post-launch:** QA is **local-dev-only**. Never run walkthroughs, `/verify`, or any QA flow — especially data-mutating ones — against the live site, which holds real user data. Published walkthroughs become local-dev reproduction guides with a "local dev only" banner.
+
+Flip this flag to **POST-LAUNCH** as part of the launch cutover. The `/walkthrough` skill reads it: pre-launch it offers the production-testing callout; post-launch it emits the local-dev-only warning instead.
+
 ## QA Publish Target
 
 <!--

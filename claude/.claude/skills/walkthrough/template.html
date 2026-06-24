@@ -60,9 +60,26 @@
 
   <main>
 
-    <!-- PRODUCTION VERIFICATION CALLOUT
-         Include this only when publishing the post-merge version. For a
-         pre-review scratch copy, remove the entire .callout block. -->
+    <!-- LAUNCH-STATUS CALLOUT
+         Post-merge (--publish) only; remove the entire .callout block for the
+         pre-review scratch copy. Choose ONE variant based on the project's
+         CLAUDE.md "QA Testing Policy" launch-status flag (default to the
+         pre-launch variant if no policy is declared):
+
+         PRE-LAUNCH — production verification is fine (prod data is disposable):
+           <div class="callout">
+             <span class="label">Verifying on production?</span>
+             Use the production app and your own account in place of the local
+             server and seed logins below. The steps and expected results are identical.
+           </div>
+
+         POST-LAUNCH — QA is local-dev-only; never run against the live site:
+           <div class="callout">
+             <span class="label">⚠️ Local dev only.</span>
+             Run this walkthrough on a local dev checkout — never against the live
+             site, which holds real data. Use the seed logins below.
+           </div>
+    -->
     <div class="callout">
       <span class="label">Verifying on production?</span>
       Use the production app and your own account in place of the local server
