@@ -87,6 +87,11 @@ Constraint: never put `$(...)`, backticks, or complex shell nesting in a commit 
 - **Comments**: No commented-out code — delete it. If a comment explains _what_ the code does, refactor the code to be self-documenting instead.
 - **Code review order**: Architecture → code quality → tests → performance
 
+## Browser & Responsive QA
+
+- **Verify mobile/responsive widths by emulating the CSS viewport, never by resizing the OS window.** When checking a layout at a mobile breakpoint (e.g. the common 375px) through a browser-automation MCP, use the device-emulation tool — `emulate` in chrome-devtools MCP with a viewport like `375x812x3,mobile,touch` — not a window-resize tool (`resize_page`, `resize_window`). Automated Chrome clamps its window to a ~500px minimum, so a "375px" resize silently renders at ~500px; because that's still under most `sm` breakpoints it _looks_ mobile and masks the error while never testing the real width.
+- **Always confirm the viewport actually took before trusting a screenshot.** After emulating, assert via the page-eval tool that `window.innerWidth` equals the target and that `document.documentElement.scrollWidth <= window.innerWidth` (the horizontal-overflow check). A screenshot alone doesn't prove the width.
+
 ## Markdown
 
 - Always label code blocks with a language identifier (e.g., `bash`, `ruby`, `yaml`, `json`, `text`) to avoid linting errors
