@@ -10,19 +10,19 @@ Take stock of a project that's been sitting untouched for months and produce a s
 
 It is **read-only with respect to the codebase**, and advisory. It inspects, reports, and recommends; it never updates dependencies, edits project files, marks ROADMAP checkboxes, or writes code. Its one deliberate write is optional and opt-in: capturing the finished plan as a tracking issue (or a `DUSTOFF.md`) so it survives the session — see step 5. The deliverable is a plan, and every item on that plan names the existing skill (or manual step) that acts on it.
 
-**Where it sits in the workflow.** This is the *first* thing you run when returning to a dormant project — before picking up an issue, before `/plan-phase`, before any new work. Its output feeds the normal cycle: a clean assessment hands off to `/update-deps`, `/readme-refresh`, `/plan-phase`, and `/resolve-issue` to actually execute the catch-up.
+**Where it sits in the workflow.** This is the _first_ thing you run when returning to a dormant project — before picking up an issue, before `/plan-phase`, before any new work. Its output feeds the normal cycle: a clean assessment hands off to `/update-deps`, `/readme-refresh`, `/plan-phase`, and `/resolve-issue` to actually execute the catch-up.
 
 **Applicability.** Works in any repo. It reads both the **project** (the working directory) and the **current conventions** under `~/.claude` to measure drift between them. It degrades gracefully — no PRD, no README, no CI, or no `gh` are all handled, with the relevant phase noting what it couldn't check rather than failing.
 
 **Not the same as:**
 
-- `/checkpoint` — that's mid-stream orientation: a 2-minute hallway update that *assumes you already know where you are* in an active push. This is the sit-down re-entry assessment for when you *don't* — you've been away for months and need to re-derive the project's state, staleness, and lifecycle stage from scratch.
-- `/update-deps`, `/readme-refresh`, `/plan-phase` — those *do* the work (update dependencies, fix the README, create issues). This one only *flags* the need and hands off. Delegate; don't duplicate.
-- `/drift-check` — that checks a branch diff against the project spec before a PR. This checks the whole project's adopted *tooling and conventions* against the current `~/.claude` standard at re-entry. Different drift, different scope.
+- `/checkpoint` — that's mid-stream orientation: a 2-minute hallway update that _assumes you already know where you are_ in an active push. This is the sit-down re-entry assessment for when you _don't_ — you've been away for months and need to re-derive the project's state, staleness, and lifecycle stage from scratch.
+- `/update-deps`, `/readme-refresh`, `/plan-phase` — those _do_ the work (update dependencies, fix the README, create issues). This one only _flags_ the need and hands off. Delegate; don't duplicate.
+- `/drift-check` — that checks a branch diff against the project spec before a PR. This checks the whole project's adopted _tooling and conventions_ against the current `~/.claude` standard at re-entry. Different drift, different scope.
 
 ## The core guardrail
 
-The output is a plan, not a fix — dustoff routes work to other skills, it doesn't perform it. (Capturing the plan as a tracking issue in step 5 is the one write it makes, and only when you approve it.) The one-line test for any step you're tempted to add or take: *"Does this belong to re-entry assessment, or am I about to re-implement `/update-deps` (or `/readme-refresh`, or `/plan-phase`)?"* If it's the latter, stop — flag it as a plan item and hand off. The value of this skill is the synthesis, not the mechanics it would otherwise duplicate.
+The output is a plan, not a fix — dustoff routes work to other skills, it doesn't perform it. (Capturing the plan as a tracking issue in step 5 is the one write it makes, and only when you approve it.) The one-line test for any step you're tempted to add or take: _"Does this belong to re-entry assessment, or am I about to re-implement `/update-deps` (or `/readme-refresh`, or `/plan-phase`)?"_ If it's the latter, stop — flag it as a plan item and hand off. The value of this skill is the synthesis, not the mechanics it would otherwise duplicate.
 
 ## Your task
 
@@ -63,7 +63,7 @@ This is the check no off-the-shelf tool does: how far has the project's adopted 
 - **Read the current standard** under `~/.claude`: the bootstrap templates (`~/.claude/docs/prd-workflow/templates/CLAUDE.md` and `templates/prd/`), the handbook (`spec-driven-development.md`), and the skills directory (`~/.claude/skills/`).
 - **CLAUDE.md markers**: compare the project's `CLAUDE.md` against the current template. Flag marker sections the template has that the project lacks (e.g. a `## QA Publish Target` block), and conventions that have since changed.
 - **PRD structure**: if `docs/prd/` exists, check it against the current expected structure — `README.md` (nav hub), `ROADMAP.md`, `CHANGELOG.md` (deviation log), numbered feature files. Flag missing pieces (a PRD with no CHANGELOG predates the deviation-log convention).
-- **Skill/workflow evolution (heuristic, framed softly)**: use git history to date the last skill-driven activity and flag where it predates a current capability — e.g. "the last dependency PR (#84, ~5 months ago) predates the Dependabot-aware `/update-deps`; a fresh run is worth it." Frame these as *worth re-running*, not as asserted facts about exact dates you can't verify from inside the project.
+- **Skill/workflow evolution (heuristic, framed softly)**: use git history to date the last skill-driven activity and flag where it predates a current capability — e.g. "the last dependency PR (#84, ~5 months ago) predates the Dependabot-aware `/update-deps`; a fresh run is worth it." Frame these as _worth re-running_, not as asserted facts about exact dates you can't verify from inside the project.
 
 ### 4. Synthesize — the re-entry plan
 

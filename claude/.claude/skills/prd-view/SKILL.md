@@ -8,9 +8,9 @@ argument-hint: "[docs/prd/NN-feature.md]"
 
 Render one canonical PRD Markdown file as a rich **HTML reading view** — a sticky-sidebar "Dashboard" the human scans, jumps around, and collapses to fight overwhelm. The point is engagement: long monochrome specs go under-read, and an unread spec is not authoritative in practice.
 
-This view is **derived and ephemeral**. The Markdown file is the single source of truth. The HTML is a presentation generated on demand, written to a gitignored `tmp/` and never committed — so it cannot drift and there is never a second source of truth. It is also a **vetting instrument**: when the rendered view surfaces something wrong or surprising, the fix goes into the *Markdown*, and you regenerate — never patch the HTML.
+This view is **derived and ephemeral**. The Markdown file is the single source of truth. The HTML is a presentation generated on demand, written to a gitignored `tmp/` and never committed — so it cannot drift and there is never a second source of truth. It is also a **vetting instrument**: when the rendered view surfaces something wrong or surprising, the fix goes into the _Markdown_, and you regenerate — never patch the HTML.
 
-The cardinal rule follows from that: **present, do not embellish.** Every claim in the output must be traceable to the source file. Add no requirements, decisions, or structure the spec does not state. Diagrams encode only facts the spec gives. If the source is ambiguous or self-contradictory, *surface that* (a `callout.flag`) rather than silently resolving it — surfacing it is the vetting loop working.
+The cardinal rule follows from that: **present, do not embellish.** Every claim in the output must be traceable to the source file. Add no requirements, decisions, or structure the spec does not state. Diagrams encode only facts the spec gives. If the source is ambiguous or self-contradictory, _surface that_ (a `callout.flag`) rather than silently resolving it — surfacing it is the vetting loop working.
 
 ## Input
 
@@ -47,7 +47,7 @@ Count honestly from the source. If a terse file has no meaningful counts, fall b
 The structure lives in `template.html` (this skill's directory); the look + click-to-copy live in `../_shared/house-style.html`. Produce the view by:
 
 1. **Read `template.html`** and use it as the exact structure. Its head comment documents every token and component snippet.
-2. **Inline the shared house style** — copy the `<style>` block from `../_shared/house-style.html` in place of the `<!-- HOUSE STYLE: … -->` marker, and its `<script>` block in place of the `<!-- HOUSE SCRIPT: … -->` marker. Copy the **actual `<style>…</style>` and `<script>…</script>` elements** (they begin at column 0): the file opens with a documentation comment that *mentions* `<style>`/`<script>` by name — do not capture that comment text or its closing `-->`, or you will nest the real CSS inside a broken element and lose all styling. Output must be one self-contained file — no external assets, no build step, works from `file://`.
+2. **Inline the shared house style** — copy the `<style>` block from `../_shared/house-style.html` in place of the `<!-- HOUSE STYLE: … -->` marker, and its `<script>` block in place of the `<!-- HOUSE SCRIPT: … -->` marker. Copy the **actual `<style>…</style>` and `<script>…</script>` elements** (they begin at column 0): the file opens with a documentation comment that _mentions_ `<style>`/`<script>` by name — do not capture that comment text or its closing `-->`, or you will nest the real CSS inside a broken element and lose all styling. Output must be one self-contained file — no external assets, no build step, works from `file://`.
 3. **Fill the tokens.** Build `{{TOC}}` (one `<li>` per section), `{{METRICS}}`, and `{{SECTIONS}}` (one `details.section` card per source `##` section, each with a `<span class="badge">§N</span>`). Open the high-signal early sections (context, architecture, model) by default; collapse deep-reference tails (exhaustive field lists, future considerations) so the page stays scannable.
 4. **Apply the conversions** as you fill each section:
    - Data-model tables → keep the table, but mark types with `.pill` and required/optional with `.req` / `.opt`. Group or summarize a very long field list if it reads as a wall, but never drop fields silently — note any grouping.
@@ -55,7 +55,7 @@ The structure lives in `template.html` (this skill's directory); the look + clic
    - RFC keywords → `<span class="kw">SHOULD</span>`.
    - Pasteable values (endpoints, commands, seed values) → `<button class="copy" data-copy="VALUE">VALUE</button>`.
    - Cross-refs → keep the `→ See file.md §N` pointer (a `<code>§N</code>` tag is fine) so the reader can reach the canonical detail.
-5. **Strip every instructional comment** — the template's head how-to block and all snippet comments guide filling only and must not appear in the output. *Keep* the template's interactive shell verbatim, though: its supplemental `<style>`/`<script>` and the back-to-top, expand/collapse-all, and click-to-copy source-path controls are real content, not instructional.
+5. **Strip every instructional comment** — the template's head how-to block and all snippet comments guide filling only and must not appear in the output. _Keep_ the template's interactive shell verbatim, though: its supplemental `<style>`/`<script>` and the back-to-top, expand/collapse-all, and click-to-copy source-path controls are real content, not instructional.
 
 ### 5. Save and open
 

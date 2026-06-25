@@ -42,7 +42,7 @@ Everything core to Claude Code itself works standalone:
 - All MCP servers (Context7, Chrome automation, etc.)
 - Agent subprocesses and parallel tool calls
 
-The plugin adds editor *awareness*, not editor *capability*.
+The plugin adds editor _awareness_, not editor _capability_.
 
 ## LazyVim Extra Configuration
 

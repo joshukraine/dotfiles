@@ -115,7 +115,7 @@ gh pr list --app dependabot --state open
 The lessons this workflow encodes, worth keeping in mind when a situation doesn't fit the steps above:
 
 - **"Passes locally, fails on one CI job" is a real failure class.** A local gate can't see a system library that's present on your machine but absent on a specific CI job. Boot-affecting dependency changes need real-CI validation, not just local tests.
-- **Don't fight Dependabot.** It already reconciles bumps and auto-closes superseded PRs. The skill's job is to *expect and verify* that behavior, not re-implement it.
+- **Don't fight Dependabot.** It already reconciles bumps and auto-closes superseded PRs. The skill's job is to _expect and verify_ that behavior, not re-implement it.
 - **Security audits are the highest-value step**, not an afterthought. A plain update can ship a live CVE that only the audit catches.
 
 ## Package manager commands

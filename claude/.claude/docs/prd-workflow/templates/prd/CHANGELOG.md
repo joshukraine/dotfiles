@@ -34,4 +34,4 @@ Each entry records one deviation or decision:
 
 ## Entries
 
-*No entries yet.*
+_No entries yet._

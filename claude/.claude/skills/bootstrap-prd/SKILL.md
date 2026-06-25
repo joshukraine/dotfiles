@@ -46,8 +46,8 @@ If the user provides a framework name, pre-fill quick-start commands from this l
 | --- | --- | --- | --- |
 | Rails | `bin/dev` | `bin/rails test` | `bin/standardrb --fix` |
 | Next.js | `npm run dev` | `npm test` | `npm run lint` |
-| Hugo | `hugo server -D` | *(none)* | *(none)* |
-| Static (no build) | Open `index.html` or use a local server | *(none)* | *(none)* |
+| Hugo | `hugo server -D` | _(none)_ | _(none)_ |
+| Static (no build) | Open `index.html` or use a local server | _(none)_ | _(none)_ |
 | Generic | `<!-- TODO: start command -->` | `<!-- TODO: test command -->` | `<!-- TODO: lint command -->` |
 
 ---

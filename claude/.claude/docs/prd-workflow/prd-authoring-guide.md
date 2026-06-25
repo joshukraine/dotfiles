@@ -16,7 +16,7 @@ Not every piece of work needs a PRD. The decision framework:
 | Multiple PRs, some design decisions | Feature spec (detailed issue or lightweight doc) | "Add onboarding flow for new users" |
 | Multiple PRs across feature areas, data model decisions, lifecycle design | Full modular PRD | "Build a literature distribution management app" |
 
-**The threshold:** If the work requires multiple PRs *and* involves design decisions that constrain future work (data model, authorization rules, status lifecycles), write it down before building it.
+**The threshold:** If the work requires multiple PRs _and_ involves design decisions that constrain future work (data model, authorization rules, status lifecycles), write it down before building it.
 
 A PRD is not an overhead tax — it's a thinking tool. The act of writing forces you to resolve ambiguity that would otherwise surface as rework during implementation. The question isn't "is this work important enough for a PRD?" — it's "will I make better decisions if I think through this systematically before coding?"
 
@@ -34,7 +34,7 @@ The quality of the brainstorming output is directly proportional to the quality 
 - **Constraints** — tech stack decisions already made, budget/timeline limits, regulatory requirements, deployment environment.
 - **Personas** — who will use this system? What are their technical comfort levels? What matters most to each persona?
 - **Prior art** — existing systems this replaces or extends. Screenshots, workflows, or documentation from the current process.
-- **Non-goals** — what this project is explicitly *not* trying to do. Fences prevent scope creep before it starts.
+- **Non-goals** — what this project is explicitly _not_ trying to do. Fences prevent scope creep before it starts.
 
 Don't drip-feed context across the conversation. Front-load it. A single, comprehensive context dump at the start produces better results than corrections and clarifications scattered across twenty exchanges.
 
@@ -71,7 +71,7 @@ A brainstorming session has produced enough material when:
 - You have a rough phase ordering — what depends on what, what's MVP, what's later.
 - You've accumulated a parking lot of deferred items and edge cases to address in later sessions or during implementation.
 
-You are *not* done when you've only discussed the happy path. You are *not* done when the data model is still vague ("we'll figure out the fields later"). You *are* done when you could hand the notes to a developer and they'd know where to start.
+You are _not_ done when you've only discussed the happy path. You are _not_ done when the data model is still vague ("we'll figure out the fields later"). You _are_ done when you could hand the notes to a developer and they'd know where to start.
 
 ---
 
@@ -87,7 +87,7 @@ These decisions are hard to change later, affect multiple parts of the system, o
 - **Status lifecycles** — states, transitions, who can trigger each transition. These define the core workflow and are referenced throughout the codebase.
 - **Authorization rules** — who can see/do what. Security decisions need to be explicit and centralized.
 - **Notification triggers** — what events trigger emails, in-app alerts, or other notifications. These create user expectations that are hard to walk back.
-- **Validation rules** — what constitutes valid data at system boundaries. Specify the *what* (e.g., "phone number is required and must be valid format") even if you leave the *how* flexible (exact regex, library choice).
+- **Validation rules** — what constitutes valid data at system boundaries. Specify the _what_ (e.g., "phone number is required and must be valid format") even if you leave the _how_ flexible (exact regex, library choice).
 - **URL patterns** — public-facing URLs are a contract. Internal routes are less critical, but anything users might bookmark or share deserves thought.
 
 ### Specify loosely
@@ -96,14 +96,14 @@ These decisions are easily changed, don't affect system contracts, and benefit f
 
 - **UI layout and styling** — describe the information to display and the user's task, not pixel positions or exact CSS. "Show a card for each event with status, date, and location" is better than a wireframe that constrains layout.
 - **Helper naming and code organization** — how to structure modules, name private methods, organize test files. These are implementation details.
-- **Error message wording** — specify *when* errors appear, not the exact copy. "Show an error when the user submits without required fields" is enough.
+- **Error message wording** — specify _when_ errors appear, not the exact copy. "Show an error when the user submits without required fields" is enough.
 - **Form field ordering** — unless the order has UX significance (e.g., a multi-step wizard), leave it to implementation.
 
 ### The gray area
 
 Some decisions need partial specification — enough to constrain the important parts while leaving room for implementation judgment:
 
-- **Validation rules** — specify *what* is validated and the business logic ("one active event per distributor at a time"), but leave implementation details flexible (model validation vs. database constraint vs. both).
+- **Validation rules** — specify _what_ is validated and the business logic ("one active event per distributor at a time"), but leave implementation details flexible (model validation vs. database constraint vs. both).
 - **URL patterns** — specify the structure for user-facing URLs, leave admin/internal routes flexible.
 - **Form fields** — specify which fields exist and which are required, leave ordering and grouping flexible.
 - **Search and filtering** — specify what users need to find, leave the UI mechanism flexible (search box vs. filters vs. both).
@@ -196,10 +196,10 @@ If you can't resolve one of these during brainstorming, that's a signal you need
 
 Decisions that can wait if you capture enough information for future resolution:
 
-- **Specific UI flows** — the exact sequence of screens for a multi-step process can be deferred if the data model and lifecycle are clear. You know *what* the user needs to accomplish; the *how* can be designed closer to implementation.
+- **Specific UI flows** — the exact sequence of screens for a multi-step process can be deferred if the data model and lifecycle are clear. You know _what_ the user needs to accomplish; the _how_ can be designed closer to implementation.
 - **Notification copy** — the triggers are specified tightly (§3), but the exact email subject lines and body text can wait.
 - **Third-party integration details** — if you know you'll integrate with a service but don't yet have API credentials or documentation, capture the integration requirements and defer the implementation details.
-- **Admin UI specifics** — admin interfaces are internal tools. Specify what admins need to *do*, defer how the interface is organized.
+- **Admin UI specifics** — admin interfaces are internal tools. Specify what admins need to _do_, defer how the interface is organized.
 
 ### The TBD format
 
@@ -218,13 +218,13 @@ Good TBD:
 
 > **TBD: Notification channel for shipment updates**
 >
-> *Question:* Should shipment status updates notify the distributor via email, in-app notification, or both?
+> _Question:_ Should shipment status updates notify the distributor via email, in-app notification, or both?
 >
-> *Options:* (a) Email only — simple, works for users who don't check the app daily. (b) In-app only — reduces email volume, requires users to check the app. (c) Both — comprehensive but risks notification fatigue.
+> _Options:_ (a) Email only — simple, works for users who don't check the app daily. (b) In-app only — reduces email volume, requires users to check the app. (c) Both — comprehensive but risks notification fatigue.
 >
-> *Constraints:* Distributors are not daily app users. Email delivery is already set up via Postmark. In-app notification infrastructure does not exist yet.
+> _Constraints:_ Distributors are not daily app users. Email delivery is already set up via Postmark. In-app notification infrastructure does not exist yet.
 >
-> *Guidance:* Start with email only (option a). Add in-app notifications as a future enhancement if user feedback indicates demand. The email templates should be designed so they can coexist with in-app notifications later.
+> _Guidance:_ Start with email only (option a). Add in-app notifications as a future enhancement if user feedback indicates demand. The email templates should be designed so they can coexist with in-app notifications later.
 
 ### Open Items sections
 

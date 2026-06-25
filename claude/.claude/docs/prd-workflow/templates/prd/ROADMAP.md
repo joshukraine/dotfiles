@@ -10,7 +10,7 @@ This document tracks implementation progress through phased delivery. Phases are
 | ------- | ------ | -------------- | -------- |
 | 0 | Project Foundation | — | Not started |
 | 1 | [Phase 1 Name] | Phase 0 | Not started |
-| *Add rows as phases are defined* | | | |
+| _Add rows as phases are defined_ | | | |
 
 ---
 
@@ -24,8 +24,8 @@ Establish the application skeleton with core infrastructure decisions wired up.
 - [ ] Development environment documentation
 - [ ] Initial deployment to staging/production
 
-**PRD references:** *Link to relevant PRD sections*
+**PRD references:** _Link to relevant PRD sections_
 
 ---
 
-*Add additional phase sections as the project roadmap is defined.*
+_Add additional phase sections as the project roadmap is defined._

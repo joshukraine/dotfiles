@@ -81,7 +81,7 @@ This is the discipline to aim for. When something comes up during implementation
    - **Implement as spec'd** — the spec was right; the impulse to deviate was wrong.
    - **Modify the approach** — the deviation is directionally right but needs a different shape.
    - **Update the spec** — the spec was incomplete or wrong; update it to reflect the new understanding.
-5. **Document first** — if the decision changes the spec, log it in `CHANGELOG.md` *before* writing code. Use the standard entry format: what changed, why, and category (Correction / Discovery / Pivot).
+5. **Document first** — if the decision changes the spec, log it in `CHANGELOG.md` _before_ writing code. Use the standard entry format: what changed, why, and category (Correction / Discovery / Pivot).
 6. **Implement** — now build it, with the spec and the changelog in agreement.
 
 The key principle: **document the change before making it.** This forces clarity. A deviation that can't be clearly articulated in a changelog entry probably isn't well enough understood to implement.
@@ -156,7 +156,7 @@ Not all documents have the same lifespan. Confusing a planning document with a l
 
 ### Planning documents (frozen after implementation)
 
-These describe *what we intended to build*. Once the feature is implemented, they become historical records. They may be updated during fold-backs to reflect what was actually built, but they are not actively maintained as the system evolves.
+These describe _what we intended to build_. Once the feature is implemented, they become historical records. They may be updated during fold-backs to reflect what was actually built, but they are not actively maintained as the system evolves.
 
 **Examples:** Individual PRD feature files (`04-events-workflow.md`, `11-individual-book-requests.md`), the ROADMAP (once all phases are complete), one-time research or decision documents.
 
@@ -164,7 +164,7 @@ These describe *what we intended to build*. Once the feature is implemented, the
 
 ### Living documents (evolve with the code)
 
-These describe *what we actually built*. They are updated whenever the system changes and are the authoritative reference for the current state.
+These describe _what we actually built_. They are updated whenever the system changes and are the authoritative reference for the current state.
 
 **Examples:** Domain model / data model reference, API integration guides, operations runbooks.
 
@@ -187,7 +187,7 @@ Document medium follows the same lifecycle split. Markdown for what an agent edi
 - **Markdown:** PRD files, ROADMAP, CHANGELOG, this handbook, skill instructions (SKILL.md), debrief summaries. Diffable, machine-readable, single source of truth.
 - **HTML:** debrief full reports, walkthroughs, QA handoffs, plans, mockups. Self-contained single files with click-to-copy controls, interactive checklists, and inline SVG. Opened in a browser with `open` — no build, no server.
 
-A third case sits between the two: a **derived reading view**. The canonical document stays Markdown — authoritative, diffable, the source of truth — while `/prd-view` *renders* a PRD file to a rich HTML Dashboard on demand (sidebar nav, an at-a-glance metric strip, collapsible cards, inline SVG). The HTML is ephemeral: generated to a gitignored `tmp/`, never committed, always regenerated from the current Markdown — so it cannot drift and never becomes a second source of truth. Its purpose is engagement *and* vetting — reading the rendered view surfaces gaps or errors, which are fixed in the Markdown and re-rendered. The spec earns its authority by being repeatedly engaged with, not skimmed once.
+A third case sits between the two: a **derived reading view**. The canonical document stays Markdown — authoritative, diffable, the source of truth — while `/prd-view` _renders_ a PRD file to a rich HTML Dashboard on demand (sidebar nav, an at-a-glance metric strip, collapsible cards, inline SVG). The HTML is ephemeral: generated to a gitignored `tmp/`, never committed, always regenerated from the current Markdown — so it cannot drift and never becomes a second source of truth. Its purpose is engagement _and_ vetting — reading the rendered view surfaces gaps or errors, which are fixed in the Markdown and re-rendered. The spec earns its authority by being repeatedly engaged with, not skimmed once.
 
 The skills that produce HTML artifacts share a house style (`~/.claude/skills/_shared/house-style.html`) and a publish pipeline (see §7 "Publishing artifacts to remote testers") so the output is consistent and portable. The format that is easiest to maintain is not always the format that is most useful to read; the split keeps both honest.
 
@@ -238,7 +238,7 @@ The project is stable and in production. Changes are incremental: bug fixes, sma
 **Characteristics:**
 
 - GitHub Issues are the sole work queue. The ROADMAP's Future section may still hold aspirational items, but day-to-day work is issue-driven.
-- Living documents are the authoritative references. The PRD is a historical archive — valuable for understanding *why* the system was built this way, but not consulted for current implementation decisions.
+- Living documents are the authoritative references. The PRD is a historical archive — valuable for understanding _why_ the system was built this way, but not consulted for current implementation decisions.
 - New features of significant scope may warrant a new PRD file (or a lightweight feature spec in the issue description). The threshold: if the feature requires multiple PRs and involves design decisions, write it down before building it.
 - Checkpoints become lighter: per-PR discipline continues, but phase boundaries no longer apply. Periodic audits happen when the project feels like it's accumulated untracked work.
 
@@ -329,13 +329,13 @@ This is where most development time is spent. One pass through this cycle produc
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Step 6 is `/verify` (user-facing PRs only): the *agent* drives the running app and reports what it observed, confirming the change actually works and catching runtime bugs before review. It complements the walkthrough rather than duplicating it — `/verify` is agent-driven (the agent runs the feature and judges the output), while `/walkthrough` is human-driven (the agent writes a checklist for the orchestrator to exercise). The two catch different classes of issue (mechanics/regressions vs. UX/visual judgment), so run both for substantive user-facing work; skip both when there is no runnable user-facing surface.
+Step 6 is `/verify` (user-facing PRs only): the _agent_ drives the running app and reports what it observed, confirming the change actually works and catching runtime bugs before review. It complements the walkthrough rather than duplicating it — `/verify` is agent-driven (the agent runs the feature and judges the output), while `/walkthrough` is human-driven (the agent writes a checklist for the orchestrator to exercise). The two catch different classes of issue (mechanics/regressions vs. UX/visual judgment), so run both for substantive user-facing work; skip both when there is no runnable user-facing surface.
 
 Steps 7 and 9 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 7, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 9, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
 
 Step 10 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
 
-**Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the *pushed* branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any walkthrough or review fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
+**Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the _pushed_ branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any walkthrough or review fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
 
 ### The QA feedback loop
 
@@ -351,14 +351,14 @@ Published walkthroughs and QA handoffs (see "Publishing artifacts to remote test
    └─ /resolve-issue N        (rejoins the PR cycle above)
 ```
 
-`/qa-triage` is the gate between an end-user-flavored report and an actionable technical issue: it investigates the report against the code, classifies it (real bug / works-as-designed / enhancement), and drafts the issue(s) it warrants — but never implements. An approved issue then flows through the normal PR cycle. This is the inbound counterpart to the outbound publishing step: `/walkthrough --publish` and `/qa-handoff` send work *out* to testers; `/qa-triage` brings their findings back *in*.
+`/qa-triage` is the gate between an end-user-flavored report and an actionable technical issue: it investigates the report against the code, classifies it (real bug / works-as-designed / enhancement), and drafts the issue(s) it warrants — but never implements. An approved issue then flows through the normal PR cycle. This is the inbound counterpart to the outbound publishing step: `/walkthrough --publish` and `/qa-handoff` send work _out_ to testers; `/qa-triage` brings their findings back _in_.
 
 ### Phase planning
 
 At the start of each phase:
 
 1. **`/plan-phase`** — Read the relevant PRD files, create GitHub issues with acceptance criteria and implementation order. This is a planning-only skill — no code is written.
-2. **`/setup-sprint`** *(optional)* — If the phase contains a batch of small, independent issues (common for chore or fix batches), create parallel worktrees. Each worktree gets its own branch and can be worked independently.
+2. **`/setup-sprint`** _(optional)_ — If the phase contains a batch of small, independent issues (common for chore or fix batches), create parallel worktrees. Each worktree gets its own branch and can be worked independently.
 
 ### Phase boundary
 
@@ -466,7 +466,7 @@ These observations motivated the workflows above. They're project-specific but i
 
 - **Modular PRD structure** — 18 files covering distinct feature areas. Easy to find the right spec, easy to update without merge conflicts, easy to hand one file to Claude Code for a focused implementation session.
 - **ROADMAP as task list** — one checkbox per PR kept phases organized and progress visible. The phase boundary was a natural checkpoint for sync work.
-- **CHANGELOG as deviation log** — the "never silently deviate" rule established the right norm, even when execution was imperfect. Having the rule meant drift was always *recognized* as something to address, not something to ignore.
+- **CHANGELOG as deviation log** — the "never silently deviate" rule established the right norm, even when execution was imperfect. Having the rule meant drift was always _recognized_ as something to address, not something to ignore.
 - **Deviation categories** (Correction / Discovery / Pivot) — these made CHANGELOG entries more useful. "Discovery" in particular helped normalize deviations as learning rather than failure.
 - **GitHub Issues as the work queue** — every implementation task flowed through an issue. PRs referenced issues. The board tracked priority. This kept planning and execution connected.
 
@@ -509,7 +509,7 @@ A condensed version of the key workflows for scanning during active development.
 
 When you encounter something that differs from the spec:
 
-1. Does it cross the threshold? → *Does it change the contract or behavior visible to users or admins?*
+1. Does it cross the threshold? → _Does it change the contract or behavior visible to users or admins?_
 2. If yes: **stop, surface, decide, document, then implement.**
 3. If unsure: surface it anyway. 30 seconds now saves hours later.
 

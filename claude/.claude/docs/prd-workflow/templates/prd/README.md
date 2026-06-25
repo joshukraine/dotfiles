@@ -15,7 +15,7 @@ This directory contains the modular PRD for [Project Name]. Each file is a self-
 | `CHANGELOG.md` | Material deviations from the PRD discovered during implementation | Reviewing or recording a "never silently deviate" decision |
 | `ROADMAP.md` | Implementation phases, progress tracking | Planning sprints, checking phase boundaries |
 | `01-overview.md` | Vision, personas, design principles, tech stack | Onboarding to the project, understanding goals |
-| *Add rows as PRD files are created* | | |
+| _Add rows as PRD files are created_ | | |
 
 ## Conventions
 

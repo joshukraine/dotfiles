@@ -9,16 +9,16 @@ argument-hint: "[issue-number ...]"
 
 Turn a QA report into a triaged decision and, where warranted, one or more well-formed technical issues — without resolving the report off the bat or writing any app code.
 
-QA reports (filed by a tester, usually carrying a `qa` label) are the *tester's view* of a problem. They describe user-visible symptoms; the engineering fix is often differently scoped — one report may need several tech issues, or several reports may share one root cause. This skill does the standard review-and-extrapolate ritual: read the report, confirm it against the codebase, decide what (if anything) to build, and draft the issue(s) — then **stop for the human to approve** before anything is created.
+QA reports (filed by a tester, usually carrying a `qa` label) are the _tester's view_ of a problem. They describe user-visible symptoms; the engineering fix is often differently scoped — one report may need several tech issues, or several reports may share one root cause. This skill does the standard review-and-extrapolate ritual: read the report, confirm it against the codebase, decide what (if anything) to build, and draft the issue(s) — then **stop for the human to approve** before anything is created.
 
-**Where it sits in the workflow.** This is the *first* step for a `qa`-labeled issue. Its output feeds the normal pipeline: an approved tech issue goes to `/resolve-issue` → `/create-pr` → `/walkthrough` + `/code-review` → merge. This skill never implements; it only triages and drafts.
+**Where it sits in the workflow.** This is the _first_ step for a `qa`-labeled issue. Its output feeds the normal pipeline: an approved tech issue goes to `/resolve-issue` → `/create-pr` → `/walkthrough` + `/code-review` → merge. This skill never implements; it only triages and drafts.
 
 **Applicability.** Needs a GitHub repo (`gh`). Built around a QA-report labeling convention but otherwise project-agnostic — no project names, tester identities, or paths are hardcoded. It reads the project's `CLAUDE.md` for local conventions (board, workflow, bilingual i18n, etc.) and embeds the rest itself.
 
 **Not the same as:**
 
-- `/resolve-issue` — it *implements* an approved issue. This one *creates* the issue for it to implement. Hand off; don't duplicate.
-- `/qa-handoff`, `/walkthrough` — those help a tester *exercise* the app and *file* reports. This one *processes* a report after it's filed.
+- `/resolve-issue` — it _implements_ an approved issue. This one _creates_ the issue for it to implement. Hand off; don't duplicate.
+- `/qa-handoff`, `/walkthrough` — those help a tester _exercise_ the app and _file_ reports. This one _processes_ a report after it's filed.
 
 ## The core guardrail
 
@@ -42,8 +42,8 @@ When passed more than one issue number, triage each in turn, presenting a full a
 ### 3. Investigate against the codebase
 
 - Search the code for the surface the report describes and **confirm the symptom is real**. Reproduce the logic path; find the root cause; note the file(s) involved.
-- Distinguish *what the tester saw* from *what the code actually does* — this is where "not-a-bug" and "wrong-assumption" cases surface. State your evidence (e.g. "no `validates :event_type` exists on the model; the field is an unbacked string column").
-- **Weigh evidence of design intent before calling something a bug.** Guards (`if x.present?`), defaults, the absence or presence of a validation, and existing tests reveal whether the current behavior was *chosen*. Code that consistently tolerates the reported state was most likely written to allow it — a strong signal the report is a feature ask or working-as-intended, not a regression.
+- Distinguish _what the tester saw_ from _what the code actually does_ — this is where "not-a-bug" and "wrong-assumption" cases surface. State your evidence (e.g. "no `validates :event_type` exists on the model; the field is an unbacked string column").
+- **Weigh evidence of design intent before calling something a bug.** Guards (`if x.present?`), defaults, the absence or presence of a validation, and existing tests reveal whether the current behavior was _chosen_. Code that consistently tolerates the reported state was most likely written to allow it — a strong signal the report is a feature ask or working-as-intended, not a regression.
 - For UI/text reports, find the exact source (e.g. the i18n key) and check every affected locale, not just the one in the report.
 
 ### 4. Classify
@@ -97,10 +97,10 @@ The QA-report @-mention is a **verification ping** — it tells whoever should c
 
 ## Conventions to encode (the error-prone ones)
 
-- **Closing-keyword hazard.** GitHub auto-closes an issue on merge when a closing keyword (`close`/`closes`/`closed`, `fix`/`fixes`/`fixed`, `resolve`/`resolves`/`resolved`) appears immediately before any `#N` *anywhere in the PR body* — not just on the `Closes:` line. When a PR should *reference* but not close an issue, never put a keyword right before its `#N`: drop the `#` ("QA report 503") or use a non-keyword verb ("addresses", "wraps up"). This is the trap that prematurely closes QA reports.
+- **Closing-keyword hazard.** GitHub auto-closes an issue on merge when a closing keyword (`close`/`closes`/`closed`, `fix`/`fixes`/`fixed`, `resolve`/`resolves`/`resolved`) appears immediately before any `#N` _anywhere in the PR body_ — not just on the `Closes:` line. When a PR should _reference_ but not close an issue, never put a keyword right before its `#N`: drop the `#` ("QA report 503") or use a non-keyword verb ("addresses", "wraps up"). This is the trap that prematurely closes QA reports.
 - **Dual-close + verification @-mention**, on the single PR that closes the QA report:
   `Closes #<tech>, Closes #<qa> — please verify after deploy, @<author>`
-- **Multi-PR rule** (one report → multiple tech issues): only the **final** PR closes the QA report. Earlier tech issues' closing plans say *close this tech issue only* (`Closes #<tech>`) and must carry **no** auto-closing reference to the QA report. The last tech issue's closing plan carries the full dual-close + @-mention line.
+- **Multi-PR rule** (one report → multiple tech issues): only the **final** PR closes the QA report. Earlier tech issues' closing plans say _close this tech issue only_ (`Closes #<tech>`) and must carry **no** auto-closing reference to the QA report. The last tech issue's closing plan carries the full dual-close + @-mention line.
 
 ## Tech issue template
 
@@ -128,6 +128,6 @@ keyword (see closing-keyword hazard)." The final issue carries the dual-close li
 
 ## Tone
 
-- You are triaging for a technical lead who wants the *why*, not just the *what*. Show your evidence from the code; make the classification defensible.
+- You are triaging for a technical lead who wants the _why_, not just the _what_. Show your evidence from the code; make the classification defensible.
 - Be the skeptic the report needs: confirm the symptom, but don't assume the tester's diagnosis or proposed fix is correct.
 - When you spot adjacent problems while investigating, flag them as notes — don't silently fold them into scope.
