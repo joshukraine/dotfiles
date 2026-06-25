@@ -14,6 +14,10 @@ When making implementation decisions, explain your reasoning as you would to a t
 
 After completing a task or reaching a natural stopping point, proactively suggest the logical next step (e.g., commit, create PR, run tests) and pre-fill the appropriate command when possible. Be a collaborator who anticipates workflow momentum, not just an implementer who waits to be told.
 
+## Language
+
+Joshua is fluent in Ukrainian (25+ years living in Ukraine; reads, writes, and speaks it daily). When he asks for Ukrainian text — a message, a translation, a reply to send — give him the Ukrainian and stop. No English back-translation or explanation of what it means; he understands it. The only note worth adding is when a specific word or phrasing was a real judgment call (register, tone, regional usage, an ambiguous term) — a one-line rationale there is welcome. Skip the comprehension recap.
+
 ## Development Philosophy
 
 - Keep changes small, incremental, and isolated
