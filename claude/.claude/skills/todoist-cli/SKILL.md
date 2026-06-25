@@ -5,7 +5,7 @@ compatibility: "Requires the td CLI (@doist/todoist-cli) to be installed and aut
 license: MIT
 metadata:
   author: Doist
-  version: "1.73.0"
+  version: "1.75.2"
 ---
 
 # Todoist CLI (td)
@@ -167,8 +167,12 @@ td project list --personal
 td project list --search "Road"
 td project archived
 td project view "Roadmap" --detailed
+td project view "Roadmap" --raw                          # don't render the description markdown
 td project collaborators "Roadmap"
 td project create --name "New Project" --color blue
+td project create --name "New Project" --description "Quarterly OKRs"
+td project create --name "Imported" --stdin              # read the description from stdin
+td project update "Roadmap" --description "Updated scope"
 td project update "Roadmap" --favorite
 td project update "Roadmap" --folder "Engineering"
 td project update "Roadmap" --no-folder
@@ -242,7 +246,11 @@ td section list "Roadmap"
 td section list --search "Planning"
 td section list --search "Planning" --project "Roadmap"
 td section create --project "Roadmap" --name "In Progress"
+td section create --project "Roadmap" --name "QA" --description "Bugs to verify"
+td section create --project "Roadmap" --name "Imported" --stdin   # read the description from stdin
 td section update id:123 --name "Done"
+td section update id:123 --description "Sprint backlog"            # description-only update
+echo "" | td section update id:123 --stdin                        # empty stdin clears the description
 td section reorder "Review" --project "Roadmap" --before "Done"
 td section reorder "Review" --project "Roadmap" --after "In Progress"
 td section reorder --section "Review" --project "Roadmap" --position 0 --dry-run
