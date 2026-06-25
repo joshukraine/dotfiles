@@ -35,7 +35,12 @@ repos:
     rev: v0.20.0
     hooks:
       - id: markdownlint-cli2
-        args: ['--config', 'markdown/.markdownlint-cli2.yaml']
+        # Lint the whole tree, not just changed files, so a tightened rule
+        # can't silently invalidate untouched files. Matches CI, which runs
+        # markdownlint-cli2 over **/*.md on every push. The hook still only
+        # fires when a markdown file is staged (types: [markdown]).
+        args: ['--config', 'markdown/.markdownlint-cli2.yaml', '**/*.md']
+        pass_filenames: false
         exclude: ^scratchpads/
 
   # YAML validation
