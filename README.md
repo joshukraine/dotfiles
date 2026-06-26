@@ -292,7 +292,7 @@ See `zsh/.config/zsh-abbr/abbreviations.zsh` for the full set (`clsp`, `clh`, `c
 ### Other Configuration
 
 - **`CLAUDE.md`** — Global development philosophy and coding standards applied across all projects
-- **`cheatsheet.md`** — Quick reference for keyboard shortcuts, commands, and context management tips
+- **[`cheatsheet.md`][cheatsheet]** — Quick reference for keyboard shortcuts (including fullscreen scrolling and custom keybindings), commands, and context management tips
 - **`starship.toml`** — Custom [Starship prompt][starship-claude] showing model, context window status, and token cost
 
 ### Troubleshooting: `~/.claude` folding
@@ -554,6 +554,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [bats]: https://github.com/bats-core/bats-core
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
 [cascadia-code]: https://github.com/microsoft/cascadia-code
+[cheatsheet]: claude/.claude/cheatsheet.md
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth
 [comic-code]: https://tosche.net/fonts/comic-code
 [coreutils]: https://formulae.brew.sh/formula/coreutils
