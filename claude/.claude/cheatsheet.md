@@ -1,6 +1,6 @@
 # Claude Code Cheatsheet
 
-_Last updated: 2026-06-02_ <!-- Update this date when editing this file -->
+_Last updated: 2026-06-26_ <!-- Update this date when editing this file -->
 
 Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 
@@ -11,6 +11,33 @@ Quick reference for usage tips, keyboard shortcuts, and workflow habits.
 | `Option+T` | Toggle extended thinking on/off for current session |
 | `Esc Esc` | Open checkpoint/rewind menu |
 | `Shift+Tab` | Cycle permission modes (default → accept-edits → plan → auto) |
+
+## Fullscreen Scrolling
+
+Fullscreen TUI rendering is enabled via `"tui": "fullscreen"` in `settings.json` to fix repaint corruption in the sidekick.nvim nested-tmux stack (Ghostty → tmux → Neovim `:terminal` → nested tmux → Claude). The conversation renders to the terminal's alternate screen buffer, so scrolling happens inside Claude — terminal/tmux scrollback and the mouse wheel don't apply.
+
+| Shortcut | Action |
+| -------- | ------ |
+| `Ctrl+↑` / `Ctrl+↓` | Scroll one line (custom binding — see below) |
+| `PageUp` / `PageDn` | Scroll half a screen |
+| `Ctrl+Home` / `Ctrl+End` | Jump to top / bottom (re-enables auto-follow) |
+| `Ctrl+O`, then `j`/`k` | Transcript mode: line-by-line scroll, `/` to search; `q` exits |
+
+The mouse wheel can't scroll here — wheel events don't survive the five-layer nested stack (Neovim's `:terminal` captures them, and sidekick's nested tmux is a separate session). Keyboard keys propagate cleanly, so scrolling is keyboard-driven.
+
+### Customizing keybindings
+
+Claude Code reads custom shortcuts from `~/.claude/keybindings.json` (symlinked from `claude/.claude/keybindings.json` in this repo). Each entry maps a keystroke to a `namespace:action` within a context. Our one customization binds the line-scroll actions, which ship unbound by default:
+
+```json
+{
+  "bindings": [
+    { "context": "Scroll", "bindings": { "ctrl+up": "scroll:lineUp", "ctrl+down": "scroll:lineDown" } }
+  ]
+}
+```
+
+Changes apply live without a restart. If Neovim ever swallows `Ctrl+↑`/`Ctrl+↓`, swap to `alt+up`/`alt+down`. Full action and context reference: <https://code.claude.com/docs/en/keybindings>.
 
 ## Useful Commands
 
