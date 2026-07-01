@@ -91,20 +91,23 @@ A unified vocabulary for classifying work across commits, branches, issues, and 
 
 ### 4. GitHub Projects Board
 
-**Priority field** (single select):
+The board carries **two independent axes — keep them separate.** Importance is the priority field; sequence/intent is the status column. "I want to do this next" is expressed by moving an issue to **Up Next** and ordering it — _not_ by bumping its priority.
 
-| Priority | Emoji | When to Use |
-| --- | --- | --- |
-| Critical | :red_circle: | Blocking other work or affecting users now |
-| Normal | :yellow_circle: | Standard priority — most issues live here |
-| Low | :green_circle: | Nice to have, do when convenient |
+**Priority field = importance** ("how much it hurts to wait"). A custom Project single-select field (named `Track` on the ComixDistro board) and the **single source of priority truth** — do _not_ also use GitHub's native org-level Priority field (public preview as of 2026-03); two priority fields drift and contradict. Revisit migrating to the native field once it GAs.
 
-**Status columns:**
+| Priority | Emoji | Means | The test |
+| --- | --- | --- | --- |
+| Critical | :red_circle: | Live-user-impacting correctness / security / data-loss, or a hard blocker | "Jump the queue regardless of current interest?" Keep **near-empty**. |
+| Normal | :yellow_circle: | Real work we intend to do — most features and fixes | The default. |
+| Low | :green_circle: | Genuinely deferrable: nice-to-have, icebox, do-if-time | "Fine if it waits a quarter." Not "boring." |
+
+**Status columns = sequence / intent** ("when"):
 
 | Column | What Lives Here |
 | --- | --- |
+| **Parked** | Deliberately idle: waiting on elapsed time or production data (soak / decision issues). _Not_ "blocked." |
 | **Backlog** | Triaged issues not yet scheduled for work |
-| **Up Next** | Committed to for the current or next sprint |
+| **Up Next** | Committed to next; order within the column = sequence |
 | **In Progress** | Actively being worked on (branch exists) |
 | **In Review** | PR open, awaiting review |
 | **Done** | PR merged and issue closed |
