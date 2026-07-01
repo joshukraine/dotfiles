@@ -226,7 +226,7 @@ These functions work with both `main` and `master` branch names automatically.
 [Claude Code][claude-code] is Anthropic's CLI tool for AI-assisted development. This repo includes a full configuration under the `claude/` directory, stowed to `~/.claude/`.
 
 > [!TIP]
-> Claude Code can also run inside Neovim via the [sidekick.nvim][sidekick-nvim] plugin, which is how I use it most of the time during development.
+> Claude Code pairs well with [Neovim][neovim] via the [sidekick.nvim][sidekick-nvim] plugin, which is how I use it most of the time during development. My preferred layout runs Claude as a sibling tmux pane (60% editor / 40% Claude) rather than nested inside the editor — see **[Claude Code + Neovim][claude-code-neovim]** for the setup, the reasoning, and how sidekick sends editor context across panes.
 
 ### Skills
 
@@ -553,6 +553,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [asdf]: https://asdf-vm.com/
 [bats]: https://github.com/bats-core/bats-core
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code/overview
+[claude-code-neovim]: claude/claude-code-neovim.md
 [cascadia-code]: https://github.com/microsoft/cascadia-code
 [cheatsheet]: claude/.claude/cheatsheet.md
 [checkhealth]: https://neovim.io/doc/user/pi_health.html#:checkhealth

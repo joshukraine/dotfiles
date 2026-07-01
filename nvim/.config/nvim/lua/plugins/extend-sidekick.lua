@@ -15,6 +15,20 @@ return {
         mux = {
           backend = "tmux",
           enabled = true,
+          -- When an AI CLI is launched from inside Neovim (e.g. <leader>ac) and no
+          -- session exists yet, open it as a tmux split in the *current* session
+          -- instead of a Neovim-hosted terminal. This keeps the process flat
+          -- (tmux → Claude) rather than nested (tmux → Neovim → :terminal → an
+          -- inner tmux → Claude), so copy/paste, scrollback, and mouse selection
+          -- behave like a normal terminal. Sidekick still drives the pane over
+          -- tmux (paste-buffer/send-keys), so <leader>af/al/at keep working.
+          -- Only applies when Neovim itself runs inside tmux; otherwise sidekick
+          -- falls back to the Neovim terminal automatically.
+          create = "split",
+          -- vertical = true → tmux `-h` (side-by-side); size 0.4 → new pane at 40%.
+          -- Mirrors the `<prefix> v` tmux binding (`split-window -h -l 40%`) for a
+          -- familiar 60% editor / 40% Claude layout.
+          split = { vertical = true, size = 0.4 },
         },
         win = {
           layout = "right",
