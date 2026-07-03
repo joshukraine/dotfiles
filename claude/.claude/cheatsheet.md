@@ -60,8 +60,10 @@ Changes apply live without a restart. If Neovim ever swallows `Ctrl+↑`/`Ctrl+�
 | `/resolve-issue 123` | Full workflow for a GitHub issue — research, plan, implement, verify; right-sizes its rigor to issue complexity |
 | `/create-pr` | Create a PR with auto-generated description and issue linking (inferred from branch name) |
 | `/simplify` | Post-implementation code review — run before creating a PR |
+| `/autopilot 123 --to pr` | Carry one issue through the whole loop autonomously to a review-ready PR (or `--to merge` for small reversible changes) |
+| `/autopilot-batch` | Fan out the `autopilot-queued` queue — one parallel worktree subagent per issue, Opus-reviewed |
 
-Custom skills live in `claude/.claude/skills/`; `/simplify` and `/code-review` are built-in Claude Code skills. Type `/` to browse the full list including PRD-specific skills (`/bootstrap-prd`, `/plan-phase`, `/setup-sprint`, `/debrief`, etc.).
+Custom skills live in `claude/.claude/skills/`; `/simplify` and `/code-review` are built-in Claude Code skills. Type `/` to browse the full list including PRD-specific skills (`/bootstrap-prd`, `/plan-phase`, `/debrief`, etc.).
 
 ### Common Workflow
 
