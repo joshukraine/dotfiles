@@ -21,7 +21,7 @@ Examples: `/autopilot 754` (→ pr), `/autopilot 754 --to pr`, `/autopilot 847 -
 
 Parse the issue number and tier from `$ARGUMENTS`. If no tier is given, default to `pr`. If the tier is unrecognized, stop and ask.
 
-> **Model note (Phase 1):** Autopilot runs at the session's current model. Per-stage model delegation (e.g. Sonnet implements, Opus reviews) is Phase 2 — see dotfiles #212.
+> **Model note:** Autopilot runs at whatever model invoked it and stays model-agnostic by design. Model delegation ("Sonnet builds, Opus reviews") is handled _outside_ this skill by `/autopilot-batch`, which sets each build subagent's model and runs the Opus gating review at the batch level — so nothing here needs to know about models.
 
 ## The "stop and ask" escape hatch (applies to every step)
 

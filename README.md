@@ -234,6 +234,8 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 
 | Skill | Purpose |
 | ----- | ------- |
+| `/autopilot` | Carry one well-scoped issue through the full dev loop autonomously, to a review-ready PR (or merge for small reversible changes) |
+| `/autopilot-batch` | Fan out a queue of issues to parallel worktree subagents, each running `/autopilot`, with an Opus gating review per PR |
 | `/bootstrap-prd` | Scaffold PRD-driven development infrastructure into a new project |
 | `/checkpoint` | Quick status update — what's done, in progress, and blocked |
 | `/create-pr` | Create a PR with auto-linked issues and formatted description |
@@ -248,7 +250,6 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/qa-triage` | Triage a QA-labeled report, classify it, and draft the technical issue(s) |
 | `/readme-refresh` | Audit and update a project README, or bootstrap a new one |
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
-| `/setup-sprint` | Create parallel Git worktrees for a batch of labeled issues |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
 | `/update-deps` | Dependabot-aware dependency updates with security audit, CI validation, and a unified PR |
 | `/walkthrough` | Generate a browser walkthrough of a PR's user-facing changes |
