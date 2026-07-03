@@ -73,7 +73,14 @@ If the change has a runnable user-facing surface, invoke `/verify <PR>` then `/w
 
 ### Step 6 — Code review
 
-Invoke `/code-review` at **high** effort on the PR diff. Triage the findings against the issue's spec:
+Invoke `/code-review`, choosing the effort level to fit the change rather than a fixed setting:
+
+- **Default `high`** — broad coverage for an unattended run.
+- **Escalate to `max`** when the review is the last line of defense or the change is higher-risk: tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive diff.
+- **Drop to `medium`** for a small, mechanical `--to pr` change (a few-line copy/i18n/config tweak) that a human will still review after — max coverage there is mostly noise.
+- **Never auto-select `ultra`** — it's a billed, cloud, user-triggered review; leave it for the user to invoke.
+
+State the level you picked and why in one line. Then triage the findings against the issue's spec:
 
 - Fix real correctness bugs and clear quality wins; commit and push (updates the open PR).
 - A finding flagged "speculative" may actually be **AC-mandated** — check the issue before dismissing it.
