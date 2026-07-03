@@ -1,7 +1,6 @@
 ---
 name: create-pr
 description: Create a pull request with auto-generated description, issue linking, ROADMAP updates, and PR-metadata validation.
-disable-model-invocation: true
 argument-hint: "[base-branch]"
 ---
 
