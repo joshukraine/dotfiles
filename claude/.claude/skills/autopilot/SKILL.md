@@ -58,7 +58,11 @@ Invoke `/create-pr`. It infers the issue from the branch name and opens a **read
 
 ### Steps 4–5 — Verify and Walkthrough (user-facing changes only)
 
-If the change has a runnable user-facing surface, invoke `/verify <PR>` then `/walkthrough <PR>`. Both may report "not applicable" and exit — that's expected for changes with no user-facing surface (skip them then).
+Match the verification to the change's actual surface — don't reflexively invoke `/verify`:
+
+- **Visible / interactive surface** (a page, form, or flow a user drives): invoke `/verify <PR>` then `/walkthrough <PR>`. Both may report "not applicable" and exit — that's expected; skip them when they do.
+- **Runtime behavior but no visible surface, fully test-covered** (e.g. i18n key resolution under `raise_on_missing_translations`, a config value, a computed default): substitute a **targeted inline verification** for the browser `/verify` — run the specific test or exercise the behavior directly to confirm it resolves, and note what you checked in the debrief. A browser walkthrough adds nothing here, so skip it.
+- **No runtime surface at all** (docs, comments, a pure refactor with green tests): skip both.
 
 - **QA is local-dev-only.** The app is POST-LAUNCH (real distributor data). Never drive the production site — no walkthroughs, `/verify`, or data-mutating flows against live. Local dev only. (See project CLAUDE.md "QA Testing Policy".)
 - **Start the app the headless-reliable way**, never `bin/dev` (its Tailwind watcher exits without a TTY and foreman SIGTERMs the whole group, killing the server). Use:
@@ -83,6 +87,7 @@ Invoke `/code-review`, choosing the effort level to fit the change rather than a
 State the level you picked and why in one line. Then triage the findings against the issue's spec:
 
 - Fix real correctness bugs and clear quality wins; commit and push (updates the open PR).
+- **Adjacent cleanup that finishes the same change is allowed.** If the review surfaces the same defect in a sibling spot (e.g. a duplicated helper the diff only half-updated), fix it too rather than leaving the job half-done — and **flag the expansion in the debrief**. Being blocked by "technically out of scope" defeats autopilot's purpose. (For `--to merge`, the Step 8 narrow-class gate independently re-checks the _final_ diff, so cleanup that escapes the whitelist safely degrades the run to `--to pr` rather than shipping unseen.)
 - A finding flagged "speculative" may actually be **AC-mandated** — check the issue before dismissing it.
 - If a finding needs a product decision, that's the escape hatch — stop and ask.
 
@@ -133,4 +138,5 @@ Post a debrief-style summary:
 - **The narrow-class gate is a hard filter, not advice.** A mislabeled migration-bearing issue cannot ship unseen — worst case autopilot stops and asks.
 - **`/merge-pr`, `/walkthrough --publish`, and deploy-on-merge stay human-gated.** Autopilot's merge path is the single authorized exception, scoped to one issue by the `--to merge` flag.
 - **Prefer composing the real skills over re-implementing them** so their improvements flow through. The only inlined logic is the Step 8 merge, because `/merge-pr` is deliberately not model-invocable.
+- **Push resilience.** A `git push` can fail transiently with an SSH signing-agent error (`sign_and_send_pubkey … communication with agent failed`) — a self-healing round-trip hiccup with the SSH agent, **not** an auth denial (which would read `agent refused operation`). Retry with short backoff (~3 attempts) before treating a push as failed; only stop and report if it still fails after retries. Applies wherever autopilot pushes — the `/create-pr` push in Step 3 and any review-fix push in Step 6.
 - **When in doubt, stop and ask.** A stalled autopilot that pings you is a good outcome; a wrong merge is not.
