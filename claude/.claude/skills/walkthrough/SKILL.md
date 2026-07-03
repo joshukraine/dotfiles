@@ -1,7 +1,6 @@
 ---
 name: walkthrough
 description: Generate a hands-on browser walkthrough of a PR's user-facing changes to exercise before review; --publish posts the final version to the PR for QA.
-disable-model-invocation: true
 argument-hint: "[PR-number-or-branch] [--publish]"
 ---
 
