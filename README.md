@@ -236,6 +236,7 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | ----- | ------- |
 | `/autopilot` | Carry one well-scoped issue through the full dev loop autonomously, to a review-ready PR (or merge for small reversible changes) |
 | `/autopilot-batch` | Fan out a queue of issues to parallel worktree subagents, each running `/autopilot`, with an Opus gating review per PR |
+| `/autopilot-triage` | Vet open issues for autonomous resolution and queue the qualifying ones for `/autopilot-batch` |
 | `/bootstrap-prd` | Scaffold PRD-driven development infrastructure into a new project |
 | `/checkpoint` | Quick status update — what's done, in progress, and blocked |
 | `/create-pr` | Create a PR with auto-linked issues and formatted description |

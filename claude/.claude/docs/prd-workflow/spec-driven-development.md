@@ -273,7 +273,8 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
 | `/prd-view` | Render a PRD file as a rich HTML reading view (Dashboard style) for engaged reading and vetting; Markdown stays authoritative, the HTML is ephemeral | Ad-hoc (reading / vetting a spec) |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
-| `/autopilot-batch` | Fan out a queue of issues to parallel worktree subagents, each running `/autopilot` | Per sprint (optional) |
+| `/autopilot-triage` | Vet open issues for autonomous resolution; queue the qualifying ones (`autopilot-queued`) | Per sprint (optional) |
+| `/autopilot-batch` | Fan out the queued issues to parallel worktree subagents, each running `/autopilot` | Per sprint (optional) |
 | `/resolve-issue` | Implement an issue end-to-end; planning checkpoint scales to complexity | Per issue |
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
@@ -358,7 +359,7 @@ Published walkthroughs and QA handoffs (see "Publishing artifacts to remote test
 At the start of each phase:
 
 1. **`/plan-phase`** — Read the relevant PRD files, create GitHub issues with acceptance criteria and implementation order. This is a planning-only skill — no code is written.
-2. **`/autopilot-batch`** _(optional)_ — If the phase contains a batch of small, independent, well-scoped issues (common for chore or fix batches), fan them out: one background worktree subagent per queued issue, each running `/autopilot` to a review-ready PR (Sonnet builds, Opus reviews). Replaces the old manual per-worktree, terminal-per-issue handoff.
+2. **`/autopilot-triage` → `/autopilot-batch`** _(optional)_ — If the phase contains a batch of small, independent, well-scoped issues (common for chore or fix batches), vet them with `/autopilot-triage` (queues the autonomy-ready ones after your confirm), then fan them out with `/autopilot-batch`: one background worktree subagent per queued issue, each running `/autopilot` to a review-ready PR (Sonnet builds, Opus reviews). Replaces the old manual per-worktree, terminal-per-issue handoff.
 
 ### Phase boundary
 
