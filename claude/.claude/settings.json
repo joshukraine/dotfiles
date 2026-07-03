@@ -106,7 +106,7 @@
       "Read(~/.ssh/**)",
       "Read(~/Library/Keychains/**)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
   "hooks": {
