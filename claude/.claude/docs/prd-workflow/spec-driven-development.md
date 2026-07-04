@@ -284,6 +284,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/qa-triage` | Triage a `qa`-labeled report — confirm it against the code, classify it, and draft the tech issue(s) it warrants | Per QA report |
+| `/qa-triage-batch` | Fan out `/qa-triage` across the open `qa` reports; reconcile shared root causes across reports, present one consolidated gate, then create the tech issues | When QA reports accumulate |
 | `/checkpoint` | Quick status check: where am I, what's next | Ad-hoc / returning from break |
 | `/dustoff` | Re-entry assessment for a dormant project: lifecycle stage, staleness, and convention drift → prioritized plan, optionally captured as a tracking issue | Returning after months away |
 | `/debrief` | Detailed walkthrough of completed work | Phase boundary |
@@ -354,6 +355,8 @@ Published walkthroughs and QA handoffs (see "Publishing artifacts to remote test
 
 `/qa-triage` is the gate between an end-user-flavored report and an actionable technical issue: it investigates the report against the code, classifies it (real bug / works-as-designed / enhancement), and drafts the issue(s) it warrants — but never implements. An approved issue then flows through the normal PR cycle. This is the inbound counterpart to the outbound publishing step: `/walkthrough --publish` and `/qa-handoff` send work _out_ to testers; `/qa-triage` brings their findings back _in_.
 
+When reports pile up, **`/qa-triage-batch`** runs `/qa-triage` across the whole open `qa` queue in parallel and reconciles the drafts **across** reports — clustering several reports that share one root cause into a single tech issue — behind one consolidated decision gate. It is the QA-loop sibling of `/autopilot-batch` (autopilot family, Phase 3): it drafts and creates issues, it does not implement. The tech issues it produces feed straight into `/autopilot-triage` → `/autopilot-batch`, completing the funnel from raw tester reports to shipped fixes with human gates at the two right points (what to build, and what to merge).
+
 ### Phase planning
 
 At the start of each phase:
@@ -413,6 +416,7 @@ Skills shift in importance as the project matures (see §6):
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |
 | `/qa-triage` | Rare (pre-launch) | **Frequent** | Ongoing |
+| `/qa-triage-batch` | — | Useful (report backlogs) | Useful (report backlogs) |
 | `/checkpoint` | Ad-hoc | **Frequent** (transition period) | Ad-hoc |
 | `/dustoff` | **On return** | **On return** | **On return** |
 | `/debrief` | **Phase boundary** | Milestone reviews | Rare |
