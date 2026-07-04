@@ -249,6 +249,7 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/prd-view` | Render a PRD Markdown file as a rich HTML reading view in the browser |
 | `/qa-handoff` | Prepare a hands-on QA testing guide for a completed PRD phase |
 | `/qa-triage` | Triage a QA-labeled report, classify it, and draft the technical issue(s) |
+| `/qa-triage-batch` | Fan out `/qa-triage` across the open QA reports, cluster shared root causes across them, and create the tech issues behind one gate |
 | `/readme-refresh` | Audit and update a project README, or bootstrap a new one |
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
