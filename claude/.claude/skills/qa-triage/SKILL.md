@@ -1,7 +1,6 @@
 ---
 name: qa-triage
 description: Triage a QA-labeled report — investigate it against the code, classify it, and draft the technical issue(s) it warrants, stopping for approval before creating anything.
-disable-model-invocation: true
 argument-hint: "[issue-number ...]"
 ---
 

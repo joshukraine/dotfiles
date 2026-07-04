@@ -63,6 +63,7 @@ Changes apply live without a restart. If Neovim ever swallows `Ctrl+↑`/`Ctrl+�
 | `/autopilot 123 --to pr` | Carry one issue through the whole loop autonomously to a review-ready PR (or `--to merge` for small reversible changes) |
 | `/autopilot-triage` | Start-of-day: vet open issues and queue the autonomy-ready ones (`autopilot-queued`) |
 | `/autopilot-batch` | Fan out the `autopilot-queued` queue — one parallel worktree subagent per issue, Opus-reviewed |
+| `/qa-triage-batch` | Fan out `/qa-triage` across the open `qa` reports — reconcile shared root causes across reports, one consolidated gate, then create the tech issues |
 
 Custom skills live in `claude/.claude/skills/`; `/simplify` and `/code-review` are built-in Claude Code skills. Type `/` to browse the full list including PRD-specific skills (`/bootstrap-prd`, `/plan-phase`, `/debrief`, etc.).
 
