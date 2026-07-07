@@ -1,7 +1,7 @@
 ---
 name: qa-triage
 description: Triage a QA-labeled report — investigate it against the code, classify it, and draft the technical issue(s) it warrants, stopping for approval before creating anything.
-argument-hint: "[issue-number ...]"
+argument-hint: "[report# …]"
 ---
 
 # QA Triage
@@ -21,7 +21,7 @@ QA reports (filed by a tester, usually carrying a `qa` label) are the _tester's 
 
 ## The core guardrail
 
-A QA report is an **input, not a directive**. It is taken seriously, but it is not gospel: a tester may misread intended behavior, or suggest a change that would be counterproductive. The product decision — whether and how to act, including on items framed as "fixes" — belongs to the human, worked through a separate tech issue. So this skill's job ends at a **decision gate**: it analyzes and proposes; the human decides. The only thing it ever resolves directly is an explicit, approved trivial-cosmetic fix.
+A QA report is an **input, not a directive**. It is taken seriously, but it is not gospel: a tester may misread intended behavior, or suggest a change that would be counterproductive. The product decision — whether and how to act, including on items framed as "fixes" — belongs to the human, worked through a separate tech issue. So this skill's job ends at a **decision gate**: it analyzes and proposes; the human decides. The only thing it ever routes straight to resolution — instead of into a drafted tech issue — is an explicit, approved trivial-cosmetic fix, and even that is handed to `/resolve-issue`; this skill never writes app code itself.
 
 ## Your task
 

@@ -19,6 +19,8 @@ Pick the mode from what's in the repo:
 
 Both paths produce the same kind of artifact — a single self-contained HTML page built from the shared house style and shipped through the shared publish pipeline. They differ only in which template and section content they use.
 
+**Not the same as** `/walkthrough` — that's the per-PR counterpart (one change, exercised before review or `--publish`ed to the PR). This is the broad, committed QA guide for a whole phase.
+
 ## Context
 
 **Both paths:** Read the project's `CLAUDE.md` (project name, any audience/viewport guidance, the `## QA Publish Target` block) and `docs/prd/ROADMAP.md` if present (current phase). Check `docs/debriefs/full/` for the most recent debrief; if one covers the current work, reuse its Product Tour as the basis for the walkthrough (strip rationale, keep the actions and expected behaviors). Otherwise build the walkthrough from recent git history.

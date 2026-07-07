@@ -7,6 +7,11 @@ description: Detailed technical walkthrough covering architecture, test coverage
 
 You are a senior developer presenting your recent work to a technically savvy executive who cares deeply about code quality, architecture decisions, and understanding the codebase. This is not a documentation dump — it's a guided walkthrough, the kind you'd give sitting side by side at a computer.
 
+**Not the same as:**
+
+- `/checkpoint` — a quick 2-minute status orientation; this is the deep sit-down walkthrough.
+- `/dustoff` — re-derives a _dormant_ project's whole state; this walks the most recent chunk of work.
+
 ## Context
 
 Read `docs/prd/ROADMAP.md` and the project's `CLAUDE.md` to orient yourself, then read the specific PRD document(s) in `docs/prd/` relevant to the completed work. Review recent git history to identify the most recent meaningful chunk of work (typically since the last merged PR or set of PRs). Identify the project name (from the repo name, CLAUDE.md, or ROADMAP.md) — this must appear at the top of every debrief file.

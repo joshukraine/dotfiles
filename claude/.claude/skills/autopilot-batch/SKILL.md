@@ -33,7 +33,7 @@ State each issue's model and a one-line why at the confirm gate. The Opus gating
 
 ### Merge issues are always Opus-built
 
-A build subagent runs the whole `/autopilot` loop at **one** model (a subagent can't switch mid-run), so whichever model builds a `--to merge` issue also makes its merge go/no-go inside `/autopilot` Step 8. The §3 floor is "the merge decision is always Opus." Therefore: **any issue opted into `--to merge` is built by Opus**, regardless of what its class-rubric would otherwise pick. Sonnet only ever builds `--to pr` issues, which stop at a review-ready PR and are Opus-reviewed (Step 4) before you see them. This keeps every autonomous merge Opus-decided without the orchestrator having to re-implement the merge gate. The cost — not using Sonnet for the rare, narrow merge class — is negligible because `--to merge` is opt-in and uncommon.
+A build subagent runs the whole `/autopilot` loop at **one** model (a subagent can't switch mid-run), so whichever model builds a `--to merge` issue also makes its merge go/no-go inside `/autopilot` Step 8. The floor is non-negotiable: the merge decision is always Opus. Therefore: **any issue opted into `--to merge` is built by Opus**, regardless of what its class-rubric would otherwise pick. Sonnet only ever builds `--to pr` issues, which stop at a review-ready PR and are Opus-reviewed (Step 4) before you see them. This keeps every autonomous merge Opus-decided without the orchestrator having to re-implement the merge gate. The cost — not using Sonnet for the rare, narrow merge class — is negligible because `--to merge` is opt-in and uncommon.
 
 ## Escape hatch (batch-level)
 

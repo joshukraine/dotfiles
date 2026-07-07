@@ -9,6 +9,8 @@ Pre-PR deviation check against the project spec. Run this before `/create-pr` to
 
 > **Reference:** See `~/.claude/docs/prd-workflow/spec-driven-development.md` §2–§4 for the deviation threshold, workflow, and checkpoint cadence that this skill operationalizes.
 
+**Not the same as** `/code-review` — that inspects the diff for correctness bugs and cleanups; this checks the diff against the _spec and docs_ for deviations. They run at the same pre-PR moment and complement each other.
+
 ## Your task
 
 Perform a lightweight, advisory review of the current branch's changes against the project's spec and living documents. This is a read-only check — do not modify any files.
