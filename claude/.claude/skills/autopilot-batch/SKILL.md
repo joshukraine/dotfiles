@@ -62,7 +62,7 @@ For each issue, spawn a **background** subagent:
 - `isolation: worktree` — its own checkout, so parallel edits across issues can't collide.
 - `run_in_background: true` — they run concurrently.
 - `model:` the issue's assigned build model (Sonnet or Opus per the policy above; Opus for any `--to merge` issue).
-- prompt: run `/autopilot <n> --to <tier>` to completion, then report back — as the final message — the PR number and URL, the loop outcome (which steps ran / were n·a), a one-line summary of the change, and, if it stopped at the escape hatch, exactly where and why.
+- prompt: run `/autopilot <n> --to <tier>` to completion — running any `bin/ci` invocation serially (`PARALLEL_WORKERS=1 bin/ci`; see the serial-CI note under **Important**) — then report back, as the final message, the PR number and URL, the loop outcome (which steps ran / were n·a), a one-line summary of the change, and, if it stopped at the escape hatch, exactly where and why.
 
 Spawn them together so they run in parallel. Each subagent lands on an auto-named worktree branch (`worktree-agent-…`); inside it, `/autopilot` → `/resolve-issue` creates the proper `feat/gh-<n>-…` branch, commits, pushes, and opens the PR from it. Nothing to pre-create.
 
@@ -80,7 +80,7 @@ A subagent that **stopped** at the escape hatch keeps its `autopilot-queued` lab
 For each PR built by a **Sonnet** subagent, spawn an **Opus** review subagent:
 
 - `model: opus`, `isolation: worktree`.
-- prompt: check out the PR branch (`gh pr checkout <PR>`), run `/code-review` at `high` (escalate to `max` for a large or security-/data-sensitive diff), fix real correctness bugs and clear quality wins, commit and push (this updates the open PR), then re-run `bin/ci` so the required sign-off attaches to the final commit. Report the verdict: clean / _N_ fixes applied / a finding that needs a product decision (→ flag it for the human, don't guess).
+- prompt: check out the PR branch (`gh pr checkout <PR>`), run `/code-review` at `high` (escalate to `max` for a large or security-/data-sensitive diff), fix real correctness bugs and clear quality wins, commit and push (this updates the open PR), then re-run `bin/ci` **serially** (`PARALLEL_WORKERS=1 bin/ci`; see the serial-CI note under **Important**) so the required sign-off attaches to the final commit. Report the verdict: clean / _N_ fixes applied / a finding that needs a product decision (→ flag it for the human, don't guess).
 
 This is the Opus floor: it runs on every Sonnet build before the PR is "review-ready" for you, so a Sonnet miss is caught and fixed, never shipped. `--to merge` issues don't pass through here — they were Opus-built and Opus-reviewed inside their own `/autopilot` run, and merged there only if the narrow-class gate passed.
 
@@ -114,3 +114,4 @@ Post a batch summary:
 - **Every autonomous merge is Opus-decided** — `--merge` issues are Opus-built, so the merge go/no-go is Opus. Every Sonnet build is Opus-reviewed (Step 4) before it reaches you.
 - **One stop never halts the batch.** A stopped issue is set aside with its label intact; the rest continue. A wrong merge is the only truly bad outcome, and the gates above prevent it.
 - **Compose, don't re-implement.** Build subagents run the real `/autopilot`; review subagents run the real `/code-review`. This skill only orchestrates, gates the model floor, and manages the queue label and worktrees — so improvements to those skills flow through untouched.
+- **Run `bin/ci` serially in the batch (`PARALLEL_WORKERS=1 bin/ci`).** Several worktree subagents run `bin/ci` at once, and on macOS the parallel Minitest system-test workers fork-starve under that combined load — producing flaky failures and fork-crash storms that aren't real, then costly retries. A single test worker sidesteps it. This applies to both the build subagents' internal `bin/ci` (Step 2) and the Opus gating review's `bin/ci` (Step 4). It is batch-scoped: standalone `/autopilot` runs (one worktree, no contention) can stay parallel.
