@@ -247,11 +247,12 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/merge-pr` | Merge a PR with status checks, squash merge, and branch cleanup |
 | `/plan-phase` | Draft implementation plan and create GitHub issues (no code written) |
 | `/prd-view` | Render a PRD Markdown file as a rich HTML reading view in the browser |
-| `/qa-handoff` | Prepare a hands-on QA testing guide for a completed PRD phase |
+| `/qa-handoff` | Prepare a hands-on QA testing guide (Rails apps or static/Hugo sites) for a completed PRD phase |
 | `/qa-triage` | Triage a QA-labeled report, classify it, and draft the technical issue(s) |
 | `/qa-triage-batch` | Fan out `/qa-triage` across the open QA reports, cluster shared root causes across them, and create the tech issues behind one gate |
 | `/readme-refresh` | Audit and update a project README, or bootstrap a new one |
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
+| `/sidecar` | Research-only mode for a secondary session sharing a working dir — no tracked-file edits or git mutations |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
 | `/update-deps` | Dependabot-aware dependency updates with security audit, CI validation, and a unified PR |
 | `/walkthrough` | Generate a browser walkthrough of a PR's user-facing changes |

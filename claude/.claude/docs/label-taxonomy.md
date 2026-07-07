@@ -89,6 +89,13 @@ A unified vocabulary for classifying work across commits, branches, issues, and 
 | `wontfix` | `#FFFFFF` | Reviewed and rejected |
 | `duplicate` | `#CFD3D7` | Duplicate of another issue |
 
+**Workflow labels** (drive the autonomy and QA skill loops):
+
+| Label | Color | Description |
+| --- | --- | --- |
+| `qa` | `#5DBCD2` | Tester-filed QA report — the input to `/qa-triage` and `/qa-triage-batch` |
+| `autopilot-queued` | `#5319E7` | Vetted by `/autopilot-triage` for autonomous resolution; pending an `/autopilot-batch` run |
+
 ### 4. GitHub Projects Board
 
 The board carries **two independent axes — keep them separate.** Importance is the priority field; sequence/intent is the status column. "I want to do this next" is expressed by moving an issue to **Up Next** and ordering it — _not_ by bumping its priority.
