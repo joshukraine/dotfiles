@@ -1,6 +1,7 @@
 ---
 name: autopilot-batch
 description: Fan out a batch of autopilot-queued issues to parallel background worktree subagents — each runs /autopilot — with an Opus gating review on every Sonnet-built PR.
+disable-model-invocation: true
 argument-hint: "[--merge <issue#,…>]"
 ---
 

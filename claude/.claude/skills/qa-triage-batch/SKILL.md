@@ -1,6 +1,7 @@
 ---
 name: qa-triage-batch
 description: Fan out /qa-triage across a queue of qa-labeled reports in parallel, reconcile them across reports to cluster shared root causes, present one consolidated decision gate, and — on approval — create the resulting tech issues.
+disable-model-invocation: true
 argument-hint: "[report# …]"
 ---
 
