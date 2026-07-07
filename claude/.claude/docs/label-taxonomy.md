@@ -96,6 +96,14 @@ A unified vocabulary for classifying work across commits, branches, issues, and 
 | `qa` | `#5DBCD2` | Tester-filed QA report — the input to `/qa-triage` and `/qa-triage-batch` |
 | `autopilot-queued` | `#5319E7` | Vetted by `/autopilot-triage` for autonomous resolution; pending an `/autopilot-batch` run |
 
+**Structural labels** (optional, mark an issue's role):
+
+| Label | Color | Description |
+| --- | --- | --- |
+| `epic` | `#7057FF` | Long-running tracking issue for a large feature spanning multiple PRs |
+
+An **epic** is the durable design brief and system of record for a multi-issue feature: it carries the cross-cutting decisions, a phasing plan, and links to its child issues, while the children hold the tactical, PR-sized work. It's applied alongside a type label (usually `feat`) and stays open until the whole feature lands.
+
 ### 4. GitHub Projects Board
 
 The board carries **two independent axes — keep them separate.** Importance is the priority field; sequence/intent is the status column. "I want to do this next" is expressed by moving an issue to **Up Next** and ordering it — _not_ by bumping its priority.
