@@ -7,7 +7,7 @@ argument-hint: "[PR-number]"
 
 # Merge Pull Request
 
-Merge a pull request with consistent practices: verify checks, squash merge, clean up the branch, and pull latest main.
+Merge a pull request with consistent practices: verify checks, squash merge, clean up the branch, and pull the latest base branch.
 
 ## Command Options
 
@@ -88,7 +88,7 @@ When inside a worktree, `git switch` to the base branch will fail because it is 
 - PR: #N — [title]
 - Remote branch: deleted
 - Local branch: deleted (or kept — reason)
-- Local main: up to date
+- Local <base-branch>: up to date
 ```
 
 **Worktree** — report:
@@ -98,7 +98,7 @@ When inside a worktree, `git switch` to the base branch will fail because it is 
 
 - PR: #N — [title]
 - Remote branch: deleted
-- Local main: up to date (pulled in primary worktree)
+- Local <base-branch>: up to date (pulled in primary worktree)
 
 ## Worktree cleanup (run from outside this directory)
 
