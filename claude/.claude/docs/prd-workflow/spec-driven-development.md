@@ -273,15 +273,17 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
 | `/prd-view` | Render a PRD file as a rich HTML reading view (Dashboard style) for engaged reading and vetting; Markdown stays authoritative, the HTML is ephemeral | Ad-hoc (reading / vetting a spec) |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
+| `/autopilot` | Carry one issue through the full dev loop autonomously — to a review-ready PR, or merge+deploy for small reversible changes (`--to merge`) | Per issue (unattended) |
 | `/autopilot-triage` | Vet open issues for autonomous resolution; queue the qualifying ones (`autopilot-queued`) | Per sprint (optional) |
 | `/autopilot-batch` | Fan out the queued issues to parallel worktree subagents, each running `/autopilot` | Per sprint (optional) |
 | `/resolve-issue` | Implement an issue end-to-end; planning checkpoint scales to complexity | Per issue |
 | `/simplify` | Review changed code for reuse, quality, efficiency | Pre-PR |
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
+| `/verify` | Drive the running app end-to-end to confirm a change works (agent-driven; built-in) | Pre-review (user-facing PRs) |
 | `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | Pre-review, then pre-merge (user-facing PRs) |
 | `/code-review` | Review the diff for correctness bugs and cleanups at a chosen effort level (built-in; `/review` for an existing PR by number) | Pre-merge |
-| `/merge-pr` | Squash merge, clean up branch, pull latest main | Post-review |
+| `/merge-pr` | Squash merge, clean up branch, pull the default branch | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/qa-triage` | Triage a `qa`-labeled report — confirm it against the code, classify it, and draft the tech issue(s) it warrants | Per QA report |
 | `/qa-triage-batch` | Fan out `/qa-triage` across the open `qa` reports; reconcile shared root causes across reports, present one consolidated gate, then create the tech issues | When QA reports accumulate |
@@ -291,7 +293,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
-> **Note:** `/simplify` and `/code-review` are built-in Claude Code skills. All other entries listed above are custom skills defined in `~/.claude/skills/`.
+> **Note:** `/simplify`, `/code-review`, and `/verify` are built-in Claude Code skills. All other entries listed above are custom skills defined in `~/.claude/skills/`.
 
 ### The PR cycle (inner loop)
 
@@ -326,7 +328,7 @@ This is where most development time is spent. One pass through this cycle produc
    └─ /walkthrough --publish   (renders HTML, uploads to project's QA host, posts PR comment with link)
 
 10. Merge
-   └─ /merge-pr                (squash merge, clean up, pull main)
+   └─ /merge-pr                (squash merge, clean up, pull the default branch)
 ```
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
@@ -335,7 +337,7 @@ Step 6 is `/verify` (user-facing PRs only): the _agent_ drives the running app a
 
 Steps 7 and 9 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 7, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 9, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
 
-Step 10 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest main — ensuring a consistent end state after every PR.
+Step 10 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest changes on the default branch — ensuring a consistent end state after every PR.
 
 **Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the _pushed_ branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any walkthrough or review fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
 
@@ -406,6 +408,7 @@ Skills shift in importance as the project matures (see §6):
 | `/bootstrap-prd` | **Setup** | — | — |
 | `/prd-view` | **Spec vetting** | Occasional | Rare |
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
+| `/autopilot` | Optional | Useful (well-scoped issues) | Useful (well-scoped issues) |
 | `/autopilot-batch` | Optional | Useful for bug batches | Useful for bug batches |
 | `/resolve-issue` | **Primary workflow** | **Primary workflow** | **Primary workflow** |
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
@@ -446,14 +449,14 @@ The per-PR deviation check from §4 is supported by the `/drift-check` skill.
 
 **When to run:** Before `/create-pr`, after implementation is complete. Also useful ad-hoc when you suspect drift.
 
-**What it would do:**
+**What it does:**
 
 1. **Identify the relevant spec** — from the branch name, linked issue, or ROADMAP, determine which PRD section or living document this work relates to.
 2. **Scan for deviation signals** — review the diff for new models, columns, associations, lifecycle changes, URL patterns, or notification triggers that aren't in the spec.
 3. **Check for documentation gaps** — are there uncommitted CHANGELOG entries that should exist? Is the ROADMAP checkbox marked?
 4. **Surface questions** — present findings as a checklist, not a pass/fail. The developer (human or AI) decides what needs action.
 
-**What it would NOT do:**
+**What it does NOT do:**
 
 - Automatically update the CHANGELOG or PRD files. Documentation changes should be deliberate.
 - Block the PR. It's advisory — a nudge, not a gate.

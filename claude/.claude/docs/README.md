@@ -20,4 +20,4 @@ Everything related to spec-driven (PRD-based) development lives in `prd-workflow
 
 ## Skills
 
-Custom skills live in `~/.claude/skills/`. See the spec-driven development handbook (§7 "Skills in the Development Cycle") for a full skill map and lifecycle stage guidance.
+Custom skills live in `~/.claude/skills/`. See the spec-driven development handbook — [`spec-driven-development.md`](prd-workflow/spec-driven-development.md) §7 "Skills in the Development Cycle" — for a full skill map and lifecycle stage guidance.
