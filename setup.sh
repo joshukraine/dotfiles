@@ -278,6 +278,7 @@ handle_stow_conflicts() {
     ".local/bin/bb"
     ".local/bin/bbc"
     ".local/bin/bbcf"
+    ".local/bin/bubc"
     ".local/bin/bubo"
     ".local/bin/colortest"
     ".local/bin/copy"

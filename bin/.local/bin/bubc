@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# Update Homebrew, upgrade everything, and clean up
+# Usage: bubc
+#
+# Casks are upgraded with --force. Casks marked `auto_updates true` ship their own
+# updaters, so Homebrew skips uninstalling the old version and then refuses to
+# overwrite the app already in /Applications, failing with "It seems there is
+# already an App at ...". --force lets it replace the old app in place.
+#
+# Quit apps before upgrading them: --force will overwrite a running app bundle.
+
+set -euo pipefail
+
+echo "-> Updating Homebrew"
+brew update
+
+echo "-> Upgrading formulae"
+brew upgrade --formula
+
+echo "-> Upgrading casks"
+brew upgrade --cask --force
+
+echo "-> Cleaning up"
+brew cleanup
