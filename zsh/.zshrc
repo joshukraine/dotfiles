@@ -6,6 +6,16 @@ else
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
+# brew shellenv exports FPATH, and zsh's core functions live at a version-pinned
+# Cellar path — so a zsh upgrade leaves pre-upgrade processes (tmux server,
+# terminal app) leaking a dead fpath entry into every new shell. Self-heal here,
+# before plugins load: drop dead entries, re-add the version-agnostic path.
+typeset -U fpath
+# shellcheck disable=SC1036,SC1072,SC1073,SC1009
+fpath=(${^fpath}(N-/))
+# shellcheck disable=SC1036,SC1072,SC1073,SC1009
+fpath+=("${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh/functions"(N-/))
+
 export PATH="/opt/homebrew/opt/trash/bin:/opt/homebrew/opt/postgresql@17/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # Shared environment variables
