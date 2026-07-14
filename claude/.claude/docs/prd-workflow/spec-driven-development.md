@@ -281,7 +281,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
 | `/verify` | Drive the running app end-to-end to confirm a change works (agent-driven; built-in) | Pre-review (user-facing PRs) |
-| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | Pre-review, then pre-merge (user-facing PRs) |
+| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | On demand (complex features; projects with a non-technical tester) |
 | `/code-review` | Review the diff for correctness bugs and cleanups at a chosen effort level (built-in; `/review` for an existing PR by number) | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull the default branch | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
@@ -318,28 +318,27 @@ This is where most development time is spent. One pass through this cycle produc
 6. Verify
    └─ /verify                  (agent drives the running app — user-facing PRs only)
 
-7. Walkthrough
-   └─ /walkthrough             (human browser pre-flight — user-facing PRs only)
-
-8. Review
+7. Review
    └─ /code-review             (correctness + cleanups; built-in /review for an existing PR by number)
 
-9. Publish walkthrough
-   └─ /walkthrough --publish   (renders HTML, uploads to project's QA host, posts PR comment with link)
-
-10. Merge
+8. Merge
    └─ /merge-pr                (squash merge, clean up, pull the default branch)
 ```
 
 Steps 3 and 4 are the pre-PR quality gates. `/simplify` looks at the code itself; `/drift-check` looks at the code's relationship to the spec. Together they catch both implementation quality issues and specification drift before the PR is created.
 
-Step 6 is `/verify` (user-facing PRs only): the _agent_ drives the running app and reports what it observed, confirming the change actually works and catching runtime bugs before review. It complements the walkthrough rather than duplicating it — `/verify` is agent-driven (the agent runs the feature and judges the output), while `/walkthrough` is human-driven (the agent writes a checklist for the orchestrator to exercise). The two catch different classes of issue (mechanics/regressions vs. UX/visual judgment), so run both for substantive user-facing work; skip both when there is no runnable user-facing surface.
+Step 6 is `/verify` (user-facing PRs only): the _agent_ drives the running app and reports what it observed, confirming the change actually works and catching runtime bugs before review. It is the loop's single routine user-facing check — the agent runs the feature and judges the output, so a change that does not actually work is caught before review attention is spent on the code. Run it for substantive user-facing work; skip it when there is no runnable user-facing surface.
 
-Steps 7 and 9 are the walkthrough's two slots, both conditional on the PR having user-facing changes. At step 7, `/walkthrough` produces a throwaway browser checklist (Markdown, in `tmp/`) so the orchestrator can exercise the feature before spending review attention on the code; it is re-run as fixes land. At step 9, once the code is final, `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (when one is declared — see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it so the QA tester can follow it after deploy. For PRs with no user-facing surface the skill reports that and exits at either slot.
+**Walkthroughs are on demand, not routine.** `/walkthrough` writes a browser checklist (Markdown, in `tmp/`) for a _human_ to exercise, and `/walkthrough --publish` renders a rich HTML version, uploads it to the project's QA host (see "Publishing artifacts to remote testers" below), and posts a PR comment linking to it. Neither is a step in the default loop. `/verify` already drives the running app on every user-facing PR, so for most changes a walkthrough re-checks by hand what `/verify` just demonstrated live — a tax rather than a gate, and one that gets skipped in practice. Reach for it when the routine checks are genuinely not enough:
 
-Step 10 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest changes on the default branch — ensuring a consistent end state after every PR.
+- **A complex or high-risk feature** — you want to drive the UI yourself, exercising judgment (UX, visual polish, feel) that an agent's report does not capture.
+- **A project with a non-technical QA tester downstream** — someone who is not in the code and needs a reproduction guide to follow after deploy. This is the case the walkthrough was designed for. Such a project should make both slots routine — `/walkthrough` before review, `/walkthrough --publish` before merge — and say so in its own `CLAUDE.md`, so the choice is explicit rather than assumed.
 
-**Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the _pushed_ branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any walkthrough or review fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
+If the "tester" is a second developer running their own Claude sessions, they are not that reader, and published walkthroughs go unread. Leave both on demand.
+
+Step 8 closes the loop. `/merge-pr` encapsulates the merge preferences (squash merge by default), cleans up the feature branch, and pulls the latest changes on the default branch — ensuring a consistent end state after every PR.
+
+**Local CI sign-off as the gate.** Some projects don't run CI on pull requests — e.g. GitHub Actions fires only on push to `main` — and instead gate merges on a local `bin/ci` run that records a `gh signoff` status on the branch. Two consequences for ordering: (1) the sign-off attaches to the _pushed_ branch, so the `bin/ci` gate runs **after** `/create-pr`, never before it; and (2) the sign-off must cover the exact commit that merges, so re-run `bin/ci` after any review or QA fix. Don't add a separate pre-PR `bin/ci` pass — `/resolve-issue` and `/simplify` already validate locally, and a pre-PR run can't sign off anyway.
 
 ### The QA feedback loop
 
@@ -414,7 +413,7 @@ Skills shift in importance as the project matures (see §6):
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
 | `/drift-check` | **Critical** | Important | Light (living docs) |
 | `/create-pr` | **Always** | **Always** | **Always** |
-| `/walkthrough` | User-facing PRs | User-facing PRs | User-facing PRs |
+| `/walkthrough` | On demand | On demand | On demand |
 | `/code-review` | Pre-merge | Pre-merge | Pre-merge |
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |

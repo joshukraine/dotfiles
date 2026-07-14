@@ -57,6 +57,8 @@ QA — walkthroughs (`/walkthrough`) and `/verify` runs — is gated on launch s
 
 Flip this flag to **POST-LAUNCH** as part of the launch cutover. The `/walkthrough` skill reads it: pre-launch it offers the production-testing callout; post-launch it emits the local-dev-only warning instead.
 
+**Walkthroughs are on demand.** `/verify` is the routine user-facing check in the PR loop; `/walkthrough` and `/walkthrough --publish` are not. Invoke them when a feature is complex enough to warrant a human browser pass, or when this project has a QA tester who is not in the code and needs a reproduction guide to follow after deploy. A project with such a tester should make both routine — `/walkthrough` before review, `--publish` before merge — and record that decision here, so it is an explicit choice rather than a silent default. If the tester is another developer running their own Claude sessions, leave both on demand: a published walkthrough has no reader. However a walkthrough is invoked, the launch-status gate above still binds.
+
 ## QA Publish Target
 
 <!--
