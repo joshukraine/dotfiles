@@ -6,14 +6,34 @@
 # real file is gitignored, so your project names and color choices never get
 # committed or published.
 #
-# Map each tmux session name (the `#S` shown in the status-bar pill) to a color:
-# hex (#rrggbb), a named color (e.g. "red"), or colour0-255. Return empty to keep
-# the theme default. With `tat`, the session name is the directory's basename with
-# dots converted to dashes -- so a `my.app` directory is session `my-app`.
+# Map each tmux session name (the `#S` shown in the status-bar pill) to a color
+# from the palette below. Return empty to keep the theme default. With `tat`, the
+# session name is the directory's basename with dots converted to dashes -- so a
+# `my.app` directory is session `my-app`. Other launchers may differ: tmuxinator,
+# for one, takes the session name from the `name:` field in its project YAML.
+#
+# Two sessions that are really the same project (say, a repo you open from two
+# directories) can share a color -- just point both at the same palette entry.
+# shellcheck disable=SC2034  # the palette is a menu; unassigned colors are spares, not dead code.
 accent_for() {
+  # The theme paints the accent as the pill's BACKGROUND behind fixed near-black
+  # text (#1b1d2b), so every color here is light enough to stay readable on it.
+  # Swap in your own hexes freely, but keep them light for that reason. Ordered
+  # around the hue wheel: adjacent entries are the easiest to confuse at a
+  # glance, so give neighboring sessions colors from opposite ends.
+  local yellow="#ffc233"
+  local green="#93db29"
+  local cyan="#22d3ee"
+  local blue="#407dff"
+  local purple="#9d61ff"
+  local pink="#ff5fc8"
+  local red="#ff3d4b"
+  local orange="#ff6e34"
+  local gray="#828bb8" # muted -- for a session you want present but not shouting
+
   case "$1" in
-    my-work-app) printf '%s' "#ff966c" ;;  # orange
-    my-side-proj) printf '%s' "#c3e88d" ;; # green
-    *) printf '%s' "" ;;
+    my-work-app)  printf '%s' "${orange}" ;;
+    my-side-proj) printf '%s' "${green}" ;;
+    *)            printf '%s' "" ;;
   esac
 }
