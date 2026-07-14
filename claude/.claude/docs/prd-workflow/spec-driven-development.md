@@ -281,7 +281,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/drift-check` | Deviation check against the spec | Pre-PR |
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
 | `/verify` | Drive the running app end-to-end to confirm a change works (agent-driven; built-in) | Pre-review (user-facing PRs) |
-| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | Pre-review, then pre-merge (user-facing PRs) |
+| `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | On demand (complex features; projects with a non-technical tester) |
 | `/code-review` | Review the diff for correctness bugs and cleanups at a chosen effort level (built-in; `/review` for an existing PR by number) | Pre-merge |
 | `/merge-pr` | Squash merge, clean up branch, pull the default branch | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
@@ -413,7 +413,7 @@ Skills shift in importance as the project matures (see §6):
 | `/simplify` | Pre-PR | Pre-PR | Pre-PR |
 | `/drift-check` | **Critical** | Important | Light (living docs) |
 | `/create-pr` | **Always** | **Always** | **Always** |
-| `/walkthrough` | User-facing PRs | User-facing PRs | User-facing PRs |
+| `/walkthrough` | On demand | On demand | On demand |
 | `/code-review` | Pre-merge | Pre-merge | Pre-merge |
 | `/merge-pr` | **Always** | **Always** | **Always** |
 | `/qa-handoff` | Major features | Key changes | Rare |
