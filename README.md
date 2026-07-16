@@ -252,6 +252,7 @@ Custom [skills][agent-skills] provide structured workflows for the full developm
 | `/qa-triage-batch` | Fan out `/qa-triage` across the open QA reports, cluster shared root causes across them, and create the tech issues behind one gate |
 | `/readme-refresh` | Audit and update a project README, or bootstrap a new one |
 | `/resolve-issue` | Structured workflow for resolving a GitHub issue end-to-end |
+| `/ruby-gc` | Audit asdf-installed Ruby versions against project pins and remove unreferenced ones (dry-run by default) |
 | `/sidecar` | Research-only mode for a secondary session sharing a working dir — no tracked-file edits or git mutations |
 | `/todoist-cli` | Manage Todoist tasks, projects, and labels via the `td` CLI |
 | `/update-deps` | Dependabot-aware dependency updates with security audit, CI validation, and a unified PR |
