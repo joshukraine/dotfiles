@@ -11,7 +11,6 @@ This is a personal dotfiles repository for macOS using GNU Stow for symlink mana
 The repository is organized with each top-level directory representing a tool or application configuration:
 
 - `asdf/` - asdf version manager configuration
-- `bash/` - Bash shell configuration
 - `bin/` - Custom shell scripts and utilities
 - `brew/` - Homebrew Brewfile for package management
 - `claude/` - Claude AI assistant configuration

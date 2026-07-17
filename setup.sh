@@ -250,7 +250,6 @@ handle_stow_conflicts() {
 
   local stow_conflicts=(
     ".asdfrc"
-    ".bashrc"
     ".claude/CLAUDE.md"
     ".claude/cheatsheet.md"
     ".claude/skills"
