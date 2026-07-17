@@ -3,7 +3,7 @@
 # Run dotfiles test suite using bats-core
 #
 # Usage: run-tests [category]
-#   category: all (default), git, abbr, presets
+#   category: all (default), git, abbr, presets, bubo
 
 set -e
 
@@ -40,9 +40,13 @@ case "${category}" in
     echo "Running merge-presets tests..."
     bats tests/merge_presets/
     ;;
+  bubo)
+    echo "Running bubo staleness-report tests..."
+    bats tests/bubo/
+    ;;
   *)
     echo "Unknown category: ${category}" >&2
-    echo "Available: all, git, abbr, presets" >&2
+    echo "Available: all, git, abbr, presets, bubo" >&2
     exit 1
     ;;
 esac
