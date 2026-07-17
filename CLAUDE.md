@@ -74,6 +74,22 @@ This repo overrides the global PR-first default. Small changes — config tweaks
 - Starship prompt for consistent, informative shell prompting
 - Smart git functions with automatic branch detection (gpum, grbm, gcom, gbrm)
 
+#### Human vs. Agent Shells
+
+This config serves humans at an interactive prompt and coding agents in non-interactive shells, which want opposite things. The rule:
+
+> If it is for humans — pretty output, confirmation prompts, muscle memory — make it an **abbreviation**.
+> If it must be an **alias**, it will reach agents, so it has to be non-interactive, plain, and parse-stable.
+
+Abbreviations cannot reach agents (expansion needs ZLE), but aliases do — Claude Code snapshots the shell and replays it into every tool call. So the last line of `.zshrc` drops the alias layer in non-interactive shells (`[[ -o interactive ]] || unalias -a`). It must stay last, since the exa plugin defines `ls`/`ll`/`la`/`tree` of its own. Functions and environment are untouched.
+
+Two consequences worth knowing when working in this repo:
+
+- **Add human conveniences as abbreviations, not aliases.** Anything with a confirmation prompt or decorated output belongs in `abbreviations.zsh`.
+- **A shell-config fix does not reach a running agent session.** Snapshots are cached and replayed, so an in-flight session keeps the old aliases until it restarts.
+
+→ See `zsh/README.md` "Agents and the Alias Layer" for the full reasoning, the evidence behind the guard, and the optional-value flag trap.
+
 ### Stow-based Symlink Management
 
 - GNU Stow creates symlinks from dotfiles directory to `$HOME`
