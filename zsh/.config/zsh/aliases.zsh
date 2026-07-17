@@ -9,8 +9,13 @@ alias vim='nvim'
 alias history='fc -li 1'
 
 # ls > eza
-# Other aliases handled by exa plugin (uses eza under the hood)
+# Other aliases (ll, la, tree) handled by the exa plugin (uses eza under the hood).
 # https://github.com/zap-zsh/exa
+# Override the plugin's `ls`: upstream uses a bare `--icons`, whose optional value
+# swallows a following path (`ls /tmp` -> error). Bare already defaults to auto, so
+# pinning `=auto` is behaviour-identical. Sourced after plugins.zsh, and zsh resolves
+# aliases at use time, so this fixes ll/la/tree too.
+alias ls='eza --group-directories-first --icons=auto'
 
 # Middleman
 alias mma='bundle exec middleman article'
