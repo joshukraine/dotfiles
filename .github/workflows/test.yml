@@ -15,7 +15,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: brew install bats-core shellcheck zsh markdownlint-cli2 stow
+        # zsh-abbr (olets' tap, ~1MB, no dependencies) lets the abbreviation
+        # registration test actually run here rather than skip. Without it that
+        # test only ever exercises a maintainer's laptop.
+        run: >-
+          brew install bats-core shellcheck zsh markdownlint-cli2 stow
+          olets/tap/zsh-abbr
 
       - name: Setup test environment
         run: |

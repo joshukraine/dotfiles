@@ -60,11 +60,22 @@ setup() {
   # to parse. zsh sources this file with INTERACTIVE_COMMENTS off, so a trailing
   # `# comment` on an abbr line is read as arguments and the line is dropped
   # silently. Compare the file against what zsh-abbr actually loaded.
+  #
+  # Load zsh-abbr against the repo's file directly instead of asking a live
+  # shell. `zsh -i` would read ~/.zshrc, which measures whatever the machine
+  # happens to have stowed rather than what is committed here, and leaves the
+  # test unrunnable anywhere ~/.zshrc does not exist. `-f` skips rc files, so
+  # this reads the repo file and behaves the same everywhere.
   local abbr_file="${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh"
-  local in_file loaded
+  local brew_prefix abbr_plugin in_file loaded
+
+  brew_prefix=$(brew --prefix 2>/dev/null) || skip "homebrew not available"
+  abbr_plugin="${brew_prefix}/share/zsh-abbr/zsh-abbr.zsh"
+  [ -r "${abbr_plugin}" ] || skip "zsh-abbr not installed"
 
   in_file=$(grep -c '^abbr ' "${abbr_file}")
-  loaded=$(zsh -i -c 'abbr list 2>/dev/null | wc -l' 2>/dev/null | tr -d ' ')
+  loaded=$(ABBR_USER_ABBREVIATIONS_FILE="${abbr_file}" \
+    zsh -f -i -c ". '${abbr_plugin}'; abbr list | wc -l" 2>/dev/null | tr -d ' ')
 
   [ "${in_file}" -eq "${loaded}" ]
 }
