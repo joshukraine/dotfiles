@@ -93,3 +93,25 @@ fi
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# Keep the alias layer away from agents.
+#
+# Aliases are the human presentation layer: pretty output, muscle memory. Coding
+# agents (Claude Code) run non-interactive shells that want the opposite — plain,
+# parse-stable output. Abbreviations already can't reach agents (expansion needs
+# ZLE), but aliases do: Claude Code snapshots the shell and replays it into every
+# tool call. Dropping them here means an agent sees /bin/ls, not eza.
+#
+# This works because that snapshot is taken from a LOGIN, NON-INTERACTIVE shell —
+# verified, not assumed: its recorded options include `login` but not `interactive`,
+# and its captured function set matches a non-interactive source exactly (74 vs the
+# 96 an interactive one yields).
+#
+# Must stay last. Aliases arrive from three places — plugins.zsh (the exa plugin
+# defines ls/ll/la/tree), aliases.zsh, and .zshrc.local — and only a sweep after
+# all of them catches every one. Guarding an individual block instead would leave
+# the plugin's own `ls` alive for agents.
+#
+# Functions and environment are untouched, so gcom/gpum/grbm, PATH, and asdf shims
+# all still work for agents.
+[[ -o interactive ]] || unalias -a

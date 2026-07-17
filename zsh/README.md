@@ -11,6 +11,53 @@ Zsh is the primary shell, configured with [zsh-abbr](https://zsh-abbr.olets.dev)
 | `.config/zsh/plugins.zsh`            | Plugin declarations (loaded by Zap)                              |
 | `.config/zsh/*.sh`                   | Topic-specific config (docker, aliases, etc.)                    |
 
+## Agents and the Alias Layer
+
+This config serves two audiences that want opposite things. A human at a prompt wants pretty output, colour, and confirmation prompts. A coding agent (Claude Code) runs a **non-interactive** shell and wants plain, parseable, non-blocking output. Where they collide, the agent loses silently.
+
+The two layers behave completely differently:
+
+| Layer                      | Count | Reaches agents? | Why                                                        |
+| -------------------------- | ----- | --------------- | ---------------------------------------------------------- |
+| **Abbreviations** (zsh-abbr) | ~340  | **No**          | expansion needs ZLE; a non-interactive shell has no line editor |
+| **Aliases**                | 32    | **Yes**         | Claude Code snapshots the shell and replays it into every tool call |
+
+The rule that falls out:
+
+> If it is for humans — pretty output, confirmation prompts, muscle memory — make it an **abbreviation**.
+> If it must be an **alias**, it will reach agents, so it has to be non-interactive, plain, and parse-stable.
+
+The abbreviation layer is correct _by construction_. `abbr "cp"="gcp -iv"` and `abbr "mv"="mv -iv"` are the single worst class of agent hazard — a confirmation prompt with no TTY blocks forever — and they are safely quarantined purely by being abbreviations.
+
+### The Guard
+
+The last line of `.zshrc` sweeps the alias layer away from agents:
+
+```bash
+[[ -o interactive ]] || unalias -a
+```
+
+This works because Claude Code takes its snapshot from a **login, non-interactive** shell. That was verified rather than assumed: the snapshot's own recorded options include `login` but not `interactive`, and replaying Claude Code's exact capture (`typeset +f | grep -vE '^_[^_]'`) non-interactively reproduces the real snapshot's function set exactly, where an interactive shell yields extra ZLE and fzf widgets that appear nowhere in it.
+
+**Placement is load-bearing — it must stay last.** Aliases arrive from three places: `plugins.zsh` (the [exa plugin](https://github.com/zap-zsh/exa) defines `ls`, `ll`, `la`, `tree`), `aliases.zsh`, and `.zshrc.local`. Only a sweep after all three catches every one. Guarding an individual block instead would leave the plugin's own `ls` alive for agents — and on a fork whose plugin clone predates the upstream fix, it would strip the local `--icons=auto` pin while leaving the bare `--icons` alias in place, reintroducing the very bug that pin prevents.
+
+Agents keep everything they actually need. Only aliases are swept: functions (`gcom`, `gpum`, `grbm`, `gll`, `loadsecrets`), `PATH`, asdf shims, and environment variables are untouched. An agent simply sees `/bin/ls` instead of eza.
+
+### The Optional-Value Flag Trap
+
+eza's `--icons`, `--hyperlink`, `--classify`, and `--color` all take an **optional** value. Written bare before a path, each one swallows it:
+
+```bash
+eza --icons /tmp
+# error: invalid value '/tmp' for '--icons [<WHEN>]'
+```
+
+The error goes to stderr and stdout is empty — which reads as a valid answer. This is the worst failure class: a hang is obvious and gets killed, but an empty result is how wrong conclusions get made confidently. Always pin the value explicitly (`--icons=auto`). Short forms (`-F`) attach their value and are unaffected. `tests/shell_safety/` enforces this.
+
+### Not Ours to Fix
+
+Inside a Claude Code session, `find` and `grep` are shell functions that shadow the real binaries with embedded `bfs`/`ugrep`. These come from Claude Code itself, which appends them to every snapshot after capturing the user's shell — they are not defined anywhere in this repo, and no dotfiles change can alter them.
+
 ## History Cleanup
 
 zsh-autosuggestions shows "shadow text" completions sourced from `~/.zsh_history`. Erroneous commands that make it into history will keep appearing as suggestions. Here's how to remove them.
