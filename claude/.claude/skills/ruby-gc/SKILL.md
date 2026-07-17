@@ -23,7 +23,7 @@ These are non-negotiable. The cost of a wrong delete is a broken app plus a slow
 1. **Never delete the global version** — the one in `~/.tool-versions`.
 2. **Never delete a version that has any pin on disk**, wherever that pin lives.
 3. **Never delete without showing the table and getting an explicit confirmation** in the same session.
-4. **If the scan errors, or returns implausibly few pins, STOP and report.** A truncated scan is indistinguishable from "nothing uses this" — it produces a confident delete list that breaks real apps. This has happened; treat a thin result as a bug in the scan, not a licence to delete.
+4. **If the scan errors, or returns implausibly few pins, STOP and report.** A truncated scan is indistinguishable from "nothing uses this" — it produces a confident delete list that breaks real apps. This has happened; treat a thin result as a bug in the scan, not a licence to delete. "Implausibly few" is measured against the July 2026 baseline in "Calibration" below — check it every run, before classifying anything.
 5. **Uninstall one version at a time**, reporting each result before the next.
 
 ## Your task
@@ -73,6 +73,25 @@ find ~ -type f -name Gemfile \
   -not -path '*/.local/share/*' \
   -exec grep -HE '^\s*ruby\s' {} + 2>/dev/null
 ```
+
+### 3c. Calibration — is this scan plausible?
+
+Rule 4 is only enforceable against a known-good baseline. Measured 2026-07-17, immediately after a cleanup run:
+
+| Signal | Baseline | Treat as a broken scan if... |
+|---|---|---|
+| `.ruby-version` + `.tool-versions` files found | 58 | fewer than ~40 |
+| `.tool-versions` carrying a ruby line | 21 | fewer than ~14 |
+| Gemfiles with any `ruby` line | 113 | fewer than ~80 |
+| Gemfiles with an **exact** ruby pin | 10 | zero |
+
+Counts drift as projects come and go, so treat them as an order-of-magnitude check, not an assertion — a 20% wobble is normal, a 60% drop is a bug. The **landmark checks below are the real test**, because they fail loudly rather than plausibly:
+
+- The scan MUST reach `~/Sites/` — 13 ruby pins live there, including the legacy ETO sites on 2.7.4. Zero hits under `~/Sites` means the scan never left `~/code`.
+- The scan MUST reach `~/code/active/eto/ComixDistroBase/comix_distro/`. Missing it means a depth limit crept in.
+- The deepest real pin sits **9 levels** below `~` (`~/code/active/eto/ETOWebReboot/legacy/*/.tool-versions`). Any `-maxdepth` silently truncates this.
+
+Note the Gemfile ratio: **113 files carry a `ruby` line but only 10 are real pins.** That gap is the ~100 prag-studio Gemfiles pinning `ruby '>= 3.0.0'`. If exact pins ever approach the total, the parse is wrongly counting range specifiers — that inflates the keep list and makes the skill useless rather than dangerous. Both failure directions are worth catching.
 
 ### 4. Parse the pins carefully
 
@@ -126,4 +145,8 @@ Report each result. Afterwards, re-run `asdf list ruby` and `du -sh ~/.asdf/inst
 
 ## Relationship to `/create-bump`
 
-`/create-bump` uninstalls only the single MRI version it installed for testing — that's safe because it created it minutes earlier. It must **not** call this skill or do fleet-wide cleanup; a routine ruby-build bump should never be able to delete an app's Ruby. Run `/ruby-gc` deliberately, on its own.
+`/create-bump` is a **project-local skill** in the asdf working repo (`~/code/active/asdf/.claude/skills/create-bump/`), not part of dotfiles — it won't appear in this repo.
+
+It uninstalls only the single MRI version it installed for testing — safe, because it created that version minutes earlier and nothing can be pinned to it yet. It must **not** call this skill or do fleet-wide cleanup; a routine ruby-build bump should never be able to delete an app's Ruby. Run `/ruby-gc` deliberately, on its own.
+
+That constraint is enforced where it binds — in `/create-bump`'s own step 8, since a skill can only follow rules written in the file it reads. The note here is orientation, not enforcement. If `/create-bump` is ever rewritten, re-check that its step 8 still carries the no-fleet-cleanup rule.
