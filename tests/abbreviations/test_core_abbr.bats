@@ -44,6 +44,31 @@ setup() {
   test_abbreviation "mv" "mv -iv"
 }
 
+@test "cp expands to GNU cp" {
+  test_abbreviation "cp" "gcp -iv"
+}
+
+@test "gcp is not abbreviated, so it reaches the GNU cp binary" {
+  # gcp is GNU cp (brew coreutils) and is what cp expands to. An abbr on gcp
+  # would shadow the binary, making it unreachable by name.
+  run grep -F 'abbr "gcp"=' "${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh"
+  [ "${status}" -ne 0 ]
+}
+
+@test "every abbr line in the file actually registers with zsh-abbr" {
+  # The tests above read the file as text, so they pass even when a line fails
+  # to parse. zsh sources this file with INTERACTIVE_COMMENTS off, so a trailing
+  # `# comment` on an abbr line is read as arguments and the line is dropped
+  # silently. Compare the file against what zsh-abbr actually loaded.
+  local abbr_file="${DOTFILES}/zsh/.config/zsh-abbr/abbreviations.zsh"
+  local in_file loaded
+
+  in_file=$(grep -c '^abbr ' "${abbr_file}")
+  loaded=$(zsh -i -c 'abbr list 2>/dev/null | wc -l' 2>/dev/null | tr -d ' ')
+
+  [ "${in_file}" -eq "${loaded}" ]
+}
+
 @test "tmux abbreviations are available" {
   test_abbreviation "tl" "tmux ls"
   test_abbreviation "tlw" "tmux list-windows"
