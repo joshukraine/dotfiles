@@ -340,6 +340,16 @@ local function probe_lazy()
     return
   end
 
+  -- Load-bearing, and not obvious. lazy's Task:spawn only records a failed
+  -- process against the task when it is NOT in headless-process mode; headless
+  -- writes the output straight to stdout instead. Left alone, task:has_errors()
+  -- is therefore always false here, every failed fetch looks like a clean one,
+  -- and an offline run reports every plugin as current off the remote-tracking
+  -- refs left behind by the last successful fetch. Verified: with this line, an
+  -- offline check reports 57 of 57 plugins errored; without it, 0.
+  local config = require("lazy.core.config")
+  config.options.headless.process = false
+
   -- wait = true makes lazy's async check synchronous; show = false keeps the UI
   -- closed. This fetches, which is an index refresh, and installs nothing.
   if not pcall(function()
@@ -349,7 +359,7 @@ local function probe_lazy()
     return
   end
 
-  for name, plugin in pairs(require("lazy.core.config").plugins) do
+  for name, plugin in pairs(config.plugins) do
     local state = plugin._ or {}
 
     -- Mirrors the set lazy.check itself operates on.
