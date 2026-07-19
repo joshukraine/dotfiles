@@ -22,9 +22,9 @@ Run this **from the target application repository** — the repo whose `qa` repo
 - **(no args)** — triage every open `qa`-labeled report (minus any already in-flight; see Step 1).
 - **`[report# …]`** — scope to the listed reports only (e.g. `503 511 488`). Everything else is untouched. Use this to re-run a subset without re-triaging the whole backlog.
 
-## The model policy — "Opus analyzes, Opus reconciles"
+## The model policy — "Opus analyzes, Fable reconciles"
 
-Both stages run at **Opus 4.8** for the first cut. Unlike `/autopilot-batch`'s fan-out scale — where a Sonnet-builds/Opus-reviews split saves real cost and latency — a QA batch is low-volume (a handful of reports), so the Sonnet save is negligible, and classification ("is this a bug or intended behavior?") is exactly the judgment Opus is best at. There is no Opus-review floor behind the analysis the way `/autopilot-batch` has one; the **human gate is the only safety net**, so favor quality on the analysis. The reconcile is the genuinely hard cross-report judgment — the _whole_ reason to batch — so it stays Opus too. Earn a Sonnet-analyze split later (rule of three) only if the volume grows or an obviously-bounded report pattern emerges.
+Analysis runs at **Opus 4.8**; the reconcile runs at **Fable**. Unlike `/autopilot-batch`'s fan-out scale — where a cheaper-builds/tier-above-reviews split saves real cost and latency — a QA batch is low-volume (a handful of reports), so there is no cost case for going below Opus on analysis, and classification ("is this a bug or intended behavior?") is judgment work. There is no review floor behind the analysis the way `/autopilot-batch` has one; the **human gate is the only safety net**, so favor quality. The reconcile is the genuinely hard cross-report judgment — the _whole_ reason to batch — and it is a single subagent, so running it at Fable buys the best judgment exactly where it matters most, for a negligible cost delta. Earn a Sonnet-analyze split later (rule of three) only if the volume grows or an obviously-bounded report pattern emerges.
 
 ## Escape hatch (batch-level)
 
@@ -76,7 +76,7 @@ Spawn them together so they run in parallel. Since they create nothing, there is
 
 ### Step 3 — Barrier + reconcile
 
-Wait for **all** analysis subagents (this is a genuine barrier — cross-report clustering needs every record). Then spawn one **`model: opus`** reconcile subagent, passing it all N structured records:
+Wait for **all** analysis subagents (this is a genuine barrier — cross-report clustering needs every record). Then spawn one **`model: fable`** reconcile subagent, passing it all N structured records:
 
 - prompt: cluster reports that **share a root cause** (overlapping `root_cause` / `files` → one tech issue that closes _all_ of them — see the cluster closing plan in Step 5), flag **duplicate drafts** to collapse, and flag **conflicts** (two reports asking for opposite behavior). Return the clusters **as suggestions with a one-line rationale each — never auto-merge.** A report that doesn't cluster stays standalone.
 

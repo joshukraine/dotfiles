@@ -38,7 +38,7 @@ When a candidate is borderline, **disqualify it** — a false negative costs you
 
 For each qualifying issue, also note — as a **preview**, not a commitment:
 
-- **Build model** — Opus for data-model / security / ambiguous / cross-cutting; Sonnet for bounded pattern-work (i18n / views / config / a single test / CRUD / docs). `/autopilot-batch` re-derives this at run time from the same rubric; your preview is so you can eyeball and adjust before the run.
+- **Build model** — Opus for data-model / security / ambiguous / cross-cutting; Sonnet for bounded pattern-work (i18n / views / config / a single test / CRUD / docs). `/autopilot-batch` re-derives this at run time from the same rubric; your preview is so you can eyeball and adjust before the run. (A `--merge` opt-in overrides the preview at run time: merge issues are always Fable-built, because the merge go/no-go runs at the build model and the merge floor is Fable.)
 - **Merge-tier candidate?** — flag issues that look safe for `--to merge` (confined to config / locales / views / copy; no migration / route / dependency). These are _suggestions_ you opt into with `--merge` at run time; the batch defaults everything to `--to pr`.
 
 ## Your task
