@@ -71,6 +71,26 @@ The label stopped being purely advisory once `/autopilot`, `/autopilot-batch`, a
 
 So a cheap label can only ever cheapen the _build_ — never the safety net that catches a cheap build's mistakes.
 
+### Which issues get no tier at all
+
+Some issues have nothing to build directly, and labeling them is noise that dilutes the signal:
+
+- **Epics and tracking issues** — the design brief, not the work. Their children carry the tiers.
+- **Content hubs** — a durable reference or index issue.
+- **`qa` reports** — a tester's observation, not a work item. The tech issue derived from it via `/qa-triage` carries the tier.
+
+Everything with code to write gets a tier. Re-triage when an issue's scope materially changes — a label recorded against a spec that has since doubled in scope is worse than no label, because it reads as considered judgment.
+
+### Keeping the label and the board field honest
+
+The label is the source of truth; the board's `Model` field mirrors it for card visibility (see the gotchas below on why both exist). Nothing syncs them automatically, so drift is expected. This one-liner finds every open issue that does not carry exactly one `model:` label:
+
+```bash
+gh issue list --state open --limit 200 --json number,labels --jq '[.[] | {n: .number, m: [.labels[].name | select(startswith("model"))]}] | map(select(.m | length != 1)) | map(.n)'
+```
+
+Any numbers returned are unlabeled — or double-labeled, which is the sneakier failure. Confirm each is a deliberate exclusion (epic / tracker / qa report), then spot-check the board field against the labels.
+
 ### No label → fall back to the existing heuristics
 
 Most repos have not adopted the convention and must keep working unchanged. When an issue carries no `model:` label, the skills use their own class rubric (Opus for data-model / security / ambiguous / cross-cutting work; Sonnet for bounded pattern-work). In an adopted repo, unlabeled means Opus by convention — which that rubric already approximates — so the same fallback is correct in both worlds and no skill needs a separate "is this repo adopted?" code path to choose a model.
@@ -105,10 +125,15 @@ Where an issue carries a top-of-body callout (layer 3), it usually names the wat
 - **The label and the field are independent** — nothing keeps them in sync automatically. Treat the **label as source of truth** and let the field mirror it; if you change one, change the other.
 - **Labels are per-repo; the field is per-board.** Recreate the three labels in each new repo (additive to the existing label taxonomy — they do not replace it). Create the `Model` field once per project board.
 - **An issue must be _on the board_** to receive a field value. `gh project item-list` only returns issues already added; add missing ones with `gh project item-add`.
+- **`gh issue view` / `gh issue edit` need `--repo` when run outside a repo checkout.** A rollout often runs from somewhere else (dotfiles, a scratch dir); without `--repo` the command either errors or, worse, silently targets whatever repo you happen to be standing in.
+- **Confirm every open issue is actually a board item _before_ the field pass.** `gh project item-list` returns only what has been added, so strays silently receive no field value. Diff the open-issue list against the item list and `gh project item-add` the gaps first.
+- **Trust `item-list`, not the issue body's claim about itself.** An issue whose body says it is deliberately off-board may well be on the board anyway. The board is the authority on board membership; a body is prose someone wrote once.
 
 ---
 
 ## Implementation runbook (copy-paste `gh` commands)
+
+> **Prefer `/model-triage`.** The skill encodes this runbook end-to-end — preflight, triage, an approval gate, apply, verify — and is the intended execution path for adopting the convention in a repo. The manual commands below remain the reference for what it does, for debugging a partial rollout, and for a one-off fix.
 
 Replace `<OWNER>` (e.g. your GitHub username), `<PROJECT_NUMBER>`, and the ID placeholders as you discover them.
 
@@ -193,9 +218,20 @@ gh issue view <N> --json body --jq .body | head -5                    # confirm 
 
 ---
 
-## Worked example (gg-songbook, 7 open issues)
+## Calibration references
 
-The concrete triage that produced **1 Flagship / 3 Workhorse / 3 Light** — a useful calibration reference for applying the heuristic:
+Two real triage passes, at very different scales. Use them to sanity-check a distribution before applying it — if your flagship share is far above these, the heuristic is probably being applied too generously.
+
+| Project | Issues | Fable | Opus | Sonnet | Flagship share |
+| --- | --- | --- | --- | --- | --- |
+| gg-songbook (2026-07) | 7 | 1 | 3 | 3 | ~14% (small-n) |
+| ComixDistro (2026-07-21) | 61 | 4 | 32 | 25 | **~6%** |
+
+ComixDistro is the more trustworthy anchor: at 61 issues the distribution has settled, and the shape is the point — **a small flagship reserve, a workhorse majority, and a substantial light tail**. The flagship tier is insurance, so a pass that tiers 20% of issues Fable has stopped discriminating and is just spending.
+
+### Worked example (gg-songbook, 7 open issues)
+
+The issue-by-issue reasoning behind the 1 / 3 / 3 above — a useful reference for how the heuristic reads in practice:
 
 | Issue | Kind | Tier | Reasoning |
 | --- | --- | --- | --- |

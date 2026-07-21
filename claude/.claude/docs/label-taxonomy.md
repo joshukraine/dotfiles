@@ -80,6 +80,27 @@ A unified vocabulary for classifying work across commits, branches, issues, and 
 | `docs` | `#0075CA` | Documentation changes |
 | `test` | `#BFD4F2` | Test-only changes |
 
+**Model labels** (one per issue — required alongside the type label, in repos that have adopted the convention):
+
+| Label | Color | Description |
+| --- | --- | --- |
+| `model: fable` | `#B60205` | Flagship build — reserve for subtle/multi-module correctness, silent-data-integrity stakes |
+| `model: opus` | `#FBCA04` | Workhorse build — well-scoped features, migrations/data-model, thin specs |
+| `model: sonnet` | `#0E8A16` | Light build — docs, single tests, i18n/copy, bounded pattern-following |
+
+The label records **which Claude model should build the issue**, assigned by asking what a _wrong answer_ costs and how far the reasoning reaches. Semantics, deliberately compact:
+
+- **Build tier only.** Review runs one tier above the build, and merge/reconcile decisions stay at Fable, per the standing model ladder. A cheap label never cheapens the safety net.
+- **Unlabeled = Opus** (fail-safe default) — so a missed label degrades to the workhorse tier, never to a cheaper one.
+- **The label is the source of truth**; a board `Model` field mirrors it for card visibility. If you change one, change the other.
+- **Assigned at creation, alongside the type label** — this is the second required labeling decision when an issue is opened, not a later cleanup pass. `/model-triage` exists to adopt the convention in a repo that already has open issues, and to sweep up drift; it is a backstop, not the primary mechanism.
+- **No tier on issues with nothing to build directly**: epics, trackers, content hubs, and `qa` reports (the derived tech issue carries the tier).
+- **Re-triage if an issue's scope materially changes.**
+
+This taxonomy is also the single place the current model _names_ live. When the lineup shifts, update the table here, then rename per-repo with `gh label edit` — the rename propagates to every issue already carrying the label.
+
+→ Judgment, calibration references, and the per-project rollout runbook: [`model-selection-strategy.md`](model-selection-strategy.md).
+
 **Triage labels** (optional, added during review):
 
 | Label | Color | Description |

@@ -45,7 +45,7 @@ For each qualifying issue, also note — as a **preview**, not a commitment:
   gh label list --json name --jq '[.[].name | select(startswith("model: "))]'
   ```
 
-  A non-empty result means the repo has adopted the convention, so a queued issue without a `model:` label is a **triage gap** — worth fixing, but never a reason to skip the issue. The batch treats it as Opus by convention via the rubric. Do not apply the label yourself: model tiering is assigned when the issue is triaged, and quietly stamping a tier here would launder a guess into the record.
+  A non-empty result means the repo has adopted the convention, so a queued issue without a `model:` label is a **triage gap** — worth fixing, but never a reason to skip the issue. The batch treats it as Opus by convention via the rubric. Do not apply the label yourself: model tiering is assigned when the issue is triaged, and quietly stamping a tier here would launder a guess into the record. Point the gap at **`/model-triage --maintenance`**, which is the skill that owns that write.
 - **Merge-tier candidate?** — flag issues that look safe for `--to merge` (confined to config / locales / views / copy; no migration / route / dependency). These are _suggestions_ you opt into with `--merge` at run time; the batch defaults everything to `--to pr`.
 
 ## Your task
@@ -89,7 +89,7 @@ Skip:
   #870  needs a data-model decision (new column not in the schema)
   #872  spec ambiguous — two conflicting acceptance criteria
 
-Model-label gaps (adopted repo): #855 — label it at issue triage.
+Model-label gaps (adopted repo): #855 — run `/model-triage --maintenance` to fill it.
 ```
 
 **CONFIRM GATE:** This is the human gate the lifecycle requires — the label is applied **only after you confirm**. Present the proposed queue and wait. You may trim, add, or adjust a model call. Nothing is labeled before you say go.
