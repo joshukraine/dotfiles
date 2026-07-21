@@ -21,13 +21,33 @@ Examples: `/autopilot 754` (→ pr), `/autopilot 754 --to pr`, `/autopilot 847 -
 
 Parse the issue number and tier from `$ARGUMENTS`. If no tier is given, default to `pr`. If the tier is unrecognized, stop and ask.
 
-> **Model note:** Autopilot runs at whatever model invoked it and stays model-agnostic by design. Model delegation ("Sonnet builds, Opus reviews") is handled _outside_ this skill by `/autopilot-batch`, which sets each build subagent's model and runs the Opus gating review at the batch level — so nothing here needs to know about models.
+## Build model — reconcile against the issue's `model:` label
+
+Repos that have adopted the per-issue model convention (`~/.claude/docs/model-selection-strategy.md`) carry a `model: fable` / `model: opus` / `model: sonnet` label recording the **build** tier chosen at triage. Read it as part of the announce:
+
+```bash
+gh issue view <n> --json labels --jq '[.labels[].name | select(startswith("model: "))] | first // "none"'
+```
+
+Autopilot cannot _act_ on that label the way `/autopilot-batch` does — a running agent cannot switch its own model, so this skill still runs at whatever model invoked it. What it can do is reconcile before any work starts. Ladder, cheapest to most capable: **Sonnet 5 → Opus 4.8 → Fable 5**.
+
+- **No label** — the common case, and never a reason to stop. Either the repo hasn't adopted the convention or triage hasn't reached this issue; fall back to the existing judgment (announce that you're proceeding on the invoking model) and run.
+- **Session model matches the label** — say so in one line and proceed.
+- **Session model is _below_ the labeled tier** (e.g. Sonnet running a `model: opus` issue) — **stop and ask.** This is an under-build, the direction that produces quietly wrong work, and the announce is the cheapest possible moment to catch it. Report the mismatch and recommend re-invoking at the labeled tier. **Exception:** if whoever invoked you states the lower tier was chosen deliberately — an `/autopilot-batch` override at its confirm gate is the usual case — the human gate already happened. Note the deliberate downgrade and proceed.
+- **Session model is _above_ the labeled tier** (e.g. Opus running a `model: sonnet` issue) — note it once and **proceed.** Over-building costs money, not correctness, and halting an authorized run over a spend preference is the worse trade. Carry the note into the completion report so the pattern shows up if it repeats.
+
+**The label governs the build only.** It never lowers a derived tier: the `/code-review` effort in Step 6 and the `--to merge` gate in Step 8 are unaffected, and **the merge go/no-go floor stays Fable regardless of any label** — a `model: sonnet` issue does not get a cheaper merge decision. (In a batch run, `/autopilot-batch` enforces that floor by building every `--merge` issue with Fable.)
+
+If the issue body opens with a **model callout** (a `> 🤖 Recommended model: …` blockquote), it names the watch-item or escalation trigger behind the tier choice — read it, treat it as part of the spec, and watch that specific thing during Step 1.
+
+**Escalation is the escape hatch, not a silent upgrade.** If the work proves materially harder than the label assumed, stop, report what you hit, and recommend re-running at a higher tier — noting that the issue's label should be updated afterward so the record stays honest.
 
 ## The "stop and ask" escape hatch (applies to every step)
 
 Autopilot is autonomous, not reckless. **Stop immediately, report what you found, and wait for the user** if any of these arise — do not guess or push through:
 
 - The `/resolve-issue` planning checkpoint (Step 3 of that skill) judges the issue **complex or ambiguous** — multiple subsystems, real design choices, or unclear acceptance criteria.
+- The issue's `model:` label names a **higher tier than the model you are running** (see "Build model" above) — an under-build, caught before any work starts.
 - A decision surfaces that the project's own guardrails reserve for the user: a **new DB column not in the data model, a changed model association, an altered public URL, a new dependency, or a change to the event status lifecycle** (see the project CLAUDE.md "Handling Ambiguity" table).
 - Tests fail in a way you cannot confidently resolve, or a fix would require inventing scope beyond the issue.
 - The spec conflicts with what you find in the code (three valid responses per global CLAUDE.md: implement as written, ask, or propose a change — the latter two mean stop).
@@ -37,7 +57,7 @@ When you stop, post a concise summary: what's done, where you stopped, exactly w
 
 ## Your task
 
-Announce the run first: issue number, tier, and the boundary ("will stop at review-ready PR" / "will merge + deploy if the narrow-class gate passes"). Confirm you are starting from an appropriate base (a clean `main`/`master`, or an existing worktree branch for this issue). Then work the loop:
+Announce the run first: issue number, tier, the boundary ("will stop at review-ready PR" / "will merge + deploy if the narrow-class gate passes"), and the **model reconciliation** from the section above (the issue's `model:` label, the model you are running, and the verdict — match / no label / over-model note / stopping on an under-model). Confirm you are starting from an appropriate base (a clean `main`/`master`, or an existing worktree branch for this issue). Then work the loop:
 
 ### Step 1 — Resolve
 
@@ -124,6 +144,7 @@ Post a debrief-style summary:
 ## Autopilot — issue #N ([--to pr | --to merge])
 
 - PR: #M — <title>   <url>
+- Model: built on <model> — issue labeled <model: x | none> [<matched | ran above the label, consider the labeled tier next time>]
 - Loop: resolve ✓  simplify ✓  create-pr ✓  verify [✓/n·a]  walkthrough [✓/n·a]  code-review ✓  bin/ci ✓ (signed off)
 - Files: <count> changed
 - Notable decisions / cleanups: <one or two lines>
@@ -135,6 +156,7 @@ Post a debrief-style summary:
 ## Important
 
 - **`--to pr` is the default and never merges or deploys.** Only an explicit `--to merge` can, and only through the narrow-class gate.
+- **The `model:` label sets the build tier only, and only ever advises _this_ skill.** A single agent can't switch its own model, so here the label is a reconciliation at announce time — it never lowers the review effort or the Fable merge floor, and its absence changes nothing.
 - **The narrow-class gate is a hard filter, not advice.** A mislabeled migration-bearing issue cannot ship unseen — worst case autopilot stops and asks.
 - **`/merge-pr`, `/walkthrough --publish`, and deploy-on-merge stay human-gated.** Autopilot's merge path is the single authorized exception, scoped to one issue by the `--to merge` flag.
 - **Prefer composing the real skills over re-implementing them** so their improvements flow through. The only inlined logic is the Step 8 merge, because `/merge-pr` is deliberately not model-invocable.

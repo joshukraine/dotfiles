@@ -8,7 +8,7 @@ argument-hint: "[label-or-filter]"
 
 Vet a pool of open issues against the autonomy rubric and, after your confirmation, tag the ones that qualify with the `autopilot-queued` label. `/autopilot-batch` later reads that label and runs the batch. This is the **vet** half of the triage → run split; the two are decoupled on purpose — triage once (cheap, start-of-day), run the batch whenever and from wherever.
 
-The label is **membership only**: it means "vetted and pending," nothing more. Build model and tier are decided at run time (model by rubric, tier by your `--merge` opt-in), never encoded in the label.
+The `autopilot-queued` label is **membership only**: it means "vetted and pending," nothing more. Tier is decided at run time by your `--merge` opt-in, never encoded in it. The build model rides on a separate, pre-existing label (`model: fable` / `model: opus` / `model: sonnet`) that issue triage assigns — this skill **reports** that label, it does not assign one.
 
 ## Where this runs
 
@@ -38,7 +38,14 @@ When a candidate is borderline, **disqualify it** — a false negative costs you
 
 For each qualifying issue, also note — as a **preview**, not a commitment:
 
-- **Build model** — Opus for data-model / security / ambiguous / cross-cutting; Sonnet for bounded pattern-work (i18n / views / config / a single test / CRUD / docs). `/autopilot-batch` re-derives this at run time from the same rubric; your preview is so you can eyeball and adjust before the run. (A `--merge` opt-in overrides the preview at run time: merge issues are always Fable-built, because the merge go/no-go runs at the build model and the merge floor is Fable.)
+- **Build model** — **report the issue's `model:` label** if it has one; that label is what `/autopilot-batch` will actually build with (see `~/.claude/docs/model-selection-strategy.md`). If it has none, preview the rubric fallback the batch will use instead — Opus for data-model / security / ambiguous / cross-cutting; Sonnet for bounded pattern-work (i18n / views / config / a single test / CRUD / docs) — and mark it as a preview, not a fact. Either way this is so you can eyeball and adjust before the run. (A `--merge` opt-in overrides both at run time: merge issues are always Fable-built, because the merge go/no-go runs at the build model and the merge floor is Fable.)
+- **Missing `model:` label in an adopted repo** — flag it. Check adoption once per run:
+
+  ```bash
+  gh label list --json name --jq '[.[].name | select(startswith("model: "))]'
+  ```
+
+  A non-empty result means the repo has adopted the convention, so a queued issue without a `model:` label is a **triage gap** — worth fixing, but never a reason to skip the issue. The batch treats it as Opus by convention via the rubric. Do not apply the label yourself: model tiering is assigned when the issue is triaged, and quietly stamping a tier here would launder a guess into the record.
 - **Merge-tier candidate?** — flag issues that look safe for `--to merge` (confined to config / locales / views / copy; no migration / route / dependency). These are _suggestions_ you opt into with `--merge` at run time; the batch defaults everything to `--to pr`.
 
 ## Your task
@@ -65,7 +72,7 @@ Before proposing anything, clean the existing queue so an interrupted prior run 
 
 ### Step 3 — Vet
 
-Assess each candidate against the rubric — read the issue body and, where scope is unclear, the code a fix would touch. Assign a verdict (queue / skip), a one-line why, and for queue candidates the model preview + merge-tier flag.
+Assess each candidate against the rubric — read the issue body and, where scope is unclear, the code a fix would touch. Assign a verdict (queue / skip), a one-line why, and for queue candidates the build model (from its `model:` label, or a rubric preview if unlabeled) + merge-tier flag.
 
 ### Step 4 — Present + CONFIRM GATE
 
@@ -73,13 +80,16 @@ Present the triage table — proposed queue and skips together, so the exclusion
 
 ```text
 Queue:
-  #851  Sonnet  pr     localize checkout flash messages — complete spec, i18n pattern
-  #863  Sonnet  merge? copy tweak on the about page — config/copy only, no code paths
-  #847  Opus    pr     recompute shipment weight rounding — bounded but touches money math
+  #851  Sonnet (label)   pr     localize checkout flash messages — complete spec, i18n pattern
+  #863  Sonnet (label)   merge? copy tweak on the about page — config/copy only, no code paths
+  #847  Opus (label)     pr     recompute shipment weight rounding — bounded but touches money math
+  #855  Opus (no label!) pr     backfill the shipment CSV export — no `model:` label, rubric preview
 
 Skip:
   #870  needs a data-model decision (new column not in the schema)
   #872  spec ambiguous — two conflicting acceptance criteria
+
+Model-label gaps (adopted repo): #855 — label it at issue triage.
 ```
 
 **CONFIRM GATE:** This is the human gate the lifecycle requires — the label is applied **only after you confirm**. Present the proposed queue and wait. You may trim, add, or adjust a model call. Nothing is labeled before you say go.
@@ -100,14 +110,14 @@ Only after confirmation:
 
 ### Step 6 — Report + handoff
 
-Summarize: how many were queued (list + model preview + which are merge-tier candidates), how many reconciled/removed, how many skipped (with reasons). Then the handoff:
+Summarize: how many were queued (list + build model with its source + which are merge-tier candidates), how many reconciled/removed, how many skipped (with reasons), and any `model:` label gaps in an adopted repo. Then the handoff:
 
 > Queue ready — _N_ issues. Run it from this repo with `/autopilot-batch`. To authorize merge for the flagged candidates, add `--merge <#,#>`.
 
 ## Important
 
 - **The confirm gate is a hard stop.** The label is never applied speculatively — only issues you approve get queued (lifecycle step 1).
-- **Membership only.** The label encodes neither model nor tier; those are run-time decisions. Do not add per-issue tier/model labels.
+- **Membership only.** `autopilot-queued` encodes neither model nor tier. Tier is a run-time decision; the model comes from the issue's own `model:` label (or the batch's rubric fallback). Do not invent autopilot-specific tier labels, and do not apply a `model:` label here — report what triage assigned, and flag what it missed.
 - **Reconcile first, always.** Every run self-heals the queue before proposing, so a crashed or interrupted prior run leaves no stale membership.
 - **Decoupled by design.** Triage and run are separate sessions on purpose — vet cheaply now, run the batch later / from anywhere. Do not fold the batch run into this skill.
 - **When borderline, skip.** Autopilot's value is unattended throughput on issues that genuinely don't need you; a wrongly-queued issue that should have stopped defeats that.
