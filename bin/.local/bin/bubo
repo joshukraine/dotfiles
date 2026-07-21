@@ -108,15 +108,23 @@ render_records() {
 
 # --- git clones --------------------------------------------------------------
 
-# Classify one git clone against its origin's HEAD.
+# Classify one git clone against the branch it tracks.
 # Prints a tab-separated "<name> <status> <detail>" record.
 #
 # Compares HEAD SHAs rather than asking whether the remote SHA is present
 # locally: the object is routinely already in the local store from an earlier
 # fetch even though HEAD never moved, which reports stale clones as current.
+#
+# The remote SHA comes from the branch this clone actually tracks, not from the
+# remote's default branch. zap ships checked out on release-v1 while its origin
+# HEAD points at master, so `ls-remote origin HEAD` compares two unrelated
+# branches and reports zap permanently stale -- a false positive no `zap update`
+# can clear, because zap is in fact current on release-v1. A clone with no
+# upstream (detached HEAD, or no tracking configured) falls back to the remote's
+# default branch, the best answer available.
 probe_clone() {
   local dir="$1"
-  local name local_sha="" remote_sha=""
+  local name local_sha="" remote_sha="" upstream remote_ref
 
   name="$(basename "${dir}")"
 
@@ -126,7 +134,16 @@ probe_clone() {
     return 0
   fi
 
-  remote_sha="$(git -C "${dir}" ls-remote origin HEAD 2>/dev/null | awk 'NR == 1 { print $1 }')" || remote_sha=""
+  # `@{upstream}` abbreviates to "<remote>/<branch>"; strip the remote to get
+  # the branch. Remote names carry no slash, so #*/ leaves branch names that do.
+  upstream="$(git -C "${dir}" rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)" || upstream=""
+  if [[ -n "${upstream}" ]]; then
+    remote_ref="refs/heads/${upstream#*/}"
+  else
+    remote_ref="HEAD"
+  fi
+
+  remote_sha="$(git -C "${dir}" ls-remote origin "${remote_ref}" 2>/dev/null | awk 'NR == 1 { print $1 }')" || remote_sha=""
   if [[ -z "${remote_sha}" ]]; then
     printf '%s\tUNKNOWN\tno answer from origin\n' "${name}"
     return 0

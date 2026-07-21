@@ -71,6 +71,32 @@ advance_clone() {
   git -C "${CLONE}" commit -qm "local work"
 }
 
+# Build zap's shape: an origin whose default branch has moved ahead of a side
+# branch, with the clone checked out on that side branch. origin HEAD then points
+# somewhere the clone deliberately does not track. Sets ORIGIN and CLONE.
+make_clone_on_side_branch() {
+  ORIGIN="${TEST_TMPDIR}/origin"
+  CLONE="${TEST_TMPDIR}/clone"
+
+  git -c init.defaultBranch=main init -q "${ORIGIN}"
+  git -C "${ORIGIN}" config user.name "Test User"
+  git -C "${ORIGIN}" config user.email "test@example.com"
+  echo "one" >"${ORIGIN}/file"
+  git -C "${ORIGIN}" add file
+  git -C "${ORIGIN}" commit -qm "one"
+
+  # A side branch that stays put while the default branch, where origin HEAD
+  # points, moves ahead of it -- mirroring zap's release-v1 trailing master.
+  git -C "${ORIGIN}" branch release-v1
+  echo "two" >>"${ORIGIN}/file"
+  git -C "${ORIGIN}" add file
+  git -C "${ORIGIN}" commit -qm "two"
+
+  git clone -q --branch release-v1 "${ORIGIN}" "${CLONE}"
+  git -C "${CLONE}" config user.name "Test User"
+  git -C "${CLONE}" config user.email "test@example.com"
+}
+
 # Put a fake asdf on PATH whose `latest` reports a fixed version.
 mock_asdf_latest() {
   local latest="$1"
@@ -142,6 +168,29 @@ EOF
 
   assert_contains "${output}" "STALE"
   assert_not_contains "${output}" "CURRENT"
+}
+
+# The zap trap. A clone deliberately checked out on a non-default branch tracks
+# a branch the remote HEAD symref never points to. Comparing local HEAD against
+# `ls-remote origin HEAD` then pits the tracked branch against the remote default
+# and reports a current clone permanently stale -- exactly what bubo did to zap,
+# which ships on release-v1 while its origin HEAD points at a further-ahead
+# master. The comparison must be against the branch the clone tracks.
+#
+# The first assertion proves the fixture reproduces the trap, so this cannot
+# quietly stop testing anything if the setup changes.
+@test "probe_clone reports a clone tracking a non-default branch as current" {
+  make_clone_on_side_branch
+
+  local head_sha default_sha
+  head_sha="$(git -C "${CLONE}" rev-parse HEAD)"
+  default_sha="$(git -C "${CLONE}" ls-remote origin HEAD | awk 'NR == 1 { print $1 }')"
+  assert_not_equals "${head_sha}" "${default_sha}" "fixture is broken: origin HEAD should differ from the tracked branch"
+
+  run_bubo "probe_clone '${CLONE}'"
+
+  assert_contains "${output}" "CURRENT"
+  assert_not_contains "${output}" "STALE"
 }
 
 @test "probe_clone reports a clone with local commits as ahead, not stale" {
