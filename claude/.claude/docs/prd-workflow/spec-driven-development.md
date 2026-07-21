@@ -273,6 +273,7 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/bootstrap-prd` | Scaffold PRD structure for a new project | Once per project |
 | `/prd-view` | Render a PRD file as a rich HTML reading view (Dashboard style) for engaged reading and vetting; Markdown stays authoritative, the HTML is ephemeral | Ad-hoc (reading / vetting a spec) |
 | `/plan-phase` | Create GitHub issues from a PRD phase | Once per phase |
+| `/model-triage` | Adopt the per-issue model-selection convention — tier every open issue, apply the `model:` labels, board field, and callouts behind an approval gate; `--maintenance` sweeps drift | Once per project (then rarely) |
 | `/autopilot` | Carry one issue through the full dev loop autonomously — to a review-ready PR, or merge+deploy for small reversible changes (`--to merge`) | Per issue (unattended) |
 | `/autopilot-triage` | Vet open issues for autonomous resolution; queue the qualifying ones (`autopilot-queued`) | Per sprint (optional) |
 | `/autopilot-batch` | Fan out the queued issues to parallel worktree subagents, each running `/autopilot` | Per sprint (optional) |
@@ -407,6 +408,7 @@ Skills shift in importance as the project matures (see §6):
 | `/bootstrap-prd` | **Setup** | — | — |
 | `/prd-view` | **Spec vetting** | Occasional | Rare |
 | `/plan-phase` | **Every phase** | Rare (new features only) | — |
+| `/model-triage` | **Setup** (or on adoption) | Rare (drift sweep) | Rare (drift sweep) |
 | `/autopilot` | Optional | Useful (well-scoped issues) | Useful (well-scoped issues) |
 | `/autopilot-batch` | Optional | Useful for bug batches | Useful for bug batches |
 | `/resolve-issue` | **Primary workflow** | **Primary workflow** | **Primary workflow** |
