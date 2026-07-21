@@ -85,7 +85,7 @@ A non-empty result means the repo has adopted the convention.
 
 ### A running skill cannot switch its own model
 
-`/autopilot-batch` spawns build subagents, so it can _set_ each one's model from the label. `/autopilot` invoked directly cannot — it runs at whatever model the session started with. There, the label is reconciled at announce time instead: running below the labeled tier is an under-build and stops for the user; running above it is only a cost note. See the `/autopilot` skill for the exact rule.
+`/autopilot-batch` spawns build subagents, so it can _set_ each one's model from the label. `/autopilot` invoked directly cannot — it runs at whatever model the session started with. There, the label is reconciled at announce time instead: running below the labeled tier is an under-build and stops for the user — unless the invoker states the downgrade was deliberate, since then a human already made the call; running above the labeled tier is only a cost note. See the `/autopilot` skill for the exact rule.
 
 ### Escalation stays allowed, and the label follows
 
