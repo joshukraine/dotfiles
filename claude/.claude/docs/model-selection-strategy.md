@@ -58,6 +58,45 @@ Callout template:
 
 ---
 
+## Consumers: how the autopilot skills read the label
+
+The label stopped being purely advisory once `/autopilot`, `/autopilot-batch`, and `/autopilot-triage` began reading it. This section is the contract those three skills implement — change it here first, then the skills.
+
+### The label sets the build tier, and nothing else
+
+`model: fable` → build with Fable; `model: opus` → Opus; `model: sonnet` → Sonnet. Every _derived_ tier in a run is computed from the build tier, never taken from the label:
+
+- **Review runs one tier above the build** — Sonnet build → Opus review, Opus build → Fable review, Fable build → Fable review (Fable is the ceiling, so a flagship build gets a flagship peer rather than nothing).
+- **The `--to merge` go/no-go floor stays Fable**, always. A `model: sonnet` label on a merge-tier issue does not lower it; `/autopilot-batch` forces a Fable build for any `--merge` issue precisely so the merge decision is Fable-made.
+
+So a cheap label can only ever cheapen the _build_ — never the safety net that catches a cheap build's mistakes.
+
+### No label → fall back to the existing heuristics
+
+Most repos have not adopted the convention and must keep working unchanged. When an issue carries no `model:` label, the skills use their own class rubric (Opus for data-model / security / ambiguous / cross-cutting work; Sonnet for bounded pattern-work). In an adopted repo, unlabeled means Opus by convention — which that rubric already approximates — so the same fallback is correct in both worlds and no skill needs a separate "is this repo adopted?" code path to choose a model.
+
+Adoption _is_ worth detecting for triage, though, so a missing label can be reported as the gap it is:
+
+```bash
+gh label list --json name --jq '[.[].name | select(startswith("model: "))]'
+```
+
+A non-empty result means the repo has adopted the convention.
+
+### A running skill cannot switch its own model
+
+`/autopilot-batch` spawns build subagents, so it can _set_ each one's model from the label. `/autopilot` invoked directly cannot — it runs at whatever model the session started with. There, the label is reconciled at announce time instead: running below the labeled tier is an under-build and stops for the user; running above it is only a cost note. See the `/autopilot` skill for the exact rule.
+
+### Escalation stays allowed, and the label follows
+
+If a cheap build hits hidden complexity, escalating mid-flight is correct — the label records a judgment, not a cage. Update the label afterward so the record stays honest and the next triage pass calibrates against what actually happened.
+
+### Surface the body callout
+
+Where an issue carries a top-of-body callout (layer 3), it usually names the watch-item or escalation trigger that made the tier a judgment call. Pass that callout through to the build agent's prompt, so the caveat reaches the model actually doing the work — a callout only the orchestrator reads is wasted.
+
+---
+
 ## Gotchas we learned (read before implementing)
 
 - **Comments cannot sit at the top of an issue.** GitHub appends comments below the body in chronological order and they sink as discussion accumulates — so a "comment near the top" is impossible. The only thing reliably at the top is the issue **body**, so the callout is a body edit (`gh issue edit --body-file`), not a comment.
