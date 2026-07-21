@@ -221,6 +221,37 @@ The configuration includes intelligent git functions that automatically detect y
 
 These functions work with both `main` and `master` branch names automatically.
 
+## Staleness Reporting
+
+`bubo` reports what in the environment has drifted, across every surface `setup.sh` installs: Homebrew, Zap and its plugins, tmux/tpm plugins, asdf plugins and tool versions, Neovim/lazy, and Mason. It prints the command to fix anything that is behind.
+
+```bash
+bubo
+```
+
+```text
+tmux plugins (tpm)           2 stale, 2 current
+  tpm                        99469c4 -> e261deb
+  vim-tmux-navigator         c45243d -> e41c431
+  fix: ~/.config/tmux/plugins/tpm/bin/update_plugins all
+
+mason                        4 stale, 33 current
+  registry data: 4h old
+  tree-sitter-cli            v0.26.10 -> v0.26.11
+  fix: nvim +Mason  (then press U)
+```
+
+**It installs and upgrades nothing.** Index and registry refreshes are permitted and unavoidable — `brew update` refreshes the tap index, and lazy fetches — but nothing changes version. Fixing is always a separate, deliberate act. `bubc` upgrades Homebrew; the other fix commands are printed next to whatever needs them.
+
+Everything runs in parallel, because the cost is almost entirely network round trips: the clone probes alone take 4.2s sequentially against 0.6s in parallel. The full report costs about 3s, against 2.5s for the `brew update && brew outdated` that `bubo` used to be.
+
+Two properties are worth knowing, because both were learned from real bugs:
+
+- **A probe that cannot reach the network reports `UNKNOWN`, never "current".** A report that under-reports staleness is worse than no report, because it turns "I don't know" into "you're fine". Same reason a symbolic asdf pin like `stable` reports `UNKNOWN`: it resolves at runtime, so comparing it against a version number is not a comparison.
+- **Clone staleness compares HEAD SHAs**, rather than asking whether the remote HEAD object exists locally. The latter is the obvious check and it silently lies — the object is routinely already in the local store from an earlier fetch even though `HEAD` never moved. It called both `tpm` and `vim-tmux-navigator` current while each sat a commit behind.
+
+That second bug is not hypothetical: a stale Zap plugin clone kept a fixed-upstream bug alive locally for 10 months, and nothing surfaced it.
+
 ## Claude Code
 
 [Claude Code][claude-code] is Anthropic's CLI tool for AI-assisted development. This repo includes a full configuration under the `claude/` directory, stowed to `~/.claude/`.

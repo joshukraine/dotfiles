@@ -108,7 +108,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
@@ -178,7 +177,8 @@
     "enabled": false
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "model": "opus[1m]",
+  "effortLevel": "xhigh",
   "tui": "fullscreen",
   "voice": {
     "enabled": true

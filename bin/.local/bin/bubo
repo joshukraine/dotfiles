@@ -1,8 +1,542 @@
 #!/usr/bin/env bash
 #
-# Update Homebrew and show outdated packages
+# Report which dotfiles-managed tools have gone stale
 # Usage: bubo
+#
+# Probes every surface setup.sh installs -- homebrew, zap, tpm, asdf, lazy, mason
+# -- and prints the command to fix anything that is behind.
+#
+# Installs and upgrades nothing. Index and registry refreshes are permitted and
+# unavoidable (brew update refreshes the tap index; lazy fetches), but no
+# installed software changes version.
+#
+# Probes run in parallel because the cost is almost entirely network round trips:
+# the clone probes alone take 4.2s sequentially against 0.6s in parallel.
+#
+# Two rules this report is built around, both learned from real bugs:
+#
+#   1. A probe that cannot reach the network reports UNKNOWN, never "current".
+#      A report that under-reports staleness is worse than no report, because it
+#      turns "I don't know" into "you're fine".
+#
+#   2. Clone staleness compares HEAD SHAs. The obvious check -- does the remote
+#      HEAD object exist locally, via `git cat-file -e` -- finds objects pulled
+#      in by an earlier fetch and calls stale clones current.
+#
+# See https://github.com/joshukraine/dotfiles/issues/236.
 
 set -euo pipefail
 
-brew update && brew outdated
+ZAP_DIR="${ZAP_DIR:-${XDG_DATA_HOME:-${HOME}/.local/share}/zap}"
+TMUX_PLUGIN_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/tmux/plugins"
+ASDF_DATA_DIR="${ASDF_DATA_DIR:-${HOME}/.asdf}"
+TOOL_VERSIONS="${HOME}/.tool-versions"
+
+# Bound the network probes. Git has no timeout flag, but it will abort a transfer
+# that stalls, which keeps a black-holed connection from hanging the report.
+export GIT_TERMINAL_PROMPT=0
+export GIT_HTTP_LOW_SPEED_LIMIT=1000
+export GIT_HTTP_LOW_SPEED_TIME=10
+
+# --- output ------------------------------------------------------------------
+
+section() {
+  printf '%-28s %s\n' "$1" "$2"
+}
+
+item() {
+  printf '  %-26s %s\n' "$1" "$2"
+}
+
+note() {
+  printf '  %s\n' "$1"
+}
+
+fix() {
+  printf '  fix: %s\n' "$1"
+}
+
+# Join non-zero counts into a verdict like "2 stale, 1 unknown, 12 current".
+# Args: <count> <label> [<count> <label> ...]
+summary() {
+  local out=""
+
+  while [[ "$#" -gt 0 ]]; do
+    if [[ "$1" -gt 0 ]]; then
+      [[ -z "${out}" ]] || out="${out}, "
+      out="${out}$1 $2"
+    fi
+    shift 2
+  done
+
+  printf '%s' "${out}"
+}
+
+# Render a section from tab-separated "<name> <status> <detail>" records on stdin.
+# Only non-current items are listed; the rest are counted in the verdict.
+# Args: <label> <fix command> [<note>]
+render_records() {
+  local label="$1" fix_cmd="$2" note_line="${3:-}"
+  local name status detail
+  local stale=0 ahead=0 unknown=0 current=0 lines=""
+
+  while IFS=$'\t' read -r name status detail; do
+    case "${status}" in
+      CURRENT)
+        current=$((current + 1))
+        ;;
+      STALE)
+        stale=$((stale + 1))
+        lines="${lines}$(item "${name}" "${detail}")"$'\n'
+        ;;
+      AHEAD)
+        ahead=$((ahead + 1))
+        lines="${lines}$(item "${name}" "${detail}")"$'\n'
+        ;;
+      UNKNOWN)
+        unknown=$((unknown + 1))
+        lines="${lines}$(item "${name}" "UNKNOWN: ${detail}")"$'\n'
+        ;;
+    esac
+  done
+
+  section "${label}" "$(summary "${stale}" stale "${ahead}" ahead "${unknown}" unknown "${current}" current)"
+  [[ -z "${note_line}" ]] || note "${note_line}"
+  [[ -z "${lines}" ]] || printf '%s' "${lines}"
+  [[ "${stale}" -eq 0 ]] || fix "${fix_cmd}"
+}
+
+# --- git clones --------------------------------------------------------------
+
+# Classify one git clone against the branch it tracks.
+# Prints a tab-separated "<name> <status> <detail>" record.
+#
+# Compares HEAD SHAs rather than asking whether the remote SHA is present
+# locally: the object is routinely already in the local store from an earlier
+# fetch even though HEAD never moved, which reports stale clones as current.
+#
+# The remote SHA comes from the branch this clone actually tracks, not from the
+# remote's default branch. zap ships checked out on release-v1 while its origin
+# HEAD points at master, so `ls-remote origin HEAD` compares two unrelated
+# branches and reports zap permanently stale -- a false positive no `zap update`
+# can clear, because zap is in fact current on release-v1. A clone with no
+# upstream (detached HEAD, or no tracking configured) falls back to the remote's
+# default branch, the best answer available.
+probe_clone() {
+  local dir="$1"
+  local name local_sha="" remote_sha="" upstream remote_ref
+
+  name="$(basename "${dir}")"
+
+  local_sha="$(git -C "${dir}" rev-parse HEAD 2>/dev/null)" || local_sha=""
+  if [[ -z "${local_sha}" ]]; then
+    printf '%s\tUNKNOWN\tnot a git clone\n' "${name}"
+    return 0
+  fi
+
+  # `@{upstream}` abbreviates to "<remote>/<branch>"; strip the remote to get
+  # the branch. Remote names carry no slash, so #*/ leaves branch names that do.
+  upstream="$(git -C "${dir}" rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)" || upstream=""
+  if [[ -n "${upstream}" ]]; then
+    remote_ref="refs/heads/${upstream#*/}"
+  else
+    remote_ref="HEAD"
+  fi
+
+  remote_sha="$(git -C "${dir}" ls-remote origin "${remote_ref}" 2>/dev/null | awk 'NR == 1 { print $1 }')" || remote_sha=""
+  if [[ -z "${remote_sha}" ]]; then
+    printf '%s\tUNKNOWN\tno answer from origin\n' "${name}"
+    return 0
+  fi
+
+  if [[ "${local_sha}" == "${remote_sha}" ]]; then
+    printf '%s\tCURRENT\t\n' "${name}"
+  elif git -C "${dir}" merge-base --is-ancestor "${remote_sha}" "${local_sha}" 2>/dev/null; then
+    printf '%s\tAHEAD\tlocal commits on top of %s\n' "${name}" "${remote_sha:0:7}"
+  else
+    printf '%s\tSTALE\t%s -> %s\n' "${name}" "${local_sha:0:7}" "${remote_sha:0:7}"
+  fi
+}
+
+# List every immediate subdirectory of a parent that is a git clone.
+clone_dirs_in() {
+  local parent="$1" dir
+
+  [[ -d "${parent}" ]] || return 0
+
+  for dir in "${parent}"/*/; do
+    [[ -e "${dir}.git" ]] || continue
+    printf '%s\n' "${dir%/}"
+  done
+}
+
+# Probe a set of clones in parallel and render them as one section.
+# Args: <label> <fix command> [<clone dir> ...]
+report_clone_group() {
+  local label="$1" fix_cmd="$2"
+  shift 2
+
+  if [[ "$#" -eq 0 ]]; then
+    section "${label}" "skipped: no clones found"
+    return 0
+  fi
+
+  local tmpdir dir
+  tmpdir="$(mktemp -d)"
+
+  for dir in "$@"; do
+    probe_clone "${dir}" >"${tmpdir}/$(basename "${dir}")" &
+  done
+  wait
+
+  render_records "${label}" "${fix_cmd}" < <(cat "${tmpdir}"/* | sort)
+  rm -rf "${tmpdir}"
+}
+
+# --- probes ------------------------------------------------------------------
+
+probe_brew() {
+  local label="homebrew"
+  local outdated="" count
+
+  if ! command -v brew >/dev/null 2>&1; then
+    section "${label}" "skipped: brew not installed"
+    return 0
+  fi
+
+  # The tap-index refresh bubo has always done, and the reason `brew outdated`
+  # can answer honestly.
+  if ! brew update >/dev/null 2>&1; then
+    section "${label}" "UNKNOWN: brew update failed"
+    return 0
+  fi
+
+  if ! outdated="$(brew outdated 2>/dev/null)"; then
+    section "${label}" "UNKNOWN: brew outdated failed"
+    return 0
+  fi
+
+  if [[ -z "${outdated}" ]]; then
+    section "${label}" "current"
+    return 0
+  fi
+
+  count="$(printf '%s\n' "${outdated}" | wc -l | tr -d ' ')"
+  section "${label}" "${count} stale"
+  printf '%s\n' "${outdated}" | sed 's/^/  /'
+  fix "bubc"
+}
+
+probe_zap() {
+  local label="zsh plugins (zap)"
+  local dirs=() dir
+
+  if [[ ! -d "${ZAP_DIR}" ]]; then
+    section "${label}" "skipped: zap not installed"
+    return 0
+  fi
+
+  # Zap itself is a clone, and goes stale exactly like the plugins it manages.
+  if [[ -e "${ZAP_DIR}/.git" ]]; then
+    dirs+=("${ZAP_DIR}")
+  fi
+
+  while IFS= read -r dir; do
+    dirs+=("${dir}")
+  done < <(clone_dirs_in "${ZAP_DIR}/plugins")
+
+  report_clone_group "${label}" 'zap update all' ${dirs[@]+"${dirs[@]}"}
+}
+
+probe_tmux() {
+  local label="tmux plugins (tpm)"
+  local dirs=() dir
+
+  while IFS= read -r dir; do
+    dirs+=("${dir}")
+  done < <(clone_dirs_in "${TMUX_PLUGIN_DIR}")
+
+  report_clone_group "${label}" "${TMUX_PLUGIN_DIR}/tpm/bin/update_plugins all" ${dirs[@]+"${dirs[@]}"}
+}
+
+probe_asdf_plugins() {
+  local label="asdf plugins"
+  local dirs=() dir
+
+  while IFS= read -r dir; do
+    dirs+=("${dir}")
+  done < <(clone_dirs_in "${ASDF_DATA_DIR}/plugins")
+
+  report_clone_group "${label}" 'asdf plugin update --all' ${dirs[@]+"${dirs[@]}"}
+}
+
+# Compare one pin from .tool-versions against the newest version asdf knows of.
+# Prints a tab-separated "<tool> <status> <detail>" record.
+#
+# asdf latest only knows what the plugin's vendored version definitions know, so
+# a stale asdf plugin makes this under-report. That is what the asdf plugin probe
+# above is for: the plugin axis is what keeps this one honest.
+probe_asdf_tool() {
+  local tool="$1" pinned="$2"
+  local latest="" version
+  local pins=()
+
+  read -ra pins <<<"${pinned}"
+
+  for version in ${pins[@]+"${pins[@]}"}; do
+    # Symbolic pins ("stable", "lts", "system", "ref:...") resolve at runtime.
+    # String-comparing one against a version number is not a comparison at all,
+    # and would report a permanent false "stale".
+    if [[ "${version}" != [0-9]* ]]; then
+      printf '%s\tUNKNOWN\t"%s" is symbolic, not comparable\n' "${tool}" "${version}"
+      return 0
+    fi
+  done
+
+  latest="$(asdf latest "${tool}" 2>/dev/null)" || latest=""
+  if [[ -z "${latest}" ]]; then
+    printf '%s\tUNKNOWN\tasdf latest gave no answer\n' "${tool}"
+    return 0
+  fi
+
+  for version in ${pins[@]+"${pins[@]}"}; do
+    if [[ "${version}" == "${latest}" ]]; then
+      printf '%s\tCURRENT\t\n' "${tool}"
+      return 0
+    fi
+  done
+
+  printf '%s\tSTALE\t%s -> %s\n' "${tool}" "${pinned}" "${latest}"
+}
+
+probe_asdf_versions() {
+  local label="asdf tool versions"
+  local tmpdir tool versions
+
+  if ! command -v asdf >/dev/null 2>&1; then
+    section "${label}" "skipped: asdf not installed"
+    return 0
+  fi
+
+  if [[ ! -f "${TOOL_VERSIONS}" ]]; then
+    section "${label}" "skipped: ${TOOL_VERSIONS} not present"
+    return 0
+  fi
+
+  tmpdir="$(mktemp -d)"
+
+  while read -r tool versions; do
+    case "${tool}" in
+      '' | \#*) continue ;;
+    esac
+    probe_asdf_tool "${tool}" "${versions}" >"${tmpdir}/${tool}" &
+  done <"${TOOL_VERSIONS}"
+  wait
+
+  render_records "${label}" "asdf install <tool> <version>, then update ${TOOL_VERSIONS}" \
+    < <(cat "${tmpdir}"/* | sort)
+  rm -rf "${tmpdir}"
+}
+
+# --- neovim ------------------------------------------------------------------
+
+# lazy and mason are both Lua APIs inside the same editor, so one headless nvim
+# answers for both surfaces and the startup cost is paid once.
+nvim_probe_lua() {
+  cat <<'LUA'
+-- Records are sentinel-prefixed and tab-separated so that unrelated nvim output
+-- cannot be mistaken for a probe result.
+local function emit(...)
+  io.stdout:write(table.concat({ "BUBO", ... }, "\t") .. "\n")
+end
+
+local function probe_lazy()
+  local ok, lazy = pcall(require, "lazy")
+  if not ok then
+    emit("LAZY_ABSENT")
+    return
+  end
+
+  -- Load-bearing, and not obvious. lazy's Task:spawn only records a failed
+  -- process against the task when it is NOT in headless-process mode; headless
+  -- writes the output straight to stdout instead. Left alone, task:has_errors()
+  -- is therefore always false here, every failed fetch looks like a clean one,
+  -- and an offline run reports every plugin as current off the remote-tracking
+  -- refs left behind by the last successful fetch. Verified: with this line, an
+  -- offline check reports 57 of 57 plugins errored; without it, 0.
+  local config = require("lazy.core.config")
+  config.options.headless.process = false
+
+  -- wait = true makes lazy's async check synchronous; show = false keeps the UI
+  -- closed. This fetches, which is an index refresh, and installs nothing.
+  if not pcall(function()
+    lazy.check({ show = false, wait = true })
+  end) then
+    emit("LAZY_FAILED")
+    return
+  end
+
+  for name, plugin in pairs(config.plugins) do
+    local state = plugin._ or {}
+
+    -- Mirrors the set lazy.check itself operates on.
+    if plugin.url and state.installed then
+      local failed = false
+      for _, task in ipairs(state.tasks or {}) do
+        if task.has_errors and task:has_errors() then
+          failed = true
+        end
+      end
+
+      if failed then
+        -- A plugin whose fetch failed has no verdict, and must not read as current.
+        emit("LAZY", name, "UNKNOWN", "fetch failed")
+      elseif state.updates then
+        local from = string.sub((state.updates.from or {}).commit or "", 1, 7)
+        local to = string.sub((state.updates.to or {}).commit or "", 1, 7)
+        emit("LAZY", name, "STALE", from .. " -> " .. to)
+      else
+        emit("LAZY", name, "CURRENT", "")
+      end
+    end
+  end
+end
+
+-- The mason probe reads the cached registry, so it is only as honest as that
+-- cache is fresh. Without reporting the cache's age, a stale registry silently
+-- reports outdated packages as current.
+local function registry_age()
+  local newest = nil
+
+  for _, file in ipairs(vim.fn.glob(vim.fn.stdpath("data") .. "/mason/registries/*/*/*/info.json", false, true)) do
+    local ok, data = pcall(function()
+      return vim.json.decode(table.concat(vim.fn.readfile(file), "\n"))
+    end)
+    if ok and type(data) == "table" and data.download_timestamp then
+      if not newest or data.download_timestamp > newest then
+        newest = data.download_timestamp
+      end
+    end
+  end
+
+  if not newest then
+    return "age unknown"
+  end
+
+  local age = os.time() - newest
+  if age < 3600 then
+    return string.format("%dm old", math.floor(age / 60))
+  elseif age < 86400 then
+    return string.format("%dh old", math.floor(age / 3600))
+  end
+  return string.format("%dd old", math.floor(age / 86400))
+end
+
+local function probe_mason()
+  local ok, registry = pcall(require, "mason-registry")
+  if not ok then
+    emit("MASON_ABSENT")
+    return
+  end
+
+  for _, pkg in ipairs(registry.get_installed_packages()) do
+    local installed_ok, installed = pcall(pkg.get_installed_version, pkg)
+    local latest_ok, latest = pcall(pkg.get_latest_version, pkg)
+
+    if not (installed_ok and latest_ok) then
+      emit("MASON", pkg.name, "UNKNOWN", "registry has no version for it")
+    elseif installed == latest then
+      emit("MASON", pkg.name, "CURRENT", "")
+    else
+      emit("MASON", pkg.name, "STALE", installed .. " -> " .. latest)
+    end
+  end
+
+  emit("MASON_AGE", registry_age())
+end
+
+pcall(probe_lazy)
+pcall(probe_mason)
+io.stdout:flush()
+vim.cmd("qa!")
+LUA
+}
+
+# True when the nvim probe emitted a bare marker such as LAZY_ABSENT.
+nvim_probe_marker() {
+  printf '%s\n' "$1" | awk -F'\t' -v marker="$2" '$2 == marker { found = 1 } END { exit !found }'
+}
+
+# Extract the "<name> <status> <detail>" records for one surface.
+nvim_probe_records() {
+  printf '%s\n' "$1" | awk -F'\t' -v kind="$2" '$2 == kind { print $3 "\t" $4 "\t" $5 }' | sort
+}
+
+probe_nvim() {
+  local lazy_label="nvim plugins (lazy)" mason_label="mason"
+  local luafile raw="" age=""
+
+  if ! command -v nvim >/dev/null 2>&1; then
+    section "${lazy_label}" "skipped: nvim not installed"
+    printf '\n'
+    section "${mason_label}" "skipped: nvim not installed"
+    return 0
+  fi
+
+  luafile="$(mktemp)"
+  nvim_probe_lua >"${luafile}"
+  raw="$(nvim --headless -c "luafile ${luafile}" 2>/dev/null | grep '^BUBO' || true)"
+  rm -f "${luafile}"
+
+  if nvim_probe_marker "${raw}" LAZY_ABSENT; then
+    section "${lazy_label}" "skipped: lazy.nvim not loaded"
+  elif nvim_probe_marker "${raw}" LAZY_FAILED; then
+    section "${lazy_label}" "UNKNOWN: lazy check did not complete"
+  else
+    render_records "${lazy_label}" 'nvim "+Lazy sync"' < <(nvim_probe_records "${raw}" LAZY)
+  fi
+
+  printf '\n'
+
+  if nvim_probe_marker "${raw}" MASON_ABSENT; then
+    section "${mason_label}" "skipped: mason.nvim not loaded"
+    return 0
+  fi
+
+  age="$(printf '%s\n' "${raw}" | awk -F'\t' '$2 == "MASON_AGE" { print $3; exit }')"
+  render_records "${mason_label}" 'nvim +Mason  (then press U)' "registry data: ${age:-age unknown}" \
+    < <(nvim_probe_records "${raw}" MASON)
+}
+
+# --- report ------------------------------------------------------------------
+
+main() {
+  local file first=1
+
+  # Deliberately global: the EXIT trap fires after main has returned, by which
+  # point a local would be out of scope and unset.
+  BUBO_TMPDIR="$(mktemp -d)"
+  trap 'rm -rf "${BUBO_TMPDIR}"' EXIT
+
+  # Numbered so the report reads in a fixed order regardless of which probe
+  # finishes first.
+  probe_brew >"${BUBO_TMPDIR}/10-brew" &
+  probe_zap >"${BUBO_TMPDIR}/20-zap" &
+  probe_tmux >"${BUBO_TMPDIR}/30-tmux" &
+  probe_asdf_plugins >"${BUBO_TMPDIR}/40-asdf-plugins" &
+  probe_asdf_versions >"${BUBO_TMPDIR}/50-asdf-versions" &
+  probe_nvim >"${BUBO_TMPDIR}/60-nvim" &
+  wait
+
+  for file in "${BUBO_TMPDIR}"/*; do
+    [[ -s "${file}" ]] || continue
+    [[ "${first}" -eq 1 ]] || printf '\n'
+    first=0
+    cat "${file}"
+  done
+}
+
+# Sourced by the test suite, which exercises the probes directly.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
+fi
