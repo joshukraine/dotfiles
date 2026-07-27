@@ -1,6 +1,6 @@
 # Per-Issue Model Selection Strategy (GitHub Issues + Projects v2)
 
-A portable convention for recording a **recommended Claude model on each GitHub issue**, so that when you sit down to resolve an issue the right model is chosen deliberately — reserving the expensive flagship model for the work that actually needs it, and routing routine work to cheaper tiers. This controls usage/cost without sacrificing quality on the hard problems. First implemented in `gg-songbook` (2026-07); this document is the handoff so it can be replicated in any repo (e.g. ComixDistro) and eventually folded into dotfiles.
+A portable convention for recording a **recommended Claude model on each GitHub issue**, so that when you sit down to resolve an issue the right model is chosen deliberately — reserving the expensive flagship model for the work that actually needs it, and routing routine work to cheaper tiers. This protects plan-limit headroom without sacrificing quality on the hard problems (see "What a tier actually costs" below). First implemented in `gg-songbook` (2026-07); this document is the handoff so it can be replicated in any repo (e.g. ComixDistro) and eventually folded into dotfiles.
 
 ---
 
@@ -14,11 +14,19 @@ Model names change over time, so think in **tiers**, not fixed names. Map the ti
 
 The triage rule — assign each issue a tier by asking what a _wrong answer_ costs and how far the reasoning reaches:
 
-- **Flagship** when a wrong answer would _silently_ corrupt canonical/persistent data, **or** the reasoning spans several modules with non-obvious ripple effects. This is the insurance case — the extra reasoning headroom prevents a subtle miss that produces wrong output with no error.
+- **Flagship** when a wrong answer would _silently_ corrupt canonical/persistent data with no error surface. This is the insurance case, and only that case — the extra reasoning headroom buys a check against the failure mode that produces wrong output without ever failing.
 - **Workhorse** for well-specified features with a test scaffold and a _contained_ blast radius. Identify the single riskiest sub-problem up front and note that only _that_ piece should escalate to the flagship tier if it proves gnarly.
 - **Light** for documentation, a single regression test, and mechanical pattern-following where the spec leaves little to interpret.
 
 When unsure, lean one tier down for docs/tests and one tier up for anything touching data integrity.
+
+**The flagship bar tightened on 2026-07-27.** It used to read "silently corrupt canonical data **or** the reasoning spans several modules with non-obvious ripple." Opus 5's step-change is precisely in multi-module, long-horizon reasoning, so the workhorse tier now absorbs that clause and it has been cut. Flagship is the silent-corruption case alone. Expect the flagship share to fall from the ~6% measured under the old bar to roughly **2–3%**.
+
+### What a tier actually costs
+
+The argument throughout this document is denominated in **plan-limit headroom**, not dollars. On a usage-limited plan (Claude Max) consumption is a hard ceiling: over-spending on the flagship tier does not produce a larger invoice you can absorb by paying more, it runs the limit out mid-batch. `/autopilot-batch` fan-out — a dozen builds plus a gating review each, in parallel — is exactly the workload that hits that wall.
+
+API `$/MTok` list prices remain the best available **proxy for relative consumption weight** between tiers (as of 2026-07, Fable ~2× Opus). Read them as a ratio, not as spend.
 
 ---
 
@@ -32,7 +40,7 @@ Three repo-scoped labels, with cost-suggestive colors (red = expensive/reserve, 
 
 | Label | Hex color | Meaning |
 | --- | --- | --- |
-| `model: fable` | `B60205` (dark red) | Flagship — reserve for subtle/multi-module correctness |
+| `model: fable` | `B60205` (dark red) | Flagship — reserve for silent-data-corruption stakes |
 | `model: opus` | `FBCA04` (amber) | Workhorse — well-scoped features, refactors |
 | `model: sonnet` | `0E8A16` (green) | Light — docs, single tests, mechanical edits |
 
@@ -66,10 +74,47 @@ The label stopped being purely advisory once `/autopilot`, `/autopilot-batch`, a
 
 `model: fable` → build with Fable; `model: opus` → Opus; `model: sonnet` → Sonnet. Every _derived_ tier in a run is computed from the build tier, never taken from the label:
 
-- **Review runs one tier above the build** — Sonnet build → Opus review, Opus build → Fable review, Fable build → Fable review (Fable is the ceiling, so a flagship build gets a flagship peer rather than nothing).
+- **Review runs at Opus 5 or above, and never below the build** — Sonnet build → Opus review, Opus build → Opus review, Fable build → Fable review. See "The review floor, and the trade it accepts" below for why this is a floor rather than a tier-above rule.
 - **The `--to merge` go/no-go floor stays Fable**, always. A `model: sonnet` label on a merge-tier issue does not lower it; `/autopilot-batch` forces a Fable build for any `--merge` issue precisely so the merge decision is Fable-made.
 
 So a cheap label can only ever cheapen the _build_ — never the safety net that catches a cheap build's mistakes.
+
+### The review floor, and the trade it accepts
+
+> **Review runs at Opus 5 or above, and never below the build.**
+
+| Build | Review | Why |
+| --- | --- | --- |
+| Sonnet 5 | Opus 5 | A genuine step up — the case this floor exists for |
+| Opus 5 | Opus 5 | Fresh context, adversarial prompt, independent sample |
+| Fable 5 | Fable 5 | Unchanged (ceiling) |
+
+This replaced a "review one tier above the build" rule on 2026-07-27. That rule existed to make leaning on the _cheap_ tier for the bulk close to free on quality — an under-build gets caught before it ships. Opus was never the cheap build, so applying it mechanically to Opus builds spent flagship capacity insuring against a risk it was not written for. Opus 5 made that plain: it landed at the same consumption weight as Opus 4.8 with a step-change in capability, while Fable stayed ~2× the weight, so the same premium now buys a much thinner capability margin.
+
+Scale mattered more than the per-run delta. `/autopilot-batch` routes every build to a gating review, so against ComixDistro's settled 4 Fable / 32 Opus / 25 Sonnet distribution the old rule produced **4 Fable builds and ~36 Fable review runs**. Flagship usage was concentrated in reviews, not builds — and invisible to a "~6% flagship" figure that counts builds only.
+
+**What the middle row gives up, knowingly:**
+
+1. _Strict capability dominance_ — the reviewer is no longer unambiguously stronger than the builder.
+2. _Decorrelated blind spots_ — and this is the one that matters. A mistake Opus 5 is systematically prone to may be invisible to a second Opus 5 instance, however fresh its context. Fable failing **differently** was part of what made cross-tier review a real check, distinct from it merely being more capable.
+
+Accepted because the tier-above rule was aimed at cheap builds, because Fable and Opus share enough lineage that the decorrelation was always partial, and because the escalation paths below cover the tail. **If an Opus-reviewed Opus build ever ships a real miss, this is the line to revisit — and correlated blind spots is the mechanism to suspect first.**
+
+Context freshness needs no separate mechanism: `/autopilot-batch` spawns the gating review as its own `isolation: worktree` subagent, so the reviewer starts from a clean context by construction.
+
+#### Escalating to a Fable review
+
+Three paths already exist, and together they _are_ the escalation story. There is deliberately **no conditional rule** that reaches for Fable automatically.
+
+1. **`model: fable` at triage.** The bottom row is unchanged, so a flagship label yields a Fable build _and_ a Fable review. An issue complex enough to want a Fable review will almost always clear the flagship bar anyway — the existing label **is** the lever.
+2. **Mid-flight escalation carries the review with it.** The review tier is derived from the model the build _actually ran at_, never from the label, so a build that escalates to Fable pulls its review up automatically.
+3. **Re-run the review.** `/code-review` is not one-shot. An Opus review that comes back smelling wrong can be re-run at Fable on the same PR before merge, for the cost of one review. This path is correct precisely _because_ it is invoked by judgment rather than by rule.
+
+An automatic conditional ("Fable review when the issue carries data-integrity stakes") was considered and rejected: speculative machinery for a failure mode not yet observed, and redundant with all three paths above.
+
+#### Watch item — the build/verify asymmetry
+
+Work that is **easy to build and hard to verify** — a large mechanical refactor with a wide blast radius — is the one shape this ladder serves poorly. The risk sits in review, not build, so `model: fable` over-pays (Fable builds what Opus could have) while `model: opus` under-reviews. Path 3 covers it manually today. **If it recurs three times, that is the signal to give the review tier its own lever** instead of deriving it from the build — not before.
 
 ### Which issues get no tier at all
 
@@ -148,7 +193,7 @@ gh project list --owner <OWNER>       # find the board's <PROJECT_NUMBER> and no
 ### 1. Create the three labels (per repo)
 
 ```bash
-gh label create "model: fable"  --color B60205 --description "Recommended model: Fable 5 (reserve for subtle/multi-module correctness)"
+gh label create "model: fable"  --color B60205 --description "Recommended model: Fable 5 (reserve for silent-data-corruption stakes)"
 gh label create "model: opus"   --color FBCA04 --description "Recommended model: Opus 5 (well-scoped features, refactors)"
 gh label create "model: sonnet" --color 0E8A16 --description "Recommended model: Sonnet (docs, single tests, mechanical edits)"
 ```
@@ -222,12 +267,14 @@ gh issue view <N> --json body --jq .body | head -5                    # confirm 
 
 Two real triage passes, at very different scales. Use them to sanity-check a distribution before applying it — if your flagship share is far above these, the heuristic is probably being applied too generously.
 
+> **Measured under the previous rules.** Both passes predate 2026-07-27: they were tiered against the **two-clause flagship bar** (silent corruption _or_ multi-module ripple) and the **review-one-tier-above** ladder. They are kept rather than deleted because they remain the record of how the heuristic read in practice — but under the tightened single-clause bar several of these Fable calls would now land at Opus, and the expected flagship share is **~2–3%**, not ~6%. Compare your pass against their _shape_, not their absolute number.
+
 | Project | Issues | Fable | Opus | Sonnet | Flagship share |
 | --- | --- | --- | --- | --- | --- |
 | gg-songbook (2026-07) | 7 | 1 | 3 | 3 | ~14% (small-n) |
 | ComixDistro (2026-07-21) | 61 | 4 | 32 | 25 | **~6%** |
 
-ComixDistro is the more trustworthy anchor: at 61 issues the distribution has settled, and the shape is the point — **a small flagship reserve, a workhorse majority, and a substantial light tail**. The flagship tier is insurance, so a pass that tiers 20% of issues Fable has stopped discriminating and is just spending.
+ComixDistro is the more trustworthy anchor: at 61 issues the distribution has settled, and the shape is the point — **a small flagship reserve, a workhorse majority, and a substantial light tail**. The flagship tier is insurance, so a pass that tiers 20% of issues Fable has stopped discriminating and is just burning limit headroom.
 
 ### Worked example (gg-songbook, 7 open issues)
 

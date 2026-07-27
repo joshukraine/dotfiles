@@ -24,13 +24,13 @@ From the **target repository's checkout** — you need the issues _and_ the code
 
 Assign a tier by asking what a _wrong answer_ costs and how far the reasoning reaches. Full treatment in the strategy doc; the working summary:
 
-- **Fable (flagship)** — a wrong answer would _silently_ corrupt canonical/persistent data, **or** the reasoning spans several modules with non-obvious ripple. This is the insurance case. Expect it rare, and expect each one to have a nameable reason.
+- **Fable (flagship)** — a wrong answer would _silently_ corrupt canonical/persistent data with no error surface. This is the insurance case, and only that case. Expect it rare, and expect each one to have a nameable reason. (Multi-module reasoning with non-obvious ripple used to qualify here too; Opus 5 absorbed it and the clause was cut on 2026-07-27.)
 - **Opus (workhorse)** — well-specified features with a test scaffold and a contained blast radius; migrations / data-model; thin specs; security-adjacent work. The default when you genuinely can't tell.
 - **Sonnet (light)** — docs, a single regression test, i18n / copy, mechanical pattern-following where the spec leaves little to interpret and failure is visible.
 
 Lean one tier down for docs/tests, one tier up for anything touching data integrity.
 
-**Calibration:** ComixDistro's settled pass was 4 Fable / 32 Opus / 25 Sonnet across 61 issues — roughly **6% flagship**. If your pass lands far above that, you are not discriminating, you are just spending. Check the two calibration references in the strategy doc before presenting.
+**Calibration:** ComixDistro's settled pass was 4 Fable / 32 Opus / 25 Sonnet across 61 issues — roughly **6% flagship** — but that pass was tiered under the older two-clause flagship bar. Under the tightened bar expect **~2–3%**. Either way, a pass landing far above is not discriminating, it is just burning limit headroom. Check the two calibration references in the strategy doc — and the note on which rules they were measured under — before presenting.
 
 ### Issues that get no tier
 
@@ -53,7 +53,7 @@ Establish that everything the apply step needs exists, and stop early if it does
 3. **Labels exist** — `gh label list`. Create any missing ones from the taxonomy, exactly as specified there:
 
    ```bash
-   gh label create "model: fable"  --color B60205 --description "Recommended model: Fable 5 (reserve for subtle/multi-module correctness)"
+   gh label create "model: fable"  --color B60205 --description "Recommended model: Fable 5 (reserve for silent-data-corruption stakes)"
    gh label create "model: opus"   --color FBCA04 --description "Recommended model: Opus 5 (well-scoped features, refactors)"
    gh label create "model: sonnet" --color 0E8A16 --description "Recommended model: Sonnet (docs, single tests, mechanical edits)"
    ```
