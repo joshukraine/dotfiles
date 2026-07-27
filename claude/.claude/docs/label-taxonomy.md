@@ -84,13 +84,13 @@ A unified vocabulary for classifying work across commits, branches, issues, and 
 
 | Label | Color | Description |
 | --- | --- | --- |
-| `model: fable` | `#B60205` | Flagship build — reserve for subtle/multi-module correctness, silent-data-integrity stakes |
+| `model: fable` | `#B60205` | Flagship build — reserve for silent-data-corruption stakes: a wrong answer corrupts canonical data with no error surface |
 | `model: opus` | `#FBCA04` | Workhorse build — well-scoped features, migrations/data-model, thin specs |
 | `model: sonnet` | `#0E8A16` | Light build — docs, single tests, i18n/copy, bounded pattern-following |
 
 The label records **which Claude model should build the issue**, assigned by asking what a _wrong answer_ costs and how far the reasoning reaches. Semantics, deliberately compact:
 
-- **Build tier only.** Review runs one tier above the build, and merge/reconcile decisions stay at Fable, per the standing model ladder. A cheap label never cheapens the safety net.
+- **Build tier only.** Review runs at Opus or above and never below the build, and merge/reconcile decisions stay at Fable, per the standing model ladder. A cheap label never cheapens the safety net.
 - **Unlabeled = Opus** (fail-safe default) — so a missed label degrades to the workhorse tier, never to a cheaper one.
 - **The label is the source of truth**; a board `Model` field mirrors it for card visibility. If you change one, change the other.
 - **Assigned at creation, alongside the type label** — this is the second required labeling decision when an issue is opened, not a later cleanup pass. `/model-triage` exists to adopt the convention in a repo that already has open issues, and to sweep up drift; it is a backstop, not the primary mechanism.
