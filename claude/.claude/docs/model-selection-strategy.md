@@ -9,7 +9,7 @@ A portable convention for recording a **recommended Claude model on each GitHub 
 Model names change over time, so think in **tiers**, not fixed names. Map the tiers to whatever the current lineup is:
 
 - **Flagship tier** (as of 2026-07: **Fable 5**) — the most capable/expensive model. Reserve it.
-- **Workhorse tier** (as of 2026-07: **Opus 4.8**) — very capable, the default for real feature work.
+- **Workhorse tier** (as of 2026-07: **Opus 5**) — very capable, the default for real feature work.
 - **Light tier** (as of 2026-07: **Sonnet**) — fast and cheap, ample for well-bounded work.
 
 The triage rule — assign each issue a tier by asking what a _wrong answer_ costs and how far the reasoning reaches:
@@ -149,7 +149,7 @@ gh project list --owner <OWNER>       # find the board's <PROJECT_NUMBER> and no
 
 ```bash
 gh label create "model: fable"  --color B60205 --description "Recommended model: Fable 5 (reserve for subtle/multi-module correctness)"
-gh label create "model: opus"   --color FBCA04 --description "Recommended model: Opus 4.8 (well-scoped features, refactors)"
+gh label create "model: opus"   --color FBCA04 --description "Recommended model: Opus 5 (well-scoped features, refactors)"
 gh label create "model: sonnet" --color 0E8A16 --description "Recommended model: Sonnet (docs, single tests, mechanical edits)"
 ```
 

@@ -29,7 +29,7 @@ Repos that have adopted the per-issue model convention (`~/.claude/docs/model-se
 gh issue view <n> --json labels --jq '[.labels[].name | select(startswith("model: "))] | first // "none"'
 ```
 
-Autopilot cannot _act_ on that label the way `/autopilot-batch` does — a running agent cannot switch its own model, so this skill still runs at whatever model invoked it. What it can do is reconcile before any work starts. Ladder, cheapest to most capable: **Sonnet 5 → Opus 4.8 → Fable 5**.
+Autopilot cannot _act_ on that label the way `/autopilot-batch` does — a running agent cannot switch its own model, so this skill still runs at whatever model invoked it. What it can do is reconcile before any work starts. Ladder, cheapest to most capable: **Sonnet 5 → Opus 5 → Fable 5**.
 
 - **No label** — the common case, and never a reason to stop. Either the repo hasn't adopted the convention or triage hasn't reached this issue; fall back to the existing judgment (announce that you're proceeding on the invoking model) and run.
 - **Session model matches the label** — say so in one line and proceed.

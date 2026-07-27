@@ -24,18 +24,18 @@ Default tier is `--to pr` by design — merge is opt-in, per issue, never batch-
 
 ## The build-model policy — the label decides the build, review runs one tier above
 
-Each issue's _build_ subagent runs at a model chosen per issue; the _gating review_ always runs **one model tier above that build**. Ladder, cheapest to most capable: **Sonnet 5 → Opus 4.8 → Fable 5**.
+Each issue's _build_ subagent runs at a model chosen per issue; the _gating review_ always runs **one model tier above that build**. Ladder, cheapest to most capable: **Sonnet 5 → Opus 5 → Fable 5**.
 
 ### Resolving each issue's build model
 
 **Read the issue's `model:` label first.** Repos that have adopted the per-issue model convention (`~/.claude/docs/model-selection-strategy.md`) carry one on every open issue, recording the build tier assigned at triage. Step 1's issue list already returns labels, so no extra call is needed:
 
-- `model: sonnet` → build with **Sonnet 5**; `model: opus` → **Opus 4.8**; `model: fable` → **Fable 5**.
+- `model: sonnet` → build with **Sonnet 5**; `model: opus` → **Opus 5**; `model: fable` → **Fable 5**.
 - **No `model:` label → fall back to the class rubric below.** Most repos have not adopted the convention and must keep working unchanged; in an adopted repo, unlabeled means Opus by convention — which the rubric already approximates — so the same fallback is right in both worlds.
 
 The fallback rubric, unchanged:
 
-- **Opus 4.8** — data-model / migrations, auth / security boundaries, inventory / shipment correctness, thin or ambiguous specs, cross-cutting refactors. Also the model whenever you genuinely can't tell the class (safe default — Opus never under-builds).
+- **Opus 5** — data-model / migrations, auth / security boundaries, inventory / shipment correctness, thin or ambiguous specs, cross-cutting refactors. Also the model whenever you genuinely can't tell the class (safe default — Opus never under-builds).
 - **Sonnet 5** — bounded, well-specified, pattern-following work: i18n / copy, views / Tailwind, config, a single test, straightforward CRUD, docs.
 
 State each issue's model at the confirm gate **and where it came from** — `label` or `rubric (no label)` — with a one-line why for every rubric call. An override you make at the gate is worth writing back to the issue's label afterward, so the record stays honest for the next run.
@@ -46,8 +46,8 @@ The gating review (Step 4) is computed from the build tier — one tier above �
 
 | Build | Gating review |
 | --- | --- |
-| Sonnet 5 | Opus 4.8 |
-| Opus 4.8 | Fable 5 |
+| Sonnet 5 | Opus 5 |
+| Opus 5 | Fable 5 |
 | Fable 5 | Fable 5 (ceiling — a flagship build gets a flagship peer) |
 
 This is the structural safety net: an under-build is caught and fixed at review, never shipped. That is exactly what makes leaning on the cheaper tier for the bulk close to free on quality while saving real cost and latency at fan-out scale — so **a `model: sonnet` label must never downgrade the review.** It sets the build only.

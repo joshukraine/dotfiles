@@ -18,7 +18,7 @@ From the **target repository's checkout** — you need the issues _and_ the code
 ## Arguments
 
 - **(no args)** — full rollout: tier every open issue that should carry a label.
-- **`--maintenance`** — sweep mode: tier only issues _missing_ a label, and reconcile label ↔ board-field drift. Leaves existing labels alone unless an issue's scope has visibly changed.
+- **`--maintenance`** — sweep mode: tier only issues _missing_ a label, reconcile label ↔ board-field drift, and refresh stale label _descriptions_. Leaves existing label assignments alone unless an issue's scope has visibly changed.
 
 ## The tiering heuristic
 
@@ -54,9 +54,18 @@ Establish that everything the apply step needs exists, and stop early if it does
 
    ```bash
    gh label create "model: fable"  --color B60205 --description "Recommended model: Fable 5 (reserve for subtle/multi-module correctness)"
-   gh label create "model: opus"   --color FBCA04 --description "Recommended model: Opus 4.8 (well-scoped features, refactors)"
+   gh label create "model: opus"   --color FBCA04 --description "Recommended model: Opus 5 (well-scoped features, refactors)"
    gh label create "model: sonnet" --color 0E8A16 --description "Recommended model: Sonnet (docs, single tests, mechanical edits)"
    ```
+
+   **Also check the descriptions of labels that already exist.** A description names the model current _at the time the label was created_, so a repo adopted before a model release carries a stale one indefinitely — `gh label create` won't touch it and no other step will either. Compare against the strings above and repair any mismatch:
+
+   ```bash
+   gh label list --json name,description --jq '.[] | select(.name | startswith("model: ")) | "\(.name)\t\(.description)"'
+   gh label edit "model: opus" --description "Recommended model: Opus 5 (well-scoped features, refactors)"
+   ```
+
+   Report each repair as drift fixed, not as a label created.
 
 4. **`Model` field exists** — `gh project field-list <N> --owner <OWNER> --format json`. If absent, create it once:
 
