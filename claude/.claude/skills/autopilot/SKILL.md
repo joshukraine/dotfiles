@@ -6,7 +6,7 @@ argument-hint: "[issue-number] [--to pr|merge]"
 
 # Autopilot
 
-Drive a single GitHub issue through the project's full development loop with minimal supervision, stopping at a boundary you authorize up front. This composes the existing skills (`/resolve-issue`, `/simplify`, `/create-pr`, `/verify`, `/walkthrough`, `/code-review`) plus `bin/ci` — it does not reinvent them.
+Drive a single GitHub issue through the project's full development loop with minimal supervision, stopping at a boundary you authorize up front. This composes the existing skills (`/resolve-issue`, `/simplify`, `/create-pr`, `/verify`, `/walkthrough`, and the built-in `review`) plus `bin/ci` — it does not reinvent them.
 
 Use this when an issue is clear and well-specified and you want it carried to a review-ready PR (or, for small reversible changes, all the way to merge) without invoking each step by hand. For issues that need close collaboration, use the individual skills instead.
 
@@ -36,7 +36,7 @@ Autopilot cannot _act_ on that label the way `/autopilot-batch` does — a runni
 - **Session model is _below_ the labeled tier** (e.g. Sonnet running a `model: opus` issue) — **stop and ask.** This is an under-build, the direction that produces quietly wrong work, and the announce is the cheapest possible moment to catch it. Report the mismatch and recommend re-invoking at the labeled tier. **Exception:** if whoever invoked you states the lower tier was chosen deliberately — an `/autopilot-batch` override at its confirm gate is the usual case — the human gate already happened. Note the deliberate downgrade and proceed.
 - **Session model is _above_ the labeled tier** (e.g. Opus running a `model: sonnet` issue) — note it once and **proceed.** Over-building costs plan-limit headroom, not correctness, and halting an authorized run over a consumption preference is the worse trade. Carry the note into the completion report so the pattern shows up if it repeats.
 
-**The label governs the build only.** It never lowers a derived tier: the `/code-review` effort in Step 6 and the `--to merge` gate in Step 8 are unaffected, and **the merge go/no-go floor stays Fable regardless of any label** — a `model: sonnet` issue does not get a cheaper merge decision. (In a batch run, `/autopilot-batch` enforces that floor by building every `--merge` issue with Fable, and applies the standing review floor — Opus or above, never below the build — to every `--to pr` PR.)
+**The label governs the build only.** It never lowers a derived tier: the review tier in Step 6 and the `--to merge` gate in Step 8 are unaffected, and **the merge go/no-go floor stays Fable regardless of any label** — a `model: sonnet` issue does not get a cheaper merge decision. (In a batch run, `/autopilot-batch` enforces that floor by building every `--merge` issue with Fable, and applies the standing review floor — Opus or above, never below the build — to every `--to pr` PR.)
 
 If the issue body opens with a **model callout** (a `> 🤖 Recommended model: …` blockquote), it names the watch-item or escalation trigger behind the tier choice — read it, treat it as part of the spec, and watch that specific thing during Step 1.
 
@@ -97,14 +97,24 @@ Match the verification to the change's actual surface — don't reflexively invo
 
 ### Step 6 — Code review
 
-Invoke `/code-review`, choosing the effort level to fit the change rather than a fixed setting:
+**Spawn a review subagent** — do not review your own work in-session. You built this diff; a self-review inherits every assumption that produced it. A fresh subagent starts from a clean context and reads the code as written rather than as intended, which is the bulk of what the review is buying. Spawn it read-only: it reports findings, you triage and fix them (Step 7's `bin/ci` and any fix commits stay in this session, so only one agent ever writes to the branch).
 
-- **Default `high`** — broad coverage for an unattended run.
-- **Escalate to `max`** when the review is the last line of defense or the change is higher-risk: tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive diff.
-- **Drop to `medium`** for a small, mechanical `--to pr` change (a few-line copy/i18n/config tweak) that a human will still review after — max coverage there is mostly noise.
-- **Never auto-select `ultra`** — it's a billed, cloud, user-triggered review; leave it for the user to invoke.
+The subagent runs the built-in **`review <PR#>`** — the pull-request reviewer. Autopilot always has a PR number here; Step 3 captured it. It shares this session's working directory, already on the PR branch, so it needs no worktree and no `gh pr checkout`.
 
-State the level you picked and why in one line. Then triage the findings against the issue's spec:
+**`review` takes a PR number and nothing else — there is no effort level.** Depth is not an argument you pass; it is three things you choose:
+
+| Lever | How you turn it up |
+| --- | --- |
+| **Spawn tier** | The model you spawn the reviewer at. Floor: **the session model, never below the build.** Escalate a tier for a higher-risk diff — tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive change. |
+| **Reviewer fan-out** | Spawn several reviewers with distinct adversarial lenses (correctness, security, does-the-test-actually-test-it) rather than one. Use for the same higher-risk diffs that justify a tier bump. |
+| **Verification method** | Instruct the reviewer to **mutation-test** its key claims: delete or disable the feature and confirm the covering test actually fails. Make this the default, not an escalation — a test that passes with the feature removed is the failure mode a read-only review structurally cannot see. |
+
+Two invocation constraints worth knowing, because they are not obvious and cost a run to rediscover:
+
+- **`/code-review` is not available here.** It is a built-in, user-triggered command for a working diff, not a model-invocable skill — there is no frontmatter to change and no file to edit. `review` is not a workaround for it; it is the correct tool, because autopilot is reviewing a pull request.
+- **Never reach for `/code-review ultra`** — a billed cloud review, user-invoked by design. Leave it for the user.
+
+State the reviewer's tier and lens count in one line. Then triage the findings against the issue's spec:
 
 - Fix real correctness bugs and clear quality wins; commit and push (updates the open PR).
 - **Adjacent cleanup that finishes the same change is allowed.** If the review surfaces the same defect in a sibling spot (e.g. a duplicated helper the diff only half-updated), fix it too rather than leaving the job half-done — and **flag the expansion in the debrief**. Being blocked by "technically out of scope" defeats autopilot's purpose. (For `--to merge`, the Step 8 narrow-class gate independently re-checks the _final_ diff, so cleanup that escapes the whitelist safely degrades the run to `--to pr` rather than shipping unseen.)
@@ -125,7 +135,7 @@ Run `bin/ci`. This runs the full pipeline and produces the `gh signoff` that is 
 - [ ] no changed model association and no altered public route (`config/routes.rb` public paths, `has_many`/`belongs_to`/etc.)
 - [ ] no new gem/dependency — no `Gemfile`, `Gemfile.lock`, or `package.json` change
 - [ ] the diff is confined to config / locales / views / copy / a small setting
-- [ ] `bin/ci` is green **and** `/code-review` surfaced no correctness findings
+- [ ] `bin/ci` is green **and** the Step 6 review surfaced no correctness findings
 
 Inspect with `git diff --stat <base>...HEAD` and check the changed paths. **If any check fails, do not merge** — announce which check failed, degrade to tier `pr` (post the summary, recommend `/merge-pr`), and stop.
 
@@ -145,7 +155,7 @@ Post a debrief-style summary:
 
 - PR: #M — <title>   <url>
 - Model: built on <model> — issue labeled <model: x | none> [<matched | ran above the label, consider the labeled tier next time>]
-- Loop: resolve ✓  simplify ✓  create-pr ✓  verify [✓/n·a]  walkthrough [✓/n·a]  code-review ✓  bin/ci ✓ (signed off)
+- Loop: resolve ✓  simplify ✓  create-pr ✓  verify [✓/n·a]  walkthrough [✓/n·a]  review ✓ (<tier>, <n> lens)  bin/ci ✓ (signed off)
 - Files: <count> changed
 - Notable decisions / cleanups: <one or two lines>
 - AC checkboxes: <checked / left for manual>
@@ -156,9 +166,10 @@ Post a debrief-style summary:
 ## Important
 
 - **`--to pr` is the default and never merges or deploys.** Only an explicit `--to merge` can, and only through the narrow-class gate.
-- **The `model:` label sets the build tier only, and only ever advises _this_ skill.** A single agent can't switch its own model, so here the label is a reconciliation at announce time — it never lowers the review effort or the Fable merge floor, and its absence changes nothing.
+- **The `model:` label sets the build tier only, and only ever advises _this_ skill.** A single agent can't switch its own model, so here the label is a reconciliation at announce time — it never lowers the Step 6 review tier or the Fable merge floor, and its absence changes nothing.
+- **The Step 6 reviewer is a subagent for independence, not just for tier.** Even spawned at the same model as the build, a fresh context catches what a self-review cannot — the builder's blind spots and its assumptions about what the code does are exactly what a same-session review carries forward intact.
 - **The narrow-class gate is a hard filter, not advice.** A mislabeled migration-bearing issue cannot ship unseen — worst case autopilot stops and asks.
 - **`/merge-pr`, `/walkthrough --publish`, and deploy-on-merge stay human-gated.** Autopilot's merge path is the single authorized exception, scoped to one issue by the `--to merge` flag.
-- **Prefer composing the real skills over re-implementing them** so their improvements flow through. The only inlined logic is the Step 8 merge, because `/merge-pr` is deliberately not model-invocable.
+- **Prefer composing the real skills over re-implementing them** so their improvements flow through. The only inlined logic is the Step 8 merge, because `/merge-pr` is deliberately not model-invocable. **A skill that turns out not to be invocable is a signal to find the right tool, never to hand-roll a substitute** — a hand-rolled step that still reports as the real one is the worst outcome, because the report reads as though the gate held.
 - **Push resilience.** A `git push` can fail transiently with an SSH signing-agent error (`sign_and_send_pubkey … communication with agent failed`) — a self-healing round-trip hiccup with the SSH agent, **not** an auth denial (which would read `agent refused operation`). Retry with short backoff (~3 attempts) before treating a push as failed; only stop and report if it still fails after retries. Applies wherever autopilot pushes — the `/create-pr` push in Step 3 and any review-fix push in Step 6.
 - **When in doubt, stop and ask.** A stalled autopilot that pings you is a good outcome; a wrong merge is not.
