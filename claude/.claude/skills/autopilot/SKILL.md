@@ -99,7 +99,7 @@ Match the verification to the change's actual surface — don't reflexively invo
 
 **Spawn a review subagent** — do not review your own work in-session. You built this diff; a self-review inherits every assumption that produced it. A fresh subagent starts from a clean context and reads the code as written rather than as intended, which is the bulk of what the review is buying.
 
-Tell it in the prompt to **report findings only** — no edits, no commits, no pushes. That is a prompt constraint, not a sandbox: a `general-purpose` reviewer holds Edit and Write, so nothing enforces it but the instruction. You triage and fix what it reports, and Step 7's `bin/ci` runs here, so only one agent ever writes to the branch. (`/autopilot-batch` Step 4 deliberately inverts this — its reviewer owns its own worktree, so it fixes and pushes directly. Branch ownership is what differs, not the review standard.)
+Tell it in the prompt to **report findings only** — no edits, no commits, no pushes. That is a prompt constraint, not a sandbox: a `general-purpose` reviewer holds Edit and Write, so nothing enforces it but the instruction. You triage and fix what it reports, and Step 7's CI run happens in this session, so only one agent ever writes to the branch. (`/autopilot-batch` Step 4 deliberately inverts this — its reviewer owns its own worktree, so it fixes and pushes directly. Branch ownership is what differs, not the review standard.)
 
 The subagent runs the built-in **`review <PR#>`** — the pull-request reviewer. Autopilot always has a PR number here; Step 3 captured it. It shares this session's working directory, already on the PR branch, so it needs no worktree and no `gh pr checkout`.
 
@@ -127,7 +127,9 @@ State the reviewer's tier and lens count in one line. Then triage the findings a
 
 ### Step 7 — Local CI + sign-off
 
-Run `bin/ci`. This runs the full pipeline and produces the `gh signoff` that is the required branch-protection gate. Re-run it after any review/walkthrough fix so the sign-off attaches to the commit that will merge. If `bin/ci` fails, stop and report (do not merge or leave a broken PR silently).
+Run the project's CI command. **If whoever invoked you supplied a specific CI command, run that one and never bare `bin/ci`** — a batch run does exactly this, handing you a wrapper that carries test-database isolation and serial execution. Those settings are not yours to drop: bare `bin/ci` there would run against the _shared_ test database and clobber a concurrent session. With no such instruction — the standalone case — run `bin/ci`.
+
+CI runs the full pipeline and produces the `gh signoff` that is the required branch-protection gate. Re-run it after any review/walkthrough fix so the sign-off attaches to the commit that will merge. If it fails, stop and report (do not merge or leave a broken PR silently).
 
 ### Step 8 — Boundary
 
@@ -139,7 +141,7 @@ Run `bin/ci`. This runs the full pipeline and produces the `gh signoff` that is 
 - [ ] no changed model association and no altered public route (`config/routes.rb` public paths, `has_many`/`belongs_to`/etc.)
 - [ ] no new gem/dependency — no `Gemfile`, `Gemfile.lock`, or `package.json` change
 - [ ] the diff is confined to config / locales / views / copy / a small setting
-- [ ] `bin/ci` is green **and** the Step 6 review surfaced no correctness findings
+- [ ] CI is green **and** the Step 6 review surfaced no correctness findings
 
 Inspect with `git diff --stat <base>...HEAD` and check the changed paths. **If any check fails, do not merge** — announce which check failed, degrade to tier `pr` (post the summary, recommend `/merge-pr`), and stop.
 
@@ -159,7 +161,7 @@ Post a debrief-style summary:
 
 - PR: #M — <title>   <url>
 - Model: built on <model> — issue labeled <model: x | none> [<matched | ran above the label, consider the labeled tier next time>]
-- Loop: resolve ✓  simplify ✓  create-pr ✓  verify [✓/n·a]  walkthrough [✓/n·a]  review ✓ (<tier>, <n> lens)  bin/ci ✓ (signed off)
+- Loop: resolve ✓  simplify ✓  create-pr ✓  verify [✓/n·a]  walkthrough [✓/n·a]  review ✓ (<tier>, <n> lens)  CI ✓ (signed off)
 - Files: <count> changed
 - Notable decisions / cleanups: <one or two lines>
 - AC checkboxes: <checked / left for manual>
@@ -176,4 +178,5 @@ Post a debrief-style summary:
 - **`/merge-pr`, `/walkthrough --publish`, and deploy-on-merge stay human-gated.** Autopilot's merge path is the single authorized exception, scoped to one issue by the `--to merge` flag.
 - **Prefer composing the real skills over re-implementing them** so their improvements flow through. The only inlined logic is the Step 8 merge, because `/merge-pr` is deliberately not model-invocable. **A skill that turns out not to be invocable is a signal to find the right tool, never to hand-roll a substitute** — a hand-rolled step that still reports as the real one is the worst outcome, because the report reads as though the gate held.
 - **Push resilience.** A `git push` can fail transiently with an SSH signing-agent error (`sign_and_send_pubkey … communication with agent failed`) — a self-healing round-trip hiccup with the SSH agent, **not** an auth denial (which would read `agent refused operation`). Retry with short backoff (~3 attempts) before treating a push as failed; only stop and report if it still fails after retries. Applies wherever autopilot pushes — the `/create-pr` push in Step 3 and any review-fix push in Step 6.
+- **An inherited CI command outranks this skill's default.** When a caller hands you a specific CI command it is carrying constraints you cannot see from in here — under `/autopilot-batch` it is test-database isolation and serial execution, and substituting bare `bin/ci` would run against the shared test database and clobber a concurrent session. This is the one place where composing skills leaks: the outer skill's environment does not reach you through the Bash tool, only through the instruction, so treat that instruction as binding.
 - **When in doubt, stop and ask.** A stalled autopilot that pings you is a good outcome; a wrong merge is not.
