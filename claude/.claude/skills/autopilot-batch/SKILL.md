@@ -82,29 +82,46 @@ Announce the run first: how many issues are queued, the tier split (all `--to pr
 
 ### Step 2 — Fan out the builds
 
-**First, write each issue's isolated CI wrapper.** Do this yourself, before spawning anything — one file per issue, at `/tmp/autopilot-ci-i<n>`, `chmod +x`:
+**First, write each issue's isolated-command wrapper.** Do this yourself, before spawning anything — one file per issue, at `/tmp/autopilot-i<n>`, `chmod +x`:
 
 ```bash
 #!/usr/bin/env bash
-# Isolated CI for autopilot issue <n>. Written by /autopilot-batch; not part of the repo.
-exec env PARALLEL_WORKERS=1 RAILS_ENV=test \
-  DATABASE_URL=postgres:///<app>_test_i<n> \
-  bin/ci "$@"
+# Isolated commands for autopilot issue <n>. Written by /autopilot-batch; not part of the repo.
+set -euo pipefail
+
+# The main checkout also has bin/ci, so a wrong-cwd run would silently test the
+# wrong tree while still writing to this issue's database. Refuse unless we are
+# in a linked worktree. (Outside a git repo both commands fail and compare
+# equal, which also refuses — the safe direction.)
+if [ "$(git rev-parse --git-dir 2>/dev/null)" = "$(git rev-parse --git-common-dir 2>/dev/null)" ]; then
+  echo "autopilot-i<n>: run this from the agent's worktree, not $PWD" >&2
+  exit 1
+fi
+
+export PARALLEL_WORKERS=1 RAILS_ENV=test DATABASE_URL=postgres:///<app>_test_i<n>
+
+case "${1:-ci}" in
+  ci)      exec bin/ci ;;
+  test)    shift; exec bin/rails test "$@" ;;
+  prepare) exec bin/rails db:test:prepare ;;
+  *)       echo "usage: $(basename "$0") [ci|test <args>|prepare]" >&2; exit 2 ;;
+esac
 ```
 
 This is the whole point of the mechanism: **the three variables are typed once, by you, instead of re-threaded onto every command by an agent for the length of a run.** The Bash tool does not persist shell state between calls, so an `export` at the start of an agent's run does nothing and the variables would otherwise have to be re-typed on every test, CI, and `db:test:prepare` invocation — including the ones initiated from inside `/autopilot`, which the agent invokes rather than controls. A wrapper cannot be half-remembered.
 
-Two deliberate choices:
+Three deliberate choices:
 
+- **It covers all three call sites, not just CI.** `ci` for the full pipeline, `test` for the fast checks `/resolve-issue` Step 5 and `/autopilot` Step 4 need mid-loop, `prepare` for the one-time database setup. A CI-only wrapper would leave the loop with no isolated way to run tests — and an agent that needs one and hasn't got one will reach for bare `bin/rails test`, which is exactly the unprefixed invocation that leaked twelve worker databases on 2026-07-27. Forbidding a command without supplying its replacement produces the violation rather than preventing it.
 - **It lives in `/tmp`, not in `bin/`.** Build agents commit frequently, and a `bin/ci-isolated` inside the worktree is an untracked file that `git add -A` would sweep into the PR.
-- **It does not `cd`.** `bin/ci` resolves against the agent's cwd, so the same wrapper serves the build agent and the later review agent in their different worktrees. Run from anywhere else it fails loudly with "no such file" — a visible failure, never a silent run against the wrong database.
+- **It guards its cwd instead of `cd`-ing.** Not `cd`-ing is what lets one wrapper serve the build agent and the later review agent in their different worktrees. But "wrong cwd fails loudly" is only true for directories that lack `bin/ci` — and the main checkout has one, so an invocation from there would have run CI against the wrong tree and signed off on the wrong branch, silently. The worktree assertion closes that.
 
 Then, for each issue, spawn a **background** subagent:
 
 - `isolation: worktree` — its own checkout, so parallel edits across issues can't collide.
 - `run_in_background: true` — they run concurrently.
 - `model:` the issue's assigned build model — from its `model:` label, or the rubric when it has none; Fable for any `--to merge` issue. Because the subagent is spawned _at_ that model, `/autopilot`'s own announce-time reconciliation normally finds a match and passes straight through. **If you spawn an agent _below_ its issue's label** — a downgrade you approved at the confirm gate — say so explicitly in the prompt ("building at Opus is a deliberate override of this issue's `model: fable` label, approved at the batch confirm gate"), or the agent will treat it as an under-build and stop.
-- prompt: if the issue body opens with a **model callout** (a `> 🤖 Recommended model: …` blockquote), quote it in the prompt — it names the watch-item or escalation trigger behind the tier choice, and it is wasted if only the orchestrator reads it. Then: run `/autopilot <n> --to <tier>` to completion, with this instruction stated explicitly — **your CI command for this entire run is `/tmp/autopilot-ci-i<n>`, run in the foreground, from your worktree root. Never bare `bin/ci`, and never `bin/rails test` directly. This holds inside `/autopilot` too — its Step 7 defers to the CI command you were given.** (See the foreground-CI note under **Important**; the wrapper already carries the serial and isolated-database settings, so there is nothing to re-type.) Then report back, as the final message, the PR number and URL, the loop outcome (which steps ran / were n·a), a one-line summary of the change, and, if it stopped at the escape hatch, exactly where and why.
+- prompt: if the issue body opens with a **model callout** (a `> 🤖 Recommended model: …` blockquote), quote it in the prompt — it names the watch-item or escalation trigger behind the tier choice, and it is wasted if only the orchestrator reads it. Then: run `/autopilot <n> --to <tier>` to completion, with this instruction stated explicitly — **every test, CI, and database command for this entire run goes through `/tmp/autopilot-i<n>`, run in the foreground from your worktree root: `… prepare` once before anything else, then `… ci` for the full pipeline and `… test [args]` for the fast checks mid-loop. Never bare `bin/ci`, never `bin/rails test`. This holds inside `/autopilot` too — its Step 7 defers to the CI command you were given.** (See the foreground-CI note under **Important**; the wrapper carries the serial and isolated-database settings, so there is nothing to re-type and nothing to remember.) Then report back, as the final message, the PR number and URL, the loop outcome (which steps ran / were n·a), a one-line summary of the change, and, if it stopped at the escape hatch, exactly where and why.
 
 Spawn them together so they run in parallel. Each subagent lands on an auto-named worktree branch (`worktree-agent-…`); inside it, `/autopilot` → `/resolve-issue` creates the proper `feat/gh-<n>-…` branch, commits, pushes, and opens the PR from it. Nothing to pre-create.
 
@@ -123,24 +140,26 @@ A subagent that **stopped** at the escape hatch keeps its `autopilot-queued` lab
 For each review-ready PR, spawn a review subagent per the derivation table above — **Opus** for a Sonnet-built or Opus-built PR, **Fable** for a Fable-built PR. Derive this from the model the build actually ran at, **not** from the issue's `model:` label: if a build was overridden at the confirm gate or escalated mid-flight, the review must follow the real build tier, not the recorded one. That is also what makes a mid-flight escalation to Fable pull its own review up with it.
 
 - `model: opus` (Sonnet or Opus build) or `model: fable` (Fable build), `isolation: worktree`.
-- prompt: check out the PR branch (`gh pr checkout <PR>`), run the built-in `review <PR>` — it takes a PR number and **no effort level**, so depth comes from the spawn tier above plus, for a large or security-/data-sensitive diff, fanning out additional adversarial lenses; **mutation-test** the key claims either way (delete or disable the change and confirm the covering test actually fails — a test that stays green with the feature removed is the miss a read-only review cannot see). Then fix real correctness bugs and clear quality wins, commit and push (this updates the open PR), then re-run CI with **`/tmp/autopilot-ci-i<n>`** — the same wrapper the build agent used, so the review reuses that issue's database — so the required sign-off attaches to the final commit. Report the verdict: clean / _N_ fixes applied / a finding that needs a product decision (→ flag it for the human, don't guess).
+- prompt: check out the PR branch (`gh pr checkout <PR>`), run the built-in `review <PR>` — it takes a PR number and **no effort level**, so depth comes from the spawn tier above plus, for a large or security-/data-sensitive diff, fanning out additional adversarial lenses; **mutation-test** the key claims either way (delete or disable the change and confirm the covering test actually fails — a test that stays green with the feature removed is the miss a read-only review cannot see). Then fix real correctness bugs and clear quality wins, commit and push (this updates the open PR), then re-run CI with **`/tmp/autopilot-i<n> ci`** — the same wrapper the build agent used, so the review reuses that issue's database — so the required sign-off attaches to the final commit. Its `test` mode is available for iterating on a fix without paying for the full pipeline each time. Report the verdict: clean / _N_ fixes applied / a finding that needs a product decision (→ flag it for the human, don't guess).
 - Also state in the prompt: **if `gh signoff` fails with `current branch is not tracking a remote branch`, you are on a detached HEAD** — `gh pr checkout` could not take the branch. It is the only red step in an otherwise green run and reads like a test failure, which is what makes it expensive. Step 3 removes the build worktree first precisely to prevent this, so if it still happens, say so rather than working around it silently. The recovery is either a throwaway tracking branch (`git switch -c signoff-<PR>` then push with `-u`), or — after confirming the tree is clean and `HEAD` equals `origin/<pr-branch>` — `gh signoff create -f`.
 
 This is the review floor: every `--to pr` build is reviewed at Opus or above — never below itself — before the PR is "review-ready" for you, so a build-model miss is caught and fixed, never shipped. If a review comes back thin on a diff you are uneasy about, re-spawning the reviewer at Fable on the same PR is the escalation path: one review's worth of headroom, invoked by judgment rather than by rule. `--to merge` issues don't pass through here — they were Fable-built and Fable-reviewed inside their own `/autopilot` run, and merged there only if the narrow-class gate passed.
 
 ### Step 5 — Reclaim worktrees
 
-Build worktrees are already gone — Step 3 removes each one as its build finishes. What remains after the batch settles are the **review** worktrees, plus the build worktree of any issue that stopped at the escape hatch (left deliberately: its work is unpushed and removing it would discard the run).
+Step 3 already removed the build worktree of every issue that reached a review-ready PR. What remains: the **review** worktrees, the build worktrees of `--to merge` issues (they merged inside their own run and never passed through Step 3), and the build worktree of anything that stopped at the escape hatch — that last one deliberately, since its work is unpushed and removing it would discard the run.
 
-Sweep the rest: `git worktree list` to find the leftover `…/worktrees/agent-*` entries, `git worktree remove --force <path>` each one, then `git worktree prune`. The branches live on the remote (pushed as `feat/gh-<n>-…`), so removing the local worktrees is safe. Delete any `signoff-<PR>` helper branches a reviewer had to create (see Step 4), and remove the per-issue CI wrappers: `rm -f /tmp/autopilot-ci-i*`.
+Don't work from that list; work from `git worktree list`, which is authoritative. `git worktree remove --force <path>` each leftover `…/worktrees/agent-*` entry except any belonging to a stopped issue, then `git worktree prune`. The branches live on the remote (pushed as `feat/gh-<n>-…`), so removing the local worktrees is safe. Delete any `signoff-<PR>` helper branches a reviewer had to create (see Step 4), and remove the per-issue wrappers: `rm -f /tmp/autopilot-i*`.
 
 **Drop the per-issue test databases too** — they are the batch's largest leftover and nothing else reclaims them:
 
 ```bash
 psql -lqt | cut -d'|' -f1 | tr -d ' ' \
   | grep -E "^<app>_test_i[0-9]+([-_][0-9]+)?$" \
-  | while read -r db; do dropdb "$db"; done
+  | while read -r db; do dropdb "$db" || echo "still in use, skipped: $db"; done
 ```
+
+`dropdb` fails on a database that still has an open connection — a stray agent or a `psql` you left open. That is why the loop tolerates a failure and names the database instead of aborting the sweep; re-run it once the connection is gone.
 
 The `_i[0-9]+` segment is what keeps this off the project's own `<app>_test` and its worker databases, which belong to the human's local runs — the pattern matches only databases this batch created. Run the leak check under **Important** _before_ this, not after: dropping the evidence first would hide a bypass you needed to know about.
 
@@ -172,13 +191,13 @@ Post a batch summary:
 - **The `model:` label sets the build tier only.** The review tier is derived from the build (Opus floor, never below the build) and the merge floor is Fable, so no label can cheapen either — the safety net that catches a cheap build's mistakes is never itself cheapened. An issue with no label runs on the rubric exactly as before, which is what keeps unadopted repos working unchanged.
 - **One stop never halts the batch.** A stopped issue is set aside with its label intact; the rest continue. A wrong merge is the only truly bad outcome, and the gates above prevent it.
 - **Compose, don't re-implement.** Build subagents run the real `/autopilot`; review subagents run the built-in `review <PR>`. This skill only orchestrates, gates the model floor, and manages the queue label and worktrees — so improvements to those skills flow through untouched. **`/code-review` is not an option here** — it is a user-triggered command for a working diff and is not model-invocable, which is why the reviewer takes the PR-number variant. A subagent that finds a skill uninvocable must say so, never substitute a hand-rolled review that reports as the real one.
-- **Agents never type the isolation variables — the Step 2 wrapper carries them.** `/tmp/autopilot-ci-i<n>` is the only CI command an agent runs, and it is the enforcement point for both settings below. Pre-create that issue's database once before the first run (`env PARALLEL_WORKERS=1 RAILS_ENV=test DATABASE_URL=postgres:///<app>_test_i<n> bin/rails db:test:prepare`) — that is the one place the variables are still written out by hand, and it happens once per issue rather than on every command.
+- **Agents never type the isolation variables — the Step 2 wrapper carries them.** `/tmp/autopilot-i<n>` is the only test/CI/database command an agent runs (`prepare`, then `ci` and `test`), and it is the single enforcement point for both settings below. The build agent runs `… prepare` as its first action, inside its own worktree; the orchestrator cannot, because the wrapper's worktree guard correctly refuses to run from the main checkout.
 - **Why the database must be isolated (`RAILS_ENV=test DATABASE_URL=…` per agent).** Several worktree agents run CI at once; if they all share the project's one default test DB they deadlock against each other — and against any _other_ session using that same DB (a common case: a second Claude working in the primary checkout). `PARALLEL_WORKERS=1` does **not** solve this — it only fixes fork-starvation _within_ one run. Each agent gets a name distinct from the project's default test DB, e.g. `<app>_test_i<issue#>` (`…_test_i847`), reused by that issue's gating review. **`RAILS_ENV=test` is not optional:** `DATABASE_URL` only maps to the _test_ connection under `RAILS_ENV=test`. Omit it and `db:test:prepare` silently falls through to the shared default test DB (clobbering the other session), while `bin/ci`'s setup runs `db:prepare` in _development_ — creating the isolated DB stamped `development` and seeding it, which then breaks data-counting tests and makes `db:seed:replant` abort with `EnvironmentMismatchError`. Batch-scoped: standalone `/autopilot` runs (one worktree, no contention) don't need it.
 - **Why CI must run serially (`PARALLEL_WORKERS=1`).** Several worktree subagents run CI at once, and on macOS the parallel Minitest system-test workers fork-starve under that combined load — producing flaky failures and fork-crash storms that aren't real, then costly retries. A single test worker sidesteps it. Batch-scoped: standalone `/autopilot` runs can stay parallel.
 - **Verify the isolation held before you report the batch.** After the run, check that no per-worker databases leaked:
 
   ```bash
-  psql -lqt | cut -d'|' -f1 | tr -d ' ' | grep -E "<app>_test_i[0-9]+[-_][0-9]+"
+  psql -lqt | cut -d'|' -f1 | tr -d ' ' | grep -E "^<app>_test_i[0-9]+[-_][0-9]+$"
   ```
 
   It should return nothing. A hit means some command ran without `PARALLEL_WORKERS=1` — the wrapper was bypassed somewhere. Say so in the report rather than cleaning up quietly; that is the signal the mechanism is leaking. (Observed 2026-07-27: `…_test_i367_0` through `_i367_11`, twelve worker databases from a single missed prefix.) **The `[-_]` is deliberate** — Rails has used both `<base>-<n>` and `<base>_<n>` for parallel worker databases depending on version, and both are present on this machine today, so a pattern hardcoding one separator silently passes on a project using the other.
