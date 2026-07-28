@@ -97,7 +97,9 @@ Match the verification to the change's actual surface — don't reflexively invo
 
 ### Step 6 — Code review
 
-**Spawn a review subagent** — do not review your own work in-session. You built this diff; a self-review inherits every assumption that produced it. A fresh subagent starts from a clean context and reads the code as written rather than as intended, which is the bulk of what the review is buying. Spawn it read-only: it reports findings, you triage and fix them (Step 7's `bin/ci` and any fix commits stay in this session, so only one agent ever writes to the branch).
+**Spawn a review subagent** — do not review your own work in-session. You built this diff; a self-review inherits every assumption that produced it. A fresh subagent starts from a clean context and reads the code as written rather than as intended, which is the bulk of what the review is buying.
+
+Tell it in the prompt to **report findings only** — no edits, no commits, no pushes. That is a prompt constraint, not a sandbox: a `general-purpose` reviewer holds Edit and Write, so nothing enforces it but the instruction. You triage and fix what it reports, and Step 7's `bin/ci` runs here, so only one agent ever writes to the branch. (`/autopilot-batch` Step 4 deliberately inverts this — its reviewer owns its own worktree, so it fixes and pushes directly. Branch ownership is what differs, not the review standard.)
 
 The subagent runs the built-in **`review <PR#>`** — the pull-request reviewer. Autopilot always has a PR number here; Step 3 captured it. It shares this session's working directory, already on the PR branch, so it needs no worktree and no `gh pr checkout`.
 
@@ -105,14 +107,16 @@ The subagent runs the built-in **`review <PR#>`** — the pull-request reviewer.
 
 | Lever | How you turn it up |
 | --- | --- |
-| **Spawn tier** | The model you spawn the reviewer at. **Floor: the session model** — which here is also the build model, since one agent built the whole diff and cannot switch tiers. Escalate a tier for a higher-risk diff: tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive change. |
-| **Reviewer fan-out** | Spawn several reviewers with distinct adversarial lenses (correctness, security, does-the-test-actually-test-it) rather than one. Use for the same higher-risk diffs that justify a tier bump. For a security- or data-sensitive diff the built-in **`security-review`** is also model-invocable and is the sharper second lens — run it alongside `review`, not instead of it. |
+| **Spawn tier** | The model you spawn the reviewer at. You cannot switch _your own_ model mid-run, but the Agent tool takes a `model` override, so a Sonnet session can and should spawn an Opus reviewer. **Floor: Opus 5 or above, and never below the build** — the same absolute floor `/autopilot-batch` applies, which is what keeps a `model: sonnet` issue from buying a cheaper review. Escalate above the floor for a higher-risk diff: tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive change. |
+| **Reviewer fan-out** | Spawn several reviewers with distinct adversarial lenses (correctness, security, does-the-test-actually-test-it) rather than one. Use for the same higher-risk diffs that justify a tier bump. For a security- or data-sensitive diff the built-in **`security-review`** is also model-invocable and is the sharper second lens — run it alongside `review`, not instead of it. Note the different scope: `review` takes a PR number, while `security-review` works off pending changes on the **current branch**, so its reviewer must actually be on the PR branch. |
 | **Verification method** | Instruct the reviewer to **mutation-test** its key claims: delete or disable the feature and confirm the covering test actually fails. Make this the default, not an escalation — a test that passes with the feature removed is the failure mode a read-only review structurally cannot see. |
 
 Two invocation constraints worth knowing, because they are not obvious and cost a run to rediscover:
 
 - **`/code-review` is not available here.** It is a built-in, user-triggered command for a working diff, not a model-invocable skill — there is no frontmatter to change and no file to edit. `review` is not a workaround for it; it is the correct tool, because autopilot is reviewing a pull request.
 - **Never reach for `/code-review ultra`** — a billed cloud review, user-invoked by design. Leave it for the user.
+
+All three facts this step depends on were verified empirically on 2026-07-28, from inside a worktree-isolated `general-purpose` subagent — the same position a `/autopilot-batch` build agent occupies: `review` and `security-review` both appear in a subagent's skill listing and both invocations are accepted; `code-review` appears in no listing under any spelling; and a subagent **can** spawn a nested subagent, so this step works when `/autopilot` is itself running inside a batch build agent. That last one is default-dependent — the `Explore` and `Plan` agent types exclude the Agent tool, so spawn the reviewer as `general-purpose` (the default).
 
 State the reviewer's tier and lens count in one line. Then triage the findings against the issue's spec:
 
