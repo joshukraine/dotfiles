@@ -134,6 +134,16 @@ Build worktrees are already gone — Step 3 removes each one as its build finish
 
 Sweep the rest: `git worktree list` to find the leftover `…/worktrees/agent-*` entries, `git worktree remove --force <path>` each one, then `git worktree prune`. The branches live on the remote (pushed as `feat/gh-<n>-…`), so removing the local worktrees is safe. Delete any `signoff-<PR>` helper branches a reviewer had to create (see Step 4), and remove the per-issue CI wrappers: `rm -f /tmp/autopilot-ci-i*`.
 
+**Drop the per-issue test databases too** — they are the batch's largest leftover and nothing else reclaims them:
+
+```bash
+psql -lqt | cut -d'|' -f1 | tr -d ' ' \
+  | grep -E "^<app>_test_i[0-9]+([-_][0-9]+)?$" \
+  | while read -r db; do dropdb "$db"; done
+```
+
+The `_i[0-9]+` segment is what keeps this off the project's own `<app>_test` and its worker databases, which belong to the human's local runs — the pattern matches only databases this batch created. Run the leak check under **Important** _before_ this, not after: dropping the evidence first would hide a bypass you needed to know about.
+
 ## Completion report
 
 Post a batch summary:
