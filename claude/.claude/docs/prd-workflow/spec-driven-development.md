@@ -283,7 +283,8 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/create-pr` | Create PR with issue linking and ROADMAP update | Per issue |
 | `/verify` | Drive the running app end-to-end to confirm a change works (agent-driven; built-in) | Pre-review (user-facing PRs) |
 | `/walkthrough` | Generate a browser walkthrough of user-facing changes; `--publish` renders HTML, uploads to the project's QA host (when configured), and posts a PR comment with the link | On demand (complex features; projects with a non-technical tester) |
-| `/code-review` | Review the diff for correctness bugs and cleanups at a chosen effort level (built-in; `/review` for an existing PR by number) | Pre-merge |
+| `/code-review` | Review the working diff for correctness bugs and cleanups at a chosen effort level (built-in). **You type this one** — it is user-triggered and not model-invocable | Pre-merge |
+| `review` | Review an existing PR by number (built-in). The model-invocable counterpart to `/code-review`, and what an agent uses to review a PR — it takes a PR number and no effort level | Pre-merge (agent-run reviews) |
 | `/merge-pr` | Squash merge, clean up branch, pull the default branch | Post-review |
 | `/qa-handoff` | Generate a hands-on QA testing guide as a self-contained HTML page; `--publish` uploads it to the project's QA host | Per feature (when needed) |
 | `/qa-triage` | Triage a `qa`-labeled report — confirm it against the code, classify it, and draft the tech issue(s) it warrants | Per QA report |
@@ -294,7 +295,9 @@ This section maps every skill to its place in the development cycle. Think of it
 | `/update-deps` | Reconcile Dependabot PRs, audit security, validate on CI, open a unified PR | Periodic maintenance |
 | `/readme-refresh` | Audit and update README, or bootstrap one | Periodic / phase boundary |
 
-> **Note:** `/simplify`, `/code-review`, and `/verify` are built-in Claude Code skills. All other entries listed above are custom skills defined in `~/.claude/skills/`.
+> **Note:** `/simplify`, `/code-review`, `review`, and `/verify` are built-in Claude Code skills. All other entries listed above are custom skills defined in `~/.claude/skills/`.
+>
+> **`/code-review` vs. `review`** — the same built-in pair split by trigger, and the distinction matters when an agent is doing the reviewing. `/code-review` reviews the _working diff_ and is **user-triggered only**: it is not exposed to the model as an invocable skill, so an agent cannot run it (and `/code-review ultra` is a billed cloud review that should never fire unattended). `review` reviews a _pull request by number_ and is model-invocable — it is what `/autopilot` and `/autopilot-batch` spawn their review subagents to run. It accepts no effort level, so agent-side review depth comes from the reviewer's spawn tier, fan-out, and verification method rather than an argument.
 
 ### The PR cycle (inner loop)
 
