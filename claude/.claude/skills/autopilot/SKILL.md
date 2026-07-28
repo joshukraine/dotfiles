@@ -105,8 +105,8 @@ The subagent runs the built-in **`review <PR#>`** — the pull-request reviewer.
 
 | Lever | How you turn it up |
 | --- | --- |
-| **Spawn tier** | The model you spawn the reviewer at. Floor: **the session model, never below the build.** Escalate a tier for a higher-risk diff — tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive change. |
-| **Reviewer fan-out** | Spawn several reviewers with distinct adversarial lenses (correctness, security, does-the-test-actually-test-it) rather than one. Use for the same higher-risk diffs that justify a tier bump. |
+| **Spawn tier** | The model you spawn the reviewer at. **Floor: the session model** — which here is also the build model, since one agent built the whole diff and cannot switch tiers. Escalate a tier for a higher-risk diff: tier `--to merge` (ships to prod with no human review before deploy), or a large / multi-subsystem / security- or data-sensitive change. |
+| **Reviewer fan-out** | Spawn several reviewers with distinct adversarial lenses (correctness, security, does-the-test-actually-test-it) rather than one. Use for the same higher-risk diffs that justify a tier bump. For a security- or data-sensitive diff the built-in **`security-review`** is also model-invocable and is the sharper second lens — run it alongside `review`, not instead of it. |
 | **Verification method** | Instruct the reviewer to **mutation-test** its key claims: delete or disable the feature and confirm the covering test actually fails. Make this the default, not an escalation — a test that passes with the feature removed is the failure mode a read-only review structurally cannot see. |
 
 Two invocation constraints worth knowing, because they are not obvious and cost a run to rediscover:
