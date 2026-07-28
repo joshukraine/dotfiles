@@ -108,7 +108,7 @@ Three paths already exist, and together they _are_ the escalation story. There i
 
 1. **`model: fable` at triage.** The bottom row is unchanged, so a flagship label yields a Fable build _and_ a Fable review. An issue complex enough to want a Fable review will almost always clear the flagship bar anyway — the existing label **is** the lever.
 2. **Mid-flight escalation carries the review with it.** The review tier is derived from the model the build _actually ran at_, never from the label, so a build that escalates to Fable pulls its review up automatically.
-3. **Re-run the review.** `/code-review` is not one-shot. An Opus review that comes back smelling wrong can be re-run at Fable on the same PR before merge, for the cost of one review. This path is correct precisely _because_ it is invoked by judgment rather than by rule.
+3. **Re-run the review.** The gating review is not one-shot. An Opus review that comes back smelling wrong can be re-run at Fable on the same PR before merge — a fresh reviewer subagent spawned at the higher tier — for the cost of one review. This path is correct precisely _because_ it is invoked by judgment rather than by rule.
 
 An automatic conditional ("Fable review when the issue carries data-integrity stakes") was considered and rejected: speculative machinery for a failure mode not yet observed, and redundant with all three paths above.
 
