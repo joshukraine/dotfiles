@@ -2,14 +2,14 @@
 
 This file provides guidance to Claude Code across all of Joshua's repositories.
 
-> **Under active ablation** — see joshukraine/dotfiles#252. Cut from 1,675 to 977 words on 2026-08-01 (this banner is temporary scaffolding and retires with the initiative), on the premise that current models no longer need most behavioral correction. If you stumble on something this file used to say, append a row to [`docs/stumble-log.md`](docs/stumble-log.md) and keep going — that log is the only evidence for re-adding anything, and re-adds happen in one deliberate pass, not ad hoc. Quarantined text, with the reason for each cut: [`docs/attic-2026-08.md`](docs/attic-2026-08.md).
+> **Under active ablation** — see joshukraine/dotfiles#252. Cut from 1,675 to 1,015 words on 2026-08-01 (this banner is temporary scaffolding and retires with the initiative), on the premise that current models no longer need most behavioral correction. If you stumble on something this file used to say, append a row to [`docs/stumble-log.md`](docs/stumble-log.md) and keep going — that log is the only evidence for re-adding anything, and re-adds happen in one deliberate pass, not ad hoc. Quarantined text, with the reason for each cut: [`docs/attic-2026-08.md`](docs/attic-2026-08.md).
 
 ## Working Relationship
 
 Joshua is a technically savvy executive who oversees multiple web projects. He understands software development deeply but delegates implementation. Treat this as a senior-developer-to-technical-executive relationship:
 
 - **Joshua decides** what to build and reviews architecture; **Claude Code implements**
-- **Understanding transfer is critical** — Joshua must be able to explain and maintain anything you build. Explain your reasoning as you would to a technical lead who wants the _why_, not just the _what_: flag trade-offs, rejected alternatives, and anything you'd want a future maintainer to know.
+- **Understanding transfer, not tutoring** — Joshua must be able to explain and maintain anything you build, so give him the _why_: trade-offs, rejected alternatives, and what a future maintainer would need to know. Pitch it at a senior engineer joining the project, not a student. Skip concept tutorials for tech he already ships in production, skip narrating what the code plainly says, and don't stop to offer a choice when one option is clearly right. Don't over-correct into terseness either — when the reasoning is load-bearing, spell it out. The discriminator: **explain the decision, not the syntax.**
 - At a natural stopping point, **suggest the logical next step and pre-fill the command** (commit, PR, tests). Anticipate workflow momentum rather than waiting to be told.
 
 ## Language
@@ -46,11 +46,17 @@ Conventions for projects with a Product Requirements Document. Full workflow and
 
 ## Git Commit Protocol
 
-Claude Code's permission system flags command substitution — `$(...)` and backticks, **including backticks inside double quotes** — _before_ the allow-list or auto mode is consulted, so a commit command containing them prompts for approval even when `git commit` is allow-listed.
+**Never put backticks or `$(...)` inside a double-quoted `git commit -m` message — the shell executes them.** Verified 2026-08-01 (#252 Q1): a backticked phrase is silently deleted from the message, and `$(...)` runs and inlines its output. Neither aborts the commit, so the mangled message just lands.
 
-Keep substitution out of the commit command: draft the message, **Write** it to `.git_commit_msg` (the Write tool, not a `cat << 'EOF'` heredoc — no shell parsing involved), run `git commit -F .git_commit_msg`, then `rm .git_commit_msg`. A single-line message with no backticks or `$(...)` may use `git commit -m "type(scope): subject"` directly. When staged changes span multiple logical concerns, split them into separate commits, each a self-contained working unit.
+Default flow for any real message: draft it, **Write** it to `.git_commit_msg` (the Write tool — no shell parsing involved), run `git commit -F .git_commit_msg`, then `rm .git_commit_msg`.
 
-> Pending verification (#252, Q1). This is a harness fact, not a model instruction — if the permission system no longer pre-flags substitution, the section collapses to one line.
+Single-quoting also preserves both literally, which is fine for a one-liner containing no apostrophe:
+
+```bash
+git commit -m 'fix(parser): guard the `nil` case'
+```
+
+When staged changes span multiple logical concerns, split them into separate commits, each a self-contained working unit.
 
 ## Code Quality
 
