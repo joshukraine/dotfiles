@@ -6,7 +6,16 @@ argument-hint: "[issue-number]"
 
 # Resolve GitHub Issue
 
-Take the issue at `gh issue view $ARGUMENTS` through to a verified, committed implementation on a feature branch — stopping short of the PR.
+Take a GitHub issue through to a verified, committed implementation on a feature branch — stopping short of the PR.
+
+## Fetch — both calls, always
+
+```bash
+gh issue view $ARGUMENTS                # title, labels, body, and a `comments: N` count
+gh issue view $ARGUMENTS --comments     # the thread — this one omits the body, so it is not a swap for the first
+```
+
+**Read the comments, not just the body.** The body is the oldest artifact on an issue; comments carry scope added later, sequencing against other issues, and decisions that supersede an acceptance criterion still written in the body. An issue filed months ago and worked today is the normal case, not the exception. Run the second call unconditionally — the `comments: N` count sits in a metadata header that is easy to skim past, and a zero-comment issue costs one wasted call.
 
 ## Plan before implementing
 
@@ -46,12 +55,15 @@ Commit each working component rather than everything at the end — typically 3�
 
 Run the project's full test suite and confirm no regressions. **Do not proceed until it passes.**
 
-Then check off the acceptance criteria the work satisfied — fetch the issue body, flip `- [ ]` to `- [x]` for what's now done, and write it back:
+Then check off the acceptance criteria the work satisfied. Round-trip through a file rather than a shell variable — issue bodies routinely contain backticks and `$(...)`, and a file keeps them out of shell parsing entirely:
 
 ```bash
-gh issue view $ARGUMENTS --json body --jq '.body'
-gh issue edit $ARGUMENTS --body "$updated_body"
+gh issue view $ARGUMENTS --json body --jq '.body' > <scratchpad>/issue-body.md
+# edit that file: flip `- [ ]` to `- [x]` for the criteria now satisfied
+gh issue edit $ARGUMENTS --body-file <scratchpad>/issue-body.md
 ```
+
+Check off only what the work actually satisfied. If a criterion was superseded by a comment, say so in the summary rather than silently ticking or skipping it.
 
 ## Hand off — do not create the PR
 

@@ -24,11 +24,7 @@ The ablation method only works if the observation half actually happens. Cutting
 
 | Date | Repo | What happened | Candidate fix | Scope |
 | --- | --- | --- | --- | --- |
-| | | | | |
-
-<!-- Example row, delete once real entries exist:
-| 2026-08-04 | comix_distro | Left three blocks of commented-out ERB in a view; Joshua flagged it in review | Re-add the "no commented-out code" line from attic-2026-08.md § Code Quality → Comments | project |
--->
+| 2026-08-01 | comix_distro | First run of the trimmed `/resolve-issue` on #512. The trim cut Step 1's "extract title, description, labels, **and comments**" as GENERIC, leaving only `gh issue view N` — which prints the body but not the comment thread. That session read the comments anyway, by habit, and the three comments held roughly a third of the real scope plus one that **superseded an acceptance criterion still written in the body**. Following the skill literally would have shipped incomplete work while ticking every AC. Near-miss, not a failure — but only because of an unreliable habit. | Fixed in #254: the fetch step now runs `gh issue view N` **and** `gh issue view N --comments` unconditionally, with the rationale inline. | skill |
 
 ## Watch list
 
