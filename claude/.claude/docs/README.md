@@ -18,6 +18,16 @@ Everything related to spec-driven (PRD-based) development lives in `prd-workflow
 | --- | --- | --- |
 | [`label-taxonomy.md`](label-taxonomy.md) | Unified vocabulary for commits, branches, issues, and project boards | Naming a branch, choosing a commit type, setting up GitHub labels |
 | [`model-selection-strategy.md`](model-selection-strategy.md) | Per-issue `model:` label convention — the tiering heuristic, the runbook to adopt it in a repo, and how the autopilot skills consume it | Triaging issues for model tier, adopting the convention in a new repo, changing how autopilot picks a build model |
+| [`responsive-qa.md`](responsive-qa.md) | Verifying a layout at a mobile breakpoint so the result is trustworthy — viewport emulation vs. window resizing, the two assertions that prove the width took, and the fallbacks | **Before** checking any layout at a mobile width through a browser-automation MCP |
+
+## Config Trim Initiative (Aug 2026)
+
+Working files for the always-loaded-config ablation tracked in joshukraine/dotfiles#252. Both are temporary by design — they retire when the initiative closes.
+
+| Document | Purpose | Consult When... |
+| --- | --- | --- |
+| [`attic-2026-08.md`](attic-2026-08.md) | Text quarantined out of the global `CLAUDE.md`, with the reason for each cut | Re-adding an instruction, or wondering why something is no longer in the global file |
+| [`stumble-log.md`](stumble-log.md) | The running record of missed instructions — **the only admissible evidence for a re-add** | Claude got something wrong that a removed line would have prevented; or running the Phase 3 re-add pass |
 
 ## Skills
 
