@@ -6,87 +6,55 @@ argument-hint: "[issue-number]"
 
 # Resolve GitHub Issue
 
-Systematically resolve GitHub issues with a structured workflow.
+Take the issue at `gh issue view $ARGUMENTS` through to a verified, committed implementation on a feature branch — stopping short of the PR.
 
-## Your task
+## Plan before implementing
 
-Track your progress through the 6 steps below. Report completion of each step before moving to the next.
+Right-size the ceremony to the issue:
 
-### Step 1: Get issue details
-
-- Run `gh issue view $ARGUMENTS` to get issue details
-- Extract title, description, labels, and comments
-- Identify complexity and scope
-
-### Step 2: Research and understand
-
-- Search related PRs: `gh pr list --search "fix issue $ARGUMENTS"`
-- Search codebase for relevant files and patterns
-- Review similar issues if applicable
-
-### Step 3: Plan solution
-
-- Break the issue into small, manageable tasks
-- Identify files that need changes
-- Consider edge cases and testing requirements
-
-**CHECKPOINT**: Present the plan and get sign-off before implementing — but right-size the ceremony to the issue:
-
-- **Small, well-scoped** (a few files, an obvious approach): a one-line plan and a quick confirm. If the path is genuinely unambiguous, state your assumption and proceed without waiting — the global "bias toward action" rule applies.
-- **Complex or ambiguous** (multiple subsystems, design choices, real risk): present a full implementation plan and wait for explicit approval before proceeding.
+- **Small and well-scoped** (a few files, an obvious approach) — state the plan in a line and proceed. Don't wait for a reply.
+- **Complex or ambiguous** (multiple subsystems, design choices, real risk) — present the implementation plan and **wait for explicit approval**.
 
 When unsure which applies, treat it as complex and ask.
 
-### Step 4: Create or reuse branch, then implement
+## Branch
 
-- Check the current branch first: `git branch --show-current`
-  - **If already on a feature branch for this issue** (named `<prefix>/gh-$ARGUMENTS-...` — e.g. one created earlier in the same run, including an autopilot fan-out worktree re-entering this step): reuse it — do not create a new branch.
-  - **Otherwise** (on `main`/`master` or an unrelated branch): determine the branch prefix from the issue's type label (see Branch Naming below) and create the feature branch: `git switch -c <prefix>/gh-$ARGUMENTS-<short-description>`
-- Confirm the working branch: `git branch --show-current`
-- Implement with frequent commits (see commit strategy below)
-- **Do NOT include issue references** in commit messages
+Check `git branch --show-current` first:
 
-**Commit Strategy:**
+- **Already on a feature branch for this issue** (`<prefix>/gh-$ARGUMENTS-…`) — reuse it, do not create a second branch. This includes re-entering this step inside an autopilot fan-out worktree.
+- **Otherwise** — `git switch -c <prefix>/gh-$ARGUMENTS-<short-description>`
 
-- Commit every major component — don't wait until everything is done
-- Each commit must be working code
-- Typical range: 3-8 commits for most issues
-- Track which acceptance criteria from the issue have been satisfied as you go
+The prefix comes from the issue's type label. If the project defines its own branch convention, that wins.
 
-### Step 5: Verify solution
+| Type label | Prefix |
+| --- | --- |
+| `feat` | `feat/` |
+| `fix` | `fix/` |
+| `chore` | `chore/` |
+| `docs` | `docs/` |
+| `test` | `test/` |
 
-- Run `git log --oneline` to confirm commits exist
-- Run comprehensive tests across all changes
-- Verify the original issue is resolved completely
-- Check for regressions
-- Update the issue to check off all completed acceptance criteria checkboxes: fetch the current body with `gh issue view $ARGUMENTS --json body --jq '.body'`, replace `- [ ]` with `- [x]` for completed items, then update with `gh issue edit $ARGUMENTS --body "$updated_body"`
-- **STOP**: Do not proceed until all checks pass
+No type label? Bug fixes are `fix/`, new functionality `feat/`, everything else `chore/`.
 
-### Step 6: Report back
+## Commit as you go
 
-- Summarize: files modified, commits made, test status, resolution confirmation
-- **STOP**: Ask user if they want to create PR now
-- For non-trivial implementations, suggest running `/simplify` first to review for code reuse, quality, and efficiency improvements
-- Recommend: `/create-pr` (issue number will be inferred from branch name)
-- **Do NOT automatically create PR**
+Commit each working component rather than everything at the end — typically 3–8 commits for an issue, each one working code.
 
-## Branch Naming
+**Never reference the issue number in a commit message.** Issues close when the PR merges, so the closing keyword belongs in the PR description, not the commits.
 
-Use the issue's type label to determine the prefix. Format:
-`<prefix>/gh-<number>-<short-description>`
+## Before reporting done
 
-| Type Label | Branch Prefix | Example                    |
-| ---------- | ------------- | -------------------------- |
-| `feat`     | `feat/`       | `feat/gh-41-add-auth`      |
-| `fix`      | `fix/`        | `fix/gh-55-fix-login`      |
-| `chore`    | `chore/`      | `chore/gh-51-update-deps`  |
-| `docs`     | `docs/`       | `docs/gh-60-update-readme` |
-| `test`     | `test/`       | `test/gh-63-add-coverage`  |
+Run the project's full test suite and confirm no regressions. **Do not proceed until it passes.**
 
-If the issue has no type label, infer from context: bug fixes use `fix/`, new functionality uses `feat/`, everything else uses `chore/`.
+Then check off the acceptance criteria the work satisfied — fetch the issue body, flip `- [ ]` to `- [x]` for what's now done, and write it back:
 
-## Important
+```bash
+gh issue view $ARGUMENTS --json body --jq '.body'
+gh issue edit $ARGUMENTS --body "$updated_body"
+```
 
-- **Commit messages**: Describe what the commit does, NO issue references
-- **PR description**: Contains "Closes #$ARGUMENTS" to link the PR to the issue
-- **Why**: Issues close when PRs merge, not when individual commits land
+## Hand off — do not create the PR
+
+Summarize what changed: files touched, commits made, test status, and which acceptance criteria are now met. Then **stop and ask**.
+
+Recommend `/simplify` first for anything non-trivial, then `/create-pr` — it infers the issue number from the branch name.
