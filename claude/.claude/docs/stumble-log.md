@@ -16,9 +16,26 @@ The ablation method only works if the observation half actually happens. Cutting
 
 - One row per incident, not per category. Three separate wrong-branch-prefix incidents are three rows.
 - Record what _actually happened_, not the instruction you wish existed. The fix column is a hypothesis.
-- **Do not re-add during the observation window** (Phase 2, ~2 weeks from 2026-08-01). Log and keep going. Re-adds happen in one deliberate Phase 3 pass.
+- **Do not re-add during the observation window** (Phase 2, now running to **2026-09-26** — see [Observation window](#observation-window) below). Log and keep going. Re-adds happen in one deliberate Phase 3 pass.
+- **Exception — command bugs get fixed on the spot, not logged and endured.** Decision D7 on #252: when a skill hands over a command that is incomplete for the job it describes, the instruction _introduces_ the gap rather than failing to prevent one, and no amount of model capability closes it. Test: _if the model followed this line perfectly, would it still get the wrong result?_ If yes, fix it now — that is not a re-add. Log it anyway, so the method keeps its record.
 - A line comes back only if it appears here **more than once**. Single incidents are noise.
 - Re-add at the narrowest scope that fixes it: skill > project `CLAUDE.md` > global.
+- **Tag rows that happened during atypical work** — travel, short sessions, cold re-entry into a project untouched for a week. Phase 3 weighs a stumble differently depending on whether it surfaced during normal throughput.
+
+## Observation window
+
+| | |
+| --- | --- |
+| Opened | 2026-08-01 — Phase 1 merge (#253) |
+| Closes | **2026-09-26** |
+
+Originally ~2 weeks, closing 2026-08-15. Extended on 2026-08-12, because the original window would have measured almost nothing: Joshua left on 2026-08-04 for a trip to the States and returns 2026-09-09, with work volume in the interval a fraction of normal. That leaves roughly **three days** of representative work behind the window's evidence, not two weeks — and the single logged entry so far came from day one.
+
+The distortion is not only that there is less work. Travel work is a different _shape_: short sessions and cold re-entry make some stumble classes more likely, while the watch-list items that need long implementation sessions to surface at all — doc drift, large unreviewed diffs — cannot fire. The sample is skewed in both directions at once, which is worse than simply being small.
+
+The new date allows roughly two and a half weeks of normal-volume work after the return. Travel-period entries still count; tag them per the rules above and let Phase 3 weigh them.
+
+**Frozen until 2026-09-09:** Phase 4 (responsive-QA → skill) and Phase 6 (ComixDistro's repeated CI-ordering rationale). Both change live config, and config surgery on a single travelling machine is a bad trade against signal this weak.
 
 ## Log
 
