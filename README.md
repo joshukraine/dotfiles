@@ -114,7 +114,7 @@ The dotfiles `setup.sh` script uses [GNU Stow][gnu-stow] to symlink all the conf
 
 The setup script will try to detect and backup these files ahead of Stow, but it's still a good idea to check your `$HOME` directory as well as `$HOME/.config` and `$HOME/.local/bin`.
 
-On a fresh machine, `setup.sh` also pre-creates `~/.claude` as a real directory so Stow links the Claude config files individually instead of folding the whole directory into one symlink (which would route Claude Code's runtime state into the repo). If you forked before this behavior existed and see Claude runtime files appearing in `git status`, see [Troubleshooting: `~/.claude` folding](#troubleshooting-claude-folding).
+On a fresh machine, `setup.sh` also pre-creates `~/.claude` and `~/.claude/skills` as real directories so Stow links the Claude config files individually instead of folding a whole directory into one symlink (which would route Claude Code's runtime state, or its synced account skills, into the repo). If you forked before this behavior existed and see Claude runtime files appearing in `git status`, see [Troubleshooting: `~/.claude` folding](#troubleshooting-claude-folding) and [Troubleshooting: `~/.claude/skills` folding](#troubleshooting-claudeskills-folding).
 
 ### 📍 3. Clone and setup the dotfiles
 
@@ -354,10 +354,35 @@ Then confirm the result:
 
 ```bash
 ls -ld ~/.claude               # expect a real directory (drwx…), not a symlink (lrwx…)
-ls -la ~/.claude | grep ' -> ' # expect exactly: CLAUDE.md, settings.json, starship.toml, skills, docs, presets
+ls -la ~/.claude | grep ' -> ' # expect exactly: CLAUDE.md, settings.json, starship.toml, docs, presets
 ```
 
 If a stray symlink such as `sessions` still points into the repo, remove just that link (`rm ~/.claude/sessions`) and re-run the `git clean` above so a later `stow -R` can't fold it back.
+
+### Troubleshooting: `~/.claude/skills` folding
+
+The same trap exists one level down. Claude Code v2.1.273+ mirrors the skills you have enabled on your claude.ai account into `~/.claude/skills/synced/`, so that directory is a write target too — roughly 200 files. If `~/.claude/skills` is a folded symlink, they all land in the repo. The tell is an untracked `claude/.claude/skills/synced/` in `git status`.
+
+`setup.sh` now pre-creates `~/.claude/skills` as a real directory, but that only helps a fresh install. To repair an already-folded one, quit all `claude` sessions and run:
+
+```bash
+cd ~/dotfiles
+
+mv claude/.claude/skills/synced /tmp/synced-stash  # move the mirror out of the repo FIRST
+rm ~/.claude/skills                                # remove the fold symlink (not its target)
+mkdir -p ~/.claude/skills                          # recreate it as a real directory
+stow claude/                                       # link each skill individually
+mv /tmp/synced-stash ~/.claude/skills/synced       # put the mirror back, now outside the repo
+```
+
+Order matters: `synced/` has to leave the repo before you re-stow, or Stow sees it as a package child and symlinks it straight back in. Deleting it instead of stashing it is also fine — Claude Code re-downloads it on the next launch. Then confirm:
+
+```bash
+ls -ld ~/.claude/skills        # expect a real directory (drwx…), not a symlink (lrwx…)
+git status --short             # expect no claude/.claude/skills/synced/ entry
+```
+
+To opt out of account skill syncing altogether, set `syncClaudeAiSkills: false` in `~/.claude/settings.json`. Claude Code stops downloading and moves what it already synced to `~/.claude/skills/.trash` at the next launch.
 
 ## About Neovim Distributions
 

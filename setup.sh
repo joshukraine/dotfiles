@@ -234,6 +234,11 @@ setup_directories() {
   # then writes its runtime state (sessions/, projects/, history.jsonl, …) into the
   # dotfiles working tree. See README "Troubleshooting: ~/.claude folding".
   ensure_dir "${HOME}/.claude" "Create Claude config directory (prevents stow folding)"
+
+  # Same guard one level deeper. Claude Code >= 2.1.273 mirrors the skills enabled
+  # on your claude.ai account into ~/.claude/skills/synced/, so this directory is a
+  # write target too — if stow folds it, those ~200 files land in the working tree.
+  ensure_dir "${HOME}/.claude/skills" "Create Claude skills directory (prevents stow folding)"
 }
 
 handle_stow_conflicts() {
@@ -248,11 +253,14 @@ handle_stow_conflicts() {
     dotfiles_info "[DRY RUN] Would change to directory: %s" "${DOTFILES}"
   fi
 
+  # Anything listed here is backed up unless it is already a symlink. Do NOT add
+  # ~/.claude or ~/.claude/skills: setup_directories creates both as real
+  # directories on purpose, so this loop would rename them away and let stow fold
+  # them back into the repo — the exact breakage they exist to prevent.
   local stow_conflicts=(
     ".asdfrc"
     ".claude/CLAUDE.md"
     ".claude/cheatsheet.md"
-    ".claude/skills"
     ".claude/presets"
     ".claude/settings.json"
     ".claude/starship.toml"
