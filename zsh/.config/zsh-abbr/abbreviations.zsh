@@ -21,6 +21,15 @@ abbr "src"="source ${HOME}/.zshrc"
 # system
 abbr "fast"="fastfetch"
 
+# tailscale
+abbr "tss"="tailscale status"
+abbr "tsg"="tailscale get"
+abbr "tsip"="tailscale ip -4"
+abbr "tsp"="tailscale ping"
+abbr "tsu"="tailscale up"
+abbr "tsd"="tailscale down"
+abbr "tsnc"="tailscale netcheck"
+
 # claude code
 abbr "cl"="claude"
 abbr "clsp"="claude --dangerously-skip-permissions"
