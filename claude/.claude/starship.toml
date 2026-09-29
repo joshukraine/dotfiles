@@ -15,11 +15,14 @@ $git_status\
 [](fg:git_bg)\
 [ ](fg:model_bg)\
 ${env_var.CLAUDE_MODEL_NERD}\
+${env_var.CLAUDE_EFFORT}\
 [](bg:model_bg fg:context_bg)\
 ${env_var.CLAUDE_CONTEXT}\
-[](bg:context_bg fg:cost_bg)\
-${env_var.CLAUDE_COST}\
-[  ](fg:cost_bg)\
+[](bg:context_bg fg:rate_5h_bg)\
+${env_var.CLAUDE_RATE_5H}\
+[](bg:rate_5h_bg fg:rate_7d_bg)\
+${env_var.CLAUDE_RATE_7D}\
+[  ](fg:rate_7d_bg)\
 """
 
 [env_var.CLAUDE_STAR]
@@ -47,15 +50,25 @@ variable = "CLAUDE_MODEL_NERD"
 format = "[$env_value ]($style)"
 style = "bg:model_bg fg:model italic"
 
+[env_var.CLAUDE_EFFORT]
+variable = "CLAUDE_EFFORT"
+format = "[$env_value ]($style)"
+style = "bg:model_bg fg:effort"
+
 [env_var.CLAUDE_CONTEXT]
 variable = "CLAUDE_CONTEXT"
 format = "[$env_value ]($style)"
 style = "bg:context_bg fg:context"
 
-[env_var.CLAUDE_COST]
-variable = "CLAUDE_COST"
-format = "[$env_value]($style)"
-style = "bg:cost_bg fg:cost"
+[env_var.CLAUDE_RATE_5H]
+variable = "CLAUDE_RATE_5H"
+format = "[$env_value ]($style)"
+style = "bg:rate_5h_bg fg:rate_5h"
+
+[env_var.CLAUDE_RATE_7D]
+variable = "CLAUDE_RATE_7D"
+format = "[ $env_value]($style)"
+style = "bg:rate_7d_bg fg:rate_7d"
 
 ## Custom palette
 #
@@ -74,9 +87,13 @@ git_bg = "#3b4252"
 
 model = "#5e81ac"
 model_bg = "#2e3440"
+effort = "#81a1c1"
 
 context = "#8fbcbb"
 context_bg = "#3b4252"
 
-cost = "#a3be8c"
-cost_bg = "#434c5e"
+rate_5h = "#a3be8c"
+rate_5h_bg = "#434c5e"
+
+rate_7d = "#ebcb8b"
+rate_7d_bg = "#4c566a"

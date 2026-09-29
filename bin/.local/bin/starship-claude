@@ -6,12 +6,14 @@
 # environment variables you can use in a standard Starship prompt.
 #
 # Formatted values (for display):
-# - `CLAUDE_MODEL` - Short model name with icon (haiku/sonnet/opus)
-# - `CLAUDE_MODEL_NERD` - Model with version (e.g., "󱚦 opus 4.5")
+# - `CLAUDE_MODEL` - Model name with version (e.g., "Opus 5.5")
+# - `CLAUDE_MODEL_NERD` - Same, prefixed with a Nerd Font icon when one is defined
 # - `CLAUDE_CONTEXT` - Context window usage percentage (left-padded, e.g., "15%")
 # - `CLAUDE_COST` - Formatted session cost (e.g., "$0.71")
 # - `CLAUDE_SUMMARY` - Session summary extracted from transcript
 # - `CLAUDE_STAR` - Star character for prompt decoration
+# - `CLAUDE_EFFORT` - Reasoning effort level (e.g., "high"); unset if unsupported
+# - `CLAUDE_RATE_5H` / `CLAUDE_RATE_7D` - claude.ai plan usage (e.g., "5h 42% (1h 56m)")
 #
 # Raw values (direct from JSON):
 # - `CLAUDE_SESSION_ID` - Session UUID
@@ -44,6 +46,9 @@
 # Also prints OSC 9;4 ConEmu terminal progress bar for context usage (optional)
 #
 # Repository: https://github.com/martinemde/starship-claude
+#
+# Locally modified from upstream 9fdada5: full model name with version,
+# effort level, and plan rate-limit usage (ported from upstream b45d4a0).
 #
 # Usage:
 #   Add to ~/.claude/settings.json:
@@ -166,13 +171,19 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
       (if .context_window.current_usage == null then "" else (.context_window.current_usage.cache_read_input_tokens // 0) end), # 21
       # Computed values (indexes 22-23)
       (.model.display_name // .model.id // ""),                     # 22 - raw_model
-      (.workspace.current_dir // .workspace.project_dir // .cwd // "") # 23 - dir
+      (.workspace.current_dir // .workspace.project_dir // .cwd // ""), # 23 - dir
+      # Effort and claude.ai plan rate limits (indexes 24-28)
+      (.effort.level // ""),                                        # 24
+      (.rate_limits.five_hour.used_percentage // ""),               # 25
+      (.rate_limits.seven_day.used_percentage // ""),               # 26
+      (.rate_limits.five_hour.resets_at // ""),                     # 27
+      (.rate_limits.seven_day.resets_at // "")                      # 28
     ] | .[]
   ')"
 
   # Parse jq output into an array (one element per line)
   # Initialize with defaults to handle partial/failed jq output
-  values=("" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
+  values=("" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
 
   # Only parse if jq produced output
   if [ -n "$jq_output" ]; then
@@ -221,32 +232,58 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
   fi
 
   #
-  # Short model name: haiku / sonnet / opus (pure bash, no external commands)
+  # Model name with version: "Opus 5.5", "Fable 5.1", "Haiku 4.5"
+  # Built from model.id (claude-<family>-<major>-<minor>[...]) because
+  # display_name may omit the version or carry a "(1M context)" suffix.
   #
-  if [ -n "$raw_model" ]; then
-    # Lowercase using bash parameter expansion (bash 4+) or tr fallback
-    if [[ "${BASH_VERSINFO[0]:-0}" -ge 4 ]]; then
-      lower_model="${raw_model,,}"
-    else
-      lower_model="$(printf '%s' "$raw_model" | tr '[:upper:]' '[:lower:]')"
-    fi
+  model_id="${values[6]:-}"
+  if [[ "$model_id" =~ ^claude-([a-z]+)-([0-9]+)-([0-9]+) ]]; then
+    family="${BASH_REMATCH[1]}"
+    full_model="$(tr '[:lower:]' '[:upper:]' <<<"${family:0:1}")${family:1} ${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+  else
+    full_model="${raw_model%% (*}"
+  fi
 
-    case "$lower_model" in
-    *haiku*) short_model="$HAIKU" ;;
-    *sonnet*) short_model="$SONNET" ;;
-    *opus*) short_model="$OPUS" ;;
-    *) short_model="$raw_model" ;;
+  if [ -n "$full_model" ]; then
+    # Icon only (strip the word after the glyph); families without one get none
+    case "$full_model" in
+    Haiku*) icon="${HAIKU%% *}" ;;
+    Sonnet*) icon="${SONNET%% *}" ;;
+    Opus*) icon="${OPUS%% *}" ;;
+    *) icon="" ;;
     esac
 
-    export CLAUDE_MODEL="$short_model"
-    export CLAUDE_MODEL_NERD="$short_model"
+    export CLAUDE_MODEL="$full_model"
+    export CLAUDE_MODEL_NAME="$full_model"
+    export CLAUDE_MODEL_NERD="${icon:+$icon }$full_model"
+  fi
 
-    # Extract version number using bash regex (no sed/grep)
-    if [[ "$raw_model" =~ ([0-9]+)\.([0-9]+) ]]; then
-      export CLAUDE_MODEL_NAME="$short_model ${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+  #
+  # Reasoning effort (absent when the model doesn't support it)
+  #
+  export CLAUDE_EFFORT="${values[24]:-}"
+
+  #
+  # claude.ai plan rate limits: "5h 42% (1h 56m)" and "7d 18% (4d 15h)"
+  # Only present for Pro/Max subscribers, after the first API response.
+  #
+  fmt_remaining() {
+    local remaining=$(($1 - $(date +%s)))
+    [ "$remaining" -gt 0 ] || return 0
+    if [ "$remaining" -ge 86400 ]; then
+      printf ' (%dd %dh)' $((remaining / 86400)) $((remaining % 86400 / 3600))
+    elif [ "$remaining" -ge 3600 ]; then
+      printf ' (%dh %dm)' $((remaining / 3600)) $((remaining % 3600 / 60))
     else
-      export CLAUDE_MODEL_NAME="$short_model"
+      printf ' (%dm)' $((remaining / 60))
     fi
+  }
+
+  if [ -n "${values[25]:-}" ]; then
+    export CLAUDE_RATE_5H="5h ${values[25]%.*}%$(fmt_remaining "${values[27]:-0}")"
+  fi
+  if [ -n "${values[26]:-}" ]; then
+    export CLAUDE_RATE_7D="7d ${values[26]%.*}%$(fmt_remaining "${values[28]:-0}")"
   fi
 
   #
