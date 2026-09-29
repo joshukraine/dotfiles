@@ -40,6 +40,8 @@ truncate_to_repo = true
 symbol = ""
 style = "bg:git_bg fg:git_branch"
 format = "[$symbol $branch]($style)"
+truncation_length = 15
+truncation_symbol = "…"
 
 [git_status]
 style = "bg:git_bg fg:git_status"
@@ -67,7 +69,7 @@ style = "bg:rate_5h_bg fg:rate_5h"
 
 [env_var.CLAUDE_RATE_7D]
 variable = "CLAUDE_RATE_7D"
-format = "[ $env_value]($style)"
+format = "[$env_value]($style)"
 style = "bg:rate_7d_bg fg:rate_7d"
 
 ## Custom palette
