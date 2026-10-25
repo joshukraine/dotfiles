@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+#
+# Keep the Mac and its display awake (e.g. while preaching or teaching)
+# Usage: awake [on [hours] | off | status]   (no argument toggles)
+#
+# Runs caffeinate in the background. It switches itself off after 4 hours
+# by default, so forgetting to turn it off can't drain the battery overnight.
+
+set -euo pipefail
+
+pidfile="${TMPDIR:-/tmp}/awake.pid"
+
+running() {
+  [[ -f "${pidfile}" ]] && kill -0 "$(cat "${pidfile}")" 2>/dev/null
+}
+
+notify() {
+  echo "$1"
+  osascript -e "display notification \"$1\" with title \"awake\"" 2>/dev/null || true
+}
+
+start() {
+  local hours="${1:-4}"
+  if running; then
+    notify "Already on. Use 'awake off' to stop."
+    return
+  fi
+  # -d display, -i idle sleep, -m disk, -s system sleep (on AC), -u declare user active
+  nohup caffeinate -dimsu -t "$((hours * 3600))" >/dev/null 2>&1 &
+  echo "${!}" >"${pidfile}"
+  notify "On — screen stays awake for ${hours}h (or until 'awake off')."
+}
+
+stop() {
+  if running; then
+    kill "$(cat "${pidfile}")"
+    rm -f "${pidfile}"
+    notify "Off — normal sleep settings restored."
+  else
+    rm -f "${pidfile}"
+    notify "Already off."
+  fi
+}
+
+case "${1:-toggle}" in
+  on) start "${2:-4}" ;;
+  off) stop ;;
+  status) if running; then echo "on"; else echo "off"; fi ;;
+  toggle) if running; then stop; else start; fi ;;
+  *)
+    echo "Usage: awake [on [hours] | off | status]"
+    exit 1
+    ;;
+esac
