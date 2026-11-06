@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+#
+# Open a tmux session for one lane of the Obsidian vault
+#
+# Usage: vault [lane]
+#        vault --list
+# Arguments:
+#   lane - A folder under the vault root, either as a relative path
+#          ("Developer/hermes") or just the folder name ("hermes"). With no
+#          argument, or when the name matches more than one folder, an fzf
+#          picker opens (a partial name pre-fills its query).
+#
+# Examples:
+#   vault                   # Pick a lane from the vault's folders
+#   vault hermes            # ~/obsidian-vault/Developer/hermes
+#   vault Bible Teaching    # Top-level folder; quoting is optional
+#   vault --list            # Print the lanes the picker offers
+#
+# Returns: Attaches to tmux session vault-<folder>, created from the
+#          tmuxinator "vault" template (nvim + Claude Code in that folder).
+#          If the session already exists, attaches to it instead.
+# Behavior:
+#   - Lanes are folders up to two levels below the vault root; dot-folders
+#     are skipped. Each lane runs in its own tmux session, which is what
+#     lets sidekick.nvim tell concurrent Claude Code processes apart.
+#   - Refuses a folder that does not exist. Creating a lane is a vault
+#     decision, so make the folder in Obsidian first and run vault again.
+#
+# Environment:
+#   OBSIDIAN_VAULT - vault root (default: ~/obsidian-vault)
+
+set -euo pipefail
+
+vault_root() {
+  printf '%s\n' "${OBSIDIAN_VAULT:-${HOME}/obsidian-vault}"
+}
+
+# All lane candidates as paths relative to the vault root, sorted.
+lanes() {
+  local root
+  root="$(vault_root)"
+  find "${root}" -mindepth 1 -maxdepth 2 \( -name '.*' -prune \) -o -type d -print \
+    | cut -c "$((${#root} + 2))-" \
+    | LC_ALL=C sort
+}
+
+refuse() {
+  echo "vault: $1" >&2
+  echo "Lanes are folders in $(vault_root), up to two levels deep." >&2
+  echo "Create the folder in Obsidian first; the launcher never creates one." >&2
+  exit 1
+}
+
+# Print the lane a query refers to, or exit 1 with an explanation.
+resolve_lane() {
+  local query="${1:-}" root candidates
+  root="$(vault_root)"
+  query="${query%/}"
+
+  # 1. An exact relative path.
+  if [[ -n "${query}" && -d "${root}/${query}" ]]; then
+    printf '%s\n' "${query}"
+    return
+  fi
+
+  candidates="$(lanes)"
+
+  if [[ -n "${query}" ]]; then
+    # 2. A folder name that occurs exactly once, matched case-insensitively.
+    local lowered named
+    lowered="$(tr '[:upper:]' '[:lower:]' <<<"${query}")"
+    named="$(awk -F/ -v q="${lowered}" 'tolower($NF) == q' <<<"${candidates}")"
+    if [[ -n "${named}" && "$(wc -l <<<"${named}")" -eq 1 ]]; then
+      printf '%s\n' "${named}"
+      return
+    fi
+    # Nothing even contains the query: refuse rather than open an empty picker.
+    if ! grep -qiF -- "${query}" <<<"${candidates}"; then
+      refuse "no folder matching '${query}' in the vault."
+    fi
+  fi
+
+  # 3. The picker, pre-filled with whatever was typed.
+  command -v fzf >/dev/null 2>&1 || refuse "'${query}' is ambiguous and fzf is not installed (brew install fzf)."
+  local pick
+  pick="$(fzf --height 40% --reverse --prompt 'lane> ' \
+    --query "${query}" --select-1 --exit-0 \
+    --preview "ls -1 '${root}'/{}" --preview-window 'right:50%' <<<"${candidates}")" || true
+  [[ -n "${pick}" ]] || exit 130
+  printf '%s\n' "${pick}"
+}
+
+usage() {
+  awk 'NR > 2 && !/^#/ { exit } NR > 2 { sub(/^# ?/, ""); print }' "${BASH_SOURCE[0]}"
+}
+
+main() {
+  case "${1:-}" in
+    -h | --help) usage ;;
+    -l | --list) lanes ;;
+    *)
+      local lane
+      lane="$(resolve_lane "$*")"
+      exec tmuxinator start vault lane="${lane}"
+      ;;
+  esac
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
+fi
