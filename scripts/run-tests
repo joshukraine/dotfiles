@@ -3,7 +3,7 @@
 # Run dotfiles test suite using bats-core
 #
 # Usage: run-tests [category]
-#   category: all (default), git, abbr, presets, bubo
+#   category: all (default), git, abbr, presets, bubo, vault
 
 set -e
 
@@ -44,9 +44,13 @@ case "${category}" in
     echo "Running bubo staleness-report tests..."
     bats tests/bubo/
     ;;
+  vault)
+    echo "Running vault lane-launcher tests..."
+    bats tests/vault/
+    ;;
   *)
     echo "Unknown category: ${category}" >&2
-    echo "Available: all, git, abbr, presets, bubo" >&2
+    echo "Available: all, git, abbr, presets, bubo, vault" >&2
     exit 1
     ;;
 esac

@@ -598,7 +598,7 @@ accent_for() {
 
 Colors can be hex (`#rrggbb`), a named color (`red`), or `colour0`–`colour255`. The real `project-accent.local.sh` is gitignored, so your project names and color choices never leave your machine.
 
-> **Note:** the lookup key is the **tmux session name**, not the directory path. With [`tat`](bin/.local/bin/tat) the session name is the current directory's basename with dots converted to dashes (a `foo.bar` directory becomes session `foo-bar`), so map it as `foo-bar`. Keying on the session name lets two checkouts that share a directory name (e.g. `bfo1` and `bfo2`) still get distinct colors.
+> **Note:** the lookup key is the **tmux session name**, not the directory path. With [`tat`](bin/.local/bin/tat) the session name is the current directory's basename with dots converted to dashes (a `foo.bar` directory becomes session `foo-bar`), so map it as `foo-bar`. Keying on the session name lets two checkouts that share a directory name (e.g. `bfo1` and `bfo2`) still get distinct colors. Sessions opened with [`vault`](bin/.local/bin/vault) (one per Obsidian-vault lane) are named `vault-<folder>`, so a lane like `Developer/hermes` maps as `vault-hermes`.
 
 Colors apply automatically to new sessions (via a `session-created` hook) and backfill existing sessions whenever tmux is reloaded. The color is driven entirely by the `@accent` user option, which the theme renders into both pills; if you switch away from TokyoNight Moon, parameterize the new theme's pills with `#{@accent}` — see the comments in `~/.config/tmux/themes/tokyonight_moon.tmux`.
 
