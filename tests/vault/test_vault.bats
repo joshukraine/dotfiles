@@ -26,11 +26,11 @@ setup() {
   export OBSIDIAN_VAULT="${FIXTURE}"
 
   EXPECTED_LANES="$(printf '%s\n' \
-    "ETO Operations" \
-    "ETO Operations/UGO" \
     "Developer" \
     "Developer/archive" \
     "Developer/hermes" \
+    "ETO Operations" \
+    "ETO Operations/UGO" \
     "Health" \
     "Health/archive")"
 }
