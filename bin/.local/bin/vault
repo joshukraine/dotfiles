@@ -13,7 +13,7 @@
 # Examples:
 #   vault                   # Pick a lane from the vault's folders
 #   vault hermes            # ~/obsidian-vault/Developer/hermes
-#   vault Bible Teaching    # Top-level folder; quoting is optional
+#   vault ETO Operations    # Top-level folder; quoting is optional
 #   vault --list            # Print the lanes the picker offers
 #
 # Returns: Attaches to tmux session vault-<folder>, created from the

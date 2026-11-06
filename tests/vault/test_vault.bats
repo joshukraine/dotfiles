@@ -18,7 +18,7 @@ setup() {
 
   FIXTURE="$(mktemp -d)"
   mkdir -p \
-    "${FIXTURE}/Bible Teaching/romans-session-7" \
+    "${FIXTURE}/ETO Operations/UGO" \
     "${FIXTURE}/Developer/archive" \
     "${FIXTURE}/Developer/hermes/too-deep" \
     "${FIXTURE}/Health/archive" \
@@ -26,8 +26,8 @@ setup() {
   export OBSIDIAN_VAULT="${FIXTURE}"
 
   EXPECTED_LANES="$(printf '%s\n' \
-    "Bible Teaching" \
-    "Bible Teaching/romans-session-7" \
+    "ETO Operations" \
+    "ETO Operations/UGO" \
     "Developer" \
     "Developer/archive" \
     "Developer/hermes" \
@@ -65,9 +65,9 @@ run_vault() {
 }
 
 @test "an exact relative path resolves as given" {
-  run_vault resolve_lane "'Bible Teaching/romans-session-7'"
+  run_vault resolve_lane "'ETO Operations/UGO'"
   [ "${status}" -eq 0 ]
-  [ "${output}" = "Bible Teaching/romans-session-7" ]
+  [ "${output}" = "ETO Operations/UGO" ]
 }
 
 @test "a trailing slash is tolerated" {
