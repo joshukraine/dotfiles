@@ -2,23 +2,28 @@
 #
 # Open a tmux session for one lane of the Obsidian vault
 #
-# Usage: vault [lane]
+# Usage: vault [lane] [-- prompt]
 #        vault --list
 # Arguments:
-#   lane - A folder under the vault root, either as a relative path
-#          ("Developer/hermes") or just the folder name ("hermes"). With no
-#          argument, or when the name matches more than one folder, an fzf
-#          picker opens (a partial name pre-fills its query).
+#   lane   - A folder under the vault root, either as a relative path
+#            ("Developer/hermes") or just the folder name ("hermes"). With
+#            no argument, or when the name matches more than one folder, an
+#            fzf picker opens (a partial name pre-fills its query).
+#   prompt - Everything after "--" becomes Claude Code's first instruction.
+# Options:
+#   -l, --list     Print the lanes the picker offers
+#   -n, --dry-run  Print the tmuxinator command instead of running it
 #
 # Examples:
 #   vault                   # Pick a lane from the vault's folders
 #   vault hermes            # ~/obsidian-vault/Developer/hermes
 #   vault ETO Operations    # Top-level folder; quoting is optional
-#   vault --list            # Print the lanes the picker offers
+#   vault Health -- "Training planning session. Read training-plan-2027.md first."
 #
 # Returns: Attaches to tmux session vault-<folder>, created from the
 #          tmuxinator "vault" template (nvim + Claude Code in that folder).
-#          If the session already exists, attaches to it instead.
+#          If the session already exists, attaches to it instead, and any
+#          prompt is ignored.
 # Behavior:
 #   - Lanes are folders up to two levels below the vault root; dot-folders
 #     are skipped. Each lane runs in its own tmux session, which is what
@@ -95,15 +100,34 @@ usage() {
 }
 
 main() {
-  case "${1:-}" in
-    -h | --help) usage ;;
-    -l | --list) lanes ;;
-    *)
-      local lane
-      lane="$(resolve_lane "$*")"
-      exec tmuxinator start vault lane="${lane}"
-      ;;
-  esac
+  local dry_run=0 prompt="" lane
+  local -a lane_words=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -h | --help) usage; return ;;
+      -l | --list) lanes; return ;;
+      -n | --dry-run) dry_run=1 ;;
+      --)
+        shift
+        prompt="$*"
+        break
+        ;;
+      *) lane_words+=("$1") ;;
+    esac
+    shift
+  done
+
+  lane="$(resolve_lane "${lane_words[*]-}")"
+  local -a cmd=(tmuxinator start vault "lane=${lane}")
+  if [[ -n "${prompt}" ]]; then
+    cmd+=("prompt=${prompt}")
+  fi
+  if ((dry_run)); then
+    printf '%q ' "${cmd[@]}"
+    echo
+    return
+  fi
+  exec "${cmd[@]}"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

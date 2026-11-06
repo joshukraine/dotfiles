@@ -95,3 +95,17 @@ run_vault() {
   [[ "${lines[0]}" == "Open a tmux session for one lane of the Obsidian vault" ]]
   [[ "${output}" == *"OBSIDIAN_VAULT"* ]]
 }
+
+@test "--dry-run prints the tmuxinator command for the resolved lane" {
+  run "${VAULT_BIN}" --dry-run hermes
+  [ "${status}" -eq 0 ]
+  [[ "${output}" == "tmuxinator start vault lane=Developer/hermes"* ]]
+  [[ "${output}" != *"prompt="* ]]
+}
+
+@test "everything after -- is passed through as the prompt" {
+  run "${VAULT_BIN}" --dry-run ETO Operations -- "Resume the UGO wrap-up. Read ugo-hub.md first."
+  [ "${status}" -eq 0 ]
+  [[ "${output}" == *"lane=ETO\ Operations"* ]]
+  [[ "${output}" == *"prompt=Resume\ the\ UGO\ wrap-up.\ Read\ ugo-hub.md\ first."* ]]
+}
