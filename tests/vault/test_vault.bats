@@ -24,6 +24,8 @@ setup() {
     "${FIXTURE}/Health/archive" \
     "${FIXTURE}/.obsidian/plugins"
   export OBSIDIAN_VAULT="${FIXTURE}"
+  # Keep prompt files out of the real ~/.cache.
+  export XDG_CACHE_HOME="${FIXTURE}/.cache"
 
   EXPECTED_LANES="$(printf '%s\n' \
     "Developer" \
@@ -103,9 +105,26 @@ run_vault() {
   [[ "${output}" != *"prompt="* ]]
 }
 
-@test "everything after -- is passed through as the prompt" {
+@test "everything after -- is written to the lane's prompt file" {
   run "${VAULT_BIN}" --dry-run ETO Operations -- "Resume the UGO wrap-up. Read ugo-hub.md first."
   [ "${status}" -eq 0 ]
   [[ "${output}" == *"lane=ETO\ Operations"* ]]
-  [[ "${output}" == *"prompt=Resume\ the\ UGO\ wrap-up.\ Read\ ugo-hub.md\ first."* ]]
+  [[ "${output}" != *"prompt=Resume"* ]]
+  local file="${XDG_CACHE_HOME}/vault/eto-operations.prompt"
+  [[ "${output}" == *"prompt_file=${file}"* ]]
+  [ "$(cat "${file}")" = "Resume the UGO wrap-up. Read ugo-hub.md first." ]
+}
+
+@test "a prompt longer than the 1024-byte tty line limit survives intact" {
+  # tmuxinator types the pane command with tmux send-keys, and macOS truncates
+  # a canonical tty input line at 1024 bytes. The file is what keeps the typed
+  # command short, so the file must hold the whole prompt.
+  local prompt
+  prompt="$(printf 'word%04d ' $(seq 1 300))end"
+  [ "${#prompt}" -gt 1024 ]
+  run "${VAULT_BIN}" --dry-run Health -- "${prompt}"
+  [ "${status}" -eq 0 ]
+  [[ "${output}" == *"prompt_file=${XDG_CACHE_HOME}/vault/health.prompt"* ]]
+  [[ "${output}" != *"word0001"* ]]
+  [ "$(cat "${XDG_CACHE_HOME}/vault/health.prompt")" = "${prompt}" ]
 }
