@@ -10,6 +10,8 @@
 #            no argument, or when the name matches more than one folder, an
 #            fzf picker opens (a partial name pre-fills its query).
 #   prompt - Everything after "--" becomes Claude Code's first instruction.
+#            It is written to ~/.cache/vault/<folder>.prompt and the pane
+#            reads it from there, so any length works (see Behavior).
 # Options:
 #   -l, --list     Print the lanes the picker offers
 #   -n, --dry-run  Print the tmuxinator command instead of running it
@@ -30,9 +32,14 @@
 #     lets sidekick.nvim tell concurrent Claude Code processes apart.
 #   - Refuses a folder that does not exist. Creating a lane is a vault
 #     decision, so make the folder in Obsidian first and run vault again.
+#   - The prompt goes through a file, not the command line, because
+#     tmuxinator types each pane command into the pane with tmux send-keys
+#     and macOS caps a canonical tty input line at 1024 bytes. A long prompt
+#     passed inline was silently truncated, Enter included.
 #
 # Environment:
 #   OBSIDIAN_VAULT - vault root (default: ~/obsidian-vault)
+#   XDG_CACHE_HOME - where the prompt file lives (default: ~/.cache)
 
 set -euo pipefail
 
@@ -95,6 +102,17 @@ resolve_lane() {
   printf '%s\n' "${pick}"
 }
 
+# Write the prompt to the lane's cache file and print that file's path.
+write_prompt() {
+  local lane="$1" prompt="$2" slug dir file
+  slug="$(basename "${lane}" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')"
+  dir="${XDG_CACHE_HOME:-${HOME}/.cache}/vault"
+  mkdir -p "${dir}"
+  file="${dir}/${slug}.prompt"
+  printf '%s\n' "${prompt}" >"${file}"
+  printf '%s\n' "${file}"
+}
+
 usage() {
   awk 'NR > 2 && !/^#/ { exit } NR > 2 { sub(/^# ?/, ""); print }' "${BASH_SOURCE[0]}"
 }
@@ -120,7 +138,7 @@ main() {
   lane="$(resolve_lane "${lane_words[*]-}")"
   local -a cmd=(tmuxinator start vault "lane=${lane}")
   if [[ -n "${prompt}" ]]; then
-    cmd+=("prompt=${prompt}")
+    cmd+=("prompt_file=$(write_prompt "${lane}" "${prompt}")")
   fi
   if ((dry_run)); then
     printf '%q ' "${cmd[@]}"
