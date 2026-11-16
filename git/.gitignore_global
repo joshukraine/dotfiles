@@ -284,3 +284,5 @@ foo.*
 
 # Claude Code commit-protocol temp file (git commit -F)
 .git_commit_msg
+
+**/.claude/settings.local.json
