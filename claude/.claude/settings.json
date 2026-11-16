@@ -108,6 +108,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
@@ -218,5 +219,5 @@
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment. Also Route 53 hosted zones and record sets, S3 bucket policies and public-access settings, the Fly app configuration (`fly.toml`, secrets, scaling), the VPS firewall and VPN ACLs, Netlify site and DNS settings, and GitHub Actions workflow files and repository settings."
     ]
   },
-  "model": "opus"
+  "advisorModel": "fable"
 }
