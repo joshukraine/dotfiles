@@ -178,13 +178,12 @@
     "enabled": false
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "medium"
     },
-    "claude-fable-5-1": {
-      "effortLevel": "high"
+    "claude-fable-5-2": {
+      "effortLevel": "medium"
     }
   },
   "tui": "fullscreen",
