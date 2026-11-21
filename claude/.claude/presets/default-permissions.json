@@ -68,6 +68,8 @@
       "Bash(gh run:*)",
       "Bash(gh search:*)",
 
+      "Bash(npx -y modern-web-guidance@latest:*)",
+
       "WebSearch",
       "WebFetch(domain:context7.com)",
       "WebFetch(domain:docs.anthropic.com)",

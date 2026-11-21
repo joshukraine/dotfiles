@@ -22,6 +22,10 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 # Claude Code: allow truecolor inside tmux (anthropics/claude-code#35148)
 export CLAUDE_CODE_TMUX_TRUECOLOR=1
 
+# Opt out of telemetry from the Modern Web Guidance CLI (Claude Code plugin).
+# Note: the name is generic, so any other tool honoring it is opted out too.
+export DISABLE_TELEMETRY=1
+
 # XDG Base Directory Specification
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="${HOME}/.local/share"

@@ -306,6 +306,19 @@ cc-perms      # show active permission counts
 
 Presets live in `claude/.claude/presets/` with a [README][presets-readme] explaining the design.
 
+### Plugins
+
+Plugins and their marketplaces are declared in `settings.json` (`enabledPlugins` and `extraKnownMarketplaces`), so Claude Code installs them on first launch with no manual `/plugin install` step.
+
+| Plugin | Source | Purpose |
+| ------ | ------ | ------- |
+| `modern-web-guidance` | [GoogleChrome/modern-web-guidance][modern-web-guidance] | Current HTML/CSS/client-side JS best practices, looked up before writing front-end code |
+| `starship-claude` | [martinemde/starship-claude][starship-claude] | Statusline setup wizard |
+
+LSP plugins (`lua-lsp`, `typescript-lsp`, `ruby-lsp`, `pyright-lsp`) come from the official `claude-plugins-official` marketplace. The [kepano/obsidian-skills][obsidian-skills] marketplace is registered globally but its plugin is enabled only in the Obsidian vault project.
+
+`modern-web-guidance` fetches its guides at runtime with `npx -y modern-web-guidance@latest`, so it needs Node (installed via Homebrew and asdf). That command is pre-approved in both the global settings and the base permission preset, so it works in any project. Its telemetry, which sends Google the agent's search queries, is turned off by `DISABLE_TELEMETRY=1` in `shared/environment.sh`.
+
 ### Safety
 
 - **Hooks** block `rm -rf` patterns and log all Bash commands
@@ -641,6 +654,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [license]: https://github.com/joshukraine/dotfiles/blob/master/LICENSE
 [lunar-vim]: https://www.lunarvim.org/
 [markdownlint]: https://github.com/DavidAnson/markdownlint-cli2
+[modern-web-guidance]: https://github.com/GoogleChrome/modern-web-guidance
 [monaspace]: https://monaspace.githubnext.com
 [monolisa]: https://www.monolisa.dev/
 [neovim-from-scratch]: https://youtu.be/J9yqSdvAKXY
@@ -648,6 +662,7 @@ Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
 [nerd-font-cheat-sheet]: https://www.nerdfonts.com/cheat-sheet
 [nerd-fonts]: https://www.nerdfonts.com/
 [nodejs]: https://nodejs.org/
+[obsidian-skills]: https://github.com/kepano/obsidian-skills
 [operator-mono-lig]: https://github.com/kiliman/operator-mono-lig
 [operator-mono]: https://www.typography.com/fonts/operator/styles/operatormonoscreensmart
 [pr-135]: https://github.com/joshukraine/dotfiles/pull/135

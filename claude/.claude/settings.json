@@ -74,6 +74,7 @@
       "Bash(gh pr:*)",
       "Bash(gh run:*)",
       "Bash(gh search:*)",
+      "Bash(npx -y modern-web-guidance@latest:*)",
       "WebSearch",
       "WebFetch(domain:context7.com)",
       "WebFetch(domain:docs.anthropic.com)",
@@ -164,13 +165,20 @@
     "typescript-lsp@claude-plugins-official": true,
     "starship-claude@starship-claude": true,
     "ruby-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": true,
+    "modern-web-guidance@googlechrome": true
   },
   "extraKnownMarketplaces": {
     "obsidian-skills": {
       "source": {
         "source": "github",
         "repo": "kepano/obsidian-skills"
+      }
+    },
+    "googlechrome": {
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance"
       }
     }
   },
@@ -186,6 +194,7 @@
       "effortLevel": "medium"
     }
   },
+  "advisorModel": "fable",
   "tui": "fullscreen",
   "voice": {
     "enabled": true
@@ -217,6 +226,5 @@
       "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`), plus the Hermes VPS, the ComixDistro Fly app, and any host serving a live public site for either org — none of which carry `prod` in their names.",
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment. Also Route 53 hosted zones and record sets, S3 bucket policies and public-access settings, the Fly app configuration (`fly.toml`, secrets, scaling), the VPS firewall and VPN ACLs, Netlify site and DNS settings, and GitHub Actions workflow files and repository settings."
     ]
-  },
-  "advisorModel": "fable"
+  }
 }
