@@ -6,4 +6,4 @@ live-server
 neovim
 pug
 stylelint
-typescript
+typescript@6
