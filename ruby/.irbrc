@@ -4,9 +4,9 @@ if defined?(AmazingPrint)
   AmazingPrint.irb!
 end
 
-# https://github.com/vitallium/irb-theme-tokyonight
-if defined?(Irb::Theme::Tokyonight)
-  require "irb/theme/tokyonight/storm"
-end
+# https://github.com/skatkov/irb-theme-nord
+# Reline must exist before the theme file is evaluated (the gem assumes it).
+require "reline"
+require "irb/theme/nord/nord"
 
 # vim: set filetype=ruby:
