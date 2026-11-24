@@ -8,33 +8,35 @@
 add_newline = false
 command_timeout = 2000
 
+# Nord: la fuente de verdad es #2E3440 / #D8DEE9 / #88C0D0.
+
 [package]
 disabled = true
 
 [directory]
-style = "bold bright-blue"
+style = "bold #88c0d0"
 
 [git_branch]
-style = "bold bright-white"
+style = "bold #d8dee9"
 symbol = "󰘬 "
 
 [git_status]
 format = '([\[$all_status$ahead_behind \]]($style) )'
-ahead = " [](purple)[$count](white)"
-behind = " [](cyan)[$count](white)"
-conflicted = ' [=$count](yellow)'
-deleted = ' [✘$count](bright-black)'
-diverged = " [](cyan)[$ahead_count](white)[](purple)[$behind_count](white)"
-modified = ' [*$count](red)'
-renamed = " [»$count](purple)"
-staged = " [+$count](green)"
-stashed = " [\\$$count](yellow)"
-style = "bold bright-white"
-untracked = " [?$count](cyan)"
+ahead = " [](#5e81ac)[$count](#d8dee9)"
+behind = " [](#5e81ac)[$count](#d8dee9)"
+conflicted = ' [=$count](#ebcb8b)'
+deleted = ' [✘$count](#bf616a)'
+diverged = " [](#88c0d0)[$ahead_count](#d8dee9)[](#5e81ac)[$behind_count](#d8dee9)"
+modified = ' [*$count](#a3be8c)'
+renamed = ' [»$count](#b48ead)'
+staged = ' [+$count](#a3be8c)'
+stashed = ' [\\$$count](#ebcb8b)'
+style = "bold #d8dee9"
+untracked = " [?$count](#88c0d0)"
 
 [git_commit]
 only_detached = true
-style = "bright-black"
+style = "#4c566a"
 format = "[$hash]($style) "
 
 [ruby]
@@ -48,7 +50,7 @@ symbol = "󰌠 "
 
 # [shell]
 # disabled = false
-# style = 'cyan'
+# style = '#88c0d0'
 # bash_indicator = '\$'
 # zsh_indicator = '%'
 
@@ -61,4 +63,4 @@ symbol = "󰌠 "
 # [time]
 # disabled = false
 # format = '[󱑎 $time]($style) '
-# style = "bright-black"
+# style = "#4c566a"
