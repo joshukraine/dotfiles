@@ -606,17 +606,19 @@ Colors apply automatically to new sessions (via a `session-created` hook) and ba
 
 Nord is applied locally without touching the vendored Core layer. Source of truth for the palette: base `#2E3440`, text `#D8DEE9`, accent `#88C0D0`; all surfaces are opaque (no blur).
 
+- Ghostty is the terminal again: `dotfiles-MacBook/ghostty/config` (OS-native layer) carries the explicit Nord palette, opaque and blur-free. AeroSpace `⌘ n` opens a new Ghostty instance with its own shell (no auto-tmux). The Kitty switch was reverted and Kitty uninstalled.
 - SketchyBar: `~/.config/sketchybar/themes/nord.lua` (separate repo), with `blur_radius = 0` and popups capped at 10 px corner radius.
-- Kitty: `kitty/.config/kitty/current-theme.conf`, `background_opacity 1.0`.
-- Ghostty: `dotfiles-MacBook/ghostty/config` (OS-native layer), explicit Nord palette and no transparency.
 - tmux: `dotfiles-MacBook/os/macos.conf` re-sets the generated `@tn_*` tokens after Core's theme block; the battery pill uses `dotfiles-MacBook/tmux/tmux-battery-nord.sh`.
-- Starship: `dotfiles-MacBook/starship/starship.nord.toml`, selected by `STARSHIP_CONFIG` in `dotfiles-MacBook/zsh/zshrc`.
+- Starship keeps its original config and `~/.config/starship.toml` symlink. Only the hex values in its palette (in `dotfiles-MacBook/core/starship/starship.toml`) were changed to Nord; no module, format or override was added.
+- Spotify: `dotfiles-MacBook/spicetify/Nord/color.ini`, linked into `~/.config/spicetify/Themes/Nord`; applied with `spicetify apply` (restart Spotify to see it).
+- Chrome: unpacked theme at `dotfiles-MacBook/chrome-theme/manifest.json`. Load it in `chrome://extensions` with developer mode; Chrome regenerates `Cached Theme.pak` from the manifest.
+- Neovim: local overlay `dotfiles-MacBook/nvim/plugin/nord-local.lua`, linked into `~/.local/share/nvim/site/plugin/`. It runs after Core's Everforest plugin, patches the shared palette and repaints the highlights; `core/nvim/` stays untouched.
 - IRB: `ruby/.irbrc` plus the `irb-theme-nord` gem in `ruby/.default-gems`.
-- Raycast: `raycast` cask in `brew/Brewfile` (Alfred stays installed). AeroSpace `⌘ enter` opens Kitty.
+- Raycast is installed outside Homebrew, so the cask was removed from `brew/Brewfile` to keep `brew bundle` green. Its script command `dotfiles-MacBook/raycast/ghostty-new-window.sh` opens Ghostty without tmux. Alfred stays installed.
 
-Core (`dotfiles-core` and the vendored `core/` trees) is deliberately unchanged: tmux, Starship and Neovim still generate their own palette there. Switching the whole fleet to Nord is a separate Core release.
+`dotfiles-core` and the vendored `core/` trees are deliberately unchanged as theme sources: tmux and Neovim still generate their own palettes there and are overridden locally. Switching the whole fleet to Nord is a separate Core release.
 
-Rollback: `~/tmp/dotfiles-backup-20261124-143659` and `~/tmp/dotfiles-macbook-backup-20261124-150657` contain the pre-change state (including uncommitted work). Each commit in this branch is also independently revertable.
+Rollback: `~/tmp/dotfiles-backup-20261124-143659`, `~/tmp/dotfiles-macbook-backup-20261124-150657` and `~/tmp/dotfiles-nord2-backup-20261124-151956` contain the pre-change states (including uncommitted work). Each commit is also independently revertable.
 
 ## License
 
