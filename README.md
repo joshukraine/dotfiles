@@ -606,7 +606,7 @@ Colors apply automatically to new sessions (via a `session-created` hook) and ba
 
 Nord is applied locally without touching the vendored Core layer. Source of truth for the palette: base `#2E3440`, text `#D8DEE9`, accent `#88C0D0`; all surfaces are opaque (no blur).
 
-- Ghostty is the terminal again: `dotfiles-MacBook/ghostty/config` (OS-native layer) carries the explicit Nord palette, opaque and blur-free. AeroSpace `⌘ n` opens a new Ghostty instance with its own shell (no auto-tmux). The Kitty switch was reverted and Kitty uninstalled.
+- Ghostty is the terminal again: `dotfiles-MacBook/ghostty/config` (OS-native layer) carries the explicit Nord palette at `background-opacity = 0.90` with no blur — subtle translucency, not glass. AeroSpace `⌘ enter` opens a new Ghostty instance with its own shell (no auto-tmux). The Kitty switch was reverted and Kitty uninstalled.
 - SketchyBar: `~/.config/sketchybar/themes/nord.lua` (separate repo), with `blur_radius = 0` and popups capped at 10 px corner radius.
 - tmux: `dotfiles-MacBook/os/macos.conf` re-sets the generated `@tn_*` tokens after Core's theme block; the battery pill uses `dotfiles-MacBook/tmux/tmux-battery-nord.sh`.
 - Starship keeps its original config and `~/.config/starship.toml` symlink. Only the hex values in its palette (in `dotfiles-MacBook/core/starship/starship.toml`) were changed to Nord; no module, format or override was added.
