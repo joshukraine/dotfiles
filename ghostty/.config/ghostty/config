@@ -4,7 +4,7 @@
 # Online documentation:
 # https://ghostty.org/docs/config/reference
 
-theme = TokyoNight Moon
+theme = Nord
 
 # Font settings
 # List available fonts: ghostty +list-fonts
