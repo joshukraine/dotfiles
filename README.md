@@ -602,6 +602,22 @@ Colors can be hex (`#rrggbb`), a named color (`red`), or `colour0`–`colour255`
 
 Colors apply automatically to new sessions (via a `session-created` hook) and backfill existing sessions whenever tmux is reloaded. The color is driven entirely by the `@accent` user option, which the theme renders into both pills; if you switch away from TokyoNight Moon, parameterize the new theme's pills with `#{@accent}` — see the comments in `~/.config/tmux/themes/tokyonight_moon.tmux`.
 
+## Nord desktop theme (local macOS layer)
+
+Nord is applied locally without touching the vendored Core layer. Source of truth for the palette: base `#2E3440`, text `#D8DEE9`, accent `#88C0D0`; all surfaces are opaque (no blur).
+
+- SketchyBar: `~/.config/sketchybar/themes/nord.lua` (separate repo), with `blur_radius = 0` and popups capped at 10 px corner radius.
+- Kitty: `kitty/.config/kitty/current-theme.conf`, `background_opacity 1.0`.
+- Ghostty: `dotfiles-MacBook/ghostty/config` (OS-native layer), explicit Nord palette and no transparency.
+- tmux: `dotfiles-MacBook/os/macos.conf` re-sets the generated `@tn_*` tokens after Core's theme block; the battery pill uses `dotfiles-MacBook/tmux/tmux-battery-nord.sh`.
+- Starship: `dotfiles-MacBook/starship/starship.nord.toml`, selected by `STARSHIP_CONFIG` in `dotfiles-MacBook/zsh/zshrc`.
+- IRB: `ruby/.irbrc` plus the `irb-theme-nord` gem in `ruby/.default-gems`.
+- Raycast: `raycast` cask in `brew/Brewfile` (Alfred stays installed). AeroSpace `⌘ enter` opens Kitty.
+
+Core (`dotfiles-core` and the vendored `core/` trees) is deliberately unchanged: tmux, Starship and Neovim still generate their own palette there. Switching the whole fleet to Nord is a separate Core release.
+
+Rollback: `~/tmp/dotfiles-backup-20261124-143659` and `~/tmp/dotfiles-macbook-backup-20261124-150657` contain the pre-change state (including uncommitted work). Each commit in this branch is also independently revertable.
+
 ## License
 
 Copyright &copy; 2014–2026 Joshua Steele. [MIT License][license]
